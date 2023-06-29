@@ -1,0 +1,211 @@
+﻿@model Lighting.Models.model_input
+
+@{
+    ViewData["Title"] = "IR_corporate_governance";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 02 CORPORATE GOVERNANCE :: CORPORATE GOVERNANCE ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        <h5>นโยบายการกำกับดูแลกิจการ</h5>
+                        <h1>นโยบายการกำกับดูแลกิจการ</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="cp-page">
+                <div class="three-colPad">
+                    <div class="row justify-content-center more-mb">
+                        @{
+                            if(Model.count_list_CorporateGovernance_File > 0){
+                                if (Context.Request.Cookies["lang"] == "EN"){
+                                    foreach (var items in Model.list_CorporateGovernance_File)
+                                    {
+                                        <div class="col-lg-4 col-md-4 col-6">
+                                            <a class="coverBox" href="~/upload_file/CorporateGovernanceFile/@items.file_name" target="_blank">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="book-cover"><img src="~/upload_image/CorporateGovernanceFile/@items.image_name"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="cover-topic">
+                                                            <p>@items.title_file_en</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
+                                }else{
+                                    foreach (var items in Model.list_CorporateGovernance_File)
+                                    {
+                                        <div class="col-lg-4 col-md-4 col-6">
+                                            <a class="coverBox" href="~/upload_file/CorporateGovernanceFile/@items.file_name" target="_blank">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="book-cover"><img src="~/upload_image/CorporateGovernanceFile/@items.image_name"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="cover-topic">
+                                                            <p>@items.title_file_th</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                            }
+                        }                   
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="content-center">
+                            <div class="topicBD-Box">
+                                <div>นโยบายการกำกับดูแลกิจการ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    @{
+                        if(Context.Request.Cookies["lang"] == "EN"){
+                            @Html.Raw(Model.fod_CorporateGovernance.detail_en)
+                        }else{
+                            @Html.Raw(Model.fod_CorporateGovernance.detail_th)
+                        }
+                    }
+
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-9 col-md-11 col-12">
+                        <ul class="display-tab center">
+                            @{
+                                var count_1 = 1;
+                                if (Model.count_list_CorporateGovernance_Cate > 0)
+                                {
+                                    if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                        foreach (var items in Model.list_CorporateGovernance_Cate)
+                                        {
+                                            if(count_1 == 1){
+                                                <li class="active" rel="@count_1">
+                                                    <a href="javascript:void(0)">
+                                                        <div class="cate-txtBox">
+                                                            <div>@items.title_en</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            }else{
+                                                <li class="" rel="@count_1">
+                                                    <a href="javascript:void(0)">
+                                                        <div class="cate-txtBox">
+                                                            <div>@items.title_en</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            }
+
+                                            count_1++;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (var items in Model.list_CorporateGovernance_Cate)
+                                        {
+                                             if(count_1 == 1){
+                                                <li class="active" rel="@count_1">
+                                                    <a href="javascript:void(0)">
+                                                        <div class="cate-txtBox">
+                                                            <div>@items.title_th</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            }else{
+                                                <li class="" rel="@count_1">
+                                                    <a href="javascript:void(0)">
+                                                        <div class="cate-txtBox">
+                                                            <div>@items.title_th</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            }
+
+                                            count_1++;
+                                        }
+                                    }
+
+
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="display-group">
+                            @{
+                                var count_2 = 1;
+                                if (Model.count_list_CorporateGovernance_Cate > 0)
+                                {
+                                    if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                        foreach (var items in Model.list_CorporateGovernance_Cate)
+                                        {
+                                            <div class="display-info" rel="@count_2">
+                                                @Html.Raw(items.detail_en)
+                                            </div>
+
+                                            count_2++;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (var items in Model.list_CorporateGovernance_Cate)
+                                        {
+                                            <div class="display-info" rel="@count_2">
+                                                @Html.Raw(items.detail_th)
+                                            </div>
+
+                                            count_2++;
+                                        }
+                                    }
+
+
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".display-tab > li").click(function () {
+            var rel = $(this).attr("rel");
+            console.log(rel);
+            $('.display-info').hide();
+            $('.display-info[rel=' + rel + ']').fadeIn();
+            $(".display-tab > li").removeClass("active");
+            $(this).addClass("active");
+        });
+    });
+</script>
+

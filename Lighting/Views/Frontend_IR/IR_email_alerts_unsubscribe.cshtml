@@ -1,0 +1,154 @@
+﻿@{
+    ViewData["Title"] = "IR_email_alerts_unsubscribe";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var Count_IR_Cancel_Email = (List<Lighting.Areas.Identity.Data.IR_Cancel_Email>)ViewBag.IR_Cancel_Email;
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 09 CORPORATE INFO :: EMAIL ALERT - UNSUBSCRIBE ---------->
+<div class="content-padding foot-pad minH">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            @if (Count_IR_Cancel_Email.Count() != 0)
+            {
+                if (Context.Request.Cookies["lang"] == "EN")
+                {
+                    foreach (var item in ViewBag.IR_Cancel_Emai)
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <div class="header-twoline">
+                                    <h5>@item.Title_EN</h5>
+                                    <h1>@item.SubTitle_EN</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="email-alert-page">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10 col-md-10 col-12">
+                                    <div class="WH-Box input-form mb-0">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="txt-content text-center f-17">
+                                                    <p>@item.Text_EN</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="icon-email"><i class="fas fa-envelope"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-5 col-md-7 col-12">
+                                                <input type="email" class="form-control more-BD" placeholder="@item.Input_Text_EN">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="content-center">
+                                                    <a class="buttonB m-size" href="">@item.Button_Submit_EN</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    foreach (var item in ViewBag.IR_Cancel_Emai)
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <div class="header-twoline">
+                                    <h5>@item.Title_TH</h5>
+                                    <h1>@item.SubTitle_TH</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="email-alert-page">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10 col-md-10 col-12">
+                                    <div class="WH-Box input-form mb-0">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="txt-content text-center f-17">
+                                                    <p>@item.Text_TH</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="icon-email"><i class="fas fa-envelope"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-5 col-md-7 col-12">
+                                                <input type="email" class="form-control more-BD" placeholder="@item.Input_Text_TH">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="content-center">
+                                                    <a class="buttonB m-size" href="">@item.Button_Submit_TH</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col">
+                        <div class="header-twoline">
+                            <h5>สอบถามข้อมูลนักลงทุน</h5>
+                            <h1>ยกเลิกอีเมลรับข่าวสาร</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="email-alert-page">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10 col-md-10 col-12">
+                            <div class="WH-Box input-form mb-0">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="txt-content text-center f-17">
+                                            <p>ยินดีต้อนรับเข้าสู่การบริการข่าวสารอิเล็กทรอนิกส์จาก บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน) <br>กรุณากรอกชื่ออีเมลของท่าน เพื่อยกเลิกการรับข้อมูลข่าวสารอิเล็กทรอนิกส์</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="icon-email"><i class="fas fa-envelope"></i></div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-5 col-md-7 col-12">
+                                        <input type="email" class="form-control more-BD" placeholder="อีเมล">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="content-center">
+                                            <a class="buttonB m-size" href="">ยกเลิกรับข่าวสาร</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿@model Lighting.Models.model_input
+
+@{
+    ViewData["Title"] = "IR_inc_corporate_governance_content";
+}
+
+<div class="cp-page">
+    <div class="three-colPad">
+        <div class="row justify-content-center more-mb">
+            @{
+                if(Model.count_list_page_corporate_governance_file > 0){
+                    if (Context.Request.Cookies["lang"] == "EN"){
+                        foreach(var items in Model.list_page_corporate_governance_file){
+                            <div class="col-lg-4 col-md-4 col-6">
+                                <a class="coverBox" href="@Model.path_file@items.file_name" target="_blank">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="book-cover"><img src="@Model.path_image@items.image_name"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="cover-topic">
+                                                <p>@items.title_file_en</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    }else{
+                        foreach (var items in Model.list_page_corporate_governance_file)
+                        {
+                            <div class="col-lg-4 col-md-4 col-6">
+                                <a class="coverBox" href="@Model.path_file@items.file_name" target="_blank">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="book-cover"><img src="@Model.path_image@items.image_name"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="cover-topic">
+                                               <p>@items.title_file_th</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    }
+                }
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="content-center">
+                <div class="topicBD-Box">
+                    @{
+                        if (Context.Request.Cookies["lang"] == "EN"){
+                            <div>@Model.title_en</div>
+                        }else{
+                            <div>@Model.title_th</div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        @{
+            if (Model.count_fod_page_corporate_governance_content > 0){
+                if (Context.Request.Cookies["lang"] == "EN")
+                {
+                    @Html.Raw(Model.fod_page_corporate_governance_content.detail_en)
+                }
+                else
+                {
+                    @Html.Raw(Model.fod_page_corporate_governance_content.detail_th)
+                }
+            }
+        }
+    </div>
+</div>

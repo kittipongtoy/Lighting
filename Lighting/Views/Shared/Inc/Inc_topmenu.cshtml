@@ -1,0 +1,857 @@
+﻿@{
+
+}
+
+<div class="thetop"></div>
+<!--------------- HEADER --------------->
+<header>
+    <div class="container-fluid">
+        <div class="wrap-pad more-w">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-4">
+                    <a class="mainlogo" href="index.php"><img src="~/Frontend_assets/images/L&E-logo.svg"></a>
+                </div>
+                <div class="col-lg-10 col-md-10 col-8">
+                    <div class="row">
+                        <div class="col">
+                            <!-- MAIN - MENU :: IPAD & MOBILE -->
+                            <div class="d-block d-md-block d-lg-none">
+                                <!-- HAMBURGER - MENU -->
+                                <button type="button" class="btn nav-menu" data-toggle="modal" data-target="#menu-mobile">
+                                    <i class="fas fa-bars"></i>
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal left fade" id="menu-mobile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-header">
+                                            <a class="mainlogo" href="index.php"><img src="~/Frontend_assets/images/L&E-logo.svg"></a>
+                                            <button type="button" class="close btn " data-dismiss="modal" aria-label="Close">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-content pt-0">
+                                            <!-- MAINMENU -->
+                                            <div class="modal-body">
+                                                <div id="menu">
+                                                    <div class="menu-box">
+                                                        <div class="menu-wrapper-inner">
+                                                            <div class="menu-wrapper">
+                                                                <div class="menu-slider">
+                                                                    <div class="menu">
+                                                                        <ul>
+                                                                            <li data-page="home">
+                                                                                <div class="menu-item"><a href="index.php">HOME</a></div>
+                                                                            </li>
+                                                                            <li data-page="resource">
+                                                                                <div class="menu-item">
+                                                                                    <a href="#" class="menu-anchor" data-menu="2">
+                                                                                        RESOURCE & FACILITY
+                                                                                        <img class="detail" src="~/Frontend_assets/images/icon/icon-chevronR.svg">
+                                                                                    </a>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li data-page="solution">
+                                                                                <div class="menu-item">
+                                                                                    <a href="#" class="menu-anchor" data-menu="3">
+                                                                                        SMART SOLUTION
+                                                                                        <img class="detail" src="~/Frontend_assets/images/icon/icon-chevronR.svg">
+                                                                                    </a>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li data-page="product">
+                                                                                <div class="menu-item">
+                                                                                    <a href="#" class="menu-anchor" data-menu="4">
+                                                                                        PRODUCTS
+                                                                                        <img class="detail" src="~/Frontend_assets/images/icon/icon-chevronR.svg">
+                                                                                    </a>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li data-page="project">
+                                                                                <div class="menu-item">
+                                                                                    <a href="#" class="menu-anchor" data-menu="5">
+                                                                                        PROJECT REF
+                                                                                        <img class="detail" src="~/Frontend_assets/images/icon/icon-chevronR.svg">
+                                                                                    </a>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li data-page="download">
+                                                                                <div class="menu-item">
+                                                                                    <a href="#" class="menu-anchor" data-menu="6">
+                                                                                        DOWNLOAD
+                                                                                        <img class="detail" src="~/Frontend_assets/images/icon/icon-chevronR.svg">
+                                                                                    </a>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li data-page="news">
+                                                                                <div class="menu-item"><a href="news.php">NEWS</a></div>
+                                                                            </li>
+                                                                            <li data-page="ir">
+                                                                                <div class="menu-item"><a href="IR_index.php">INVESTOR</a></div>
+                                                                            </li>
+                                                                            <li data-page="job">
+                                                                                <div class="menu-item"><a href="apply_job.php">APPLY JOB</a></div>
+                                                                            </li>
+                                                                            <li data-page="contact">
+                                                                                <div class="menu-item"><a href="contact.php">CONTACT</a></div>
+                                                                            </li>
+                                                                            <li data-page="privacy">
+                                                                                <div class="menu-item"><a href="privacy_policy.php">PRIVACY POLICY</a></div>
+                                                                            </li>
+                                                                            <li data-page="cookie">
+                                                                                <div class="menu-item"><a href="cookies_policy.php">COOKIES POLICY</a></div>
+                                                                            </li>
+
+                                                                            <li>
+                                                                                <div class="menu-item lang-menu">
+                                                                                    <a href="#" class="menu-anchor pt-3" data-menu="1">
+                                                                                        <img class="flag" src="~/Frontend_assets/images/icon/flag-en.svg">EN
+                                                                                        <img class="detail" src="~/Frontend_assets/images/icon/icon-chevronR.svg">
+                                                                                    </a>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+
+                                                                    <!-- LANG -->
+                                                                    <div class="submenu menu" data-menu="1">
+                                                                        <div class="submenu-back">
+                                                                            <div class="menu-item">
+                                                                                <a href="#" class="menu-back">
+                                                                                    Back
+                                                                                    <img class="detail back" src="~/Frontend_assets/images/icon/icon-chevronL.svg">
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <ul class="lang-menu">
+                                                                            <li>
+                                                                                <div class="menu-item">
+                                                                                    <a href=""><img class="flag" src="~/Frontend_assets/images/icon/flag-th.svg">TH</a>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item">
+                                                                                    <a href=""><img class="flag" src="~/Frontend_assets/images/icon/flag-en.svg">EN</a>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+
+                                                                    <!-- RESOURCE & FACILITY -->
+                                                                    <div class="submenu menu" data-menu="2">
+                                                                        <div class="submenu-back">
+                                                                            <div class="menu-item">
+                                                                                <a href="#" class="menu-back">
+                                                                                    Back
+                                                                                    <img class="detail back" src="~/Frontend_assets/images/icon/icon-chevronL.svg">
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <ul>
+                                                                            <li class="m-sub-topic">PROFILE</li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="history.php">History</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="philosophy.php">Our Philosophy Vision & Mission</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="organization.php">Organization Chart</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="awards.php">Awards</a></div>
+                                                                            </li>
+                                                                            <li class="m-sub-topic">SUBSIDIARIES PROFILE</li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="subsidiaries.php">L&E Lighting Innovation Center</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="subsidiaries.php">L&E Solid State Co.,Ltd</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="subsidiaries.php">L&E Manufacturing Co.,Ltd</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="subsidiaries.php">L&E Assembly / Service</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="subsidiaries.php">L&E Warehouse & Logistics</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="subsidiaries.php">L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="subsidiaries.php">L&E Overseas Offices</a></div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+
+                                                                    <!-- SMART SOLUTION -->
+                                                                    <div class="submenu menu" data-menu="3">
+                                                                        <div class="submenu-back">
+                                                                            <div class="menu-item">
+                                                                                <a href="#" class="menu-back">
+                                                                                    Back
+                                                                                    <img class="detail back" src="~/Frontend_assets/images/icon/icon-chevronL.svg">
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <ul>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="smart_solution.php">All</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="smart_solution_detail.php">ICON LINK (APP)</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="smart_solution_detail.php">WISE PLUS (APP)</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="smart_solution_detail.php">WISE PLAY (APP)</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="smart_solution_detail.php">WISE PRO (BROWSER)</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="smart_solution_detail.php">WISE NB (BROWSER)</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="smart_solution_detail.php">LIGHTING MANAGEMENT SYSTEM (APP/BROWSER)</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="smart_solution_detail.php">SMART BUILDING</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="smart_solution_detail.php">SMART STREET POLE (BROWSER)</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="smart_solution_detail.php">SMART URBAN POLE (BROWSER)</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="smart_solution_detail.php">SMART SOLAR STREET POLE (BROWSER)</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="smart_solution_detail.php">SMART FARMING (BROWSER)</a></div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+
+                                                                    <!-- PRODUCT -->
+                                                                    <div class="submenu menu" data-menu="4">
+                                                                        <div class="submenu-back">
+                                                                            <div class="menu-item">
+                                                                                <a href="#" class="menu-back">
+                                                                                    Back
+                                                                                    <img class="detail back" src="~/Frontend_assets/images/icon/icon-chevronL.svg">
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <ul>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="product.php">All</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="product_category.php">INDOOR</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="product_category.php">OUTDOOR</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="product_category.php">DECORATIVE</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="product_category.php">ENTERTAINMENT</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="product_category.php">SPECIAL</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="product_category.php">SWITCH / RECEPTACLE / SIGNAGE</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="product_category.php">LAMP</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="product_category.php">COMPONENT / CONTROL EQUIPMENT</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="product_category.php">HORTICULTURE / BIOLOGICAL LIGHTING</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="product_category.php">POLE</a></div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+
+                                                                    <!-- PROJECT REF -->
+                                                                    <div class="submenu menu" data-menu="5">
+                                                                        <div class="submenu-back">
+                                                                            <div class="menu-item">
+                                                                                <a href="#" class="menu-back">
+                                                                                    Back
+                                                                                    <img class="detail back" src="~/Frontend_assets/images/icon/icon-chevronL.svg">
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <ul>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="project.php">All</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="project_category.php">RESIDENTIAL</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="project_category.php">HOTEL / RESORT</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="project_category.php">SHOP / SHOWROOM</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="project_category.php">BANK / OFFICE / COMMERCIAL BUILDING</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="project_category.php">FACADE / HISTORICAL STRUCTURE</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="project_category.php">SPORT</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="project_category.php">EVENT / EXHIBITION</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="project_category.php">AIRPORT</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="project_category.php">FACTORY</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="project_category.php">SHOPPING MALL</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="project_category.php">SPA</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="project_category.php">STREETLIGHT / TUNNEL</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="project_category.php">OUTDOOR / LANDSCAPE</a></div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+
+                                                                    <!-- DOWNLOAD -->
+                                                                    <div class="submenu menu" data-menu="6">
+                                                                        <div class="submenu-back">
+                                                                            <div class="menu-item">
+                                                                                <a href="#" class="menu-back">
+                                                                                    Back
+                                                                                    <img class="detail back" src="~/Frontend_assets/images/icon/icon-chevronL.svg">
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <ul>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="download.php">L&E BIM OBJECTS</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="download.php">CATALOGUE</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="download.php">COMPANY PROFILE</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="download.php">IES FILE</a></div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="menu-item"><a href="download.php">LEAFLET</a></div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- LANG :: PC & IPAD PRO -->
+                            <div class="d-none d-lg-block">
+                                <ul class="lang">
+                                    <li>
+                                        <button>TH</button>
+                                    </li>
+                                    <li class="active">
+                                        <button>EN</button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <ul class="top-menu">
+                                <!-- SEARCH -->
+                                <li>
+                                    <div class="search-container">
+                                        <div class="search-icon-btn">
+                                            <i class="fa fa-search"></i>
+                                        </div>
+                                        <div class="search-input">
+                                            <input type="search" class="search-bar" placeholder="search">
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- CART -->
+                                <li>
+                                    <a href="https://www.lightingshoponline.com/" target="_blank"><i class="fas fa-shopping-cart"></i></a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <!-- MAIN - MENU :: PC & IPAD PRO -->
+                    <div class="d-none d-md-none d-lg-block">
+                        <div class="row ">
+                            <div class="col">
+                                <ul class="mainmenu">
+                                    <li data-page="resource">
+                                        <a href="">RESOURCE & FACILITY</a>
+                                        <div class="dropdown-container">
+                                            <div class="menu-container">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <h6>PROFILE</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <ul class="dropdown-submenu">
+                                                                    <li>
+                                                                        <a href="history.php">
+                                                                            <p>History</p>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="philosophy.php">
+                                                                            <p>Our Philosophy Vision & Mission</p>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="organization.php">
+                                                                            <p>Organization Chart</p>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="awards.php">
+                                                                            <p>Awards</p>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <h6>SUBSIDIARIES PROFILE</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <ul class="dropdown-submenu w-half">
+                                                                    <li>
+                                                                        <a href="subsidiaries.php">
+                                                                            <p>L&E Lighting Innovation Center</p>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="subsidiaries.php">
+                                                                            <p>L&E Solid State Co.,Ltd</p>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="subsidiaries.php">
+                                                                            <p>L&E Manufacturing Co.,Ltd</p>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="subsidiaries.php">
+                                                                            <p>L&E Assembly / Service</p>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="subsidiaries.php">
+                                                                            <p>L&E Warehouse & Logistics</p>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="subsidiaries.php">
+                                                                            <p>L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</p>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="subsidiaries.php">
+                                                                            <p>L&E Overseas Offices</p>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li data-page="solution">
+                                        <a href="smart_solution.php">SMART SOLUTION</a>
+                                        <div class="dropdown-container">
+                                            <div class="imgHover-container">
+                                                <div class="imgHover-containerBG"></div>
+                                            </div>
+                                            <div class="menu-container w-img">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h6>SMART SOLUTION</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <ul class="dropdown-submenu w-half">
+                                                            <li>
+                                                                <a href="smart_solution_detail.php">
+                                                                    <p>ICON LINK (APP)</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution01.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="smart_solution_detail.php">
+                                                                    <p>WISE PLUS (APP)</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution02.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="smart_solution_detail.php">
+                                                                    <p>WISE PLAY (APP)</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution03.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="smart_solution_detail.php">
+                                                                    <p>WISE PRO (BROWSER)</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution04.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="smart_solution_detail.php">
+                                                                    <p>WISE NB (BROWSER)</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution05.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="smart_solution_detail.php">
+                                                                    <p>LIGHTING MANAGEMENT SYSTEM (APP/BROWSER)</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution06.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="smart_solution_detail.php">
+                                                                    <p>SMART BUILDING</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution07.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="smart_solution_detail.php">
+                                                                    <p>SMART STREET POLE (BROWSER)</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution08.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="smart_solution_detail.php">
+                                                                    <p>SMART URBAN POLE (BROWSER)</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution09.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="smart_solution_detail.php">
+                                                                    <p>SMART SOLAR STREET POLE (BROWSER)</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution10.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="smart_solution_detail.php">
+                                                                    <p>SMART FARMING (BROWSER)</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution11.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li data-page="product">
+                                        <a href="product.php">PRODUCTS</a>
+                                        <div class="dropdown-container min-pad">
+                                            <div class="menu-container">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <ul class="product-dropdownmenu">
+                                                            <li>
+                                                                <a href="product_category.php">
+                                                                    <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                    <div class="product-cate">
+                                                                        <p>INDOOR</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="product_category.php">
+                                                                    <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                    <div class="product-cate">
+                                                                        <p>OUTDOOR</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="product_category.php">
+                                                                    <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                    <div class="product-cate">
+                                                                        <p>DECORATIVE</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="product_category.php">
+                                                                    <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                    <div class="product-cate">
+                                                                        <p>ENTERTAINMENT</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="product_category.php">
+                                                                    <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                    <div class="product-cate">
+                                                                        <p>SPECIAL</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="product_category.php">
+                                                                    <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                    <div class="product-cate">
+                                                                        <p>SWITCH / RECEPTACLE / SIGNAGE</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="product_category.php">
+                                                                    <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                    <div class="product-cate">
+                                                                        <p>LAMP</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="product_category.php">
+                                                                    <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                    <div class="product-cate">
+                                                                        <p>COMPONENT / CONTROL EQUIPMENT</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="product_category.php">
+                                                                    <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                    <div class="product-cate">
+                                                                        <p>HORTICULTURE / BIOLOGICAL LIGHTING</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="product_category.php">
+                                                                    <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                    <div class="product-cate">
+                                                                        <p>POLE</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li data-page="project">
+                                        <a href="project.php">PROJECT REF</a>
+                                        <div class="dropdown-container">
+                                            <div class="imgHover-container">
+                                                <div class="imgHover-containerBG"></div>
+                                            </div>
+                                            <div class="menu-container w-img">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h6>PROJECT REF</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <ul class="dropdown-submenu w-half">
+                                                            <li>
+                                                                <a href="project_category.php">
+                                                                    <p>RESIDENTIAL</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project01.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="project_category.php">
+                                                                    <p>HOTEL / RESORT</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project02.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="project_category.php">
+                                                                    <p>SHOP / SHOWROOM</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project03.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="project_category.php">
+                                                                    <p>BANK / OFFICE / COMMERCIAL BUILDING</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project04.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="project_category.php">
+                                                                    <p>FACADE / HISTORICAL STRUCTURE</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project05.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="project_category.php">
+                                                                    <p>SPORT</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project06.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="project_category.php">
+                                                                    <p>EVENT / EXHIBITION</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project07.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="project_category.php">
+                                                                    <p>AIRPORT</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project08.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="project_category.php">
+                                                                    <p>FACTORY</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project09.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="project_category.php">
+                                                                    <p>SHOPPING MALL</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project10.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="project_category.php">
+                                                                    <p>SPA</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project11.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="project_category.php">
+                                                                    <p>STREETLIGHT / TUNNEL</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project12.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="project_category.php">
+                                                                    <p>OUTDOOR / LANDSCAPE</p>
+                                                                    <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project13.jpg"></div>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li data-page="download"><a href="download.php">DOWNLOAD</a></li>
+                                    <li data-page="news"><a href="news.php">NEWS</a></li>
+                                    <li data-page="ir"><a href="IR_index.php">INVESTOR</a></li>
+                                    <li data-page="job"><a href="apply_job.php">APPLY JOB</a></li>
+                                    <li data-page="contact"><a href="contact.php">CONTACT</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+@section Scripts{
+    <script type="text/javascript">
+        var menu_width;
+        jQuery(document).ready(
+            function () {
+                initMenu();
+            });
+        function initMenu() {
+            menu_width = $("#menu .menu").width();
+            $("#menu .menu-back").click(function () {
+                var _pos = $("#menu .menu-slider").position().left + menu_width;
+                var _obj = $("#menu .submenu");
+                $("#menu .menu-slider").stop().animate({
+                    left: _pos
+                }, 300, function () {
+                    _obj.hide();
+                });
+                return false;
+            });
+
+            $("#menu .menu-anchor").click(function () {
+                var _d = $(this).data('menu');
+                $("#menu .submenu").each(function () {
+                    var _d_check = $(this).data('menu');
+                    if (_d_check == _d) {
+                        $(this).show();
+                        var _pos = $("#menu .menu-slider").position().left - menu_width;
+
+                        $("#menu .menu-slider").stop(true, true).animate({
+                            left: _pos
+                        }, 300);
+                        return false;
+                    }
+                });
+                return false;
+            });
+        }
+
+
+        // ACTIVE MENU //
+        $(function () {
+            var getPage = '<?php echo($pageName); ?>';
+            $(".mainmenu li").each(function () {
+                var getMenu = $(this).attr("data-page");
+                if (getPage == getMenu) {
+                    $(this).addClass('active');
+                }
+            });
+        });
+    </script>
+}

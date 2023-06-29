@@ -1,0 +1,147 @@
+﻿@{
+    ViewData["Title"] = "IR_set_announcement";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+
+    var Count_IR_Stock_Market = (List<Lighting.Areas.Identity.Data.IR_Stock_Market>)ViewBag.GetIR_Stock_Market;
+    var Count_IR_NewDetail = (List<Lighting.Areas.Identity.Data.IR_NewDetail>)ViewBag.IR_NewDetail;
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 08 NEWS ROOM :: SET ANNOUNCEMENT ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        @if (Count_IR_Stock_Market.Count() != 0)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                foreach (var item in ViewBag.GetIR_Stock_Market)
+                                {
+                                    <h5>@item.Title_EN</h5>
+                                    <h1>@item.SubTitle_EN</h1>
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.GetIR_Stock_Market)
+                                {
+                                    <h5>@item.Title_TH</h5>
+                                    <h1>@item.SubTitle_TH</h1>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <h5>ห้องข่าว</h5>
+                            <h1>ข่าวแจ้งตลาดหลักทรัพย์</h1>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-9 col-lg-10 col-md-11 col-12">
+                    <div class="timeline-section" id="GetIR_NewDetail">
+                        @if (Count_IR_NewDetail.Count() != 0)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                foreach (var item in ViewBag.IR_NewDetail)
+                                {
+                                    <div class="newsBox">
+                                        <div class="row">
+                                            <div class="col">
+                                                <a class="news-content" href="@Url.Action("IR_set_announcement_detail","Frontend_IR",new { Id = item.Id })">
+                                                    <div class="news-topic">
+                                                        <p>@item.Title_EN</p>
+                                                    </div>
+                                                    <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                                    <div class="txt-content">
+                                                        @Html.Raw(item.Detail_EN)
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.IR_NewDetail)
+                                {
+                                    <div class="newsBox">
+                                        <div class="row">
+                                            <div class="col">
+                                                <a class="news-content" href="@Url.Action("IR_set_announcement_detail","Frontend_IR",new { Id = item.Id })">
+                                                    <div class="news-topic">
+                                                        <p>@item.Title_TH</p>
+                                                    </div>
+                                                    <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                                    <div class="txt-content">
+                                                        @Html.Raw(item.Detail_TH)
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }                               
+                            }
+                        }
+                        else
+                        {
+                            <div class="newsBox">
+                                <div class="row">
+                                    <div class="col">
+                                        <a class="news-content" href="@Url.Action("IR_set_announcement_detail","Frontend_IR")">
+                                            <div class="news-topic">
+                                                <p>หัวข้อข่าวแจ้งตลาดหลักทรัพย์ หัวข้อข่าวแจ้งตลาดหลักทรัพย์ หัวข้อข่าวแจ้งตลาดหลักทรัพย์</p>
+                                            </div>
+                                            <div class="news-date">18 FEB 2023</div>
+                                            <div class="txt-content">
+                                                <p>อาข่าซี้อพาร์ตเมนท์ สโลว์ออร์แกนิคสโตน ดีไซน์เนอร์ซินโดรมพาสต้า รันเวย์ฮากกาด็อกเตอร์ อวอร์ดชิฟฟอนเอ็นทรานซ์ ชะโนดวอเตอร์ธรรมา บูมตะหงิดคองเกรสสถาปัตย์ ศึกษาศาสตร์เซาท์อัลบั้มสตริง วีซ่าวิลเลจแอ็คชั่น ปิโตรเคมีสติกเกอร์มิลค์ แพทเทิร์นผลักดันมายองเนสเนอะ เพนกวินเด้อคอมพ์โปรโมท พงษ์เปราะบาง พาร์ทเนอร์ แจ๊กเก็ตเซอร์วิสแอดมิชชั่นทอร์นาโดเทอร์โบ แฟลชอัลตราฉลุย</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="content-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <i class="fas fa-arrow-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+
+    </script>
+}

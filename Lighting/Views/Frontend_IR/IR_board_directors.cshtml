@@ -1,0 +1,356 @@
+﻿@model Lighting.Models.model_input
+
+@{
+    ViewData["Title"] = "IR_board_directors";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+
+    var cookies = Context.Request.Cookies["lang"];
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 01 CORPORATE INFO :: BOARD DIRECTORS ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        <h5>ข้อมูลบริษัท</h5>
+                        <h1>คณะกรรมการบริษัท</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ul class="display-tab center m-half">
+                        <li class="active" rel="1">
+                            <a href="javascript:void(0)">
+                                <div class="cate-txtBox">
+                                    <div>คณะกรรมการบริษัท</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li rel="2">
+                            <a href="javascript:void(0)">
+                                <div class="cate-txtBox">
+                                    <div>คณะผู้บริหาร</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <input id="lang" value="@cookies" hidden />
+            <div class="row justify-content-center">
+                <div class="col-xl-11 col-lg-12 col-12">
+                    <div class="display-group">
+                        <!---------- BOARD DIRECTOR ---------->
+                        <div class="display-info board-section" rel="1">
+                            <div class="row">
+                                @{
+                                    if (Model.count_list_Board > 0)
+                                    {
+                                        if (Context.Request.Cookies["lang"] == "EN")
+                                        {
+                                            foreach (var items in Model.list_Board)
+                                            {
+                                                                    <div class="col-lg-6 col-md-6 col-12">
+                                                                        <a href="javascript:void(0);" onclick="openmodal(@items.id)">
+                                                                            <div class="name-position">
+                                                                                <div class="row">
+                                                                                    <div class="col">
+                                                                                        <div class="img-width imgBD"><img src="~/upload_image/BoardOfDirectors/@items.image_name"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col">
+                                                                                        <ul class="name-info">
+                                                                                            <li>@items.name_en</li>
+                                                                                            <li>@items.position_en</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            foreach (var items in Model.list_Board)
+                                            {
+                                                                    <div class="col-lg-6 col-md-6 col-12">
+                                                                        <a href="javascript:void(0);" onclick="openmodal(@items.id)">
+                                                                            <div class="name-position">
+                                                                                <div class="row">
+                                                                                    <div class="col">
+                                                                                        <div class="img-width imgBD"><img src="~/upload_image/BoardOfDirectors/@items.image_name"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col">
+                                                                                        <ul class="name-info">
+                                                                                            <li>@items.name_th</li>
+                                                                                            <li>@items.position_th</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                            </div>
+
+                        </div><!-- END/BOARD DIRECTOR -->
+                        <!---------- EXECUTIVE ---------->
+                        <div class="display-info board-section" rel="2">
+                            <div class="row">
+                                @{
+                                    if (Model.count_list_Manage > 0)
+                                    {
+                                        if (Context.Request.Cookies["lang"] == "EN")
+                                        {
+                                            foreach (var items in Model.list_Manage)
+                                            {
+                                                                    <div class="col-lg-6 col-md-6 col-12">
+                                                                        <a href="javascript:void(0);" onclick="openmodal(@items.id)">
+                                                                            <div class="name-position">
+                                                                                <div class="row">
+                                                                                    <div class="col">
+                                                                                        <div class="img-width imgBD"><img src="~/upload_image/BoardOfDirectors/@items.image_name"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col">
+                                                                                        <ul class="name-info">
+                                                                                            <li>@items.name_en</li>
+                                                                                            <li>@items.position_en</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            foreach (var items in Model.list_Manage)
+                                            {
+                                                                    <div class="col-lg-6 col-md-6 col-12">
+                                                                        <a href="javascript:void(0);" onclick="openmodal(@items.id)">
+                                                                            <div class="name-position">
+                                                                                <div class="row">
+                                                                                    <div class="col">
+                                                                                        <div class="img-width imgBD"><img src="~/upload_image/BoardOfDirectors/@items.image_name"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col">
+                                                                                        <ul class="name-info">
+                                                                                            <li>@items.name_th</li>
+                                                                                            <li>@items.position_th</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                            }
+                                        }
+
+                                    }
+                                }                           
+                            </div>
+                        </div><!-- END/EXECUTIVE -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- MODAL :: BOARD INFO -->
+<div class="modal fade profileBox" id="profile-info" data-keyboard="false" tabindex="-1" aria-labelledby="profile-info" aria-hidden="true">
+    <div class="modal-dialog modal-lg more">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-12">
+                        <div class="img-width imgBD"><img id="image_name" src=""></div>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-12">ตำแหน่งในบริษัท</div>
+                    <div class="col-lg-8 col-md-12 col-12">
+                        <p id="position_company"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-12">สัญชาติ</div>
+                    <div class="col-lg-8 col-md-12 col-12">
+                        <p id="nationality"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-12">การศึกษา</div>
+                    <div class="col-lg-8 col-md-12 col-12" id="study">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-12">ความเชี่ยวชาญ</div>
+                    <div class="col-lg-8 col-md-12 col-12">
+                        <p id="expertise"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-12">วันเข้าดำรงตำแหน่งกรรมการ</div>
+                    <div class="col-lg-8 col-md-12 col-12">
+                        <p id="date_appointment"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-12">จำนวนการถือหุ้นสามัญของบริษัท</div>
+                    <div class="col-lg-8 col-md-12 col-12">
+                        <p id="shares_held"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-12">การผ่านหลักสูตรอบรม</div>
+                    <div class="col-lg-8 col-md-12 col-12" id="training_course">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-12">ประวัติการทำงาน</div>
+                    <div class="col-lg-8 col-md-12 col-12" id="work_history">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-12">การดำรงตำแหน่งในกิจการที่แข่งขัน หรือเกี่ยวเนื่องกับธุรกิจของบริษัท</div>
+                    <div class="col-lg-8 col-md-12 col-12" id="holding_position">
+                        @*<p>- ไม่มี -</p>*@
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-12">ประวัติการทำผิดกฎหมายในระยะ 10 ปีที่ผ่านมา</div>
+                    <div class="col-lg-8 col-md-12 col-12" id="Illegal_history">
+                        @*<p>- ไม่มี -</p>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function openmodal(id){
+        $("#profile-info").modal('toggle');
+        $.ajax({
+			type: "POST",
+			cache: false,
+            url: "/Frontend_IR/IR_board_directors_getData",
+			data: {
+				id: id,
+			},    // multiple data sent using ajax
+			success: function (data) {
+				if (data.status == "success") {
+                    $("#image_name").removeAttr("src");
+                    $("#image_name").attr("src", "/upload_image/BoardOfDirectors/" + data.data.image_name);
+                    if($("#lang").val() == 'EN'){
+                         console.log("EN")
+                        $("#position_company").html(data.data.position_company_en);
+                        $("#nationality").html(data.data.nationality_en);
+                        $("#study").html(data.data.study_en.replace(/\n/g, "<br>"));
+                        $("#expertise").html(data.data.expertise_en);
+                        $("#date_appointment").html(data.data.date_appointment_en);
+                        $("#shares_held").html(data.data.shares_held_en);
+                        if(data.data.training_course_en != null){
+                             $("#training_course").html(data.data.training_course_en.replace(/\n/g, "<br>"));
+                        }else{
+                            $("#training_course").html(data.data.training_course_en);
+                        }
+                        if (data.data.work_history_en != null) {
+                            $("#work_history").html(data.data.work_history_en.replace(/\n/g, "<br>"));
+                        } else {
+                            $("#work_history").html(data.data.work_history_en);
+                        }
+                        if (data.data.holding_position_en != null) {
+                            $("#holding_position").html(data.data.holding_position_en.replace(/\n/g, "<br>"));
+                        } else {
+                            $("#holding_position").html(data.data.holding_position_en);
+                        }
+                            if(data.data.illegal_history_en != null){
+                             $("#Illegal_history").html(data.data.illegal_history_en.replace(/\n/g, "<br>"));
+                        }else{
+                            $("#Illegal_history").html(data.data.illegal_history_en);
+                        }
+                        
+                    }else{
+                        console.log("TH")
+                        $("#position_company").html(data.data.position_company_th);
+                        $("#nationality").html(data.data.nationality_th);
+                        $("#study").html(data.data.study_th.replace(/\n/g, "<br>"));
+                        $("#expertise").html(data.data.expertise_th);
+                        $("#date_appointment").html(data.data.date_appointment_th);
+                        $("#shares_held").html(data.data.shares_held_th);
+                        if (data.data.training_course_th != null) {
+                            $("#training_course").html(data.data.training_course_th.replace(/\n/g, "<br>"));
+                        } else {
+                            $("#training_course").html(data.data.training_course_th);
+                        }
+                        if (data.data.work_history_th != null) {
+                            $("#work_history").html(data.data.work_history_th.replace(/\n/g, "<br>"));
+                        } else {
+                            $("#work_history").html(data.data.work_history_th);
+                        }
+                        if (data.data.holding_position_th != null) {
+                            $("#holding_position").html(data.data.holding_position_th.replace(/\n/g, "<br>"));
+                        } else {
+                            $("#holding_position").html(data.data.holding_position_th);
+                        }
+                        if (data.data.illegal_history_th != null) {
+                            $("#Illegal_history").html(data.data.illegal_history_th.replace(/\n/g, "<br>"));
+                        } else {
+                            $("#Illegal_history").html(data.data.illegal_history_th);
+                        }
+                    }
+				}
+				else {
+					Swal.fire({
+						icon: 'warning',
+						text: data.message,
+					});
+				}
+			}, error: function (e) {
+				Swal.fire({
+					icon: 'error',
+					text: e.message,
+				});
+				console.log(e.message);
+				console.log(e.inner);
+			}
+		});
+    }
+    $(document).ready(function () {
+        $(".display-tab > li").click(function () {
+            var rel = $(this).attr("rel");
+            console.log(rel);
+            $('.display-info').hide();
+            $('.display-info[rel=' + rel + ']').fadeIn();
+            $(".display-tab > li").removeClass("active");
+            $(this).addClass("active");
+        });
+    });
+</script>

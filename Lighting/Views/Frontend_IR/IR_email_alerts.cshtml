@@ -1,0 +1,199 @@
+﻿
+@{
+    ViewData["Title"] = "IR_email_alerts";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var Count_IR_Email_Alerts = (List<Lighting.Areas.Identity.Data.IR_Email_Alerts>)ViewBag.IR_Email_Alerts;
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 09 CORPORATE INFO :: EMAIL ALERT - SUBSCRIBE ---------->
+<div class="content-padding foot-pad minH">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        @if (Count_IR_Email_Alerts.Count() != 0)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                foreach (var item in ViewBag.IR_Email_Alerts)
+                                {
+                                    <h5>@item.Title_EN</h5>
+                                    <h1>@item.SubTitle_EN</h1>
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.IR_Email_Alerts)
+                                {
+                                    <h5>@item.Title_TH</h5>
+                                    <h1>@item.SubTitle_TH</h1>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <h5>สอบถามข้อมูลนักลงทุน</h5>
+                            <h1>อีเมลรับข่าวสาร</h1>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="email-alert-page">
+                @if (Count_IR_Email_Alerts.Count() != 0)
+                {
+                    if (Context.Request.Cookies["lang"] == "EN")
+                    {
+                        foreach (var item in ViewBag.IR_Email_Alerts)
+                        {
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10 col-md-10 col-12">
+                                    <div class="WH-Box input-form">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="txt-content text-center f-17">
+                                                    @item.Text_Register_EN
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="icon-email"><i class="fas fa-envelope"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-5 col-md-7 col-12">
+                                                <input type="email" class="form-control more-BD" placeholder="@item.Text_Input_Email_EN">
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-11 col-12">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="accept-term">
+                                                    <label class="form-check-label" for="accept-term">@item.Policy_EN</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="content-center">
+                                                    <a class="buttonB m-size" href="">@item.Button_Submit_EN</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-12 col-md-10 col-12">
+                                    <div class="note text-center">@item.Note_EN</div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        foreach (var item in ViewBag.IR_Email_Alerts)
+                        {
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10 col-md-10 col-12">
+                                    <div class="WH-Box input-form">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="txt-content text-center f-17">
+                                                    @item.Text_Register_TH
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="icon-email"><i class="fas fa-envelope"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-5 col-md-7 col-12">
+                                                <input type="email" class="form-control more-BD" placeholder="@item.Text_Input_Email_TH">
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-11 col-12">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="accept-term">
+                                                    <label class="form-check-label" for="accept-term">@item.Policy_TH</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="content-center">
+                                                    <a class="buttonB m-size" href="">@item.Button_Submit_TH</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-12 col-md-10 col-12">
+                                    <div class="note text-center">@item.Note_TH</div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+                else
+                {
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10 col-md-10 col-12">
+                            <div class="WH-Box input-form">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="txt-content text-center f-17">
+                                            <p>ท่านสามารถลงทะเบียนเพื่อรับข่าวสารอิเล็กทรอนิกส์ <br>เราจะส่งข่าวสารให้ท่านทาง อีเมล เมื่อมีข่าวสารที่เกี่ยวกับบริษัท (ประกาศ, ปรับปรุงเว็บไซต์) ที่ประกาศผ่านเว็บไซต์นี้</p>
+                                            <p>เพื่อลงทะเบียนรับข้อมูลข่าวสารอิเล็กทรอนิกส์กรุณากรอกรายละเอียด ของท่านและคลิกปุ่ม <strong>“สมัครสมาชิกรับข่าวสาร”</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="icon-email"><i class="fas fa-envelope"></i></div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-5 col-md-7 col-12">
+                                        <input type="email" class="form-control more-BD" placeholder="อีเมล">
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-11 col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="accept-term">
+                                            <label class="form-check-label" for="accept-term">
+                                                ฉันได้อ่านและยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href="">นโยบายความเป็นส่วนตัว</a> และยินยอมให้รวบรวมประมวลผลและ / หรือเปิดเผยข้อมูลส่วนบุคคลที่ฉันให้ไว้เพื่อบรรลุวัตถุประสงค์ดังกล่าวข้างต้น
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="content-center">
+                                            <a class="buttonB m-size" href="">สมัครรับข่าวสาร</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12 col-md-10 col-12">
+                            <div class="note text-center">หมายเหตุ : หากท่านต้องการยกเลิกข่าวสารอิเล็กทรอนิกส์จาก บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน) <a href="IR_email_alerts_unsubscribe.php">โปรดคลิกที่นี่</a></div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

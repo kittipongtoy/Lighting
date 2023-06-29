@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "IR_fact_sheet";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 04 SHAREHOLDER INFORMATION :: FACT SHEET ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        @if (Context.Request.Cookies["lang"] == "EN")
+                        {
+                            if (ViewBag.Header != null)
+                            {
+                                foreach (var item in ViewBag.Header)
+                                {
+                                    <h5>@item.titleENG</h5>
+                                    <h1>@item.detailsTitleENG</h1>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (ViewBag.Header != null)
+                            {
+                                foreach (var item in ViewBag.Header)
+                                {
+                                    <h5>@item.titleTH</h5>
+                                    <h1>@item.detailsTitleTH</h1>
+                                }
+                            }
+                        }
+
+                        @*  <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
+                        <h1>ข้อมูลที่สำคัญ</h1>*@
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    @if (Context.Request.Cookies["lang"] == "EN")
+                    {
+                        if (ViewBag.Body != null)
+                        {
+                            foreach (var item in ViewBag.Body)
+                            {
+                                <div class="img-width"><img src="~/upload_image/ImportInfo_Shareholder/@item.image_name_ENG"></div>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (ViewBag.Body != null)
+                        {
+                            foreach (var item in ViewBag.Body)
+                            {
+                                <div class="img-width"><img src="~/upload_image/ImportInfo_Shareholder/@item.image_name"></div>
+                            }
+                        }
+                    }
+
+                    @*<div class="img-width"><img src="~/Frontend_assets/images/ir/fact-sheet.png"></div>  *@
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

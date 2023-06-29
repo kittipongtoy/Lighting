@@ -1,0 +1,294 @@
+﻿@{
+    ViewData["Title"] = "IR_Contact_Edit";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <div class="toolbar" id="kt_toolbar">
+        <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+            <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center me-3 flex-wrap mb-5 mb-lg-0 lh-1">
+                <h1 class="d-flex align-items-center text-dark fw-bold my-1 fs-3">ติดต่อนักลงทุนสัมพันธ์</h1>
+                <span class="h-20px border-gray-200 border-start mx-4"></span>
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
+                    <li class="breadcrumb-item text-muted">
+                        <a href="@Url.Action("InvestorRelations_index","Corporate_Governance")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                    </li>
+                    <li class="breadcrumb-item text-muted">สอบถามข้อมูลนักลงทุน</li>
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                    </li>
+                    <li class="breadcrumb-item text-dark">ติดต่อนักลงทุนสัมพันธ์</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <div id="kt_content_container" class="container-xxl">
+            <div class="card">
+                <div class="card-body pt-0">
+                    <div class="row mb-3" style="padding-top: 1.5rem!important;">
+                        <div class="col-6">
+                            <h2>
+                                แก้ไขรายการ
+                            </h2>
+                        </div>
+                        <div class="col-6" style="text-align:right;">
+                            <a type="button" class="btn btn-secondary" href="@Url.Action("IR_Contact_Index","IR_Contact")">ย้อนกลับ</a>
+                        </div>
+                    </div>
+                    <form id="form_create" enctype="multipart/form-data">
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    ชื่อ TH
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Title_TH" id="Title_TH" />
+                            </div>
+                            <div class="col-2">
+                                <span>
+                                    ชื่อ EN
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Title_EN" id="Title_EN" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    รายละเอียด TH
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="SubTitle_TH" id="SubTitle_TH" />
+                            </div>
+                            <div class="col-2">
+                                <span>
+                                    รายละเอียด EN
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="SubTitle_EN" id="SubTitle_EN" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    ชื่อ TH
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Name_TH" id="Name_TH" />
+                            </div>
+                            <div class="col-2">
+                                <span>
+                                    ชื่อ EN
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Name_EN" id="Name_EN" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    ตำแหน่ง TH
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Position_TH" id="Position_TH" />
+                            </div>
+                            <div class="col-2">
+                                <span>
+                                    ตำแหน่ง EN
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Position_EN" id="Position_EN" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    ที่อยู่ TH
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Address_TH" id="Address_TH" />
+                            </div>
+                            <div class="col-2">
+                                <span>
+                                    ที่อยู่ EN
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Address_EN" id="Address_EN" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    เบอร์โทร แถวที่ 1
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Tel" id="Tel" />
+                            </div>
+                            <div class="col-2">
+                                <span>
+                                    เบอร์โทร แถวที่ 2
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Tel2" id="Tel2" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    Email
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Email" id="Email" />
+                            </div>
+                            <div class="col-2">
+                                <span>
+                                    รูปพื้นหลังด้านซ้าย
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    สถานะการใช้งาน
+                                </span>
+                            </div>
+                            <div class="col-4" id="CheckStatus">
+                              
+                            </div>
+                        </div>
+                        <input type="hidden" name="Id" id="Id" />
+                    </form>
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                }
+            }
+        };
+        var Parmeter_id = getUrlParameter('Id');
+
+        var check = 0;
+        function checkSwitch() {
+            if (document.getElementById("use_status").checked == true) {
+                check = 1;
+            }
+            else {
+                check = 0;
+            }
+            $("#use_status").val(check);
+            console.log(check)
+        }
+
+        $(()=>{
+            $.ajax({
+                type: 'get',
+                url: '/IR_Contact/Get_IR_Contact',
+                data: { Id: Parmeter_id },
+                success: function (data) {
+                    console.log(data)
+                    $("#Id").val(data.id);
+                    $("#Title_TH").val(data.title_TH);                 
+                    $("#Title_EN").val(data.title_EN);
+                    $("#SubTitle_TH").val(data.subTitle_TH);
+                    $("#SubTitle_EN").val(data.subTitle_EN);
+                    $("#Name_TH").val(data.name_TH);
+                    $("#Name_EN").val(data.name_EN);
+                    $("#Position_TH").val(data.position_TH);
+                    $("#Position_EN").val(data.position_EN);
+                    $("#Address_TH").val(data.address_TH);
+                    $("#Address_EN").val(data.address_EN);
+                    $("#Tel").val(data.tel);
+                    $("#Tel2").val(data.tel2);
+                    $("#Email").val(data.email);
+
+                    var status = '';
+                    if (data.status == 1) {
+                        status += '<div class="form-check form-switch">';
+                        status += '<input class="form-check-input" type="checkbox" name="Status" value="1" checked id="use_status" checked onclick="checkSwitch()">';
+                        status += '<label class="form-check-label" for="use_status"> ใช้งาน </label>';
+                        status += '</div>';
+                    }
+                    else
+                    {
+                        status += '<div class="form-check form-switch">';
+                        status += '<input class="form-check-input" type="checkbox" name="Status" value="0" id="use_status" onclick="checkSwitch()">';
+                        status += '<label class="form-check-label" for="use_status"> ใช้งาน </label>';
+                        status += '</div>';
+                    }
+                    $("#CheckStatus").html(status);
+                },
+                error: (e) => {
+                    displayError(e);
+                }
+            });
+        })
+
+        function submit_form() {
+            var forms = $('#form_create')[0];
+            var data = new FormData(forms);
+            $.ajax({
+                type: 'put',
+                url: '/IR_Contact/IR_Contact_Edit_Submit',
+                data: data,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'บันทึกข้อมูลเรียบร้อยแล้ว',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    window.location.href = "/IR_Contact/IR_Contact_Index";
+                },
+                error: (e) => {
+                    displayError(e);
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Profile_Awards";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+}
+<div class="top-page">
+    <div class="container">
+        <div class="row">
+            <div class="col">RESOURCE & FACILITY</div>
+        </div>
+    </div>
+</div>
+
+<!---------- RESOURCE & FACILITY :: AWARDS ---------->
+<div class="content-padding foot-pad minH">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="header-twoline">
+                    <h5>PROFILE</h5>
+                    <h1>AWARDS</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-9 col-lg-11 col-md-12 col-11">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="awardBox">
+                            <div class="row">
+                                <div class="col">
+                                    <a class="img-width hover-img" data-fancybox="gallery" data-caption="SET AWARDS 2008" href="~/Frontend_assets/images/resource-facility/award01.jpg">
+                                        <img src="~/Frontend_assets/images/resource-facility/award01.jpg">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <ul class="name-info">
+                                        <li>SET AWARDS 2008</li>
+                                        <li>Top Corporate Governance Report Award - mai <br>Lighting & Equipment Public Company Limited</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="awardBox">
+                            <div class="row">
+                                <div class="col">
+                                    <a class="img-width hover-img" data-fancybox="gallery" data-caption="SET AWARDS 2010" href="~/Frontend_assets/images/resource-facility/award02.jpg">
+                                        <img src="~/Frontend_assets/images/resource-facility/award02.jpg">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <ul class="name-info">
+                                        <li>SET AWARDS 2010</li>
+                                        <li>Top Corporate Governance Report Award - mai <br>Lighting & Equipment Public Company Limited</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        Fancybox.bind('[data-fancybox="gallery"]', {
+            Toolbar: {
+                display: [
+                    { id: "prev", position: "center" },
+                    { id: "counter", position: "center" },
+                    { id: "next", position: "center" },
+                    "zoom",
+                    "fullscreen",
+                    "download",
+                    "thumbs",
+                    "close",
+                ],
+            },
+        });
+    </script>
+}

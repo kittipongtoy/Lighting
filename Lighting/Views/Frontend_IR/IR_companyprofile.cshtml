@@ -1,0 +1,229 @@
+﻿@model Lighting.Models.model_input
+
+@{
+    ViewData["Title"] = "IR_companyprofile";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 01 CORPORATE INFO :: COMPANY PROFILE ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        <h5>ข้อมูลบริษัท</h5>
+                        <h1>ข้อมูลทั่วไปบริษัท</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- PC & IPAD PRO -->
+            <div class="d-none d-lg-block">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5">
+                        <ul class="display-tab company-list">
+                            @{
+                                if (Model.count_list_Companyprofile > 0)
+                                {
+                                    var count_row = 1;
+                                    foreach (var items in Model.list_Companyprofile)
+                                    {
+                                        if (count_row == 1)
+                                        {
+                                            if(Context.Request.Cookies["lang"] == "EN"){
+                                                        <li class="active" rel="@count_row">
+                                                            <a href="javascript:void(0)">
+                                                                <div class="company-name">
+                                                                    <div>@items.title_en</div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                            }else{
+                                                        <li class="active" rel="@count_row">
+                                                            <a href="javascript:void(0)">
+                                                                <div class="company-name">
+                                                                    <div>@items.title_th</div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                            }
+                                         
+                                        }
+                                        else
+                                        {
+                                            if (Context.Request.Cookies["lang"] == "EN")
+                                            {
+                                                        <li class="" rel="@count_row">
+                                                            <a href="javascript:void(0)">
+                                                                <div class="company-name">
+                                                                    <div>@items.title_en</div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                            }
+                                            else
+                                            {
+                                                        <li class="" rel="@count_row">
+                                                            <a href="javascript:void(0)">
+                                                                <div class="company-name">
+                                                                    <div>@items.title_th</div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                            }
+                                        }
+                                        count_row++;
+                                    }
+                                }
+                            }
+                          
+
+                        </ul>
+                    </div>
+                    <div class="col-lg-7 col-md-7">
+                        <div class="display-group">
+                            <!-- 01 -->
+                            @{
+                                if (Model.count_list_Companyprofile > 0)
+                                {
+                                    var count_row_2 = 1;
+                                    foreach (var items in Model.list_Companyprofile)
+                                    {
+                                        if (Context.Request.Cookies["lang"] == "EN")
+                                        {
+                                                    <div class="display-info" rel="@count_row_2">
+                                                        <div class="blueBox company-info">
+                                                            @Html.Raw(items.detail_en)
+                                                        </div>
+                                                    </div>
+                                        }
+                                        else
+                                        {
+                                                    <div class="display-info" rel="@count_row_2">
+                                                        <div class="blueBox company-info">
+                                                            @Html.Raw(items.detail_th)
+                                                        </div>
+                                                    </div>
+                                        }
+                                        count_row_2++;
+                                    }
+                                }
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAIN - MENU :: IPAD & MOBILE -->
+            <div class="d-block d-md-block d-lg-none">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-10">
+                        <div class="input-form">
+                            <select class="form-select more-BD" onchange="change_mobile(this)">
+                                @{
+                                    if (Model.count_list_Companyprofile > 0)
+                                    {
+                                        var count_row = 1;
+                                        foreach (var items in Model.list_Companyprofile)
+                                        {
+                                            if (count_row == 1)
+                                            {
+                                                if (Context.Request.Cookies["lang"] == "EN")
+                                                {
+                                                            <option selected value="@items.id">@items.title_en</option>
+                                                }
+                                                else
+                                                {
+                                                            <option selected value="@items.id">@items.title_th</option>
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                if (Context.Request.Cookies["lang"] == "EN")
+                                                {
+                                                            <option value="@items.id">@items.title_en</option>
+                                                }
+                                                else
+                                                {
+                                                            <option value="@items.id">@items.title_th</option>
+                                                }
+                                            }
+                                            count_row++;
+                                        }
+                                    }
+                                }
+                                
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-11 col-12">
+                        <div class="blueBox company-info" id="mobile_detail">
+                            @{
+                                if (Model.count_list_Companyprofile > 0)
+                                {
+                                    if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                                @Html.Raw(Model.list_Companyprofile[0].detail_en)
+                                    }
+                                    else
+                                    {
+                                                @Html.Raw(Model.list_Companyprofile[0].detail_th)
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function change_mobile(obj_selected){
+        $.ajax({
+            type: "POST",
+            cache: false,
+            url: "/Frontend_IR/IR_companyprofile_getData",
+            data: {
+                id: obj_selected.value,
+            },    // multiple data sent using ajax
+            success: function (data) {
+                if (data.status == "success") {
+                    $("#mobile_detail").html(data.data);
+                }
+                else {
+                    Swal.fire({
+                        icon: 'warning',
+                        text: data.message,
+                    });
+                }
+            }, error: function (e) {
+                Swal.fire({
+                    icon: 'error',
+                    text: e.message,
+                });
+                console.log(e.message);
+                console.log(e.inner);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $(".display-tab > li").click(function () {
+            var rel = $(this).attr("rel");
+            console.log(rel);
+            $('.display-info').hide();
+            $('.display-info[rel=' + rel + ']').fadeIn();
+            $(".display-tab > li").removeClass("active");
+            $(this).addClass("active");
+        });
+    });
+</script>

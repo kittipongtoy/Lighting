@@ -1,0 +1,191 @@
+﻿
+@using System.Globalization;
+
+@{
+    ViewData["Title"] = "IR_annual_report";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+
+<!---------- IR 04 SHAREHOLDER INFORMATION :: ANNUAL REPORT ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        @if (Context.Request.Cookies["lang"] == "EN")
+                        {
+                            if (ViewBag.Header != null)
+                            {
+                                foreach (var item in ViewBag.Header)
+                                {
+                                    <h5>@item.titleENG</h5>
+                                    <h1>@item.detailsTitleENG</h1>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (ViewBag.Header != null)
+                            {
+                                foreach (var item in ViewBag.Header)
+                                {
+                                    <h5>@item.titleTH</h5>
+                                    <h1>@item.detailsTitleTH</h1>
+                                }
+                            }
+                        }
+
+                        @*  <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
+                        <h1>รายงานประจำปี / ONE REPORT</h1>*@
+
+                    </div>
+                </div>
+            </div>
+            <div class="three-colPad">
+                <div class="row justify-content-center"> 
+
+                    @if (Context.Request.Cookies["lang"] == "EN")
+                    {
+                        if (ViewBag.Body != null)
+                        {
+                            foreach (var item in ViewBag.Body)
+                            {
+                                var dateget = Convert.ToDateTime(item.year);
+                                var year = dateget.ToString("yyyy", new CultureInfo("en-US"));
+
+                                <div class="col-lg-4 col-md-4 col-6">
+                                    <a class="coverBox" href="~/upload_file/SH_annualReport/@item.file_name_ENG" target="_blank">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="book-cover"><img src="~/upload_image/SH_annualReport/@item.upload_image_ENG"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="cover-topic">
+                                                    <p>@item.titleENG &nbsp; @year</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (ViewBag.Body != null)
+                        {
+                            foreach (var item in ViewBag.Body)
+                            {
+                                var dateget = Convert.ToDateTime(item.year);
+                                var year = dateget.ToString("yyyy", new CultureInfo("th-TH"));
+
+                                <div class="col-lg-4 col-md-4 col-6">
+                                    <a class="coverBox" href="~/upload_file/SH_annualReport/@item.file_name" target="_blank">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="book-cover"><img src="~/upload_image/SH_annualReport/@item.upload_image"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="cover-topic">
+                                                    <p>@item.titleTH &nbsp; @year</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            } 
+                        }
+                    }
+
+                    @*<div class="col-lg-4 col-md-4 col-6">
+                        <a class="coverBox" href="~/Frontend_assets/images/testPDF.pdf" target="_blank">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="book-cover"><img src="~/Frontend_assets/images/ir/annual01.gif"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="cover-topic">
+                                        <p>One Report 2564</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>*@
+
+                    @*<div class="col-lg-4 col-md-4 col-6">
+                        <a class="coverBox" href="~/Frontend_assets/images/testPDF.pdf" target="_blank">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="book-cover"><img src="~/Frontend_assets/images/ir/annual02.gif"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="cover-topic">
+                                        <p>รายงานประจำปี 2563</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-6">
+                        <a class="coverBox" href="~/Frontend_assets/images/testPDF.pdf" target="_blank">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="book-cover"><img src="~/Frontend_assets/images/ir/annual03.gif"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="cover-topic">
+                                        <p>รายงานประจำปี 2562</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>*@
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="content-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination mt-4">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <i class="fas fa-arrow-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Partial("~/Views/Shared/Inc/IR_inc_footer.cshtml")
+
+ 
+

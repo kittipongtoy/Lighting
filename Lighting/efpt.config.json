@@ -1,0 +1,193 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "LightingContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "Lighting",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[Author_secretary_File]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Board_of_Directors]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Company_Overview]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Companyprofile]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CorporateGovernance]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CorporateGovernance_Cate]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CorporateGovernance_File]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[M_chairman]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[M_message_chairman]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Anti_fraud]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Anti_fraud_File]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Author_audit_committee]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Author_audit_committee_File]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Author_board_director]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Author_board_director_File]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Author_cg]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Author_cg_File]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Author_chairman]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Author_chairman_executive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Author_chairman_executive_File]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Author_chairman_File]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Author_executive_board]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Author_executive_board_File]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Author_secretary]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Author_secretary_File]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_business_ethics]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_business_ethics_File]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Channel_clue]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Channel_clue_File]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_CRS_policy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_CRS_policy_File]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Gift_entertainment]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[O_Gift_entertainment_File]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrganizationalStructure]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[P_philosophy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ShareHolder]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ShareHolder_DataDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sustainability_Report]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[User]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "laptop-077vncl7\\sqlexpress.Lighting.dbo",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "IR_gift_and_entertainment_policy";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 02 CORPORATE GOVERNANCE :: GIFT & ENTERTAINMENT POLICY ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        <h5>นโยบายการกำกับดูแลกิจการ</h5>
+                        <h1>นโยบายการให้หรือรับของขวัญ และการเลี้ยงรับรอง</h1>
+                    </div>
+                </div>
+            </div>
+            @Html.Partial("~/Views/Shared/Inc/IR_inc_corporate_governance_content.cshtml")
+        </div>
+    </div>
+</div>

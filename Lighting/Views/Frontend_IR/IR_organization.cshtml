@@ -1,0 +1,54 @@
+﻿@model Lighting.Models.model_input
+
+@{
+    ViewData["Title"] = "IR_organization";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+<!---------- IR 01 CORPORATE INFO :: ORGANIZATION ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        <h5>ข้อมูลบริษัท</h5>
+                        <h1>โครงสร้างองค์กร</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                @{
+                    if (Model.count_list_OrganizationalStructure > 0)
+                    {
+                        foreach (var items in Model.list_OrganizationalStructure)
+                        {
+                            <div class="col-lg-10 col-md-11 col-12 mb-3">
+                                <a class="img-width hover-img" data-fancybox data-caption="โครงสร้างองค์กร" href="~/upload_image/OrganizationalStructure/@items.image_name">
+                                    <img src="~/upload_image/OrganizationalStructure/@items.image_name">
+                                </a>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    Fancybox.bind('[data-fancybox]', {
+        //Toolbar: {
+        //    display: [
+        //        { id: "prev", position: "center" },
+        //        { id: "counter", position: "center" },
+        //        { id: "next", position: "center" },
+        //        "zoom",
+        //        "fullscreen",
+        //        "download",
+        //        "close",
+        //    ],
+        //},
+    });
+</script>

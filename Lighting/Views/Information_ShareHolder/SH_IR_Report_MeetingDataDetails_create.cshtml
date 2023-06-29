@@ -1,0 +1,215 @@
+﻿@model Lighting.Models.model_input
+
+@{
+    ViewData["Title"] = "SH_IR_Report_MeetingDataDetails_create";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+
+    DateTime? dds = Model.SH_IR_Report_MeetingData.year;
+    var year = dds.Value.Year.ToString();
+}
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Toolbar-->
+    <div class="toolbar" id="kt_toolbar">
+        <!--begin::Container-->
+        <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+            <!--begin::Page title-->
+            <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center me-3 flex-wrap mb-5 mb-lg-0 lh-1">
+                <!--begin::Title-->
+                <h1 class="d-flex align-items-center text-dark fw-bold my-1 fs-3">แบบฟอร์ม</h1>
+                <!--end::Title-->
+                <!--begin::Separator-->
+                <span class="h-20px border-gray-200 border-start mx-4"></span>
+                <!--end::Separator-->
+                <!--begin::Breadcrumb-->
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">
+                        <a href="@Url.Action("InvestorRelations_index","Investor_Relations")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">นโยบายการกำกับดูแลกิจการ</li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-dark">นโยบายการกำกับดูแลกิจการ</li>
+                    <!--end::Item-->
+                </ul>
+                <!--end::Breadcrumb-->
+            </div>
+            <!--end::Page title-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Toolbar-->
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
+            <!--begin::Card-->
+            <div class="card">
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <div class="row mb-3" style="padding-top: 1.5rem!important;">
+                        <div class="col-6">
+                            <h2>
+                                เพิ่มรายการ
+                            </h2>
+                            <h2>
+                                @Model.SH_IR_Report_MeetingData.titleTH (@year)
+                            </h2>
+                            <br />
+                        </div>
+                        <div class="col-6" style="text-align:right;">
+                            <a type="button" class="btn btn-secondary" href="@Url.Action("SH_IR_Report_Meeting","Information_ShareHolder")">ย้อนกลับ</a>
+                        </div>
+                    </div>
+                    <form id="form_create" enctype="multipart/form-data">
+
+                        <input type="text" class="form-control" name="reportMeeting_id" value="@Model.SH_IR_Report_MeetingData.id" hidden />
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    หัวข้อ TH
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="titleTH" required autocomplete="off" />
+                            </div>
+
+                            <div class="col-2">
+                                <span>
+                                    หัวข้อ ENG
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="titleENG" required autocomplete="off" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    ปี
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input class="col-lg-6 form-control" name="Year_Str" id="Year" type="text" autocomplete="off" multiple required placeholder="กรุณาเลือกปี" />
+                            </div> 
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    ไฟล์เอกสาร TH
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="file" class="form-control" name="uploaded_file" accept="application/pdf,application/vnd.ms-excel" />
+                            </div>
+                            <div class="col-2">
+                                <span>
+                                    ไฟล์เอกสาร ENG
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="file" class="form-control" name="uploaded_file_ENG" accept="application/pdf,application/vnd.ms-excel" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    สถานะการใช้งาน
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" checked type="checkbox" name="active_status" value="1" id="use_status">
+                                    <label class="form-check-label" for="active_status">ใช้งาน</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+</div>
+<!--end::Content-->
+@section Scripts{
+     
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+
+        $("#Year").datepicker({
+            format: "yyyy",
+            startView: "years",
+            minViewMode: "years"
+        });
+         
+        function submit_form() {
+            var raw_form = document.getElementById('form_create');
+            var formData = new FormData(raw_form);
+
+            $.ajax({
+                type: 'POST',
+                url: '/Information_ShareHolder/SH_IR_Report_MeetingDataDetails_submit',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (data) {
+                    if (data.status == "success") { 
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = "@Url.Action("SH_IR_Report_Meeting","Information_ShareHolder")";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+    </script>
+
+}

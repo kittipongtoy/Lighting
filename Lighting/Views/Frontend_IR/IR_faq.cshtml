@@ -1,0 +1,159 @@
+﻿
+@{
+    ViewData["Title"] = "IR_faq";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var Count_IR_faq = (List<Lighting.Areas.Identity.Data.IR_faq>)ViewBag.IR_faq;
+    var Count_IR_faq_Detail = (List<Lighting.Areas.Identity.Data.IR_faq_Detail>)ViewBag.IR_faq_Detail;
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 09 CORPORATE INFO :: FAQ ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        @if (Count_IR_faq.Count() != 0)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                foreach (var item in ViewBag.IR_faq)
+                                {
+                                    <h5>@item.Title_EN</h5>
+                                    <h1>@item.SubTitle_EN</h1>
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.IR_faq)
+                                {
+                                    <h5>@item.Title_TH</h5>
+                                    <h1>@item.SubTitle_TH</h1>
+                                }
+                            }
+                        }
+                        else
+                        {
+                             <h5>สอบถามข้อมูลนักลงทุน</h5>
+                             <h1>ถามตอบ</h1>
+                        }                      
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-11 col-12">
+                    <div class="faq-acc">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                @if (Count_IR_faq_Detail.Count() != 0)
+                                {
+                                    if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                        foreach (var item in ViewBag.IR_faq_Detail)
+                                        {
+                                            <!-- QUESTION :: 01 -->
+                                            <div class="panel-heading active" role="tab">
+                                                <div class="row">
+                                                    <div class="col-lg-11 col-md-11 col-10">@item.Title_EN </div>
+                                                    <div class="col-lg-1 col-md-1 col-2">
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#section01" aria-expanded="true"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="section01" class="panel-collapse collapse show" role="tabpanel" data-parent="#accordion">
+                                                <div class="panel-body">
+                                                   @Html.Raw(item.Detail_EN)
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in ViewBag.IR_faq_Detail)
+                                        {
+                                            <!-- QUESTION :: 01 -->
+                                            <div class="panel-heading active" role="tab">
+                                                <div class="row">
+                                                    <div class="col-lg-11 col-md-11 col-10">@item.Title_TH</div>
+                                                    <div class="col-lg-1 col-md-1 col-2">
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#section01" aria-expanded="true"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="section01" class="panel-collapse collapse show" role="tabpanel" data-parent="#accordion">
+                                                <div class="panel-body">
+                                                    @Html.Raw(item.Detail_TH)
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <!-- QUESTION :: 01 -->
+                                    <div class="panel-heading active" role="tab">
+                                        <div class="row">
+                                            <div class="col-lg-11 col-md-11 col-10">หัวข้อคำถาม ข้อที่ 1</div>
+                                            <div class="col-lg-1 col-md-1 col-2">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#section01" aria-expanded="true"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="section01" class="panel-collapse collapse show" role="tabpanel" data-parent="#accordion">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="txt-content">
+                                                        <p>วืดปิโตรเคมีสโลว์เอสเปรสโซ ริกเตอร์อุเทนจตุคามเยอบีราดีลเลอร์ เอ็กซ์เพรสโอเวอร์สติกเกอร์ โพลล์สเกตช์วัคค์เฟิร์มม้านั่ง โอเพ่น เปปเปอร์มินต์ละติน ธัมโมคอลัมนิสต์ เทเลกราฟ ไลท์เรตสเก็ตช์ ตรวจทานเตี๊ยมไมเกรนปัจเจกชน ฟรุตอิเลียดแดนซ์ ซามูไร เยอร์บีราฉลุยเมี่ยงคำเมเปิล วอร์รูมวืดเปโซดีพาร์ตเมนต์พรีเมียม คาสิโนโลชั่นเมจิก เทควันโดบรรพชนโซนี่แฮนด์</p>
+                                                        <p>ราเมนพลาซ่า นายแบบวิทย์แซ็กโซโฟนสโตร์คอลัมนิสต์ อาว์ปฏิสัมพันธ์ทัวร์ อมาตยาธิปไตยสไตล์บู๊ โพลารอยด์ไวกิ้ง ลอจิสติกส์สแตนดาร์ดซิตี้ คอนโด สะเด่าแพลนอุตสาหการ ดยุกแอ็กชั่นแฮมเบอร์เกอร์บึ้มเช็ก เป็นไงสะกอมโรแมนติคเก๋ากี้โต๋เต๋ แม่ค้าเป่ายิ้งฉุบสโตร์ อุตสาหการแชมปิยอง สะบึม ไทม์มหาอุปราชาแชมเปี้ยนแลนด์ พรีเมียร์วีนเต๊ะซาร์ดีนโหงวเฮ้ง บาร์บีคิว ชัตเตอร์เรซิ่น เบิร์ดเซรามิกศิรินทร์เรซิน สเก็ตช์ฮวงจุ้ยสึนามิ โบกี้สไตล์ แช่แข็ง คอนเฟิร์มเอาท์ดอร์ อุตสาหการปูอัดวิลล์มุมมอง โบรกเกอร์ช็อปเปอร์ จ๊อกกี้แคปพรีเมียร์บุ๋นแดรี่ คอนเซปต์ซีเรียสพาวเวอร์ สหรัฐ คีตราชันผ้าห่ม ดีพาร์ตเมนท์เทอร์โบหลวงตาสมิติเวช ดีพาร์ตเมนต์แคนยอนรายชื่อโบรชัวร์ ลอร์ดเทคโลชั่น ลอร์ดมินต์ ความหมายวอลนัทรีดไถ อาข่าแจ็กพ็อต แบล็คสเปคอพาร์ตเมนท์</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xl-8 col-lg-9 col-md-10 col-12">
+                                                    <a data-fancybox class="img-width" href="~/Frontend_assets/images/ir/ir-faq01.jpg"><img src="~/Frontend_assets/images/ir/ir-faq01.jpg"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    // collapse //
+    $(document).ready(function () {
+        $('.collapse.in').prev('.panel-heading').addClass('active');
+        $('#accordion')
+            .on('show.bs.collapse', function (a) {
+                $(a.target).prev('.panel-heading').addClass('active');
+            })
+            .on('hide.bs.collapse', function (a) {
+                $(a.target).prev('.panel-heading').removeClass('active');
+            });
+    });
+
+
+    Fancybox.bind('[data-fancybox]', {
+        //Toolbar: {
+        //    display: [
+        //        { id: "prev", position: "center" },
+        //        { id: "counter", position: "center" },
+        //        { id: "next", position: "center" },
+        //        "zoom",
+        //        "fullscreen",
+        //        "download",
+        //        "close",
+        //    ],
+        //},
+    });
+</script>
+

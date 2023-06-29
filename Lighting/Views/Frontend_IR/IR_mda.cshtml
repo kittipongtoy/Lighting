@@ -1,0 +1,536 @@
+﻿@using System.Globalization
+
+@{
+    ViewData["Title"] = "IR_mda";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 03 FINANCIAL INFORMATION :: MD&A ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        @if (Context.Request.Cookies["lang"] == "EN")
+                        {
+                            if (ViewBag.Header != null)
+                            {
+                                foreach (var item in ViewBag.Header)
+                                {
+                                    <h5>@item.titleENG</h5>
+                                    <h1>@item.detailsTitleENG</h1>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (ViewBag.Header != null)
+                            {
+                                foreach (var item in ViewBag.Header)
+                                {
+                                    <h5>@item.titleTH</h5>
+                                    <h1>@item.detailsTitleTH</h1>
+                                }
+                            }
+                        }
+
+                        @* <h5>ข้อมูลสำคัญทางการเงิน</h5>
+                        <h1>คำอธิบาย และการวิเคราะห์</h1>*@
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ul class="display-tab center m-half">
+                        <li class="active" rel="1">
+                            <a href="javascript:void(0)">
+                                <div class="cate-txtBox">
+                                    @if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                        if (ViewBag.Header != null)
+                                        {
+                                            foreach (var item in ViewBag.Header)
+                                            {
+                                                <div>@item.dataTitleENG</div>
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (ViewBag.Header != null)
+                                        {
+                                            foreach (var item in ViewBag.Header)
+                                            {
+                                                <div>@item.dataTitleTH</div>
+                                            }
+                                        }
+                                    }
+
+                                    @*<div>ข้อมูล</div>*@
+
+                                </div>
+                            </a>
+                        </li>
+                        <li rel="2">
+                            <a href="javascript:void(0)">
+                                <div class="cate-txtBox">
+                                    @if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                        if (ViewBag.Header != null)
+                                        {
+                                            foreach (var item in ViewBag.Header)
+                                            {
+                                                <div>@item.downloadTitleENG</div>
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (ViewBag.Header != null)
+                                        {
+                                            foreach (var item in ViewBag.Header)
+                                            {
+                                                <div>@item.downloadTitleTH</div>
+                                            }
+                                        }
+                                    }
+
+                                    @*<div>ดาวน์โหลด</div>*@
+
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="display-group">
+                        <!---------- INFO ---------->
+                        <div class="display-info" rel="1">
+                            <div class="row">
+
+                                @if (Context.Request.Cookies["lang"] == "EN")
+                                {
+                                    if (ViewBag.Body != null)
+                                    {
+                                        foreach (var item1 in ViewBag.Body)
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-12">
+                                                <a class="WH-Box hover-img" data-fancybox="gallery" data-caption="@item1.titleENG" href="~/upload_image/SH_importantFinancial/@item1.image_name_ENG">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="topicBD-Box">
+                                                                <div>@item1.titleENG</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="img-width"><img src="~/upload_image/SH_importantFinancial/@item1.image_name_ENG"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <h6>@item1.detailsTitleENG</h6>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (ViewBag.Body != null)
+                                    {
+                                        foreach (var item1 in ViewBag.Body)
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-12">
+                                                <a class="WH-Box hover-img" data-fancybox="gallery" data-caption="@item1.titleTH" href="~/upload_image/SH_importantFinancial/@item1.image_name">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="topicBD-Box">
+                                                                <div>@item1.titleTH</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="img-width"><img src="~/upload_image/SH_importantFinancial/@item1.image_name"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <h6>@item1.detailsTitleTH</h6>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        }
+                                    }
+                                }
+
+                                @* <div class="col-lg-6 col-md-6 col-12">
+                                <a class="WH-Box hover-img" data-fancybox="gallery" data-caption="รายได้จากการขายและให้บริการ" href="~/Frontend_assets/images/ir/chart01.jpg">
+                                <div class="row">
+                                <div class="col">
+                                <div class="topicBD-Box">
+                                <div>รายได้จากการขายและให้บริการ</div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <div class="img-width"><img src="~/Frontend_assets/images/ir/chart01.jpg"></div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <h6>รายได้จากการขายและให้บริการ (ล้านบาท)</h6>
+                                </div>
+                                </div>
+                                </a>
+                                </div>*@
+                                @*
+                                <div class="col-lg-6 col-md-6 col-12">
+                                <a class="WH-Box hover-img" data-fancybox="gallery" data-caption="รายได้อื่น" href="~/Frontend_assets/images/ir/chart02.jpg">
+                                <div class="row">
+                                <div class="col">
+                                <div class="topicBD-Box">
+                                <div>รายได้อื่น</div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <div class="img-width"><img src="~/Frontend_assets/images/ir/chart02.jpg"></div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <h6>รายได้อื่น (ล้านบาท)</h6>
+                                </div>
+                                </div>
+                                </a>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                <a class="WH-Box hover-img" data-fancybox="gallery" data-caption="ต้นทุนขายและต้นทุนการให้บริการ" href="~/Frontend_assets/images/ir/chart03.jpg">
+                                <div class="row">
+                                <div class="col">
+                                <div class="topicBD-Box">
+                                <div>ต้นทุนขายและต้นทุนการให้บริการ</div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <div class="img-width"><img src="~/Frontend_assets/images/ir/chart03.jpg"></div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <h6>ต้นทุนขายและต้นทุนการให้บริการ (ล้านบาท)</h6>
+                                </div>
+                                </div>
+                                </a>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                <a class="WH-Box hover-img" data-fancybox="gallery" data-caption="ค่าใช้จ่ายในการขายและบริหาร" href="~/Frontend_assets/images/ir/chart04.jpg">
+                                <div class="row">
+                                <div class="col">
+                                <div class="topicBD-Box">
+                                <div>ค่าใช้จ่ายในการขายและบริหาร</div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <div class="img-width"><img src="~/Frontend_assets/images/ir/chart04.jpg"></div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <h6>ค่าใช้จ่ายในการขายและบริหาร (ล้านบาท)</h6>
+                                </div>
+                                </div>
+                                </a>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                <a class="WH-Box hover-img" data-fancybox="gallery" data-caption="ต้นทุนทางการเงิน" href="~/Frontend_assets/images/ir/chart05.jpg">
+                                <div class="row">
+                                <div class="col">
+                                <div class="topicBD-Box">
+                                <div>ต้นทุนทางการเงิน</div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <div class="img-width"><img src="~/Frontend_assets/images/ir/chart05.jpg"></div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <h6>ต้นทุนทางการเงิน (ล้านบาท)</h6>
+                                </div>
+                                </div>
+                                </a>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                <a class="WH-Box hover-img" data-fancybox="gallery" data-caption="ค่าใช้จ่ายภาษีเงินได้" href="~/Frontend_assets/images/ir/chart06.jpg">
+                                <div class="row">
+                                <div class="col">
+                                <div class="topicBD-Box">
+                                <div>ค่าใช้จ่ายภาษีเงินได้</div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <div class="img-width"><img src="~/Frontend_assets/images/ir/chart06.jpg"></div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <h6>ค่าใช้จ่ายภาษีเงินได้ (ล้านบาท)</h6>
+                                </div>
+                                </div>
+                                </a>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                <a class="WH-Box hover-img" data-fancybox="gallery" data-caption="กำไรสำหรับปี" href="~/Frontend_assets/images/ir/chart07.jpg">
+                                <div class="row">
+                                <div class="col">
+                                <div class="topicBD-Box">
+                                <div>กำไรสำหรับปี</div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <div class="img-width"><img src="~/Frontend_assets/images/ir/chart07.jpg"></div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <h6>กำไรสำหรับปี (ล้านบาท)</h6>
+                                </div>
+                                </div>
+                                </a>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                <a class="WH-Box hover-img" data-fancybox="gallery" data-caption="กำไรเบ็ดเสร็จสำหรับปี" href="~/Frontend_assets/images/ir/chart08.jpg">
+                                <div class="row">
+                                <div class="col">
+                                <div class="topicBD-Box">
+                                <div>กำไรเบ็ดเสร็จสำหรับปี</div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <div class="img-width"><img src="~/Frontend_assets/images/ir/chart08.jpg"></div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col">
+                                <h6>กำไรเบ็ดเสร็จสำหรับปี (ล้านบาท)</h6>
+                                </div>
+                                </div>
+                                </a>
+                                </div>*@
+
+                            </div>
+                        </div><!-- END/INFO -->
+                        <!---------- DOWNLOAD ---------->
+                        <div class="display-info" rel="2">
+                            <div class="row justify-content-center">
+                                <div class="col-xl-8 col-lg-9 col-md-10 col-12">
+                                    <div class="blueTB text-center">
+                                        <table>
+                                            <thead>
+                                                <tr>
+
+                                                    @if (Context.Request.Cookies["lang"] == "EN")
+                                                    {
+                                                        if (ViewBag.Header != null)
+                                                        {
+                                                            foreach (var item in ViewBag.Header)
+                                                            {
+                                                                <th>@item.nameTitleENG</th>
+                                                                <th>@item.downloadTitleENG</th>
+                                                            }
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        if (ViewBag.Header != null)
+                                                        {
+                                                            foreach (var item in ViewBag.Header)
+                                                            {
+                                                                <th>@item.nameTitleTH</th>
+                                                                <th>@item.downloadTitleTH</th>
+                                                            }
+                                                        }
+                                                    }
+
+                                                    @*
+                                                    <th>หัวข้อ</th>
+                                                    <th>ดาวน์โหลด</th>*@
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                                @if (Context.Request.Cookies["lang"] == "EN")
+                                                {
+                                                    if (ViewBag.BodyFile != null)
+                                                    {
+                                                        foreach (var item2 in ViewBag.BodyFile)
+                                                        {
+                                                            var confrimDate = Convert.ToDateTime(item2.year);
+                                                            var Insert_Date = confrimDate.ToString("yyyy", new CultureInfo("en-US"));
+
+                                                            <tr>
+                                                                <td>@item2.title &nbsp; @Insert_Date</td>
+                                                                <td>
+                                                                    <a class="download-button" href="~/upload_file/SH_importantFinancial/@item2.file_name_ENG" target="_blank"><span>Download</span></a>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (ViewBag.BodyFile != null)
+                                                    {
+                                                        foreach (var item2 in ViewBag.BodyFile)
+                                                        {
+                                                            var confrimDate = Convert.ToDateTime(item2.year);
+                                                            var Insert_Date = confrimDate.ToString("yyyy", new CultureInfo("th-TH"));
+
+                                                            <tr>
+                                                                <td>@item2.title &nbsp; @Insert_Date</td>
+                                                                <td>
+                                                                    <a class="download-button" href="~/upload_file/SH_importantFinancial/@item2.file_name" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+
+                                                @* <tr>
+                                                <td>MD & A 2022</td>
+                                                <td>
+                                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                                </tr>*@
+
+                                                @*<tr>
+                                                <td>MD & A 2021</td>
+                                                <td>
+                                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                <td>MD & A 2020</td>
+                                                <td>
+                                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                <td>MD & A 2019</td>
+                                                <td>
+                                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                <td>MD & A 2018</td>
+                                                <td>
+                                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                <td>MD & A 2017</td>
+                                                <td>
+                                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                <td>MD & A 2016</td>
+                                                <td>
+                                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                <td>MD & A 2015</td>
+                                                <td>
+                                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                <td>MD & A 2014</td>
+                                                <td>
+                                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                <td>MD & A 2013</td>
+                                                <td>
+                                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                <td>MD & A 2012</td>
+                                                <td>
+                                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                                </tr>*@
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".display-tab > li").click(function () {
+            var rel = $(this).attr("rel");
+            console.log(rel);
+            $('.display-info').hide();
+            $('.display-info[rel=' + rel + ']').fadeIn();
+            $(".display-tab > li").removeClass("active");
+            $(this).addClass("active");
+        });
+    });
+
+
+    Fancybox.bind('[data-fancybox="gallery"]', {
+        //Toolbar: {
+        //    display: [
+        //        { id: "prev", position: "center" },
+        //        { id: "counter", position: "center" },
+        //        { id: "next", position: "center" },
+        //        "zoom",
+        //        "fullscreen",
+        //        "download",
+        //        "thumbs",
+        //        "close",
+        //    ],
+        //},
+    });
+</script>

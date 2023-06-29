@@ -1,0 +1,214 @@
+﻿@using System.Globalization
+
+@{
+    ViewData["Title"] = "IR_presentation_doc";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+
+<!---------- IR 05 PRESENTATION :: PRESENTATION DOC ---------->
+<div class="content-padding foot-pad minH">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        @if (Context.Request.Cookies["lang"] == "EN")
+                        {
+                            if (ViewBag.Header != null)
+                            {
+                                foreach (var item in ViewBag.Header)
+                                {
+                                    <h5>@item.titleENG</h5>
+                                    <h1>@item.detailsTitleENG</h1>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (ViewBag.Header != null)
+                            {
+                                foreach (var item in ViewBag.Header)
+                                {
+                                    <h5>@item.titleTH</h5>
+                                    <h1>@item.detailsTitleTH</h1>
+                                }
+                            }
+                        }
+
+                       @*  <h5>การนำเสนอข้อมูล</h5>
+                        <h1>เอกสารนำเสนอ</h1>*@
+
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-9 col-lg-10 col-md-11 col-12">
+                    <div class="blueTB">
+                        <table>
+                            <thead>
+                                <tr>
+                                    @if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                        if (ViewBag.Header != null)
+                                        {
+                                            foreach (var item in ViewBag.Header)
+                                            {
+                                                <th>@item.present_documentTitleENG</th>
+                                                <th>@item.downloadTitleENG</th>
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (ViewBag.Header != null)
+                                        {
+                                            foreach (var item in ViewBag.Header)
+                                            {
+                                                <th>@item.present_documentTitleTH</th>
+                                                <th>@item.downloadTitleTH</th>
+                                            }
+                                        }
+                                    }
+
+                                   @*   <th>เอกสารนำเสนอ</th>
+                                    <th>ดาวน์โหลด</th>*@
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Context.Request.Cookies["lang"] == "EN")
+                                {
+                                    if (ViewBag.Body != null)
+                                    {
+                                        foreach (var item in ViewBag.Body)
+                                        {
+                                            var confrimDate = Convert.ToDateTime(item.document_date);
+                                            var Insert_Date = confrimDate.ToString("MM/yyyy", new CultureInfo("en-US"));
+
+                                            <tr>
+                                                <td>@item.titleENG &nbsp; @Insert_Date</td>
+                                                <td>
+                                                    <a class="download-button" href="~/upload_file/SH_IR_Presentation/@item.file_name_ENG" target="_blank"><span>Download</span></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (ViewBag.Body != null)
+                                    {
+                                        foreach (var item in ViewBag.Body)
+                                        {
+                                            var confrimDate = Convert.ToDateTime(item.document_date);
+                                            var Insert_Date = confrimDate.ToString("MM/yyyy", new CultureInfo("th-TH"));
+
+                                            <tr>
+                                                <td>@item.titleTH &nbsp; @Insert_Date</td>
+                                                <td>
+                                                    <a class="download-button" href="~/upload_file/SH_IR_Presentation/@item.file_name" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+
+                                @*  <tr>
+                                <td>บริษัทจดทะเบียนพบผู้ลงทุนสำหรับผลประกอบการไตรมาส 4/2564</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
+                                </tr>*@
+                                @*
+                                <tr>
+                                <td>บริษัทจดทะเบียนพบผู้ลงทุนสำหรับผลประกอบการไตรมาส 3/2564</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 3/2563</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 4/2562</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 3/2562</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 4/2561</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 3/2561</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 4/2560</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 3/2560</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 4/2559</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
+                                </tr>*@
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="content-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <i class="fas fa-arrow-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

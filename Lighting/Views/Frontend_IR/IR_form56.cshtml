@@ -1,0 +1,279 @@
+﻿@using System.Globalization
+
+@{
+    ViewData["Title"] = "IR_form56";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 04 SHAREHOLDER INFORMATION :: FORM 56-1 ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        @if (Context.Request.Cookies["lang"] == "EN")
+                        {
+                            if (ViewBag.Header != null)
+                            {
+                                foreach (var item in ViewBag.Header)
+                                {
+                                    <h5>@item.titleENG</h5>
+                                    <h1>@item.detailsTitleENG</h1>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (ViewBag.Header != null)
+                            {
+                                foreach (var item in ViewBag.Header)
+                                {
+                                    <h5>@item.titleTH</h5>
+                                    <h1>@item.detailsTitleTH</h1>
+                                }
+                            }
+                        }
+
+                        @*  <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
+                        <h1>แบบฟอร์ม 56-1</h1>*@
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-10 col-lg-11 col-12">
+                    <div class="blueTB form56TB">
+                        <table>
+                            <thead>
+                                <tr>
+                                    @if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                        if (ViewBag.Header != null)
+                                        {
+                                            foreach (var item in ViewBag.Header)
+                                            {
+                                                <th>@item.nameTitleENG</th>
+                                                <th>@item.yearTitleENG</th>
+                                                <th>@item.dateConfrimTitleENG</th>
+                                                <th>@item.detailsENG</th>
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (ViewBag.Header != null)
+                                        {
+                                            foreach (var item in ViewBag.Header)
+                                            {
+
+                                                <th>@item.nameTitleTH</th>
+                                                <th>@item.yearTitleTH</th>
+                                                <th>@item.dateConfrimTitleTH</th>
+                                                <th>@item.detailsTH</th>
+                                            }
+                                        }
+                                    }
+
+                                    @* <th>ชื่อบริษัท</th>
+                                    <th>ประจำปี</th>
+                                    <th>วันที่ได้รับข้อมูล</th>
+                                    <th>รายละเอียด</th>*@
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Context.Request.Cookies["lang"] == "EN")
+                                {
+                                    if (ViewBag.Body != null)
+                                    {
+                                        foreach (var item in ViewBag.Body)
+                                        {
+                                            var dateget = Convert.ToDateTime(item.year);
+                                            var year = dateget.ToString("yyyy", new CultureInfo("en-US"));
+
+                                            var confrimDate = Convert.ToDateTime(item.confrimDate);
+                                            var confrim_Date = confrimDate.ToString("dd/MM/yyyy", new CultureInfo("en-US"));
+
+                                            <tr>
+                                                <td>@item.titleENG</td>
+                                                <td>@year</td>
+                                                <td>@confrim_Date</td>
+                                                <td>
+                                                    <a class="download-button" href="~/upload_file/SH_IR_Form/@item.file_name_ENG" target="_blank"><span>Download</span></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (ViewBag.Body != null)
+                                    {
+                                        foreach (var item in ViewBag.Body)
+                                        {
+                                            var dateget = Convert.ToDateTime(item.year);
+                                            var year = dateget.ToString("yyyy", new CultureInfo("th-TH"));
+
+                                            var confrimDate = Convert.ToDateTime(item.confrimDate);
+                                            var confrim_Date = confrimDate.ToString("dd/MM/yyyy", new CultureInfo("th-TH"));
+
+                                            <tr>
+                                                <td>@item.titleTH</td>
+                                                <td>@year</td>
+                                                <td>@confrim_Date</td>
+                                                <td>
+                                                    <a class="download-button" href="~/upload_file/SH_IR_Form/@item.file_name" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+
+                              @*  <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2564</td>
+                                    <td>29/03/2565</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2563</td>
+                                    <td>25/03/2564</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2562</td>
+                                    <td>31/03/2563</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2560</td>
+                                    <td>27/03/2561</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2559</td>
+                                    <td>29/03/2560</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2558</td>
+                                    <td>31/03/2559</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2557</td>
+                                    <td>24/03/2558</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2556</td>
+                                    <td>27/03/2557</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2555</td>
+                                    <td>27/03/2556</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2554</td>
+                                    <td>03/04/2555</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2553</td>
+                                    <td>24/03/2554</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2552</td>
+                                    <td>26/03/2553</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2551</td>
+                                    <td>30/03/2552</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2550</td>
+                                    <td>23/07/2551</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2549</td>
+                                    <td>24/04/2550</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2548</td>
+                                    <td>20/03/2549</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                    <td>2547</td>
+                                    <td>23/03/2548</td>
+                                    <td>
+                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                    </td>
+                                </tr>*@
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

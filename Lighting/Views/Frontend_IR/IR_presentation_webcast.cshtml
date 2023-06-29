@@ -1,0 +1,244 @@
+﻿@using System.Globalization
+
+@{
+    ViewData["Title"] = "IR_presentation_webcast";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 05 PRESENTATION :: PRESENTATION WEBCAST ---------->
+<div class="content-padding foot-pad minH">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        @if (Context.Request.Cookies["lang"] == "EN")
+                        {
+                            if (ViewBag.Header != null)
+                            {
+                                foreach (var item in ViewBag.Header)
+                                {
+                                    <h5>@item.titleENG</h5>
+                                    <h1>@item.detailsTitleENG</h1>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (ViewBag.Header != null)
+                            {
+                                foreach (var item in ViewBag.Header)
+                                {
+                                    <h5>@item.titleTH</h5>
+                                    <h1>@item.detailsTitleTH</h1>
+                                }
+                            }
+                        }
+
+                        @* <h5>การนำเสนอข้อมูล</h5>
+                        <h1>วิดีโอบริษัท</h1>*@
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-9 col-lg-10 col-md-11 col-12">
+                    <div class="blueTB webcastTB">
+                        <table>
+                            <thead>
+                                <tr>
+                                    @if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                        if (ViewBag.Header != null)
+                                        {
+                                            foreach (var item in ViewBag.Header)
+                                            {
+                                                <th>@item.activitytitleENG</th>
+                                                <th>@item.webcastTitleENG</th>
+                                                <th>@item.downloadtitleENG</th>
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (ViewBag.Header != null)
+                                        {
+                                            foreach (var item in ViewBag.Header)
+                                            {
+                                                <th>@item.activitytitleTH</th>
+                                                <th>@item.webcastTitleTH</th>
+                                                <th>@item.downloadtitleTH</th>
+                                            }
+                                        }
+                                    }
+
+                                    @* <th>กิจกรรม</th>
+                                    <th>ดูเว็บแคสต์</th>
+                                    <th>ดาวน์โหลด</th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Context.Request.Cookies["lang"] == "EN")
+                                {
+                                    if (ViewBag.Body != null)
+                                    {
+                                        foreach (var item in ViewBag.Body)
+                                        {
+                                            var confrimDate = Convert.ToDateTime(item.activity_date);
+                                            var Insert_Date = confrimDate.ToString("MM/yyyy", new CultureInfo("en-US"));
+
+                                            <tr>
+                                                <td>@item.titleENG &nbsp; @Insert_Date</td>
+                                                <td>
+                                                    <a class="download-button viewBT" href="@item.linkVideo" target="_blank"><span>ดูเว็บแคสต์</span></a>
+                                                </td>
+                                                <td>
+                                                    <a class="download-button" href="~/upload_file/SH_IR_PresentationWebcast/@item.file_name_ENG" target="_blank"><span>Download</span></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (ViewBag.Body != null)
+                                    {
+                                        foreach (var item in ViewBag.Body)
+                                        {
+                                            var confrimDate = Convert.ToDateTime(item.activity_date);
+                                            var Insert_Date = confrimDate.ToString("MM/yyyy", new CultureInfo("th-TH"));
+
+                                            <tr>
+                                                <td>@item.titleTH &nbsp; @Insert_Date</td>
+                                                <td>
+                                                    <a class="download-button viewBT" href="@item.linkVideo" target="_blank"><span>ดูเว็บแคสต์</span></a>
+                                                </td>
+                                                <td>
+                                                    <a class="download-button" href="~/upload_file/SH_IR_PresentationWebcast/@item.file_name" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+
+                                @* <tr>
+                            <td>บริษัทจดทะเบียนพบผู้ลงทุนสำหรับผลประกอบการไตรมาส 3/2565</td>
+                            <td>
+                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
+                            </td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>*@
+
+                                @*<tr>
+                            <td>การประชุมสามัญผู้ถือหุ้นประจำปี 2565</td>
+                            <td>
+                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
+                            </td>
+                            <td></td>
+                            </tr>
+                            <tr>
+                            <td>บริษัทจดทะเบียนพบผู้ลงทุนสำหรับผลประกอบการไตรมาส 4/2564</td>
+                            <td>
+                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
+                            </td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>บริษัทจดทะเบียนพบผู้ลงทุนสำหรับผลประกอบการไตรมาส 3/2564</td>
+                            <td>
+                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
+                            </td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>การประชุมสามัญผู้ถือหุ้นประจำปี 2564</td>
+                            <td>
+                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
+                            </td>
+                            <td></td>
+                            </tr>
+                            <tr>
+                            <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 3/2563</td>
+                            <td>
+                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
+                            </td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>การประชุมสามัญผู้ถือหุ้นประจำปี 2563</td>
+                            <td>
+                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
+                            </td>
+                            <td></td>
+                            </tr>
+                            <tr>
+                            <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 4/2562</td>
+                            <td>
+                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
+                            </td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 3/2562</td>
+                            <td>
+                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
+                            </td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>การประชุมสามัญผู้ถือหุ้นประจำปี 2562</td>
+                            <td>
+                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
+                            </td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>*@
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="content-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <i class="fas fa-arrow-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

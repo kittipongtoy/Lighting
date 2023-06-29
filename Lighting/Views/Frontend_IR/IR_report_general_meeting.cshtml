@@ -1,0 +1,395 @@
+﻿@using System.Globalization
+
+@{
+    ViewData["Title"] = "IR_report_general_meeting";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 04 SHAREHOLDER INFORMATION :: REPORT GENERAL MEETING ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        @if (Context.Request.Cookies["lang"] == "EN")
+                        {
+                            if (ViewBag.Header != null)
+                            {
+                                foreach (var item in ViewBag.Header)
+                                {
+                                    <h5>@item.titleENG</h5>
+                                    <h1>@item.detailsTitleENG</h1>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (ViewBag.Header != null)
+                            {
+                                foreach (var item in ViewBag.Header)
+                                {
+                                    <h5>@item.titleTH</h5>
+                                    <h1>@item.detailsTitleTH</h1>
+                                }
+                            }
+                        }
+
+                        @* <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
+                        <h1>รายงานการประชุมผู้ถือหุ้น</h1>*@
+
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-9 col-lg-10 col-md-11 col-12">
+                    <div class="blueTB report-meetingTB">
+                        <table>
+
+                            @if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                if (ViewBag.Body != null)
+                                {
+                                    foreach (var item in ViewBag.Body)
+                                    {
+
+                                        DateTime? dds = item.year;
+                                        var year = dds.Value.Year.ToString();
+                                        @*ViewBag.Content*@
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2">@item.titleENG &nbsp; @year</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @{
+                                                if (ViewBag.Content != null)
+                                                {
+                                                    foreach (var items in ViewBag.Content)
+                                                    {
+                                                        var dateDatas = Convert.ToDateTime(items.year);
+                                                        var InsertDates = dateDatas.ToString("yyyy", new CultureInfo("en-US"));
+
+                                                        if (items.reportMeeting_id == item.id)
+                                                        {
+                                                            <tr>
+                                                                <td>@items.titleENG &nbsp; @InsertDates</td>
+                                                                <td>
+                                                                    <a class="download-button" href="~/upload_file/SH_IR_ReportMeeting/@items.file_name_ENG" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            @*
+                                <tr>
+                                <td>แจ้งมติที่ประชุมสามัญผู้ถือหุ้นประจำปี 2565</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>รายงานการประชุมสามัญผู้ถือหุ้นประจำปี 2565</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
+                                </tr>*@
+                                        </tbody>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (ViewBag.Body != null)
+                                {
+                                    foreach (var item in ViewBag.Body)
+                                    {
+                                        DateTime? dds = item.year;
+                                        var year = dds.Value.Year.ToString();
+                                        int years = Convert.ToInt32(year) + 543;
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2">@item.titleTH &nbsp; @years</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                if (ViewBag.Content != null)
+                                                {
+                                                    foreach (var items in ViewBag.Content)
+                                                    {
+
+                                                        var dateData = Convert.ToDateTime(items.year);
+                                                        var InsertDate = dateData.ToString("yyyy", new CultureInfo("th-TH"));
+
+                                                        if (items.reportMeeting_id == item.id)
+                                                        {
+                                                            <tr>
+                                                                <td>@items.titleTH &nbsp; @InsertDate</td>
+                                                                <td>
+                                                                    <a class="download-button" href="~/upload_file/SH_IR_ReportMeeting/@items.file_name" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        </tbody>
+                                    }
+                                }
+                            }
+
+                            @* <thead>
+                            <tr>
+                            <th colspan="2">รายงานการประชุมประจำปี 2565</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <td>แจ้งมติที่ประชุมสามัญผู้ถือหุ้นประจำปี 2565</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>รายงานการประชุมสามัญผู้ถือหุ้นประจำปี 2565</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            </tbody>*@
+
+                            @* <thead>
+                            <tr>
+                            <th colspan="2">รายงานการประชุมประจำปี 2564</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <td>แจ้งมติที่ประชุมสามัญผู้ถือหุ้นประจำปี 2564</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>รายงานการประชุมสามัญผู้ถือหุ้นประจำปี 2564</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                            <th colspan="2">รายงานการประชุมประจำปี 2563</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <td>แจ้งมติที่ประชุมสามัญผู้ถือหุ้นประจำปี 2563</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>รายงานการประชุมสามัญผู้ถือหุ้นประจำปี 2563</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                            <th colspan="2">รายงานการประชุมประจำปี 2562</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <td>แจ้งมติที่ประชุมสามัญผู้ถือหุ้นประจำปี 2562</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>รายงานการประชุมสามัญผู้ถือหุ้นประจำปี 2562</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                            <th colspan="2">รายงานการประชุมประจำปี 2561</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <td>แจ้งมติที่ประชุมสามัญผู้ถือหุ้นประจำปี 2561</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>รายงานการประชุมสามัญผู้ถือหุ้นประจำปี 2561</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                            <th colspan="2">รายงานการประชุมประจำปี 2560</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <td>แจ้งมติที่ประชุมสามัญผู้ถือหุ้นประจำปี 2560</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>รายงานการประชุมสามัญผู้ถือหุ้นประจำปี 2560</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                            <th colspan="2">รายงานการประชุมประจำปี 2559</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <td>แจ้งมติที่ประชุมสามัญผู้ถือหุ้นประจำปี 2559</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>รายงานการประชุมสามัญผู้ถือหุ้นประจำปี 2559</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                            <th colspan="2">รายงานการประชุมประจำปี 2558</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <td>แจ้งมติที่ประชุมสามัญผู้ถือหุ้นประจำปี 2558</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>รายงานการประชุมสามัญผ้ถือหุ้นประจําปี ครั้งที่ 1/2558</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                            <th colspan="2">รายงานการประชุมประจำปี 2557</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <td>แจ้งมติที่ประชุมสามัญผู้ถือหุ้นประจำปี 2557</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>แจ้งมติที่ประชุมวิสามัญผู้ถือหุ้นครั้งที่ 1/2557</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>รายงานการประชุมวิสามัญผู้ถือหุ้นครั้งที่ 1/2557</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                            <th colspan="2">รายงานการประชุมประจำปี 2556</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <td>แจ้งมติที่ประชุมสามัญผู้ถือหุ้นประจำปี ครั้งที่ 1/2556</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>รายงานการประชุมสามัญผู้ถือหุ้นประจำปี ครั้งที่ 1/2556</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                            <th colspan="2">รายงานการประชุมประจำปี 2555</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <td>มติที่ประชุมสามัญผู้ถือหุ้นประจำปี ครั้งที่ 1/2555</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>รายงานการประชุมสามัญผู้ถือหุ้นประจำปี ครั้งที่ 1/2555</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                            <th colspan="2">รายงานการประชุมประจำปี 2554</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <td>แจ้งมติคณะกรรมการบริษัทครั้งที่ 1/2554</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>มติที่ประชุมสามัญผู้ถือหุ้นประจำปี ครั้งที่ 1/2554</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>รายงานการประชุมสามัญผู้ถือหุ้นประจำปี ครั้งที่ 1/2554</td>
+                            <td>
+                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                            </td>
+                            </tr>
+                            </tbody>*@
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

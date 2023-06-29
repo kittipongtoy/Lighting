@@ -1,0 +1,163 @@
+﻿@{
+    ViewData["Title"] = "IR_news_clipping";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var Count_IR_Print_Media = (List<Lighting.Areas.Identity.Data.IR_Print_Media>)ViewBag.IR_Print_Media;
+    var Count_IR_Print_MediaDetail = (List<Lighting.Areas.Identity.Data.IR_Print_MediaDetail>)ViewBag.IR_Print_MediaDetail;
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 08 NEWS ROOM :: NEWS CLIPPING ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        @if (Count_IR_Print_Media.Count() != 0)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                foreach (var item in ViewBag.IR_Print_Media)
+                                {
+                                    <h5>@item.Title_EN</h5>
+                                    <h1>@item.SubTitle_EN</h1>
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.IR_Print_Media)
+                                {
+                                    <h5>@item.Title_TH</h5>
+                                    <h1>@item.SubTitle_TH</h1>
+                                }
+                            }
+                        }
+                        else
+                        {
+                             <h5>ห้องข่าว</h5>
+                             <h1>ข่าวจากสื่อสิ่งพิมพ์</h1>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-9 col-md-11 col-12">
+                    <div class="blueBox input-form clipping-news more-mb">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-4">ตั้งแต่วันที่</div>
+                            <div class="col-lg-4 col-md-4 col-8">
+                                <input type="date" class="form-control">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-4">ถึงวันที่</div>
+                            <div class="col-lg-4 col-md-4 col-8">
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="content-center">
+                                    <a class="buttonB m-size" href=""><i class="fas fa-search"></i>ค้นหา</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-10 col-lg-11 col-md-11 col-12">
+                    <div class="blueTB clipping-newsTB">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>วันที่</th>
+                                    <th>หัวข้อข่าว</th>
+                                    <th>แหล่งข่าว</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Count_IR_Print_Media.Count() != 0)
+                                {
+                                    if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                        foreach (var item in ViewBag.IR_Print_MediaDetail)
+                                        {
+                                            <tr>
+                                                <td>@item.NewDate.ToString("dd MMM yyyy")</td>
+                                                <td>
+                                                    <a href="~/upload_file/IR_NewRoom/@item.FileNameEN" target="_blank">@item.Title_EN</a>
+                                                </td>
+                                                <td>
+                                                    <div class="source-logo"><img src="~/upload_image/IR_NewRoom/@item.Image_Newssource"></div>
+                                                </td>
+                                            </tr>
+                                            
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in ViewBag.IR_Print_MediaDetail)
+                                        {
+                                            <tr>
+                                                <td>@item.NewDate.ToString("dd MMM yyyy")</td>
+                                                <td>
+                                                    <a href="~/upload_file/IR_NewRoom/@item.FileNameEN" target="_blank">@item.Title_TH</a>
+                                                </td>
+                                                <td>
+                                                    <div class="source-logo"><img src="~/upload_image/IR_NewRoom/@item.Image_Newssource"></div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>19 ม.ค. 2566</td>
+                                        <td>
+                                            <a href="~/Frontend_assets/images/ir/clipping-news.pdf" target="_blank">L&Eตั้งเป้ารายได้ปีนี้โตลุยประมูลงาน3-4พันล.</a>
+                                        </td>
+                                        <td>
+                                            <div class="source-logo"><img src="~/Frontend_assets/images/ir/news-thunhoon.png"></div>
+                                        </td>
+                                    </tr>                                  
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="content-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <i class="fas fa-arrow-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+   
+    </script>
+}

@@ -1,0 +1,366 @@
+﻿@{
+
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>L&E</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robot" content="index, follow" />
+    <meta name='copyright' content='Orange Technology Solution co.,ltd.'>
+    <meta name='designer' content='Atthacha S.'>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link type="text/css" rel="stylesheet" href="~/Frontend_assets/css/layout.css" media="screen,projection" />
+    <link type="image/ico" rel="shortcut icon" href="~/Frontend_assets/images/favicon.ico">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/v4-shims.css">
+    <script src="~/Frontend_assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="~/Frontend_assets/js/jquery.min.js"></script>
+    <script src="~/Frontend_assets/js/jquery-ui.js"></script>
+    <script src="~/Frontend_assets/js/popper.min.js"></script>
+    <script src="~/Frontend_assets/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/Frontend_assets/OwlCarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Frontend_assets/OwlCarousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Frontend_assets/fancybox/fancybox.css">
+    <script src="~/Frontend_assets/fancybox/fancybox.umd.js"></script>
+    <script src="~/Frontend_assets/OwlCarousel/owl.carousel.min.js"></script>
+   
+</head>
+<body>
+    <div class="thetop"></div>
+    <header>
+        <div class="container-fluid">
+            <div class="wrap-pad more-w">
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-4">
+                        <a class="mainlogo" asp-controller="Lighting" asp-action="Index"><img src="~/Frontend_assets/images/L&E-logo.svg"></a>
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-8">
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-block d-md-block d-lg-none">
+                                    <button type="button" class="btn nav-menu" data-toggle="modal" data-target="#menu-mobile">
+                                        <i class="fas fa-bars"></i>
+                                    </button>
+                                    <div class="modal left fade" id="menu-mobile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-header">
+                                                <a class="mainlogo" asp=><img src="~/Frontend_assets/images/L&E-logo.svg"></a>
+                                                <button type="button" class="close btn " data-dismiss="modal" aria-label="Close">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                            <div class="modal-content pt-0">
+                                                <div class="modal-body">
+                                                    <div id="menu">
+                                                        <div class="menu-box">
+                                                            <div class="menu-wrapper-inner">
+                                                                <div class="menu-wrapper">
+                                                                    <div class="menu-slider">
+                                                                        <div class="menu">
+                                                                            <ul>
+                                                                                <li data-page="home">
+                                                                                    <div class="menu-item"><a href="">หน้าหลัก</a></div>
+                                                                                </li>
+                                                                                <li data-page="about">
+                                                                                    <div class="menu-item"><a href="">ข้อมูลองค์กร</a></div>
+                                                                                </li>
+                                                                                <li data-page="solution">
+                                                                                    <div class="menu-item"><a href="">สมาร์ท โซลูชั่น</a></div>
+                                                                                </li>
+                                                                                <li data-page="product">
+                                                                                    <div class="menu-item"><a href="">สินค้า</a></div>
+                                                                                </li>
+                                                                                <li data-page="portfolio">
+                                                                                    <div class="menu-item"><a href="">ผลงาน</a></div>
+                                                                                </li>
+                                                                                <li data-page="download">
+                                                                                    <div class="menu-item"><a href="">ดาวน์โหลด</a></div>
+                                                                                </li>
+                                                                                <li data-page="news">
+                                                                                    <div class="menu-item"><a href="">ข่าวสาร</a></div>
+                                                                                </li>
+                                                                                <li data-page="ir">
+                                                                                    <div class="menu-item"><a href="@Url.Action("IR_index","Frontend_IR")">นักลงทุนสัมพันธ์</a></div>
+                                                                                </li>
+                                                                                <li data-page="job">
+                                                                                    <div class="menu-item"><a href="">สมัครงาน</a></div>
+                                                                                </li>
+                                                                                <li data-page="contact">
+                                                                                    <div class="menu-item"><a href="">ติดต่อเรา</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item lang-menu">
+                                                                                        <a href="#" class="menu-anchor pt-3" data-menu="1">
+                                                                                            @{
+                                                                                                var get_cookies_mobile = Context.Request.Cookies["lang"];
+                                                                                                var lang_th = "TH";
+                                                                                                var lang_en = "EN";
+                                                                                                if (get_cookies_mobile == "EN")
+                                                                                                {
+                                                                                                    <img class="flag" src="~/Frontend_assets/images/icon/flag-en.svg">
+
+                                                                                                    @lang_en
+                                                                                                }
+                                                                                                else
+                                                                                                {
+                                                                                                    <img class="flag" src="~/Frontend_assets/images/icon/flag-th.svg">
+
+                                                                                                    @lang_th
+                                                                                                }
+                                                                                            }
+                                                                                            <img class="detail" src="~/Frontend_assets/images/icon/icon-chevronR.svg">
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="submenu menu" data-menu="1">
+                                                                            <div class="submenu-back">
+                                                                                <div class="menu-item">
+                                                                                    <a href="#" class="menu-back">
+                                                                                        ย้อนกลับ
+                                                                                        <img class="detail back" src="~/Frontend_assets/images/icon/icon-chevronL.svg">
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <ul class="lang-menu">
+                                                                                <li onclick="setLang('TH')">
+                                                                                    <div class="menu-item">
+                                                                                        <a href="" onclick="setLang('TH')"><img onclick="setLang('TH')" class="flag" src="~/Frontend_assets/images/icon/flag-th.svg">TH</a>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li onclick="setLang('EN')">
+                                                                                    <div class="menu-item">
+                                                                                        <a href="" onclick="setLang('EN')"><img onclick="setLang('EN')" class="flag" src="~/Frontend_assets/images/icon/flag-en.svg">EN</a>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-none d-lg-block">
+                                    <ul class="lang">
+                                        @{
+                                            var get_cookies = Context.Request.Cookies["lang"];
+                                            if (get_cookies == "EN")
+                                            {
+                                                <li id="butt_th">
+                                                    <button onclick="setLang('TH')">TH</button>
+                                                </li>
+                                                <li id="butt_en" class="active">
+                                                    <button onclick="setLang('EN')">EN</button>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li id="butt_th" class="active">
+                                                    <button onclick="setLang('TH')">TH</button>
+                                                </li>
+                                                <li id="butt_en" class="">
+                                                    <button onclick="setLang('EN')">EN</button>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                                <ul class="top-menu">
+                                    <li>
+                                        <div class="search-container">
+                                            <div class="search-icon-btn">
+                                                <i class="fa fa-search"></i>
+                                            </div>
+                                            <div class="search-input">
+                                                <input type="search" class="search-bar" placeholder="search">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.lightingshoponline.com/" target="_blank"><i class="fas fa-shopping-cart"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row d-none d-lg-block">
+                            <div class="col">
+                                <ul class="mainmenu">
+                                 @*   <li data-page="about"><a href="">ข้อมูลองค์กร</a></li>
+                                    <li data-page="solution"><a href="">สมาร์ท โซลูชั่น</a></li>
+                                    <li data-page="product"><a href="">สินค้า</a></li>
+                                    <li data-page="portfolio"><a href="">ผลงาน</a></li>
+                                    <li data-page="download"><a href="">ดาวน์โหลด</a></li>
+                                    <li data-page="news"><a href="">ข่าวสาร</a></li>
+                                    <li data-page="ir"><a href="@Url.Action("IR_index","Frontend_IR")">นักลงทุนสัมพันธ์</a></li>
+                                    <li data-page="job"><a href="">สมัครงาน</a></li>
+                                    <li data-page="contact"><a href="">ติดต่อเรา</a></li>*@
+
+                                   @* <li data-page="about"><a href="">RESOURCE & FACILITY</a></li>
+                                    <li data-page="solution"><a href="@Url.Action("SmartSolution","SmartSolution")">SMART SOLUTION</a></li>
+                                    <li data-page="product"><a href="@Url.Action("Product","Product")">PRODUCTS</a></li>
+                                    <li data-page="portfolio"><a href="@Url.Action("Project","Project")">PROJECT REF</a></li>
+                                    <li data-page="download"><a href="@Url.Action("Download","Download")">DOWNLOAD</a></li>
+                                    <li data-page="news"><a href="@Url.Action("New","New")">NEWS</a></li>
+                                    <li data-page="ir"><a href="@Url.Action("IR_index","Frontend_IR")">INVESTOR</a></li>
+                                    <li data-page="job"><a href="@Url.Action("ApplyJob","ApplyJob")">APPLY JOB</a></li>
+                                    <li data-page="contact"><a href="@Url.Action("Contact","Contact")">CONTACT</a></li>*@
+
+                                    <li><a href="">Resource & Facility</a></li>
+                                    <li><a href="">Smart Solution</a></li>
+                                    <li><a href="">News</a></li>
+                                    <li><a href="">Investor</a></li>
+                                    <li><a href="">Apply Job</a></li>
+                                    <li><a href="">Contact us</a></li>
+                                    <li><a href="">Privacy Policy</a></li>
+                                    <li><a href="">Cookies Policy</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="d-none d-md-block">
+        <nav class="side-menu">
+            <ul>
+                <li>
+                    <a href="https://www.lightingshoponline.com/" target="_blank">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/lightingthailand" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/LightingChannel?reload=9" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.tiktok.com/@@lightingthailand" target="_blank">
+                        <img src="~/Frontend_assets/images/icon/icon-tiktokWH.svg">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://lin.ee/P1l76vy" target="_blank">
+                        <img src="~/Frontend_assets/images/icon/icon-lineWH.svg">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    @RenderBody()
+    @Html.Partial("~/Views/Shared/Inc/IR_inc_footer.cshtml")
+    @await RenderSectionAsync("Scripts", required: false)
+    @section Scripts{
+    <script type="text/javascript">
+        var menu_width;
+        jQuery(document).ready(
+            function () {
+                initMenu();
+            });
+        function initMenu() {
+            menu_width = $("#menu .menu").width();
+            $("#menu .menu-back").click(function () {
+                var _pos = $("#menu .menu-slider").position().left + menu_width;
+                var _obj = $("#menu .submenu");
+                $("#menu .menu-slider").stop().animate({
+                    left: _pos
+                }, 300, function () {
+                    _obj.hide();
+                });
+                return false;
+            });
+
+            $("#menu .menu-anchor").click(function () {
+                var _d = $(this).data('menu');
+                $("#menu .submenu").each(function () {
+                    var _d_check = $(this).data('menu');
+                    if (_d_check == _d) {
+                        $(this).show();
+                        var _pos = $("#menu .menu-slider").position().left - menu_width;
+
+                        $("#menu .menu-slider").stop(true, true).animate({
+                            left: _pos
+                        }, 300);
+                        return false;
+                    }
+                });
+                return false;
+            });
+        }
+
+
+        // ACTIVE MENU //
+        $(function () {
+            var getPage = $("#page_name").val();
+            $(".mainmenu li").each(function () {
+                var getMenu = $(this).attr("data-page");
+                if (getPage == getMenu) {
+                    $(this).addClass('active');
+                }
+            });
+        });
+
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 200) {
+                $('.side-menu').fadeIn();
+            } else {
+                $('.side-menu').fadeOut();
+            }
+        });
+        function setLang(lang) {
+            if (lang == 'TH') {
+                $("#butt_th").addClass("active");
+                $("#butt_en").removeClass("active");
+            } else {
+                $("#butt_en").addClass("active");
+                $("#butt_th").removeClass("active");
+            }
+
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Frontend_IR/change_lang",
+                data: {
+                    lang: lang
+                },    // multiple data sent using ajax
+                success: function (data) {
+                    if (data.status == "success") {
+                        window.location.reload();
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+    </script>
+    }
+</body>
+</html>

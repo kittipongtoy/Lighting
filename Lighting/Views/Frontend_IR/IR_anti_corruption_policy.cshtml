@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "IR_anti_corruption_policy";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 02 CORPORATE GOVERNANCE :: ANTI CORRUPTION POLICY ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        <h5>นโยบายการกำกับดูแลกิจการ</h5>
+                        <h1>นโยบายการต่อต้านการทุจริตและคอร์รัปชั่น</h1>
+                    </div>
+                </div>
+            </div>
+            @Html.Partial("~/Views/Shared/Inc/IR_inc_corporate_governance_content.cshtml")
+        </div>
+    </div>
+</div>

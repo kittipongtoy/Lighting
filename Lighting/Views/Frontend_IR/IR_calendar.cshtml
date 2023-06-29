@@ -1,0 +1,176 @@
+﻿@{
+    ViewData["Title"] = "IR_calendar";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var Count_IR_InvestorCalendar = (List<Lighting.Areas.Identity.Data.IR_InvestorCalendar>)ViewBag.IR_InvestorCalendar;
+    var Count_IR_InvestorCalendarDetail = (List<Lighting.Areas.Identity.Data.IR_InvestorCalendarDetail>)ViewBag.IR_InvestorCalendarDetail;
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 08 NEWS ROOM :: CALENDAR ---------->
+<div class="content-padding foot-pad minH">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        @if (Count_IR_InvestorCalendar.Count() != 0)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                foreach (var item in ViewBag.IR_InvestorCalendar)
+                                {
+                                    <h5>@item.Title_EN</h5>
+                                    <h1>@item.SubTitle_EN</h1>
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.IR_InvestorCalendar)
+                                {
+                                    <h5>@item.Title_TH</h5>
+                                    <h1>@item.SubTitle_TH</h1>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <h5 id="Title">ห้องข่าว</h5>
+                            <h1 id="SubTitle">ปฎิทินนักลงทุน</h1>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-3 col-md-4 col-8">
+                    <div class="input-form">
+                        <select class="form-select more-BD">
+                            <option selected>เลือกปี</option>
+                            <option value="1">2566</option>
+                            <option value="2">2565</option>
+                            <option value="3">2564</option>
+                            <option value="4">2563</option>
+                            <option value="5">2562</option>
+                            <option value="6">2561</option>
+                            <option value="7">2560</option>
+                            <option value="8">2559</option>
+                            <option value="9">2558</option>
+                            <option value="10">2557</option>
+                            <option value="11">2556</option>
+                            <option value="12">2555</option>
+                            <option value="13">2554</option>
+                            <option value="14">2553</option>
+                            <option value="15">2552</option>
+                            <option value="16">2551</option>
+                            <option value="17">2550</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="blueTB calendarTB">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>วันและเวลา</th>
+                                    <th>กิจกรรม</th>
+                                    <th>สถานที่</th>
+                                    <th>เอกสารประกอบ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Count_IR_InvestorCalendar.Count() != 0)
+                                {
+                                    if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                        foreach (var item in ViewBag.IR_InvestorCalendar)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <ul class="date-time">
+                                                        <li>@item.NewDate.ToString("dd MMM yyyy HH:mm:ss")</li>
+                                                    </ul>
+                                                </td>
+                                                <td>@item.Activity_EN</td>
+                                                <td>@item.Position_EN</td>
+                                                <td>
+                                                    <a class="download-button" href="/upload_file/IR_NewRoom/@item.FileNameEN" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in ViewBag.IR_InvestorCalendar)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <ul class="date-time">
+                                                        <li>@item.NewDate.ToString("dd MMM yyyy HH:mm:ss")</li>
+                                                    </ul>
+                                                </td>
+                                                <td>@item.Activity_TH</td>
+                                                <td>@item.Position_TH</td>
+                                                <td>
+                                                    <a class="download-button" href="/upload_file/IR_NewRoom/@item.FileNameTH" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>
+                                            <ul class="date-time">
+                                                <li>15 พฤศจิกายน 2565</li>
+                                                <li>15:15 - 16:00</li>
+                                            </ul>
+                                        </td>
+                                        <td>บริษัทจดทะเบียนพบผู้ลงทุนสำหรับผลประกอบการไตรมาส 3/2565</td>
+                                        <td>รับชมผ่านช่องทางออนไลน์</td>
+                                        <td>
+                                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="content-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <i class="fas fa-arrow-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+
+    </script>
+}

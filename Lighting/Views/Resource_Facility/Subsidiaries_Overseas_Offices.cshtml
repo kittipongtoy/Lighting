@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Subsidiaries_Overseas_Offices";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+}
+<div class="top-page">
+    <div class="container">
+        <div class="row">
+            <div class="col">RESOURCE & FACILITY</div>
+        </div>
+    </div>
+</div>
+
+<!---------- RESOURCE & FACILITY :: SUBSIDIARIES PROFILE ---------->
+<div class="content-padding foot-pad">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="header-twoline">
+                    <h5>SUBSIDIARIES PROFILE</h5>
+                    <h1>L&E Lighting Innovation Center</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="subsidiary-page">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-12 mb-3">
+                    <a class="img-width imgBD hover-img" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/subsidiaries01.jpg">
+                        <img src="~/Frontend_assets/images/resource-facility/subsidiaries01.jpg">
+                    </a>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <a class="img-width imgBD hover-img" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/subsidiaries02.jpg">
+                        <img src="~/Frontend_assets/images/resource-facility/subsidiaries02.jpg">
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="content-center">
+                        <div class="topicBD-Box">
+                            <div>VDO</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-10 col-md-10 col-12">
+                    <div class="container-vdo">
+                        <iframe class="responsive-vdo" src="https://www.youtube.com/embed/VecvjOBceCs"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        Fancybox.bind('[data-fancybox="gallery"]', {
+            Toolbar: {
+                display: [
+                    { id: "prev", position: "center" },
+                    { id: "counter", position: "center" },
+                    { id: "next", position: "center" },
+                    "zoom",
+                    "fullscreen",
+                    "download",
+                    "thumbs",
+                    "close",
+                ],
+            },
+        });
+    </script>
+}

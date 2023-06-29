@@ -1,0 +1,167 @@
+﻿@{
+    ViewData["Title"] = "IR_public_relation";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var Count_IR_MassMedia = (List<Lighting.Areas.Identity.Data.IR_MassMedia>)ViewBag.IR_MassMedia;
+    var Count_IR_MassMediaDetail = (List<Lighting.Areas.Identity.Data.IR_MassMediaDetail>)ViewBag.IR_MassMediaDetail;
+}
+
+@Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
+<input id="page_name" value="ir" hidden />
+
+<!---------- IR 08 NEWS ROOM :: PUBLIC RELATION ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row">
+                <div class="col">
+                    <div class="header-twoline">
+                        @if (Count_IR_MassMedia.Count() != 0)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                foreach (var item in ViewBag.IR_MassMedia)
+                                {
+                                    <h5>@item.Title_EN</h5>
+                                    <h1>@item.SubTitle_EN</h1>
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.IR_MassMedia)
+                                {
+                                    <h5>@item.Title_TH</h5>
+                                    <h1>@item.SubTitle_TH</h1>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <h5 id="Title">ห้องข่าว</h5>
+                            <h1 id="SubTitle">ข่าวแจ้งสื่อมวลชน</h1>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="three-colPad">
+                <div class="row">
+                    @if (Count_IR_MassMediaDetail.Count() != 0)
+                    {
+                        if (Context.Request.Cookies["lang"] == "EN")
+                        {
+                            foreach (var item in ViewBag.IR_MassMediaDetail)
+                            {
+                                <div class="col-lg-4 col-md-4 col-6">
+                                    <a class="news-publicBox" href="@Url.Action("IR_public_relation_detail","Frontend_IR", new { Id = item.Id })">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="img-width"><img src="~/upload_image/IR_NewRoom/@item.Image"></div>
+                                            </div>
+                                        </div>
+                                        <div class="news-public-info">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="news-topic">
+                                                        <p>หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.IR_MassMediaDetail)
+                            {
+                                <div class="col-lg-4 col-md-4 col-6">
+                                    <a class="news-publicBox" href="@Url.Action("IR_public_relation_detail","Frontend_IR", new { Id =  item.Id })">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="img-width"><img src="~/upload_image/IR_NewRoom/@item.Image"></div>
+                                            </div>
+                                        </div>
+                                        <div class="news-public-info">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="news-topic">
+                                                        <p>หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-lg-4 col-md-4 col-6">
+                            <a class="news-publicBox" href="@Url.Action("IR_public_relation_detail","Frontend_IR")">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="img-width"><img src="~/Frontend_assets/images/ir/ir-public01.jpg"></div>
+                                    </div>
+                                </div>
+                                <div class="news-public-info">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="news-topic">
+                                                <p>หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="news-date">17 FEB 2023</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="content-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination mt-4">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <i class="fas fa-arrow-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        
+    </script>
+}
