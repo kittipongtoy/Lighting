@@ -27,7 +27,100 @@
     <link rel="stylesheet" href="~/Frontend_assets/fancybox/fancybox.css">
     <script src="~/Frontend_assets/fancybox/fancybox.umd.js"></script>
     <script src="~/Frontend_assets/OwlCarousel/owl.carousel.min.js"></script>
-   
+    <script type="text/javascript">
+        var menu_width;
+        jQuery(document).ready(
+            function () {
+                initMenu();
+            });
+        function initMenu() {
+            menu_width = $("#menu .menu").width();
+            $("#menu .menu-back").click(function () {
+                var _pos = $("#menu .menu-slider").position().left + menu_width;
+                var _obj = $("#menu .submenu");
+                $("#menu .menu-slider").stop().animate({
+                    left: _pos
+                }, 300, function () {
+                    _obj.hide();
+                });
+                return false;
+            });
+
+            $("#menu .menu-anchor").click(function () {
+                var _d = $(this).data('menu');
+                $("#menu .submenu").each(function () {
+                    var _d_check = $(this).data('menu');
+                    if (_d_check == _d) {
+                        $(this).show();
+                        var _pos = $("#menu .menu-slider").position().left - menu_width;
+
+                        $("#menu .menu-slider").stop(true, true).animate({
+                            left: _pos
+                        }, 300);
+                        return false;
+                    }
+                });
+                return false;
+            });
+        }
+
+
+        // ACTIVE MENU //
+        $(function () {
+            var getPage = $("#page_name").val();
+            $(".mainmenu li").each(function () {
+                var getMenu = $(this).attr("data-page");
+                if (getPage == getMenu) {
+                    $(this).addClass('active');
+                }
+            });
+        });
+
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 200) {
+                $('.side-menu').fadeIn();
+            } else {
+                $('.side-menu').fadeOut();
+            }
+        });
+        function setLang(lang) {
+            if (lang == 'TH') {
+                $("#butt_th").addClass("active");
+                $("#butt_en").removeClass("active");
+            } else {
+                $("#butt_en").addClass("active");
+                $("#butt_th").removeClass("active");
+            }
+
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Frontend_IR/change_lang",
+                data: {
+                    lang: lang
+                },    // multiple data sent using ajax
+                success: function (data) {
+                    if (data.status == "success") {
+                        window.location.reload();
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="thetop"></div>
@@ -195,7 +288,7 @@
                         <div class="row d-none d-lg-block">
                             <div class="col">
                                 <ul class="mainmenu">
-                                 @*   <li data-page="about"><a href="">ข้อมูลองค์กร</a></li>
+                                    @*   <li data-page="about"><a href="">ข้อมูลองค์กร</a></li>
                                     <li data-page="solution"><a href="">สมาร์ท โซลูชั่น</a></li>
                                     <li data-page="product"><a href="">สินค้า</a></li>
                                     <li data-page="portfolio"><a href="">ผลงาน</a></li>
@@ -205,7 +298,7 @@
                                     <li data-page="job"><a href="">สมัครงาน</a></li>
                                     <li data-page="contact"><a href="">ติดต่อเรา</a></li>*@
 
-                                   @* <li data-page="about"><a href="">RESOURCE & FACILITY</a></li>
+                                    @* <li data-page="about"><a href="">RESOURCE & FACILITY</a></li>
                                     <li data-page="solution"><a href="@Url.Action("SmartSolution","SmartSolution")">SMART SOLUTION</a></li>
                                     <li data-page="product"><a href="@Url.Action("Product","Product")">PRODUCTS</a></li>
                                     <li data-page="portfolio"><a href="@Url.Action("Project","Project")">PROJECT REF</a></li>
@@ -266,101 +359,5 @@
     @RenderBody()
     @Html.Partial("~/Views/Shared/Inc/IR_inc_footer.cshtml")
     @await RenderSectionAsync("Scripts", required: false)
-    @section Scripts{
-    <script type="text/javascript">
-        var menu_width;
-        jQuery(document).ready(
-            function () {
-                initMenu();
-            });
-        function initMenu() {
-            menu_width = $("#menu .menu").width();
-            $("#menu .menu-back").click(function () {
-                var _pos = $("#menu .menu-slider").position().left + menu_width;
-                var _obj = $("#menu .submenu");
-                $("#menu .menu-slider").stop().animate({
-                    left: _pos
-                }, 300, function () {
-                    _obj.hide();
-                });
-                return false;
-            });
-
-            $("#menu .menu-anchor").click(function () {
-                var _d = $(this).data('menu');
-                $("#menu .submenu").each(function () {
-                    var _d_check = $(this).data('menu');
-                    if (_d_check == _d) {
-                        $(this).show();
-                        var _pos = $("#menu .menu-slider").position().left - menu_width;
-
-                        $("#menu .menu-slider").stop(true, true).animate({
-                            left: _pos
-                        }, 300);
-                        return false;
-                    }
-                });
-                return false;
-            });
-        }
-
-
-        // ACTIVE MENU //
-        $(function () {
-            var getPage = $("#page_name").val();
-            $(".mainmenu li").each(function () {
-                var getMenu = $(this).attr("data-page");
-                if (getPage == getMenu) {
-                    $(this).addClass('active');
-                }
-            });
-        });
-
-
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 200) {
-                $('.side-menu').fadeIn();
-            } else {
-                $('.side-menu').fadeOut();
-            }
-        });
-        function setLang(lang) {
-            if (lang == 'TH') {
-                $("#butt_th").addClass("active");
-                $("#butt_en").removeClass("active");
-            } else {
-                $("#butt_en").addClass("active");
-                $("#butt_th").removeClass("active");
-            }
-
-            $.ajax({
-                type: "POST",
-                cache: false,
-                url: "/Frontend_IR/change_lang",
-                data: {
-                    lang: lang
-                },    // multiple data sent using ajax
-                success: function (data) {
-                    if (data.status == "success") {
-                        window.location.reload();
-                    }
-                    else {
-                        Swal.fire({
-                            icon: 'warning',
-                            text: data.message,
-                        });
-                    }
-                }, error: function (e) {
-                    Swal.fire({
-                        icon: 'error',
-                        text: e.message,
-                    });
-                    console.log(e.message);
-                    console.log(e.inner);
-                }
-            });
-        }
-    </script>
-    }
 </body>
 </html>

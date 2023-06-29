@@ -24,6 +24,189 @@
     <link rel="stylesheet" href="~/Frontend_assets/fancybox/fancybox.css">
     <script src="~/Frontend_assets/fancybox/fancybox.umd.js"></script>
     <script src="~/Frontend_assets/OwlCarousel/owl.carousel.min.js"></script>
+    <script>
+        $(function () {
+            var getPage = $("#page_name").val();
+            $(".mainmenu li").each(function () {
+                var getMenu = $(this).attr("data-page");
+                if (getPage == getMenu) {
+                    $(this).addClass('active');
+                }
+            });
+        });
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 200) {
+                $('.side-menu').fadeIn();
+            } else {
+                $('.side-menu').fadeOut();
+            }
+        });
+
+        function setLang(lang) {
+            if (lang == 'TH') {
+                $("#butt_th").addClass("active");
+                $("#butt_en").removeClass("active");
+            } else {
+                $("#butt_en").addClass("active");
+                $("#butt_th").removeClass("active");
+            }
+
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Frontend_IR/change_lang",
+                data: {
+                    lang: lang
+                },    // multiple data sent using ajax
+                success: function (data) {
+                    if (data.status == "success") {
+                        window.location.reload();
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        var menu_width;
+        $(() => {
+            $('.main-banner').owlCarousel({
+                loop: true,
+                margin: 0,
+                autoplay: true,
+                animateOut: 'fadeOut',
+                autoplayTimeout: 5500,
+                smartSpeed: 4000,
+                autoplayHoverPause: false,
+                mouseDrag: false,
+                dots: true,
+                nav: false,
+                navText: [
+                    '<i class="fas fa-chevron-left"></i>',
+                    '<i class="fas fa-chevron-right"></i>'
+                ],
+                responsive: {
+                    0: {
+                        items: 1,
+                        slideBy: 1,
+                    },
+                    640: {
+                        items: 1,
+                        slideBy: 1
+                    },
+                    1024: {
+                        items: 1,
+                        slideBy: 1
+                    }
+                }
+            })
+
+            menu_width = $("#menu .menu").width();
+            $("#menu .menu-back").click(function () {
+                var _pos = $("#menu .menu-slider").position().left + menu_width;
+                var _obj = $("#menu .submenu");
+                $("#menu .menu-slider").stop().animate({
+                    left: _pos
+                }, 300, function () {
+                    _obj.hide();
+                });
+                return false;
+            });
+
+            $("#menu .menu-anchor").click(function () {
+                var _d = $(this).data('menu');
+                $("#menu .submenu").each(function () {
+                    var _d_check = $(this).data('menu');
+                    if (_d_check == _d) {
+                        $(this).show();
+                        var _pos = $("#menu .menu-slider").position().left - menu_width;
+
+                        $("#menu .menu-slider").stop(true, true).animate({
+                            left: _pos
+                        }, 300);
+                        return false;
+                    }
+                });
+                return false;
+            });
+
+            $('.index-main-banner').OwlCarousel({
+                loop: true,
+                margin: 0,
+                autoplay: true,
+                animateOut: 'fadeOut',
+                autoplayTimeout: 5500,
+                smartSpeed: 4000,
+                autoplayHoverPause: false,
+                mouseDrag: false,
+                dots: true,
+                nav: false,
+                navText: [
+                    '<i class="fas fa-chevron-left"></i>',
+                    '<i class="fas fa-chevron-right"></i>'
+                ],
+                responsive: {
+                    0: {
+                        items: 1,
+                        slideBy: 1,
+                    },
+                    640: {
+                        items: 1,
+                        slideBy: 1
+                    },
+                    1024: {
+                        items: 1,
+                        slideBy: 1
+                    }
+                }
+            })
+
+            $('.catalogue-slide').OwlCarousel({
+                loop: false,
+                margin: 0,
+                autoplay: false,
+                autoplayTimeout: 1500,
+                smartSpeed: 1000,
+                autoplayHoverPause: true,
+                mouseDrag: false,
+                dots: false,
+                nav: true,
+                navText: [
+                    '<i class="fas fa-chevron-left"></i>',
+                    '<i class="fas fa-chevron-right"></i>'
+                ],
+                responsive: {
+                    0: {
+                        items: 1,
+                        slideBy: 1,
+                        dots: true,
+                                                            / nav: true
+                                                        },
+                640: {
+                    items: 3,
+                    slideBy: 1
+                },
+                1024: {
+                    items: 3,
+                    slideBy: 1
+                }
+            }
+                                                })
+                                            });
+
+    </script>
 </head>
 <body>
     <div class="thetop"></div>
@@ -843,190 +1026,5 @@
 
     @Html.Partial("~/Views/Shared/Inc/IR_inc_footer.cshtml")
     @await RenderSectionAsync("Scripts", required: false)
-    @section Scripts{
-        <script>
-            $(function () {
-                var getPage = $("#page_name").val();
-                $(".mainmenu li").each(function () {
-                    var getMenu = $(this).attr("data-page");
-                    if (getPage == getMenu) {
-                        $(this).addClass('active');
-                    }
-                });
-            });
-
-            $(window).scroll(function () {
-                if ($(this).scrollTop() > 200) {
-                    $('.side-menu').fadeIn();
-                } else {
-                    $('.side-menu').fadeOut();
-                }
-            });
-
-            function setLang(lang) {
-                if (lang == 'TH') {
-                    $("#butt_th").addClass("active");
-                    $("#butt_en").removeClass("active");
-                } else {
-                    $("#butt_en").addClass("active");
-                    $("#butt_th").removeClass("active");
-                }
-
-                $.ajax({
-                    type: "POST",
-                    cache: false,
-                    url: "/Frontend_IR/change_lang",
-                    data: {
-                        lang: lang
-                    },    // multiple data sent using ajax
-                    success: function (data) {
-                        if (data.status == "success") {
-                            window.location.reload();
-                        }
-                        else {
-                            Swal.fire({
-                                icon: 'warning',
-                                text: data.message,
-                            });
-                        }
-                    }, error: function (e) {
-                        Swal.fire({
-                            icon: 'error',
-                            text: e.message,
-                        });
-                        console.log(e.message);
-                        console.log(e.inner);
-                    }
-                });
-            }
-
-            var menu_width;
-            $(() => {
-                $('.main-banner').owlCarousel({
-                    loop: true,
-                    margin: 0,
-                    autoplay: true,
-                    animateOut: 'fadeOut',
-                    autoplayTimeout: 5500,
-                    smartSpeed: 4000,
-                    autoplayHoverPause: false,
-                    mouseDrag: false,
-                    dots: true,
-                    nav: false,
-                    navText: [
-                        '<i class="fas fa-chevron-left"></i>',
-                        '<i class="fas fa-chevron-right"></i>'
-                    ],
-                    responsive: {
-                        0: {
-                            items: 1,
-                            slideBy: 1,
-                        },
-                        640: {
-                            items: 1,
-                            slideBy: 1
-                        },
-                        1024: {
-                            items: 1,
-                            slideBy: 1
-                        }
-                    }
-                })
-
-                menu_width = $("#menu .menu").width();
-                $("#menu .menu-back").click(function () {
-                    var _pos = $("#menu .menu-slider").position().left + menu_width;
-                    var _obj = $("#menu .submenu");
-                    $("#menu .menu-slider").stop().animate({
-                        left: _pos
-                    }, 300, function () {
-                        _obj.hide();
-                    });
-                    return false;
-                });
-
-                $("#menu .menu-anchor").click(function () {
-                    var _d = $(this).data('menu');
-                    $("#menu .submenu").each(function () {
-                        var _d_check = $(this).data('menu');
-                        if (_d_check == _d) {
-                            $(this).show();
-                            var _pos = $("#menu .menu-slider").position().left - menu_width;
-
-                            $("#menu .menu-slider").stop(true, true).animate({
-                                left: _pos
-                            }, 300);
-                            return false;
-                        }
-                    });
-                    return false;
-                });
-
-                $('.index-main-banner').OwlCarousel({
-                    loop: true,
-                    margin: 0,
-                    autoplay: true,
-                    animateOut: 'fadeOut',
-                    autoplayTimeout: 5500,
-                    smartSpeed: 4000,
-                    autoplayHoverPause: false,
-                    mouseDrag: false,
-                    dots: true,
-                    nav: false,
-                    navText: [
-                        '<i class="fas fa-chevron-left"></i>',
-                        '<i class="fas fa-chevron-right"></i>'
-                    ],
-                    responsive: {
-                        0: {
-                            items: 1,
-                            slideBy: 1,
-                        },
-                        640: {
-                            items: 1,
-                            slideBy: 1
-                        },
-                        1024: {
-                            items: 1,
-                            slideBy: 1
-                        }
-                    }
-                })
-
-                $('.catalogue-slide').OwlCarousel({
-                    loop: false,
-                    margin: 0,
-                    autoplay: false,
-                    autoplayTimeout: 1500,
-                    smartSpeed: 1000,
-                    autoplayHoverPause: true,
-                    mouseDrag: false,
-                    dots: false,
-                    nav: true,
-                    navText: [
-                        '<i class="fas fa-chevron-left"></i>',
-                        '<i class="fas fa-chevron-right"></i>'
-                    ],
-                    responsive: {
-                        0: {
-                            items: 1,
-                            slideBy: 1,
-                            dots: true,
-                                                    / nav: true
-                                                },
-                    640: {
-                        items: 3,
-                        slideBy: 1
-                    },
-                    1024: {
-                        items: 3,
-                        slideBy: 1
-                    }
-                }
-                                        })
-                                    });
-
-        </script>
-    }
 </body>
 </html>
