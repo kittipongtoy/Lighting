@@ -61,13 +61,20 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="news-topic">
-                                                        <p>หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน</p>
+                                                        <p>@item.Title_EN</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col">
-                                                    <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                                    @if (@item.NewDate != null)
+                                                    {
+                                                        <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="news-date"></div>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
@@ -90,13 +97,20 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="news-topic">
-                                                        <p>หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน</p>
+                                                        <p>@item.Title_TH</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col">
-                                                    <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                                    @if (@item.NewDate != null)
+                                                    {
+                                                        <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="news-date"></div>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>

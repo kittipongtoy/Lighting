@@ -117,6 +117,21 @@
             public int? Status { get; set; }
         }
 
+        public class AuthorizationResponse
+		{
+            public int? Index { get; set; }
+            public string Id { get; set; }
+			public string EmployeeCode { get; set; } = string.Empty;
+			public int EmployeeCodeInt { get; set; } = 0;
+			public string? Firstname { get; set; }
+			public string? Lastname { get; set; }
+			public string? Address { get; set; }
+			public string? ProfilePath { get; set; }
+			public string? ReceptionistFile { get; set; }
+			public string? ApplicationFile { get; set; }
+			public string? GuarantorIdentificationCardFile { get; set; }
+		}
+
         public class IR_ContactResponse
         {
             public int? Index { get; set; }

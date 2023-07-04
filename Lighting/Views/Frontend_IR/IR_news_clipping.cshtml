@@ -77,14 +77,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (Count_IR_Print_Media.Count() != 0)
+                                @if (Count_IR_Print_MediaDetail.Count() != 0)
                                 {
                                     if (Context.Request.Cookies["lang"] == "EN")
                                     {
                                         foreach (var item in ViewBag.IR_Print_MediaDetail)
                                         {
                                             <tr>
-                                                <td>@item.NewDate.ToString("dd MMM yyyy")</td>
+                                                @if (@item.NewDate != null)
+                                                {
+                                                    <td>@item.NewDate.ToString("dd MMM yyyy")</td>
+                                                }
+                                                else
+                                                {
+                                                   <td></td>
+                                                }
+                                               
                                                 <td>
                                                     <a href="~/upload_file/IR_NewRoom/@item.FileNameEN" target="_blank">@item.Title_EN</a>
                                                 </td>
@@ -100,7 +108,14 @@
                                         foreach (var item in ViewBag.IR_Print_MediaDetail)
                                         {
                                             <tr>
-                                                <td>@item.NewDate.ToString("dd MMM yyyy")</td>
+                                                @if (@item.NewDate != null)
+                                                {
+                                                    <td>@item.NewDate.ToString("dd MMM yyyy")</td>
+                                                }
+                                                else
+                                                {
+                                                    <td></td>
+                                                }
                                                 <td>
                                                     <a href="~/upload_file/IR_NewRoom/@item.FileNameEN" target="_blank">@item.Title_TH</a>
                                                 </td>

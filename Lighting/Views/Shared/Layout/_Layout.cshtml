@@ -164,50 +164,56 @@
 		here_investerRelation = "here";
 	}
 
-	
+	var show_Infor_Shareholders = "";
+	var here_Infor_Shareholders = "";
+	if (ViewData["Title"] == "Major_ShareHolder"
+	|| ViewData["Title"] == "Import_Info_ShareHolder"
+	|| ViewData["Title"] == "SH_GeneralMeeting"
+	|| ViewData["Title"] == "SH_IR_dividend"
+	|| ViewData["Title"] == "SH_IR_annualReport"
+	|| ViewData["Title"] == "SH_IR_Form"
+	|| ViewData["Title"] == "SH_IR_Report_Meeting"
+	|| ViewData["Title"] == "SH_IR_propose_agenda")
+	{
+		show_Infor_Shareholders = "show";
+		here_Infor_Shareholders = "here";
+		show_investerRelation = "show";
+		here_investerRelation = "here";
+	}
 
-    var show_Infor_Shareholders = "";
-    var here_Infor_Shareholders = "";
-    if (ViewData["Title"] == "Major_ShareHolder"
-    || ViewData["Title"] == "Import_Info_ShareHolder"
-    || ViewData["Title"] == "SH_GeneralMeeting"
-    || ViewData["Title"] == "SH_IR_dividend"
-    || ViewData["Title"] == "SH_IR_annualReport"
-    || ViewData["Title"] == "SH_IR_Form"
-    || ViewData["Title"] == "SH_IR_Report_Meeting"
-    || ViewData["Title"] == "SH_IR_propose_agenda")
-    {
-        show_Infor_Shareholders = "show";
-        here_Infor_Shareholders = "here";
-        show_investerRelation = "show";
-        here_investerRelation = "here";
-    }
+	var show_presentation_infor = "";
+	var here_presentation_infor = "";
+	if (ViewData["Title"] == "SH_IR_Presentation_Doc"
+	|| ViewData["Title"] == "SH_IR_Presentation_webcast")
+	{
+		show_presentation_infor = "show";
+		here_presentation_infor = "here";
+		show_investerRelation = "show";
+		here_investerRelation = "here";
+	}
 
-    var show_presentation_infor = "";
-    var here_presentation_infor = "";
-    if (ViewData["Title"] == "SH_IR_Presentation_Doc"
-    || ViewData["Title"] == "SH_IR_Presentation_webcast")
-    {
-        show_presentation_infor = "show";
-        here_presentation_infor = "here";
-        show_investerRelation = "show";
-        here_investerRelation = "here";
-    }
+	var show_important_financial_information = "";
+	var here_important_financial_information = "";
+	if (ViewData["Title"] == "SH_IR_finance_statement"
+	|| ViewData["Title"] == "SH_IR_MDA"
+	|| ViewData["Title"] == "SH_IR_financial_highlight"
+	|| ViewData["Title"] == "SH_IR_prospectus")
+	{
+		show_important_financial_information = "show";
+		here_important_financial_information = "here";
+		show_investerRelation = "show";
+		here_investerRelation = "here";
+	} 
 
-    var show_important_financial_information = "";
-    var here_important_financial_information = "";
-    if (ViewData["Title"] == "SH_IR_finance_statement"
-    || ViewData["Title"] == "SH_IR_MDA"
-    || ViewData["Title"] == "SH_IR_financial_highlight"
-    || ViewData["Title"] == "SH_IR_prospectus")
-    {
-        show_important_financial_information = "show";
-        here_important_financial_information = "here";
-        show_investerRelation = "show";
-        here_investerRelation = "here";
-    } 
-
-
+	var Show_Authorization = "";
+	var Here_Authorization = "";
+	if(ViewData["Title"] == "Authorization_Index"
+	|| ViewData["Title"] == "Authorization_Add"
+	|| ViewData["Title"] == "Authorization_Edit")
+	{
+		Show_Authorization = "show";
+		Here_Authorization = "here";
+	}
 
 }
 
@@ -863,9 +869,7 @@
 												}
 											</div>
 										</div>
-									</div>
-									
-									
+									</div>								
                                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_important_financial_information @here_important_financial_information">
                                         <span class="menu-link">
                                             <span class="menu-bullet">
@@ -961,8 +965,7 @@
                                             </div>
 
                                         </div> 
-                                    </div>
-									
+                                    </div>								
                                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_Infor_Shareholders @here_Infor_Shareholders">
                                         <span class="menu-link">
                                             <span class="menu-bullet">
@@ -1140,8 +1143,7 @@
                                             </div>
 
                                         </div>
-                                    </div>
-									
+                                    </div>								
                                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_presentation_infor @here_presentation_infor">
                                         <span class="menu-link">
                                             <span class="menu-bullet">
@@ -1193,7 +1195,6 @@
                                             </div>
                                         </div>
                                     </div>
-
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion @here_Analyst @show_Analyst">
 										<span class="menu-link">
 											<span class="menu-bullet">
@@ -1598,7 +1599,7 @@
 									</div>
 								</div>
 							</div>
-							<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div data-kt-menu-trigger="click" class="menu-item menu-accordion" @show_Analyst @here_Analyst>
 								<span class="menu-link">
 									<span class="menu-icon">
 										<i class="bi bi bi-people-fill fs-3"></i>
@@ -1608,12 +1609,24 @@
 								</span>
 								<div class="menu-sub menu-sub-accordion">
 									<div class="menu-item">
-										<a class="menu-link" href="#">
-											<span class="menu-bullet">
-												<span class="bullet bullet-dot"></span>
-											</span>
-											<span class="menu-title">ผู้ใช้งาน</span>
-										</a>
+										@if (ViewData["Title"] == "Authorization_Index" || ViewData["Title"] == "Authorization_Add" || ViewData["Title"] == "Authorization_Edit")
+										{
+											<a class="menu-link" href="#">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">ผู้ใช้งาน</span>
+											</a>
+										}
+										else
+										{
+											<a class="menu-link" href="#">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">ผู้ใช้งาน</span>
+											</a>
+										}									
 									</div>
 								</div>
 							</div>	

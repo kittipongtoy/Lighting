@@ -45,7 +45,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-9 col-lg-10 col-md-11 col-12">
                     <div class="timeline-section" id="GetIR_NewDetail">
-                        @if (Count_IR_Latest_News.Count() != 0)
+                        @if (Count_IR_Latest_NewDetail.Count() != 0)
                         {
                             if (Context.Request.Cookies["lang"] == "EN")
                             {
@@ -58,7 +58,14 @@
                                                     <div class="news-topic">
                                                         <p>@item.Title_EN</p>
                                                     </div>
-                                                    <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                                    @if (@item.NewDate != null)
+                                                    {
+                                                        <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="news-date"></div>
+                                                    }
                                                     <div class="txt-content">
                                                         @Html.Raw(item.Detail_EN)
                                                     </div>
@@ -79,7 +86,14 @@
                                                     <div class="news-topic">
                                                         <p>@item.Title_TH</p>
                                                     </div>
-                                                    <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                                    @if (@item.NewDate != null)
+                                                    {
+                                                        <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="news-date"></div>
+                                                    }
                                                     <div class="txt-content">
                                                         <p> @Html.Raw(item.Detail_TH)</p>
                                                     </div>

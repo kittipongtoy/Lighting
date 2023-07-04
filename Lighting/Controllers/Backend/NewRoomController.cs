@@ -277,6 +277,7 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPost]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
         public async Task<IActionResult> IR_NewDetail_Add_Submit(RequestDTO.IR_NewDetailRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
         {
             IR_NewDetail iR_NewDetail = new IR_NewDetail();
@@ -378,6 +379,7 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPut]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
         public async Task<IActionResult> IR_NewDetail_Edit_Submit(RequestDTO.IR_NewDetailRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
         {
             try
@@ -1164,6 +1166,7 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPost]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
         public async Task<IActionResult> Mass_MediaDetail_Add_Submit(RequestDTO.IR_Mass_MediaRequest model, List<IFormFile> uploaded_Image)
         {
             IR_MassMediaDetail IR_MassMediaDetail = new IR_MassMediaDetail();
@@ -1251,6 +1254,7 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPut]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
         public async Task<IActionResult> Mass_MediaDetail_EditSubmit(RequestDTO.IR_Mass_MediaRequest model, List<IFormFile> uploaded_Image)
         {
             try
@@ -1626,6 +1630,7 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPost]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
         public async Task<IActionResult> Print_MediaDetail_Add_Submit(RequestDTO.IR_Print_MedialDetailRequest model, List<IFormFile> uploaded_Image, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
         {
             IR_Print_MediaDetail IR_Print_MediaDetail = new IR_Print_MediaDetail();
@@ -1750,6 +1755,7 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPut]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
         public async Task<IActionResult> Print_MediaDetail_EditSubmit(RequestDTO.IR_Print_MedialDetailRequest model, List<IFormFile> uploaded_Image, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
         {
             try
@@ -2167,6 +2173,7 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPost]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
         public async Task<IActionResult> InvestorCalendarDetail_Add_Submit(RequestDTO.InvestorCalendarDetailRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
         {
             IR_InvestorCalendarDetail IR_InvestorCalendarDetail = new IR_InvestorCalendarDetail();
@@ -2269,6 +2276,7 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPut]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
         public async Task<IActionResult> InvestorCalendarDetail_EditSubmit(RequestDTO.InvestorCalendarDetailRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
         {
             try

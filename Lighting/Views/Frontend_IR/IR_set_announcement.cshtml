@@ -59,7 +59,14 @@
                                                     <div class="news-topic">
                                                         <p>@item.Title_EN</p>
                                                     </div>
-                                                    <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                                    @if(@item.NewDate != null)
+                                                    {
+                                                        <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>                                                  
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="news-date"></div>
+                                                    }
                                                     <div class="txt-content">
                                                         @Html.Raw(item.Detail_EN)
                                                     </div>
@@ -80,7 +87,14 @@
                                                     <div class="news-topic">
                                                         <p>@item.Title_TH</p>
                                                     </div>
-                                                    <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                                    @if (@item.NewDate != null)
+                                                    {
+                                                        <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="news-date"></div>
+                                                    }
                                                     <div class="txt-content">
                                                         @Html.Raw(item.Detail_TH)
                                                     </div>

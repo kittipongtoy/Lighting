@@ -108,6 +108,7 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPost]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
         public async Task<IActionResult> IR_Contact_Add_Submit(RequestDTO.IR_ContactRequest model, List<IFormFile> uploaded_image) 
         {
             IR_Contact iR_Contact = new IR_Contact();
@@ -190,6 +191,7 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPut]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
         public async Task<IActionResult> IR_Contact_Edit_Submit(RequestDTO.IR_ContactRequest model, List<IFormFile> uploaded_image)
         {
             try

@@ -81,16 +81,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (Count_IR_InvestorCalendar.Count() != 0)
+                                @if (Count_IR_InvestorCalendarDetail.Count() != 0)
                                 {
                                     if (Context.Request.Cookies["lang"] == "EN")
                                     {
-                                        foreach (var item in ViewBag.IR_InvestorCalendar)
+                                        foreach (var item in ViewBag.IR_InvestorCalendarDetail)
                                         {
                                             <tr>
                                                 <td>
                                                     <ul class="date-time">
-                                                        <li>@item.NewDate.ToString("dd MMM yyyy HH:mm:ss")</li>
+                                                        @if (item.NewDate != null)
+                                                        {
+                                                            <li>@item.NewDate.ToString("dd MMM yyyy HH:mm:ss")</li>
+                                                        }
+                                                        else
+                                                        {
+                                                            <li></li>
+                                                        }
                                                     </ul>
                                                 </td>
                                                 <td>@item.Activity_EN</td>
@@ -103,12 +110,19 @@
                                     }
                                     else
                                     {
-                                        foreach (var item in ViewBag.IR_InvestorCalendar)
+                                        foreach (var item in ViewBag.IR_InvestorCalendarDetail)
                                         {
                                             <tr>
                                                 <td>
                                                     <ul class="date-time">
-                                                        <li>@item.NewDate.ToString("dd MMM yyyy HH:mm:ss")</li>
+                                                        @if (item.NewDate != null)
+                                                        {
+                                                            <li>@item.NewDate.ToString("dd MMM yyyy HH:mm:ss")</li>
+                                                        }
+                                                        else
+                                                        {
+                                                            <li></li>
+                                                        }
                                                     </ul>
                                                 </td>
                                                 <td>@item.Activity_TH</td>

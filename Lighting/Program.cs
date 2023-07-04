@@ -56,8 +56,7 @@ builder.Services.AddCors(options =>
 	options.AddPolicy(myAllowSpecificOrigins,
 					  policy =>
 					  {
-						  policy.WithOrigins("https://ir.lighting.co.th/",
-											  "");
+						  policy.WithOrigins("https://ir.lighting.co.th/", "").AllowAnyHeader().AllowCredentials().AllowAnyMethod();
 					  });
 });
 
@@ -73,6 +72,12 @@ builder.Services.AddDbContext<LightingContext>(options =>
 
 builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
 	options.TokenLifespan = TimeSpan.FromMinutes(30));
+
+builder.Services.Configure<FormOptions>(x =>
+{
+    x.ValueLengthLimit = int.MaxValue;
+    x.MultipartBodyLengthLimit = int.MaxValue; // In case of multipart
+});
 
 //add date time to console, .net error log
 builder.Services.AddLogging(options =>
