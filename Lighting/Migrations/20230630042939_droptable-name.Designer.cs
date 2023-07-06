@@ -4,6 +4,7 @@ using Lighting.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lighting.Migrations
 {
     [DbContext(typeof(LightingContext))]
-    partial class LightingContextModelSnapshot : ModelSnapshot
+    [Migration("20230630042939_droptable-name")]
+    partial class droptablename
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,60 +221,6 @@ namespace Lighting.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Companyprofile");
-                });
-
-            modelBuilder.Entity("Lighting.Areas.Identity.Data.Contact", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("CellPhone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("GoogleMaps_Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Location_EN")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Location_TH")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OfficePhone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PlaceName_EN")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PlaceName_TH")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TelePhone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("YouTube_Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.CorporateGovernance", b =>
@@ -1368,9 +1316,9 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "306b2232-df9b-406d-b2e9-7aa7af541fa4",
+                            Id = "acb317a2-6b51-4dfd-97cf-146a88fd05d0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a2833200-24c1-43c7-979e-e246440e2421",
+                            ConcurrencyStamp = "3b30b1b4-d91d-418d-b7c6-2f486f7dd46d",
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -1380,9 +1328,9 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEID6V7aOmYhJ5DL8muBhRb4GIkuQJ5znnsyFOO58tuTUh4U0M61T6+Tv0YdOgVRJJA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELGbDPN0z3sJGHm7NaDHwrWMTsySV/9TqI6xWI/nmwW7iFLJTF2kpaVIR4ZembC9+g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fed24152-0e34-4e23-9a68-cf1df871a013",
+                            SecurityStamp = "6b14c76a-08ed-43c1-b307-00cde9d0af97",
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -1465,24 +1413,27 @@ namespace Lighting.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Content_EN")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content_TH")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CreateDate_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CreateDate_TH")
+                    b.Property<string>("CreateDate")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImagePath")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title_EN")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title_TH")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -2333,13 +2284,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "69b3891d-1e86-4f2a-84c8-7b7d8fccc254",
-                            ConcurrencyStamp = "3ca87561-e607-45b3-85a7-449d2f748113",
+                            Id = "6ddab358-a89c-43ec-9886-42fa8bb16b7e",
+                            ConcurrencyStamp = "31c5f576-31b7-4fba-b925-755967a925d1",
                             Name = "Admin",
                             NameThai = "Admin",
                             NormalizedName = "Admin",
-                            created_at = new DateTime(2023, 7, 5, 4, 7, 32, 718, DateTimeKind.Utc).AddTicks(5628),
-                            updated_at = new DateTime(2023, 7, 5, 4, 7, 32, 718, DateTimeKind.Utc).AddTicks(5632)
+                            created_at = new DateTime(2023, 6, 30, 4, 29, 39, 246, DateTimeKind.Utc).AddTicks(1686),
+                            updated_at = new DateTime(2023, 6, 30, 4, 29, 39, 246, DateTimeKind.Utc).AddTicks(1689)
                         });
                 });
 
@@ -3838,8 +3789,8 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "306b2232-df9b-406d-b2e9-7aa7af541fa4",
-                            RoleId = "69b3891d-1e86-4f2a-84c8-7b7d8fccc254"
+                            UserId = "acb317a2-6b51-4dfd-97cf-146a88fd05d0",
+                            RoleId = "6ddab358-a89c-43ec-9886-42fa8bb16b7e"
                         });
                 });
 

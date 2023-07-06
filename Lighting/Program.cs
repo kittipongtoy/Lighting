@@ -184,7 +184,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
 //pattern: "{controller=Lighting}/{action=Index}/{id?}");
-pattern: "{controller=Frontend_IR}/{action=IR_index}/{id?}");
+pattern: "{controller=ManageContact}/{action=Manage_Contact_Page}");
 
 
 app.MapRazorPages();
