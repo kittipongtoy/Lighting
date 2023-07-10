@@ -177,7 +177,7 @@ namespace Lighting.Controllers.Backend
         }
         public async Task<IActionResult> Edit_News_Page(int id)
         {
-            var edit = await _db.News.FirstOrDefaultAsync(news => news.Id == id);
+            var edit = await _db.News.Where(news => news.Id == id).FirstOrDefaultAsync();
             if (edit != null)
             {
                 var root_path = _env.WebRootPath;
@@ -203,7 +203,7 @@ namespace Lighting.Controllers.Backend
         public async Task<IActionResult> Edit([FromForm] Input_NewsVm input_News, [FromQuery, Required] int id)
         {
 
-            var edite = await _db.News.FirstOrDefaultAsync(news => news.Id.Equals(id));
+            var edite = await _db.News.Where(news => news.Id.Equals(id)).FirstOrDefaultAsync();
             if (edite != null)
             {
                 var root_path = _env.WebRootPath;

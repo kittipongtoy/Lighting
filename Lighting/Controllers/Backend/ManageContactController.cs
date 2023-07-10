@@ -47,7 +47,7 @@ namespace Lighting.Controllers.Backend
 
         public async Task<IActionResult> Edit_Page(int id)
         {
-            var contact = await _db.Contacts.AsNoTracking().FirstOrDefaultAsync(contact => contact.Id == id);
+            var contact = await _db.Contacts.AsNoTracking().Where(contact => contact.Id == id).FirstOrDefaultAsync();
 
             if (contact != null)
             {

@@ -1,0 +1,231 @@
+﻿@{
+    ViewData["Title"] = "Add News";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+@model Lighting.Models.InputFilterModels.ApplyJob.Output_ApplyJobVM
+
+<div class="container">
+    <div class="row p-1 mt-3">
+        <a href="@Url.Action("Manage_job_page","ManageJob")" class="btn btn-primary h3 mb-3 mt-1" style="float:right;">กลับ</a>
+     </div>
+
+
+    <div class="row p-1 mt-3">
+        <div class="col-12">
+
+            <!--position-->
+            <div class="form-group mt-2 p-1">
+                <label class="h4">ชื่อตำแหน่งงาน (ภาษาไทย)</label>
+                <input type="text" class="form-control" id="job_name_th" placeholder="ชื่อตำแหน่ง" value="@Model.PositionName_TH">
+            </div>
+            <div class="form-group mt-3 p-1">
+                <label class="h4"> Position (English)</label>
+                <input type="text" class="form-control" id="job_name_en" placeholder="Position" value="@Model.PositionName_EN">
+            </div>
+            <!--end position-->
+            <!-- date-->
+            <div class="form-group mt-2 p-1">
+                <label class="h4">วันที่</label>
+                <input type="text" class="form-control" id="date_th" placeholder="01 ม.ค. 2566" value="@Model.Date_TH">
+            </div>
+            <div class="form-group mt-3 p-1">
+                <label class="h4">Date</label>
+                <input type="text" class="form-control" id="date_en" placeholder="01 JAN 2023" value="@Model.Date_EN">
+            </div>
+            <!-- date-->
+            <!--Quantity-->
+            <div class="form-group mt-3 p-1">
+                <label class="h4">รับจำนวน</label>
+                <input type="text" class="form-control" id="quantity" placeholder="1" value="@Model.Quantity">
+            </div>
+            <!--end Quantity-->
+            <!--WorkPlace-->
+            <div class="form-group mt-3 p-1">
+                <label class="h4">ที่ทำงาน</label>
+                <input type="text" class="form-control" id="workPlace_th" placeholder="ตัวอย่าง ตึก a ถนน a อำเภอ a จังหวัด a" value="@Model.WorkPlace_TH">
+            </div>
+            <div class="form-group mt-3 p-1">
+                <label class="h4">WorkPlace</label>
+                <input type="text" class="form-control" id="workPlace_en" placeholder="example a tower province ..." value="@Model.WorkPlace_EN">
+            </div>
+            <!--WorkPlace-->
+            <!--respondsibity-->
+            <div class="form-group mt-3 p-1">
+                <label class="h4">หน้าที่ (ภาษาไทย)</label>
+                <textarea id="respondsibility_th">@Model.Respondsibility_TH</textarea>
+            </div>
+            <div class="form-group mt-3 p-1">
+                <label class="h4">Respondsibility (English)</label>
+                <textarea id="respondsibility_en">@Model.Respondsibility_EN</textarea>
+            </div>
+            <!--end respondsibity-->
+            <!--qualification-->
+            <div class="form-group mt-3 p-1">
+                <label class="h4">คุณสมบัติ (ภาษาไทย)</label>
+                <textarea id="qualification_th">@Model.Qualification_TH</textarea>
+            </div>
+            <div class="form-group mt-3 p-1">
+                <label class="h4">Qualification (English)</label>
+                <textarea id="qualification_en">@Model.Qualification_EN</textarea>
+            </div>
+            <!--end qualification-->
+            <!--email-->
+            <div class="form-group mt-3 p-1">
+                <label class="h4">Email</label>
+                <input type="text" class="form-control" id="email1" placeholder="a@example.com" value="@Model.Email1">
+            </div>
+            <div class="form-group mt-3 p-1">
+                <label class="h4">Email</label>
+                <input type="text" class="form-control" id="email2" placeholder="a@example.com" value="@Model.Email2">
+            </div>
+            <!--email-->
+            <!--phone number-->
+            <div class="form-group mt-3 p-1">
+                <label class="h4">เบอร์โทรติดต่อ</label>
+                <input type="text" class="form-control" id="phone" placeholder="(+66) 08xxxxxxxx" value="@Model.PhoneNumber">
+            </div>
+            <!--end phone number-->
+
+            <button onclick="submit_form()" class="btn btn-primary mt-3 mb-5">submit</button>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        var Respondsibility_en;
+        var Respondsibility_th;
+
+        var Qualification_en;
+        var Qualification_th;
+
+        ClassicEditor
+            .create(document.querySelector('#respondsibility_th'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                Respondsibility_th = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#respondsibility_en'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                Respondsibility_en = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        ClassicEditor
+            .create(document.querySelector('#qualification_th'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                Qualification_th = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#qualification_en'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                Qualification_en = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        function submit_form() {
+
+            const position_th = $("#job_name_th").val();
+            const position_en = $("#job_name_en").val();
+
+            const respondsibility_th = Respondsibility_th.getData();
+            const respondsibility_en = Respondsibility_en.getData();
+
+            const qualification_th = Qualification_th.getData();
+            const qualification_en = Qualification_en.getData();
+
+            const date_th = $("#date_th").val();
+            const date_en = $("#date_en").val();
+
+            const quantity = $("#quantity").val();
+
+            const workPlace_th = $("#workPlace_th").val();
+            const workPlace_en = $("#workPlace_en").val();
+
+            const email1 = $("#email1").val();
+            const email2 = $("#email2").val();
+
+            const phonenumber = $("#phone").val();
+
+            var formData = new FormData();
+
+            formData.append("PositionName_TH", position_th);
+            formData.append("PositionName_EN", position_en);
+
+            formData.append("Date_TH", date_th);
+            formData.append("Date_EN", date_en);
+
+            formData.append("WorkPlace_TH", workPlace_th);
+            formData.append("WorkPlace_EN", workPlace_en);
+
+            formData.append("Respondsibility_TH", respondsibility_th);
+            formData.append("Respondsibility_EN", respondsibility_en);
+
+            formData.append("Qualification_TH", qualification_th);
+            formData.append("Qualification_EN", qualification_en);
+
+            formData.append("Email1", email1);
+            formData.append("Email2", email2);
+
+            formData.append("Quantity", quantity);
+
+            formData.append("PhoneNumber", phonenumber);
+
+            $.ajax({
+                type: 'POST',
+                url: '/ManageJob/edit?id='+"@Model.Id",
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = "/ManageJob/Manage_Job_Page";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+
+
+        }
+    </script>
+}

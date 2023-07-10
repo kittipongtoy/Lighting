@@ -16,6 +16,8 @@ namespace Lighting.Areas.Identity.Data
         {
         }
 
+        public DbSet<Download> Downloads { get; set; }
+        public DbSet<ApplyJob> ApplyJobs { get; set; }
         #region contact
         public DbSet<Contact> Contacts { get; set; }
         #endregion

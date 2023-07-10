@@ -1,0 +1,154 @@
+﻿@{
+    ViewData["Title"] = "Add Contact";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+    var lang = Context.Request.Cookies["lang"];
+}
+
+<div class="container">
+    <a href="@Url.Action("manage_Download_page","ManageDownload")" class="btn btn-primary  mb-1 mt-2">กลับ</a>
+    <div class="row">
+        <div class="col-12">
+            <!--contact type-->
+            <div class="form-group p-2">
+                <label class="h4">ประเภท</label>
+                <select class="form-control" id="download_type">
+                    <option value="L&E BIM OBJECTS" class="h5">L&E BIM OBJECTS</option>
+                    <option value="CATALOGUE" class="h5">CATALOGUE</option>
+                    <option value="COMPANY PROFILE" class="h5">COMPANY PROFILE</option>
+                    <option value="IES FILE" class="h5">IES FILE</option>
+                    <option value="LEAFLET" class="h5">LEAFLET</option>
+                </select>
+            </div>
+            <!--end contact type-->
+
+            <!-- dowload name-->
+            <div class="form-group mt-3 p-2" style="border:1px solid black" id="place">
+                <label class="h4 mt-3">ชื่อการดาวน์โหลด</label>
+                <input type="text" class="form-control" id="download_name_th" placeholder="ชื่อการดาวน์โหลด">
+                <label class="h4 mt-3">Download Name (English)</label>
+                <input type="text" class="form-control" id="download_name_en" placeholder="Download Name">
+            </div>
+            <!--dowload name-->
+
+            <!--fileimage-->
+            <div class="custom-file mt-3 p-1" style="border:1px solid black">
+                <img style="width:100%;height:100%;display:none;" id="preview_show_img" />
+                <br />
+                <input type="file" class="custom-file-input mt-3" id="file_img" accept="image/png, image/gif, image/jpeg" >
+                <label class="custom-file-label h4">เลือกไฟล์ รูป</label>
+            </div>
+            <!--end file-->
+
+            <!--file download-->
+            <div class="custom-file mt-3 p-1">
+                <input type="file" class="custom-file-input mt-3" id="file_download" >
+                <label class="custom-file-label h4">เลือกไฟล์</label>
+            </div>
+            <!--file-->
+
+            <button type="button" class="btn btn-primary mt-3" style="margin-bottom:3rem;" onclick="submit()">บันทึก</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        var image_file;
+        var file_dowload;
+
+        $(document).ready(function () {
+            $('#file_img').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    image_file = e.target.files[0];
+                    $('#preview_show_img').attr('src', await blobToBase64DataURL(image_file)).css("display", "block");
+                }
+            });
+            $('#file_download').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    file_dowload = e.target.files[0];
+                }
+            });
+        });
+
+
+        const blobToBase64DataURL = blob => new Promise(
+            resolvePromise => {
+                const reader = new FileReader();
+                reader.onload = () => resolvePromise(reader.result);
+                reader.readAsDataURL(blob);
+            }
+        );
+
+        function submit() {
+
+            let download_type = $("#download_type").val();
+
+            let download_name_th = $("#download_name_th").val();
+            let download_name_en = $("#download_name_en").val();
+
+            let formData = new FormData();
+            formData.append("DownloadType", download_type);
+            formData.append("Name_EN", download_name_en);
+            formData.append("Name_TH", download_name_th);
+
+            if (image_file != undefined) {
+                formData.append("Image", image_file);
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    text: "กรุณาใส่รูป",
+                });
+                return;
+            }
+
+            if (file_dowload != undefined){
+                formData.append("File", file_dowload);
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    text: "กรุณใส่ไฟล์ดาวโหลด",
+                });
+                return;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/ManageDownload/Add_Download',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = "/ManageDownload/Manage_Download_Page";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+    </script>
+            }

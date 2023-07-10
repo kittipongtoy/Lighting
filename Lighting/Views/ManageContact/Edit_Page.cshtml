@@ -6,7 +6,7 @@
 @model Lighting.Models.InputFilterModels.Contact.Output_ContactVM
 
 <div class="container">
-    <a href="@Url.Action("manage_contact_page","ManageContact")"><button class="btn btn-primary mb-1 mt-2" >กลับ</button></a>
+    <a href="@Url.Action("manage_contact_page","ManageContact")"><button class="btn btn-primary mb-1 mt-2">กลับ</button></a>
     <div class="row">
         <div class="col-12">
             <!--contact type-->
@@ -78,9 +78,9 @@
             <!--email and link--->
             <!--fileimage-->
             <div class="custom-file mt-3 p-1" style="border:1px solid black">
-                @if(Model.ImagePath != null)
+                @if (Model.ImagePath != null)
                 {
-                    <img style="width:100%;height:100%;" id="preview_show_img" src="@Model.ImagePath"/>
+                    <img style="width:100%;height:100%;" id="preview_show_img" src="@Model.ImagePath" />
                 }
                 else
                 {
@@ -154,7 +154,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/ManageContact/Edit?id='+"@Model.Id",
+                url: '/ManageContact/Edit?id=' + "@Model.Id",
                 data: formData,
                 processData: false,
                 contentType: false,
