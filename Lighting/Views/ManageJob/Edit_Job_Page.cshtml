@@ -5,11 +5,7 @@
 @model Lighting.Models.InputFilterModels.ApplyJob.Output_ApplyJobVM
 
 <div class="container">
-    <div class="row p-1 mt-3">
-        <a href="@Url.Action("Manage_job_page","ManageJob")" class="btn btn-primary h3 mb-3 mt-1" style="float:right;">กลับ</a>
-     </div>
-
-
+    <a href="@Url.Action("Manage_job_page","ManageJob")" class="btn bg-info h3 mb-3 mt-1" style="float:right;">กลับ</a><br /><br /><br />
     <div class="row p-1 mt-3">
         <div class="col-12">
 
@@ -189,7 +185,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/ManageJob/edit?id='+"@Model.Id",
+                url: '/ManageJob/edit?id=' + "@Model.Id",
                 data: formData,
                 processData: false,
                 contentType: false,
