@@ -1599,7 +1599,7 @@
 									</div>
 								</div>
 							</div>
-							<div data-kt-menu-trigger="click" class="menu-item menu-accordion" @show_Analyst @here_Analyst>
+							<div data-kt-menu-trigger="click" class="menu-item menu-accordion @Show_Authorization @Here_Authorization">
 								<span class="menu-link">
 									<span class="menu-icon">
 										<i class="bi bi bi-people-fill fs-3"></i>
@@ -1611,7 +1611,7 @@
 									<div class="menu-item">
 										@if (ViewData["Title"] == "Authorization_Index" || ViewData["Title"] == "Authorization_Add" || ViewData["Title"] == "Authorization_Edit")
 										{
-											<a class="menu-link" href="#">
+											<a class="menu-link active" href="@Url.Action("Authorization_Index","Authorization")">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
@@ -1620,7 +1620,7 @@
 										}
 										else
 										{
-											<a class="menu-link" href="#">
+											<a class="menu-link" href="@Url.Action("Authorization_Index","Authorization")">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
