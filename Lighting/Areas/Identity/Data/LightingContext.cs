@@ -16,6 +16,14 @@ namespace Lighting.Areas.Identity.Data
         {
         }
 
+        public DbSet<Download> Downloads { get; set; }
+        public DbSet<ApplyJob> ApplyJobs { get; set; }
+        #region contact
+        public DbSet<Contact> Contacts { get; set; }
+        #endregion
+        #region news
+        public DbSet<News> News { get; set; }
+        #endregion
         public DbSet<Author_secretary_File> Author_secretary_File { get; set; }
         public DbSet<Board_of_Directors> Board_of_Directors { get; set; }
         public DbSet<Company_Overview> Company_Overview { get; set; }

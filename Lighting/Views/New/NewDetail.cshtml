@@ -2,6 +2,8 @@
     ViewData["Title"] = "NewDetail";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
 }
+<script src="~/Frontend_assets/fancybox/fancybox.umd.js"></script>
+<link type="text/css" rel="stylesheet" href="/Frontend_assets/fancybox/fancybox.css" />
 <div class="top-page">
     <div class="container">
         <div class="row">
@@ -68,7 +70,29 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        $(()=>{
+            $('[data-fancybox]').fancybox({
+                // Options will go here
+                buttons: [
+                    'close'
+                ],
+                wheel: false,
+                transitionEffect: "slide",
+                // thumbs          : false,
+                // hash            : false,
+                loop: true,
+                // keyboard        : true,
+                toolbar: false,
+                // animationEffect : false,
+                // arrows          : true,
+                clickContent: false
+            });
+        })
+    </script>
+}

@@ -1,0 +1,119 @@
+﻿@{
+    ViewData["Title"] = "Add Contact";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+@model IEnumerable<Lighting.Models.InputFilterModels.Download.Output_DownloadVM>
+
+<div class="container" style="width:100%;">
+    <div class="row d-flex justify-content-between mb-3">
+        <div class="col  d-flex justify-content-center">
+            <a href="@Url.Action("CATALOGUE_Page","ManageDownload")" class="btn btn-primary rounded-2">
+                ดูงานทั้งหมด / View All Job
+            </a>
+        </div>
+        <div class="col  d-flex justify-content-center">
+            <a href="@Url.Action("Add_Download_Page","ManageDownload")" class="btn btn-primary rounded-2">
+                เพิ่มดาวโหลด/ Add Download
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <table class="table mt-3">
+            <thead>
+                <tr style="border-top:1px solid black;border-bottom:1px solid black;">
+                    <th scope="col">#</th>
+                    <th scope="col">ประเภทการดาวน์โหลด/Dowload Type</th>
+                    <th scope="col">ชื่อหัวข้อดาวน์โหลด/Download Title</th>
+                    <th scope="col">ดาวโหลดไฟล์/Dowload File</th>
+                    <th scope="col" class="text-center">จัดการ/Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var download in Model)
+                {
+                    <tr id="@download.Id">
+                        <th scope="row">@download.Id</th>
+                        <td>@download.DownloadType</td>
+                        <td>@download.Name_TH/@download.Name_EN</td>
+                        <td><a href="/ManageDownload/Download?path_and_name=@download.File" target="_blank" class="btn btn-primary">โหลด/download</a></td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-warning" onclick="editById(@download.Id)">
+                                <i class="bi bi-pencil-square"></i>แก้ไข/edit
+                            </button>
+                            <button type="button" class="btn btn-danger" style="margin-left: 15px;" onclick="deleteRowById(@download.Id)">
+                                <i class="bi bi-trash-fill"></i>ลบ/delete
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+
+
+        function editById(id) {
+            window.location.href = "/ManageDownload/Edit_Page?id=" + id;
+        }
+
+        function deleteRowById(id) {
+
+            Swal.fire({
+                icon: 'warning',
+                title: "คุณแน่ใจว่าต้องการลบ?",
+                text: "",
+                showConfirmButton: true,
+            }).then((confirm) => {
+                if (confirm.isConfirmed) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/ManageDownload/DeleteById?id=' + id,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        beforeSend: function () {
+                            Swal.fire('Please wait')
+                            Swal.showLoading()
+                        },
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then(() => {
+
+                                    $("#" + id).remove();
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+                } else {
+
+                }
+            });
+        }
+
+    </script>
+}

@@ -1,0 +1,122 @@
+﻿@{
+    ViewData["Title"] = "News Detail";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var lang = Context.Request.Cookies["lang"];
+}
+@model Lighting.Models.InputFilterModels.News.Output_NewsVm
+
+<div class="top-page">
+    <div class="container">
+        <div class="row">
+            <div class="col">NEWS</div>
+        </div>
+    </div>
+</div>
+<!---------- NEWS :: DETAIL ---------->
+<div class="content-padding foot-pad">
+    <div class="container-fluid">
+        <div class="wrap-pad">
+            <div class="row justify-content-center">
+                <div class="col-xl-10 col-lg-11 col-md-11 col-12">
+                    <div class="news-page">
+                        <div class="row">
+                            <div class="col">
+                                @if (lang == "EN")
+                                {
+                                    <h4>@Model.Title_EN</h4>
+                                    <div class="news-date">@Model.CreateDate_EN</div>
+                                }
+                                else
+                                {
+                                    <h4>@Model.Title_TH</h4>
+                                    <div class="news-date">@Model.CreateDate_TH</div>
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="img-width"><img src="~/@Model.TitleImage"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="txt-content indent">
+                                    @if (lang == "EN")
+                                    {
+                                        @Html.Raw(Model.Content_EN)
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw(Model.Content_TH)
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h6>Photo Album</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <ul class="news-gallery">
+                                    @foreach (var path_img in Model.ImgList)
+                                    {
+                                        <li><a data-fancybox="gallery" href="~/@path_img"><div class="img-width"><img src="~/@path_img"></div></a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="doubleBD"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="content-center">
+                                    <a class="buttonB" href="@Url.Action("index","News")"><i class="fas fa-long-arrow-alt-left"></i>Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="scrolltop" style="display: block;">
+    <div class="scroll icon"><i class="fas fa-chevron-up"></i></div>
+</div>
+
+
+
+@section Scripts{
+    <script>
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 500) {
+                $('.scrolltop:hidden').stop(true, true).fadeIn();
+            } else {
+                $('.scrolltop').stop(true, true).fadeOut();
+            }
+        });
+        $(function () { $(".scroll").click(function () { $("html,body").animate({ scrollTop: $(".thetop").offset().top }, "1000"); return false }) })
+
+        // collapse //
+        $(document).ready(function () {
+            $('.collapse.in').prev('.panel-heading').addClass('active');
+            $('#foot-accordion')
+                .on('show.bs.collapse', function (a) {
+                    $(a.target).prev('.panel-heading').addClass('active');
+                })
+                .on('hide.bs.collapse', function (a) {
+                    $(a.target).prev('.panel-heading').removeClass('active');
+                });
+        });
+
+    </script>
+}

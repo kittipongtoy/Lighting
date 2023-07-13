@@ -1,0 +1,203 @@
+﻿@{
+    ViewData["Title"] = "Manage News";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+@model IEnumerable<Lighting.Models.InputFilterModels.Contact.Output_ContactVM>
+
+<div class="container" style="width:100%;">
+    <div class="row d-flex justify-content-between mb-3">
+        <div class="col  d-flex justify-content-center">
+            <a href="@Url.Action("index","ManageContact")" class="btn btn-primary rounded-2">
+                ดูคอนแทคทั้งหมด / View All Contact
+            </a>
+        </div>
+        <div class="col  d-flex justify-content-center">
+            <a href="@Url.Action("Add_Contact_Page","ManageContact")" class="btn btn-primary rounded-2">
+                เพิ่มคอนแทค/ Add Contact
+            </a>
+        </div>
+    </div>
+
+    <div class="row bg-secondary" style="height:3rem;">
+        <div class="col-4 bg-primary d-flex justify-content-center align-items-center h3" style="user-select:none;height:100%;" id="showroom_btn" onclick="clickSelect_ShowRoom()">
+            โชว์รูม/SHOWROOM
+        </div>
+        <div class="col-4   d-flex justify-content-center align-items-center h3" style="user-select:none;height:100%;" id="factory_warehouse_btn" onclick="clickSelect_FactoryAndWareHouse()">
+            โรงงานและโกดัง/FACTORY&WAREHOUSE
+        </div>
+        <div class="col-4   d-flex justify-content-center align-items-center h3" style="user-select:none;height:100%;" id="oversea_btn" onclick="clickSelect_OverSeaOffice()">
+            ออฟฟิศต่างประเทศ/OVERSEA OFFICES
+        </div>
+    </div>
+
+
+    <!--container contact-->
+    <div class="row mt-5 " style="display:block;padding:2rem;" id="showroom_container">
+        <table class="table table-borderless" style="width:100%;">
+            <thead>
+                <tr style="border-top:1px solid black;border-bottom:1px solid black">
+                    <th scope="col">#</th>
+                    <th scope="col">ชื่อสถานที่/Place Name</th>
+                    <th scope="col">ตำแหน่งที่อยู๋/Location</th>
+                    <th scope="col" class="text-center">จัดการ/Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contact in Model.Where(contact => contact.ContactType == "SHOWROOM"))
+                {
+                    <tr id="@contact.Id">
+                        <th scope="row">@contact.Id</th>
+                        <td>@contact.PlaceName_TH/@contact.PlaceName_EN</td>
+                        <td>@contact.Location_TH/@contact.Location_EN</td>
+                        <td class="text-center" style=""><button type="button" class="btn btn-warning" onclick="editById(@contact.Id)"><i class="bi bi-pencil-square"></i>แก้ไข/edit</button><button type="button" class="btn btn-danger" style="margin-left: 15px;" onclick="deleteRowById(@contact.Id)"><i class="bi bi-trash-fill"></i>ลบ/delete</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="row mt-5 " style="display:none;padding:2rem;" id="factory_and_warehouse_container">
+        <table class="table table-borderless" style="width:100%;">
+
+            <thead>
+                <tr style="border-top:1px solid black;border-bottom:1px solid black">
+                    <th scope="col">#</th>
+                    <th scope="col">ชื่อสถานที่/Place Name</th>
+                    <th scope="col">ตำแหน่งที่อยู๋/Location</th>
+                    <th scope="col" class="text-center">จัดการ/Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contact in Model.Where(contact => contact.ContactType == "FACTORY_AND_WAREHOUSE"))
+                {
+                    <tr id="@contact.Id">
+                        <th scope="row">@contact.Id</th>
+                        <td>@contact.PlaceName_TH/@contact.PlaceName_EN</td>
+                        <td>@contact.Location_TH/@contact.Location_EN</td>
+                        <td class="text-center" style=""><button type="button" class="btn btn-warning" onclick="editById(@contact.Id)"><i class="bi bi-pencil-square"></i>แก้ไข/edit</button><button type="button" class="btn btn-danger" style="margin-left: 15px;" onclick="deleteRowById(@contact.Id)"><i class="bi bi-trash-fill"></i>ลบ/delete</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="row mt-5 " style="display:none;padding:2rem;" id="oversea_offices_container">
+        <table class="table table-borderless" style="width:100%;">
+            <thead>
+                <tr style="border-top:1px solid black;border-bottom:1px solid black">
+                    <th scope="col">#</th>
+                    <th scope="col">ชื่อสถานที่/Place Name</th>
+                    <th scope="col">ตำแหน่งที่อยู๋/Location</th>
+                    <th scope="col" class="text-center">จัดการ/Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contact in Model.Where(contact => contact.ContactType == "OVERSEA_OFFICES"))
+                {
+                    <tr id="@contact.Id">
+                        <th scope="row">@contact.Id</th>
+                        <td>@contact.PlaceName_TH/@contact.PlaceName_EN</td>
+                        <td>@contact.Location_TH/@contact.Location_EN</td>
+                        <td class="text-center" style=""><button type="button" class="btn btn-warning" onclick="editById(@contact.Id)"><i class="bi bi-pencil-square"></i>แก้ไข/edit</button><button type="button" class="btn btn-danger" style="margin-left: 15px;" onclick="deleteRowById(@contact.Id)"><i class="bi bi-trash-fill"></i>ลบ/delete</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!--end container contact-->
+</div>
+
+
+@section Scripts{
+    <script>
+
+        function clickSelect_FactoryAndWareHouse() {
+
+            $("#showroom_btn").removeClass("bg-primary");
+            $("#factory_warehouse_btn").addClass("bg-primary");
+            $("#oversea_btn").removeClass("bg-primary");
+
+            $("#showroom_container").css("display", "none");
+            $("#factory_and_warehouse_container").css("display", "block");
+            $("#oversea_offices_container").css("display", "none");
+        }
+
+        function clickSelect_OverSeaOffice() {
+
+            $("#showroom_btn").removeClass("bg-primary");
+            $("#factory_warehouse_btn").removeClass("bg-primary");
+            $("#oversea_btn").addClass("bg-primary");
+
+            $("#showroom_container").css("display", "none");
+            $("#factory_and_warehouse_container").css("display", "none");
+            $("#oversea_offices_container").css("display", "block");
+        }
+
+        function clickSelect_ShowRoom() {
+
+            $("#showroom_btn").addClass("bg-primary");
+            $("#factory_warehouse_btn").removeClass("bg-primary");
+            $("#oversea_btn").removeClass("bg-primary");
+
+            $("#showroom_container").css("display", "block");
+            $("#factory_and_warehouse_container").css("display", "none");
+            $("#oversea_offices_container").css("display", "none");
+        }
+
+        function editById(id) {
+            window.location.href = "/ManageContact/Edit_Page?id=" + id;
+        }
+
+        function deleteRowById(id) {
+
+            Swal.fire({
+                icon: 'warning',
+                title: "คุณแน่ใจว่าต้องการลบ?",
+                text: "",
+                showConfirmButton: true,
+            }).then((confirm) => {
+                if (confirm.isConfirmed) {
+
+                    $.ajax({
+                        type: 'GET',
+                        url: '/ManageContact/DeleteById?id=' + id,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        beforeSend: function () {
+                            Swal.fire('Please wait')
+                            Swal.showLoading()
+                        },
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then(() => {
+
+                                    $("#" + id).remove();
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+                } else {
+
+                }
+            });
+        }
+
+    </script>
+}
