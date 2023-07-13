@@ -158,7 +158,6 @@
     <Content Remove="wwwroot\Frontend_assets\js\jquery-3.3.1.slim.min.js" />
     <Content Remove="wwwroot\Frontend_assets\js\jquery-ui.js" />
     <Content Remove="wwwroot\Frontend_assets\js\jquery.min.js" />
-    <Content Remove="wwwroot\Frontend_assets\js\popper.min.js" />
     <Content Remove="wwwroot\Frontend_assets\OwlCarousel\owl.carousel.min.css" />
     <Content Remove="wwwroot\Frontend_assets\OwlCarousel\owl.carousel.min.js" />
     <Content Remove="wwwroot\Frontend_assets\OwlCarousel\owl.theme.default.min.css" />
@@ -430,14 +429,12 @@
     <None Include="wwwroot\Frontend_assets\js\jquery-3.3.1.slim.min.js" />
     <None Include="wwwroot\Frontend_assets\js\jquery-ui.js" />
     <None Include="wwwroot\Frontend_assets\js\jquery.min.js" />
-    <None Include="wwwroot\Frontend_assets\js\popper.min.js" />
     <None Include="wwwroot\Frontend_assets\OwlCarousel\owl.carousel.min.css" />
     <None Include="wwwroot\Frontend_assets\OwlCarousel\owl.carousel.min.js" />
     <None Include="wwwroot\Frontend_assets\OwlCarousel\owl.theme.default.min.css" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\upload_file\CorporateGovernanceFile\" />
     <Folder Include="wwwroot\upload_file\BusinessEthics\" />
     <Folder Include="wwwroot\upload_file\CRSpolicy\" />
@@ -474,6 +471,8 @@
     <Folder Include="wwwroot\upload_file\SH_GeneralMeeting\" />
     <Folder Include="wwwroot\upload_image\IR_Contact\" />
     <Folder Include="wwwroot\upload_image\IR_NewRoom\" />
+    <Folder Include="wwwroot\upload_image\contact\" />
+    <Folder Include="wwwroot\upload_image\news\" />
     <Folder Include="wwwroot\upload_image\SH_IR_financial_hilight\" />
     <Folder Include="wwwroot\upload_image\SH_annualReport\" />
     <Folder Include="wwwroot\upload_image\SH_GeneralMeeting\" />

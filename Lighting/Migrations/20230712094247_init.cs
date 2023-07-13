@@ -5,10 +5,36 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Lighting.Migrations
 {
-    public partial class xx : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ApplyJobs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PositionName_TH = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PositionName_EN = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date_TH = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date_EN = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WorkPlace_TH = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WorkPlace_EN = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Respondsibility_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Respondsibility_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Qualification_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Qualification_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplyJobs", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -161,6 +187,30 @@ namespace Lighting.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Contacts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ContactType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PlaceName_TH = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PlaceName_EN = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Location_TH = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Location_EN = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CellPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TelePhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OfficePhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GoogleMaps_Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    YouTube_Url = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contacts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CorporateGovernance",
                 columns: table => new
                 {
@@ -213,6 +263,22 @@ namespace Lighting.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CorporateGovernance_File", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Downloads",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DownloadType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name_EN = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name_TH = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    File_Path = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Downloads", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -693,6 +759,25 @@ namespace Lighting.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_M_message_chairman", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "News",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateDate_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateDate_EN = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_News", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -1199,6 +1284,50 @@ namespace Lighting.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SH_annual_ReportData", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShareHolder",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    nameTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    nameTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    amountTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    amountTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    percentTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    percentTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShareHolder", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShareHolder_DataDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nameTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    nameENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    amount = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    percentPerAmount = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShareHolder_DataDetails", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -1801,27 +1930,6 @@ namespace Lighting.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SH_IR_Report_Meeting_DataDetails",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    titleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    titleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    file_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    file_name_ENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    active_status = table.Column<int>(type: "int", nullable: true),
-                    year = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    reportMeeting_id = table.Column<int>(type: "int", nullable: true),
-                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SH_IR_Report_Meeting_DataDetails", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SH_IR_Report_MeetingData",
                 columns: table => new
                 {
@@ -1840,47 +1948,24 @@ namespace Lighting.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShareHolder",
+                name: "SH_IR_Report_Meeting_DataDetails",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    detailsTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    detailsTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    detailsTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    detailsENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    nameTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    nameTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    amountTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    amountTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    percentTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    percentTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    file_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    file_name_ENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    active_status = table.Column<int>(type: "int", nullable: true),
+                    year = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    reportMeeting_id = table.Column<int>(type: "int", nullable: true),
                     created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
                     updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShareHolder", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ShareHolder_DataDetails",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    nameTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    nameENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    amount = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    percentPerAmount = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShareHolder_DataDetails", x => x.Id);
+                    table.PrimaryKey("PK_SH_IR_Report_Meeting_DataDetails", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -2007,17 +2092,17 @@ namespace Lighting.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NameThai", "NormalizedName", "created_at", "updated_at" },
-                values: new object[] { "a5a00998-f58e-49ad-8cd6-0093c539e8aa", "042ee99e-6436-495e-a514-1735ca4bb8ff", "Admin", "Admin", "Admin", new DateTime(2023, 6, 26, 6, 16, 5, 104, DateTimeKind.Utc).AddTicks(1798), new DateTime(2023, 6, 26, 6, 16, 5, 104, DateTimeKind.Utc).AddTicks(1810) });
+                values: new object[] { "81a7550e-4226-4f2b-9a41-57a8ae9eeaf8", "394abd93-77a2-432d-8338-bddf6b459c97", "Admin", "Admin", "Admin", new DateTime(2023, 7, 12, 9, 42, 47, 491, DateTimeKind.Utc).AddTicks(4555), new DateTime(2023, 7, 12, 9, 42, 47, 491, DateTimeKind.Utc).AddTicks(4558) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ApplicationFile", "ConcurrencyStamp", "Email", "EmailConfirmed", "EmployeeCode", "EmployeeCodeInt", "Firstname", "GuarantorIdentificationCardFile", "Isactive", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePath", "ReceptionistFile", "SecurityStamp", "TwoFactorEnabled", "UserName", "created_at", "updated_at" },
-                values: new object[] { "e17f5d21-466e-4cff-8922-180a953e4044", 0, null, null, "41999b78-b421-4498-b9d3-57bd52bfeecd", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEO0/lW43CYIReKv8cecKIIunKCTboSC5RrDnjJ/X3dJI41vGzeFcsR7+SPEu4xyy4Q==", null, false, null, null, "6210bb62-9e68-4638-8c44-95f4a1748e03", false, "Admin@Lighting.com", null, null });
+                values: new object[] { "53a710e0-ba5f-40dc-b6b7-a018fb21b165", 0, null, null, "55a1b0d0-d7f1-46d5-ab56-3da3c501c198", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEIlOtSOqOizxe/5RCMaULDWvC5ZjF+61mdW85gCO1D892wnKPnKAlbY7fV4x/GgoLQ==", null, false, null, null, "3ce6a690-e19d-4151-91b0-9d6e4b3dc7d4", false, "Admin@Lighting.com", null, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "a5a00998-f58e-49ad-8cd6-0093c539e8aa", "e17f5d21-466e-4cff-8922-180a953e4044" });
+                values: new object[] { "81a7550e-4226-4f2b-9a41-57a8ae9eeaf8", "53a710e0-ba5f-40dc-b6b7-a018fb21b165" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -2062,6 +2147,9 @@ namespace Lighting.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ApplyJobs");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -2089,6 +2177,9 @@ namespace Lighting.Migrations
                 name: "Companyprofile");
 
             migrationBuilder.DropTable(
+                name: "Contacts");
+
+            migrationBuilder.DropTable(
                 name: "CorporateGovernance");
 
             migrationBuilder.DropTable(
@@ -2096,6 +2187,9 @@ namespace Lighting.Migrations
 
             migrationBuilder.DropTable(
                 name: "CorporateGovernance_File");
+
+            migrationBuilder.DropTable(
+                name: "Downloads");
 
             migrationBuilder.DropTable(
                 name: "Import_Info_ShareHolder");
@@ -2159,6 +2253,9 @@ namespace Lighting.Migrations
 
             migrationBuilder.DropTable(
                 name: "M_message_chairman");
+
+            migrationBuilder.DropTable(
+                name: "News");
 
             migrationBuilder.DropTable(
                 name: "O_Anti_fraud");
@@ -2245,6 +2342,12 @@ namespace Lighting.Migrations
                 name: "SH_annual_ReportData");
 
             migrationBuilder.DropTable(
+                name: "ShareHolder");
+
+            migrationBuilder.DropTable(
+                name: "ShareHolder_DataDetails");
+
+            migrationBuilder.DropTable(
                 name: "SH_dividen");
 
             migrationBuilder.DropTable(
@@ -2329,16 +2432,10 @@ namespace Lighting.Migrations
                 name: "SH_IR_Report_Meeting");
 
             migrationBuilder.DropTable(
-                name: "SH_IR_Report_Meeting_DataDetails");
-
-            migrationBuilder.DropTable(
                 name: "SH_IR_Report_MeetingData");
 
             migrationBuilder.DropTable(
-                name: "ShareHolder");
-
-            migrationBuilder.DropTable(
-                name: "ShareHolder_DataDetails");
+                name: "SH_IR_Report_Meeting_DataDetails");
 
             migrationBuilder.DropTable(
                 name: "Sustainability_Report");

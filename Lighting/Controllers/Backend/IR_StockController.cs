@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Lighting.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lighting.Controllers.Backend
@@ -6,7 +7,12 @@ namespace Lighting.Controllers.Backend
     [Authorize]
     public class IR_StockController : Controller
 	{
-		public IActionResult IR_Stock_Quote_Index()
+		private readonly LightingContext _db;
+        public IR_StockController(LightingContext db)
+        {
+            _db = db;
+        }
+        public IActionResult IR_Stock_Quote_Index()
 		{
 			return View();
 		}

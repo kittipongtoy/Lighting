@@ -1,0 +1,210 @@
+﻿@{
+    ViewData["Title"] = "Add News";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row p-1">
+        <div class="col-12">
+
+            <!--title-->
+            <div class="form-group mt-2 p-1">
+                <label class="h4">หัวข้อ (ภาษาไทย)</label>
+                <input type="text" class="form-control" id="title_th" placeholder="กรอกหัวข้อ">
+            </div>
+            <div class="form-group mt-3 p-1">
+                <label class="h4"> Title (English)</label>
+                <input type="text" class="form-control" id="title_en" placeholder="Enter Title Englist">
+            </div>
+            <!--end title-->
+            <!--create date-->
+            <div class="form-group mt-2 p-1">
+                <label class="h4">วันที่ (ภาษาไทย)</label>
+                <input type="text" class="form-control" id="date_th" placeholder="01 ม.ค. 2566">
+            </div>
+            <div class="form-group mt-3 p-1">
+                <label class="h4">Date (English)</label>
+                <input type="text" class="form-control" id="date_en" placeholder="01 JAN 2023">
+            </div>
+            <!--create date-->
+            <!--content-->
+            <div class="form-group mt-3 p-1">
+                <label class="h4">คอนเทนต์ (ภาษาไทย)</label>
+                <textarea id="Content_TH"></textarea>
+            </div>
+            <div class="form-group mt-3 p-1">
+                <label class="h4">  Content (English)</label>
+                <textarea id="Content_EN"></textarea>
+            </div>
+            <!--end content-->
+            <!--file-->
+
+            <div class="custom-file mt-3 p-1" style="border:1px solid black;">
+                <img id="preview_show_img" class="mt-3" style="width:200px;height:200px;display:none;" /> <!--img preview-->
+                <br />
+                <br />
+                <input type="file" class="custom-file-input" id="file_title" accept="image/png, image/gif, image/jpeg">
+                <label class="custom-file-label h4">เลือกไฟล์รูป หัวข้อ/title image</label>
+            </div>
+
+            <!--img preview-->
+            <div class="custom-file mt-3 p-1" style="border:1px solid black;">
+                <div class="d-flex justify-content-start flex-wrap mt-3" id="preview_sub_img">
+                </div>
+
+                <input type="file" class="custom-file-input" id="file_sub_img" accept="image/png, image/gif, image/jpeg" multiple>
+                <label class="custom-file-label h4">เลือกไฟล์ รูปประกอบ/sub image</label>
+            </div>
+            <!--end file-->
+            <center style="display:flex;justify-content:space-between;margin:3rem;">
+                <button onclick="submit_form()" class="btn btn-primary">บันทึก/save</button>
+                <a href="@Url.Action("Manage_News_page","news")" class="btn bg-info">กลับ/back</a>
+            </center>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        var editorTH;
+        var editorEN;
+        ClassicEditor
+            .create(document.querySelector('#Content_TH'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                editorTH = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#Content_EN'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                editorEN = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        var file_title;
+        var files_sub_img;
+
+        $(document).ready(function () {
+            $('#file_title').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    file_title = e.target.files[0];
+                    $('#preview_show_img').attr('src', await blobToBase64DataURL(file_title)).css("display", "block");
+                }
+            });
+            $('#file_sub_img').change(async function (e) {
+                files_sub_img = null;
+                files_sub_img = e.target.files;
+                if (files_sub_img.length > 0) {
+                    let inner_html_img = "";
+                    let id_img = 0;
+                    for (file of files_sub_img) {
+                        inner_html_img += '<div class="position-relative m-3" style="width:200px;height:200px;" id="preview_img_id' + id_img + '" >';
+                        inner_html_img += '<img class=" postion-absolute" style="width:100%;height:100%;" src="' + await blobToBase64DataURL(file) + '" />';
+                        inner_html_img += '<div class="position-absolute bg-dark text-danger d-flex justify-content-center" style="top:0;right:0;width:3rem;height:3rem;font-size:2rem;text-align: center;" onClick="delete_sub_img(' + id_img + ')">&times;</div>';
+                        inner_html_img += '</div>';
+                        id_img++;
+                    }
+                    $('#preview_sub_img').html(inner_html_img);
+                }
+            });
+        });
+
+        function delete_sub_img(id) {
+            let new_img = [];
+            let index = 0;
+            for (const file of files_sub_img) {
+                if (index !== id) {
+                    new_img.push(file);
+                }
+                index++;
+            }
+            files_sub_img = new_img;
+            console.log(files_sub_img);
+            $('#preview_sub_img').parent().find('#preview_img_id' + id).remove();
+        }
+
+        const blobToBase64DataURL = blob => new Promise(
+            resolvePromise => {
+                const reader = new FileReader();
+                reader.onload = () => resolvePromise(reader.result);
+                reader.readAsDataURL(blob);
+            }
+        );
+
+        function submit_form() {
+
+            const title_th = $("#title_th").val();
+            const title_en = $("#title_en").val();
+
+            const content_th = editorTH.getData();
+            const content_en = editorEN.getData();
+
+            const date_th = $("#date_th").val();
+            const date_en = $("#date_en").val();
+
+            var formData = new FormData();
+            formData.append("Title_TH", title_th);
+            formData.append("Title_EN", title_en);
+            formData.append("Content_TH", content_th);
+            formData.append("Content_EN", content_en);
+            formData.append("TitleImage", file_title);
+
+            formData.append("CreateDate_TH", date_th);
+            formData.append("CreateDate_EN", date_en);
+
+            console.log(files_sub_img);
+            if (files_sub_img != undefined) {
+                for (const file of files_sub_img) {
+                    formData.append("ImgList", file);
+                }
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/News/Add_News',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = "/news/Manage_News_Page";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+
+
+        }
+    </script>
+}

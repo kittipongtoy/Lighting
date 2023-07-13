@@ -1,0 +1,202 @@
+﻿@{
+    ViewData["Title"] = "Add Contact";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+@model Lighting.Models.InputFilterModels.Contact.Output_ContactVM
+
+<div class="container">
+    
+    <div class="row">
+        <div class="col-12">
+            <!--contact type-->
+            <div class="form-group p-2">
+                <label class="h4">ประเภท</label>
+                <select class="form-control" id="contact_type">
+                    @if (Model.ContactType == "SHOWROOM")
+                    {
+                        <option value="SHOWROOM" selected="selected" class="h5">โชว์รูม/SHOWROOM</option>
+                    }
+                    else
+                    {
+                        <option value="SHOWROOM" class="h5">โชว์รูม/SHOWROOM</option>
+                    }
+                    @if (Model.ContactType == "FACTORY_AND_WAREHOUSE")
+                    {
+                        <option value="FACTORY_AND_WAREHOUSE" selected="selected" class="h5">โรงงานและโกดัง/FACTORY AND WAREHOUSE</option>
+                    }
+                    else
+                    {
+                        <option value="FACTORY_AND_WAREHOUSE" class="h5">โรงงานและโกดัง/FACTORY AND WAREHOUSE</option>
+                    }
+                    @if (Model.ContactType == "OVERSEA_OFFICES")
+                    {
+                        <option value="OVERSEA_OFFICES" selected="selected" class="h5">ออฟฟิศต่างประเทศ/OVERSEA OFFICES</option>
+                    }
+                    else
+                    {
+                        <option value="OVERSEA_OFFICES" class="h5">ออฟฟิศต่างประเทศ/OVERSEA OFFICES</option>
+                    }
+                </select>
+            </div>
+            <!--end contact type-->
+            <!--place name-->
+            <div class="form-group mt-3 p-2" style="border:1px solid black" id="place">
+                <label class="h4 mt-3">ชื่อสถานที่ (ภาษาไทย)</label>
+                <input type="text " class="form-control" id="place_name_th" placeholder="ชื่อสถานที่ ภาษาไทย" value="@Model.PlaceName_TH">
+                <label class="h4 mt-3">Place Name (English)</label>
+                <input type="text" class="form-control" id="place_name_en" placeholder="Place Name English" value="@Model.PlaceName_EN">
+            </div>
+            <!--end place name-->
+            <!--Location -->
+            <div class="form-group mt-3 p-2" style="border:1px solid black" id="location">
+                <label class="h4 mt-3">ที่อยู่ (ภาษาไทย)</label>
+                <input type="text" class="form-control" id="location_th" placeholder="ที่อยู่ ภาษาไทย" value="@Model.Location_TH">
+                <label class="h4 mt-3">Location (English)</label>
+                <input type="text" class="form-control" id="location_en" placeholder="Location English" value="@Model.Location_EN">
+            </div>
+            <!--end Location -->
+            <!--phone-->
+            <div class="form-group mt-3 p-2">
+                <label class="h4 mt-3">เบอร์โทรศัพท์</label>
+                <input type="text" class="form-control" id="cell_phone" placeholder="เบอร์โทรศัพท์" value="@Model.CellPhone">
+                <label class="h4 mt-3">เบอร์โทรสำนักงาน</label>
+                <input type="text" class="form-control" id="tele_phone" placeholder="เบอร์โทรสำนักงาน" value="@Model.TelePhone">
+                <label class="h4 mt-3">เบอร์โทรออฟฟิส</label>
+                <input type="text" class="form-control" id="office_phone" placeholder="เบอร์โทรออฟฟิส" value="@Model.OfficePhone">
+            </div>
+            <!--endphone-->
+            <!--email and link-->
+            <div class="form-group  p-2">
+                <label class="h4 mt-3">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Email@example.com" value="@Model.Email">
+                <label class="h4 mt-3">Google Map URL</label>
+                <input type="text" class="form-control" id="googlemap" placeholder="https://example.com" value="@Model.GoogleMaps_Url">
+                <label class="h4 mt-3">Youtube URL</label>
+                <input type="text" class="form-control" id="youtube" placeholder="https://youtube.com/example" value="@Model.YouTube_Url">
+            </div>
+            <!--email and link--->
+            <!--fileimage-->
+            <div class="custom-file mt-3 p-1" style="border:1px solid black">
+                @if (Model.ImagePath != null)
+                {
+                    <img style="width:100%;height:100%;" id="preview_show_img" src="@Model.ImagePath" />
+                }
+                else
+                {
+                    <img style="width:100%;height:100%;display:none;" id="preview_show_img" />
+                }
+                <br />
+                <input type="file" class="custom-file-input mt-3" id="file_img" accept="image/png, image/gif, image/jpeg" multiple>
+                <label class="custom-file-label h4">เลือกไฟล์ เปลี่ยนรูป</label>
+            </div>
+            <!--file-->
+            <center style="display:flex;justify-content:space-between;margin:3rem;">
+                <button type="button" class="btn btn-primary " onclick="submit()">บันทึก/save</button>
+                <a href="@Url.Action("manage_contact_page","ManageContact")" class="btn bg-info" >กลับ/back</a>
+            </center>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        var image_file;
+        $(document).ready(function () {
+            $('#file_img').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    image_file = e.target.files[0];
+                    $('#preview_show_img').attr('src', await blobToBase64DataURL(image_file)).css("display", "block");
+                }
+            });
+        });
+
+
+        const blobToBase64DataURL = blob => new Promise(
+            resolvePromise => {
+                const reader = new FileReader();
+                reader.onload = () => resolvePromise(reader.result);
+                reader.readAsDataURL(blob);
+            }
+        );
+
+        function submit() {
+
+            let contact_type = $("#contact_type").val();
+
+            let place_name_th = $("#place_name_th").val();
+            let place_name_en = $("#place_name_en").val();
+
+            let location_th = $("#location_th").val();
+            let location_en = $("#location_en").val();
+
+            let cell_phone = $("#cell_phone").val();
+            let tele_phone = $("#tele_phone").val();
+            let office_phone = $("#office_phone").val();
+
+            let email = $("#email").val();
+            let google_map = $("#googlemap").val();
+            let youtube = $("#youtube").val();
+
+            let formData = new FormData();
+            formData.append("ContactType", contact_type);
+            formData.append("PlaceName_TH", place_name_th);
+            formData.append("PlaceName_EN", place_name_en);
+            formData.append("Location_TH", location_th);
+            formData.append("Location_EN", location_en);
+            formData.append("CellPhone", cell_phone);
+            formData.append("TelePhone", tele_phone);
+            formData.append("OfficePhone", office_phone);
+            if (image_file != undefined) {
+                formData.append("Image", image_file);
+            }
+
+            formData.append("Email", email);
+            formData.append("GoogleMaps_Url", google_map);
+            formData.append("YouTube_Url", youtube);
+
+            $.ajax({
+                type: 'POST',
+                url: '/ManageContact/Edit?id=' + "@Model.Id",
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = "/ManageContact/Manage_Contact_Page";
+                        });
+                    }
+                    else {
+                        $("#place").css('border-color', "red");
+                        $("#location").css('border-color', "red");
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+
+                    }
+                }, error: function (e) {
+                    $("#place").css('border-color', "red");
+                    $("#location").css('border-color', "red");
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+    </script>
+            }
