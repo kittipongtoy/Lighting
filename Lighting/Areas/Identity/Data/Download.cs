@@ -6,7 +6,6 @@
         public string DownloadType { get; set; }
         public string Name_EN { get; set; }
         public string Name_TH { get; set; }
-        public string Image { get; set; }
-        public string File { get; set; }
+        public string File_Path { get; set; }
     }
 }

@@ -4,43 +4,41 @@
 }
 
 <div class="container">
-    <a href="@Url.Action("Manage_Job_page","ManageJob")" class="btn bg-info  mb-1 mt-2 " style="float:right;">กลับ</a><br /><br /><br />
     <div class="row p-1">
         <div class="col-12">
-
             <!--position-->
             <div class="form-group mt-2 p-1">
                 <label class="h4">ชื่อตำแหน่งงาน (ภาษาไทย)</label>
                 <input type="text" class="form-control" id="job_name_th" placeholder="ชื่อตำแหน่ง">
             </div>
             <div class="form-group mt-3 p-1">
-                <label class="h4"> Position (English)</label>
+                <label class="h4"> Position Name (English)</label>
                 <input type="text" class="form-control" id="job_name_en" placeholder="Position">
             </div>
             <!--end position-->
             <!-- date-->
             <div class="form-group mt-2 p-1">
-                <label class="h4">วันที่</label>
+                <label class="h4">วันที่ (ภาษาไทย)</label>
                 <input type="text" class="form-control" id="date_th" placeholder="01 ม.ค. 2566">
             </div>
             <div class="form-group mt-3 p-1">
-                <label class="h4">Date</label>
+                <label class="h4">Date (English)</label>
                 <input type="text" class="form-control" id="date_en" placeholder="01 JAN 2023">
             </div>
             <!-- date-->
             <!--Quantity-->
             <div class="form-group mt-3 p-1">
-                <label class="h4">รับจำนวน</label>
+                <label class="h4">รับจำนวน/position </label>
                 <input type="text" class="form-control" id="quantity" placeholder="1">
             </div>
             <!--end Quantity-->
             <!--WorkPlace-->
             <div class="form-group mt-3 p-1">
-                <label class="h4">ที่ทำงาน</label>
+                <label class="h4">ที่ทำงาน (ภาษาไทย)</label>
                 <input type="text" class="form-control" id="workPlace_th" placeholder="ตัวอย่าง ตึก a ถนน a อำเภอ a จังหวัด a">
             </div>
             <div class="form-group mt-3 p-1">
-                <label class="h4">WorkPlace</label>
+                <label class="h4">WorkPlace (English)</label>
                 <input type="text" class="form-control" id="workPlace_en" placeholder="example a tower province ...">
             </div>
             <!--WorkPlace-->
@@ -80,8 +78,11 @@
                 <input type="text" class="form-control" id="phone" placeholder="(+66) 08xxxxxxxx">
             </div>
             <!--end phone number-->
+            <center style="display:flex;justify-content:space-between;margin:3rem;">
+                <button onclick="submit_form()" class="btn btn-primary">บันทึก/save</button>
+                <a href="@Url.Action("Manage_Job_page","ManageJob")" class="btn bg-info">กลับ/back</a>
+            </center>
 
-            <button onclick="submit_form()" class="btn btn-primary mt-3 mb-5">submit</button>
 
         </div>
     </div>

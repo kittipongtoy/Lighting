@@ -1,99 +1,55 @@
 ﻿@{
     ViewData["Title"] = "Add Contact";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
-    var lang = Context.Request.Cookies["lang"];
 }
 @model IEnumerable<Lighting.Models.InputFilterModels.Download.Output_DownloadVM>
 
 <div class="container" style="width:100%;">
     <div class="row d-flex justify-content-between mb-3">
         <div class="col  d-flex justify-content-center">
-            @if (lang == "EN")
-            {
-                <a href="@Url.Action("index","ManageDownload")" class="btn bg-info  rounded-2">
-                    View All Job
-                </a>
-            }
-            else
-            {
-                <a href="@Url.Action("index","ManageDownload")" class="btn btn-primary rounded-2">
-                    ดูงานทั้งหมด
-                </a>
-            }
+            <a href="@Url.Action("CATALOGUE_Page","ManageDownload")" class="btn btn-primary rounded-2">
+                ดูงานทั้งหมด / View All Job
+            </a>
         </div>
         <div class="col  d-flex justify-content-center">
-
-            @if (lang == "EN")
-            {
-                <a href="@Url.Action("Add_Download_Page","ManageDownload")" class="btn btn-primary rounded-2">
-                    Add Download
-                </a>
-            }
-            else
-            {
-                <a href="@Url.Action("Add_Download_Page","ManageDownload")" class="btn btn-primary rounded-2">
-                    เพิ่มดาวโหลด
-                </a>
-            }
-
+            <a href="@Url.Action("Add_Download_Page","ManageDownload")" class="btn btn-primary rounded-2">
+                เพิ่มดาวโหลด/ Add Download
+            </a>
         </div>
     </div>
 
     <div class="row">
-        @if (lang == "EN")
-        {
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Dowload Type</th>
-                        <th scope="col">Download Title</th>
-                        <th scope="col">Dowload File</th>
-                        <th scope="col" class="text-center">Manage</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var download in Model)
-                    {
-                        <tr id="@download.Id">
-                            <th scope="row">@download.Id</th>
-                            <td>@download.DownloadType</td>
-                            <td>@download.Name_EN</td>
-                            <td><a href="ManageDownload/Download?path_and_name=@download.File" target="_blank" class="btn btn-primary">Download File</a></td>
-                            <td class="text-center" style=""><button type="button" class="btn btn-warning" onclick="editById(@download.Id)"><i class="bi bi-pencil-square"></i>แก้ไข</button><button type="button" class="btn btn-danger" style="margin-left: 15px;" onclick="deleteRowById(@download.Id)"><i class="bi bi-trash-fill"></i>ลบ</button></td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">ประเภทการดาวน์โหลด</th>
-                        <th scope="col">ชื่อหัวข้อดาวน์โหลด</th>
-                        <th scope="col">ดาวโหลดไฟล์</th>
-                        <th scope="col" class="text-center">จัดการ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var download in Model)
-                    {
-                        <tr id="@download.Id">
-                            <th scope="row">@download.Id</th>
-                            <td>@download.DownloadType</td>
-                            <td>@download.Name_TH</td>
-                            <td><a href="@download.File" target="_blank" class="btn btn-primary">โหลด</a></td>
-                            <td class="text-center" style=""><button type="button" class="btn btn-warning" onclick="editById(@download.Id)"><i class="bi bi-pencil-square"></i>แก้ไข</button><button type="button" class="btn btn-danger" style="margin-left: 15px;" onclick="deleteRowById(@download.Id)"><i class="bi bi-trash-fill"></i>ลบ</button></td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
 
-        }
-
+        <table class="table mt-3">
+            <thead>
+                <tr style="border-top:1px solid black;border-bottom:1px solid black;">
+                    <th scope="col">#</th>
+                    <th scope="col">ประเภทการดาวน์โหลด/Dowload Type</th>
+                    <th scope="col">ชื่อหัวข้อดาวน์โหลด/Download Title</th>
+                    <th scope="col">ดาวโหลดไฟล์/Dowload File</th>
+                    <th scope="col" class="text-center">จัดการ/Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var download in Model)
+                {
+                    <tr id="@download.Id">
+                        <th scope="row">@download.Id</th>
+                        <td>@download.DownloadType</td>
+                        <td>@download.Name_TH/@download.Name_EN</td>
+                        <td><a href="/ManageDownload/Download?path_and_name=@download.File" target="_blank" class="btn btn-primary">โหลด/download</a></td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-warning" onclick="editById(@download.Id)">
+                                <i class="bi bi-pencil-square"></i>แก้ไข/edit
+                            </button>
+                            <button type="button" class="btn btn-danger" style="margin-left: 15px;" onclick="deleteRowById(@download.Id)">
+                                <i class="bi bi-trash-fill"></i>ลบ/delete
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
 

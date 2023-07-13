@@ -1,12 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Add Contact";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
-    var lang = Context.Request.Cookies["lang"];
 }
 @model Lighting.Models.InputFilterModels.Contact.Output_ContactVM
 
 <div class="container">
-    <a href="@Url.Action("manage_contact_page","ManageContact")" class="btn bg-info  mb-1 mt-2 " style="float:right;">กลับ</a><br /><br /><br />
+    
     <div class="row">
         <div class="col-12">
             <!--contact type-->
@@ -15,27 +14,27 @@
                 <select class="form-control" id="contact_type">
                     @if (Model.ContactType == "SHOWROOM")
                     {
-                        <option value="SHOWROOM" selected="selected" class="h5">โชว์รูม</option>
+                        <option value="SHOWROOM" selected="selected" class="h5">โชว์รูม/SHOWROOM</option>
                     }
                     else
                     {
-                        <option value="SHOWROOM" class="h5">โชว์รูม</option>
+                        <option value="SHOWROOM" class="h5">โชว์รูม/SHOWROOM</option>
                     }
                     @if (Model.ContactType == "FACTORY_AND_WAREHOUSE")
                     {
-                        <option value="FACTORY_AND_WAREHOUSE" selected="selected" class="h5">โรงงานและโกดัง</option>
+                        <option value="FACTORY_AND_WAREHOUSE" selected="selected" class="h5">โรงงานและโกดัง/FACTORY AND WAREHOUSE</option>
                     }
                     else
                     {
-                        <option value="FACTORY_AND_WAREHOUSE" class="h5">โรงงานและโกดัง</option>
+                        <option value="FACTORY_AND_WAREHOUSE" class="h5">โรงงานและโกดัง/FACTORY AND WAREHOUSE</option>
                     }
                     @if (Model.ContactType == "OVERSEA_OFFICES")
                     {
-                        <option value="OVERSEA_OFFICES" selected="selected" class="h5">ออฟฟิศต่างประเทศ</option>
+                        <option value="OVERSEA_OFFICES" selected="selected" class="h5">ออฟฟิศต่างประเทศ/OVERSEA OFFICES</option>
                     }
                     else
                     {
-                        <option value="OVERSEA_OFFICES" class="h5">ออฟฟิศต่างประเทศ</option>
+                        <option value="OVERSEA_OFFICES" class="h5">ออฟฟิศต่างประเทศ/OVERSEA OFFICES</option>
                     }
                 </select>
             </div>
@@ -91,7 +90,11 @@
                 <label class="custom-file-label h4">เลือกไฟล์ เปลี่ยนรูป</label>
             </div>
             <!--file-->
-            <button type="button" class="btn btn-primary mt-3" style="margin-bottom:3rem;" onclick="submit()">บันทึก</button>
+            <center style="display:flex;justify-content:space-between;margin:3rem;">
+                <button type="button" class="btn btn-primary " onclick="submit()">บันทึก/save</button>
+                <a href="@Url.Action("manage_contact_page","ManageContact")" class="btn bg-info" >กลับ/back</a>
+            </center>
+
         </div>
     </div>
 </div>

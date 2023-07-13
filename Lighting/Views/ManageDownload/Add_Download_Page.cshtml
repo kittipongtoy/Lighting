@@ -5,7 +5,6 @@
 }
 
 <div class="container">
-    <a href="@Url.Action("manage_Download_page","ManageDownload")" class="btn bg-info  mb-1 mt-2 " style="float:right;">กลับ</a><br /><br /><br />
     <div class="row">
         <div class="col-12">
             <!--contact type-->
@@ -45,8 +44,10 @@
                 <label class="custom-file-label h4">เลือกไฟล์</label>
             </div>
             <!--file-->
-
-            <button type="button" class="btn btn-primary mt-3" style="margin-bottom:3rem;" onclick="submit()">บันทึก</button>
+            <center style="display:flex;justify-content:space-between;margin:3rem;">
+                <button type="button" class="btn btn-primary" onclick="submit()">บันทึก/save</button>
+                <a href="@Url.Action("manage_Download_page","ManageDownload")" class="btn bg-info" >กลับ/back</a>
+            </center>
         </div>
     </div>
 </div>
@@ -63,7 +64,7 @@
                     $('#preview_show_img').attr('src', await blobToBase64DataURL(image_file)).css("display", "block");
                 }
             });
-            $('#file_download').change(async function (e) {
+            $('#file_download').change( function (e) {
                 if (e.target.files.length === 1) {
                     file_dowload = e.target.files[0];
                 }

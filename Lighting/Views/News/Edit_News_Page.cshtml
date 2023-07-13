@@ -4,7 +4,6 @@
 }
 @model Lighting.Models.InputFilterModels.News.Output_NewsVm
 <div class="container">
-    <a href="@Url.Action("Manage_News_page","news")" class="btn bg-info  mb-1 mt-2 " style="float:right;">กลับ</a><br /><br /><br />
     <div class="row p-1">
         <div class="col-12">
 
@@ -20,11 +19,11 @@
             <!--end title-->
             <!--create date-->
             <div class="form-group mt-2 p-1">
-                <label class="h4">วันที่</label>
+                <label class="h4">วันที่  (ภาษาไทย)</label>
                 <input type="text" class="form-control" id="date_th" value="@Model.CreateDate_TH" placeholder="01 ม.ค. 2566">
             </div>
             <div class="form-group mt-3 p-1">
-                <label class="h4">Date</label>
+                <label class="h4">Date (English)</label>
                 <input type="text" class="form-control" id="date_en" value="@Model.CreateDate_EN" placeholder="01 JAN 2023">
             </div>
             <!--create date-->
@@ -39,29 +38,35 @@
             </div>
             <!--end content-->
             <!--file-->
-            <img id="preview_show_img" class="mt-3" style="width:200px;height:200px;" src="@Model.TitleImage" /> <!--img preview-->
-            <div class="custom-file mt-3 p-1">
+
+            <div class="custom-file mt-3 p-1" style="border:1px solid black;">
+                <img id="preview_show_img" class="mt-3" style="width:200px;height:200px;" src="@Model.TitleImage" /> <!--img preview-->
+                <br />
+                <br />
+                <br />
                 <input type="file" class="custom-file-input" id="file_title" accept="image/png, image/gif, image/jpeg">
-                <label class="custom-file-label h4">เปลี่ยนรูป หัวข้อ</label>
+                <label class="custom-file-label h4">เปลี่ยนรูป หัวข้อ/title image</label>
             </div>
-            <div class="d-flex justify-content-start flex-wrap mt-3" id="preview_sub_img">
-                @for (var index=0; index <  Model.ImgList.Count; index++)
+            <div class="d-flex justify-content-start flex-wrap mt-3" style="border:1px solid black;" id="preview_sub_img">
+                @for (var index = 0; index < Model.ImgList.Count; index++)
                 {
-                    <div class="position-relative m-3" style="width:200px;height:200px;" id='@index' >
-                    <img class=" postion-absolute" style="width:100%;height:100%;" src="@Model.ImgList[index]" />
+                    <div class="position-relative m-3" style="width:200px;height:200px;" id='@index'>
+                        <img class=" postion-absolute" style="width:100%;height:100%;" src="@Model.ImgList[index]" />
                         <div class="position-absolute bg-dark text-danger d-flex justify-content-center" style="top:0;right:0;width:3rem;height:3rem;font-size:2rem;text-align: center;" onClick="delete_img_show_sub(@index,'@Model.ImgList[index]')">&times;</div>
                     </div>
                 }
-            </div> 
-            <!--img preview-->
-            <div class="custom-file mt-3 p-1">
-                <input type="file" class="custom-file-input" id="file_sub_img" accept="image/png, image/gif, image/jpeg" multiple>
-                <label class="custom-file-label h4">เพิ่มรูป รูปประกอบ</label>
+                <div class="custom-file mt-3 p-1">
+                    <input type="file" class="custom-file-input" id="file_sub_img" accept="image/png, image/gif, image/jpeg" multiple>
+                    <label class="custom-file-label h4">เพิ่มรูป รูปประกอบ/sub image</label>
+                </div>
+                <!--end file-->
             </div>
-            <!--end file-->
+            <!--img preview-->
 
-            <button onclick="submit_form()" class="btn btn-primary mt-3 mb-5">submit</button>
-
+            <center style="display:flex;justify-content:space-between;margin:3rem;">
+                <button onclick="submit_form()" class="btn btn-primary">บันทึก/save</button>
+                <a href="@Url.Action("Manage_News_page","news")" class="btn bg-info  ">กลับ/back</a>
+            </center>
         </div>
     </div>
 </div>
@@ -118,7 +123,7 @@
             });
         });
 
-        function delete_img_show_sub(id,path) {
+        function delete_img_show_sub(id, path) {
             var form = new FormData();
             form.append("path", path);
 
@@ -159,7 +164,7 @@
                     console.log(e.inner);
                 }
             });
-            
+
         }
 
         function delete_sub_img(id) {

@@ -6,7 +6,7 @@
 @model Lighting.Models.InputFilterModels.Download.Output_DownloadVM
 
 <div class="container">
-    <a href="@Url.Action("manage_Download_page","ManageDownload")" class="btn bg-info  mb-1 mt-2 " style="float:right;">กลับ</a><br /><br /><br />
+
     <div class="row">
         <div class="col-12">
             <!--contact type-->
@@ -59,7 +59,7 @@
             <!--end contact type-->
             <!-- dowload name-->
             <div class="form-group mt-3 p-2" style="border:1px solid black" id="place">
-                <label class="h4 mt-3">ชื่อการดาวน์โหลด</label>
+                <label class="h4 mt-3">ชื่อการดาวน์โหลด (ภาษาไทย)</label>
                 <input type="text" class="form-control" id="download_name_th" placeholder="ชื่อการดาวน์โหลด" value="@Model.Name_TH">
                 <label class="h4 mt-3">Download Name (English)</label>
                 <input type="text" class="form-control" id="download_name_en" placeholder="Download Name" value="@Model.Name_EN">
@@ -70,19 +70,22 @@
                 <img style="width:100%;height:100%;" id="preview_show_img" src="@Model.Image"/>
                 <br />
                 <input type="file" class="custom-file-input mt-3" id="file_img" accept="image/png, image/gif, image/jpeg">
-                <label class="custom-file-label h4">เปลี่ยน รูป</label>
+                <label class="custom-file-label h4">เปลี่ยน รูป/chanage title image</label>
             </div>
             <!--end file-->
             <!--file download-->
             <div class="custom-file mt-3 p-1">
                 <input type="file" class="custom-file-input mt-3" id="file_download">
-                <label class="custom-file-label h4">เปลี่ยนไฟล์</label>
+                <label class="custom-file-label h4">เปลี่ยนไฟล์/chnage file</label>
             </div>
-            <a href="ManageDownload/Download?path_and_name=@Model.File" target="_blank" class="btn btn-primary h4 mt-3">ดาวน์โหลดไฟล์</a>
+            <a href="ManageDownload/Download?path_and_name=@Model.File" target="_blank" class="btn btn-primary h4 mt-3">ดาวน์โหลดไฟล์/down load file</a>
             <br/>
             <!--file-->
+            <center style="display:flex;justify-content:space-between;margin:3rem;">
+                <button type="button" class="btn btn-primary"  onclick="submit(@Model.Id)">บันทึก/save</button>
+                <a href="@Url.Action("manage_Download_page","ManageDownload")" class="btn bg-info" >กลับ/back</a>
+            </center>
 
-            <button type="button" class="btn btn-primary mt-3" style="margin-bottom:3rem;" onclick="submit(@Model.Id)">บันทึก</button>
         </div>
     </div>
 </div>
@@ -129,23 +132,11 @@
 
             if (image_file != undefined) {
                 formData.append("Image", image_file);
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    text: "กรุณาใส่รูป",
-                });
-                return;
-            }
+            } 
 
             if (file_dowload != undefined) {
                 formData.append("File", file_dowload);
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    text: "กรุณใส่ไฟล์ดาวโหลด",
-                });
-                return;
-            }
+            } 
 
             $.ajax({
                 type: 'POST',

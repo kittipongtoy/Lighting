@@ -5,16 +5,15 @@
 }
 
 <div class="container">
-    <a href="@Url.Action("manage_contact_page","ManageContact")" class="btn bg-info  mb-1 mt-2 " style="float:right;">กลับ</a><br /><br /><br />
     <div class="row">
         <div class="col-12">
             <!--contact type-->
             <div class="form-group p-2">
                 <label class="h4">ประเภท</label>
                 <select class="form-control" id="contact_type">
-                    <option value="SHOWROOM" class="h5">โชว์รูม</option>
-                    <option value="FACTORY_AND_WAREHOUSE" class="h5">โรงงานและโกดัง</option>
-                    <option value="OVERSEA_OFFICES" class="h5">ออฟฟิศต่างประเทศ</option>
+                    <option value="SHOWROOM" class="h5">โชว์รูม/SHOWROOM</option>
+                    <option value="FACTORY_AND_WAREHOUSE" class="h5">โรงงานและโกดัง/FACTORY AND WAREHOUSE</option>
+                    <option value="OVERSEA_OFFICES" class="h5">ออฟฟิศต่างประเทศ/OVERSEA OFFICES</option>
                 </select>
             </div>
             <!--end contact type-->
@@ -63,7 +62,10 @@
                 <label class="custom-file-label h4">เลือกไฟล์ รูป</label>
             </div>
             <!--file-->
-            <button type="button" class="btn btn-primary mt-3" style="margin-bottom:3rem;" onclick="submit()">บันทึก</button>
+            <center style="margin:3rem;display:flex;justify-content:space-between;"> 
+                <button type="button" class="btn btn-primary" onclick="submit()">บันทึก/save</button>
+                <a href="@Url.Action("manage_contact_page","ManageContact")" class="btn bg-info">กลับ/back</a>
+                </center>
         </div>
     </div>
 </div>

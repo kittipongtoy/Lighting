@@ -435,7 +435,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\upload_file\CorporateGovernanceFile\" />
     <Folder Include="wwwroot\upload_file\BusinessEthics\" />
     <Folder Include="wwwroot\upload_file\CRSpolicy\" />
@@ -449,7 +448,6 @@
     <Folder Include="wwwroot\upload_file\Author_executive_board\" />
     <Folder Include="wwwroot\upload_file\Author_secretary\" />
     <Folder Include="wwwroot\upload_file\IR_NewRoom\" />
-    <Folder Include="wwwroot\upload_file\Download\" />
     <Folder Include="wwwroot\upload_file\SH_importantFinancial\" />
     <Folder Include="wwwroot\upload_file\SH_IR_download_financialStatements\" />
     <Folder Include="wwwroot\upload_file\SH_annualReport\" />

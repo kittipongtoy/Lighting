@@ -1,101 +1,56 @@
 ﻿@{
     ViewData["Title"] = "Manage News";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
-    var lang = Context.Request.Cookies["lang"];
 }
 @model IEnumerable<Lighting.Models.InputFilterModels.ApplyJob.Output_ApplyJobVM>
 
 <div class="container" style="width:100%;">
     <div class="row d-flex justify-content-between mb-3">
         <div class="col  d-flex justify-content-center">
-            @if (lang == "EN")
-            {
-                <a href="@Url.Action("index","ManageJob")" class="btn btn-primary rounded-2">
-                    View All Job
-                </a>
-            }
-            else
-            {
-                <a href="@Url.Action("index","ManageJob")" class="btn btn-primary rounded-2">
-                    ดูงานทั้งหมด
-                </a>
-            }
+
+            <a href="@Url.Action("index","ManageJob")" class="btn btn-primary">
+                ดูงานทั้งหมด/View All Job
+            </a>
         </div>
         <div class="col  d-flex justify-content-center">
-
-            @if (lang == "EN")
-            {
-                <a href="@Url.Action("Add_Job_Page","ManageJob")" class="btn btn-primary rounded-2">
-                    Add Job
-                </a>
-            }
-            else
-            {
-                <a href="@Url.Action("Add_Job_Page","ManageJob")" class="btn btn-primary rounded-2">
-                    เพิ่มงาน
-                </a>
-            }
-
+            <a href="@Url.Action("Add_Job_Page","ManageJob")" class="btn btn-primary rounded-2">
+                เพิ่มงาน/Add Job
+            </a>
         </div>
     </div>
-
-
-    <div class="row">
-        @if (lang == "EN")
-        {
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Position Name</th>
-                        <th scope="col">Work Place</th>
-                        <th scope="col">Date</th>
-                        <th scope="col" class="text-center">Manage</th>
+    <div class="row mt-4">
+        <table class="table">
+            <thead>
+                <tr style="border-top:1px solid black;border-bottom:1px solid black">
+                    <th scope="col">#</th>
+                    <th scope="col">ชื่อตำแหน่ง/Position Name</th>
+                    <th scope="col">สถานที่ทำงาน/Work Place</th>
+                    <th scope="col">วันประกาศ/Date</th>
+                    <th scope="col" class="text-center">จัดการ/Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var job in Model)
+                {
+                    <tr id="@job.Id">
+                        <th scope="row">@job.Id</th>
+                        <td>@job.PositionName_TH/@job.PositionName_EN</td>
+                        <td>@job.WorkPlace_TH/@job.WorkPlace_EN</td>
+                        <td>@job.Date_TH &nbsp;/&nbsp;&nbsp; @job.Date_EN</td>
+                        <td class="text-center" style="">
+                            <button type="button" class="btn btn-warning" onclick="editById(@job.Id)">
+                                <i class="bi bi-pencil-square"></i>แก้ไข/edit
+                            </button>
+                            <button type="button" class="btn btn-danger" style="margin-left: 15px;" onclick="deleteRowById(@job.Id)">
+                                <i class="bi bi-trash-fill"></i>ลบ/delete
+                            </button>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var job in Model)
-                    {
-                        <tr id="@job.Id">
-                            <th scope="row">@job.Id</th>
-                            <td>@job.PositionName_EN</td>
-                            <td>@job.WorkPlace_EN</td>
-                            <td>@job.Date_EN</td>
-                            <td class="text-center" style=""><button type="button" class="btn btn-warning" onclick="editById(@job.Id)"><i class="bi bi-pencil-square"></i>แก้ไข</button><button type="button" class="btn btn-danger" style="margin-left: 15px;" onclick="deleteRowById(@job.Id)"><i class="bi bi-trash-fill"></i>ลบ</button></td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">ชื่อตำแหน่ง</th>
-                        <th scope="col">สถานที่ทำงาน</th>
-                        <th scope="col">วันประกาศ</th>
-                        <th scope="col" class="text-center">จัดการ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var job in Model)
-                    {
-                        <tr id="@job.Id">
-                            <th scope="row">@job.Id</th>
-                            <td>@job.PositionName_TH</td>
-                            <td>@job.WorkPlace_TH</td>
-                            <td>@job.Date_TH</td>
-                            <td class="text-center" style=""><button type="button" class="btn btn-warning" onclick="editById(@job.Id)"><i class="bi bi-pencil-square"></i>แก้ไข</button><button type="button" class="btn btn-danger" style="margin-left: 15px;" onclick="deleteRowById(@job.Id)"><i class="bi bi-trash-fill"></i>ลบ</button></td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-
+                }
+            </tbody>
+        </table>
     </div>
- 
+
 </div>
 
 
