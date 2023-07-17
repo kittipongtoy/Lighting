@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Manage Project";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+
+@model IEnumerable<Lighting.Models.InputFilterModels.Product.Output_ProductVM>
+
+<style>
+    .product-menu{
+        display:flex;
+        justify-content:space-between;
+        height:auto;
+        background-color:rgba(0,0,0,0.5);
+        padding:2rem;
+        margin-bottom:2rem;
+    }
+</style>
+
+<div class="container">
+    <div class="product-menu">
+        <a href="@Url.Action("Manage_Model_Page","ManageProduct")" class="btn btn-primary">เพิ่มโมเดล/Add Model</a>
+        <a href="@Url.Action("Manage_Category_Page","ManageProduct")" class="btn btn-primary">เพิ่มหมวดหมู่/Add Category</a>
+    </div>
+    <center> <a href="@Url.Action("Add_Product_Page","ManageProduct")" class="btn bg-success">เพิ่มโปรดัก/Add Product </a> </center>
+    <div class="row mt-5">
+
+        <table class="table mt-3">
+            <thead>
+                <tr style="border-top:1px solid black;border-bottom:1px solid black;">
+                    <th scope="col">#</th>
+                    <th scope="col">รูปปก/Image Preview</th>
+                    <th scope="col">ชื่อรุ่น/Model Name</th>
+                    <th scope="col">ชื่อประเภท/Type Name</th>
+                    <th scope="col">กำลัง/power</th>
+                    <th scope="col" class="text-center">จัดการ/Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 1;
+                }
+                @foreach (var product in Model)
+                {
+                    <tr id="@product.Id">
+                        <th scope="row">@i</th>
+                        <td><img src="@product.Preview_Imamge" style="width:100px;height:100px;" /> </td>
+                        <td>@product.Model</td>
+                        <td>@product.Type_TH / @product.Type_TH</td>
+                        <td>@product.Power</td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Edit_Product_Page","ManageProduct")" type="button" class="btn btn-warning" >
+                                <i class="bi bi-pencil-square"></i>แก้ไข/edit
+                            </a>
+                            <button type="button" class="btn btn-danger" onclick="deleteRowById(@product.Id)">
+                                <i class="bi bi-trash-fill"></i>ลบ/delete
+                            </button>
+                        </td>
+                        @{
+                             i = i+1;
+                        }
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>

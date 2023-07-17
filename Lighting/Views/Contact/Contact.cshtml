@@ -1,7 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Contact";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var lang = Context.Request.Cookies["lang"];
 }
+@model IEnumerable<Lighting.Models.InputFilterModels.Contact.Output_ContactVM>
 
 <div class="top-page">
     <div class="container">
@@ -11,6 +13,8 @@
     </div>
 </div>
 <!---------- CONTACT US ---------->
+
+
 <div class="content-padding contact-page" id="contact">
     <div class="container">
         <div class="head-office">
@@ -69,8 +73,8 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-5 col-12">
-                    <a class="img-width hover-img" data-fancybox href="~/Frontend_assets/images/contact/map-headoffice.jpg">
-                        <img src="~/Frontend_assets/images/contact/map-headoffice.jpg">
+                    <a class="img-width hover-img" data-fancybox="" href="/Frontend_assets/images/contact/map-headoffice.jpg">
+                        <img src="/Frontend_assets/images/contact/map-headoffice.jpg">
                     </a>
                 </div>
             </div>
@@ -89,7 +93,7 @@
                     <li rel="2">
                         <a href="javascript:void(0)">
                             <div class="cate-txtBox">
-                                <div>FACTORY & WAREHOUSE</div>
+                                <div>FACTORY &amp; WAREHOUSE</div>
                             </div>
                         </a>
                     </li>
@@ -103,405 +107,554 @@
                 </ul>
             </div>
         </div>
+
+
         <div class="row justify-content-center">
             <div class="col-lg-12 col-md-12 col-12">
                 <div class="display-group">
                     <!---------- 01 SHOWROOM ---------->
-                    <div class="display-info" rel="1">
+                    <div class="display-info" rel="1" id="showroom_btn">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5>L&E : Lighting Solution Center</h5>
+                            @if (lang == "EN")
+                            {
+                                @foreach (var contact in Model.Where(contact => contact.ContactType == "SHOWROOM"))
+                                {
+                                    <div class="col-lg-6 col-md-6 col-12 mt-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5>@contact.PlaceName_EN</h5>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <ul class="contact-info">
+                                                    <li class="address">
+                                                        <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                        <p>@contact.Location_EN</p>
+                                                    </li>
+
+                                                    @if (contact.CellPhone != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                                            <p>@contact.CellPhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.TelePhone != null)
+                                                    {
+
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
+                                                            <p>@contact.TelePhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.OfficePhone != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-fax"></i></div>
+                                                            <p>@contact.OfficePhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.Email != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                                            <p><a href="mailto:@contact.Email">@contact.Email</a></p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.GoogleMaps_Url != null)
+                                                    {
+                                                        <li class="map">
+                                                            <a class="buttonB" href="@contact.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                                            @if (contact.YouTube_Url != null)
+                                                            {
+                                                                <a class="buttonBD" href="@contact.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                            }
+                                                        </li>
+                                                    }
+
+                                                </ul>
+                                                @if (contact.ImagePath != null)
+                                                {
+                                                    <div class="row d-none d-md-block mt-3">
+                                                        <div class="col">
+                                                            <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
+                                                                <img src="~/@contact.ImagePath">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <!-- MAP :: FOR MOBILE -->
+                                        @if (contact.ImagePath != null)
+                                        {
+                                            <div class="row d-block d-md-none">
+                                                <div class="col">
+                                                    <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
+                                                        <img src="~/@contact.ImagePath">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <ul class="contact-info">
-                                            <li class="address">
-                                                <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                <p>9, Pakin Building Ratchadapisek RoadDindaeng, Bangkok, 10400</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                <p>(+66)246-1164-66</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-fax"></i></div>
-                                                <p>(+66)246-1161</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                <p><a href="mailto:thitipongs@lighting.co.th">thitipongs@lighting.co.th</a></p>
-                                            </li>
-                                            <li class="map">
-                                                <a class="buttonB" href="https://goo.gl/maps/eGMjWxSzSGQHfHJF6" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                            </li>
-                                        </ul>
+                                }
+                            }
+                            else
+                            {
+                                @foreach (var contact in Model.Where(contact => contact.ContactType == "SHOWROOM"))
+                                {
+                                    <div class="col-lg-6 col-md-6 col-12 mt-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5>@contact.PlaceName_TH</h5>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <ul class="contact-info">
+                                                    <li class="address">
+                                                        <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                        <p>@contact.Location_TH</p>
+                                                    </li>
+
+                                                    @if (contact.CellPhone != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                                            <p>@contact.CellPhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.TelePhone != null)
+                                                    {
+
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
+                                                            <p>@contact.TelePhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.OfficePhone != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-fax"></i></div>
+                                                            <p>@contact.OfficePhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.Email != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                                            <p><a href="mailto:@contact.Email">@contact.Email</a></p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.GoogleMaps_Url != null)
+                                                    {
+                                                        <li class="map">
+                                                            <a class="buttonB" href="@contact.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                                            @if (contact.YouTube_Url != null)
+                                                            {
+                                                                <a class="buttonBD" href="@contact.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                            }
+                                                        </li>
+                                                    }
+
+                                                </ul>
+                                                @if (contact.ImagePath != null)
+                                                {
+                                                    <div class="row d-none d-md-block mt-3">
+                                                        <div class="col">
+                                                            <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
+                                                                <img src="~/@contact.ImagePath">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <!-- MAP :: FOR MOBILE -->
+                                        @if (contact.ImagePath != null)
+                                        {
+                                            <div class="row d-block d-md-none">
+                                                <div class="col">
+                                                    <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
+                                                        <img src="~/@contact.ImagePath">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
-                                </div>
-                                <!-- MAP :: FOR MOBILE -->
-                                <div class="row d-block d-md-none">
-                                    <div class="col">
-                                        <a class="img-width imgBD hover-img" data-fancybox href="~/Frontend_assets/images/contact/map-rachada.jpg">
-                                            <img src="~/Frontend_assets/images/contact/map-rachada.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5>Rachapruek Branch</h5>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <ul class="contact-info">
-                                            <li class="address">
-                                                <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                <p>3rd Floor The Crystal SB Rachapruek</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                <p>(+66)2-118-7501</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                <p><a href="mailto:nutawut.sa@lighting.co.th">nutawut.sa@lighting.co.th</a></p>
-                                            </li>
-                                            <li class="map">
-                                                <a class="buttonB" href="https://goo.gl/maps/BN3gt1vG65YhitRa9" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                                <a class="buttonBD" href="https://www.youtube.com/watch?v=GeZV-iJ208U" target="_blank"><i class="fab fa-youtube"></i>YouTube</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- MAP :: FOR MOBILE -->
-                                <div class="row d-block d-md-none">
-                                    <div class="col">
-                                        <a class="img-width imgBD hover-img" data-fancybox href="~/Frontend_assets/images/contact/map-ratchapruk.jpg">
-                                            <img src="~/Frontend_assets/images/contact/map-ratchapruk.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- MAP :: FOR PC -->
-                        <div class="d-none d-md-block">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <a class="img-width imgBD hover-img" data-fancybox href="~/Frontend_assets/images/contact/map-rachada.jpg">
-                                        <img src="~/Frontend_assets/images/contact/map-rachada.jpg">
-                                    </a>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <a class="img-width imgBD hover-img" data-fancybox href="~/Frontend_assets/images/contact/map-ratchapruk.jpg">
-                                        <img src="~/Frontend_assets/images/contact/map-ratchapruk.jpg">
-                                    </a>
-                                </div>
-                            </div>
+                                }
+                            }
                         </div>
                     </div>
-
                     <!---------- 02 FACTORY & WAREHOUSE ---------->
-                    <div class="display-info" rel="2">
+                    <div class="display-info" rel="2" id="factory_warehouse_btn">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5>L&E Manufacturing Company Limited. (LEM)</h5>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <ul class="contact-info">
-                                            <li class="address">
-                                                <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                <p>85/3 Soi Prachumporn Chaengwattana Road, Laksi, Bangkok 10210</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                <p>(+66)2-982-4629</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                <p><a href="mailto:secretary.lem@gmail.com">secretary.lem@gmail.com</a></p>
-                                            </li>
-                                            <li class="map">
-                                                <a class="buttonB" href="https://goo.gl/maps/4odJ6QpsS5nSsKeA7" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- MAP :: FOR MOBILE -->
-                                <div class="row d-block d-md-none">
-                                    <div class="col">
-                                        <a class="img-width imgBD hover-img" data-fancybox href="~/Frontend_assets/images/contact/map-chaengwattana.jpg">
-                                            <img src="~/Frontend_assets/images/contact/map-chaengwattana.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="topic-wSubtopic">
-                                            <h5>L&E Noppawong Factory</h5>
-                                            <ul>
-                                                <li>L&E Solid State CO.,LTD</li>
-                                                <li>L&E Manufacturing CO.,LTD</li>
-                                                <li>Warehouse and Distribution Center</li>
-                                            </ul>
+                            @if (lang == "EN")
+                            {
+                                @foreach (var contact in Model.Where(contact => contact.ContactType == "FACTORY_AND_WAREHOUSE"))
+                                {
+                                    <div class="col-lg-6 col-md-6 col-12 mt-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5>@contact.PlaceName_EN</h5>
+                                            </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <ul class="contact-info">
+                                                    <li class="address">
+                                                        <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                        <p>@contact.Location_EN</p>
+                                                    </li>
+
+                                                    @if (contact.CellPhone != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                                            <p>@contact.CellPhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.TelePhone != null)
+                                                    {
+
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
+                                                            <p>@contact.TelePhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.OfficePhone != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-fax"></i></div>
+                                                            <p>@contact.OfficePhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.Email != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                                            <p><a href="mailto:@contact.Email">@contact.Email</a></p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.GoogleMaps_Url != null)
+                                                    {
+                                                        <li class="map">
+                                                            <a class="buttonB" href="@contact.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                                            @if (contact.YouTube_Url != null)
+                                                            {
+                                                                <a class="buttonBD" href="@contact.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                            }
+                                                        </li>
+                                                    }
+
+                                                </ul>
+                                                @if (contact.ImagePath != null)
+                                                {
+                                                    <div class="row d-none d-md-block mt-3">
+                                                        <div class="col">
+                                                            <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
+                                                                <img src="~/@contact.ImagePath">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <!-- MAP :: FOR MOBILE -->
+                                        @if (contact.ImagePath != null)
+                                        {
+                                            <div class="row d-block d-md-none">
+                                                <div class="col">
+                                                    <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
+                                                        <img src="~/@contact.ImagePath">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <ul class="contact-info">
-                                            <li class="address">
-                                                <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                <p>45/25-29 Moo 3 Bangbuothong-Supanburi Road ,Namai Latlumkaeo, Pathumthani 12140</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                <p>(+66)2 150 2601-4</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-fax"></i></div>
-                                                <p>(+66)2 150 2605</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                <p><a href="mailto:secretaryled@lighting.co.th">secretaryled@lighting.co.th</a></p>
-                                            </li>
-                                            <li class="map">
-                                                <a class="buttonB" href="https://goo.gl/maps/kcpEF3pdbXiznSQh9" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                            </li>
-                                        </ul>
+                                }
+                            }
+                            else
+                            {
+                                @foreach (var contact in Model.Where(contact => contact.ContactType == "FACTORY_AND_WAREHOUSE"))
+                                {
+                                    <div class="col-lg-6 col-md-6 col-12 mt-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5>@contact.PlaceName_TH</h5>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <ul class="contact-info">
+                                                    <li class="address">
+                                                        <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                        <p>@contact.Location_TH</p>
+                                                    </li>
+
+                                                    @if (contact.CellPhone != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                                            <p>@contact.CellPhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.TelePhone != null)
+                                                    {
+
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
+                                                            <p>@contact.TelePhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.OfficePhone != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-fax"></i></div>
+                                                            <p>@contact.OfficePhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.Email != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                                            <p><a href="mailto:@contact.Email">@contact.Email</a></p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.GoogleMaps_Url != null)
+                                                    {
+                                                        <li class="map">
+                                                            <a class="buttonB" href="@contact.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                                            @if (contact.YouTube_Url != null)
+                                                            {
+                                                                <a class="buttonBD" href="@contact.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                            }
+                                                        </li>
+                                                    }
+
+                                                </ul>
+                                                @if (contact.ImagePath != null)
+                                                {
+                                                    <div class="row d-none d-md-block mt-3">
+                                                        <div class="col">
+                                                            <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
+                                                                <img src="~/@contact.ImagePath">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <!-- MAP :: FOR MOBILE -->
+                                        @if (contact.ImagePath != null)
+                                        {
+                                            <div class="row d-block d-md-none">
+                                                <div class="col">
+                                                    <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
+                                                        <img src="~/@contact.ImagePath">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
-                                </div>
-                                <!-- MAP :: FOR MOBILE -->
-                                <div class="row d-block d-md-none">
-                                    <div class="col">
-                                        <a class="img-width imgBD hover-img" data-fancybox href="~/Frontend_assets/images/contact/map-noppawong.jpg">
-                                            <img src="~/Frontend_assets/images/contact/map-noppawong.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- MAP :: FOR PC -->
-                        <div class="d-none d-md-block">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <a class="img-width imgBD hover-img" data-fancybox href="~/Frontend_assets/images/contact/map-chaengwattana.jpg">
-                                        <img src="~/Frontend_assets/images/contact/map-chaengwattana.jpg">
-                                    </a>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <a class="img-width imgBD hover-img" data-fancybox href="~/Frontend_assets/images/contact/map-noppawong.jpg">
-                                        <img src="~/Frontend_assets/images/contact/map-noppawong.jpg">
-                                    </a>
-                                </div>
-                            </div>
+                                }
+                            }
                         </div>
                     </div>
                     <!---------- 03 OVERSEA OFFICES ---------->
-                    <div class="display-info" rel="3">
+                    <div class="display-info" rel="3" id="oversea_btn">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5>Lighting & Equipment (Myanmar) CO.,LTD</h5>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <ul class="contact-info">
-                                            <li class="address">
-                                                <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                <p>No. 19-L Myint Zu 2 street, Yankin Township Between Kabaraye Pagoda Road and Wayzayantar Road, Yangon, Myanmar.</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                <p>(+95)94-5001-0468</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                <p><a href="mailto:le_myanmar@lighting.co.th">le_myanmar@lighting.co.th</a></p>
-                                            </li>
-                                            <li class="map">
-                                                <a class="buttonB" href="https://goo.gl/maps/i7e49ypzdgnqxUuH7" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- MAP :: FOR MOBILE -->
-                                <div class="row d-block d-md-none">
-                                    <div class="col">
-                                        <a class="img-width imgBD hover-img" data-fancybox href="~/Frontend_assets/images/contact/map-myanmar.jpg">
-                                            <img src="~/Frontend_assets/images/contact/map-myanmar.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5>Lighting & Equipment (Vietnam) CO.,LTD</h5>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <ul class="contact-info">
-                                            <li class="address">
-                                                <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                <p>Lot 101/3 Road No.1 Long Binh (AMATA) Industrial Park, Long Binh WardBien Hoa City, Dong Nai Province, Vietnam</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                <p>(+84)251 3685688</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-fax"></i></div>
-                                                <p>(+66)2 150 2605</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                <p><a href="mailto:eklukb@lighting.co.th">eklukb@lighting.co.th</a>,</p>
-                                                <p><a href="mailto:weerada.wo@lighting.co.th">weerada.wo@lighting.co.th</a>,</p>
-                                                <p><a href="mailto:chinh@lighting.co.th">chinh@lighting.co.th</a></p>
-                                            </li>
-                                            <li class="map">
-                                                <a class="buttonB" href="https://goo.gl/maps/vditqFYPjnSBTo8q6" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- MAP :: FOR MOBILE -->
-                                <div class="row d-block d-md-none">
-                                    <div class="col">
-                                        <a class="img-width imgBD hover-img" data-fancybox href="~/Frontend_assets/images/contact/map-vietnam.jpg">
-                                            <img src="~/Frontend_assets/images/contact/map-vietnam.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- MAP :: FOR PC -->
-                        <div class="d-none d-md-block">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <a class="img-width imgBD hover-img" data-fancybox href="~/Frontend_assets/images/contact/map-chaengwattana.jpg">
-                                        <img src="~/Frontend_assets/images/contact/map-chaengwattana.jpg">
-                                    </a>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <a class="img-width imgBD hover-img" data-fancybox href="~/Frontend_assets/images/contact/map-noppawong.jpg">
-                                        <img src="~/Frontend_assets/images/contact/map-noppawong.jpg">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                            @if (lang == "EN")
+                            {
+                                @foreach (var contact in Model.Where(contact => contact.ContactType == "OVERSEA_OFFICES"))
+                                {
+                                    <div class="col-lg-6 col-md-6 col-12 mt-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5>@contact.PlaceName_EN</h5>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <ul class="contact-info">
+                                                    <li class="address">
+                                                        <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                        <p>@contact.Location_EN</p>
+                                                    </li>
 
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5>Representative Office of Indonesia</h5>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <ul class="contact-info">
-                                            <li class="address">
-                                                <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                <p>The Vida Building 7th Floor, JI. Raya Pejuaagan No.8, Kebon Jeruk - Jakata Barat, Jakata 11530, Indonesia</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                <p>(+62)212-977-8000</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
-                                                <p>(+62)812-878-1918, (+62)818-083-3247</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-fax"></i></div>
-                                                <p>(+62)212-977-8001</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                <p><a href="mailto:jemmy@lighting.co.th">jemmy@lighting.co.th</a></p>
-                                            </li>
-                                            <li class="map">
-                                                <a class="buttonB" href="https://goo.gl/maps/UH5a9GKEKKTWsdG56" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5>Representative Office of Malaysia</h5>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <ul class="contact-info">
-                                            <li class="address">
-                                                <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                <p>Contact : Mr.Alex Goh</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                <p>(+60)1-2286-1288</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                <p><a href="mailto:alex.goh@lighting.co.th">alex.goh@lighting.co.th</a></p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                                    @if (contact.CellPhone != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                                            <p>@contact.CellPhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.TelePhone != null)
+                                                    {
 
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5>Corporate Showroom in Combodia</h5>
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
+                                                            <p>@contact.TelePhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.OfficePhone != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-fax"></i></div>
+                                                            <p>@contact.OfficePhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.Email != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                                            <p><a href="mailto:@contact.Email">@contact.Email</a></p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.GoogleMaps_Url != null)
+                                                    {
+                                                        <li class="map">
+                                                            <a class="buttonB" href="@contact.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                                            @if (contact.YouTube_Url != null)
+                                                            {
+                                                                <a class="buttonBD" href="@contact.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                            }
+                                                        </li>
+                                                    }
+
+                                                </ul>
+                                                @if (contact.ImagePath != null)
+                                                {
+                                                    <div class="row d-none d-md-block mt-3">
+                                                        <div class="col">
+                                                            <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
+                                                                <img src="~/@contact.ImagePath">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <!-- MAP :: FOR MOBILE -->
+                                        @if (contact.ImagePath != null)
+                                        {
+                                            <div class="row d-block d-md-none">
+                                                <div class="col">
+                                                    <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
+                                                        <img src="~/@contact.ImagePath">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <ul class="contact-info">
-                                            <li class="address">
-                                                <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                <p>Home Access Co.,Ltd. THAN'S Building No.46, Mao Tse Toung Blvd (245) comer 95 road, Phnom Penh 120111, Combodia</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                <p>(+855)23-216-195</p>
-                                            </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                <p><a href="mailto:sale@myhomeaccess.com">sale@myhomeaccess.com</a></p>
-                                            </li>
-                                            <li class="map">
-                                                <a class="buttonB" href="https://goo.gl/maps/Su3xsFomGjxvp7v86" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                            </li>
-                                        </ul>
+                                }
+                            }
+                            else
+                            {
+                                @foreach (var contact in Model.Where(contact => contact.ContactType == "OVERSEA_OFFICES"))
+                                {
+                                    <div class="col-lg-6 col-md-6 col-12 mt-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5>@contact.PlaceName_TH</h5>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <ul class="contact-info">
+                                                    <li class="address">
+                                                        <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                        <p>@contact.Location_TH</p>
+                                                    </li>
+
+                                                    @if (contact.CellPhone != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                                            <p>@contact.CellPhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.TelePhone != null)
+                                                    {
+
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
+                                                            <p>@contact.TelePhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.OfficePhone != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-fax"></i></div>
+                                                            <p>@contact.OfficePhone</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.Email != null)
+                                                    {
+                                                        <li>
+                                                            <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                                            <p><a href="mailto:@contact.Email">@contact.Email</a></p>
+                                                        </li>
+                                                    }
+                                                    @if (contact.GoogleMaps_Url != null)
+                                                    {
+                                                        <li class="map">
+                                                            <a class="buttonB" href="@contact.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                                            @if (contact.YouTube_Url != null)
+                                                            {
+                                                                <a class="buttonBD" href="@contact.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                            }
+                                                        </li>
+                                                    }
+
+                                                </ul>
+                                                @if (contact.ImagePath != null)
+                                                {
+                                                    <div class="row d-none d-md-block mt-3">
+                                                        <div class="col">
+                                                            <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
+                                                                <img src="~/@contact.ImagePath">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <!-- MAP :: FOR MOBILE -->
+                                        @if (contact.ImagePath != null)
+                                        {
+                                            <div class="row d-block d-md-none">
+                                                <div class="col">
+                                                    <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
+                                                        <img src="~/@contact.ImagePath">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
-                                </div>
-                            </div>
+                                }
+                            }
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".display-tab > li").click(function () {
+                var rel = $(this).attr("rel");
+                console.log(rel);
+                $('.display-info').hide();
+                $('.display-info[rel=' + rel + ']').fadeIn();
+                $(".display-tab > li").removeClass("active");
+                $(this).addClass("active");
+            });
+        });
+    </script>
+}

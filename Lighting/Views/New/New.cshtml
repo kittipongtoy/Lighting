@@ -1,106 +1,108 @@
 ﻿@{
-    ViewData["Title"] = "New";
+    ViewData["Title"] = "News";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var lang = Context.Request.Cookies["lang"];
 }
-<div class="top-page">
-    <div class="container">
-        <div class="row">
-            <div class="col">NEWS</div>
-        </div>
-    </div>
-</div>
+@model IEnumerable< Lighting.Models.InputFilterModels.News.Output_NewsVm>
+
 <div class="content-padding foot-pad">
     <div class="container-fluid">
         <div class="wrap-pad">
             <div class="three-colPad">
                 <div class="row">
-                    <div class="col-lg-4 col-md-4 col-6">
-                        <a class="news-publicBox" href="@Url.Action("NewDetail","New")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/news/news01.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="news-public-info">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="news-topic">
-                                            <p>News Topic News Topic News Topic News Topic News Topic News Topic News Topic</p>
+                    @if (lang == "EN")
+                    {
+                        @foreach (var news in Model)
+                        {
+                            <div class="col-lg-4 col-md-4 col-6">
+                                <a class="news-publicBox" href="/New/NewDetail?id=@news.Id">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="img-width">
+                                                <img src="~/@news.TitleImage" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="news-date">20 FEB 2023</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-6">
-                        <a class="news-publicBox" href="@Url.Action("NewDetail","New")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/news/news02.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="news-public-info">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="news-topic">
-                                            <p>News Topic News Topic News Topic News Topic News Topic News Topic News Topic</p>
+                                    <div class="news-public-info">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="news-topic">
+                                                    <p>@news.Title_EN</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="news-date">@news.CreateDate_EN</div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="news-date">12 FEB 2023</div>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-6">
-                        <a class="news-publicBox" href="@Url.Action("NewDetail","New")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/news/news03.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="news-public-info">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="news-topic">
-                                            <p>News Topic News Topic News Topic News Topic News Topic News Topic News Topic</p>
+                        }
+                    }
+                    else
+                    {
+                        @foreach (var news in Model)
+                        {
+                            <div class="col-lg-4 col-md-4 col-6">
+                                <a class="news-publicBox" href="/New/NewDetail?id=@news.Id">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="img-width">
+                                                <img src="~/@news.TitleImage" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="news-date">04 FEB 2023</div>
+                                    <div class="news-public-info">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="news-topic">
+                                                    <p>@news.Title_TH</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="news-date">@news.CreateDate_TH</div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
+                        }
+                    }
                 </div>
             </div>
+
             <div class="row">
                 <div class="col">
                     <div class="content-center">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination mt-4">
                                 <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
+                                    <a class="page-link" href="/new/index?start=@(ViewBag.CurrentPage > 0 ? ViewBag.CurrentPage - 6:0)" aria-label="Previous">
                                         <i class="fas fa-arrow-left"></i>
                                     </a>
                                 </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                @if (ViewBag.Pagination != null)
+                                {
+                                    int page_count = 1;
+                                    foreach (var pagination_num in ViewBag.Pagination)
+                                    {
+                                        if (ViewBag.CurrentPage == pagination_num)
+                                        {
+                                            <li class="page-item active"><a class="page-link" href="/new/index?start=@pagination_num">@page_count</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="page-item "><a class="page-link" href="/new/index?start=@pagination_num">@page_count</a></li>
+                                        }
+                                        page_count++;
+                                    }
+                                }
                                 <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
+                                    <a class="page-link" href="/new/index?start=@((ViewBag.CurrentPage + 6) > ViewBag.MaximumPage ? ViewBag.MaximumPage :(ViewBag.CurrentPage + 6)  )" aria-label="Next">
                                         <i class="fas fa-arrow-right"></i>
                                     </a>
                                 </li>
@@ -109,6 +111,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

@@ -185,11 +185,15 @@ app.MapControllerRoute(
     name: "default",
 //pattern: "{controller=Lighting}/{action=Index}/{id?}");
 
-pattern: "{controller=ManageDownload}/{action=manage_download_page}");
+//pattern: "{controller=ManageDownload}/{action=manage_download_page}");
 //pattern: "{controller=news}/{action=manage_news_page}");
 //pattern: "{controller=ManageJob}/{action=manage_job_page}");
 //pattern: "{controller=ManageContact}/{action=manage_Contact_page}");
-
+//pattern: "{controller=ProjectRef}/{action=manage_page}");
+//product
+//pattern: "{controller=ManageProduct}/{action=Manage_Category_Page}");
+//pattern: "{controller=ManageProduct}/{action=Manage_Model_Page}");
+pattern: "{controller=ManageProduct}/{action=Manage_Product_Page}");
 
 app.MapRazorPages();
 

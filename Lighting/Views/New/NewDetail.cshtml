@@ -1,7 +1,10 @@
 ﻿@{
-    ViewData["Title"] = "NewDetail";
+    ViewData["Title"] = "News Detail";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var lang = Context.Request.Cookies["lang"];
 }
+@model Lighting.Models.InputFilterModels.News.Output_NewsVm
+
 <div class="top-page">
     <div class="container">
         <div class="row">
@@ -18,20 +21,35 @@
                     <div class="news-page">
                         <div class="row">
                             <div class="col">
-                                <h4>News Topic News Topic News Topic News Topic News Topic News Topic News Topic</h4>
-                                <div class="news-date">20 FEB 2023 </div>
+                                @if (lang == "EN")
+                                {
+                                    <h4>@Model.Title_EN</h4>
+                                    <div class="news-date">@Model.CreateDate_EN</div>
+                                }
+                                else
+                                {
+                                    <h4>@Model.Title_TH</h4>
+                                    <div class="news-date">@Model.CreateDate_TH</div>
+                                }
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div class="img-width"><img src="~/Frontend_assets/images/news/news01.jpg"></div>
+                                <div class="img-width"><img src="~/@Model.TitleImage"></div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="txt-content indent">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus arcu bibendum at varius vel pharetra vel turpis nunc. Egestas erat imperdiet sed euismod nisi porta. In hac habitasse platea dictumst. Massa tempor nec feugiat nisl pretium fusce id. Massa id neque aliquam vestibulum morbi. A scelerisque purus semper eget. Velit laoreet id donec ultrices tincidunt arcu non sodales neque. Ornare aenean euismod elementum nisi. Duis tristique sollicitudin nibh sit amet commodo nulla facilisi. Mi in nulla posuere sollicitudin aliquam ultrices sagittis. Urna duis convallis convallis tellus. Cursus metus aliquam eleifend mi in nulla posuere sollicitudin. Nulla facilisi cras fermentum odio eu. Rutrum tellus pellentesque eu tincidunt.</p>
-                                    <p>A condimentum vitae sapien pellentesque habitant morbi tristique senectus et. Et tortor at risus viverra adipiscing at in tellus. Adipiscing elit duis tristique sollicitudin nibh sit amet commodo nulla. Non enim praesent elementum facilisis. Habitant morbi tristique senectus et. Elementum integer enim neque volutpat ac tincidunt vitae semper quis. Congue eu consequat ac felis donec et. Amet purus gravida quis blandit turpis cursus. Ultrices vitae auctor eu augue ut. Orci sagittis eu volutpat odio. Volutpat blandit aliquam etiam erat velit scelerisque. Praesent semper feugiat nibh sed pulvinar. Sit amet consectetur adipiscing elit. Posuere lorem ipsum dolor sit amet.</p>
+                                    @if (lang == "EN")
+                                    {
+                                        @Html.Raw(Model.Content_EN)
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw(Model.Content_TH)
+                                    }
+
                                 </div>
                             </div>
                         </div>
@@ -43,13 +61,10 @@
                         <div class="row">
                             <div class="col">
                                 <ul class="news-gallery">
-                                    <li><a data-fancybox="gallery" href="~/Frontend_assets/images/news/news01.jpg"><div class="img-width"><img src="~/Frontend_assets/images/news/news01.jpg"></div></a></li>
-                                    <li><a data-fancybox="gallery" href="~/Frontend_assets/images/news/news04.jpg"><div class="img-width"><img src="~/Frontend_assets/images/news/news04.jpg"></div></a></li>
-                                    <li><a data-fancybox="gallery" href="~/Frontend_assets/images/news/news05.jpg"><div class="img-width"><img src="~/Frontend_assets/images/news/news05.jpg"></div></a></li>
-                                    <li><a data-fancybox="gallery" href="~/Frontend_assets/images/news/news06.jpg"><div class="img-width"><img src="~/Frontend_assets/images/news/news06.jpg"></div></a></li>
-                                    <li><a data-fancybox="gallery" href="~/Frontend_assets/images/news/news07.jpg"><div class="img-width"><img src="~/Frontend_assets/images/news/news07.jpg"></div></a></li>
-                                    <li><a data-fancybox="gallery" href="~/Frontend_assets/images/news/news08.jpg"><div class="img-width"><img src="~/Frontend_assets/images/news/news08.jpg"></div></a></li>
-                                    <li><a data-fancybox="gallery" href="~/Frontend_assets/images/news/news09.jpg"><div class="img-width"><img src="~/Frontend_assets/images/news/news09.jpg"></div></a></li>
+                                    @foreach (var path_img in Model.ImgList)
+                                    {
+                                        <li><a data-fancybox="gallery" href="~/@path_img"><div class="img-width"><img src="~/@path_img"></div></a></li>
+                                    }
                                 </ul>
                             </div>
                         </div>
@@ -61,7 +76,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="content-center">
-                                    <a class="buttonB" href="@Url.Action("New","New")"><i class="fas fa-long-arrow-alt-left"></i>Back</a>
+                                    <a class="buttonB" href="@Url.Action("index","News")"><i class="fas fa-long-arrow-alt-left"></i>Back</a>
                                 </div>
                             </div>
                         </div>
@@ -72,3 +87,36 @@
         </div>
     </div>
 </div>
+
+<div class="scrolltop" style="display: block;">
+    <div class="scroll icon"><i class="fas fa-chevron-up"></i></div>
+</div>
+
+
+
+@section Scripts{
+    <script>
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 500) {
+                $('.scrolltop:hidden').stop(true, true).fadeIn();
+            } else {
+                $('.scrolltop').stop(true, true).fadeOut();
+            }
+        });
+        $(function () { $(".scroll").click(function () { $("html,body").animate({ scrollTop: $(".thetop").offset().top }, "1000"); return false }) })
+
+        // collapse //
+        $(document).ready(function () {
+            $('.collapse.in').prev('.panel-heading').addClass('active');
+            $('#foot-accordion')
+                .on('show.bs.collapse', function (a) {
+                    $(a.target).prev('.panel-heading').addClass('active');
+                })
+                .on('hide.bs.collapse', function (a) {
+                    $(a.target).prev('.panel-heading').removeClass('active');
+                });
+        });
+
+    </script>
+}

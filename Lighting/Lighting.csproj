@@ -472,6 +472,10 @@
     <Folder Include="wwwroot\upload_image\IR_Contact\" />
     <Folder Include="wwwroot\upload_image\IR_NewRoom\" />
     <Folder Include="wwwroot\upload_image\contact\" />
+    <Folder Include="wwwroot\upload_image\Image_Category\" />
+    <Folder Include="wwwroot\upload_image\Product\" />
+    <Folder Include="wwwroot\upload_image\Product_Model\" />
+    <Folder Include="wwwroot\upload_image\ProjectRef\" />
     <Folder Include="wwwroot\upload_image\news\" />
     <Folder Include="wwwroot\upload_image\SH_IR_financial_hilight\" />
     <Folder Include="wwwroot\upload_image\SH_annualReport\" />

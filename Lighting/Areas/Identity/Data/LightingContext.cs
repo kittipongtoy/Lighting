@@ -16,6 +16,16 @@ namespace Lighting.Areas.Identity.Data
         {
         }
 
+        #region product
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Product_Model> Product_Models { get; set; }
+        public DbSet<Product_Category> Product_Categorys { get; set; }
+        #endregion
+
+        #region Project Ref
+        public DbSet<Category_Project> Category_Projects { get; set; }
+        public DbSet<ProjectRef> ProjectRefs { get; set; }
+        #endregion
         public DbSet<Download> Downloads { get; set; }
         public DbSet<ApplyJob> ApplyJobs { get; set; }
         #region contact

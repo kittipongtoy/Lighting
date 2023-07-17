@@ -172,22 +172,22 @@
                                                                                     <div class="menu-item"><a href="">สินค้า</a></div>
                                                                                 </li>
                                                                                 <li data-page="portfolio">
-                                                                                    <div class="menu-item"><a href="">ผลงาน</a></div>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Project","Project")">ผลงาน</a></div>
                                                                                 </li>
                                                                                 <li data-page="download">
-                                                                                    <div class="menu-item"><a href="">ดาวน์โหลด</a></div>
+                                                                                    <div class="menu-item"><a href="@Url.Action("CATALOGUE_Page","Download")">ดาวน์โหลด</a></div>
                                                                                 </li>
                                                                                 <li data-page="news">
-                                                                                    <div class="menu-item"><a href="">ข่าวสาร</a></div>
+                                                                                    <div class="menu-item"><a href="@Url.Action("new","new")">ข่าวสาร</a></div>
                                                                                 </li>
                                                                                 <li data-page="ir">
                                                                                     <div class="menu-item"><a href="@Url.Action("IR_index","Frontend_IR")">นักลงทุนสัมพันธ์</a></div>
                                                                                 </li>
                                                                                 <li data-page="job">
-                                                                                    <div class="menu-item"><a href="">สมัครงาน</a></div>
+                                                                                    <div class="menu-item"><a href="@Url.Action("ApplyJob","ApplyJob")">สมัครงาน</a></div>
                                                                                 </li>
                                                                                 <li data-page="contact">
-                                                                                    <div class="menu-item"><a href="">ติดต่อเรา</a></div>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Contact","Contact")">ติดต่อเรา</a></div>
                                                                                 </li>
                                                                                 <li>
                                                                                     <div class="menu-item lang-menu">
@@ -302,24 +302,25 @@
                                     <li data-page="job"><a href="">สมัครงาน</a></li>
                                     <li data-page="contact"><a href="">ติดต่อเรา</a></li>*@
 
-                                    @* <li data-page="about"><a href="">RESOURCE & FACILITY</a></li>
+                                    <li data-page="about"><a href="">RESOURCE & FACILITY</a></li>
                                     <li data-page="solution"><a href="@Url.Action("SmartSolution","SmartSolution")">SMART SOLUTION</a></li>
                                     <li data-page="product"><a href="@Url.Action("Product","Product")">PRODUCTS</a></li>
                                     <li data-page="portfolio"><a href="@Url.Action("Project","Project")">PROJECT REF</a></li>
-                                    <li data-page="download"><a href="@Url.Action("Download","Download")">DOWNLOAD</a></li>
+                                    <li data-page="download"><a href="@Url.Action("CATALOGUE_Page","Download")">DOWNLOAD</a></li>
                                     <li data-page="news"><a href="@Url.Action("New","New")">NEWS</a></li>
                                     <li data-page="ir"><a href="@Url.Action("IR_index","Frontend_IR")">INVESTOR</a></li>
                                     <li data-page="job"><a href="@Url.Action("ApplyJob","ApplyJob")">APPLY JOB</a></li>
-                                    <li data-page="contact"><a href="@Url.Action("Contact","Contact")">CONTACT</a></li>*@
-
+                                    <li data-page="contact"><a href="@Url.Action("Contact","Contact")">CONTACT</a></li>
+                                    @*
                                     <li><a href="">Resource & Facility</a></li>
                                     <li><a href="">Smart Solution</a></li>
-                                    <li><a href="">News</a></li>
+                                    <li><a href="@Url.Action("new","new")">News</a></li>
                                     <li><a href="">Investor</a></li>
-                                    <li><a href="">Apply Job</a></li>
-                                    <li><a href="">Contact us</a></li>
+                                    <li><a href="@Url.Action("ApplyJob","ApplyJob")">Apply Job</a></li>
+                                    <li><a href="@Url.Action("Contact","Contact")">Contact us</a></li>
                                     <li><a href="">Privacy Policy</a></li>
                                     <li><a href="">Cookies Policy</a></li>
+                                    *@
                                 </ul>
                             </div>
                         </div>
