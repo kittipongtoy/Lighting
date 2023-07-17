@@ -2,6 +2,33 @@
 {
     public class IR_Important_Financial_model
     {
+        public class ResponserAnnualReport
+        {
+            public int id { get; set; }
+            public Nullable<System.DateTime> year { get; set; }
+            public string? titleTH { get; set; }
+            public string? titleENG { get; set; }
+            public string? upload_image { get; set; }
+            public string? upload_image_ENG { get; set; }
+            public string? file_name { get; set; }
+            public string? file_name_ENG { get; set; }
+            public int? use_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        }
+        public class ResponserDFStatement
+        {
+            public int id { get; set; }
+            public string? titleTH { get; set; }
+            public string? titleENG { get; set; }
+            public string? file_name { get; set; }
+            public string? file_name_ENG { get; set; }
+            public Nullable<System.DateTime> inputDate { get; set; }
+            public int? active_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        }
+
         public class SH_IR_MDA_Data_table
         {
             public int count_row { get; set; }

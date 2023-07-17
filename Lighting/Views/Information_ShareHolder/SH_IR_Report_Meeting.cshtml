@@ -58,14 +58,14 @@
             <div class="card">
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
-                    
+
                     <div class="mb-10">
                     </div>
-                    
-                <form id="form_create" enctype="multipart/form-data">
-                    @{
-                        if (Model.count_row_SH_IR_Report_Meeting == 0)
-                        {
+
+                    <form id="form_create" enctype="multipart/form-data">
+                        @{
+                            if (Model.count_row_SH_IR_Report_Meeting == 0)
+                            {
                                 <div class="row mb-3">
                                     <div class="col-2">
                                         <span>
@@ -104,9 +104,9 @@
                                     </div>
                                 </div>
 
-                        }
-                        else
-                        {
+                            }
+                            else
+                            {
                                 <div class="row mb-3">
                                     <div class="col-2">
                                         <span>
@@ -145,16 +145,16 @@
                                     </div>
                                 </div>
 
+                            }
                         }
-                    }
 
-                </form>
+                    </form>
 
-                <div class="row mb-3" style="justify-content: right;">
-                    <div class="col-1">
-                        <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
                     </div>
-                </div>
 
                 </div>
 
@@ -432,12 +432,12 @@
                             showConfirmButton: false,
                             timer: 2000
                         })
-                        .then(() => {
-                            $("#exampleModal_create").modal('toggle');
-                            var oTable = $('#kt_customers_table').DataTable();
-                            oTable.ajax.reload(null, false);
+                            .then(() => {
+                                $("#exampleModal_create").modal('toggle');
+                                var oTable = $('#kt_customers_table').DataTable();
+                                oTable.ajax.reload(null, false);
 
-                        });
+                            });
 
                         window.location.href = "@Url.Action("SH_IR_Report_Meeting","Information_ShareHolder")";
 
@@ -672,9 +672,11 @@
                 }
             });
         }
-         
+
         function add_item(id) {
-            window.location.href = "@Url.Action("SH_IR_Report_MeetingDataDetails_view","Information_ShareHolder")/" + id;
+            location.href = '/Information_ShareHolder/SH_IR_Report_MeetingDataDetails_view/?Id=' + id;
+
+            //window.location.href = "Url.Action("SH_IR_Report_MeetingDataDetails_view","Information_ShareHolder")/" + id;
         }
 
         //load data details to table
@@ -685,7 +687,7 @@
                 "ajax": {
                     "url": "/Information_ShareHolder/SH_IR_Report_MeetingData_getTable",
                     "type": "POST",
-                    "datatype": "json", 
+                    "datatype": "json",
                 },
                 "columns": [
                     {
@@ -719,9 +721,9 @@
                     },
                     {
                         "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
-                            
+
                             var add = '<button type="button" class="btn btn-success" onclick="add_item(' + row.id + ')"><i class="bi bi-icon-plus"></i>เพิ่ม</button>';
-                            
+
                             return add;
 
                         }
@@ -730,7 +732,7 @@
                         "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
                             var text = '<button type="button" class="btn btn-warning" onclick="edit_item(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
                             text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_item(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
-                             
+
                             return text;
 
                         }

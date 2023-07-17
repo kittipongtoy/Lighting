@@ -3,11 +3,20 @@
 @{
     ViewData["Title"] = "IR_presentation_doc";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+
+    var language = "";
+    if (Context.Request.Cookies["lang"] == "EN")
+    {
+        language = "EN";
+    }
+    else
+    {
+        language = "TH";
+    }
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
-<input id="page_name" value="ir" hidden />
-
+<input id="page_name" value="ir" hidden /> 
 
 <!---------- IR 05 PRESENTATION :: PRESENTATION DOC ---------->
 <div class="content-padding foot-pad minH">
@@ -39,7 +48,7 @@
                             }
                         }
 
-                       @*  <h5>การนำเสนอข้อมูล</h5>
+                        @*  <h5>การนำเสนอข้อมูล</h5>
                         <h1>เอกสารนำเสนอ</h1>*@
 
                     </div>
@@ -74,13 +83,18 @@
                                         }
                                     }
 
-                                   @*   <th>เอกสารนำเสนอ</th>
+                                    @*   <th>เอกสารนำเสนอ</th>
                                     <th>ดาวน์โหลด</th>*@
 
                                 </tr>
                             </thead>
-                            <tbody>
-                                @if (Context.Request.Cookies["lang"] == "EN")
+                            @*
+                            <tbody id="data-container">
+                            </tbody>*@
+
+                            <tbody id="data-container">
+
+                               @* @if (Context.Request.Cookies["lang"] == "EN")
                                 {
                                     if (ViewBag.Body != null)
                                     {
@@ -115,69 +129,8 @@
                                             </tr>
                                         }
                                     }
-                                }
+                                }*@
 
-                                @*  <tr>
-                                <td>บริษัทจดทะเบียนพบผู้ลงทุนสำหรับผลประกอบการไตรมาส 4/2564</td>
-                                <td>
-                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                </td>
-                                </tr>*@
-                                @*
-                                <tr>
-                                <td>บริษัทจดทะเบียนพบผู้ลงทุนสำหรับผลประกอบการไตรมาส 3/2564</td>
-                                <td>
-                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 3/2563</td>
-                                <td>
-                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 4/2562</td>
-                                <td>
-                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 3/2562</td>
-                                <td>
-                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 4/2561</td>
-                                <td>
-                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 3/2561</td>
-                                <td>
-                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 4/2560</td>
-                                <td>
-                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 3/2560</td>
-                                <td>
-                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 4/2559</td>
-                                <td>
-                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                </td>
-                                </tr>*@
 
                             </tbody>
                         </table>
@@ -189,22 +142,25 @@
                 <div class="col">
                     <div class="content-center">
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <i class="fas fa-arrow-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
+
+                            <div id="pagination">
+                            </div>
+                            @*<ul class="pagination">
+                            <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                            <i class="fas fa-arrow-left"></i>
+                            </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                            <i class="fas fa-arrow-right"></i>
+                            </a>
+                            </li>
+                            </ul>*@
                         </nav>
                     </div>
                 </div>
@@ -212,3 +168,142 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+
+    <script>
+
+        var getPagination;
+
+        $(function () {
+            let container = $('#pagination');
+            getPagination = function (dto) {
+                var local = "@language";
+
+                var title = function ({ titleTH, titleENG }, lag) {
+                    if (lag === "TH") {
+                        if (titleTH.toLowerCase() == "null") {
+                            return titleTH;
+                        } else {
+                            return titleTH;
+                        }
+                        //return FileDownload_TH;
+                    } else if (lag === "EN") {
+                        if (titleENG.toLowerCase() == "null") {
+                            return titleENG;
+                        } else {
+                            return titleENG;
+                        }
+                        //return FileDownload_ENG;
+                    }
+                }
+
+                var date = function ({ document_date }, lag) {
+                    if (lag === "TH") {
+                        return getDateString(document_date);
+                    } else if (lag === "EN") {
+                        return getDateString(document_date);
+                    }
+                }
+
+                var file = function ({ file_name, file_name_ENG }, lag) {
+                    if (lag === "TH") {
+                        if (file_name.toLowerCase() == "null") {
+                            return file_name;
+                        } else {
+                            return file_name;
+                        }
+                        //return FileDownload_TH;
+                    } else if (lag === "EN") {
+                        if (file_name_ENG.toLowerCase() == "null") {
+                            return file_name_ENG;
+                        } else {
+                            return file_name_ENG;
+                        }
+                        //return FileDownload_ENG;
+                    }
+                }
+
+                var GetId = function ({ id }, lag) {
+                    if (lag === "TH") {
+                        return id;
+                    } else if (lag === "EN") {
+                        return id;
+                    }
+                }
+
+                container.pagination({
+                    dataSource: dto,
+                    pageSize: 10,
+                    position: 'center',
+                    callback: function (data, pagination) {
+                        var dataHtml = ``;
+
+                        $.each(data, function (index, item) {
+
+                            var date = new Date(item.document_date);
+                            var optionsTH = { year: 'numeric', month: 'numeric' };
+                            var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
+
+                            var optionsEN = { year: 'numeric', month: 'numeric' };
+                            var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
+
+                            dataHtml += `<tr>
+                                                <td>`+ title(item, local) + ` &nbsp;`;
+                            if (local == "TH") {
+                                dataHtml += formattedDateTH
+                            } else {
+                                dataHtml += formattedDateEN
+                            }
+                            dataHtml += `</td>
+                                        <td>
+                                                            <a class="download-button" href="../upload_file/SH_IR_Presentation/`+ file(item, local) + `" target="_blank">`;
+                            if (local == "TH") {
+                                dataHtml += `<span>ดูเว็บแคสต์ </span>`;
+                            } else {
+                                dataHtml += `<span>Download </span>`;
+                            }
+                            dataHtml += `</a>
+                                        </td>
+                                    </tr>`;  
+
+                        });
+
+                        dataHtml += ``;
+
+                        $("#data-container").html(dataHtml);
+                    }
+                });
+
+            }
+
+            getPagination(function (done) {
+                $.ajax({
+                    url: '/Frontend_IR/Get_IR_presentation_doc',
+                    type: 'GET',
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+
+                        let pp = [];
+
+                        if (response && response.obj && Array.isArray(response.obj)) {
+                            response.obj.forEach(data => pp.push(data));
+                        } else {
+                            console.log('Invalid response or missing "obj" property');
+                        }
+
+                        done(pp);
+                        console.log(pp);
+                    },
+                    error: function (error) {
+                        console.log('AJAX request failed:', error);
+                    }
+                });
+            });
+
+        });
+
+    </script>
+
+}

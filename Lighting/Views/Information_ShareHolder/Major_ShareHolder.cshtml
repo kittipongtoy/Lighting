@@ -428,7 +428,9 @@
     }
 
     function edit_details(id) {
-        window.location.href = "@Url.Action("ShareHolder_DataDetails_edit","Information_ShareHolder")/" + id;
+        location.href = '/Information_ShareHolder/ShareHolder_DataDetails_edit/?Id=' + id;
+
+        //window.location.href = "Url.Action("ShareHolder_DataDetails_edit","Information_ShareHolder")/" + id;
     }
 
     function delete_details(id) {

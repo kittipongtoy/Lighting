@@ -72,6 +72,44 @@
                             if (Model.count_row_CorporateGovernance == 0)
                             {
                                 <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="title_TH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="title_ENG" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="detailsTitleTH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="detailsTitleENG" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
                                     <div class="col-12">
                                         <span>
                                             เนื้อหา TH
@@ -94,6 +132,45 @@
                             }
                             else
                             {
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" id="title_TH" name="title_TH" autocomplete="off" value="@Model.fod_CorporateGovernance.title_TH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" id="title_ENG" name="title_ENG" autocomplete="off" value="@Model.fod_CorporateGovernance.title_ENG"/>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" id="detailsTitleTH" name="detailsTitleTH" autocomplete="off" value="@Model.fod_CorporateGovernance.detailsTitleTH"/>
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" id="detailsTitleENG" name="detailsTitleENG" autocomplete="off" value="@Model.fod_CorporateGovernance.detailsTitleENG" />
+                                    </div>
+                                </div>
+
                                 <div class="row mb-3">
                                     <div class="col-12">
                                         <span>
@@ -137,7 +214,7 @@
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                            <a type="button" class="btn btn-primary" href="@Url.Action("Corporate_governance_create_cate","Corporate_Governance")/2">เพิ่ม</a>
+                            <a type="button" class="btn btn-primary" href="@Url.Action("Corporate_governance_create_cate","corporate_governance")">เพิ่ม</a>
                         </div>
                     </div>
                 </div>
@@ -259,7 +336,9 @@
         }
 
         function edit_item_file(id) {
-            window.location.href = "@Url.Action("Corporate_governance_edit_file","Corporate_Governance")/" + id;
+            location.href = '/Corporate_Governance/Corporate_governance_edit_file/?Id=' + id;
+
+            //window.location.href = "Url.Action("Corporate_governance_edit_file","Corporate_Governance")/" + id;
         }
 
         function delete_item_file(id) {
@@ -342,7 +421,9 @@
         }
 
         function edit_item_cate(id) {
-            window.location.href = "@Url.Action("Corporate_governance_edit_cate","Corporate_Governance")/" + id;
+            location.href = '/Corporate_Governance/Corporate_governance_edit_cate/?Id=' + id;
+
+            //window.location.href = "Url.Action("Corporate_governance_edit_cate","Corporate_Governance")/" + id;
         }
 
         function delete_item_cate(id) {

@@ -4,8 +4,7 @@ using System.Globalization;
 using Lighting.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol.Core.Types;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using NuGet.Protocol.Core.Types; 
 
 namespace Lighting.Controllers.Backend
 {
@@ -1541,7 +1540,15 @@ namespace Lighting.Controllers.Backend
 
             return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
         }
-
+        public IActionResult Get_Edit_SH_IR_download_financialStatements(int? id)
+        {
+            var InfoDataedit = db.SH_IR_download_financial_statements.Where(x => x.id == id).FirstOrDefault();
+            if (InfoDataedit != null)
+            {
+                return Json(InfoDataedit);
+            }
+            return Json(new { alert = 0 });
+        }
         ///
         public IActionResult SH_IR_prospectus()
         {

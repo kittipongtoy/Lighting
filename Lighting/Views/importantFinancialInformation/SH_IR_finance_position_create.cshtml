@@ -63,7 +63,7 @@
                                 เพิ่มรายการ
                             </h2>
                             <h2>
-                                @Model.SH_IR_financial_position.titleTH 
+                                @Model.SH_IR_financial_position.titleTH
                             </h2>
                             <br />
                         </div>
@@ -83,7 +83,7 @@
                             <div class="col-10">
                                 <textarea type="text" class="form-control" name="titleTH" required autocomplete="off"></textarea>
                             </div>
-                        </div> 
+                        </div>
 
                         <div class="row mb-3">
                             <div class="col-2">
@@ -96,7 +96,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3"> 
+                        <div class="row mb-3">
                             <div class="col-2">
                                 <span>
                                     ล้านบาท
@@ -106,7 +106,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3"> 
+                        <div class="row mb-3">
                             <div class="col-2">
                                 <span>
                                     %
@@ -115,7 +115,7 @@
                                 <input type="text" class="form-control" name="percent" required autocomplete="off" />
                             </div>
                         </div>
-                         
+
                     </form>
 
                     <div class="row mb-3" style="justify-content: right;">
@@ -135,9 +135,9 @@
 </div>
 <!--end::Content-->
 @section Scripts{
-     
+
     <script>
-         
+
         function submit_form() {
             var raw_form = document.getElementById('form_create');
             var formData = new FormData(raw_form);
@@ -161,7 +161,9 @@
                             showConfirmButton: false,
                             timer: 2000
                         }).then(() => {
-                            window.location.href = "@Url.Action("SH_IR_finance_position","importantFinancialInformation")/@Model.SH_IR_financial_position.id";
+                            location.href = '/importantFinancialInformation/SH_IR_finance_position/?Id=' + @Model.SH_IR_financial_position.id;
+
+                            //window.location.href = "Url.Action("SH_IR_finance_position","importantFinancialInformation")/Model.SH_IR_financial_position.id";
                         });
                     }
                     else {

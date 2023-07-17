@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 using UAParser;
 using System.Net.NetworkInformation;
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Lighting.Controllers.Frontend
 {
@@ -62,6 +64,26 @@ namespace Lighting.Controllers.Frontend
             }
             return View();
         }
+        public IActionResult Get_IR_annual_report()
+        {
+            var IR_AnnualReport = db.SH_annual_ReportData.Where(x => x.use_status == 1).OrderByDescending(x => x.year).AsEnumerable().Select((op) => new IR_Important_Financial_model.ResponserAnnualReport
+            {
+                id = op.id,
+                titleTH = op.titleTH,
+                titleENG = op.titleENG,
+                file_name = op.file_name,
+                file_name_ENG = op.file_name_ENG,
+                upload_image=op.upload_image,
+                upload_image_ENG=op.upload_image_ENG,
+                year = op.year
+            }).ToList();
+
+            return Json(new { obj = IR_AnnualReport });
+
+            //return View();
+        }
+
+
         public IActionResult IR_anti_corruption_policy()
         {
             var main_content = new model_input.page_corporate_governance_content();
@@ -843,6 +865,20 @@ namespace Lighting.Controllers.Frontend
 
             return View();
         }
+        public IActionResult Get_IR_Finance_Statement()
+        { 
+            var IR_DFS = db.SH_IR_download_financial_statements.Where(x => x.active_status == 1).OrderByDescending(x => x.inputDate).AsEnumerable().Select((op, index) => new IR_Important_Financial_model.ResponserDFStatement
+            {
+                id = op.id, 
+                titleTH = op.titleTH,
+                titleENG = op.titleENG,
+                file_name = op.file_name,
+                file_name_ENG = op.file_name_ENG,
+                inputDate = op.inputDate
+            }).ToList();
+
+            return Json(new { obj = IR_DFS }); 
+        }
         public IActionResult IR_financial_highlight()
         {
             var data = db.SH_IR_financial_highlight.ToList();
@@ -1030,6 +1066,20 @@ namespace Lighting.Controllers.Frontend
             }
             return View();
         }
+        public IActionResult Get_IR_presentation_doc()
+        {
+            var IR_PWevcast = db.SH_IR_presentation_doc_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.document_date).AsEnumerable().Select((op, index) => new IR_Presentation_Infor_model.Presentation_doc
+            {
+                id = op.id,
+                titleTH = op.titleTH,
+                titleENG = op.titleENG,
+                file_name = op.file_name,
+                file_name_ENG = op.file_name_ENG,
+                document_date = op.document_date, 
+            }).ToList();
+
+            return Json(new { obj = IR_PWevcast });
+        }
         public IActionResult IR_presentation_webcast()
         {
             var data = db.SH_IR_presentation_webcast.ToList();
@@ -1044,6 +1094,22 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Body = details;
             }
             return View();
+        }
+        public IActionResult Get_IR_presentation_webcast()
+        {
+            var IR_PWevcast = db.SH_IR_presentation_webcast_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.activity_date).AsEnumerable().Select((op, index) => new IR_Presentation_Infor_model.Presentation_webcast
+            {
+                id = op.id,
+                titleTH = op.titleTH,
+                titleENG = op.titleENG,
+                file_name = op.file_name,
+                file_name_ENG = op.file_name_ENG,
+                activity_date = op.activity_date,
+                linkVideo=op.linkVideo
+            }).ToList();
+
+            return Json(new { obj = IR_PWevcast });
+
         }
         public IActionResult IR_propose_agenda()
         {

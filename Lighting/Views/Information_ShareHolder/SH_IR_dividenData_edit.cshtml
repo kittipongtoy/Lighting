@@ -195,7 +195,7 @@
     <!--end::Post-->
 </div>
 <!--end::Content-->
-@section Scripts{
+@section Scripts{ 
 
     <!-- Bootstrap DatePicker -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -278,7 +278,9 @@
                             showConfirmButton: false,
                             timer: 2000
                         }).then(() => {
-                            window.location.href = "@Url.Action("SH_IR_dividend","Information_ShareHolder")";
+                            location.href = '/Information_ShareHolder/SH_IR_dividend';
+
+                            //window.location.href = "Url.Action("SH_IR_dividend","Information_ShareHolder")";
                         });
                     }
                     else {
