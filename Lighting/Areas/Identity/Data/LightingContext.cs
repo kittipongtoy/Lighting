@@ -15,7 +15,11 @@ namespace Lighting.Areas.Identity.Data
         public LightingContext()
         {
         }
-
+        #region Project Ref
+        public DbSet<Category_Project> Category_Projects { get; set; }
+        public DbSet<ProjectRef> ProjectRefs { get; set; }
+        //public DbSet<Category_ProjectRef> Category_ProjectRefs { get; set; } //join auto
+        #endregion
         public DbSet<Download> Downloads { get; set; }
         public DbSet<ApplyJob> ApplyJobs { get; set; }
         #region contact

@@ -183,12 +183,13 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-//pattern: "{controller=Lighting}/{action=Index}/{id?}");
+pattern: "{controller=Lighting}/{action=Index}/{id?}");
 
-pattern: "{controller=ManageDownload}/{action=manage_download_page}");
+//pattern: "{controller=ManageDownload}/{action=manage_download_page}");
 //pattern: "{controller=news}/{action=manage_news_page}");
 //pattern: "{controller=ManageJob}/{action=manage_job_page}");
 //pattern: "{controller=ManageContact}/{action=manage_Contact_page}");
+//pattern: "{controller=ProjectRef}/{action=manage_page}");
 
 
 app.MapRazorPages();

@@ -6,12 +6,18 @@
 
 <div class="container" style="width:100%;">
     <div class="row d-flex justify-content-between mb-3">
-        <div class="col  d-flex justify-content-center">
-            <a href="@Url.Action("CATALOGUE_Page","ManageDownload")" class="btn btn-primary rounded-2">
+        <div>
+            @*<a href="@Url.Action("CATALOGUE_Page","ManageDownload")" class="btn btn-primary rounded-2">
                 ดูงานทั้งหมด / View All Job
             </a>
+            *@
+            @*
+            style="display:grid;grid-template-columns:auto 20%;"
+            <input type="text" placeholder="ชื่อหัวข้อดาวน์โหลด/Download Title" style="padding:5px;"/>
+            <button  style="word-wrap:break-word;">ค้นหา/search</button>
+            *@
         </div>
-        <div class="col  d-flex justify-content-center">
+        <div style="display:flex;justify-content:flex-end">
             <a href="@Url.Action("Add_Download_Page","ManageDownload")" class="btn btn-primary rounded-2">
                 เพิ่มดาวโหลด/ Add Download
             </a>
@@ -42,7 +48,7 @@
                             <button type="button" class="btn btn-warning" onclick="editById(@download.Id)">
                                 <i class="bi bi-pencil-square"></i>แก้ไข/edit
                             </button>
-                            <button type="button" class="btn btn-danger" style="margin-left: 15px;" onclick="deleteRowById(@download.Id)">
+                            <button type="button" class="btn btn-danger"  onclick="deleteRowById(@download.Id)">
                                 <i class="bi bi-trash-fill"></i>ลบ/delete
                             </button>
                         </td>
