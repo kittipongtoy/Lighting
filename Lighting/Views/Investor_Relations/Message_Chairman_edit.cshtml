@@ -44,7 +44,7 @@
                     <form id="form_create" enctype="multipart/form-data">
                         <input class="form-control" name="id" hidden value="@Model.fod_chairman.id" />
                         <div class="mb-10" style="text-align:center;">
-                            <img src="~/upload_image/Chairman/@Model.fod_chairman.image_name" style="height: 250px;width: 250px;" alt="image">
+                            <img src="~/upload_image/Chairman/@Model.fod_chairman.image_name_TH" style="height: 250px;width: 250px;" alt="image">
                         </div>
                         <div class="row mb-3">
                             <div class="col-2">
@@ -85,12 +85,22 @@
                         <div class="row mb-3">
                             <div class="col-2">
                                 <span>
-                                    รูปประธานกรรมการ
+                                    รูปประธานกรรมการ TH
                                 </span>
                             </div>
                             <div class="col-4">
-                                <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
+                                <input type="file" class="form-control" name="uploaded_imageTH" accept="image/*" />
                             </div>
+                            <div class="col-2">
+                                <span>
+                                    รูปประธานกรรมการ EN
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="file" class="form-control" name="uploaded_imageEN" accept="image/*" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                             <div class="col-2">
                                 <span>
                                     สถานะการใช้งาน

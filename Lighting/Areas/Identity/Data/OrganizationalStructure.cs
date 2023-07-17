@@ -7,7 +7,8 @@ namespace Lighting.Areas.Identity.Data
     {
         [Key]
         public int id { get; set; }
-        public string? image_name { get; set; }
+        public string? image_nameTH { get; set; }
+        public string? image_nameEN { get; set; }
         public int? num_order { get; set; }
         public int? use_status { get; set; }
         public DateTime? created_at { get; set; }

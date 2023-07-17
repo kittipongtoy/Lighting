@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Lighting.Migrations
 {
-    public partial class dd : Migration
+    public partial class xx : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -117,7 +117,8 @@ namespace Lighting.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name_th = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     name_en = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    image_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    image_nameTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    image_nameEN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     position_th = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     position_en = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     type_board = table.Column<int>(type: "int", nullable: true),
@@ -314,6 +315,40 @@ namespace Lighting.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ImportInfo_ShareHolderData", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IR_Analyst_Chapter",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FileName_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileName_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IR_Analyst_Chapter", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IR_Analysts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FileName_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileName_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IR_Analysts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -733,7 +768,8 @@ namespace Lighting.Migrations
                     name_en = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     rank_th = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     rank_en = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    image_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    image_name_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    image_name_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     use_status = table.Column<int>(type: "int", nullable: true),
                     created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
                     updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -1218,7 +1254,8 @@ namespace Lighting.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    image_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    image_nameTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    image_nameEN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     num_order = table.Column<int>(type: "int", nullable: true),
                     use_status = table.Column<int>(type: "int", nullable: true),
                     created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -2092,17 +2129,17 @@ namespace Lighting.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NameThai", "NormalizedName", "created_at", "updated_at" },
-                values: new object[] { "bcd42aac-e6ee-4e0d-aab8-e1d31a23098c", "2b1a0c80-27b1-4fe8-87a0-4be9f37658df", "Admin", "Admin", "Admin", new DateTime(2023, 7, 13, 3, 23, 22, 715, DateTimeKind.Utc).AddTicks(1405), new DateTime(2023, 7, 13, 3, 23, 22, 715, DateTimeKind.Utc).AddTicks(1412) });
+                values: new object[] { "96f961aa-c089-4ee2-ac00-e32f902c2f5e", "1a16b7b8-9b75-4014-8791-3dbd8e086f71", "Admin", "Admin", "Admin", new DateTime(2023, 7, 17, 4, 46, 27, 252, DateTimeKind.Utc).AddTicks(6306), new DateTime(2023, 7, 17, 4, 46, 27, 252, DateTimeKind.Utc).AddTicks(6311) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ApplicationFile", "ConcurrencyStamp", "Email", "EmailConfirmed", "EmployeeCode", "EmployeeCodeInt", "Firstname", "GuarantorIdentificationCardFile", "Isactive", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePath", "ReceptionistFile", "SecurityStamp", "TwoFactorEnabled", "UserName", "created_at", "updated_at" },
-                values: new object[] { "2fa4de79-25a2-4a01-a8b2-b598fbf6dd13", 0, null, null, "ea9800a1-6bf5-4fa6-a507-d7aba292ad2d", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEO0fffrzYyB4liLvVMlCjz5pZqZrnQphxBiOJOG+vqwAfMrT3x0DiLbpdMmOvsViVQ==", null, false, null, null, "e3a18d9e-50a0-4b92-b3ea-ea47aaa6b9f6", false, "Admin@Lighting.com", null, null });
+                values: new object[] { "84430850-7b63-4828-be54-c6a723d51915", 0, null, null, "2163ce9d-83bd-4c55-bca2-153052f108aa", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEB7iSxolWApVgHGapETxvbfBHz2LikxRvuthZuW9k2uo2Ex/Yk/lqDgSaUxf3r3yhA==", null, false, null, null, "674a21bf-b0b3-4064-99e1-30357e4e1cc3", false, "Admin@Lighting.com", null, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "bcd42aac-e6ee-4e0d-aab8-e1d31a23098c", "2fa4de79-25a2-4a01-a8b2-b598fbf6dd13" });
+                values: new object[] { "96f961aa-c089-4ee2-ac00-e32f902c2f5e", "84430850-7b63-4828-be54-c6a723d51915" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -2196,6 +2233,12 @@ namespace Lighting.Migrations
 
             migrationBuilder.DropTable(
                 name: "ImportInfo_ShareHolderData");
+
+            migrationBuilder.DropTable(
+                name: "IR_Analyst_Chapter");
+
+            migrationBuilder.DropTable(
+                name: "IR_Analysts");
 
             migrationBuilder.DropTable(
                 name: "IR_Cancel_Email");

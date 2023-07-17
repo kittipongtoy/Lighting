@@ -12,6 +12,14 @@
             public string? Email { get; set; }
         }
 
+        public class IR_AnalystRequest
+        {
+            public int? Id { get; set; }
+            public string? FileName_TH { get; set; }
+            public string? FileName_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
         public class IR_ComplaintsRequest
         {
 			public int Id { get; set; }

@@ -25,11 +25,22 @@
                     {
                         foreach (var items in Model.list_OrganizationalStructure)
                         {
-                            <div class="col-lg-10 col-md-11 col-12 mb-3">
-                                <a class="img-width hover-img" data-fancybox data-caption="โครงสร้างองค์กร" href="~/upload_image/OrganizationalStructure/@items.image_name">
-                                    <img src="~/upload_image/OrganizationalStructure/@items.image_name">
-                                </a>
-                            </div>
+                            @if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                <div class="col-lg-10 col-md-11 col-12 mb-3">
+                                    <a class="img-width hover-img" data-fancybox data-caption="โครงสร้างองค์กร" href="~/upload_image/OrganizationalStructure/@items.image_nameEN">
+                                        <img src="~/upload_image/OrganizationalStructure/@items.image_nameTH">
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-lg-10 col-md-11 col-12 mb-3">
+                                    <a class="img-width hover-img" data-fancybox data-caption="โครงสร้างองค์กร" href="~/upload_image/OrganizationalStructure/@items.image_nameTH">
+                                        <img src="~/upload_image/OrganizationalStructure/@items.image_nameTH">
+                                    </a>
+                                </div>                          
+                            }
                         }
                     }
                 }

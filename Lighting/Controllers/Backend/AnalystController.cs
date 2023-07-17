@@ -21,7 +21,7 @@ namespace Lighting.Controllers.Backend
 			return View();
 		}
 
-		[HttpGet]
+        [HttpPost]
 		public async Task<IActionResult> Table_Analyst()
 		{
             try
@@ -45,7 +45,8 @@ namespace Lighting.Controllers.Backend
                         Index = runitem,
                         Id = item.Id,
                         FileName_TH = item.FileName_TH,
-                        FileName_EN = item.FileName_EN
+                        FileName_EN = item.FileName_EN,
+                        Status = item.Status
                     });
                     runitem++;
                 }
@@ -79,8 +80,20 @@ namespace Lighting.Controllers.Backend
             return View();
         }
 
-        public IActionResult Analyst_Add_Submit()
+        [HttpPost]
+        public IActionResult Analyst_Add_Submit(RequestDTO.IR_AnalystRequest model)
         {
+            try
+            {
+                IR_Analyst iR_Analyst = new IR_Analyst();
+                iR_Analyst.Status = model.Status;
+                
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
             return View();
         }
 
@@ -89,16 +102,19 @@ namespace Lighting.Controllers.Backend
             return View();
         }
 
+        [HttpGet]
         public IActionResult GetAnalyst_Edit()
         {
             return View();
         }
 
+        [HttpPut]
         public IActionResult Analyst_Edit_Submit()
         {
             return View();
         }
 
+        [HttpDelete]
         public IActionResult Analyst_Delete()
         {
             return View();
@@ -109,7 +125,7 @@ namespace Lighting.Controllers.Backend
 			return View();
 		}
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Table_Analyst_Chapter()
         {
             try
@@ -167,6 +183,7 @@ namespace Lighting.Controllers.Backend
             return View();
         }
 
+        [HttpPost]
         public IActionResult Analyst_Chapter_Add_Submit()
         {
             return View();
@@ -177,16 +194,19 @@ namespace Lighting.Controllers.Backend
             return View();
         }
 
+        [HttpGet]
         public IActionResult GetAnalyst_ChapterEdit()
         {
             return View();
         }
 
+        [HttpPut]
         public IActionResult Analyst_ChapterEdit_Submit()
         {
             return View();
         }
 
+        [HttpDelete]
         public IActionResult Analyst_Chapter_Delete()
         {
             return View();

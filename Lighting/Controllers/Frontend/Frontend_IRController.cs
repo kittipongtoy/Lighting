@@ -1103,6 +1103,7 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
+
         public IActionResult IR_set_announcement_detail(int? Id)
         {
             return View();

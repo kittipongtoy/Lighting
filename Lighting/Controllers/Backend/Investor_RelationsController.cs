@@ -67,7 +67,8 @@ namespace Lighting.Controllers.Backend
                         count_row = count,
                         id = items.id,
                         created_at = items.created_at,
-                        image_name = items.image_name,
+                        image_nameTH = items.image_name_TH,
+                        image_nameEN = items.image_name_EN,
                         name_en = items.name_en,
                         name_th = items.name_th,
                         rank_en = items.rank_en,
@@ -131,11 +132,11 @@ namespace Lighting.Controllers.Backend
         {
             return View();
         }
-        public IActionResult Message_Chairman_create_insert(M_chairman m_Chairman, List<IFormFile> uploaded_image)
+        public IActionResult Message_Chairman_create_insert(M_chairman m_Chairman, List<IFormFile> uploaded_imageTH, List<IFormFile> uploaded_imageEN)
         {
             try
             {
-                if (uploaded_image.Count == 0)
+                if (uploaded_imageTH.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูปประธานกรรมการ" });
                 }
@@ -156,13 +157,13 @@ namespace Lighting.Controllers.Backend
                     return Json(new { status = "error", message = "กรุณาระบุ ตำแหน่ง EN" });
                 }
 
-                foreach (var formFile in uploaded_image)
+                foreach (var formFile in uploaded_imageTH)
                 {
                     if (formFile.Length > 0)
                     {
                         var datestr = DateTime.Now.Ticks.ToString();
                         var extension = Path.GetExtension(formFile.FileName);
-                        m_Chairman.image_name = datestr + extension;
+                        m_Chairman.image_name_TH = datestr + extension;
                         var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Chairman/" + datestr + extension);
 
                         using (var stream = System.IO.File.Create(filePath))
@@ -171,7 +172,24 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
-                if(m_Chairman.use_status != 1)
+
+                foreach (var formFile in uploaded_imageEN)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.Ticks.ToString();
+                        var extension = Path.GetExtension(formFile.FileName);
+                        m_Chairman.image_name_EN = datestr + extension;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Chairman/" + datestr + extension);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFile.CopyTo(stream);
+                        }
+                    }
+                }
+
+                if (m_Chairman.use_status != 1)
                 {
                     m_Chairman.use_status = 0;
                 }
@@ -199,7 +217,7 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { fod_chairman = get_detail };
             return View(model);
         }
-        public IActionResult Message_Chairman_edit_update(M_chairman m_Chairman, List<IFormFile> uploaded_image)
+        public IActionResult Message_Chairman_edit_update(M_chairman m_Chairman, List<IFormFile> uploaded_imageTH, List<IFormFile> uploaded_imageEN)
         {
             try
             {
@@ -222,13 +240,13 @@ namespace Lighting.Controllers.Backend
 
                 var old_data = db.M_chairman.Where(x=>x.id == m_Chairman.id).FirstOrDefault();
 
-                if(uploaded_image.Count != 0)
+                if(uploaded_imageTH.Count != 0)
                 {
-                    foreach (var formFile in uploaded_image)
+                    foreach (var formFile in uploaded_imageTH)
                     {
                         if (formFile.Length > 0)
                         {
-                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Chairman/" + old_data.image_name);
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Chairman/" + old_data.image_name_TH);
                             if (System.IO.File.Exists(old_filePath) == true)
                             {
                                 System.IO.File.Delete(old_filePath);
@@ -236,7 +254,7 @@ namespace Lighting.Controllers.Backend
 
                             var datestr = DateTime.Now.Ticks.ToString();
                             var extension = Path.GetExtension(formFile.FileName);
-                            old_data.image_name = datestr + extension;
+                            old_data.image_name_TH = datestr + extension;
                             var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Chairman/" + datestr + extension);
 
                             using (var stream = System.IO.File.Create(filePath))
@@ -246,6 +264,32 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+
+                if (uploaded_imageEN.Count != 0)
+                {
+                    foreach (var formFile in uploaded_imageEN)
+                    {
+                        if (formFile.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Chairman/" + old_data.image_name_EN);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            old_data.image_name_EN = datestr + extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Chairman/" + datestr + extension);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+
 
                 if (m_Chairman.use_status != 1)
                 {
@@ -776,7 +820,7 @@ namespace Lighting.Controllers.Backend
             }
            
         }
-        public IActionResult Board_of_Directors_create_insert(Board_of_Directors board_Of_Directors, List<IFormFile> uploaded_image)
+        public IActionResult Board_of_Directors_create_insert(Board_of_Directors board_Of_Directors, List<IFormFile> uploaded_imageTH, List<IFormFile> uploaded_imageEN)
         {
             try
             {
@@ -796,7 +840,7 @@ namespace Lighting.Controllers.Backend
                 {
                     return Json(new { status = "error", message = "กรุณาระบุ ตำแหน่ง EN" });
                 }
-                if (uploaded_image.Count == 0)
+                if (uploaded_imageTH.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
@@ -825,13 +869,29 @@ namespace Lighting.Controllers.Backend
                     return Json(new { status = "error", message = "กรุณาระบุ การศึกษา EN" });
                 }
 
-                foreach (var formFile in uploaded_image)
+                foreach (var formFile in uploaded_imageTH)
                 {
                     if (formFile.Length > 0)
                     {
                         var datestr = DateTime.Now.Ticks.ToString();
                         var extension = Path.GetExtension(formFile.FileName);
-                        board_Of_Directors.image_name = datestr + extension;
+                        board_Of_Directors.image_nameTH = datestr + extension;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BoardOfDirectors/" + datestr + extension);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFile.CopyTo(stream);
+                        }
+                    }
+                }
+
+                foreach (var formFile in uploaded_imageEN)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.Ticks.ToString();
+                        var extension = Path.GetExtension(formFile.FileName);
+                        board_Of_Directors.image_nameEN = datestr + extension;
                         var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BoardOfDirectors/" + datestr + extension);
 
                         using (var stream = System.IO.File.Create(filePath))
@@ -872,7 +932,7 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { fod_Board_of_Directors = get_detail };
             return View(model);
         }
-        public IActionResult Board_of_Directors_edit_update(Board_of_Directors board_Of_Directors, List<IFormFile> uploaded_image)
+        public IActionResult Board_of_Directors_edit_update(Board_of_Directors board_Of_Directors, List<IFormFile> uploaded_imageTH, List<IFormFile> uploaded_imageEN)
         {
             try
             {
@@ -917,13 +977,13 @@ namespace Lighting.Controllers.Backend
                     return Json(new { status = "error", message = "กรุณาระบุ การศึกษา EN" });
                 }
                 var get_oldData = db.Board_of_Directors.Where(x => x.id == board_Of_Directors.id).FirstOrDefault();
-                if (uploaded_image.Count > 0)
+                if (uploaded_imageTH.Count > 0)
                 {
-                    foreach (var formFile in uploaded_image)
+                    foreach (var formFile in uploaded_imageTH)
                     {
                         if (formFile.Length > 0)
                         {
-                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BoardOfDirectors/" + get_oldData.image_name);
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BoardOfDirectors/" + get_oldData.image_nameTH);
                             if (System.IO.File.Exists(old_filePath) == true)
                             {
                                 System.IO.File.Delete(old_filePath);
@@ -932,7 +992,33 @@ namespace Lighting.Controllers.Backend
 
                             var datestr = DateTime.Now.Ticks.ToString();
                             var extension = Path.GetExtension(formFile.FileName);
-                            get_oldData.image_name = datestr + extension;
+                            get_oldData.image_nameTH = datestr + extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BoardOfDirectors/" + datestr + extension);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+
+                if (uploaded_imageEN.Count > 0)
+                {
+                    foreach (var formFile in uploaded_imageEN)
+                    {
+                        if (formFile.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BoardOfDirectors/" + get_oldData.image_nameEN);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            get_oldData.image_nameEN = datestr + extension;
                             var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BoardOfDirectors/" + datestr + extension);
 
                             using (var stream = System.IO.File.Create(filePath))
@@ -1000,7 +1086,8 @@ namespace Lighting.Controllers.Backend
                         count_row = count,
                         id = items.id,
                         created_at = items.created_at,
-                        image_name = items.image_name,
+                        image_nameTH = items.image_nameTH,
+                        image_nameEN = items.image_nameEN,
                         position_th = items.position_th,
                         name_th = items.name_th,
                         updated_at = items.updated_at,
@@ -1029,7 +1116,8 @@ namespace Lighting.Controllers.Backend
                         count_row = count,
                         id = items.id,
                         created_at = items.created_at,
-                        image_name = items.image_name,
+                        image_nameTH = items.image_nameTH,
+                        image_nameEN = items.image_nameEN,
                         position_th = items.position_th,
                         name_th = items.name_th,
                         updated_at = items.updated_at,
@@ -1073,10 +1161,16 @@ namespace Lighting.Controllers.Backend
 
                 if (checkrow != null)
                 {
-                    var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BoardOfDirectors/" + checkrow.image_name);
+                    var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BoardOfDirectors/" + checkrow.image_nameTH);
                     if (System.IO.File.Exists(old_filePath) == true)
                     {
                         System.IO.File.Delete(old_filePath);
+                    }
+
+                    var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BoardOfDirectors/" + checkrow.image_nameEN);
+                    if (System.IO.File.Exists(old_filePath2) == true)
+                    {
+                        System.IO.File.Delete(old_filePath2);
                     }
 
                     db.Board_of_Directors.Remove(checkrow);
@@ -1094,22 +1188,22 @@ namespace Lighting.Controllers.Backend
         {
             return View();
         }
-        public IActionResult Organizational_Structure_index_insert(OrganizationalStructure organizationalStructure, List<IFormFile> uploaded_image)
+        public IActionResult Organizational_Structure_index_insert(OrganizationalStructure organizationalStructure, List<IFormFile> uploaded_imageTH, List<IFormFile> uploaded_imageEN)
         {
             try
             {
-                if (uploaded_image.Count == 0)
+                if (uploaded_imageTH.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
 
-                foreach (var formFile in uploaded_image)
+                foreach (var formFile in uploaded_imageTH)
                 {
                     if (formFile.Length > 0)
                     {
                         var datestr = DateTime.Now.Ticks.ToString();
                         var extension = Path.GetExtension(formFile.FileName);
-                        organizationalStructure.image_name = datestr + extension;
+                        organizationalStructure.image_nameTH = datestr + extension;
                         var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/OrganizationalStructure/" + datestr + extension);
 
                         using (var stream = System.IO.File.Create(filePath))
@@ -1118,6 +1212,23 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+
+                foreach (var formFile in uploaded_imageEN)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.Ticks.ToString();
+                        var extension = Path.GetExtension(formFile.FileName);
+                        organizationalStructure.image_nameEN = datestr + extension;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/OrganizationalStructure/" + datestr + extension);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFile.CopyTo(stream);
+                        }
+                    }
+                }
+
                 if (organizationalStructure.use_status != 1)
                 {
                     organizationalStructure.use_status = 0;
@@ -1136,18 +1247,18 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
-        public IActionResult Organizational_Structure_index_update(OrganizationalStructure organizationalStructure, List<IFormFile> uploaded_image)
+        public IActionResult Organizational_Structure_index_update(OrganizationalStructure organizationalStructure, List<IFormFile> uploaded_imageTH, List<IFormFile> uploaded_imageEN)
         {
             try
             {
                 var get_oldData = db.OrganizationalStructure.Where(x => x.id == organizationalStructure.id).FirstOrDefault();
-                if (uploaded_image.Count > 0)
+                if (uploaded_imageTH.Count > 0)
                 {
-                    foreach (var formFile in uploaded_image)
+                    foreach (var formFile in uploaded_imageTH)
                     {
                         if (formFile.Length > 0)
                         {
-                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/OrganizationalStructure/" + get_oldData.image_name);
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/OrganizationalStructure/" + get_oldData.image_nameTH);
                             if (System.IO.File.Exists(old_filePath) == true)
                             {
                                 System.IO.File.Delete(old_filePath);
@@ -1156,7 +1267,7 @@ namespace Lighting.Controllers.Backend
 
                             var datestr = DateTime.Now.Ticks.ToString();
                             var extension = Path.GetExtension(formFile.FileName);
-                            get_oldData.image_name = datestr + extension;
+                            get_oldData.image_nameTH = datestr + extension;
                             var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/OrganizationalStructure/" + datestr + extension);
 
                             using (var stream = System.IO.File.Create(filePath))
@@ -1166,6 +1277,32 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+
+                if (uploaded_imageEN.Count > 0)
+                {
+                    foreach (var formFile in uploaded_imageEN)
+                    {
+                        if (formFile.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/OrganizationalStructure/" + get_oldData.image_nameEN);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            get_oldData.image_nameEN = datestr + extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/OrganizationalStructure/" + datestr + extension);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+
 
 
                 if (organizationalStructure.use_status != 1)
@@ -1185,6 +1322,7 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+
         public IActionResult Organizational_Structure_index_getTable()
         {
             try
@@ -1199,7 +1337,8 @@ namespace Lighting.Controllers.Backend
                         count_row = count,
                         id = items.id,
                         created_at = items.created_at,
-                        image_name = items.image_name,
+                        image_nameEN = items.image_nameEN,
+                        image_nameTH = items.image_nameTH,
                         updated_at = items.updated_at,
                         use_status = items.use_status
                     });
@@ -1241,10 +1380,16 @@ namespace Lighting.Controllers.Backend
 
                 if (checkrow != null)
                 {
-                    var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/OrganizationalStructure/" + checkrow.image_name);
+                    var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/OrganizationalStructure/" + checkrow.image_nameTH);
                     if (System.IO.File.Exists(old_filePath) == true)
                     {
                         System.IO.File.Delete(old_filePath);
+                    }
+
+                    var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/OrganizationalStructure/" + checkrow.image_nameEN);
+                    if (System.IO.File.Exists(old_filePath2) == true)
+                    {
+                        System.IO.File.Delete(old_filePath2);
                     }
 
                     db.OrganizationalStructure.Remove(checkrow);
