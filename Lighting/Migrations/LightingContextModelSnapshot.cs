@@ -354,6 +354,18 @@ namespace Lighting.Migrations
                     b.Property<string>("detail_th")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("detailsTitleENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("detailsTitleTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("title_ENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("title_TH")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("updated_at")
                         .HasColumnType("datetime2");
 
@@ -410,10 +422,16 @@ namespace Lighting.Migrations
                     b.Property<string>("file_name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("file_name_ENG")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("file_type")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("image_name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("image_name_ENG")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("title_file_en")
@@ -1459,9 +1477,9 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2fa4de79-25a2-4a01-a8b2-b598fbf6dd13",
+                            Id = "e8ebd70d-9efb-44f7-a55f-54345e19a2d5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ea9800a1-6bf5-4fa6-a507-d7aba292ad2d",
+                            ConcurrencyStamp = "2c6c2bd1-6584-4f48-99ee-ae6d0ef7a5bf",
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -1471,9 +1489,9 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO0fffrzYyB4liLvVMlCjz5pZqZrnQphxBiOJOG+vqwAfMrT3x0DiLbpdMmOvsViVQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDMypW4gA/AuN5Ioee1jLlScXjcoLapAzjTmnppiq5fUKYCT9GfXHdrgbL9lIBApqw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e3a18d9e-50a0-4b92-b3ea-ea47aaa6b9f6",
+                            SecurityStamp = "60fbd42a-01e5-4d99-b81c-46ea4f1231d5",
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -2099,6 +2117,24 @@ namespace Lighting.Migrations
                     b.Property<string>("detail_th")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("detailsTitleENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("detailsTitleTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("titleDetails_ENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("titleDetails_TH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("title_ENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("title_TH")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("updated_at")
                         .HasColumnType("datetime2");
 
@@ -2121,10 +2157,16 @@ namespace Lighting.Migrations
                     b.Property<string>("file_name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("file_name_ENG")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("file_type")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("image_name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("image_name_ENG")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("title_file_en")
@@ -2424,13 +2466,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bcd42aac-e6ee-4e0d-aab8-e1d31a23098c",
-                            ConcurrencyStamp = "2b1a0c80-27b1-4fe8-87a0-4be9f37658df",
+                            Id = "d96a3fef-22e4-4b49-984b-6023322a0e01",
+                            ConcurrencyStamp = "24943abb-cddf-4c79-b219-7d3f42a00c27",
                             Name = "Admin",
                             NameThai = "Admin",
                             NormalizedName = "Admin",
-                            created_at = new DateTime(2023, 7, 13, 3, 23, 22, 715, DateTimeKind.Utc).AddTicks(1405),
-                            updated_at = new DateTime(2023, 7, 13, 3, 23, 22, 715, DateTimeKind.Utc).AddTicks(1412)
+                            created_at = new DateTime(2023, 7, 17, 5, 2, 22, 208, DateTimeKind.Utc).AddTicks(9251),
+                            updated_at = new DateTime(2023, 7, 17, 5, 2, 22, 208, DateTimeKind.Utc).AddTicks(9252)
                         });
                 });
 
@@ -3929,8 +3971,8 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "2fa4de79-25a2-4a01-a8b2-b598fbf6dd13",
-                            RoleId = "bcd42aac-e6ee-4e0d-aab8-e1d31a23098c"
+                            UserId = "e8ebd70d-9efb-44f7-a55f-54345e19a2d5",
+                            RoleId = "d96a3fef-22e4-4b49-984b-6023322a0e01"
                         });
                 });
 

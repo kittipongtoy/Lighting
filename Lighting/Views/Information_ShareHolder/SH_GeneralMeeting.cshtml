@@ -62,247 +62,247 @@
 
                     <div class="mb-10">
                     </div>
-                     <form id="form_create" enctype="multipart/form-data">
-                    @{
-                        if (Model.count_row_generalMeeting == 0)
-                        {
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="titleTH" autocomplete="off" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="titleENG" autocomplete="off" />
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ รายละเอียด TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="detailsTitleTH" autocomplete="off" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ รายละเอียดENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="detailsTitleENG" autocomplete="off" />
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        รูปภาพ TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        รูปภาพ ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="file" class="form-control" name="uploaded_image_ENG" accept="image/*" />
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        ลิงค์
-                                    </span>
-                                </div>
-                                <div class="col-10">
-                                    <textarea type="text" class="form-control" name="link" autocomplete="off"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ การประชุม TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="meetingTitleTH" autocomplete="off" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ การประชุม ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="meetingTitleENG" autocomplete="off" />
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ ดาวน์โหลด TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="downloadTitleTH" autocomplete="off" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ ดาวน์โหลด ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="downloadTitleENG" autocomplete="off" />
-                                </div>
-                            </div>
-
-                        }
-                        else
-                        {
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="TitleTH" value="@Model.fod_generalMeeting.titleTH" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="TitleENG" value="@Model.fod_generalMeeting.titleENG" />
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ รายละเอียด TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="detailsTitleTH" value="@Model.fod_generalMeeting.detailsTitleTH" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ รายละเอียดENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="detailsTitleENG" value="@Model.fod_generalMeeting.detailsTitleENG" />
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-
-                                <div class="col-2">
-                                    <span>
-                                        รูปภาพ TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-
-                                    <div class="mb-10" style="text-align:center;">
-                                        <img src="~/upload_image/SH_GeneralMeeting/@Model.fod_generalMeeting.image_name" style="height: 250px;width: 250px;" alt="image">
+                    <form id="form_create" enctype="multipart/form-data">
+                        @{
+                            if (Model.count_row_generalMeeting == 0)
+                            {
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
                                     </div>
-                                    <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
-                                </div>
-                                <div class="col-2">
-
-                                    <span>
-                                        รูปภาพ ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <div class="mb-10" style="text-align:center;">
-                                        <img src="~/upload_image/SH_GeneralMeeting/@Model.fod_generalMeeting.image_name_ENG" style="height: 250px;width: 250px;" alt="image">
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="titleTH" autocomplete="off" />
                                     </div>
-                                    <input type="file" class="form-control" name="uploaded_image_ENG" accept="image/*" />
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="titleENG" autocomplete="off" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="row  mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        ลิงค์
-                                    </span>
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="detailsTitleTH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียดENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="detailsTitleENG" autocomplete="off" />
+                                    </div>
                                 </div>
-                                <div class="col-10">
-                                    <textarea type="text" class="form-control" name="link" autocomplete="off">@Model.fod_generalMeeting.link</textarea>
-                                </div>
-                            </div>
 
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ การประชุม TH
-                                    </span>
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            รูปภาพ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            รูปภาพ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="file" class="form-control" name="uploaded_image_ENG" accept="image/*" />
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="meetingTitleTH" autocomplete="off" value="@Model.fod_generalMeeting.meetingTitleTH" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ การประชุม ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="meetingTitleENG" autocomplete="off" value="@Model.fod_generalMeeting.meetingTitleENG" />
-                                </div>
-                            </div>
 
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ ดาวน์โหลด TH
-                                    </span>
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            ลิงค์
+                                        </span>
+                                    </div>
+                                    <div class="col-10">
+                                        <textarea type="text" class="form-control" name="link" autocomplete="off"></textarea>
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="downloadTitleTH" autocomplete="off" value="@Model.fod_generalMeeting.downloadTitleTH" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ ดาวน์โหลด ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="downloadTitleENG" autocomplete="off" value="@Model.fod_generalMeeting.downloadTitleENG" />
-                                </div>
-                            </div>
 
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ การประชุม TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="meetingTitleTH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ การประชุม ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="meetingTitleENG" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ดาวน์โหลด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="downloadTitleTH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ดาวน์โหลด ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="downloadTitleENG" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="TitleTH" value="@Model.fod_generalMeeting.titleTH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="TitleENG" value="@Model.fod_generalMeeting.titleENG" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="detailsTitleTH" value="@Model.fod_generalMeeting.detailsTitleTH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียดENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="detailsTitleENG" value="@Model.fod_generalMeeting.detailsTitleENG" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+
+                                    <div class="col-2">
+                                        <span>
+                                            รูปภาพ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+
+                                        <div class="mb-10" style="text-align:center;">
+                                            <img src="~/upload_image/SH_GeneralMeeting/@Model.fod_generalMeeting.image_name" style="height: 250px;width: 250px;" alt="image">
+                                        </div>
+                                        <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
+                                    </div>
+                                    <div class="col-2">
+
+                                        <span>
+                                            รูปภาพ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="mb-10" style="text-align:center;">
+                                            <img src="~/upload_image/SH_GeneralMeeting/@Model.fod_generalMeeting.image_name_ENG" style="height: 250px;width: 250px;" alt="image">
+                                        </div>
+                                        <input type="file" class="form-control" name="uploaded_image_ENG" accept="image/*" />
+                                    </div>
+                                </div>
+
+                                <div class="row  mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            ลิงค์
+                                        </span>
+                                    </div>
+                                    <div class="col-10">
+                                        <textarea type="text" class="form-control" name="link" autocomplete="off">@Model.fod_generalMeeting.link</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ การประชุม TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="meetingTitleTH" autocomplete="off" value="@Model.fod_generalMeeting.meetingTitleTH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ การประชุม ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="meetingTitleENG" autocomplete="off" value="@Model.fod_generalMeeting.meetingTitleENG" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ดาวน์โหลด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="downloadTitleTH" autocomplete="off" value="@Model.fod_generalMeeting.downloadTitleTH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ดาวน์โหลด ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="downloadTitleENG" autocomplete="off" value="@Model.fod_generalMeeting.downloadTitleENG" />
+                                    </div>
+                                </div>
+
+                            }
                         }
-                    }
 
-                </form>
+                    </form>
 
-                <div class="row mb-3" style="justify-content: right;">
-                    <div class="col-1">
-                        <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
                     </div>
-                </div>
 
                 </div>
-               
+
             </div>
             <!--end::Card body-->
             @*end*@
@@ -424,9 +424,11 @@
         }
 
         function edit_details(id) {
-            window.location.href = "@Url.Action("SH_GeneralMeetingData_edit","Information_ShareHolder")/" + id;
+            location.href = '/Information_ShareHolder/SH_GeneralMeetingData_edit/?Id=' + id;
+
+            //window.location.href = "Url.Action("SH_GeneralMeetingData_edit","Information_ShareHolder")/" + id;
         }
-        
+
         function changeStatus(id, checked_obj) {
             $.ajax({
                 type: "POST",
@@ -455,7 +457,7 @@
                     console.log(e.inner);
                 }
             });
-        } 
+        }
 
         function delete_details(id) {
             Swal.fire({

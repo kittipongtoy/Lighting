@@ -3,10 +3,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Lighting.Areas.Identity.Data
 {
-	public class O_business_ethics : IProperty
+    public class O_business_ethics : IProperty
     {
         [Key]
         public int id { get; set; }
+        public string? title_TH { get; set; }
+        public string? title_ENG { get; set; }
+        public string? detailsTitleTH { get; set; }
+        public string? detailsTitleENG { get; set; } 
+        public string? titleDetails_TH { get; set; }
+        public string? titleDetails_ENG { get; set; }
         public string? detail_th { get; set; }
         public string? detail_en { get; set; }
         public DateTime? created_at { get; set; }

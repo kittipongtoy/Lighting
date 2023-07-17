@@ -58,104 +58,104 @@
             <div class="card">
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
-                    
+
                     <div class="mb-10">
                     </div>
-                    
-                <form id="form_create" enctype="multipart/form-data">
-                    @{
-                        if (Model.count_row_SH_IR_propose_agenda == 0)
-                        {
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="TitleTH" autocomplete="off" required />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="TitleENG" autocomplete="off" required />
-                                </div>
-                            </div>
 
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ รายละเอียด TH
-                                    </span>
+                    <form id="form_create" enctype="multipart/form-data">
+                        @{
+                            if (Model.count_row_SH_IR_propose_agenda == 0)
+                            {
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="TitleTH" autocomplete="off" required />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="TitleENG" autocomplete="off" required />
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <textarea type="text" class="form-control" name="detailsTitleTH" autocomplete="off" required ></textarea>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="detailsTitleTH" autocomplete="off" required></textarea>
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="detailsTitleENG" autocomplete="off" required></textarea>
+                                    </div>
                                 </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ รายละเอียด ENG
-                                    </span>
+
+                            }
+                            else
+                            {
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="TitleTH" value="@Model.fod_SH_IR_propose_agenda.titleTH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="TitleENG" value="@Model.fod_SH_IR_propose_agenda.titleENG" />
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <textarea type="text" class="form-control" name="detailsTitleENG" autocomplete="off" required ></textarea>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            รายละเอียด หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="detailsTitleTH" value="@Model.fod_SH_IR_propose_agenda.detailsTitleTH" required />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            รายละเอียด หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="detailsTitleENG" value="@Model.fod_SH_IR_propose_agenda.detailsTitleENG" required />
+                                    </div>
                                 </div>
-                            </div>
-                             
+
+                            }
                         }
-                        else
-                        {
 
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="TitleTH" value="@Model.fod_SH_IR_propose_agenda.titleTH" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="TitleENG" value="@Model.fod_SH_IR_propose_agenda.titleENG" />
-                                </div>
-                            </div>
+                    </form>
 
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        รายละเอียด หัวข้อ TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="detailsTitleTH" value="@Model.fod_SH_IR_propose_agenda.detailsTitleTH" required />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        รายละเอียด หัวข้อ ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="detailsTitleENG" value="@Model.fod_SH_IR_propose_agenda.detailsTitleENG" required />
-                                </div>
-                            </div>
-                             
-                        }
-                    }
-
-                </form>
-
-                <div class="row mb-3" style="justify-content: right;">
-                    <div class="col-1">
-                        <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
                     </div>
-                </div>
 
                 </div>
 
@@ -204,7 +204,7 @@
                     <thead>
                         <!--begin::Table row-->
                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                            <th>#</th> 
+                            <th>#</th>
                             <th class="min-w-125px">หัวข้อ TH</th>
                             <th class="min-w-125px">หัวข้อ ENG</th>
                             <th class="min-w-125px">สถานะการใช้งาน</th>
@@ -279,7 +279,9 @@
         }
 
         function edit_details(id) {
-            window.location.href = "@Url.Action("SH_IR_propose_agenda_DataDetails_edit","Information_ShareHolder")/" + id;
+            location.href = '/Information_ShareHolder/SH_IR_propose_agenda_DataDetails_edit/?Id=' + id;
+
+            //window.location.href = "Url.Action("SH_IR_propose_agenda_DataDetails_edit","Information_ShareHolder")/" + id;
         }
 
         function changeStatus_cate(id, checked_obj) {
@@ -378,7 +380,7 @@
                 "columns": [
                     {
                         "name": "count_row", "data": "count_row"
-                    }, 
+                    },
                     {
                         "name": "titleTH", "data": "titleTH"
                     },

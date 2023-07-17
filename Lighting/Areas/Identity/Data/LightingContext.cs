@@ -57,6 +57,7 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<O_Gift_entertainment_File> O_Gift_entertainment_File { get; set; }
         public DbSet<O_business_ethics> O_business_ethics { get; set; }
         public DbSet<O_business_ethics_File> O_business_ethics_File { get; set; }
+        public DbSet<O_business_ethics_File> O_business_ethics_details { get; set; }
         public DbSet<OrganizationalStructure> OrganizationalStructure { get; set; }
         public DbSet<P_philosophy> P_philosophy { get; set; }
         public DbSet<Sustainability_Report> Sustainability_Report { get; set; }

@@ -3,6 +3,16 @@
 @{
     ViewData["Title"] = "IR_presentation_webcast";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+
+    var language = "";
+    if (Context.Request.Cookies["lang"] == "EN")
+    {
+        language = "EN";
+    }
+    else
+    {
+        language = "TH";
+    }
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
@@ -79,135 +89,55 @@
                                     <th>ดาวน์โหลด</th>*@
                                 </tr>
                             </thead>
-                            <tbody>
-                                @if (Context.Request.Cookies["lang"] == "EN")
-                                {
-                                    if (ViewBag.Body != null)
-                                    {
-                                        foreach (var item in ViewBag.Body)
-                                        {
-                                            var confrimDate = Convert.ToDateTime(item.activity_date);
-                                            var Insert_Date = confrimDate.ToString("MM/yyyy", new CultureInfo("en-US"));
+                            @*
+                            <tbody id="data-container">
+                            </tbody>*@
 
-                                            <tr>
-                                                <td>@item.titleENG &nbsp; @Insert_Date</td>
-                                                <td>
-                                                    <a class="download-button viewBT" href="@item.linkVideo" target="_blank"><span>ดูเว็บแคสต์</span></a>
-                                                </td>
-                                                <td>
-                                                    <a class="download-button" href="~/upload_file/SH_IR_PresentationWebcast/@item.file_name_ENG" target="_blank"><span>Download</span></a>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
+                            <tbody id="data-container">
+                                @*@if (Context.Request.Cookies["lang"] == "EN")
+                                {
+                                if (ViewBag.Body != null)
+                                {
+                                foreach (var item in ViewBag.Body)
+                                {
+                                var confrimDate = Convert.ToDateTime(item.activity_date);
+                                var Insert_Date = confrimDate.ToString("MM/yyyy", new CultureInfo("en-US"));
+
+                                <tr>
+                                <td>@item.titleENG &nbsp; @Insert_Date</td>
+                                <td>
+                                <a class="download-button viewBT" href="@item.linkVideo" target="_blank"><span>ดูเว็บแคสต์</span></a>
+                                </td>
+                                <td>
+                                <a class="download-button" href="~/upload_file/SH_IR_PresentationWebcast/@item.file_name_ENG" target="_blank"><span>Download</span></a>
+                                </td>
+                                </tr>
+                                }
+                                }
                                 }
                                 else
                                 {
-                                    if (ViewBag.Body != null)
-                                    {
-                                        foreach (var item in ViewBag.Body)
-                                        {
-                                            var confrimDate = Convert.ToDateTime(item.activity_date);
-                                            var Insert_Date = confrimDate.ToString("MM/yyyy", new CultureInfo("th-TH"));
+                                if (ViewBag.Body != null)
+                                {
+                                foreach (var item in ViewBag.Body)
+                                {
+                                var confrimDate = Convert.ToDateTime(item.activity_date);
+                                var Insert_Date = confrimDate.ToString("MM/yyyy", new CultureInfo("th-TH"));
 
-                                            <tr>
-                                                <td>@item.titleTH &nbsp; @Insert_Date</td>
-                                                <td>
-                                                    <a class="download-button viewBT" href="@item.linkVideo" target="_blank"><span>ดูเว็บแคสต์</span></a>
-                                                </td>
-                                                <td>
-                                                    <a class="download-button" href="~/upload_file/SH_IR_PresentationWebcast/@item.file_name" target="_blank"><span>ดาวน์โหลด</span></a>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
+                                <tr>
+                                <td>@item.titleTH &nbsp; @Insert_Date</td>
+                                <td>
+                                <a class="download-button viewBT" href="@item.linkVideo" target="_blank"><span>ดูเว็บแคสต์</span></a>
+                                </td>
+                                <td>
+                                <a class="download-button" href="~/upload_file/SH_IR_PresentationWebcast/@item.file_name" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
+                                </tr>
                                 }
+                                }
+                                }*@
 
-                                @* <tr>
-                            <td>บริษัทจดทะเบียนพบผู้ลงทุนสำหรับผลประกอบการไตรมาส 3/2565</td>
-                            <td>
-                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
-                            </td>
-                            <td>
-                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                            </td>
-                            </tr>*@
-
-                                @*<tr>
-                            <td>การประชุมสามัญผู้ถือหุ้นประจำปี 2565</td>
-                            <td>
-                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
-                            </td>
-                            <td></td>
-                            </tr>
-                            <tr>
-                            <td>บริษัทจดทะเบียนพบผู้ลงทุนสำหรับผลประกอบการไตรมาส 4/2564</td>
-                            <td>
-                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
-                            </td>
-                            <td>
-                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td>บริษัทจดทะเบียนพบผู้ลงทุนสำหรับผลประกอบการไตรมาส 3/2564</td>
-                            <td>
-                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
-                            </td>
-                            <td>
-                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td>การประชุมสามัญผู้ถือหุ้นประจำปี 2564</td>
-                            <td>
-                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
-                            </td>
-                            <td></td>
-                            </tr>
-                            <tr>
-                            <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 3/2563</td>
-                            <td>
-                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
-                            </td>
-                            <td>
-                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td>การประชุมสามัญผู้ถือหุ้นประจำปี 2563</td>
-                            <td>
-                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
-                            </td>
-                            <td></td>
-                            </tr>
-                            <tr>
-                            <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 4/2562</td>
-                            <td>
-                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
-                            </td>
-                            <td>
-                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td>บริษัทจดทะเบียนพบผู้ลงทุน สำหรับผลประกอบการไตรมาส 3/2562</td>
-                            <td>
-                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
-                            </td>
-                            <td>
-                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td>การประชุมสามัญผู้ถือหุ้นประจำปี 2562</td>
-                            <td>
-                            <a class="download-button viewBT" href="https://www.youtube.com/watch?v=5N3RhMUyoEM" target="_blank"><span>ดูเว็บแคสต์</span></a>
-                            </td>
-                            <td>
-                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                            </td>
-                            </tr>*@
+                                
 
                             </tbody>
                         </table>
@@ -219,22 +149,24 @@
                 <div class="col">
                     <div class="content-center">
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <i class="fas fa-arrow-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                            <div id="pagination">
+                            </div>
+                            @*<ul class="pagination">
+                            <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                            <i class="fas fa-arrow-left"></i>
+                            </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                            <i class="fas fa-arrow-right"></i>
+                            </a>
+                            </li>
+                            </ul>*@
                         </nav>
                     </div>
                 </div>
@@ -242,3 +174,151 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+
+    <script>
+
+        var getPagination;
+
+        $(function () { 
+            let container = $('#pagination');
+            getPagination = function (dto) {
+                var local = "@language";
+
+                var title = function ({ titleTH, titleENG }, lag) {
+                    if (lag === "TH") {
+                        if (titleTH.toLowerCase() == "null") {
+                            return titleTH;
+                        } else {
+                            return titleTH;
+                        }
+                        //return FileDownload_TH;
+                    } else if (lag === "EN") {
+                        if (titleENG.toLowerCase() == "null") {
+                            return titleENG;
+                        } else {
+                            return titleENG;
+                        }
+                        //return FileDownload_ENG;
+                    }
+                }
+
+                var date = function ({ activity_date }, lag) {
+                    if (lag === "TH") {
+                        return getDateString(activity_date);
+                    } else if (lag === "EN") {
+                        return getDateString(activity_date);
+                    }
+                }
+
+                var file = function ({ file_name, file_name_ENG }, lag) {
+                    if (lag === "TH") {
+                        if (file_name.toLowerCase() == "null") {
+                            return file_name;
+                        } else {
+                            return file_name;
+                        }
+                        //return FileDownload_TH;
+                    } else if (lag === "EN") {
+                        if (file_name_ENG.toLowerCase() == "null") {
+                            return file_name_ENG;
+                        } else {
+                            return file_name_ENG;
+                        }
+                        //return FileDownload_ENG;
+                    }
+                }
+
+                var link = function ({ linkVideo }, lag) {
+                    if (lag === "TH") {
+                        return linkVideo;
+                    } else if (lag === "EN") {
+                        return linkVideo;
+                    }
+                }
+
+                container.pagination({
+                    dataSource: dto,
+                    pageSize: 10,
+                    position: 'center',
+                    callback: function (data, pagination) {
+                        var dataHtml = ``;
+
+                        $.each(data, function (index, item) {
+
+                            var date = new Date(item.activity_date);
+                            var optionsTH = { year: 'numeric', month: 'numeric' };
+                            var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
+
+                            var optionsEN = { year: 'numeric', month: 'numeric' };
+                            var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
+
+                            dataHtml += `<tr>
+                                             <td>`+ title(item, local) + ` &nbsp;`;
+                            if (local == "TH") {
+                                dataHtml += formattedDateTH
+                            } else {
+                                dataHtml += formattedDateEN
+                            }
+                            dataHtml += `</td>
+                                            <td>
+                                                    <a class="download-button viewBT" href="`+ link(item, local) + `" target="_blank">`; 
+                            if (local == "TH") {
+                                dataHtml += `<span>ดูเว็บแคสต์ </span>`;
+                            } else {
+                                dataHtml += `<span>View Video </span>`;
+                            }
+                            dataHtml += `</a>
+                                                    </td>
+                                                    <td>
+                                                        <a class="download-button" href="../upload_file/SH_IR_PresentationWebcast/`+ file(item, local) + `" target="_blank">`;
+                            if (local == "TH") {
+                                dataHtml += `<span>ดูเว็บแคสต์ </span>`;
+                            } else {
+                                dataHtml += `<span>Download </span>`;
+                            }
+                            dataHtml += `</a>
+                                                    </td>
+                                                </tr>`;
+
+                        });
+
+                        dataHtml += ``;
+
+                        $("#data-container").html(dataHtml);
+                    }
+                });
+
+            }
+
+            getPagination(function (done) { 
+                $.ajax({
+                    url: '/Frontend_IR/Get_IR_presentation_webcast',
+                    type: 'GET',
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+
+                        let pp = [];
+
+                        if (response && response.obj && Array.isArray(response.obj)) {
+                            response.obj.forEach(data => pp.push(data));
+                        } else {
+                            console.log('Invalid response or missing "obj" property');
+                        }
+
+                        done(pp);
+                        console.log(pp);
+                    },
+                    error: function (error) {
+                        console.log('AJAX request failed:', error);
+                    }
+                });
+            });
+
+        });
+
+    </script>
+
+}

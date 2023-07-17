@@ -1,9 +1,17 @@
-﻿
-@using System.Globalization;
+﻿@using System.Globalization;
 
 @{
     ViewData["Title"] = "IR_annual_report";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var language = "";
+    if (Context.Request.Cookies["lang"] == "EN")
+    {
+        language = "EN";
+    }
+    else
+    {
+        language = "TH";
+    }
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
@@ -47,113 +55,117 @@
                 </div>
             </div>
             <div class="three-colPad">
-                <div class="row justify-content-center"> 
+                <div class="row justify-content-center">
 
-                    @if (Context.Request.Cookies["lang"] == "EN")
+                    <div id="data-container">
+                    </div>
+
+                    @* @if (Context.Request.Cookies["lag"] == "EN")
                     {
-                        if (ViewBag.Body != null)
-                        {
-                            foreach (var item in ViewBag.Body)
-                            {
-                                var dateget = Convert.ToDateTime(item.year);
-                                var year = dateget.ToString("yyyy", new CultureInfo("en-US"));
+                    if (ViewBag.Body != null)
+                    {
+                    foreach (var item in ViewBag.Body)
+                    {
+                    var dateget = Convert.ToDateTime(item.year);
+                    var year = dateget.ToString("yyyy", new CultureInfo("en-US"));
 
-                                <div class="col-lg-4 col-md-4 col-6">
-                                    <a class="coverBox" href="~/upload_file/SH_annualReport/@item.file_name_ENG" target="_blank">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="book-cover"><img src="~/upload_image/SH_annualReport/@item.upload_image_ENG"></div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="cover-topic">
-                                                    <p>@item.titleENG &nbsp; @year</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            }
-                        }
+                    <div class="col-lg-4 col-md-4 col-6">
+                    <a class="coverBox" href="~/upload_file/SH_annualReport/@item.file_name_ENG" target="_blank">
+                    <div class="row">
+                    <div class="col">
+                    <div class="book-cover"><img src="~/upload_image/SH_annualReport/@item.upload_image_ENG"></div>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col">
+                    <div class="cover-topic">
+                    <p>@item.titleENG &nbsp; @year</p>
+                    </div>
+                    </div>
+                    </div>
+                    </a>
+                    </div>
+                    }
+                    }
                     }
                     else
                     {
-                        if (ViewBag.Body != null)
-                        {
-                            foreach (var item in ViewBag.Body)
-                            {
-                                var dateget = Convert.ToDateTime(item.year);
-                                var year = dateget.ToString("yyyy", new CultureInfo("th-TH"));
+                    if (ViewBag.Body != null)
+                    {
+                    foreach (var item in ViewBag.Body)
+                    {
+                    var dateget = Convert.ToDateTime(item.year);
+                    var year = dateget.ToString("yyyy", new CultureInfo("th-TH"));
 
-                                <div class="col-lg-4 col-md-4 col-6">
-                                    <a class="coverBox" href="~/upload_file/SH_annualReport/@item.file_name" target="_blank">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="book-cover"><img src="~/upload_image/SH_annualReport/@item.upload_image"></div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="cover-topic">
-                                                    <p>@item.titleTH &nbsp; @year</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            } 
-                        }
+                    <div class="col-lg-4 col-md-4 col-6">
+                    <a class="coverBox" href="~/upload_file/SH_annualReport/@item.file_name" target="_blank">
+                    <div class="row">
+                    <div class="col">
+                    <div class="book-cover"><img src="~/upload_image/SH_annualReport/@item.upload_image"></div>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col">
+                    <div class="cover-topic">
+                    <p>@item.titleTH &nbsp; @year</p>
+                    </div>
+                    </div>
+                    </div>
+                    </a>
+                    </div>
                     }
+                    }
+                    }*@
+
 
                     @*<div class="col-lg-4 col-md-4 col-6">
-                        <a class="coverBox" href="~/Frontend_assets/images/testPDF.pdf" target="_blank">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="book-cover"><img src="~/Frontend_assets/images/ir/annual01.gif"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="cover-topic">
-                                        <p>One Report 2564</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                    <a class="coverBox" href="~/Frontend_assets/images/testPDF.pdf" target="_blank">
+                    <div class="row">
+                    <div class="col">
+                    <div class="book-cover"><img src="~/Frontend_assets/images/ir/annual01.gif"></div>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col">
+                    <div class="cover-topic">
+                    <p>One Report 2564</p>
+                    </div>
+                    </div>
+                    </div>
+                    </a>
                     </div>*@
 
                     @*<div class="col-lg-4 col-md-4 col-6">
-                        <a class="coverBox" href="~/Frontend_assets/images/testPDF.pdf" target="_blank">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="book-cover"><img src="~/Frontend_assets/images/ir/annual02.gif"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="cover-topic">
-                                        <p>รายงานประจำปี 2563</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                    <a class="coverBox" href="~/Frontend_assets/images/testPDF.pdf" target="_blank">
+                    <div class="row">
+                    <div class="col">
+                    <div class="book-cover"><img src="~/Frontend_assets/images/ir/annual02.gif"></div>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col">
+                    <div class="cover-topic">
+                    <p>รายงานประจำปี 2563</p>
+                    </div>
+                    </div>
+                    </div>
+                    </a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-6">
-                        <a class="coverBox" href="~/Frontend_assets/images/testPDF.pdf" target="_blank">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="book-cover"><img src="~/Frontend_assets/images/ir/annual03.gif"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="cover-topic">
-                                        <p>รายงานประจำปี 2562</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                    <a class="coverBox" href="~/Frontend_assets/images/testPDF.pdf" target="_blank">
+                    <div class="row">
+                    <div class="col">
+                    <div class="book-cover"><img src="~/Frontend_assets/images/ir/annual03.gif"></div>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col">
+                    <div class="cover-topic">
+                    <p>รายงานประจำปี 2562</p>
+                    </div>
+                    </div>
+                    </div>
+                    </a>
                     </div>*@
 
                 </div>
@@ -162,22 +174,27 @@
                 <div class="col">
                     <div class="content-center">
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination mt-4">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <i class="fas fa-arrow-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
+
+                            <div id="pagination">
+                            </div>
+
+                            @* <ul class=" mt-4">
+                            <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                            <i class="fas fa-arrow-left"></i>
+                            </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                            <i class="fas fa-arrow-right"></i>
+                            </a>
+                            </li>
+                            </ul>*@
+
                         </nav>
                     </div>
                 </div>
@@ -185,7 +202,184 @@
         </div>
     </div>
 </div>
-@Html.Partial("~/Views/Shared/Inc/IR_inc_footer.cshtml")
 
- 
+@section Scripts{
+
+    <script>
+
+        var getPagination;
+
+        $(function () {
+
+            let container = $('#pagination');
+            var dto = [];
+            getPagination = function (dto) { 
+                 
+                var local = "@language"; 
+
+                var date = function ({ year }, lag) {
+                    if (lag === "TH") {
+                        return getDateString(year);
+                    } else if (lag === "EN") {
+                        return getDateString(year);
+                    }
+                }
+
+                var image = function ({ upload_image, upload_image_ENG }, lag) {
+                    if (lag === "TH") {
+                        if (upload_image.toLowerCase() == "null") {
+                            return upload_image;
+                        } else {
+                            return upload_image;
+                        }
+                        //return FileDownload_TH;
+                    } else if (lag === "EN") {
+                        if (upload_image_ENG.toLowerCase() == "null") {
+                            return upload_image_ENG;
+                        } else {
+                            return upload_image_ENG;
+                        }
+                        //return FileDownload_ENG;
+                    }
+                }
+
+                var file = function ({ file_name, file_name_ENG }, lag) {
+                    if (lag === "TH") {
+                        if (file_name.toLowerCase() == "null") {
+                            return file_name;
+                        } else {
+                            return file_name;
+                        }
+                        //return FileDownload_TH;
+                    } else if (lag === "EN") {
+                        if (file_name_ENG.toLowerCase() == "null") {
+                            return file_name_ENG;
+                        } else {
+                            return file_name_ENG;
+                        }
+                        //return FileDownload_ENG;
+                    }
+                }
+
+                var title = function ({ titleTH, titleENG }, lag) {
+                    if (lag === "TH") {
+                        if (titleTH.toLowerCase() == "null") {
+                            return titleTH;
+                        } else {
+                            return titleTH;
+                        }
+                        //return titleENG;
+                    } else if (lag === "EN") {
+                        if (titleENG.toLowerCase() == "null") {
+                            return titleENG;
+                        } else {
+                            return titleENG;
+                        }
+                        //return titleENG;
+                    }
+                }
+
+                var GetId = function ({ id }, lag) {
+                    if (lag === "TH") {
+                        return id;
+                    } else if (lag === "EN") {
+                        return id;
+                    }
+                }
+
+                container.pagination({
+                    dataSource: dto,
+                    pageSize: 12,
+                    position: 'center',
+                    callback: function (data, pagination) {
+                        var dataHtml = `<div class="three-colPad">
+                                                                <div class="row justify-content-center">`;
+                        console.log(data)
+                        $.each(data, function (index, item) {
+
+                            var date = new Date(item.year);
+                            var optionsTH = { year: 'numeric' };
+                            var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
+
+                            var optionsEN = { year: 'numeric' };
+                            var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
+
+                            //let { date } = convertDate(item.year, local);
+
+                            dataHtml += `<div class="col-lg-4 col-md-4 col-6" >
+                                            <a class="coverBox" href="../upload_file/SH_annualReport/`+ file(item, local) + `" target="_blank">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="book-cover">
+                                                                <img src="../upload_image/SH_annualReport/`+ image(item, local) + `" >
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="cover-topic">
+                                                                    <p>`+ title(item, local) + `&nbsp;`;
+                                                        if (local == "TH") {
+                                                            dataHtml += formattedDateTH
+                                                        } else {
+                                                            dataHtml += formattedDateEN
+                                                        }
+                                                        dataHtml += `</p>
+                                                </div>
+                                        </div>
+                                </div>
+                            </a>
+                        </div>`;
+                        });
+
+                        dataHtml += ` </div>
+                                                             </div>`;
+
+                        $("#data-container").html(dataHtml);
+                    }
+                });
+
+            }
+
+            getPagination(function (done) {
+                //debugger;
+                $.ajax({
+                    url: '/Frontend_IR/Get_IR_annual_report',
+                    type: 'GET',
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+
+                        let pp = [];
+
+                        if (response && response.obj && Array.isArray(response.obj)) {
+                            response.obj.forEach(data => pp.push(data));
+                        } else {
+                            console.log('Invalid response or missing "obj" property');
+                        }
+
+                        done(pp);
+                        console.log(pp);
+                    },
+                    error: function (error) {
+                        console.log('AJAX request failed:', error);
+                    }
+                });
+            });
+        });
+
+        function getDateString(date) {
+
+            var dtStart = new Date(parseInt(date.substr(6)));
+
+            return moment(dtStart).format("YYYY");
+        }
+
+        $(document).on('click', '.SW_TH, .SW_EN', function (e) {
+            location.reload();
+        });
+
+
+    </script>
+    }
 
