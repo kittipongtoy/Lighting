@@ -1170,6 +1170,12 @@ namespace Lighting.Controllers.Frontend
             return View();
         }
 
+        public async Task<IActionResult> Get_IR_NewDetail()
+        {
+            var DB = await db.IR_NewDetail.Where(x => x.Status == 1).ToListAsync();
+            return Ok(DB);
+        }
+
         public IActionResult IR_set_announcement_detail(int? Id)
         {
             return View();

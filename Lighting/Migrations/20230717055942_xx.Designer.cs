@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lighting.Migrations
 {
     [DbContext(typeof(LightingContext))]
-    [Migration("20230717044628_xx")]
+    [Migration("20230717055942_xx")]
     partial class xx
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -359,6 +359,18 @@ namespace Lighting.Migrations
                     b.Property<string>("detail_th")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("detailsTitleENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("detailsTitleTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("title_ENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("title_TH")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("updated_at")
                         .HasColumnType("datetime2");
 
@@ -415,10 +427,16 @@ namespace Lighting.Migrations
                     b.Property<string>("file_name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("file_name_ENG")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("file_type")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("image_name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("image_name_ENG")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("title_file_en")
@@ -1520,9 +1538,9 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "84430850-7b63-4828-be54-c6a723d51915",
+                            Id = "e1f4f096-8d65-4675-870c-136df3f72c27",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2163ce9d-83bd-4c55-bca2-153052f108aa",
+                            ConcurrencyStamp = "8f96ee2f-46e4-4f83-8eb7-3ead4531b3a0",
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -1532,9 +1550,9 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB7iSxolWApVgHGapETxvbfBHz2LikxRvuthZuW9k2uo2Ex/Yk/lqDgSaUxf3r3yhA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFw40PZSWLeyGO/DaeH0HKydv/NG3n05NOxF1TVdUbfxE/AxN6V4F/zYDeDUpdqdtA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "674a21bf-b0b3-4064-99e1-30357e4e1cc3",
+                            SecurityStamp = "5c49b4e2-ed58-49f2-94ad-1055e3c86bed",
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -2163,6 +2181,24 @@ namespace Lighting.Migrations
                     b.Property<string>("detail_th")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("detailsTitleENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("detailsTitleTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("titleDetails_ENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("titleDetails_TH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("title_ENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("title_TH")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("updated_at")
                         .HasColumnType("datetime2");
 
@@ -2185,10 +2221,16 @@ namespace Lighting.Migrations
                     b.Property<string>("file_name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("file_name_ENG")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("file_type")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("image_name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("image_name_ENG")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("title_file_en")
@@ -2491,13 +2533,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "96f961aa-c089-4ee2-ac00-e32f902c2f5e",
-                            ConcurrencyStamp = "1a16b7b8-9b75-4014-8791-3dbd8e086f71",
+                            Id = "568a0940-446d-4807-8d13-e51a08862bdb",
+                            ConcurrencyStamp = "3e9183d6-0833-4973-a540-1bb1622f2929",
                             Name = "Admin",
                             NameThai = "Admin",
                             NormalizedName = "Admin",
-                            created_at = new DateTime(2023, 7, 17, 4, 46, 27, 252, DateTimeKind.Utc).AddTicks(6306),
-                            updated_at = new DateTime(2023, 7, 17, 4, 46, 27, 252, DateTimeKind.Utc).AddTicks(6311)
+                            created_at = new DateTime(2023, 7, 17, 5, 59, 42, 190, DateTimeKind.Utc).AddTicks(5597),
+                            updated_at = new DateTime(2023, 7, 17, 5, 59, 42, 190, DateTimeKind.Utc).AddTicks(5610)
                         });
                 });
 
@@ -3996,8 +4038,8 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "84430850-7b63-4828-be54-c6a723d51915",
-                            RoleId = "96f961aa-c089-4ee2-ac00-e32f902c2f5e"
+                            UserId = "e1f4f096-8d65-4675-870c-136df3f72c27",
+                            RoleId = "568a0940-446d-4807-8d13-e51a08862bdb"
                         });
                 });
 

@@ -150,120 +150,130 @@
 @section Scripts{
     <script>
 
-        var getPagination;
+        //var getPagination;
+        //$(function () {
+        //    //debugger;
+        //    let container = $('#pagination');
+        //    getPagination = function (dto) {
+        //        var local = "@language";
 
-        $(function () {
-            //debugger;
-            let container = $('#pagination');
-            getPagination = function (dto) {
-                var local = "@language";
+        //        var title = function ({ titleTH, titleENG }, lag) {
+        //            if (lag === "TH") {
+        //                if (titleTH.toLowerCase() == "null") {
+        //                    return titleTH;
+        //                } else {
+        //                    return titleTH;
+        //                }
+        //                //return FileDownload_TH;
+        //            } else if (lag === "EN") {
+        //                if (titleENG.toLowerCase() == "null") {
+        //                    return titleENG;
+        //                } else {
+        //                    return titleENG;
+        //                }
+        //                //return FileDownload_ENG;
+        //            }
+        //        }
 
-                var title = function ({ titleTH, titleENG }, lag) {
-                    if (lag === "TH") {
-                        if (titleTH.toLowerCase() == "null") {
-                            return titleTH;
-                        } else {
-                            return titleTH;
-                        }
-                        //return FileDownload_TH;
-                    } else if (lag === "EN") {
-                        if (titleENG.toLowerCase() == "null") {
-                            return titleENG;
-                        } else {
-                            return titleENG;
-                        }
-                        //return FileDownload_ENG;
-                    }
-                }
+        //        var date = function ({ inputDate }, lag) {
+        //            if (lag === "TH") {
+        //                return getDateString(inputDate);
+        //            } else if (lag === "EN") {
+        //                return getDateString(inputDate);
+        //            }
+        //        }
 
-                var date = function ({ inputDate }, lag) {
-                    if (lag === "TH") {
-                        return getDateString(inputDate);
-                    } else if (lag === "EN") {
-                        return getDateString(inputDate);
-                    }
-                }
+        //        var file = function ({ file_name, file_name_ENG }, lag) {
+        //            if (lag === "TH") {
+        //                if (file_name.toLowerCase() == "null") {
+        //                    return file_name;
+        //                } else {
+        //                    return file_name;
+        //                }
+        //                //return FileDownload_TH;
+        //            } else if (lag === "EN") {
+        //                if (file_name_ENG.toLowerCase() == "null") {
+        //                    return file_name_ENG;
+        //                } else {
+        //                    return file_name_ENG;
+        //                }
+        //                //return FileDownload_ENG;
+        //            }
+        //        }
 
-                var file = function ({ file_name, file_name_ENG }, lag) {
-                    if (lag === "TH") {
-                        if (file_name.toLowerCase() == "null") {
-                            return file_name;
-                        } else {
-                            return file_name;
-                        }
-                        //return FileDownload_TH;
-                    } else if (lag === "EN") {
-                        if (file_name_ENG.toLowerCase() == "null") {
-                            return file_name_ENG;
-                        } else {
-                            return file_name_ENG;
-                        }
-                        //return FileDownload_ENG;
-                    }
-                }
+        //        var GetId = function ({ id }, lag) {
+        //            if (lag === "TH") {
+        //                return id;
+        //            } else if (lag === "EN") {
+        //                return id;
+        //            }
+        //        }
 
-                var GetId = function ({ id }, lag) {
-                    if (lag === "TH") {
-                        return id;
-                    } else if (lag === "EN") {
-                        return id;
-                    }
-                }
+        //        container.pagination({
+        //            dataSource: dto,
+        //            pageSize: 15,
+        //            position: 'center',
+        //            callback: function (data, pagination) {
+        //                var dataHtml = ``;
 
-                container.pagination({
-                    dataSource: dto,
-                    pageSize: 15,
-                    position: 'center',
-                    callback: function (data, pagination) {
-                        var dataHtml = ``;
+        //                $.each(data, function (index, item) {
 
-                        $.each(data, function (index, item) {
+        //                    var date = new Date(item.inputDate);
+        //                    var optionsTH = { year: 'numeric', month: 'long', day: 'numeric' };
+        //                    var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
 
-                            var date = new Date(item.inputDate);
-                            var optionsTH = { year: 'numeric', month: 'long', day: 'numeric' };
-                            var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
+        //                    var optionsEN = { year: 'numeric', month: 'long', day: 'numeric' };
+        //                    var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
 
-                            var optionsEN = { year: 'numeric', month: 'long', day: 'numeric' };
-                            var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
+        //                    dataHtml += `<tr>
+        //                                              <td>
+        //                                                  <a href="../upload_file/SH_IR_download_financialStatements/`+ file(item, local) + ` " target ="_blank" > ` + title(item, local) + ` </a>
+        //                                        </td>
+        //                                        <td>`;
+        //                    if (local == "TH") {
+        //                        dataHtml += formattedDateTH
+        //                    } else {
+        //                        dataHtml += formattedDateEN
+        //                    }
+        //                    dataHtml += ` </td>
+        //                                        </tr>`;
 
-                            dataHtml += ``;
+        //                });
 
-                        });
+        //                dataHtml += ``;
 
-                        dataHtml += ``;
+        //                $("#data-container").html(dataHtml);
+        //            }
+        //        });
 
-                        $("#data-container").html(dataHtml);
-                    }
-                });
+        //    }
 
-            }
+        //    getPagination(function (done) {
+        //        //debugger;
+        //        $.ajax({
+        //            url: '/Frontend_IR/Get_IR_NewDetail',
+        //            type: 'GET',
+        //            processData: false,
+        //            contentType: false,
+        //            success: function (response) {
 
-            getPagination(function (done) {
-                //debugger;
-                //$.ajax({
-                //    url: '/Frontend_IR/Get_IR_Finance_Statement',
-                //    type: 'GET',
-                //    processData: false,
-                //    contentType: false,
-                //    success: function (response) {
+        //                let pp = [];
 
-                let pp = [];
+        //                if (response && response.obj && Array.isArray(response.obj)) {
+        //                    response.obj.forEach(data => pp.push(data));
+        //                } else {
+        //                    console.log('Invalid response or missing "obj" property');
+        //                }
 
-                //if (response && response.obj && Array.isArray(response.obj)) {
+        //                done(pp);
+        //                console.log(pp);
+        //            },
+        //            error: function (error) {
+        //                console.log('AJAX request failed:', error);
+        //            }
+        //        });
+        //    });
 
-                //} else {
-                //    console.log('Invalid response or missing "obj" property');
-                //}
-                response.obj.forEach(data => pp.push(@Count_IR_NewDetail));
-                done(pp);
-                //console.log(pp);
-                //    },
-                //    error: function (error) {
-                //        console.log('AJAX request failed:', error);
-                //    }
-                //});
-            });
-
-        });
+        //});
     </script>
 }

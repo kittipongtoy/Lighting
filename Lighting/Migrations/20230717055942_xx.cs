@@ -217,6 +217,10 @@ namespace Lighting.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    title_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    title_ENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     detail_th = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     detail_en = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -253,9 +257,11 @@ namespace Lighting.Migrations
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     image_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    image_name_ENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     title_file_th = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     title_file_en = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     file_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    file_name_ENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     file_type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     use_status = table.Column<int>(type: "int", nullable: true),
                     created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1110,6 +1116,12 @@ namespace Lighting.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    title_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    title_ENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleDetails_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleDetails_ENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     detail_th = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     detail_en = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1127,9 +1139,11 @@ namespace Lighting.Migrations
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     image_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    image_name_ENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     title_file_th = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     title_file_en = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     file_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    file_name_ENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     file_type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     use_status = table.Column<int>(type: "int", nullable: true),
                     created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -2129,17 +2143,17 @@ namespace Lighting.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NameThai", "NormalizedName", "created_at", "updated_at" },
-                values: new object[] { "96f961aa-c089-4ee2-ac00-e32f902c2f5e", "1a16b7b8-9b75-4014-8791-3dbd8e086f71", "Admin", "Admin", "Admin", new DateTime(2023, 7, 17, 4, 46, 27, 252, DateTimeKind.Utc).AddTicks(6306), new DateTime(2023, 7, 17, 4, 46, 27, 252, DateTimeKind.Utc).AddTicks(6311) });
+                values: new object[] { "568a0940-446d-4807-8d13-e51a08862bdb", "3e9183d6-0833-4973-a540-1bb1622f2929", "Admin", "Admin", "Admin", new DateTime(2023, 7, 17, 5, 59, 42, 190, DateTimeKind.Utc).AddTicks(5597), new DateTime(2023, 7, 17, 5, 59, 42, 190, DateTimeKind.Utc).AddTicks(5610) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ApplicationFile", "ConcurrencyStamp", "Email", "EmailConfirmed", "EmployeeCode", "EmployeeCodeInt", "Firstname", "GuarantorIdentificationCardFile", "Isactive", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePath", "ReceptionistFile", "SecurityStamp", "TwoFactorEnabled", "UserName", "created_at", "updated_at" },
-                values: new object[] { "84430850-7b63-4828-be54-c6a723d51915", 0, null, null, "2163ce9d-83bd-4c55-bca2-153052f108aa", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEB7iSxolWApVgHGapETxvbfBHz2LikxRvuthZuW9k2uo2Ex/Yk/lqDgSaUxf3r3yhA==", null, false, null, null, "674a21bf-b0b3-4064-99e1-30357e4e1cc3", false, "Admin@Lighting.com", null, null });
+                values: new object[] { "e1f4f096-8d65-4675-870c-136df3f72c27", 0, null, null, "8f96ee2f-46e4-4f83-8eb7-3ead4531b3a0", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEFw40PZSWLeyGO/DaeH0HKydv/NG3n05NOxF1TVdUbfxE/AxN6V4F/zYDeDUpdqdtA==", null, false, null, null, "5c49b4e2-ed58-49f2-94ad-1055e3c86bed", false, "Admin@Lighting.com", null, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "96f961aa-c089-4ee2-ac00-e32f902c2f5e", "84430850-7b63-4828-be54-c6a723d51915" });
+                values: new object[] { "568a0940-446d-4807-8d13-e51a08862bdb", "e1f4f096-8d65-4675-870c-136df3f72c27" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
