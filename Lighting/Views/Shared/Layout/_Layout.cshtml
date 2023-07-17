@@ -156,7 +156,11 @@
 	var show_Analyst = "";
 	var here_Analyst = "";
 	if (ViewData["Title"] == "Analyst_Chapter"
-	|| ViewData["Title"] == "Analyst")
+	|| ViewData["Title"] == "Analyst_Chapter_Add"
+	|| ViewData["Title"] == "Analyst_Chapter_Edit"
+	|| ViewData["Title"] == "Analyst"
+	|| ViewData["Title"] == "Analyst_Add"
+	|| ViewData["Title"] == "Analyst_Edit")
 	{
 		show_Analyst = "show";
 		here_Analyst = "here";
@@ -1205,7 +1209,7 @@
 										</span>
 										<div class="menu-sub menu-sub-accordion menu-active-bg">
 											<div class="menu-item">
-												@if (ViewData["Title"] == "Analyst")
+												@if (ViewData["Title"] == "Analyst" || ViewData["Title"] == "Analyst_Add" || ViewData["Title"] == "Analyst_Edit")
 												{
 												<a class="menu-link active" href="@Url.Action("Analyst","Analyst")">
 													<span class="menu-bullet">
@@ -1225,7 +1229,7 @@
 												}	
 											</div>
 											<div class="menu-item">
-												@if (ViewData["Title"] == "Analyst_Chapter")
+												@if (ViewData["Title"] == "Analyst_Chapter" || ViewData["Title"] == "Analyst_Chapter_Add" || ViewData["Title"] == "Analyst_Chapter_Edit")
 												{
 													<a class="menu-link active" href="@Url.Action("Analyst_Chapter","Analyst")">
 														<span class="menu-bullet">

@@ -117,6 +117,22 @@
             public int? Status { get; set; }
         }
 
+        public class IR_IR_Analyst_ChaptertResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? FileName_TH { get; set; }
+            public string? FileName_EN { get; set; }
+        }
+
+        public class IR_AnalystResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? FileName_TH { get; set; }
+            public string? FileName_EN { get; set; }
+        }
+
         public class AuthorizationResponse
 		{
             public int? Index { get; set; }
