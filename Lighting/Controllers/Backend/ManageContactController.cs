@@ -17,33 +17,33 @@ namespace Lighting.Controllers.Backend
             _rootPath = _env.WebRootPath;
         }
 
-        public async Task<ActionResult> Index()
-        {
-            var contact = await _db.Contacts.AsNoTracking().Select(contact => new Output_ContactVM
-            {
-                Id = contact.Id,
-                CellPhone = contact.CellPhone,
-                ContactType = contact.ContactType,
-                Email = contact.Email,
-                GoogleMaps_Url = contact.GoogleMaps_Url,
-                ImagePath = contact.ImagePath,
-                Location_EN = contact.Location_EN,
-                Location_TH = contact.Location_TH,
-                OfficePhone = contact.OfficePhone,
-                PlaceName_EN = contact.PlaceName_EN,
-                PlaceName_TH = contact.PlaceName_TH,
-                TelePhone = contact.TelePhone,
-                YouTube_Url = contact.YouTube_Url,
-            }).ToListAsync();
+        //public async Task<ActionResult> Index()
+        //{
+        //    var contact = await _db.Contacts.AsNoTracking().Select(contact => new Output_ContactVM
+        //    {
+        //        Id = contact.Id,
+        //        CellPhone = contact.CellPhone,
+        //        ContactType = contact.ContactType,
+        //        Email = contact.Email,
+        //        GoogleMaps_Url = contact.GoogleMaps_Url,
+        //        ImagePath = contact.ImagePath,
+        //        Location_EN = contact.Location_EN,
+        //        Location_TH = contact.Location_TH,
+        //        OfficePhone = contact.OfficePhone,
+        //        PlaceName_EN = contact.PlaceName_EN,
+        //        PlaceName_TH = contact.PlaceName_TH,
+        //        TelePhone = contact.TelePhone,
+        //        YouTube_Url = contact.YouTube_Url,
+        //    }).ToListAsync();
 
-            if (contact != null)
-            {
-                return View(contact);
-            }
+        //    if (contact != null)
+        //    {
+        //        return View(contact);
+        //    }
 
-            var empty_contact = new List<Output_ContactVM>();
-            return View(empty_contact);
-        }
+        //    var empty_contact = new List<Output_ContactVM>();
+        //    return View(empty_contact);
+        //}
 
         public async Task<IActionResult> Edit_Page(int id)
         {

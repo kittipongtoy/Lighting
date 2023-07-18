@@ -1,66 +1,55 @@
 ﻿@{
     ViewData["Title"] = "Project_Category";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var lang = Context.Request.Cookies["lang"];
+    int max_page = 6;
+    var category_name = (Lighting.Areas.Identity.Data.Category_Project)ViewData["category"];
 }
+@model IEnumerable<Lighting.Areas.Identity.Data.Category_Project>
 <!---------- PROJECT - REF :: CATEGORY ---------->
 <div class="content-padding foot-pad">
     <div class="container-fluid">
         <div class="wrap-pad project-page">
             <div class="row">
                 <div class="col">
-                    <h2>FACADE / HISTORICAL STRUCTURE</h2>
+                    @if (lang == "EN")
+                    {
+                        <h2>@category_name.Name_EN</h2>
+                    }
+                    else
+                    {
+                        <h2>@category_name.Name_TH</h2>
+                    }
                 </div>
             </div>
             <div class="three-colPad">
                 <div class="row">
-                    <div class="col-lg-4 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("Project_Detail","Project")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/project/project01.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contentBox-topic">
-                                        <p>BHUMIBOL BRIDGE <br>(INDUSTRIAL RING ROAD)</p>
+                    @foreach (var project in Model)
+                    {
+                        <div class="col-lg-4 col-md-4 col-6">
+                            <a class="contentBox" href="@Url.Action("Project_Detail","Project",new {id= project.Id})">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="img-width"><img src="~/@project.Image_Path"></div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("Project_Detail","Project")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/project/project-cate05.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contentBox-topic">
-                                        <p>ARUN RATCHAWARARAM TEMPLE</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="contentBox-topic">
+                                            @if (lang == "EN")
+                                            {
+                                                <p>@Html.Raw(project.Name_EN)</p>
+                                            }
+                                            else
+                                            {
+                                                <p>@Html.Raw(project.Name_TH)</p>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("Project_Detail","Project")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/project/project02.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contentBox-topic">
-                                        <p>GRANDPA GRANDPA SHRINE <br>UDONTHANI</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
+                    }
                 </div>
             </div>
             <div class="row">
@@ -68,20 +57,34 @@
                     <div class="content-center">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination mt-4">
+
                                 <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
+                                    <a class="page-link" href="/Project/Project_Category?categoryId=@ViewBag.categoryId&start=@(ViewBag.CurrentPage > 0 ? ViewBag.CurrentPage - max_page:0)" aria-label="Previous">
                                         <i class="fas fa-arrow-left"></i>
                                     </a>
                                 </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                @if (ViewBag.Pagination != null)
+                                {
+                                    int page_count = 1;
+                                    foreach (var pagination_num in ViewBag.Pagination)
+                                    {
+                                        if (ViewBag.CurrentPage == pagination_num)
+                                        {
+                                            <li class="page-item active"><a class="page-link" href="/Project/Project_Category?categoryId=@ViewBag.categoryId&start=@pagination_num">@page_count</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="page-item "><a class="page-link" href="/Project/Project_Category?categoryId=@ViewBag.categoryId&start=@pagination_num">@page_count</a></li>
+                                        }
+                                        page_count++;
+                                    }
+                                }
                                 <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
+                                    <a class="page-link" href="/Project/Project_Category?categoryId=@ViewBag.categoryId&start=@((ViewBag.CurrentPage + max_page) > ViewBag.MaximumPage ? ViewBag.MaximumPage :(ViewBag.CurrentPage + max_page)  )" aria-label="Next">
                                         <i class="fas fa-arrow-right"></i>
                                     </a>
                                 </li>
+
                             </ul>
                         </nav>
                     </div>

@@ -5,18 +5,17 @@
 @model IEnumerable<Lighting.Models.InputFilterModels.News.Output_NewsVm>
 
 <div class="container " style="width:100%">
-    <div class="row d-flex justify-content-between mb-3">
-        <div class="col  d-flex justify-content-center">
+    <div class=" d-flex justify-content-between mb-3">
+        <div>
+            @*
             <a href="/news/index" class="btn btn-primary rounded-2">
-                ข่าวทั้งหมด/ All News
+            ข่าวทั้งหมด/ All News
             </a>
+            *@
         </div>
-        <div class="col  d-flex justify-content-center">
-
-            <a href="@Url.Action("Add_News_Page","news")" class="btn btn-primary ">
-                เพิ่มข่าว / Add News
-            </a>
-        </div>
+        <a href="@Url.Action("Add_News_Page","news")" class="btn btn-primary ">
+            เพิ่มข่าว / Add News
+        </a>
     </div>
     <div class="row d-flex justify-content-center gap-5 d-flex-wraps mt-2" id="card_container">
         @foreach (var news in Model)

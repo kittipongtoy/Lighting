@@ -12,32 +12,32 @@ namespace Lighting.Controllers.Backend
         {
             _db = db;
         }
-        public async Task<IActionResult> Index()
-        {
-            var jobs = await _db.ApplyJobs
-                .OrderByDescending(job => job.Id)
-                .Select(job => new Output_ApplyJobVM
-                {
-                    Id = job.Id,
-                    Date_EN = job.Date_EN,
-                    Date_TH = job.Date_TH,
-                    Email1 = job.Email1,
-                    Email2 = job.Email2,
-                    PhoneNumber = job.PhoneNumber,
-                    PositionName_EN = job.PositionName_EN,
-                    PositionName_TH = job.PositionName_TH,
-                    Qualification_EN = job.Qualification_EN,
-                    Qualification_TH = job.Qualification_TH,
-                    Quantity = job.Quantity,
-                    Respondsibility_EN = job.Respondsibility_EN,
-                    Respondsibility_TH = job.Respondsibility_TH,
-                    WorkPlace_EN = job.WorkPlace_EN,
-                    WorkPlace_TH = job.WorkPlace_TH,
-                })
-                .ToListAsync();
+        //public async Task<IActionResult> Index()
+        //{
+        //    var jobs = await _db.ApplyJobs
+        //        .OrderByDescending(job => job.Id)
+        //        .Select(job => new Output_ApplyJobVM
+        //        {
+        //            Id = job.Id,
+        //            Date_EN = job.Date_EN,
+        //            Date_TH = job.Date_TH,
+        //            Email1 = job.Email1,
+        //            Email2 = job.Email2,
+        //            PhoneNumber = job.PhoneNumber,
+        //            PositionName_EN = job.PositionName_EN,
+        //            PositionName_TH = job.PositionName_TH,
+        //            Qualification_EN = job.Qualification_EN,
+        //            Qualification_TH = job.Qualification_TH,
+        //            Quantity = job.Quantity,
+        //            Respondsibility_EN = job.Respondsibility_EN,
+        //            Respondsibility_TH = job.Respondsibility_TH,
+        //            WorkPlace_EN = job.WorkPlace_EN,
+        //            WorkPlace_TH = job.WorkPlace_TH,
+        //        })
+        //        .ToListAsync();
 
-            return View(jobs);
-        }
+        //    return View(jobs);
+        //}
         public IActionResult Add_Job_Page()
         {
 
@@ -111,6 +111,7 @@ namespace Lighting.Controllers.Backend
         {
             var jobs = await _db.ApplyJobs
                 .AsNoTracking()
+                .OrderByDescending(x => x.Id)
                 .Select(job =>
                 new Output_ApplyJobVM
                 {

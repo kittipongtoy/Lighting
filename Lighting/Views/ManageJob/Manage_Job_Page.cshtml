@@ -5,14 +5,15 @@
 @model IEnumerable<Lighting.Models.InputFilterModels.ApplyJob.Output_ApplyJobVM>
 
 <div class="container" style="width:100%;">
-    <div class="row d-flex justify-content-between mb-3">
-        <div class="col  d-flex justify-content-center">
-
+    <div style="display:flex;justify-content:space-between">
+        <div >
+            @*
             <a href="@Url.Action("index","ManageJob")" class="btn btn-primary">
-                ดูงานทั้งหมด/View All Job
+            ดูงานทั้งหมด/View All Job
             </a>
+            *@
         </div>
-        <div class="col  d-flex justify-content-center">
+        <div >
             <a href="@Url.Action("Add_Job_Page","ManageJob")" class="btn btn-primary rounded-2">
                 เพิ่มงาน/Add Job
             </a>
@@ -41,7 +42,7 @@
                             <button type="button" class="btn btn-warning" onclick="editById(@job.Id)">
                                 <i class="bi bi-pencil-square"></i>แก้ไข/edit
                             </button>
-                            <button type="button" class="btn btn-danger" style="margin-left: 15px;" onclick="deleteRowById(@job.Id)">
+                            <button type="button" class="btn btn-danger"  onclick="deleteRowById(@job.Id)">
                                 <i class="bi bi-trash-fill"></i>ลบ/delete
                             </button>
                         </td>

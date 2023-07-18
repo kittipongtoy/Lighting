@@ -227,6 +227,31 @@ namespace Lighting.Migrations
                     b.ToTable("Board_of_Directors");
                 });
 
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.Category_Project", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Image_Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name_EN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name_TH")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category_Projects");
+                });
+
             modelBuilder.Entity("Lighting.Areas.Identity.Data.Company_Overview", b =>
                 {
                     b.Property<int>("id")
@@ -1536,9 +1561,9 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e1f4f096-8d65-4675-870c-136df3f72c27",
+                            Id = "e68c8e5e-663b-4554-afe7-891fb2aa3d09",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8f96ee2f-46e4-4f83-8eb7-3ead4531b3a0",
+                            ConcurrencyStamp = "7a246b59-b955-4a9b-89fa-26c7b7a4987d",
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -1548,9 +1573,9 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFw40PZSWLeyGO/DaeH0HKydv/NG3n05NOxF1TVdUbfxE/AxN6V4F/zYDeDUpdqdtA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMyLEAdniglZkuA/uu+I7llpXiM3ImHMdsSMWqd8AC9Bs9CjToD1n7/I2NsWFAnmUw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5c49b4e2-ed58-49f2-94ad-1055e3c86bed",
+                            SecurityStamp = "f17e7870-6762-483f-af3a-5f5c2b491055",
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -2493,6 +2518,69 @@ namespace Lighting.Migrations
                     b.ToTable("P_philosophy");
                 });
 
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.ProjectRef", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Client")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Content_EN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Content_TH")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Design_Solution")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("File_Download")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Folder_Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location_EN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location_TH")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Photo_Credit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Profile_Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProjectRef_CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title_EN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title_TH")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectRef_CategoryId");
+
+                    b.ToTable("ProjectRefs");
+                });
+
             modelBuilder.Entity("Lighting.Areas.Identity.Data.Role", b =>
                 {
                     b.Property<string>("Id")
@@ -2531,13 +2619,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "568a0940-446d-4807-8d13-e51a08862bdb",
-                            ConcurrencyStamp = "3e9183d6-0833-4973-a540-1bb1622f2929",
+                            Id = "4498ec49-a34b-4f89-9125-2df89903c107",
+                            ConcurrencyStamp = "c4748d33-785a-4ebd-b530-6c09bdbb93ac",
                             Name = "Admin",
                             NameThai = "Admin",
                             NormalizedName = "Admin",
-                            created_at = new DateTime(2023, 7, 17, 5, 59, 42, 190, DateTimeKind.Utc).AddTicks(5597),
-                            updated_at = new DateTime(2023, 7, 17, 5, 59, 42, 190, DateTimeKind.Utc).AddTicks(5610)
+                            created_at = new DateTime(2023, 7, 17, 7, 34, 42, 968, DateTimeKind.Utc).AddTicks(3846),
+                            updated_at = new DateTime(2023, 7, 17, 7, 34, 42, 968, DateTimeKind.Utc).AddTicks(3849)
                         });
                 });
 
@@ -4036,8 +4124,8 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "e1f4f096-8d65-4675-870c-136df3f72c27",
-                            RoleId = "568a0940-446d-4807-8d13-e51a08862bdb"
+                            UserId = "e68c8e5e-663b-4554-afe7-891fb2aa3d09",
+                            RoleId = "4498ec49-a34b-4f89-9125-2df89903c107"
                         });
                 });
 
@@ -4058,6 +4146,17 @@ namespace Lighting.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.ProjectRef", b =>
+                {
+                    b.HasOne("Lighting.Areas.Identity.Data.Category_Project", "ProjectRef_Category")
+                        .WithMany()
+                        .HasForeignKey("ProjectRef_CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProjectRef_Category");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
