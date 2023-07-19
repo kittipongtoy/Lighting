@@ -55,92 +55,17 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-xl-9 col-lg-10 col-md-11 col-12">
-                    <div class="timeline-section" id="data-container">
-                        @if (Count_IR_NewDetail.Count() != 0)
-                        {
-                            if (Context.Request.Cookies["lang"] == "EN")
-                            {
-                                foreach (var item in ViewBag.IR_NewDetail)
-                                {
-                                    <div class="newsBox">
-                                        <div class="row">
-                                            <div class="col">
-                                                <a class="news-content" href="@Url.Action("IR_set_announcement_detail","Frontend_IR",new { Id = item.Id })">
-                                                    <div class="news-topic">
-                                                        <p>@item.Title_EN</p>
-                                                    </div>
-                                                    @if (@item.NewDate != null)
-                                                    {
-                                                        <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
-                                                    }
-                                                    else
-                                                    {
-                                                        <div class="news-date"></div>
-                                                    }
-                                                    <div class="txt-content">
-                                                        @Html.Raw(item.Detail_EN)
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            else
-                            {
-                                foreach (var item in ViewBag.IR_NewDetail)
-                                {
-                                    <div class="newsBox">
-                                        <div class="row">
-                                            <div class="col">
-                                                <a class="news-content" href="@Url.Action("IR_set_announcement_detail","Frontend_IR",new { Id = item.Id })">
-                                                    <div class="news-topic">
-                                                        <p>@item.Title_TH</p>
-                                                    </div>
-                                                    @if (@item.NewDate != null)
-                                                    {
-                                                        <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
-                                                    }
-                                                    else
-                                                    {
-                                                        <div class="news-date"></div>
-                                                    }
-                                                    <div class="txt-content">
-                                                        @Html.Raw(item.Detail_TH)
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                        }
-                        else
-                        {
-                            <div class="newsBox">
-                                <div class="row">
-                                    <div class="col">
-                                        <a class="news-content" href="@Url.Action("IR_set_announcement_detail","Frontend_IR")">
-                                            <div class="news-topic">
-                                                <p>หัวข้อข่าวแจ้งตลาดหลักทรัพย์ หัวข้อข่าวแจ้งตลาดหลักทรัพย์ หัวข้อข่าวแจ้งตลาดหลักทรัพย์</p>
-                                            </div>
-                                            <div class="news-date">18 FEB 2023</div>
-                                            <div class="txt-content">
-                                                <p>อาข่าซี้อพาร์ตเมนท์ สโลว์ออร์แกนิคสโตน ดีไซน์เนอร์ซินโดรมพาสต้า รันเวย์ฮากกาด็อกเตอร์ อวอร์ดชิฟฟอนเอ็นทรานซ์ ชะโนดวอเตอร์ธรรมา บูมตะหงิดคองเกรสสถาปัตย์ ศึกษาศาสตร์เซาท์อัลบั้มสตริง วีซ่าวิลเลจแอ็คชั่น ปิโตรเคมีสติกเกอร์มิลค์ แพทเทิร์นผลักดันมายองเนสเนอะ เพนกวินเด้อคอมพ์โปรโมท พงษ์เปราะบาง พาร์ทเนอร์ แจ๊กเก็ตเซอร์วิสแอดมิชชั่นทอร์นาโดเทอร์โบ แฟลชอัลตราฉลุย</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
+                    <div class="timeline-section" id="data-container"></div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col">
                     <div class="content-center">
-                        <nav aria-label="Page navigation example" id="pagination"></nav>
+                        <nav aria-label="Page navigation example">
+                            <div id="pagination">
+                            </div>
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -150,130 +75,146 @@
 @section Scripts{
     <script>
 
-        //var getPagination;
-        //$(function () {
-        //    //debugger;
-        //    let container = $('#pagination');
-        //    getPagination = function (dto) {
-        //        var local = "@language";
+        var getPagination;
+        $(function () {
+            let container = $('#pagination');
+            getPagination = function (dto) {
+                var local = "@language";
+                var title = function ({ title_TH, title_EN }, lag) {
+                    if (lag === "TH") {
+                        if (title_TH == "null") {
+                            return title_TH;
+                        } else {
+                            return title_TH;
+                        }
+                    } else if (lag === "EN") {
+                        if (title_EN == "null") {
+                            return title_EN;
+                        } else {
+                            return title_EN;
+                        }
+                    }
+                }
 
-        //        var title = function ({ titleTH, titleENG }, lag) {
-        //            if (lag === "TH") {
-        //                if (titleTH.toLowerCase() == "null") {
-        //                    return titleTH;
-        //                } else {
-        //                    return titleTH;
-        //                }
-        //                //return FileDownload_TH;
-        //            } else if (lag === "EN") {
-        //                if (titleENG.toLowerCase() == "null") {
-        //                    return titleENG;
-        //                } else {
-        //                    return titleENG;
-        //                }
-        //                //return FileDownload_ENG;
-        //            }
-        //        }
+                var details = function ({ detail_TH, detail_EN }, lag) {
+                    if (lag === "TH") {
+                        if (detail_TH == "null") {
+                            return detail_TH;
+                        } else {
+                            return detail_TH;
+                        }
+                    } else if (lag === "EN") {
+                        if (detail_EN == "null") {
+                            return detail_EN;
+                        } else {
+                            return detail_EN;
+                        }
+                    }
+                }
+                var date = function ({ newDate }, lag) {
+                    if (lag === "TH") {
+                        return getDateString(newDate);
+                    } else if (lag === "EN") {
+                        return getDateString(newDate);
+                    }
+                }
 
-        //        var date = function ({ inputDate }, lag) {
-        //            if (lag === "TH") {
-        //                return getDateString(inputDate);
-        //            } else if (lag === "EN") {
-        //                return getDateString(inputDate);
-        //            }
-        //        }
+                var file = function ({ fileName_TH, fileName_EN }, lag) {
+                    if (lag === "TH") {
+                        if (fileName_TH == "null") {
+                            return fileName_TH;
+                        } else {
+                            return fileName_TH;
+                        }
+                    } else if (lag === "EN") {
+                        if (fileName_EN == "null") {
+                            return fileName_EN;
+                        } else {
+                            return fileName_EN;
+                        }
+                    }
+                }
 
-        //        var file = function ({ file_name, file_name_ENG }, lag) {
-        //            if (lag === "TH") {
-        //                if (file_name.toLowerCase() == "null") {
-        //                    return file_name;
-        //                } else {
-        //                    return file_name;
-        //                }
-        //                //return FileDownload_TH;
-        //            } else if (lag === "EN") {
-        //                if (file_name_ENG.toLowerCase() == "null") {
-        //                    return file_name_ENG;
-        //                } else {
-        //                    return file_name_ENG;
-        //                }
-        //                //return FileDownload_ENG;
-        //            }
-        //        }
+                var GetId = function ({ id }, lag) {
+                    if (lag === "TH") {
+                        return id;
+                    } else if (lag === "EN") {
+                        return id;
+                    }
+                }
 
-        //        var GetId = function ({ id }, lag) {
-        //            if (lag === "TH") {
-        //                return id;
-        //            } else if (lag === "EN") {
-        //                return id;
-        //            }
-        //        }
+                container.pagination({
+                    dataSource: dto,
+                    pageSize: 10,
+                    position: 'center',
+                    callback: function (data, pagination) {
+                        var dataHtml = ``;
 
-        //        container.pagination({
-        //            dataSource: dto,
-        //            pageSize: 15,
-        //            position: 'center',
-        //            callback: function (data, pagination) {
-        //                var dataHtml = ``;
+                        $.each(data, function (index, item) {
 
-        //                $.each(data, function (index, item) {
+                            var date = new Date(item.newDate);
+                            var optionsTH = { year: 'numeric', month: 'long', day: 'numeric' };
+                            var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
 
-        //                    var date = new Date(item.inputDate);
-        //                    var optionsTH = { year: 'numeric', month: 'long', day: 'numeric' };
-        //                    var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
+                            var optionsEN = { year: 'numeric', month: 'long', day: 'numeric' };
+                            var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
 
-        //                    var optionsEN = { year: 'numeric', month: 'long', day: 'numeric' };
-        //                    var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
+                            dataHtml += `<div class="newsBox">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a class="news-content" href="../Frontend_IR/IR_set_announcement_detail/?Id=`+ GetId(item, local) + `">
+                                                                    <div class="news-topic">
+                                                                        <p>`+ title(item, local) + `</p>
+                                                                    </div>
 
-        //                    dataHtml += `<tr>
-        //                                              <td>
-        //                                                  <a href="../upload_file/SH_IR_download_financialStatements/`+ file(item, local) + ` " target ="_blank" > ` + title(item, local) + ` </a>
-        //                                        </td>
-        //                                        <td>`;
-        //                    if (local == "TH") {
-        //                        dataHtml += formattedDateTH
-        //                    } else {
-        //                        dataHtml += formattedDateEN
-        //                    }
-        //                    dataHtml += ` </td>
-        //                                        </tr>`;
+                                                                        <div class="news-date">`;
+                            if (local == "TH") {
+                                dataHtml += formattedDateTH
+                            } else {
+                                dataHtml += formattedDateEN
+                            }
 
-        //                });
+                            dataHtml += `</div>
 
-        //                dataHtml += ``;
+                                                                    <div class="txt-content">`+
+                                details(item, local)
+                                + `</div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>`;
+                        });
+                        dataHtml += ``;
+                        $("#data-container").html(dataHtml);
+                    }
+                });
+            }
 
-        //                $("#data-container").html(dataHtml);
-        //            }
-        //        });
+            getPagination(function (done) {
+                $.ajax({
+                    url: '/Frontend_IR/Get_IR_NewDetail',
+                    type: 'GET',
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
 
-        //    }
+                        let pp = [];
 
-        //    getPagination(function (done) {
-        //        //debugger;
-        //        $.ajax({
-        //            url: '/Frontend_IR/Get_IR_NewDetail',
-        //            type: 'GET',
-        //            processData: false,
-        //            contentType: false,
-        //            success: function (response) {
+                        if (response && response.obj && Array.isArray(response.obj)) {
+                            response.obj.forEach(data => pp.push(data));
+                        } else {
+                            console.log('Invalid response or missing "obj" property');
+                        }
 
-        //                let pp = [];
+                        done(pp);
+                        //console.log(pp);
+                    },
+                    error: function (error) {
+                        console.log('AJAX request failed:', error);
+                    }
+                });
+            });
 
-        //                if (response && response.obj && Array.isArray(response.obj)) {
-        //                    response.obj.forEach(data => pp.push(data));
-        //                } else {
-        //                    console.log('Invalid response or missing "obj" property');
-        //                }
-
-        //                done(pp);
-        //                console.log(pp);
-        //            },
-        //            error: function (error) {
-        //                console.log('AJAX request failed:', error);
-        //            }
-        //        });
-        //    });
-
-        //});
+        });
     </script>
 }

@@ -1,7 +1,9 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "IR_public_relation_detail";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var Count_IR_MassMedia = (List<Lighting.Areas.Identity.Data.IR_MassMedia>)ViewBag.IR_MassMedia;
+    var Count_IR_MassMediaDetail = (List<Lighting.Areas.Identity.Data.IR_MassMediaDetail>)ViewBag.IR_MassMediaDetail;
+
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
@@ -14,83 +16,271 @@
             <div class="row">
                 <div class="col">
                     <div class="header-twoline">
-                        <h5>ห้องข่าว</h5>
-                        <h1>ข่าวแจ้งสื่อมวลชน</h1>
+                        @if (Count_IR_MassMedia.Count() != 0)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                foreach (var item in ViewBag.IR_MassMedia)
+                                {
+                                    <h5>@item.Title_EN</h5>
+                                    <h1>@item.SubTitle_EN</h1>
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.IR_MassMedia)
+                                {
+                                    <h5>@item.Title_TH</h5>
+                                    <h1>@item.SubTitle_TH</h1>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <h5 id="Title">ห้องข่าว</h5>
+                            <h1 id="SubTitle">ข่าวแจ้งสื่อมวลชน</h1>
+                        }
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-11 col-md-11 col-12">
                     <div class="news-page">
-                        <div class="row">
-                            <div class="col">
-                                <h4>หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน</h4>
-                                <div class="news-date">17 FEB 2023 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="img-width"><img src="images/ir/ir-public01.jpg"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="txt-content indent">
-                                    <p>สโรชาเฟอร์นิเจอร์ ภควัทคีตาคลิปป๊อปแอ็คชั่นแจ๊กพอต นอร์ทรีเสิร์ชโปลิศแชมเปี้ยน เอ็นทรานซ์ฮากกา สไปเดอร์ เมเปิลมายองเนส ติ๋ม รุสโซจิตพิสัยรายชื่อ โพลล์ศิรินทร์ม้านั่งเนอะสปิริต ติงต๊องเบบี้บรา ก่อนหน้ารามาธิบดีลามะ เบิร์นนพมาศฟลุค ควีนพาสปอร์ตไมเกรนแบคโฮ ไพลินคลิปว้อดก้าแจ๊สไชน่า เฉิ่มซิ้มคาแรคเตอร์ สตีลพอเพียง อุปการคุณฮวงจุ้ยเซี้ยว เยอบีราแคชเชียร์ ศิลปวัฒนธรรมศิรินทร์ เครปขั้นตอนรีดไถ โซลาร์ คีตกวีโปรโมเตอร์แอ็กชั่นเปปเปอร์มินต์ครูเสด เบลอ สติกเกอร์ออยล์ ลีกคอนแท็คบัลลาสต์สแล็กเยอร์บีรา แฟ็กซ์ มหาอุปราชาเซ็นเซอร์ อะ ฮาร์ด คอลัมนิสต์ฮ็อตด็อกโจ๋ฟีเวอร์ภควัทคีตา แจ๊กเก็ตออร์เดอร์รากหญ้าเยอบีร่า ชนะเลิศโค้ก กุนซือแล็บ ชินบัญชรสโตน จตุคามคันยิพรีเมียร์ไนน์</p>
-                                    <p>ม็อบฮากกา สปอตจิ๊กโก๋แอ๊บแบ๊ว โยเกิร์ตปาสกาลสเตริโอมาร์ชซีอีโอ รากหญ้าเซลส์ซื่อบื้อเยอร์บีร่า โยโย่กิมจิสเก็ตช์กรุ๊ป เฉิ่ม ซะสเตริโอศึกษาศาสตร์ตนเอง ม้าหินอ่อนโฟม แมมโบ้กฤษณ์กู๋ไลท์ซูโม่ บริกรคอมเมนท์วิลล์ แพทยสภาเฟรช แฮมเบอร์เกอร์ออโต้เอ็กซ์เพรส คอร์สราชานุญาตคูลเลอร์คอมเพล็กซ์ ก่อนหน้า แชมปิยองแมนชั่นเป่ายิ้งฉุบอัลตรา อิ่มแปร้แมนชั่นแซมบ้าแชเชือนตัวตน เพียว มอยส์เจอไรเซอร์หลวงปู่โกลด์พงษ์ตี๋ สไตล์ซังเตหล่อฮังก้วยซูมลิสต์ โดนัทโทรโข่งซีเรียสแฟล็ต รามเทพสแล็กขั้นตอนเกรดแดรี่ อัลตราแฮปปี้แฟรนไชส์พรีเมียร์ ทำงานอิมพีเรียลแฟ็กซ์ ซัมเมอร์ ลอจิสติกส์ดีไซน์นพมาศอพาร์ตเมนท์ แครอทติว จีดีพีหงวนอุปัทวเหตุอุปัทวเหตุจตุคาม แช่แข็งแฮปปี้มาร์จินกราวนด์ แคร์มาราธอนวอลล์ งั้นโมหจริต เพรสฮองเฮาเก๊ะ จ๊อกกี้เอาท์ดอร์คอปเตอร์คันยิแบล็ค วิลล์วิลล์โฮปรีเสิร์ช ฮิปฮอปบลอนด์ รีเสิร์ชคาแร็คเตอร์เจไดโมจิเกมส์</p>
-                                    <p>สตูดิโอเมเปิล ปัจเจกชนหมั่นโถว ดีลเลอร์ไมค์พุดดิ้ง ไลน์สเก็ตช์ พุทธภูมิ โกเต็กซ์อัลไซเมอร์ปาสเตอร์เที่ยงวัน คลิปนอร์ทคอลัมน์ สตรอว์เบอร์รีแยมโรลเบญจมบพิตร รีสอร์ตป๊อปฮาร์ดสัมนา มือถือซูเอี๋ยแรลลีโชห่วย ปัจเจกชนธัมโม กิมจิไหร่ แรงผลักตรวจทานคลับซามูไรแฮมเบอร์เกอร์ โซน เวสต์แก๊สโซฮอล์อพาร์ทเมนต์ อมาตยาธิปไตยไคลแมกซ์ซินโดรมกุนซือ</p>
+                        @if (Count_IR_MassMediaDetail.Count() != 0)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                foreach (var item in ViewBag.IR_MassMediaDetail)
+                                {
+                                    <div class="row">
+                                        <div class="col">
+                                            <h4>@item.Title_EN</h4>
+                                            @if (@item.NewDate != null)
+                                            {
+                                                <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="news-date"></div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="img-width"><img src="/upload_image/IR_NewRoom/@item.Image"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="txt-content indent">
+                                                @Html.Raw(item.Detail_EN);
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6>@item.Question_EN</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-6 col-md-6 col-12">
+                                            <ul class="contact-info person-contact">
+                                                <li>
+                                                    <p>@item.ContactUs_Name1_EN</p>
+                                                </li>
+                                                <li>
+                                                    <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                                    <p>@item.ContactUs_Tel</p>
+                                                </li>
+                                                <li>
+                                                    <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                                    <p><a href="@item.ContactUs_Mail1">@item.ContactUs_Mail1</a></p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6 col-12">
+                                            <ul class="contact-info person-contact">
+                                                <li>
+                                                    <p>@item.ContactUs_Name2_EN</p>
+                                                </li>
+                                                <li>
+                                                    <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                                    <p>@item.ContactUs_Tel2</p>
+                                                </li>
+                                                <li>
+                                                    <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                                    <p><a href="@item.ContactUs_Mail2">@item.ContactUs_Mail2</a></p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="doubleBD"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="content-center">
+                                                <a class="buttonB" href="@Url.Action("IR_public_relation","Frontend_IR")"><i class="fas fa-long-arrow-alt-left"></i>ย้อนกลับ</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.IR_MassMediaDetail)
+                                {
+                                    <div class="row">
+                                        <div class="col">
+                                            <h4>@item.Title_TH</h4>
+                                            @if (@item.NewDate != null)
+                                            {
+                                                <div class="news-date">@item.NewDate.ToString("dd MMM yyyy")</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="news-date"></div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="img-width"><img src="/upload_image/IR_NewRoom/@item.Image"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="txt-content indent">
+                                                @Html.Raw(item.Detail_TH);
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6>@item.Question_TH</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-6 col-md-6 col-12">
+                                            <ul class="contact-info person-contact">
+                                                <li>
+                                                    <p>@item.ContactUs_Name1_TH</p>
+                                                </li>
+                                                <li>
+                                                    <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                                    <p>@item.ContactUs_Tel</p>
+                                                </li>
+                                                <li>
+                                                    <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                                    <p><a href="@item.ContactUs_Mail1">@item.ContactUs_Mail1</a></p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6 col-12">
+                                            <ul class="contact-info person-contact">
+                                                <li>
+                                                    <p>@item.ContactUs_Name2_TH</p>
+                                                </li>
+                                                <li>
+                                                    <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                                    <p>@item.ContactUs_Tel2</p>
+                                                </li>
+                                                <li>
+                                                    <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                                    <p><a href="@item.ContactUs_Mail2">@item.ContactUs_Mail2</a></p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="doubleBD"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="content-center">
+                                                <a class="buttonB" href="@Url.Action("IR_public_relation","Frontend_IR")"><i class="fas fa-long-arrow-alt-left"></i>ย้อนกลับ</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col">
+                                    <h4>หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน</h4>
+                                    <div class="news-date">17 FEB 2023 </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <h6>สอบถามรายละเอียดเพิ่มเติมได้ที่ : IR PLUS</h6>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-4 col-lg-6 col-md-6 col-12">
-                                <ul class="contact-info person-contact">
-                                    <li>
-                                        <p>คุณสารภี สายะเวส (จูน)</p>
-                                    </li>
-                                    <li>
-                                        <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                        <p>02-022-6200 ต่อ 610, 081-854-8170</p>
-                                    </li>
-                                    <li>
-                                        <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                        <p><a href="mailto:sarapee@irplus.in.th">sarapee@irplus.in.th</a></p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-xl-4 col-lg-6 col-md-6 col-12">
-                                <ul class="contact-info person-contact">
-                                    <li>
-                                        <p>คุณพรทิวา พูนคำ (ข้าว)</p>
-                                    </li>
-                                    <li>
-                                        <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                        <p>02-022-6200 ต่อ 615, 084-640-4501</p>
-                                    </li>
-                                    <li>
-                                        <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                        <p><a href="mailto:porntiwa@irplus.in.th">porntiwa@irplus.in.th</a></p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="doubleBD"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="content-center">
-                                    <a class="buttonB" href="@Url.Action("IR_public_relation","Frontend_IR")"><i class="fas fa-long-arrow-alt-left"></i>ย้อนกลับ</a>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="img-width"><img src="images/ir/ir-public01.jpg"></div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="txt-content indent">
+                                        <p>สโรชาเฟอร์นิเจอร์ ภควัทคีตาคลิปป๊อปแอ็คชั่นแจ๊กพอต นอร์ทรีเสิร์ชโปลิศแชมเปี้ยน เอ็นทรานซ์ฮากกา สไปเดอร์ เมเปิลมายองเนส ติ๋ม รุสโซจิตพิสัยรายชื่อ โพลล์ศิรินทร์ม้านั่งเนอะสปิริต ติงต๊องเบบี้บรา ก่อนหน้ารามาธิบดีลามะ เบิร์นนพมาศฟลุค ควีนพาสปอร์ตไมเกรนแบคโฮ ไพลินคลิปว้อดก้าแจ๊สไชน่า เฉิ่มซิ้มคาแรคเตอร์ สตีลพอเพียง อุปการคุณฮวงจุ้ยเซี้ยว เยอบีราแคชเชียร์ ศิลปวัฒนธรรมศิรินทร์ เครปขั้นตอนรีดไถ โซลาร์ คีตกวีโปรโมเตอร์แอ็กชั่นเปปเปอร์มินต์ครูเสด เบลอ สติกเกอร์ออยล์ ลีกคอนแท็คบัลลาสต์สแล็กเยอร์บีรา แฟ็กซ์ มหาอุปราชาเซ็นเซอร์ อะ ฮาร์ด คอลัมนิสต์ฮ็อตด็อกโจ๋ฟีเวอร์ภควัทคีตา แจ๊กเก็ตออร์เดอร์รากหญ้าเยอบีร่า ชนะเลิศโค้ก กุนซือแล็บ ชินบัญชรสโตน จตุคามคันยิพรีเมียร์ไนน์</p>
+                                        <p>ม็อบฮากกา สปอตจิ๊กโก๋แอ๊บแบ๊ว โยเกิร์ตปาสกาลสเตริโอมาร์ชซีอีโอ รากหญ้าเซลส์ซื่อบื้อเยอร์บีร่า โยโย่กิมจิสเก็ตช์กรุ๊ป เฉิ่ม ซะสเตริโอศึกษาศาสตร์ตนเอง ม้าหินอ่อนโฟม แมมโบ้กฤษณ์กู๋ไลท์ซูโม่ บริกรคอมเมนท์วิลล์ แพทยสภาเฟรช แฮมเบอร์เกอร์ออโต้เอ็กซ์เพรส คอร์สราชานุญาตคูลเลอร์คอมเพล็กซ์ ก่อนหน้า แชมปิยองแมนชั่นเป่ายิ้งฉุบอัลตรา อิ่มแปร้แมนชั่นแซมบ้าแชเชือนตัวตน เพียว มอยส์เจอไรเซอร์หลวงปู่โกลด์พงษ์ตี๋ สไตล์ซังเตหล่อฮังก้วยซูมลิสต์ โดนัทโทรโข่งซีเรียสแฟล็ต รามเทพสแล็กขั้นตอนเกรดแดรี่ อัลตราแฮปปี้แฟรนไชส์พรีเมียร์ ทำงานอิมพีเรียลแฟ็กซ์ ซัมเมอร์ ลอจิสติกส์ดีไซน์นพมาศอพาร์ตเมนท์ แครอทติว จีดีพีหงวนอุปัทวเหตุอุปัทวเหตุจตุคาม แช่แข็งแฮปปี้มาร์จินกราวนด์ แคร์มาราธอนวอลล์ งั้นโมหจริต เพรสฮองเฮาเก๊ะ จ๊อกกี้เอาท์ดอร์คอปเตอร์คันยิแบล็ค วิลล์วิลล์โฮปรีเสิร์ช ฮิปฮอปบลอนด์ รีเสิร์ชคาแร็คเตอร์เจไดโมจิเกมส์</p>
+                                        <p>สตูดิโอเมเปิล ปัจเจกชนหมั่นโถว ดีลเลอร์ไมค์พุดดิ้ง ไลน์สเก็ตช์ พุทธภูมิ โกเต็กซ์อัลไซเมอร์ปาสเตอร์เที่ยงวัน คลิปนอร์ทคอลัมน์ สตรอว์เบอร์รีแยมโรลเบญจมบพิตร รีสอร์ตป๊อปฮาร์ดสัมนา มือถือซูเอี๋ยแรลลีโชห่วย ปัจเจกชนธัมโม กิมจิไหร่ แรงผลักตรวจทานคลับซามูไรแฮมเบอร์เกอร์ โซน เวสต์แก๊สโซฮอล์อพาร์ทเมนต์ อมาตยาธิปไตยไคลแมกซ์ซินโดรมกุนซือ</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <h6>สอบถามรายละเอียดเพิ่มเติมได้ที่ : IR PLUS</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-6 col-md-6 col-12">
+                                    <ul class="contact-info person-contact">
+                                        <li>
+                                            <p>คุณสารภี สายะเวส (จูน)</p>
+                                        </li>
+                                        <li>
+                                            <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                            <p>02-022-6200 ต่อ 610, 081-854-8170</p>
+                                        </li>
+                                        <li>
+                                            <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                            <p><a href="mailto:sarapee@irplus.in.th">sarapee@irplus.in.th</a></p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-4 col-lg-6 col-md-6 col-12">
+                                    <ul class="contact-info person-contact">
+                                        <li>
+                                            <p>คุณพรทิวา พูนคำ (ข้าว)</p>
+                                        </li>
+                                        <li>
+                                            <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                            <p>02-022-6200 ต่อ 615, 084-640-4501</p>
+                                        </li>
+                                        <li>
+                                            <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                            <p><a href="mailto:porntiwa@irplus.in.th">porntiwa@irplus.in.th</a></p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="doubleBD"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="content-center">
+                                        <a class="buttonB" href="@Url.Action("IR_public_relation","Frontend_IR")"><i class="fas fa-long-arrow-alt-left"></i>ย้อนกลับ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

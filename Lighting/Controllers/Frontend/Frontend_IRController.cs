@@ -1,13 +1,8 @@
-﻿using Lighting.Models;
+﻿using Lighting.Areas.Identity.Data;
+using Lighting.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Globalization;
-using Lighting.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
-
-using UAParser;
-using System.Net.NetworkInformation;
-using Newtonsoft.Json;
-using System.Text.Json.Serialization;
+using System.Globalization;
 
 namespace Lighting.Controllers.Frontend
 {
@@ -1019,14 +1014,23 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
+
+        public async Task<IActionResult> GetIR_news()
+        {
+            var DB = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).ToListAsync();
+            return Json(new { obj = DB });
+        }
+
         public async Task<IActionResult> IR_news_clipping()
         {
             ViewBag.IR_Print_Media = await db.IR_Print_Media.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_Print_MediaDetail = await db.IR_Print_MediaDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
-        public IActionResult IR_news_detail()
+        public async Task<IActionResult> IR_news_detail(int? Id)
         {
+            ViewBag.IR_Latest_News = await db.IR_Latest_News.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1 && x.Id == Id).ToListAsync();
             return View();
         }
         public IActionResult IR_organization()
@@ -1133,10 +1137,20 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_MassMediaDetail = await db.IR_MassMediaDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
-        public IActionResult IR_public_relation_detail()
+
+        public async Task<IActionResult> Get_IR_public_relation()
         {
+            var DB = await db.IR_MassMediaDetail.Where(x => x.Status == 1).ToListAsync();
+            return Json(new { obj = DB });
+        }
+
+        public async Task<IActionResult> IR_public_relation_detail(int? Id)
+        {
+            ViewBag.IR_MassMedia = await db.IR_MassMedia.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.IR_MassMediaDetail = await db.IR_MassMediaDetail.Where(x => x.Status == 1 && x.Id == Id).ToListAsync();
             return View();
         }
+
         public IActionResult IR_report_general_meeting()
         {
             var data = db.SH_IR_Report_Meeting.ToList();
@@ -1173,11 +1187,13 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> Get_IR_NewDetail()
         {
             var DB = await db.IR_NewDetail.Where(x => x.Status == 1).ToListAsync();
-            return Ok(DB);
+            return Json(new { obj = DB });
         }
 
-        public IActionResult IR_set_announcement_detail(int? Id)
+        public async Task<IActionResult> IR_set_announcement_detail(int? Id)
         {
+            ViewBag.GetIR_Stock_Market = await db.IR_Stock_Market.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1 && x.Id == Id).ToListAsync();
             return View();
         }
         public IActionResult IR_shareholding()
