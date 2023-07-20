@@ -1027,6 +1027,24 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_Print_MediaDetail = await db.IR_Print_MediaDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
+
+        public async Task<IActionResult> Get_IR_news_clipping(string? Start, string? End)
+        {
+            var DB = await db.IR_Print_MediaDetail.Where(x => x.Status == 1).ToListAsync();
+            if (Start != null)
+            {
+                DateTime CStart = Convert.ToDateTime(Start);
+                DB = DB.Where(x => x.NewDate.Value.Date >= CStart).ToList();
+            }
+            if (End != null)
+            {
+                DateTime CEnd = Convert.ToDateTime(End);
+                DB = DB.Where(x => x.NewDate.Value.Date <= CEnd).ToList();
+            }
+            
+            return Json(new { obj = DB });
+        }
+
         public async Task<IActionResult> IR_news_detail(int? Id)
         {
             ViewBag.IR_Latest_News = await db.IR_Latest_News.Where(x => x.Status == 1).ToListAsync();
