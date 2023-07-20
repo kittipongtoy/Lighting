@@ -9,16 +9,18 @@ namespace Lighting.Controllers.Frontend
     {
         private readonly LightingContext _db;
         private readonly IWebHostEnvironment _env;
-        public ProjectController(LightingContext db , IWebHostEnvironment env)
+        public ProjectController(LightingContext db, IWebHostEnvironment env)
         {
 
             _db = db;
             _env = env;
         }
-        public async Task<IActionResult> Project()
-            {
-                var project = await _db.Category_Projects
-                    .AsNoTracking()
+        public async Task<IActionResult> Project(int start)
+        {
+            var project = await _db.Category_Projects
+                .AsNoTracking()
+                .Skip(start)
+                .Take(start + 12)
                     .Select(project => new Category_Project
                     {
                         Id = project.Id,
@@ -27,31 +29,60 @@ namespace Lighting.Controllers.Frontend
                         Name_TH = project.Name_TH,
                     })
                     .ToListAsync();
-                return View(project);
-            }
-        
 
-        public async Task<IActionResult> Project_Category(int categoryId,int start)
+            #region pagination
+            var maximum_page = 12;
+            var pagination_page = new List<int>();
+            var page_count = _db.Category_Projects.AsNoTracking().ToList().Count();
+            var is_only_one_page = false;
+            if (page_count <= maximum_page)
+            {
+                pagination_page.Add(0);
+                is_only_one_page = true;
+            }
+            else
+            {
+                var max_number_page = (int)(page_count / maximum_page);
+                for (int page_num = 0; page_num < max_number_page; page_num += 1)
+                {
+                    pagination_page.Add(page_num * maximum_page);
+                }
+            }
+            //if last page 
+            if ((page_count % maximum_page) != 0 && !is_only_one_page)
+            {
+                pagination_page.Add(pagination_page[pagination_page.Count - 1] + maximum_page);
+            }
+            ViewBag.Pagination = pagination_page;
+            ViewBag.CurrentPage = start;
+            ViewBag.MaximumPage = pagination_page.Max();
+            #endregion
+
+            return View(project);
+        }
+
+
+        public async Task<IActionResult> Project_Category(int categoryId, int start)
         {
             ViewBag.categoryId = categoryId;
             var category_name = await _db.Category_Projects.FirstOrDefaultAsync(cat => cat.Id == categoryId);
             ViewData["category"] = category_name;
 
-           var project_cat = await _db.ProjectRefs
-                .AsNoTracking()
-                .Where(cat => cat.ProjectRef_CategoryId == categoryId)
-                .Skip(start)
-                .Take(start+6)
-                .OrderByDescending(cat => cat.Id)
-                .Select(project => 
-                new Category_Project
-                                    {
-                                        Id = project.Id,
-                                        Image_Path = Path.Combine(project.Folder_Path, project.Profile_Image),
-                                        Name_EN = project.Title_TH,
-                                        Name_TH = project.Title_EN,
-                                    })
-                .ToListAsync();
+            var project_cat = await _db.ProjectRefs
+                 .AsNoTracking()
+                 .Where(cat => cat.ProjectRef_CategoryId == categoryId)
+                 .Skip(start)
+                 .Take(start + 6)
+                 .OrderByDescending(cat => cat.Id)
+                 .Select(project =>
+                 new Category_Project
+                 {
+                     Id = project.Id,
+                     Image_Path = Path.Combine(project.Folder_Path, project.Profile_Image),
+                     Name_EN = project.Title_TH,
+                     Name_TH = project.Title_EN,
+                 })
+                 .ToListAsync();
 
             #region pagination
             var maximum_page = 6;
@@ -86,7 +117,7 @@ namespace Lighting.Controllers.Frontend
 
         public async Task<IActionResult> Project_Detail(int id)
         {
-            var project = await _db.ProjectRefs.Include(project=> project.ProjectRef_Category).Where(project => project.Id == id).ToListAsync();
+            var project = await _db.ProjectRefs.Include(project => project.ProjectRef_Category).Where(project => project.Id == id).ToListAsync();
 
             if (project != null)
             {

@@ -1,0 +1,285 @@
+﻿@{
+    ViewData["Title"] = "Manage Category";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+@model IEnumerable<Lighting.Models.InputFilterModels.Product.Output_ProductCategoryVM>
+
+<div class="container" style="width:100%;">
+
+    <div class="row d-flex justify-content-between mb-3">
+        <div class="col d-flex justify-content-between">
+            <div>
+                <button class="btn btn-primary" id="btn_add_category">เพิ่มหมวดหมู่/add category</button>
+            </div>
+            <a href="@Url.Action("Manage_Product_Page","ManageProduct")" class="btn btn-primary rounded-2">
+                กลับ/back
+            </a>
+        </div>
+    </div>
+
+
+    <div class="row mt-3" style="display:none;" id="add_category">
+        <div class="col-12 text-center">
+            <img style="width:50vh;height:50vh;display:none;" id="img_preview" />
+        </div>
+        <div class="col-12 " style="margin-top:3rem;">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">ชื่อหมวดหมู่/Category Name</span>
+                </div>
+                <input type="text" class="form-control" id="category_name_th" placeholder="ภาษาไทย">
+                <input type="text" class="form-control" id="category_name_en" placeholder="English">
+            </div>
+        </div>
+        <center><button class="btn btn-primary" style="margin-top:3rem;" onclick="addCategory()">บันทึก/save</button></center>
+    </div>
+
+    <div class="row mt-5">
+
+        <table class="table mt-3">
+            <thead>
+                <tr style="border-top:1px solid black;border-bottom:1px solid black;">
+                    <th scope="col">#</th>
+                    <th scope="col">หมวดหมู่/Category</th>
+                    <th scope="col" class="text-center">จัดการ/Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 1;
+                }
+                @foreach (var project in Model)
+                {
+                    <tr id="@project.Id">
+                        <th scope="row">@i</th>
+                        <td>@project.Name_TH / @project.Name_EN</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-warning" onclick="edit(@project.Id,'@project.Name_TH','@project.Name_EN')">
+                                <i class="bi bi-pencil-square"></i>แก้ไข/edit
+                            </button>
+                            <button type="button" class="btn btn-danger" onclick="deleteRowById(@project.Id)">
+                                <i class="bi bi-trash-fill"></i>ลบ/delete
+                            </button>
+                        </td>
+                        @{
+                            i++;
+                        }
+                    </tr>                    
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div style="position:fixed;inset:0;background-color:rgba(0,0,0,0.5);display:none;justify-content:center;flex-direction:column;align-items:center;z-index:10" id="edit_page">
+    <div style="width:50%;height:50vh;background-color:white;display:grid;grid-template-rows:auto 3rem 3rem auto;gap:3rem;border-radius:10px;padding:3rem;" >
+        <div></div>
+        <div style="margin-top:3rem;">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="">ชื่อหมวดหมู่/Category Name</span>
+                    </div>
+                    <input type="text" class="form-control" id="edit_category_name_th" placeholder="ภาษาไทย">
+                    <input type="text" class="form-control" id="edit_category_name_en" placeholder="English">
+                </div>
+            </div>
+            <center>
+                <button class="btn btn-primary" style="margin:3rem;" onclick="saveEdit()">บันทึก/save</button>
+                <button class="btn btn-primary btn-danger" style="margin:3rem;" onclick="closeEdit()">ปิด/close</button>
+            </center>
+            <div></div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        var edit_id = null;
+        $(document).ready(function () {
+
+            $("#btn_add_category").on("click", function () {
+                let display = $("#add_category").css("display");
+                if (display == "none") {
+                    $("#add_category").css("display", "block");
+                } else {
+                    $("#add_category").css("display", "flex");
+                }
+            });
+
+        });
+
+        function addCategory() {
+            let category_name_th = $("#category_name_th").val();
+            let category_name_en = $("#category_name_en").val();
+
+            let form = new FormData();
+            form.append("Name_TH", category_name_th);
+            form.append("Name_EN", category_name_en);
+
+
+            //ajax
+            $.ajax({
+                type: 'POST',
+                url: '/ManageProduct/Add_Category',
+                data: form,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = "/ManageProduct/Manage_Category_Page";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        function edit(id, name_th, name_en) {
+            edit_id = id;
+            $("#edit_page").css("display", "flex");
+            $("#edit_category_name_th").val(name_th);
+            $("#edit_category_name_en").val(name_en);
+        }
+
+        function closeEdit() {
+            $("#edit_page").css("display", "none");
+        }
+
+        function saveEdit() {
+
+            if (!edit_id) {
+                Swal.fire({
+                    icon: 'error',
+                    text: "กรุณาเลือกค้าที่ต้องการแก้ไข",
+                });
+            }
+
+            let category_name_th = $("#edit_category_name_th").val();
+            let category_name_en = $("#edit_category_name_en").val();
+
+
+            let form = new FormData();
+            form.append("Name_TH", category_name_th);
+            form.append("Name_EN", category_name_en);
+            //ajax
+            $.ajax({
+                type: 'POST',
+                url: '/ManageProduct/Edit_CategoryById?id=' + edit_id,
+                data: form,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            //append file
+                            edit_id = null;
+                            window.location.href = "/ManageProduct/Manage_Category_Page";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+
+        function deleteRowById(id) {
+
+            Swal.fire({
+                icon: 'warning',
+                title: "คุณแน่ใจว่าต้องการลบ?",
+                text: "",
+                showConfirmButton: true,
+            }).then((confirm) => {
+                if (confirm.isConfirmed) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/ManageProduct/Delete_CategoryById?id=' + id,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        beforeSend: function () {
+                            Swal.fire('Please wait')
+                            Swal.showLoading()
+                        },
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then(() => {
+
+                                    $("#" + id).remove();
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+
+                } else {
+
+                }
+            });
+        }
+
+    </script>
+}

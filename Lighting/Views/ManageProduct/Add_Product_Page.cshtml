@@ -1,0 +1,366 @@
+﻿@{
+    ViewData["Title"] = "Manage model";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+@using Lighting.Areas.Identity.Data
+
+<style>
+    .add-product-container{
+        width:100%;
+        height:auto;
+        padding:3rem;
+
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+    }
+    .add-product{
+        width:80%;
+        height:auto;
+
+        display:grid;
+        grid-template-rows: 30vw auto auto auto auto auto auto auto auto auto auto;
+        gap:2rem;
+    }
+
+    .add-product-grid-item {
+        display:grid;
+        grid-template-rows:1fr 2fr;
+    }
+
+    .add-product-grid-spec {
+        height:auto;
+        width:100%;
+        display: grid;
+        grid-template-rows: 4rem repeat(16,auto);
+        gap:2rem;
+        background-color:rgba(0,0,0,0.2);
+        padding:2rem;
+        border-radius:10px;
+        & > h2{
+            background-color:gray;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            text-align:center;
+            border-radius: 5px;
+        }
+    }
+
+</style>
+<div style="display:flex;justify-content:space-between;margin:1rem 10%;">
+    <div></div>
+    <a href="@Url.Action("Manage_Product_Page","ManageProduct")" class="btn btn-primary">กลับ/back</a>
+</div>
+<div class="add-product-container">
+
+    <div class="add-product">
+
+        <div >
+            <img src="" style="width:100%;height:100%;display:none;" id="img_preview"/>
+        </div>
+
+        <div class="add-product-grid-item">
+            <label class="h4">รูปโชว์/Preview Image</label>
+            <input type="file" id="file_img_preview"/>
+        </div>
+
+        <div class="add-product-grid-item">
+            <label class="h4">เลือกหมวดหมู่/category</label>
+            <select class="form-control" id="product_category_id">
+                <option class="h5" selected>กรุณาเลือก</option>
+                @foreach (var cat in (IEnumerable<Product_Category>)ViewData["category"])
+                {
+                    <option class="h5" value="@cat.Id" >@cat.Name_TH/@cat.Name_EN</option>
+                }
+            </select>
+        </div>
+
+        <div class="add-product-grid-item">
+            <label class="h4">เลือกชื่อรุ่น/model series</label>
+            <select class="form-control" id="product_model_id">
+                <option class="h5" selected>กรุณาเลือก</option>
+                @foreach (var model_data in (IEnumerable<Product_Model>)ViewData["model"])
+                {
+                    <option class="h5" value="@model_data.Id">@model_data.Name_TH/>@model_data.Name_EN</option>
+                }
+            </select>
+        </div>
+
+        <div class="add-product-grid-item">
+            <label class="h4">ชื่อรุ่น/model name</label>
+            <input type="text" placeholder="ชื่อรุ่น" id="model_name"/>
+        </div>
+
+        <div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" i>ชื่อประเภท/Category Name</span>
+                </div>
+                <input type="text" class="form-control" id="category_name_th" placeholder="ภาษาไทย">
+                <input type="text" class="form-control" id="category_name_en" placeholder="English">
+            </div>
+        </div>
+
+        <div class="add-product-grid-item">
+            <label class="h4">CUTSHEET</label>
+            <input type="file" id="cut_sheet_file"/>
+        </div>
+
+        <div class="add-product-grid-item">
+            <label class="h4">IES FILE</label>
+            <input type="file" id="ies_file"/>
+        </div>
+
+        <div class="add-product-grid-item">
+            <label class="h4">CATALOGUE</label>
+            <input type="file" id="catalogue_file" />
+        </div>
+
+        <div class="add-product-grid-item">
+            <label class="h4">More Information</label>
+            <input type="text" placeholder="https://More.Information" id="more_info" />
+        </div>
+
+        <div class="add-product-grid-item">
+            <label class="h4">การใช้งาน/Application</label>
+            <textarea id="application"></textarea>
+        </div>
+
+        <div class="add-product-grid-item">
+            <label class="h4">Technical Drawing Image</label>
+            <input type="file" multiple id="technical_img_file" />
+        </div>
+
+        <div class="add-product-grid-item">
+            <label class="h4"> Light Distribution Image</label>
+            <input type="file" multiple id="light_distribute_file" />
+        </div>
+
+        <div class="add-product-grid-spec">
+            <h2 >สเปค / Spacification</h2>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Housing</label>
+                <input type="text" placeholder="Housing" id="Housing" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Finishing</label>
+                <input type="text" placeholder="Finishing" id="Finishing" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Lens</label>
+                <input type="text" placeholder="Lens" id="Lens" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Gasket</label>
+                <input type="text" placeholder="Gasket" id="Gasket" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Dimension</label>
+                <input type="text" placeholder="Dimension" id="Dimension" />
+            </div>
+            <div class="add-product-grid-item">
+                <label class="h4">Mounting</label>
+                <input type="text" placeholder="Mounting" id="Mounting" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Power</label>
+                <input type="text" placeholder="Power" id="Power" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Source</label>
+                <input type="text" placeholder="Source" id="Source" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Lamp Colour</label>
+                <input type="text" placeholder="Lamp Colour" id="Lamp_Colour" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Luminaire Output</label>
+                <input type="text" placeholder="Luminaire Output" id="Luminaire_Output" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Beam Angle</label>
+                <input type="text" placeholder="Beam Angle" id="Beam_Angle" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Control Gear</label>
+                <input type="text" placeholder="Control Gear" id="Control_Gear" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Power Supply</label>
+                <input type="text" placeholder="Power Supply" id="Power_Supply" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">IP Rating</label>
+                <input type="text" placeholder="IP Rating" id="IP_Rating" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Luminaire Lifetime</label>
+                <input type="text" placeholder="Luminaire Lifetime" id="Luminaire_Lifetime" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Equivalent</label>
+                <input type="text" placeholder="Equivalent" id="Equivalent" />
+            </div>
+
+        </div>
+
+       
+    </div>
+    <br/>
+    <br />
+    <centter style="margin-bottom:3rem;"><button onclick="addProduct()" class="btn btn-primary">บันทึก/save</button></centter>
+</div>
+
+@section Scripts{
+    <script>
+        var preview_img,CutSheet_file,IesFile_file,Catalogue_file,technical_file,light_distribute_file;
+
+        $(document).ready(function () {
+            $('#file_img_preview').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    preview_img = e.target.files[0];
+                    $('#img_preview').attr('src', await blobToBase64DataURL(preview_img)).css("display", "block");
+                }
+            });
+            $('#cut_sheet_file').change(function (e) {
+                if (e.target.files.length === 1) {
+                    CutSheet_file = e.target.files[0];
+                }
+            });
+            $('#ies_file').change(function (e) {
+                if (e.target.files.length === 1) {
+                    IesFile_file = e.target.files[0];
+                }
+            });
+            $('#catalogue_file').change(function (e) {
+                if (e.target.files.length === 1) {
+                    Catalogue_file = e.target.files[0];
+                }
+            });
+            $('#technical_img_file').change(function (e) {
+                if (e.target.files.length >= 1) {
+                    technical_file = e.target.files;
+                }
+            });
+            $('#light_distribute_file').change(function (e) {
+                if (e.target.files.length >= 1) {
+                    light_distribute_file = e.target.files;
+                }
+            });
+        });
+
+        function addProduct(){
+
+            let form = new FormData();
+
+            form.append("Product_CategoryId", $("#product_category_id").val());
+            form.append("Product_ModelId", $("#product_model_id").val());
+            form.append("Model", $("#model_name").val());
+            form.append("Type_TH", $("#category_name_th").val());
+            form.append("Type_EN", $("#category_name_en").val());
+            form.append("Preview_Image", preview_img);
+            form.append("CUTSHEET", CutSheet_file);
+            form.append("IESFILE", IesFile_file);
+            form.append("CATALOGUE", Catalogue_file);
+            form.append("MORE_INFORMATION", $("#more_info").val());
+            form.append("Application", $("#application").val());
+            //form.append("Technical_Drawing", $("#").val());
+
+            form.append("Housing", $("#Housing").val());
+            form.append("Finishing", $("#Finishing").val());
+            form.append("Lens", $("#Lens").val());
+            form.append("Gasket", $("#Gasket").val());
+            form.append("Dimension", $("#Dimension").val());
+            form.append("Mounting", $("#Mounting").val());
+            form.append("Power", $("#Power").val());
+            form.append("Source", $("#Source").val());
+            form.append("Lamp_Colour", $("#Lamp_Colour").val());
+            form.append("Luminaire_Output", $("#Luminaire_Output").val());
+            form.append("Beam_Angle", $("#Beam_Angle").val());
+            form.append("Control_Gear", $("#Control_Gear").val());
+            form.append("Power_Supply", $("#Power_Supply").val());
+            form.append("IP_Rating", $("#IP_Rating").val());
+            form.append("Luminaire_Lifetime", $("#Luminaire_Lifetime").val());
+            form.append("Equivalent", $("#Equivalent").val());
+
+            if(light_distribute_file != undefined){
+                for (const file of light_distribute_file){
+                    form.append("LIGHT_DISTRIBUTION", file);
+                }
+            }
+
+            if (technical_file != undefined) {
+                for (const file of technical_file) {
+                    form.append("Technical_Drawing_Img", file);
+                }
+            }
+           
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/ManageProduct/Add_Product',
+                data: form,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = "/ManageProduct/Manage_Product_Page";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        const blobToBase64DataURL = blob => new Promise(
+            resolvePromise => {
+                const reader = new FileReader();
+                reader.onload = () => resolvePromise(reader.result);
+                reader.readAsDataURL(blob);
+            }
+        );
+    </script>
+}

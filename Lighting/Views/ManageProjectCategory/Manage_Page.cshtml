@@ -31,7 +31,7 @@
                 <input type="text" class="form-control" id="category_name_en" placeholder="English">
             </div>
             <label class="form-label mt-3">เลือกรูปหมวดหมู่/image category</label>
-            <input class="form-control mt-3" type="file" id="file_img_preview" >
+            <input class="form-control mt-3" type="file" id="file_img_preview">
         </div>
         <center><button class="btn btn-primary" style="margin-top:3rem;" onclick="addCategory()">บันทึก/save</button></center>
     </div>
@@ -71,13 +71,14 @@
     </div>
 </div>
 
-<div style="position:fixed;inset:0;background-color:rgba(0,0,0,0.5);display:none;justify-content:center;flex-direction:column;z-index:10" id="edit_page">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center">
-                <img style="width:50vh;height:50vh;" id="edit_img_preview" />
+<div style="position:fixed;inset:0;background-color:rgba(0,0,0,0.5);display:none;justify-content:center;flex-direction:column;align-items:center;z-index:10" id="edit_page">
+    <div style="width:50%;height:auto;background-color:white;padding:3rem;border-radius:10px;">
+        <div style="display:grid;grid-template-rows:auto 3rem 3rem 3rem;gap:3rem;">
+            <div>
+                <img style="width:100%;" id="edit_img_preview" />
             </div>
-            <div class="col-12" style="margin-top:3rem;">
+
+            <div>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="">ชื่อหมวดหมู่/Category Name</span>
@@ -85,13 +86,18 @@
                     <input type="text" class="form-control" id="edit_category_name_th" placeholder="ภาษาไทย">
                     <input type="text" class="form-control" id="edit_category_name_en" placeholder="English">
                 </div>
-                <label class="form-label mt-3">เลือกรูปหมวดหมู่/image category</label>
-                <input class="form-control mt-3" type="file" id="edit_file_img_preview" >
+
             </div>
+
+            <dvi>
+                <input class="form-control mt-3" type="file" id="edit_file_img_preview">
+            </dvi>
+
             <center>
                 <button class="btn btn-primary" style="margin-top:3rem;" onclick="saveEdit()">บันทึก/save</button>
                 <button class="btn btn-primary btn-danger" style="margin-top:3rem;" onclick="closeEdit()">ปิด/close</button>
                 </center>
+
         </div>
     </div>
 </div>
