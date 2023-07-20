@@ -36,6 +36,8 @@
         <center><button class="btn btn-primary" style="margin-top:3rem;" onclick="addCategory()">บันทึก/save</button></center>
     </div>
 
+
+
     <div class="row mt-5">
 
         <table class="table mt-3">
@@ -92,9 +94,9 @@
             </dvi>
 
             <center>
-                <button class="btn btn-primary" style="margin: 0 3rem;" onclick="saveEdit()">บันทึก/save</button>
-                <button class="btn btn-primary btn-danger" style="margin:0 3rem;" onclick="closeEdit()">ปิด/close</button>
-            </center>
+                <button class="btn btn-primary" style="margin-top:3rem;" onclick="saveEdit()">บันทึก/save</button>
+                <button class="btn btn-primary btn-danger" style="margin-top:3rem;" onclick="closeEdit()">ปิด/close</button>
+                </center>
 
         </div>
     </div>
@@ -193,13 +195,13 @@
             });
         }
 
-        function closeEdit() {
+        function closeEdit(){
             $("#edit_page").css("display", "none");
         }
 
-        function saveEdit() {
+        function saveEdit(){
 
-            if (!edit_id) {
+            if(!edit_id) {
                 Swal.fire({
                     icon: 'error',
                     text: "กรุณาเลือกค้าที่ต้องการแก้ไข",
@@ -262,7 +264,7 @@
 
         function edit(id, img_path, name_th, name_en) {
             edit_id = id;
-            $("#edit_page").css("display", "flex");
+            $("#edit_page").css("display","flex");
             $("#edit_category_name_th").val(name_th);
             $("#edit_category_name_en").val(name_en);
             $('#edit_img_preview').attr('src', img_path);

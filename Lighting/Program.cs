@@ -183,7 +183,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-//pattern: "{controller=Lighting}/{action=Index}/{id?}");
+pattern: "{controller=Lighting}/{action=Index}/{id?}");
 
 //pattern: "{controller=ManageDownload}/{action=manage_download_page}");
 //pattern: "{controller=news}/{action=manage_news_page}");
