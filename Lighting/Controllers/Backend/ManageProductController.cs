@@ -1,6 +1,7 @@
 ﻿using Lighting.Areas.Identity.Data;
 using Lighting.Models.InputFilterModels.Product;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Evaluation;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -36,11 +37,59 @@ namespace Lighting.Controllers.Backend
             return View();
         }
 
-        public async Task<ActionResult> Edit_Product_Page()
+        public async Task<ActionResult> Edit_Product_Page(int id)
         {
-            ViewData["category"] = await _db.Product_Categorys.ToListAsync();
-            ViewData["model"] = await _db.Product_Models.ToListAsync();
-            return View();
+            var product = await _db.Products
+                .Where(pro => pro.Id == id)
+                .Select(pro =>
+                new Output_ProductVM
+                {
+                    Id = pro.Id,
+                    Product_CategoryId = pro.Product_CategoryId,
+                    Product_ModelId = pro.Product_ModelId,
+                    Application = pro.Application,
+                    Beam_Angle = pro.Beam_Angle,
+                    Type_EN = pro.Type_EN,
+                    Type_TH = pro.Type_TH,
+
+                    Control_Gear = pro.Control_Gear,
+                    Dimension = pro.Dimension,
+                    Equivalent = pro.Equivalent,
+                    Finishing = pro.Finishing,
+                    Gasket = pro.Gasket,
+                    Housing = pro.Housing,
+
+                    IP_Rating = pro.IP_Rating,
+                    Lamp_Colour = pro.Lamp_Colour,
+                    Lens = pro.Lens,
+                    Luminaire_Lifetime = pro.Luminaire_Lifetime,
+                    Model = pro.Model,
+                    Mounting = pro.Mounting,
+                    MORE_INFORMATION = pro.MORE_INFORMATION,
+                    Power = pro.Power,
+                    Power_Supply = pro.Power_Supply,
+                    Source = pro.Source,
+                    Luminaire_Output = pro.Luminaire_Output,
+
+                    Folder_Path = pro.Folder_Path,
+                    CUTSHEET = pro.CUTSHEET == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CUTSHEET),
+                    CATALOGUE = pro.CATALOGUE == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CATALOGUE),
+                    IESFILE = pro.IESFILE == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.IESFILE),
+                    Preview_Imamge = pro.Preview_Image == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.Preview_Image),
+
+                }).FirstOrDefaultAsync();
+
+            if(product != null)
+            {
+                //product.Technical_Drawing_Img = GET_FILE(Path.Combine("upload_image", "Product", productItem.Folder_Path, "technical_img"));
+                //product.LIGHT_DISTRIBUTION = GET_FILE(Path.Combine("upload_image", "Product", productItem.Folder_Path, "light_ditribute_img"));
+                
+                ViewData["category"] = await _db.Product_Categorys.ToListAsync();
+                ViewData["model"] = await _db.Product_Models.ToListAsync();
+
+                return View(product);
+            }
+            return  NotFound("product not found");
         }
 
         [HttpPost]

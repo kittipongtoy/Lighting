@@ -48,7 +48,7 @@
                         <td>@product.Type_TH / @product.Type_TH</td>
                         <td>@product.Power</td>
                         <td class="text-center">
-                            <a href="@Url.Action("Edit_Product_Page","ManageProduct")" type="button" class="btn btn-warning" >
+                            <a href="@Url.Action("Edit_Product_Page","ManageProduct",new {id= product.Id})" type="button" class="btn btn-warning" >
                                 <i class="bi bi-pencil-square"></i>แก้ไข/edit
                             </a>
                             <button type="button" class="btn btn-danger" onclick="deleteRowById(@product.Id)">

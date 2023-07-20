@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
 @using Lighting.Areas.Identity.Data
+@model Lighting.Models.InputFilterModels.Product.Output_ProductVM
 
 <style>
     .add-product-container {
@@ -37,9 +38,7 @@
         background-color: rgba(0,0,0,0.2);
         padding: 2rem;
         border-radius: 10px;
-        & > h2
-
-    {
+        & > h2{
         background-color: gray;
         display: flex;
         flex-direction: column;
