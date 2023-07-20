@@ -46,8 +46,8 @@
                         }
                         else
                         {
-                             <h5>ห้องข่าว</h5>
-                             <h1>ข่าวจากสื่อสิ่งพิมพ์</h1>
+                            <h5>ห้องข่าว</h5>
+                            <h1>ข่าวจากสื่อสิ่งพิมพ์</h1>
                         }
                     </div>
                 </div>
@@ -207,33 +207,45 @@
                     position: 'center',
                     callback: function (data, pagination) {
                         var dataHtml = ``;
+                        if (data.length > 0) {
+                            $.each(data, function (index, item) {
 
-                        $.each(data, function (index, item) {
+                                var date = new Date(item.newDate);
+                                var optionsTH = { year: 'numeric', month: 'long', day: 'numeric' };
+                                var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
 
-                            var date = new Date(item.newDate);
-                            var optionsTH = { year: 'numeric', month: 'long', day: 'numeric' };
-                            var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
+                                var optionsEN = { year: 'numeric', month: 'long', day: 'numeric' };
+                                var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
 
-                            var optionsEN = { year: 'numeric', month: 'long', day: 'numeric' };
-                            var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
+                                dataHtml += `<tr><td>`;
+                                if (local == "TH") {
+                                    dataHtml += formattedDateTH
+                                } else {
+                                    dataHtml += formattedDateEN
+                                }
 
-                            dataHtml += `<tr><td>`;
-                            if (local == "TH") {
-                                dataHtml += formattedDateTH
-                            } else {
-                                dataHtml += formattedDateEN
-                            }
-
-                            dataHtml += `</td>
-                                            <td>
-                                                                 <a href="/upload_file/IR_NewRoom/` + GetFile(item, local) + `" target="_blank">` + title(item, local) + ` </a>
+                                dataHtml += `</td>
+                                                  <td>
+                                                      <a href="/upload_file/IR_NewRoom/` + GetFile(item, local) + `" target="_blank">` + title(item, local) + ` </a>
+                                                   </td>
+                                             <td>
+                                             <div class="source-logo" > <img src="/upload_image/IR_NewRoom/` + Getimage(item, local) + `"> </div>
+                                             </td>
+                                             </tr>`;
+                            });
+                        }
+                        else {
+                            dataHtml += `<tr>
+                                                <td>19 ม.ค. 2566</td>
+                                                <td>
+                                                    <a href="/Frontend_assets/images/ir/clipping-news.pdf" target="_blank">L&Eตั้งเป้ารายได้ปีนี้โตลุยประมูลงาน3-4พันล.</a>
                                                 </td>
                                                 <td>
-                                                        <div class="source-logo" > <img src="/upload_image/IR_NewRoom/` + Getimage(item, local) + `"> </div>
-                                                    </td>
-                                            </tr>`;
-                        });
-                        dataHtml += ``;
+                                                    <div class="source-logo"><img src="/Frontend_assets/images/ir/news-thunhoon.png"></div>
+                                                </td>
+                                            </tr>  `;
+                        }
+
                         $("#data-container").html(dataHtml);
                     }
                 });

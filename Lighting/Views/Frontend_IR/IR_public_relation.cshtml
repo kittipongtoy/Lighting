@@ -147,72 +147,73 @@
                     position: 'center',
                     callback: function (data, pagination) {
                         var dataHtml = ``;
+                        if (data.length > 0) {
+                            $.each(data, function (index, item) {
 
-                        $.each(data, function (index, item) {
+                                var date = new Date(item.newDate);
+                                var optionsTH = { year: 'numeric', month: 'long', day: 'numeric' };
+                                var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
 
-                            var date = new Date(item.newDate);
-                            var optionsTH = { year: 'numeric', month: 'long', day: 'numeric' };
-                            var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
+                                var optionsEN = { year: 'numeric', month: 'long', day: 'numeric' };
+                                var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
 
-                            var optionsEN = { year: 'numeric', month: 'long', day: 'numeric' };
-                            var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
+                                dataHtml += `<div class="col-lg-4 col-md-4 col-6">
+                                                                            <a class="news-publicBox" href="../Frontend_IR/IR_public_relation_detail/?Id=`+ GetId(item, local) + `">
+                                                                        <div class="row">
+                                                                            <div class="col">`;
+                                if (Getimage != null) {
+                                    dataHtml += `<div class="img-width" > <img src="/upload_image/IR_NewRoom/` + Getimage(item, local) + `" > </div>`;
+                                }
 
+                                dataHtml += `</div>
+                                                                        </div>
+                                                                        <div class="news-public-info">
+                                                                            <div class="row">
+                                                                                <div class="col">
+                                                                                        <div class="news-topic">`+ details(item, local);
+
+                                dataHtml += `</div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                        <div class="col">`;
+                                if (local == "TH") {
+                                    dataHtml += formattedDateTH
+                                } else {
+                                    dataHtml += formattedDateEN
+                                }
+                                dataHtml += `</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                        </div>`;
+                            });
+                        }
+                        else {
                             dataHtml += `<div class="col-lg-4 col-md-4 col-6">
-                                                            <a class="news-publicBox" href="../Frontend_IR/IR_public_relation_detail/?Id=`+ GetId(item, local) + `">
-                                                        <div class="row">
-                                                            <div class="col">`;
-                            if (Getimage != null) {
-                                            dataHtml += `<div class="img-width" > <img src="/upload_image/IR_NewRoom/` + Getimage(item, local) + `" > </div>`;
-                                                            }
-
-                                            dataHtml += `</div>
-                                                        </div>
-                                                        <div class="news-public-info">
-                                                            <div class="row">
-                                                                <div class="col">
-                                                                        <div class="news-topic">`+ details(item,local);
-                           
-                            dataHtml += ` </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                        <div class="col">`;
-                                                                        if (local == "TH") {
-                                                                            dataHtml += formattedDateTH
-                                                                        } else {
-                                                                            dataHtml += formattedDateEN
-                                                                        }
-                            dataHtml += `</div>
+                                                    <a class="news-publicBox" href="#">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="img-width"><img src="/Frontend_assets/images/ir/ir-public01.jpg"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="news-public-info">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="news-topic">
+                                                                <p>หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน หัวข้อข่าวแจ้งสื่อมวลชน</p>
                                                             </div>
                                                         </div>
-                                                    </a>
-                                                        </div>`;
-
-
-
-                            //dataHtml += `<div class="newsBox">
-                            //             <div class="row">
-                            //             <div class="col">
-                            //             <a class="news-content" href="../Frontend_IR/IR_public_relation_detail/?Id=`+ GetId(item, local) + `">
-                            //             <div class="news-topic">
-                            //             <p>`+ title(item, local) + `</p>
-                            //             </div>
-                            //             <div class="news-date">`;
-                            //            if (local == "TH") {
-                            //                dataHtml += formattedDateTH
-                            //            } else {
-                            //                dataHtml += formattedDateEN
-                            //            }
-                            //dataHtml += `</div>
-                            //            <div class="txt-content">`+
-                            //details(item, local)
-                            //         + `</div>
-                            //            </a>
-                            //            </div>
-                            //            </div>
-                            //            </div>`;
-                        });
-                        dataHtml += ``;
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="news-date">17 FEB 2023</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>`;
+                        }
                         $("#data-container").html(dataHtml);
                     }
                 });

@@ -145,42 +145,59 @@
                     position: 'center',
                     callback: function (data, pagination) {
                         var dataHtml = ``;
+                        if (data.length > 0) {
+                            $.each(data, function (index, item) {
 
-                        $.each(data, function (index, item) {
+                                var date = new Date(item.newDate);
+                                var optionsTH = { year: 'numeric', month: 'long', day: 'numeric' };
+                                var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
 
-                            var date = new Date(item.newDate);
-                            var optionsTH = { year: 'numeric', month: 'long', day: 'numeric' };
-                            var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
+                                var optionsEN = { year: 'numeric', month: 'long', day: 'numeric' };
+                                var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
 
-                            var optionsEN = { year: 'numeric', month: 'long', day: 'numeric' };
-                            var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
+                                dataHtml += `<div class="newsBox">
+                                                                        <div class="row">
+                                                                            <div class="col">
+                                                                                        <a class="news-content" href="../Frontend_IR/IR_news_detail/?Id=`+ GetId(item, local) + `">
+                                                                                    <div class="news-topic">
+                                                                                        <p>`+ title(item, local) + `</p>
+                                                                                    </div>
 
-                            dataHtml += `<div class="newsBox">
-                                                                <div class="row">
-                                                                    <div class="col">
-                                                                                <a class="news-content" href="../Frontend_IR/IR_news_detail/?Id=`+ GetId(item, local) + `">
-                                                                            <div class="news-topic">
-                                                                                <p>`+ title(item, local) + `</p>
+                                                                                        <div class="news-date">`;
+                                if (local == "TH") {
+                                    dataHtml += formattedDateTH
+                                } else {
+                                    dataHtml += formattedDateEN
+                                }
+
+                                dataHtml += `</div>
+
+                                                                                    <div class="txt-content">`+
+                                    details(item, local)
+                                    + `</div>
+                                                                                </a>
                                                                             </div>
-
-                                                                                <div class="news-date">`;
-                            if (local == "TH") {
-                                dataHtml += formattedDateTH
-                            } else {
-                                dataHtml += formattedDateEN
-                            }
-
-                            dataHtml += `</div>
-
-                                                                            <div class="txt-content">`+
-                                details(item, local)
-                                + `</div>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>`;
-                        });
-                        dataHtml += ``;
+                                                                        </div>
+                                                                    </div>`;
+                            });
+                        }
+                        else {
+                            dataHtml += `<div class="newsBox">
+                                        <div class="row">
+                                            <div class="col">
+                                                <a class="news-content" href = "#">
+                                                    <div class="news-topic">
+                                                        <p>หัวข้อข่าวสารนักลงทุนสัมพันธ์ หัวข้อข่าวสารนักลงทุนสัมพันธ์ หัวข้อข่าวสารนักลงทุนสัมพันธ์ </p>
+                                                            </div>
+                                                            <div class="news-date" > 20 FEB 2023 </div>
+                                                            <div class="txt-content">
+                                                                <p>สัมนาอีสต์เทควันโดบอมบ์โพสต์ เพนกวิน โฮลวีตคอนเซ็ปต์แรงดูดอีแต๋นทัวริสต์ โพลล์สหัสวรรษแดนเซอร์พล็อตแกงค์ ซ้อแบล็กมุมมอง อิเหนา บูมจึ๊กฮิเธคอันเดอร์ อุรังคธาตุจูเนียร์บอยคอตต์เอาท์ฮัลโหล เกย์วืดยนตรกรรม อีสต์ซีรีส์คอนแท็คอัลไซเมอร์วิก สเตชั่นไมค์โฟน ติ๋มภควัมปติเชฟ เหี่ยวย่นมายาคติ อิเหนาไวอากร้าตี๋ อีสต์ พาสเจอร์ไรส์ซิมดยุคติวเตอร์ </p>
+                                                            </div>
+                                                            </a>
+                                                    </div>
+                                            </div>
+                                      </div>`;
+                        }
                         $("#data-container").html(dataHtml);
                     }
                 });
@@ -206,7 +223,6 @@
                     }
                 });
             });
-
         });
     </script>
 }

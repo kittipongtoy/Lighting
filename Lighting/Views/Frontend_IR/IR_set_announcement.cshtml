@@ -149,9 +149,9 @@
                     position: 'center',
                     callback: function (data, pagination) {
                         var dataHtml = ``;
-
-                        $.each(data, function (index, item) {
-
+                        if(data.length > 0)
+                        {
+                            $.each(data, function (index, item) {
                             var date = new Date(item.newDate);
                             var optionsTH = { year: 'numeric', month: 'long', day: 'numeric' };
                             var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
@@ -166,25 +166,37 @@
                                                                     <div class="news-topic">
                                                                         <p>`+ title(item, local) + `</p>
                                                                     </div>
-
                                                                         <div class="news-date">`;
-                            if (local == "TH") {
-                                dataHtml += formattedDateTH
-                            } else {
-                                dataHtml += formattedDateEN
-                            }
-
-                            dataHtml += `</div>
-
-                                                                    <div class="txt-content">`+
-                                details(item, local)
-                                + `</div>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>`;
+                                                                            if (local == "TH") {
+                                                                                dataHtml += formattedDateTH
+                                                                            } else {
+                                                                                dataHtml += formattedDateEN
+                                                                            }
+                                                            dataHtml += `</div>
+                                                            <div class="txt-content">`+ details(item, local) + `</div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>`;
                         });
-                        dataHtml += ``;
+                        }else
+                        {
+                            dataHtml += `<div class="newsBox">
+                                <div class="row">
+                                    <div class="col">
+                                        <a class="news-content" href = "#">
+                                            <div class="news-topic">
+                                                <p>หัวข้อข่าวแจ้งตลาดหลักทรัพย์ หัวข้อข่าวแจ้งตลาดหลักทรัพย์ หัวข้อข่าวแจ้งตลาดหลักทรัพย์ </p>
+                                            </div>
+                                            <div class="news-date" > 18 FEB 2023 </div>
+                                            <div class="txt-content">
+                                                <p>อาข่าซี้อพาร์ตเมนท์ สโลว์ออร์แกนิคสโตน ดีไซน์เนอร์ซินโดรมพาสต้า รันเวย์ฮากกาด็อกเตอร์ อวอร์ดชิฟฟอนเอ็นทรานซ์ ชะโนดวอเตอร์ธรรมา บูมตะหงิดคองเกรสสถาปัตย์ ศึกษาศาสตร์เซาท์อัลบั้มสตริง วีซ่าวิลเลจแอ็คชั่น ปิโตรเคมีสติกเกอร์มิลค์ แพทเทิร์นผลักดันมายองเนสเนอะ เพนกวินเด้อคอมพ์โปรโมท พงษ์เปราะบาง พาร์ทเนอร์ แจ๊กเก็ตเซอร์วิสแอดมิชชั่นทอร์นาโดเทอร์โบ แฟลชอัลตราฉลุย </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                             </div>`;
+                        }
                         $("#data-container").html(dataHtml);
                     }
                 });
@@ -197,17 +209,13 @@
                     processData: false,
                     contentType: false,
                     success: function (response) {
-
                         let pp = [];
-
                         if (response && response.obj && Array.isArray(response.obj)) {
                             response.obj.forEach(data => pp.push(data));
                         } else {
                             console.log('Invalid response or missing "obj" property');
                         }
-
                         done(pp);
-                        //console.log(pp);
                     },
                     error: function (error) {
                         console.log('AJAX request failed:', error);
