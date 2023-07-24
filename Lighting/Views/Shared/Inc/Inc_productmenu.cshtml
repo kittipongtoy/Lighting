@@ -1,4 +1,8 @@
-﻿<div class="col-lg-3 d-none d-md-none d-lg-block">
+﻿@using Lighting.Models.InputFilterModels.Product
+@{
+    var lang = Context.Request.Cookies["lang"];
+}
+<div class="col-lg-3 d-none d-md-none d-lg-block">
     <div class="row">
         <div class="col">
             <h4 class="decor">PRODUCT</h4>
@@ -7,6 +11,7 @@
     <div class="row">
         <div class="col">
             <ul class="product-side-menu">
+                @*
                 <li><a href="@Url.Action("Product_Category","Product")">INDOOR</a></li>
                 <li class="active"><a href="@Url.Action("Product_Category","Product")">OUTDOOR</a></li>
                 <li><a href="@Url.Action("Product_Category","Product")">DECORATIVE</a></li>
@@ -17,6 +22,32 @@
                 <li><a href="@Url.Action("Product_Category","Product")">COMPONENT / CONTROL EQUIPMENT</a></li>
                 <li><a href="@Url.Action("Product_Category","Product")">HORTICULTURE / BIOLOGICAL LIGHTING</a></li>
                 <li><a href="@Url.Action("Product_Category","Product")">POLE</a></li>
+                *@
+                @foreach (var cat in (IEnumerable<Output_ProductCategoryVM>)ViewData["All_Category"])
+                {
+                    if(lang == "EN")
+                    {
+                        if (ViewBag.CategoryId == cat.Id)
+                        {
+                            <li class="active"><a href="@Url.Action("Product_Category","Product",new {categoryId= cat.Id})">@cat.Name_EN</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("Product_Category","Product",new {categoryId= cat.Id})">@cat.Name_EN</a></li>
+                        }
+                    }
+                    else
+                    {
+                        if (ViewBag.CategoryId == cat.Id)
+                        {
+                            <li class="active"><a href="@Url.Action("Product_Category","Product",new {categoryId= cat.Id})">@cat.Name_TH</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("Product_Category","Product",new {categoryId= cat.Id})">@cat.Name_TH</a></li>
+                        }
+                    }
+                }
             </ul>
         </div>
     </div>

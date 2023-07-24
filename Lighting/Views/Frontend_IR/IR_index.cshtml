@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "IR_index";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var Count_IR_Latest_NewDetail = (List<Lighting.Areas.Identity.Data.IR_Latest_NewDetail>)ViewBag.IR_Latest_NewDetail;
+    var Count_IR_NewDetail = (List<Lighting.Areas.Identity.Data.IR_NewDetail>)ViewBag.IR_NewDetail;
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
@@ -172,7 +174,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <h5>ข้อมูลสำคัญทางการเงิน ประจำปี 2564</h5>
+                    <h5>ข้อมูลสำคัญทางการเงิน ประจำปี 2565</h5>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -189,12 +191,12 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="finance-num">43.83</div>
+                                        <div class="finance-num">31.42</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <h6>มูลค่าที่ตราไว้</h6>
+                                        <h6>กำไรสำหรับปี</h6>
                                         <p>(ล้านบาท)</p>
                                     </div>
                                 </div>
@@ -233,7 +235,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="finance-num">3,347.31</div>
+                                        <div class="finance-num">3,383.11</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -255,7 +257,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="finance-num">1,164.23</div>
+                                        <div class="finance-num">1,160.21</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -289,68 +291,46 @@
                     <div class="row">
                         <div class="col">
                             <div class="timeline-section">
-                                <div class="newsBox">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="news-content" href="@Url.Action("IR_news_detail","Frontend_IR")">
-                                                <div class="news-topic">
-                                                    <p>หัวข้อข่าวสารนักลงทุนสัมพันธ์ หัวข้อข่าวสารนักลงทุนสัมพันธ์ หัวข้อข่าวสารนักลงทุนสัมพันธ์</p>
+                                @foreach(var item_New in Count_IR_Latest_NewDetail)
+                                {
+                                    if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                        <div class="newsBox">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <a class="news-content" href="@Url.Action("IR_news_detail","Frontend_IR", new { Id = item_New.Id })">
+                                                        <div class="news-topic">
+                                                            <p>@item_New.Title_EN</p>
+                                                        </div>
+                                                        @if (item_New.NewDate != null)
+                                                        {
+                                                            <div class="news-date">@item_New.NewDate.Value.ToString("dd MMM yyyy")</div>
+                                                        }                
+                                                    </a>
                                                 </div>
-                                                <div class="news-date">20 FEB 2023</div>
-                                            </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="newsBox">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="news-content" href="@Url.Action("IR_news_detail","Frontend_IR")">
-                                                <div class="news-topic">
-                                                    <p>หัวข้อข่าวสารนักลงทุนสัมพันธ์ หัวข้อข่าวสารนักลงทุนสัมพันธ์</p>
+                                    }
+                                    else
+                                    {
+                                        <div class="newsBox">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <a class="news-content" href="@Url.Action("IR_news_detail","Frontend_IR", new { Id = item_New.Id })">
+                                                        <div class="news-topic">
+                                                            <p>@item_New.Title_TH</p>
+                                                        </div>
+                                                        @if (item_New.NewDate != null)
+                                                        {
+                                                            <div class="news-date">@item_New.NewDate.Value.ToString("dd MMM yyyy")</div>
+                                                        }
+                                                    </a>
                                                 </div>
-                                                <div class="news-date">13 FEB 2023</div>
-                                            </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="newsBox">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="news-content" href="@Url.Action("IR_news_detail","Frontend_IR")">
-                                                <div class="news-topic">
-                                                    <p>หัวข้อข่าวสารนักลงทุนสัมพันธ์ หัวข้อข่าวสารนักลงทุนสัมพันธ์ หัวข้อข่าวสารนักลงทุนสัมพันธ์</p>
-                                                </div>
-                                                <div class="news-date">24 JAN 2023</div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="newsBox">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="news-content" href="@Url.Action("IR_news_detail","Frontend_IR")">
-                                                <div class="news-topic">
-                                                    <p>หัวข้อข่าวสารนักลงทุนสัมพันธ์ หัวข้อข่าวสารนักลงทุนสัมพันธ์</p>
-                                                </div>
-                                                <div class="news-date">02 JAN 2023</div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="newsBox">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="news-content" href="@Url.Action("IR_news_detail","Frontend_IR")">
-                                                <div class="news-topic">
-                                                    <p>หัวข้อข่าวสารนักลงทุนสัมพันธ์ หัวข้อข่าวสารนักลงทุนสัมพันธ์ หัวข้อข่าวสารนักลงทุนสัมพันธ์</p>
-                                                </div>
-                                                <div class="news-date">27 DEC 2022</div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                                    }
+                                }
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -366,68 +346,46 @@
                     <div class="row">
                         <div class="col">
                             <div class="timeline-section">
-                                <div class="newsBox">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="news-content" href="@Url.Action("IR_set_announcement_detail","Frontend_IR")">
-                                                <div class="news-topic">
-                                                    <p>หัวข้อข่าวแจ้งตลาดหลักทรัพย์ หัวข้อข่าวแจ้งตลาดหลักทรัพย์ หัวข้อข่าวแจ้งตลาดหลักทรัพย์</p>
+                                @foreach (var item_New in Count_IR_NewDetail)
+                                {
+                                    if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                        <div class="newsBox">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <a class="news-content" href="@Url.Action("IR_set_announcement_detail","Frontend_IR", new { Id = item_New.Id })">
+                                                        <div class="news-topic">
+                                                            <p>@item_New.Title_EN</p>
+                                                        </div>
+                                                        @if (item_New.NewDate != null)
+                                                        {
+                                                            <div class="news-date">@item_New.NewDate.Value.ToString("dd MMM yyyy")</div>
+                                                        }
+                                                    </a>
                                                 </div>
-                                                <div class="news-date">18 FEB 2023</div>
-                                            </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="newsBox">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="news-content" href="@Url.Action("IR_set_announcement_detail","Frontend_IR")">
-                                                <div class="news-topic">
-                                                    <p>หัวข้อข่าวแจ้งตลาดหลักทรัพย์ หัวข้อข่าวแจ้งตลาดหลักทรัพย์ หัวข้อข่าวแจ้งตลาดหลักทรัพย์</p>
+                                    }
+                                    else
+                                    {
+                                        <div class="newsBox">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <a class="news-content" href="@Url.Action("IR_set_announcement_detail","Frontend_IR", new { Id = item_New.Id })">
+                                                        <div class="news-topic">
+                                                            <p>@item_New.Title_TH</p>
+                                                        </div>
+                                                        @if (item_New.NewDate != null)
+                                                        {
+                                                            <div class="news-date">@item_New.NewDate.Value.ToString("dd MMM yyyy")</div>
+                                                        }
+                                                    </a>
                                                 </div>
-                                                <div class="news-date">12 FEB 2023</div>
-                                            </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="newsBox">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="news-content" href="@Url.Action("IR_set_announcement_detail","Frontend_IR")">
-                                                <div class="news-topic">
-                                                    <p>หัวข้อข่าวแจ้งตลาดหลักทรัพย์ หัวข้อข่าวแจ้งตลาดหลักทรัพย์</p>
-                                                </div>
-                                                <div class="news-date">30 JAN 2023</div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="newsBox">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="news-content" href="@Url.Action("IR_set_announcement_detail","Frontend_IR")">
-                                                <div class="news-topic">
-                                                    <p>หัวข้อข่าวแจ้งตลาดหลักทรัพย์ หัวข้อข่าวแจ้งตลาดหลักทรัพย์ หัวข้อข่าวแจ้งตลาดหลักทรัพย์</p>
-                                                </div>
-                                                <div class="news-date">17 JAN 2023</div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="newsBox">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="news-content" href="@Url.Action("IR_set_announcement_detail","Frontend_IR")">
-                                                <div class="news-topic">
-                                                    <p>หัวข้อข่าวแจ้งตลาดหลักทรัพย์ หัวข้อข่าวแจ้งตลาดหลักทรัพย์</p>
-                                                </div>
-                                                <div class="news-date">06 JAN 2023</div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                                    }
+                                }
                             </div>
-
                         </div>
                     </div>
                 </div>

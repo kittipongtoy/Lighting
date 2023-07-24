@@ -1,16 +1,8 @@
-﻿using Lighting.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Globalization;
-using Lighting.Areas.Identity.Data;
-using Microsoft.EntityFrameworkCore;
-using System.Dynamic;
-
-using UAParser;
-using System.Net.NetworkInformation;
-using Newtonsoft.Json;
-using System.Text.Json.Serialization;
-using Castle.Core.Resource;
+﻿using Lighting.Areas.Identity.Data;
+using Lighting.Models;
 using MailKit.Security;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MimeKit;
 using System.Net.Mime;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -54,8 +46,10 @@ namespace Lighting.Controllers.Frontend
             return Json(new { status = "success", message = "เปลี่ยนภาษาเรียบร้อย" });
         }
 
-        public IActionResult IR_index()
+        public async Task<IActionResult> IR_index()
         {
+            ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x=>x.Status == 1).OrderByDescending(o=>o.created_at).Take(5).ToListAsync();
+            ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).Take(5).ToListAsync();
             return View();
         }
 
@@ -600,6 +594,30 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_InvestorCalendarDetail = await db.IR_InvestorCalendarDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetIR_calendar(int? Year)
+        {
+            var DB = await db.IR_InvestorCalendarDetail.Where(x => x.Status == 1).ToListAsync();
+            if (Year != null && Year != 0)
+            {
+
+                DB = DB.Where(x => x.NewDate.Value.Year == Year).ToList();
+            }
+
+            return Json(new { obj = DB });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetIR_calendar_Year()
+        {
+            var DB = await db.IR_InvestorCalendarDetail.Where(x => x.Status == 1).Select(x => new
+            {
+                Year = x.NewDate.Value.Year
+            }).ToListAsync();
+            return Ok(DB);
+        }
+
         public IActionResult IR_chairman()
         {
             var get_message = db.M_message_chairman.FirstOrDefault();
@@ -1127,14 +1145,43 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetIR_news()
+        {
+            var DB = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).ToListAsync();
+            return Json(new { obj = DB });
+        }
+
         public async Task<IActionResult> IR_news_clipping()
         {
             ViewBag.IR_Print_Media = await db.IR_Print_Media.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_Print_MediaDetail = await db.IR_Print_MediaDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
-        public IActionResult IR_news_detail()
+
+        [HttpGet]
+        public async Task<IActionResult> Get_IR_news_clipping(string? Start, string? End)
         {
+            var DB = await db.IR_Print_MediaDetail.Where(x => x.Status == 1).ToListAsync();
+            if (Start != null)
+            {
+                DateTime CStart = Convert.ToDateTime(Start);
+                DB = DB.Where(x => x.NewDate.Value.Date >= CStart).ToList();
+            }
+            if (End != null)
+            {
+                DateTime CEnd = Convert.ToDateTime(End);
+                DB = DB.Where(x => x.NewDate.Value.Date <= CEnd).ToList();
+            }
+            
+            return Json(new { obj = DB });
+        }
+
+        public async Task<IActionResult> IR_news_detail(int? Id)
+        {
+            ViewBag.IR_Latest_News = await db.IR_Latest_News.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1 && x.Id == Id).ToListAsync();
             return View();
         }
         public IActionResult IR_organization()
@@ -1369,10 +1416,21 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_MassMediaDetail = await db.IR_MassMediaDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
-        public IActionResult IR_public_relation_detail()
+
+        [HttpGet]
+        public async Task<IActionResult> Get_IR_public_relation()
         {
+            var DB = await db.IR_MassMediaDetail.Where(x => x.Status == 1).ToListAsync();
+            return Json(new { obj = DB });
+        }
+
+        public async Task<IActionResult> IR_public_relation_detail(int? Id)
+        {
+            ViewBag.IR_MassMedia = await db.IR_MassMedia.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.IR_MassMediaDetail = await db.IR_MassMediaDetail.Where(x => x.Status == 1 && x.Id == Id).ToListAsync();
             return View();
         }
+
         public IActionResult IR_report_general_meeting()
         {
             var data = db.SH_IR_Report_Meeting.ToList();
@@ -1406,8 +1464,18 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
-        public IActionResult IR_set_announcement_detail(int? Id)
+
+        [HttpGet]
+        public async Task<IActionResult> Get_IR_NewDetail()
         {
+            var DB = await db.IR_NewDetail.Where(x => x.Status == 1).ToListAsync();
+            return Json(new { obj = DB });
+        }
+
+        public async Task<IActionResult> IR_set_announcement_detail(int? Id)
+        {
+            ViewBag.GetIR_Stock_Market = await db.IR_Stock_Market.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1 && x.Id == Id).ToListAsync();
             return View();
         }
         public IActionResult IR_shareholding()

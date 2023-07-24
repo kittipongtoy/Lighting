@@ -15,6 +15,18 @@ namespace Lighting.Areas.Identity.Data
         public LightingContext()
         {
         }
+
+        #region product
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Product_Model> Product_Models { get; set; }
+        public DbSet<Product_Category> Product_Categorys { get; set; }
+        #endregion
+
+        #region Project Ref
+        public DbSet<ProjectRef_Product> ProjectRef_Products { get; set; }
+        public DbSet<Category_Project> Category_Projects { get; set; }
+        public DbSet<ProjectRef> ProjectRefs { get; set; }
+        #endregion
         
         public DbSet<cookies_policy> cookies_policy { get; set; }
         public DbSet<privacy_PolicyTitles> privacy_PolicyTitles { get; set; }
@@ -107,8 +119,8 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<SH_IR_prospectus> SH_IR_prospectus { get; set; }
         public DbSet<SH_IR_financial_highlight_Details> SH_IR_financial_highlight_Details { get;set;}
         public DbSet<SH_IR_financial_highlight_DetailsData> SH_IR_financial_highlight_DetailsData { get; set; }
-
-
+        public DbSet<IR_Analyst> IR_Analysts { get; set; } 
+        public DbSet<IR_Analyst_Chapter> IR_Analyst_Chapter { get; set; }
         public DbSet<IR_Contact> IR_Contact { get; set; }
         public DbSet<IR_Stock_Market> IR_Stock_Market { get; set; }
         public DbSet<IR_NewDetail> IR_NewDetail { get; set; }
@@ -126,7 +138,11 @@ namespace Lighting.Areas.Identity.Data
 		public DbSet<IR_Request_Inquiry> IR_Request_Inquiry { get; set; }
         public DbSet<IR_InvestorCalendarDetail> IR_InvestorCalendarDetail { get; set; }
         public DbSet<IR_Cancel_Email> IR_Cancel_Email { get; set; }
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public DbSet<IR_Stock_Chart> IR_Stock_Chart { get; set; }
+        public DbSet<IR_Stock_Link> IR_Stock_Link { get; set; }
+        public DbSet<IR_Stock_Quote> IR_Stock_Quote { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
            optionsBuilder.EnableSensitiveDataLogging();
         }

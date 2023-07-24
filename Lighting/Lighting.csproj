@@ -449,6 +449,7 @@
     <Folder Include="wwwroot\upload_file\Author_executive_board\" />
     <Folder Include="wwwroot\upload_file\Author_secretary\" />
     <Folder Include="wwwroot\upload_file\IR_NewRoom\" />
+    <Folder Include="wwwroot\upload_file\IR_Analyst\" />
     <Folder Include="wwwroot\upload_file\SH_importantFinancial\" />
     <Folder Include="wwwroot\upload_file\SH_IR_download_financialStatements\" />
     <Folder Include="wwwroot\upload_file\SH_annualReport\" />
@@ -473,6 +474,12 @@
     <Folder Include="wwwroot\upload_image\IR_Contact\" />
     <Folder Include="wwwroot\upload_image\IR_NewRoom\" />
     <Folder Include="wwwroot\upload_image\contact\" />
+    <Folder Include="wwwroot\upload_image\Image_Category\" />
+    <Folder Include="wwwroot\upload_image\IR_Analyst\" />
+    <Folder Include="wwwroot\upload_image\Product_Category\" />
+    <Folder Include="wwwroot\upload_image\Product\" />
+    <Folder Include="wwwroot\upload_image\Product_Model\" />
+    <Folder Include="wwwroot\upload_image\ProjectRef\" />
     <Folder Include="wwwroot\upload_image\news\" />
     <Folder Include="wwwroot\upload_image\SH_IR_financial_hilight\" />
     <Folder Include="wwwroot\upload_image\SH_annualReport\" />

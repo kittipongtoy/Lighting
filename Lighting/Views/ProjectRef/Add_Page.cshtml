@@ -1,0 +1,392 @@
+﻿@{
+    ViewData["Title"] = "Add Contact";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+@model IEnumerable<Lighting.Models.InputFilterModels.ProjectRef.Output_CategoryVM>
+@using Lighting.Areas.Identity.Data
+
+<style>
+    .product-menu {
+        display: flex;
+        justify-content: space-between;
+        height: auto;
+        background-color: rgba(0,0,0,0.5);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        gap: 1rem;
+    }
+
+    #search-bar {
+        display: grid;
+        grid-template-columns: 1fr 1fr 30%;
+        margin-top: 2rem;
+    }
+</style>
+
+<div class="container" style="width:100%;padding-bottom:3rem;">
+    <div class=" d-flex justify-content-between mb-3">
+        <div>
+        </div>
+        <div>
+            <a href="@Url.Action("Manage_Page","ProjectRef")" class="btn btn-primary rounded-2">
+                กลับ/ back
+            </a>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:2rem;">
+        <div class="col">
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="categoryId">
+                <option selected>กรุณเลือกหมวดหมู่/select category</option>
+                @foreach (var category in Model)
+                {
+                    <option value="@category.Id">@category.Name_TH/@category.Name_EN</option>
+                }
+            </select>
+            <div class="input-group" style="margin-top:2rem;">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">ชื่อหัวข้อ/ Title Name</span>
+                </div>
+                <input type="text" class="form-control" id="title_name_th" placeholder="ภาษาไทย">
+                <input type="text" class="form-control" id="title_name_en" placeholder="English">
+            </div>
+            <div class="input-group" style="margin-top:2rem;">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">ชื่อสถานที่/ Place Name</span>
+                </div>
+                <input type="text" class="form-control" id="location_name_th" placeholder="ภาษาไทย">
+                <input type="text" class="form-control" id="location_name_en" placeholder="English">
+            </div>
+            <div class="mb-3" style="margin-top:2rem;">
+                <label for="exampleFormControlTextarea1" class="form-label">ชื่อลูกค้า/Client Name</label>
+                <textarea class="form-control" id="client_name"></textarea>
+            </div>
+            <div class="mb-3" style="margin-top:2rem;">
+                <label class="form-label">การออกแบบ/Design solution</label>
+                <input type="text" class="form-control" id="design_solution" placeholder="Lighting & Equipment Public Company Limited (L&E).">
+            </div>
+            <div class="mb-3" style="margin-top:2rem;">
+                <label class="form-label">เครดิตรูป/Photo Credit</label>
+                <input type="text" class="form-control" id="credit_photo" placeholder="Credit Photo">
+            </div>
+            <!--content-->
+            <div class="form-group mt-3 p-1" style="margin-top:2rem;">
+                <label class="h4">คอนเทนต์ (ภาษาไทย)</label>
+                <textarea id="Content_TH"></textarea>
+            </div>
+            <div class="form-group mt-3 p-1" style="margin-top:2rem;">
+                <label class="h4">  Content (English)</label>
+                <textarea id="Content_EN"></textarea>
+            </div>
+            <!--end content-->
+            <div style="margin-top:2rem;border:1px solid black;padding:1rem;">
+                <img style="width:50vh;height:50vh;display:none;" id="preview_show_img" />
+                <br/>
+                <label class="form-label" style="margin-top:2rem;">รูปหน้าปก/image profile</label>
+                <input class="form-control form-control-lg" id="img_profile" type="file">
+            </div>
+            <div style="margin-top:2rem;border:1px solid black;padding:1rem;">
+                <div class="d-flex justify-content-start flex-wrap mt-3" id="preview_sub_img">
+                </div>
+                <label class="form-label" style="margin-top:2rem;">รูปประกอบ/sub image</label>
+                <input class="form-control form-control-lg" id="sub_img" type="file" multiple>
+            </div>
+            <div style="margin-top:2rem;">
+                <label class="form-label">ไฟล์ดาวน์โหลด/Download</label>
+                <input class="form-control form-control-lg" id="download_file" type="file">
+            </div>
+
+            <table class="table mt-3" id="added_table">
+                <thead>
+                    <tr style="border-top:1px solid black;border-bottom:1px solid black;">
+                        <th scope="col">#</th>
+                        <th scope="col">รูปปก/Image Preview</th>
+                        <th scope="col">ชื่อรุ่น/Model Name</th>
+                        <th scope="col">ชื่อประเภท/Type Name</th>
+                        <th scope="col">กำลัง/power</th>
+                        <th scope="col" class="text-center">จัดการ/Manage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+            <center style="margin:3rem;">
+                <button class="btn btn-primary" onclick="addProject()">ตกลง</button>
+            </center>
+        </div>
+    </div>
+
+
+        <div id="search-bar" >
+            <input type="text" placeholder="ค้นหารุ่น/model name" id="txt_search_input" />
+            <select class="form-control" id="search_product_category_id">
+                <option class="h5" value="-1" selected>กรุณาเลือกหมวดหมู๋/select category</option>
+                @foreach (var cat in (IEnumerable<Product_Category>)ViewData["category"])
+                {
+                    <option class="h5" value="@cat.Id">@cat.Name_TH/@cat.Name_EN</option>
+                }
+            </select>
+            <button class="btn bg-success" onclick="search()">ค้นหาโปรดัก/search product</button>
+        </div>
+
+        <div class="row mt-5" id="search_table" >
+            <table class="table mt-3" id="show_search_table">
+                <thead>
+                    <tr style="border-top:1px solid black;border-bottom:1px solid black;">
+                        <th scope="col">#</th>
+                        <th scope="col">รูปปก/Image Preview</th>
+                        <th scope="col">ชื่อรุ่น/Model Name</th>
+                        <th scope="col">ชื่อประเภท/Type Name</th>
+                        <th scope="col">กำลัง/power</th>
+                        <th scope="col" class="text-center">จัดการ/Manage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+</div>
+
+@section Scripts{
+    <script>
+        var editorTH;
+        var editorEN;
+        ClassicEditor
+            .create(document.querySelector('#Content_TH'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                editorTH = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#Content_EN'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                editorEN = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+
+        //const content_th = editorTH.getData();
+        //const content_en = editorEN.getData();
+
+        var jsonAllSearch,productList = [];
+
+
+        function search() {
+            let category = $("#search_product_category_id").val();
+            let modelName = $("#txt_search_input").val();
+
+            if (jsonAllSearch !== undefined) {
+                let search = jsonAllSearch;
+                if (category != -1) {
+                    search = search.filter(x => x.product_CategoryId == category);
+                }
+                if (modelName != "") {
+                    search = search.filter(x => x.model.toLocaleLowerCase().startsWith(modelName.toLocaleLowerCase()));
+                }
+
+                let concat_str = search.reduce((prev, curr) =>
+                    prev += `<tr id="${curr.id}">
+                                        <th scope="row"></th>
+                                                <td><img src="${curr.preview_Imamge}" style="width:100px;height:100px;" /> </td>
+                                                <td>${curr.model}</td>
+                                                <td>${curr.type_EN} /${curr.type_TH}</td>
+                                                <td>${curr.power}</td>
+                                                <td class="text-center">
+                                                <button onClick="addproduct(${curr.id})" type="button" class="btn  bg-success">
+                                                    <i class="bi bi-pencil-square"></i>เพิ่ม/add
+                                                </a>
+                                                </td> 
+                                                </tr>`, "");
+
+                tableBody = $("#show_search_table tbody");
+                tableBody.html(concat_str);
+            }
+        }
+
+        function addproduct(id){
+            let product = jsonAllSearch.filter(x => x.id == id).reduce((prev, curr) => prev += `<tr id="${curr.id}">
+                                                <th scope="row"></th>
+                                                        <td><img src="${curr.preview_Imamge}" style="width:100px;height:100px;" /> </td>
+                                                        <td>${curr.model}</td>
+                                                        <td>${curr.type_EN} /${curr.type_TH}</td>
+                                                        <td>${curr.power}</td>
+                                                        <td class="text-center">
+                                                                <button onClick="deleteRowById(${curr.id})" type="button" class="btn  btn-danger">
+                                                            <i class="bi bi-pencil-square"></i>ลบ/delete
+                                                        </button>
+                                                        </td>
+                                                        </tr>`, "");
+            if (!productList.includes(id)) {
+                tableBody = $("#added_table tbody");
+                tableBody.append(product);
+                productList = [...productList,id];
+                //console.log("add",productList);
+            }
+        }
+
+        function deleteRowById(id) {
+            $("#" + id).remove();//remove search
+            productList = productList.filter(ids => ids !== id);
+            //console.log("remove", productList);
+        }
+
+        function addProject() {
+
+            const content_th = editorTH.getData();
+            const content_en = editorEN.getData();
+
+            var formData = new FormData();
+
+            formData.append("CategoryId", $("#categoryId").val());
+            formData.append("Title_TH", $("#title_name_th").val());
+            formData.append("Title_EN", $("#title_name_en").val());
+
+            formData.append("Content_TH", content_th);
+            formData.append("Content_EN", content_en);
+
+            formData.append("Location_TH", $("#location_name_th").val());
+            formData.append("Location_EN", $("#location_name_en").val());
+
+            formData.append("Client", $("#client_name").val());
+            formData.append("Design_Solution", $("#design_solution").val());
+            formData.append("Photo_Credit", $("#credit_photo").val());
+
+
+            if (file_download != undefined) {
+                formData.append("File_Download", file_download);
+            }
+
+            if (file_img_title != undefined) {
+                formData.append("Profile_Image", file_img_title);
+            }
+
+            if (files_sub_img != undefined) {
+                for (const file of files_sub_img) {
+                    formData.append("Image_List", file);
+                }
+            }
+
+            if (productList.length > 0){
+                for (const id of productList) {
+                    formData.append("ProductId", id);
+                }
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/ProjectRef/Add',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = "/ProjectRef/Manage_Page";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        const blobToBase64DataURL = blob => new Promise(
+            resolvePromise => {
+                const reader = new FileReader();
+                reader.onload = () => resolvePromise(reader.result);
+                reader.readAsDataURL(blob);
+            }
+        );
+
+        var file_img_title, files_sub_img, file_download;
+
+        $(document).ready(function () {
+
+            $.ajax({
+                type: 'POST',
+                url: '/ManageProduct/Search',
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (data) {
+
+                    console.log(data);
+                    jsonAllSearch = data;
+
+                }, error: function (e) {
+                    console.log(e);
+                }
+            });
+
+            $('#img_profile').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    file_img_title = e.target.files[0];
+                    $('#preview_show_img').attr('src', await blobToBase64DataURL(file_img_title)).css("display", "block");
+                }
+            });
+            $('#sub_img').change(async function (e) {
+                files_sub_img = null;
+                files_sub_img = e.target.files;
+                if (files_sub_img.length > 0) {
+                    let inner_html_img = "";
+                    let id_img = 0;
+                    for (file of files_sub_img) {
+                        inner_html_img += '<div class="position-relative m-3" style="width:200px;height:200px;" id="preview_img_id' + id_img + '" >';
+                        inner_html_img += '<img class=" postion-absolute" style="width:100%;height:100%;" src="' + await blobToBase64DataURL(file) + '" />';
+                        inner_html_img += '<div class="position-absolute bg-dark text-danger d-flex justify-content-center" style="top:0;right:0;width:3rem;height:3rem;font-size:2rem;text-align: center;" onClick="delete_sub_img(' + id_img + ')">&times;</div>';
+                        inner_html_img += '</div>';
+                        id_img++;
+                    }
+                    $('#preview_sub_img').html(inner_html_img);
+                }
+            });
+            $('#download_file').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    file_download = e.target.files[0];
+                }
+            });
+        });
+
+        function delete_sub_img(id) {
+            let new_img = [];
+            let index = 0;
+            for (const file of files_sub_img) {
+                if (index !== id) {
+                    new_img.push(file);
+                }
+                index++;
+            }
+            files_sub_img = new_img;
+            console.log(files_sub_img);
+            $('#preview_sub_img').parent().find('#preview_img_id' + id).remove();
+        }
+    </script>
+}

@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Lighting.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Lighting.Controllers.Backend
 {
+	[Authorize]
 	public class AuthorizationController : Controller
 	{
 		private readonly LightingContext _context;
@@ -94,14 +97,111 @@ namespace Lighting.Controllers.Backend
 			return View();
 		}
 
-		public IActionResult Authorization_Edit()
+		[HttpPost]
+		public async Task<IActionResult> Authorization_Add_Submit(RequestDTO.AuthorizationRequest model)
+		{
+			try
+			{
+				LightingUser lightingUser = new LightingUser();
+                var passwordHasher = new PasswordHasher<LightingUser>();
+                lightingUser.Firstname = model.Firstname;
+				lightingUser.Lastname = model.Lastname;
+				lightingUser.UserName = model.UserName;				
+				lightingUser.Email = model.Email;
+				lightingUser.EmailConfirmed = false;
+				var CoutDB = await _context.Users.ToListAsync();
+                lightingUser.EmployeeCode = lightingUser.UserName == null ? "" : lightingUser.UserName;
+				lightingUser.EmployeeCodeInt = CoutDB.Count() + 1;
+				lightingUser.NormalizedUserName = model.UserName;
+				lightingUser.NormalizedEmail = "";
+                lightingUser.PasswordHash = passwordHasher.HashPassword(lightingUser, model.password);
+				_context.Users.Add(lightingUser);
+				await _context.SaveChangesAsync();
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+			catch (Exception error)
+			{
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+		}
+
+        public IActionResult Authorization_Edit(string? Id)
 		{
 			return View();
 		}
 
-		public IActionResult Authorization_Delete() 
+		[HttpGet]
+		public async Task<IActionResult> GetAuthorization(string? Id)
 		{
-			return View();
+			try
+			{
+				var GetDB = await _context.Users.Where(x=>x.Id == Id).FirstOrDefaultAsync();
+				if (GetDB is not null)
+				{
+                    return Ok(GetDB);
+                }
+				else
+				{
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+				
+			}
+			catch (Exception error)
+			{
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+		[HttpPut]
+		public async Task<IActionResult> Authorization_Edit_Submit(RequestDTO.AuthorizationRequest model)
+		{
+			try
+			{
+				var GetDB = await _context.Users.FirstOrDefaultAsync(x => x.Id == model.Id);
+                if (GetDB is not null)
+                {
+                    var passwordHasher = new PasswordHasher<LightingUser>();
+					GetDB.Firstname = model.Firstname;
+					GetDB.Lastname = model.Lastname;
+                    GetDB.UserName = model.UserName;
+					GetDB.Email = model.Email;
+					GetDB.PasswordHash = passwordHasher.HashPassword(GetDB, model.password);
+					_context.Entry(GetDB).State = EntityState.Modified;
+					await _context.SaveChangesAsync();
+                    return new JsonResult(new { status = "success", messageArray = "success" });
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+			}
+			catch (Exception error)
+			{
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+		}
+
+        [HttpDelete]
+		public async Task<IActionResult> Authorization_Delete(string? Id) 
+		{
+			try
+			{
+				var GetDB = _context.Users.FirstOrDefault(x => x.Id == Id);
+				if (GetDB is not null)
+				{
+					_context.Users.Remove(GetDB);
+					await _context.SaveChangesAsync();
+				}
+				else
+				{
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+			catch (Exception error)
+			{
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
 		}
 	}
 }

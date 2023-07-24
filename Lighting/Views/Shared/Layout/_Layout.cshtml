@@ -156,7 +156,11 @@
 	var show_Analyst = "";
 	var here_Analyst = "";
 	if (ViewData["Title"] == "Analyst_Chapter"
-	|| ViewData["Title"] == "Analyst")
+	|| ViewData["Title"] == "Analyst_Chapter_Add"
+	|| ViewData["Title"] == "Analyst_Chapter_Edit"
+	|| ViewData["Title"] == "Analyst"
+	|| ViewData["Title"] == "Analyst_Add"
+	|| ViewData["Title"] == "Analyst_Edit")
 	{
 		show_Analyst = "show";
 		here_Analyst = "here";
@@ -1223,7 +1227,7 @@
 										</span>
 										<div class="menu-sub menu-sub-accordion menu-active-bg">
 											<div class="menu-item">
-												@if (ViewData["Title"] == "Analyst")
+												@if (ViewData["Title"] == "Analyst" || ViewData["Title"] == "Analyst_Add" || ViewData["Title"] == "Analyst_Edit")
 												{
 												<a class="menu-link active" href="@Url.Action("Analyst","Analyst")">
 													<span class="menu-bullet">
@@ -1243,7 +1247,7 @@
 												}	
 											</div>
 											<div class="menu-item">
-												@if (ViewData["Title"] == "Analyst_Chapter")
+												@if (ViewData["Title"] == "Analyst_Chapter" || ViewData["Title"] == "Analyst_Chapter_Add" || ViewData["Title"] == "Analyst_Chapter_Edit")
 												{
 													<a class="menu-link active" href="@Url.Action("Analyst_Chapter","Analyst")">
 														<span class="menu-bullet">
@@ -1681,7 +1685,7 @@
 									</div>
 								</div>
 							</div>
-							<div data-kt-menu-trigger="click" class="menu-item menu-accordion" @show_Analyst @here_Analyst>
+							<div data-kt-menu-trigger="click" class="menu-item menu-accordion @Show_Authorization @Here_Authorization">
 								<span class="menu-link">
 									<span class="menu-icon">
 										<i class="bi bi bi-people-fill fs-3"></i>
@@ -1693,7 +1697,7 @@
 									<div class="menu-item">
 										@if (ViewData["Title"] == "Authorization_Index" || ViewData["Title"] == "Authorization_Add" || ViewData["Title"] == "Authorization_Edit")
 										{
-											<a class="menu-link" href="#">
+											<a class="menu-link active" href="@Url.Action("Authorization_Index","Authorization")">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
@@ -1702,7 +1706,7 @@
 										}
 										else
 										{
-											<a class="menu-link" href="#">
+											<a class="menu-link" href="@Url.Action("Authorization_Index","Authorization")">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>

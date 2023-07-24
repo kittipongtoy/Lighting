@@ -1,8 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Product_Subcategory";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
-
+    var lang = Context.Request.Cookies["lang"];
+    int maximum = 12;
 }
+@model IEnumerable<Lighting.Models.InputFilterModels.Product.Output_ProductVM>
+@using Lighting.Models.InputFilterModels.Product
+
 <div class="top-page">
     <div class="container">
         <div class="row">
@@ -22,28 +26,71 @@
                         <div class="col">
                             <ul class="bread-crumb">
                                 <li><a href="@Url.Action("Product","Product")">PRODUCTS</a></li>
-                                <li><a href="@Url.Action("Product_Category","Product")">OUTDOOR</a></li>
-                                <li><a>FLOODLIGHT</a></li>
+                                @foreach (var cate_name in (IEnumerable<Output_ProductCategoryVM>)ViewData["All_Category"])
+                                {
+                                    if (cate_name.Id == ViewBag.CategoryId)
+                                    {
+                                        if (lang == "EN")
+                                        {
+                                            <li><a href="@Url.Action("Product_Category","Product",new {categoryId = ViewBag.CategoryId})">@cate_name.Name_EN</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="@Url.Action("Product_Category","Product",new {categoryId = ViewBag.CategoryId})">@cate_name.Name_TH</a></li>
+                                        }
+                                    }
+                                }
+                                
+                                @foreach (var sub_cat in (IEnumerable<Output_ProductModelVM>)ViewData["Sub_Category"])
+                                {
+                                    if (sub_cat.Id == ViewBag.SubCategoryId )
+                                    {
+                                        if (lang == "EN")
+                                        {
+                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {sub_categoryId=ViewBag.SubCategoryId,categoryId = ViewBag.CategoryId})">@sub_cat.Name_EN</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {sub_categoryId=ViewBag.SubCategoryId,categoryId = ViewBag.CategoryId})">@sub_cat.Name_TH</a></li>
+                                        }
+                                    }                 
+                                }
+                               
                             </ul>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <h2>FLOODLIGHT</h2>
+                            @foreach (var sub_cat in (IEnumerable<Output_ProductModelVM>)ViewData["Sub_Category"])
+                            {
+                                if (sub_cat.Id == ViewBag.SubCategoryId)
+                                {
+                                    if (lang == "EN")
+                                    {
+                                        <h2>@sub_cat.Name_EN</h2>
+                                    }
+                                    else
+                                    {
+                                        <h2>@sub_cat.Name_TH</h2>
+                                    }
+                                }
+                            }
+                            
                         </div>
                     </div>
                     <div class="three-colPad">
                         <div class="row">
+                            @foreach(var product in Model){
                             <div class="col-lg-4 col-md-4 col-6">
-                                <a class="productBox" href="@Url.Action("Product_Detail","Product")">
+                                    <a class="productBox" href="@Url.Action("Product_Detail","Product",new { categoryId = ViewBag.CategoryId, sub_categoryId=ViewBag.SubCategoryId,id=product.Id})">
                                     <div class="row">
                                         <div class="col">
                                             <div class="img-width">
-                                                <img src="~/Frontend_assets/images/product/product01.jpg">
+                                                <img src="~/@product.Preview_Imamge">
                                                 <ul class="hover-detail">
-                                                    <li>Dimension : 92x140x120 mm.</li>
-                                                    <li>Power : 5W</li>
-                                                    <li>IP Rating : 66</li>
+                                                    <li>Dimension : @product.Dimension</li>
+                                                    <li>Power : @product.Power</li>
+                                                    <li>IP Rating : @product.IP_Rating</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -51,265 +98,14 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="productBox-topic">
-                                                <p>FLL201-S</p>
+                                                <p>@product.Model</p>
                                             </div>
                                         </div>
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="productBox" href="@Url.Action("Product_Detail","Product")p">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width">
-                                                <img src="~/Frontend_assets/images/product/product02.jpg">
-                                                <ul class="hover-detail">
-                                                    <li>Dimension : 92x140x120 mm.</li>
-                                                    <li>Power : 5W</li>
-                                                    <li>IP Rating : 66</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="productBox-topic">
-                                                <p>FLL221-S</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="productBox" href="@Url.Action("Product_Detail","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width">
-                                                <img src="~/Frontend_assets/images/product/product03.jpg">
-                                                <ul class="hover-detail">
-                                                    <li>Dimension : 92x140x120 mm.</li>
-                                                    <li>Power : 5W</li>
-                                                    <li>IP Rating : 66</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="productBox-topic">
-                                                <p>FLL201-B</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="productBox" href="@Url.Action("Product_Detail","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width">
-                                                <img src="~/Frontend_assets/images/product/product04.jpg">
-                                                <ul class="hover-detail">
-                                                    <li>Dimension : 92x140x120 mm.</li>
-                                                    <li>Power : 5W</li>
-                                                    <li>IP Rating : 66</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="productBox-topic">
-                                                <p>FLL465</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="productBox" href="@Url.Action("Product_Detail","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width">
-                                                <img src="~/Frontend_assets/images/product/product05.jpg">
-                                                <ul class="hover-detail">
-                                                    <li>Dimension : 92x140x120 mm.</li>
-                                                    <li>Power : 5W</li>
-                                                    <li>IP Rating : 66</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="productBox-topic">
-                                                <p>FLL800</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="productBox" href="@Url.Action("Product_Detail","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width">
-                                                <img src="~/Frontend_assets/images/product/product06.jpg">
-                                                <ul class="hover-detail">
-                                                    <li>Dimension : 92x140x120 mm.</li>
-                                                    <li>Power : 5W</li>
-                                                    <li>IP Rating : 66</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="productBox-topic">
-                                                <p>FLL461</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="productBox" href="@Url.Action("Product_Detail","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width">
-                                                <img src="~/Frontend_assets/images/product/product07.jpg">
-                                                <ul class="hover-detail">
-                                                    <li>Dimension : 92x140x120 mm.</li>
-                                                    <li>Power : 5W</li>
-                                                    <li>IP Rating : 66</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="productBox-topic">
-                                                <p>FLL230-S-HD</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="productBox" href="@Url.Action("Product_Detail","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width">
-                                                <img src="~/Frontend_assets/images/product/product08.jpg">
-                                                <ul class="hover-detail">
-                                                    <li>Dimension : 92x140x120 mm.</li>
-                                                    <li>Power : 5W</li>
-                                                    <li>IP Rating : 66</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="productBox-topic">
-                                                <p>FLL220-A-HD</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="productBox" href="@Url.Action("Product_Detail","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width">
-                                                <img src="~/Frontend_assets/images/product/product09.jpg">
-                                                <ul class="hover-detail">
-                                                    <li>Dimension : 92x140x120 mm.</li>
-                                                    <li>Power : 5W</li>
-                                                    <li>IP Rating : 66</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="productBox-topic">
-                                                <p>FLL201-A</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="productBox" href="@Url.Action("Product_Detail","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width">
-                                                <img src="~/Frontend_assets/images/product/product10.jpg">
-                                                <ul class="hover-detail">
-                                                    <li>Dimension : 92x140x120 mm.</li>
-                                                    <li>Power : 5W</li>
-                                                    <li>IP Rating : 66</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="productBox-topic">
-                                                <p>FLL211-C</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="productBox" href="@Url.Action("Product_Detail","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width">
-                                                <img src="~/Frontend_assets/images/product/product11.jpg">
-                                                <ul class="hover-detail">
-                                                    <li>Dimension : 92x140x120 mm.</li>
-                                                    <li>Power : 5W</li>
-                                                    <li>IP Rating : 66</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="productBox-topic">
-                                                <p>FLL220-C</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="productBox" href="@Url.Action("Product_Detail","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width">
-                                                <img src="~/Frontend_assets/images/product/product12.jpg">
-                                                <ul class="hover-detail">
-                                                    <li>Dimension : 92x140x120 mm.</li>
-                                                    <li>Power : 5W</li>
-                                                    <li>IP Rating : 66</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="productBox-topic">
-                                                <p>FLL220-B-GS</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+               }
+
                         </div>
                     </div>
 
@@ -319,16 +115,28 @@
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination mt-4">
                                         <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Previous">
+                                            <a class="page-link" href="@Url.Action("Product_Subcategory","Product",new {categoryId = ViewBag.CategoryId, sub_categoryId=ViewBag.SubCategoryId,start=(ViewBag.CurrentPage > 0 ? ViewBag.CurrentPage - maximum:0)})" aria-label="Previous">
                                                 <i class="fas fa-arrow-left"></i>
                                             </a>
                                         </li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                        @if (ViewBag.Pagination != null)
+                                        {
+                                            int page_count = 1;
+                                            foreach (var pagination_num in ViewBag.Pagination)
+                                            {
+                                                if (ViewBag.CurrentPage == pagination_num)
+                                                {
+                                                    <li class="page-item active"><a class="page-link" href="@Url.Action("Product_Subcategory","Product",new {categoryId = ViewBag.CategoryId, sub_categoryId=ViewBag.SubCategoryId,start=pagination_num})">@page_count</a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="page-item "><a class="page-link" href="@Url.Action("Product_Subcategory","Product",new {categoryId = ViewBag.CategoryId, sub_categoryId=ViewBag.SubCategoryId,start=pagination_num})">@page_count</a></li>
+                                                }
+                                                page_count++;
+                                            }
+                                        }
                                         <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Next">
+                                            <a class="page-link" href="@Url.Action("Product_Subcategory","Product",new {categoryId = ViewBag.CategoryId, sub_categoryId=ViewBag.SubCategoryId,start=((ViewBag.CurrentPage + maximum) > ViewBag.MaximumPage ? ViewBag.MaximumPage :(ViewBag.CurrentPage + maximum)  )})" aria-label="Next">
                                                 <i class="fas fa-arrow-right"></i>
                                             </a>
                                         </li>

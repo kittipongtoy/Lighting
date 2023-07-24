@@ -9,7 +9,8 @@ namespace Lighting.Areas.Identity.Data
         public int id { get; set; }
         public string? name_th { get; set; }
         public string? name_en { get; set; }
-        public string? image_name { get; set; }
+        public string? image_nameTH { get; set; }
+        public string? image_nameEN { get; set; }
         public string? position_th { get; set; }
         public string? position_en { get; set; }
         public int? type_board { get; set; }

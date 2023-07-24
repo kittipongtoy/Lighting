@@ -1,8 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Product_Category";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var lang = Context.Request.Cookies["lang"];
 }
-
+@using Lighting.Models.InputFilterModels.Product
 <div class="top-page">
     <div class="container">
         <div class="row">
@@ -21,193 +22,81 @@
                         <div class="col">
                             <ul class="bread-crumb">
                                 <li><a href="@Url.Action("Product","Product")">PRODUCTS</a></li>
-                                <li><a>OUTDOOR</a></li>
+                                <li>
+                                    @foreach (var cate_name in (IEnumerable<Output_ProductCategoryVM>)ViewData["All_Category"])
+                                    {
+                                        if (cate_name.Id == ViewBag.CategoryId)
+                                        {
+                                            if (lang == "EN")
+                                            {
+                                                <a>
+                                                    @cate_name.Name_EN
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a>
+                                                    @cate_name.Name_TH
+                                                </a>
+                                            }
+                                        }
+                                    }
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <h2>OUTDOOR</h2>
+                            @foreach (var cate_name in (IEnumerable<Output_ProductCategoryVM>)ViewData["All_Category"])
+                            {
+                                if (cate_name.Id == ViewBag.CategoryId)
+                                {
+                                    if (lang == "EN")
+                                    {
+                                        <h2>
+                                            @cate_name.Name_EN
+                                        </h2>
+                                    }
+                                    else
+                                    {
+                                        <h2>
+                                            @cate_name.Name_TH
+                                        </h2>
+                                    }
+                                }
+                            }
                         </div>
                     </div>
                     <div class="three-colPad">
                         <div class="row">
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="contentBox" href="@Url.Action("Product_Subcategory","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/product/sub-category01.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>FLOODLIGHT</p>
+                            @foreach (var sub_cat in (IEnumerable<Output_ProductModelVM>)ViewData["Sub_Category"])
+                            {
+                                <div class="col-lg-4 col-md-4 col-6">
+                                    <a class="contentBox" href="@Url.Action("Product_Subcategory","Product",new { categoryId = ViewBag.CategoryId, sub_categoryId=sub_cat.Id})">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="img-width"><img src="~/@sub_cat.Image"></div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="contentBox" href="@Url.Action("Product_Subcategory","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/product/sub-category02.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>STREETLIGHT</p>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="contentBox-topic">
+                                                    @if (lang == "EN")
+                                                    {
+                                                        <p>@sub_cat.Name_EN</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>@sub_cat.Name_TH</p>
+                                                    }
+                                                    
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="contentBox" href="@Url.Action("Product_Subcategory","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/product/sub-category03.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>AREALIGHT</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="contentBox" href="@Url.Action("Product_Subcategory","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/product/sub-category04.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>CANOPY</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="contentBox" href="@Url.Action("Product_Subcategory","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/product/sub-category05.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>WALL MOUNT</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="contentBox" href="@Url.Action("Product_Subcategory","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/product/sub-category06.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>BOLLARD/BORDER</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="contentBox" href="@Url.Action("Product_Subcategory","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/product/sub-category07.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>GROUND SPIKE</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="contentBox" href="@Url.Action("Product_Subcategory","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/product/sub-category08.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>INGROUND</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="contentBox" href="@Url.Action("Product_Subcategory","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/product/sub-category09.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>UNDERWATER</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="contentBox" href="@Url.Action("Product_Subcategory","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/product/sub-category10.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>POST TOP</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-6">
-                                <a class="contentBox" href="@Url.Action("Product_Subcategory","Product")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/product/sub-category11.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>OUTDOOR LINEAR LIGHTING</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+                                    </a>
+                                </div>
+                            }
+
                         </div>
                     </div>
                 </div>

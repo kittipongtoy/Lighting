@@ -24,36 +24,49 @@
                 if (Model.count_list_chairman > 0)
                 {
                     <div class="row justify-content-center">
-                    @foreach(var items in Model.list_chairman){
+                        @foreach (var items in Model.list_chairman)
+                        {
                             <div class="col-xl-4 col-lg-5 col-md-5 col-11">
                                 <div class="name-position">
                                     <div class="row">
-                                        <div class="col">
-                                            <div class="img-width imgBD"><img src="~/upload_image/Chairman/@items.image_name"></div>
-                                        </div>
+                                        @if (Context.Request.Cookies["lang"] == "EN")
+                                        {
+                                            <div class="col">
+                                                <div class="img-width imgBD"><img src="~/upload_image/Chairman/@items.image_name_EN"></div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col">
+                                                <div class="img-width imgBD"><img src="~/upload_image/Chairman/@items.image_name_TH"></div>
+                                            </div>
+                                        }
                                     </div>
                                     <div class="row">
                                         <div class="col">
                                             <ul class="name-info">
-                                            @{
-                                                    if (Context.Request.Cookies["lang"] == "EN"){
-                                                        <li>@items.name_en</li>
-                                                        <li>@items.rank_en</li>
-                                                    }else{
-                                                        <li>@items.name_th</li>
-                                                        <li>@items.rank_th</li>
-                                                    }
-                                            }
-                                               
+                                                @if (Context.Request.Cookies["lang"] == "EN")
+                                                {
+                                                    <li>@items.name_en</li>
+                                                    <li>@items.rank_en</li>
+                                                }
+                                                else
+                                                {
+                                                    <li>@items.name_th</li>
+                                                    <li>@items.rank_th</li>
+                                                }
+
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                    }
-                        
+                        }
+
                     </div>
-                }else{
+                }
+                else
+                {
                     <div class="row justify-content-center">
                         <div class="col-xl-4 col-lg-5 col-md-5 col-11">
                             <div class="name-position">
@@ -92,8 +105,10 @@
                     </div>
                 }
 
-                if(Model.count_row_chairman > 0){
-                    if (Context.Request.Cookies["lang"] == "EN"){
+                if (Model.count_row_chairman > 0)
+                {
+                    if (Context.Request.Cookies["lang"] == "EN")
+                    {
                         <div class="row justify-content-center">
                             <div class="col-lg-12 col-md-11 col-11">
                                 <div class="quoteBox">
@@ -108,7 +123,9 @@
                                 </div>
                             </div>
                         </div>
-                    }else{
+                    }
+                    else
+                    {
                         <div class="row justify-content-center">
                             <div class="col-lg-12 col-md-11 col-11">
                                 <div class="quoteBox">
@@ -124,8 +141,10 @@
                             </div>
                         </div>
                     }
-                   
-                }else{
+
+                }
+                else
+                {
                     <div class="row justify-content-center">
                         <div class="col-lg-12 col-md-11 col-11">
                             <div class="quoteBox">

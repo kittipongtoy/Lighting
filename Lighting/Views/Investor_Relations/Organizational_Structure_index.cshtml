@@ -90,7 +90,16 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
+                                            <span>
+                                                Image TH
+                                            </span>
+                                            <input type="file" class="form-control" name="uploaded_imageTH" accept="image/*" />
+                                        </div>
+                                        <div class="row">
+                                            <span>
+                                                Image EN
+                                            </span>
+                                            <input type="file" class="form-control" name="uploaded_imageEN" accept="image/*" />
                                         </div>
                                     </form>
                                 </div>
@@ -128,7 +137,17 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
+                                             <span>
+                                                Image TH
+                                            </span>
+                                            <input type="file" class="form-control" name="uploaded_imageTH" placeholder="image TH" accept="image/*" />
+                                        </div>
+
+                                        <div class="row">
+                                            <span>
+                                                Image EN
+                                            </span>
+                                            <input type="file" class="form-control" name="uploaded_imageEN" placeholder="image EN" accept="image/*" />
                                         </div>
                                     </form>
                                 </div>
@@ -364,7 +383,7 @@
                         "name": "count_row", "data": "count_row"
                     },
                     {
-                        "name": "image_name", "data": "image_name", "class": "text-center", "render": function (data, type, row) {
+                        "name": "image_nameTH", "data": "image_nameTH", "class": "text-center", "render": function (data, type, row) {
                             var text = '<div class="mb-10" style="text-align:center;">' +
                                 '<img src="/upload_image/OrganizationalStructure/' + row.image_name + '" style="height: 250px;width: 250px;" alt="image">' +
                                 '</div>';

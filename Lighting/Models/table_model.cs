@@ -15,7 +15,8 @@ namespace Lighting.Models
             public string? name_en { get; set; }
             public string? rank_th { get; set; }
             public string? rank_en { get; set; }
-            public string? image_name { get; set; }
+            public string? image_nameTH { get; set; }
+            public string? image_nameEN { get; set; }
             public int? use_status { get; set; }
             public DateTime? created_at { get; set; }
             public DateTime? updated_at { get; set; }
@@ -34,7 +35,8 @@ namespace Lighting.Models
         {
             public int? count_row { get; set; }
             public int? id { get; set; }
-            public string? image_name { get; set; }
+            public string? image_nameTH { get; set; }
+            public string? image_nameEN { get; set; }
             public int? num_order { get; set; }
             public int? use_status { get; set; }
             public DateTime? created_at { get; set; }
@@ -68,7 +70,8 @@ namespace Lighting.Models
             public int? id { get; set; }
             public string? name_th { get; set; }
             public string? name_en { get; set; }
-            public string? image_name { get; set; }
+            public string? image_nameTH { get; set; }
+            public string? image_nameEN { get; set; }
             public string? position_th { get; set; }
             public string? position_en { get; set; }
             public int? type_board { get; set; }

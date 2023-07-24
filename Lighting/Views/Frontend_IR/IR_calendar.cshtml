@@ -3,6 +3,16 @@
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var Count_IR_InvestorCalendar = (List<Lighting.Areas.Identity.Data.IR_InvestorCalendar>)ViewBag.IR_InvestorCalendar;
     var Count_IR_InvestorCalendarDetail = (List<Lighting.Areas.Identity.Data.IR_InvestorCalendarDetail>)ViewBag.IR_InvestorCalendarDetail;
+
+    var language = "";
+    if (Context.Request.Cookies["lang"] == "EN")
+    {
+        language = "EN";
+    }
+    else
+    {
+        language = "TH";
+    }
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
@@ -45,26 +55,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-3 col-md-4 col-8">
                     <div class="input-form">
-                        <select class="form-select more-BD">
-                            <option selected>เลือกปี</option>
-                            <option value="1">2566</option>
-                            <option value="2">2565</option>
-                            <option value="3">2564</option>
-                            <option value="4">2563</option>
-                            <option value="5">2562</option>
-                            <option value="6">2561</option>
-                            <option value="7">2560</option>
-                            <option value="8">2559</option>
-                            <option value="9">2558</option>
-                            <option value="10">2557</option>
-                            <option value="11">2556</option>
-                            <option value="12">2555</option>
-                            <option value="13">2554</option>
-                            <option value="14">2553</option>
-                            <option value="15">2552</option>
-                            <option value="16">2551</option>
-                            <option value="17">2550</option>
-                        </select>
+                        <select class="form-select more-BD" name="ChangeYear" id="Year" onchange="GetData()"></select>
                     </div>
                 </div>
             </div>
@@ -80,77 +71,7 @@
                                     <th>เอกสารประกอบ</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @if (Count_IR_InvestorCalendarDetail.Count() != 0)
-                                {
-                                    if (Context.Request.Cookies["lang"] == "EN")
-                                    {
-                                        foreach (var item in ViewBag.IR_InvestorCalendarDetail)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    <ul class="date-time">
-                                                        @if (item.NewDate != null)
-                                                        {
-                                                            <li>@item.NewDate.ToString("dd MMM yyyy HH:mm:ss")</li>
-                                                        }
-                                                        else
-                                                        {
-                                                            <li></li>
-                                                        }
-                                                    </ul>
-                                                </td>
-                                                <td>@item.Activity_EN</td>
-                                                <td>@item.Position_EN</td>
-                                                <td>
-                                                    <a class="download-button" href="/upload_file/IR_NewRoom/@item.FileNameEN" target="_blank"><span>ดาวน์โหลด</span></a>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        foreach (var item in ViewBag.IR_InvestorCalendarDetail)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    <ul class="date-time">
-                                                        @if (item.NewDate != null)
-                                                        {
-                                                            <li>@item.NewDate.ToString("dd MMM yyyy HH:mm:ss")</li>
-                                                        }
-                                                        else
-                                                        {
-                                                            <li></li>
-                                                        }
-                                                    </ul>
-                                                </td>
-                                                <td>@item.Activity_TH</td>
-                                                <td>@item.Position_TH</td>
-                                                <td>
-                                                    <a class="download-button" href="/upload_file/IR_NewRoom/@item.FileNameTH" target="_blank"><span>ดาวน์โหลด</span></a>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    <tr>
-                                        <td>
-                                            <ul class="date-time">
-                                                <li>15 พฤศจิกายน 2565</li>
-                                                <li>15:15 - 16:00</li>
-                                            </ul>
-                                        </td>
-                                        <td>บริษัทจดทะเบียนพบผู้ลงทุนสำหรับผลประกอบการไตรมาส 3/2565</td>
-                                        <td>รับชมผ่านช่องทางออนไลน์</td>
-                                        <td>
-                                            <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
+                            <tbody id="data-container"></tbody>
                         </table>
                     </div>
                 </div>
@@ -160,22 +81,8 @@
                 <div class="col">
                     <div class="content-center">
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <i class="fas fa-arrow-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                            <div id="pagination">
+                            </div>
                         </nav>
                     </div>
                 </div>
@@ -185,6 +92,169 @@
 </div>
 @section Scripts{
     <script>
+        var getPagination;
+        $(function () {
+            GetData();
+            GetYear();
+        });
+
+        function GetData() {
+            let container = $('#pagination');
+            getPagination = function (dto) {
+                var local = "@language";
+                var title = function ({ activity_TH, activity_EN }, lag) {
+                    if (lag === "TH") {
+                        if (activity_TH == "null") {
+                            return activity_TH;
+                        } else {
+                            return activity_TH;
+                        }
+                    } else if (lag === "EN") {
+                        if (activity_EN == "null") {
+                            return activity_EN;
+                        } else {
+                            return activity_EN;
+                        }
+                    }
+                }
+
+                var details = function ({ position_TH, position_EN }, lag) {
+                    if (lag === "TH") {
+                        if (position_TH == "null") {
+                            return position_TH;
+                        } else {
+                            return position_TH;
+                        }
+                    } else if (lag === "EN") {
+                        if (position_EN == "null") {
+                            return position_EN;
+                        } else {
+                            return position_EN;
+                        }
+                    }
+                }
+                var date = function ({ newDate }, lag) {
+                    console.log(newDate)
+                    if (lag === "TH") {
+                        return getDateString(newDate);
+                    } else if (lag === "EN") {
+                        return getDateString(newDate);
+                    }
+                }
+
+                var file = function ({ fileNameTH, fileNameEN }, lag) {
+                    if (lag === "TH") {
+                        if (fileNameTH == "null") {
+                            return fileNameTH;
+                        } else {
+                            return fileNameTH;
+                        }
+                    } else if (lag === "EN") {
+                        if (fileNameEN == "null") {
+                            return fileNameEN;
+                        } else {
+                            return fileNameEN;
+                        }
+                    }
+                }
+
+                var GetId = function ({ id }, lag) {
+                    if (lag === "TH") {
+                        return id;
+                    } else if (lag === "EN") {
+                        return id;
+                    }
+                }
+
+                container.pagination({
+                    dataSource: dto,
+                    pageSize: 10,
+                    position: 'center',
+                    callback: function (data, pagination) {
+                        var dataHtml = ``;
+                        if (data.length > 0) {
+                            $.each(data, function (index, item) {
+                                var date = new Date(item.newDate);
+                                var optionsTH = { year: 'numeric', month: 'long', day: 'numeric' };
+                                var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
+                                var optionsEN = { year: 'numeric', month: 'long', day: 'numeric' };
+                                var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
+                                dataHtml += `<tr>
+                                                                <td>
+                                                                    <ul class="date-time">`;
+                                if (local == "TH") {
+                                    dataHtml += formattedDateTH
+                                } else {
+                                    dataHtml += formattedDateEN
+                                }
+                                dataHtml += `</ul>
+                                                                </td>
+                                                                                                <td>` + title(item, local) + `</td>
+                                                                        <td>` + details(item, local) + `</td>
+                                                                <td>
+                                                                                         <a class="download-button" href="/upload_file/IR_NewRoom/`+ file(item, local) + `" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                                </td>
+                                                            </tr>`;
+                            });
+                        }
+                        else {
+                            dataHtml += `<tr>
+                                                                <td>
+                                                                    <ul class="date-time">
+                                                                        <li>15 พฤศจิกายน 2565</li>
+                                                                        <li>15:15 - 16:00</li>
+                                                                    </ul>
+                                                                </td>
+                                                                <td>บริษัทจดทะเบียนพบผู้ลงทุนสำหรับผลประกอบการไตรมาส 3/2565</td>
+                                                                <td>รับชมผ่านช่องทางออนไลน์</td>
+                                                                <td>
+                                                                    <a class="download-button" href="/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                                </td>
+                                                            </tr>`;
+                        }
+                        $("#data-container").html(dataHtml);
+                    }
+                });
+            }
+
+            getPagination(function (done) {
+                $.ajax({
+                    url: '/Frontend_IR/GetIR_calendar',
+                    type: 'GET',
+                    data: { Year: $("[name$='ChangeYear']").val() },
+                    success: function (response) {
+                        let pp = [];
+                        if (response && response.obj && Array.isArray(response.obj)) {
+                            response.obj.forEach(data => pp.push(data));
+                        } else {
+                            console.log('Invalid response or missing "obj" property');
+                        }
+                        done(pp);
+                    },
+                    error: function (error) {
+                        console.log('AJAX request failed:', error);
+                    }
+                });
+            });
+        }
+
+        function GetYear()
+        {
+            $.ajax({
+                url: '/Frontend_IR/GetIR_calendar_Year',
+                type: 'GET',
+                success: function (response) {
+                    var s = '<option selected>เลือกปี</option>';
+                    $.each(response, function (v, c) {
+                        s += '<option value="' + c.year + '">' + c.year + '</option>';
+                    });
+                    $("#Year").html(s);
+                },
+                error: function (error) {
+                    console.log('AJAX request failed:', error);
+                }
+            });
+        }
 
     </script>
 }

@@ -1,7 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Product_Detail";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var lang = Context.Request.Cookies["lang"];
 }
+@model Lighting.Models.InputFilterModels.Product.Output_ProductVM
+@using Lighting.Models.InputFilterModels.Product
+
 <div class="top-page">
     <div class="container">
         <div class="row">
@@ -19,9 +23,35 @@
                         <div class="col">
                             <ul class="bread-crumb">
                                 <li><a href="@Url.Action("Product","Product")">PRODUCTS</a></li>
-                                <li><a href="@Url.Action("Product_Category","Product")">OUTDOOR</a></li>
-                                <li><a href="@Url.Action("Product_Subcategory","Product")">FLOODLIGHT</a></li>
-                                <li><a>FLL201-S</a></li>
+                                @foreach (var cate_name in (IEnumerable<Output_ProductCategoryVM>)ViewData["All_Category"])
+                                {
+                                    if (cate_name.Id == ViewBag.CategoryId)
+                                    {
+                                        if (lang == "EN")
+                                        {
+                                            <li><a href="@Url.Action("Product_Category","Product",new {categoryId=ViewBag.CategoryId})">@cate_name.Name_EN</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="@Url.Action("Product_Category","Product",new {categoryId=ViewBag.CategoryId})">@cate_name.Name_TH</a></li>
+                                        }
+                                    }
+                                }
+                                @foreach (var sub_cat in (IEnumerable<Output_ProductModelVM>)ViewData["Sub_Category"])
+                                {
+                                    if (sub_cat.Id == ViewBag.SubCategoryId)
+                                    {
+                                        if (lang == "EN")
+                                        {
+                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {categoryId = ViewBag.CategoryId,sub_categoryId = ViewBag.SubCategoryId})">@sub_cat.Name_EN</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {categoryId = ViewBag.CategoryId,sub_categoryId = ViewBag.SubCategoryId})">@sub_cat.Name_TH</a></li>
+                                        }
+                                    }
+                                }
+                                <li><a>@Model.Model</a></li>
                             </ul>
                         </div>
                     </div>
@@ -31,36 +61,66 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="product-header">
-                                            <h2>FLL201-S</h2>
-                                            <p>LED Floodlight / Spotlight</p>
+                                            <h2>@Model.Model</h2>
+                                            @if (lang == "EN")
+                                            {
+                                                <p>@Model.Type_EN</p>
+                                            }
+                                            else
+                                            {
+                                                <p>@Model.Type_TH</p>
+                                            }
+                                           
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col-xl-7 col-lg-8 col-md-8 col-12">
-                                        <a class="img-width" data-fancybox href="~/Frontend_assets/images/product/product01.jpg"><img src="~/Frontend_assets/images/product/product01.jpg"></a>
+                                        <a class="img-width" data-fancybox href="~/@Model.Preview_Imamge"><img src="~/@Model.Preview_Imamge"></a>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="icon-spec"><img src="~/Frontend_assets/images/product/product-spec.jpg"></div>
+                                        @if (Model.SUB_IMG != null)
+                                        {
+                                            <div class="icon-spec"><img src="~/@Model.SUB_IMG"></div>
+                                        }
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <ul class="product-download">
-                                            <li>
-                                                <a href="" target="_blank"><span>CUTSHEET</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="" target="_blank"><span>IES FILE</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="" target="_blank"><span>CATALOGUE</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="" target="_blank"><span>MORE INFORMATION</span></a>
-                                            </li>
+                                            @if (Model.CUTSHEET != null)
+                                            {
+                                                <li>
+                                                    <a href="~/@Model.CUTSHEET" target="_blank"><span>CUTSHEET</span></a>
+                                                </li>
+                                            }
+                                            @if (Model.IESFILE != null)
+                                            {
+                                                <li>
+                                                    <a href="~/@Model.IESFILE" target="_blank"><span>IES FILE</span></a>
+                                                </li>
+                                            }
+                                            @if (Model.CATALOGUE != null)
+                                            {
+                                                <li>
+                                                    <a href="~/@Model.CATALOGUE" target="_blank"><span>CATALOGUE</span></a>
+                                                </li>
+                                            }
+                                            @if (Model.RFA != null)
+                                            {
+                                                <li>
+                                                    <a href="~/@Model.RFA" target="_blank"><span>RFA FILE</span></a>
+                                                </li>
+                                            }
+                                            @if (Model.MORE_INFORMATION != null)
+                                            {
+                                                <li>
+                                                    <a href="@Model.MORE_INFORMATION" target="_blank"><span>MORE INFORMATION</span></a>
+                                                </li>
+                                            }
+
                                         </ul>
                                     </div>
                                 </div>
@@ -77,7 +137,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="txt-content mb-0">
-                                            <p>Floodlight is designed to illuminate building facade, building security,indoor and outdoor stadiums, monuments, statues, exhibition halls, shopping centers,showrooms,display areas, residences,etc.</p>
+                                            <p>@Model.Application</p>
                                         </div>
                                     </div>
                                 </div>
@@ -100,67 +160,67 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th>Housing</th>
-                                                                <td>Die-cast aluminium</td>
+                                                                <td>@Model.Housing</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Finishing</th>
-                                                                <td>Powder coated in black</td>
+                                                                <td>@Model.Finishing</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Lens</th>
-                                                                <td>Clear toughened glass</td>
+                                                                <td>@Model.Lens</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Gasket</th>
-                                                                <td>Silicone rubber</td>
+                                                                <td>@Model.Gasket</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Dimension</th>
-                                                                <td>92x140x120 mm.</td>
+                                                                <td>@Model.Dimension</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Mounting</th>
-                                                                <td>Surface</td>
+                                                                <td>@Model.Mounting</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Power</th>
-                                                                <td>5W</td>
+                                                                <td>@Model.Power</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Source</th>
-                                                                <td>LED-COB</td>
+                                                                <td>@Model.Source</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Lamp Colour</th>
-                                                                <td>3000/4000K</td>
+                                                                <td>@Model.Lamp_Colour</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Luminaire Output</th>
-                                                                <td>360 Im</td>
+                                                                <td>@Model.Luminaire_Output</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Beam Angle</th>
-                                                                <td>12/24/36 degree</td>
+                                                                <td>@Model.Beam_Angle</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Control Gear</th>
-                                                                <td>Built-in driver</td>
+                                                                <td>@Model.Control_Gear</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Power Supply</th>
-                                                                <td>220VAC 50Hz</td>
+                                                                <td>@Model.Power_Supply</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>IP Rating</th>
-                                                                <td>66</td>
+                                                                <td>@Model.IP_Rating</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Luminaire Lifetime</th>
-                                                                <td>30.000 hrs</td>
+                                                                <td>@Model.Luminaire_Lifetime</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Equivalent</th>
-                                                                <td>MR16 50W</td>
+                                                                <td>@Model.Equivalent</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -171,27 +231,37 @@
                                     <div class="col-lg-6 col-12">
                                         <div class="row">
                                             <div class="col">
-                                                <h6>TECHNICAL DRAWING</h6>
+                                                <h6>Dimension</h6>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
                                                 <ul class="product-gal">
-                                                    <li><a data-fancybox="technical-gallery" href="~/Frontend_assets/images/product/product-detail01.JPG"><img src="~/Frontend_assets/images/product/product-detail01.JPG"></a></li>
-                                                    <li><a data-fancybox="technical-gallery" href="~/Frontend_assets/images/product/product-detail01.JPG"><img src="~/Frontend_assets/images/product/product-detail01.JPG"></a></li>
+                                                    @if (Model.Technical_Drawing_Img != null)
+                                                    {
+                                                        foreach (var img in Model.Technical_Drawing_Img)
+                                                        {
+                                                            <li><a data-fancybox="technical-gallery" href="~/@img"><img src="~/@img"></a></li>
+                                                        }
+                                                    }
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                <h6>LIGHT DISTRIBUTION</h6>
+                                                <h6>Photomatric Data</h6>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
                                                 <ul class="product-gal mb-0">
-                                                    <li><a data-fancybox="distribution-gallery" href="~/Frontend_assets/images/product/product-detail02.JPG"><img src="~/Frontend_assets/images/product/product-detail02.JPG"></a></li>
-                                                    <li><a data-fancybox="distribution-gallery" href="~/Frontend_assets/images/product/product-detail02.JPG"><img src="~/Frontend_assets/images/product/product-detail02.JPG"></a></li>
+                                                    @if (Model.LIGHT_DISTRIBUTION != null)
+                                                    {
+                                                        foreach (var img in Model.LIGHT_DISTRIBUTION)
+                                                        {
+                                                            <li><a data-fancybox="distribution-gallery" href="~/@img"><img src="~/@img"></a></li>
+                                                        }
+                                                    }
                                                 </ul>
                                             </div>
                                         </div>
@@ -203,7 +273,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="content-center">
-                                <a class="buttonB" href="@Url.Action("Product_Subcategory","Product")"><i class="fas fa-long-arrow-alt-left"></i>Back</a>
+                                <a class="buttonB" href="@Url.Action("Product_Subcategory","Product",new { categoryId= ViewBag.CategoryId,  sub_categoryId= ViewBag.SubCategoryId})"><i class="fas fa-long-arrow-alt-left"></i>Back</a>
                             </div>
                         </div>
                     </div>

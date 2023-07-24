@@ -3,6 +3,16 @@
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var Count_IR_Print_Media = (List<Lighting.Areas.Identity.Data.IR_Print_Media>)ViewBag.IR_Print_Media;
     var Count_IR_Print_MediaDetail = (List<Lighting.Areas.Identity.Data.IR_Print_MediaDetail>)ViewBag.IR_Print_MediaDetail;
+
+    var language = "";
+    if (Context.Request.Cookies["lang"] == "EN")
+    {
+        language = "EN";
+    }
+    else
+    {
+        language = "TH";
+    }
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
@@ -36,8 +46,8 @@
                         }
                         else
                         {
-                             <h5>ห้องข่าว</h5>
-                             <h1>ข่าวจากสื่อสิ่งพิมพ์</h1>
+                            <h5>ห้องข่าว</h5>
+                            <h1>ข่าวจากสื่อสิ่งพิมพ์</h1>
                         }
                     </div>
                 </div>
@@ -48,17 +58,17 @@
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-4">ตั้งแต่วันที่</div>
                             <div class="col-lg-4 col-md-4 col-8">
-                                <input type="date" class="form-control">
+                                <input type="date" class="form-control" id="StartDate">
                             </div>
                             <div class="col-lg-2 col-md-2 col-4">ถึงวันที่</div>
                             <div class="col-lg-4 col-md-4 col-8">
-                                <input type="date" class="form-control">
+                                <input type="date" class="form-control" id="EndDate">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="content-center">
-                                    <a class="buttonB m-size" href=""><i class="fas fa-search"></i>ค้นหา</a>
+                                    <a class="buttonB m-size" onclick="Search()"><i class="fas fa-search"></i>ค้นหา</a>
                                 </div>
                             </div>
                         </div>
@@ -76,69 +86,7 @@
                                     <th>แหล่งข่าว</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @if (Count_IR_Print_MediaDetail.Count() != 0)
-                                {
-                                    if (Context.Request.Cookies["lang"] == "EN")
-                                    {
-                                        foreach (var item in ViewBag.IR_Print_MediaDetail)
-                                        {
-                                            <tr>
-                                                @if (@item.NewDate != null)
-                                                {
-                                                    <td>@item.NewDate.ToString("dd MMM yyyy")</td>
-                                                }
-                                                else
-                                                {
-                                                   <td></td>
-                                                }
-                                               
-                                                <td>
-                                                    <a href="~/upload_file/IR_NewRoom/@item.FileNameEN" target="_blank">@item.Title_EN</a>
-                                                </td>
-                                                <td>
-                                                    <div class="source-logo"><img src="~/upload_image/IR_NewRoom/@item.Image_Newssource"></div>
-                                                </td>
-                                            </tr>
-                                            
-                                        }
-                                    }
-                                    else
-                                    {
-                                        foreach (var item in ViewBag.IR_Print_MediaDetail)
-                                        {
-                                            <tr>
-                                                @if (@item.NewDate != null)
-                                                {
-                                                    <td>@item.NewDate.ToString("dd MMM yyyy")</td>
-                                                }
-                                                else
-                                                {
-                                                    <td></td>
-                                                }
-                                                <td>
-                                                    <a href="~/upload_file/IR_NewRoom/@item.FileNameEN" target="_blank">@item.Title_TH</a>
-                                                </td>
-                                                <td>
-                                                    <div class="source-logo"><img src="~/upload_image/IR_NewRoom/@item.Image_Newssource"></div>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    <tr>
-                                        <td>19 ม.ค. 2566</td>
-                                        <td>
-                                            <a href="~/Frontend_assets/images/ir/clipping-news.pdf" target="_blank">L&Eตั้งเป้ารายได้ปีนี้โตลุยประมูลงาน3-4พันล.</a>
-                                        </td>
-                                        <td>
-                                            <div class="source-logo"><img src="~/Frontend_assets/images/ir/news-thunhoon.png"></div>
-                                        </td>
-                                    </tr>                                  
-                                }
-                            </tbody>
+                            <tbody id="data-container"></tbody>
                         </table>
                     </div>
                 </div>
@@ -148,22 +96,7 @@
                 <div class="col">
                     <div class="content-center">
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <i class="fas fa-arrow-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                            <div id="pagination"></div>
                         </nav>
                     </div>
                 </div>
@@ -173,6 +106,180 @@
 </div>
 @section Scripts{
     <script>
-   
+        var getPagination;
+        $(function () {
+            GetData()
+        });
+
+        function GetData() {
+            console.log($("#StartDate").val())
+
+
+            let container = $('#pagination');
+            getPagination = function (dto) {
+                var local = "@language";
+                var title = function ({ title_TH, title_EN }, lag) {
+                    if (lag === "TH") {
+                        if (title_TH == "null") {
+                            return title_TH;
+                        } else {
+                            return title_TH;
+                        }
+                    } else if (lag === "EN") {
+                        if (title_EN == "null") {
+                            return title_EN;
+                        } else {
+                            return title_EN;
+                        }
+                    }
+                }
+
+                var details = function ({ detail_TH, detail_EN }, lag) {
+                    if (lag === "TH") {
+                        if (detail_TH == "null") {
+                            return detail_TH;
+                        } else {
+                            return detail_TH;
+                        }
+                    } else if (lag === "EN") {
+                        if (detail_EN == "null") {
+                            return detail_EN;
+                        } else {
+                            return detail_EN;
+                        }
+                    }
+                }
+                var date = function ({ newDate }, lag) {
+                    if (lag === "TH") {
+                        return getDateString(newDate);
+                    } else if (lag === "EN") {
+                        return getDateString(newDate);
+                    }
+                }
+
+                var file = function ({ fileName_TH, fileName_EN }, lag) {
+                    if (lag === "TH") {
+                        if (fileName_TH == "null") {
+                            return fileName_TH;
+                        } else {
+                            return fileName_TH;
+                        }
+                    } else if (lag === "EN") {
+                        if (fileName_EN == "null") {
+                            return fileName_EN;
+                        } else {
+                            return fileName_EN;
+                        }
+                    }
+                }
+
+                var GetId = function ({ id }, lag) {
+                    if (lag === "TH") {
+                        return id;
+                    } else if (lag === "EN") {
+                        return id;
+                    }
+                }
+
+                var GetFile = function ({ fileNameTH, fileNameEN }, lag) {
+                    if (lag === "TH") {
+                        if (fileNameTH == "null") {
+                            return fileNameTH;
+                        } else {
+                            return fileNameTH;
+                        }
+                    } else if (lag === "EN") {
+                        if (fileNameEN == "null") {
+                            return fileNameEN;
+                        } else {
+                            return fileNameEN;
+                        }
+                    }
+                }
+
+                var Getimage = function ({ image_Newssource }, lag) {
+                    return image_Newssource;
+                }
+
+                container.pagination({
+                    dataSource: dto,
+                    pageSize: 10,
+                    position: 'center',
+                    callback: function (data, pagination) {
+                        var dataHtml = ``;
+                        if (data.length > 0) {
+                            $.each(data, function (index, item) {
+
+                                var date = new Date(item.newDate);
+                                var optionsTH = { year: 'numeric', month: 'long', day: 'numeric' };
+                                var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
+
+                                var optionsEN = { year: 'numeric', month: 'long', day: 'numeric' };
+                                var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
+
+                                dataHtml += `<tr><td>`;
+                                if (local == "TH") {
+                                    dataHtml += formattedDateTH
+                                } else {
+                                    dataHtml += formattedDateEN
+                                }
+
+                                dataHtml += `</td>
+                                                  <td>
+                                                      <a href="/upload_file/IR_NewRoom/` + GetFile(item, local) + `" target="_blank">` + title(item, local) + ` </a>
+                                                   </td>
+                                             <td>
+                                             <div class="source-logo" > <img src="/upload_image/IR_NewRoom/` + Getimage(item, local) + `"> </div>
+                                             </td>
+                                             </tr>`;
+                            });
+                        }
+                        else {
+                            dataHtml += `<tr>
+                                                <td>19 ม.ค. 2566</td>
+                                                <td>
+                                                    <a href="/Frontend_assets/images/ir/clipping-news.pdf" target="_blank">L&Eตั้งเป้ารายได้ปีนี้โตลุยประมูลงาน3-4พันล.</a>
+                                                </td>
+                                                <td>
+                                                    <div class="source-logo"><img src="/Frontend_assets/images/ir/news-thunhoon.png"></div>
+                                                </td>
+                                            </tr>  `;
+                        }
+
+                        $("#data-container").html(dataHtml);
+                    }
+                });
+            }
+
+            getPagination(function (done) {
+                $.ajax({
+                    url: '/Frontend_IR/Get_IR_news_clipping',
+                    type: 'GET',
+                    data: {
+                        Start: $("#StartDate").val(),
+                        End: $("#EndDate").val(),
+                    },
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        let pp = [];
+                        if (response && response.obj && Array.isArray(response.obj)) {
+                            response.obj.forEach(data => pp.push(data));
+                        } else {
+                            console.log('Invalid response or missing "obj" property');
+                        }
+                        done(pp);
+                    },
+                    error: function (error) {
+                        console.log('AJAX request failed:', error);
+                    }
+                });
+            });
+        }
+
+
+        function Search() {
+            GetData()
+        }
     </script>
 }

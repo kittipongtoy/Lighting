@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Manage Project";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+@model IEnumerable<Lighting.Models.InputFilterModels.ProjectRef.Output_ProjectRef_PreviewVM>
+
+<div class="container" style="width:100%;">
+    <div class="row d-flex justify-content-between mb-3">
+        <div class="col d-flex justify-content-between" >
+            <a href="@Url.Action("Manage_Page","ManageProjectCategory")" class="btn btn-primary">
+                จัดการหมวดหมู่ / Manage Category
+            </a>
+            <a href="@Url.Action("Add_Page","ProjectRef")" class="btn btn-primary">
+                เพิ่มโปรเจค/ Add Project Ref
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <table class="table mt-3">
+            <thead>
+                <tr style="border-top:1px solid black;border-bottom:1px solid black;">
+                    <th scope="col">#</th>
+                    <th scope="col">รูปปก/image preview</th>
+                    <th scope="col">หัวข้อ/Title</th>
+                    <th scope="col" class="text-center">จัดการ/Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var project in Model)
+                {
+                    <tr id="@project.Id">
+                        <th scope="row">@project.Id</th>
+                        <td><img src="@project.PreView_Image" style="width:100px;height:100px;"/> </td>
+                        <td>@project.Title_TH / @project.Title_EN</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-warning" onclick="editById(@project.Id)">
+                                <i class="bi bi-pencil-square"></i>แก้ไข/edit
+                            </button>
+                            <button type="button" class="btn btn-danger" onclick="deleteRowById(@project.Id)">
+                                <i class="bi bi-trash-fill"></i>ลบ/delete
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+
+
+        function editById(id) {
+            window.location.href = "/ProjectRef/Edit_Page?id=" + id;
+        }
+
+        function deleteRowById(id) {
+
+            Swal.fire({
+                icon: 'warning',
+                title: "คุณแน่ใจว่าต้องการลบ?",
+                text: "",
+                showConfirmButton: true,
+            }).then((confirm) => {
+                if (confirm.isConfirmed) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/ProjectRef/DeleteById?id=' + id,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        beforeSend: function () {
+                            Swal.fire('Please wait')
+                            Swal.showLoading()
+                        },
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then(() => {
+
+                                    $("#" + id).remove();
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+                } else {
+
+                }
+            });
+        }
+
+    </script>
+}
