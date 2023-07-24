@@ -115,7 +115,6 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<SH_IR_prospectus> SH_IR_prospectus { get; set; }
         public DbSet<SH_IR_financial_highlight_Details> SH_IR_financial_highlight_Details { get;set;}
         public DbSet<SH_IR_financial_highlight_DetailsData> SH_IR_financial_highlight_DetailsData { get; set; }
-
         public DbSet<IR_Analyst> IR_Analysts { get; set; } 
         public DbSet<IR_Analyst_Chapter> IR_Analyst_Chapter { get; set; }
         public DbSet<IR_Contact> IR_Contact { get; set; }

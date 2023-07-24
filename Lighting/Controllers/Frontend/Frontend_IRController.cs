@@ -1,21 +1,10 @@
 ﻿using Lighting.Areas.Identity.Data;
 using Lighting.Models;
+using MailKit.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Globalization;
-
-using UAParser;
-using System.Net.NetworkInformation;
-using Newtonsoft.Json;
-using System.Text.Json.Serialization;
-using Castle.Core.Resource;
-using MailKit.Security;
 using MimeKit;
-using System.Net.Mime;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Newtonsoft.Json.Linq;
-using System.Text;
+using System.Globalization;
 
 namespace Lighting.Controllers.Frontend
 {
