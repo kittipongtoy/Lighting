@@ -8,14 +8,17 @@
     <div class="three-colPad">
         <div class="row justify-content-center more-mb">
             @{
-                if(Model.count_list_page_corporate_governance_file > 0){
-                    if (Context.Request.Cookies["lang"] == "EN"){
-                        foreach(var items in Model.list_page_corporate_governance_file){
+                if (Model.count_list_page_corporate_governance_file > 0)
+                {
+                    if (Context.Request.Cookies["lang"] == "EN")
+                    {
+                        foreach (var items in Model.list_page_corporate_governance_file)
+                        {
                             <div class="col-lg-4 col-md-4 col-6">
-                                <a class="coverBox" href="@Model.path_file@items.file_name" target="_blank">
+                                <a class="coverBox" href="@Model.path_file@items.file_name_ENG" target="_blank">
                                     <div class="row">
                                         <div class="col">
-                                            <div class="book-cover"><img src="@Model.path_image@items.image_name"></div>
+                                            <div class="book-cover"><img src="@Model.path_image@items.image_name_ENG"></div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -28,7 +31,9 @@
                                 </a>
                             </div>
                         }
-                    }else{
+                    }
+                    else
+                    {
                         foreach (var items in Model.list_page_corporate_governance_file)
                         {
                             <div class="col-lg-4 col-md-4 col-6">
@@ -41,7 +46,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="cover-topic">
-                                               <p>@items.title_file_th</p>
+                                                <p>@items.title_file_th</p>
                                             </div>
                                         </div>
                                     </div>
@@ -58,11 +63,29 @@
             <div class="content-center">
                 <div class="topicBD-Box">
                     @{
-                        if (Context.Request.Cookies["lang"] == "EN"){
-                            <div>@Model.title_en</div>
-                        }else{
-                            <div>@Model.title_th</div>
+                        if (Context.Request.Cookies["lang"] == "EN")
+                        {
+                            if (Model.count_fod_page_corporate_governance_content > 0)
+                            {
+                                <div>@Model.fod_page_corporate_governance_content.detailsTitleENG</div>
+                            }
+                            else
+                            {
+                                <div>@Model.title_en</div>
+                            }
                         }
+                        else
+                        {
+                            if (Model.count_fod_page_corporate_governance_content > 0)
+                            {
+                                <div>@Model.fod_page_corporate_governance_content.detailsTitleTH</div>
+                            }
+                            else
+                            {
+                                <div>@Model.title_th</div>
+                            }
+                        }
+
                     }
                 </div>
             </div>
@@ -70,7 +93,8 @@
     </div>
     <div>
         @{
-            if (Model.count_fod_page_corporate_governance_content > 0){
+            if (Model.count_fod_page_corporate_governance_content > 0)
+            {
                 if (Context.Request.Cookies["lang"] == "EN")
                 {
                     @Html.Raw(Model.fod_page_corporate_governance_content.detail_en)

@@ -69,6 +69,17 @@
                         <div class="row mb-3">
                             <div class="col-2">
                                 <span>
+                                    ปี
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input class="col-lg-6 form-control" name="Year_Str" id="Year" type="text" autocomplete="off" multiple required placeholder="กรุณาเลือกปี" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
                                     หัวข้อ TH
                                 </span>
                             </div>
@@ -144,6 +155,13 @@
 @section Scripts{
 
     <script>
+
+        $("#Year").datepicker({
+            format: "yyyy",
+            startView: "years",
+            minViewMode: "years"
+        });
+
         function submit_form() {
             var raw_form = document.getElementById('form_create');
             var formData = new FormData(raw_form);

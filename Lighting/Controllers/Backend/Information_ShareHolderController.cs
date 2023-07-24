@@ -520,7 +520,8 @@ namespace Lighting.Controllers.Backend
             return View(model);
 
         }
-        public IActionResult SH_GeneralMeeting_addData(SH_generalMeeting fod_generalMeeting, List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG)
+        public IActionResult SH_GeneralMeeting_addData(SH_generalMeeting fod_generalMeeting,
+            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG)
         {
             try
             {
@@ -695,10 +696,17 @@ namespace Lighting.Controllers.Backend
         }
 
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public IActionResult SH_GeneralMeetingData_addData(SH_generalMeeting_Data SH_generalMeetingData, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
+        public IActionResult SH_GeneralMeetingData_addData(SH_generalMeeting_Data SH_generalMeetingData, string? Year_Str,
+            List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
+                if (Year_Str == null)
+                {
+                    return Json(new { status = "warning", message = "กรุณาระบุ ปี!" });
+                }
+                DateTime InsertDate_year = DateTime.ParseExact(Year_Str, "yyyy", new CultureInfo("en-US"));
+
                 if (SH_generalMeetingData.titleTH == null || SH_generalMeetingData.titleENG == "")
                 {
                     return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ" });
@@ -721,7 +729,6 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
-
 
                 foreach (var formFileENG in uploaded_file_ENG)
                 {
@@ -749,6 +756,7 @@ namespace Lighting.Controllers.Backend
                 {
                     SH_generalMeetingData.use_status = 1;
                 }
+                SH_generalMeetingData.year = InsertDate_year;
                 SH_generalMeetingData.created_at = DateTime.Now;
                 db.SH_generalMeeting_Data.Add(SH_generalMeetingData);
                 db.SaveChanges();
@@ -761,15 +769,21 @@ namespace Lighting.Controllers.Backend
         }
 
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public IActionResult SH_GeneralMeetingData_editData_Submit(SH_generalMeeting_Data SH_generalMeetingData, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
+        public IActionResult SH_GeneralMeetingData_editData_Submit(SH_generalMeeting_Data SH_generalMeetingData, string? Year_Str,
+            List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
-
                 if (SH_generalMeetingData.titleTH == null || SH_generalMeetingData.titleENG == "")
                 {
                     return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ TH" });
                 }
+
+                if (Year_Str == null)
+                {
+                    return Json(new { status = "error", message = "กรุณาระบุ ปี!" });
+                }
+                DateTime InsertDate_year = DateTime.ParseExact(Year_Str, "yyyy", new CultureInfo("en-US"));
 
                 var old_data = db.SH_generalMeeting_Data.Where(x => x.id == SH_generalMeetingData.id).FirstOrDefault();
 
@@ -833,6 +847,7 @@ namespace Lighting.Controllers.Backend
                 {
                     old_data.use_status = 1;
                 }
+                old_data.year = InsertDate_year;
                 old_data.updated_at = DateTime.Now;
                 db.SaveChanges();
                 return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
@@ -872,6 +887,15 @@ namespace Lighting.Controllers.Backend
             {
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
+        }
+        public IActionResult Get_Edit_SH_generalMeeting_Data(int? id)
+        {
+            var InfoDataedit = db.SH_generalMeeting_Data.Where(x => x.id == id).FirstOrDefault();
+            if (InfoDataedit != null)
+            {
+                return Json(InfoDataedit);
+            }
+            return Json(new { alert = 0 });
         }
         public IActionResult SH_GeneralMeetingData_changeStatus(int? id, string? status)
         {
@@ -2385,9 +2409,43 @@ namespace Lighting.Controllers.Backend
             {
                 count_row = 1;
             }
-            var model = new model_input { count_row_SH_IR_propose_agenda = count_row, fod_SH_IR_propose_agenda = checkrow };
+
+            var getMailContact = db.receive_agenda_mail_accounts.FirstOrDefault();
+            var ggg = 0;
+            if (getMailContact != null)
+            {
+                ggg = 1;
+            }
+            var model = new model_input { count_row_SH_IR_propose_agenda = count_row, fod_SH_IR_propose_agenda = checkrow, count_receive_agenda_mail_accounts = ggg, receive_agenda_mail_accounts = getMailContact };
             return View(model);
         }
+        public IActionResult receive_agenda_mail_accounts_submit(receive_agenda_mail_accounts mailContact)
+        {
+            try
+            {
+                var checkrow = db.receive_agenda_mail_accounts.FirstOrDefault();
+                if (checkrow == null)
+                {
+                    mailContact.created_at = DateTime.Now;
+                    mailContact.updated_at = DateTime.Now;
+                    db.receive_agenda_mail_accounts.Add(mailContact);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    checkrow.account = mailContact.account; ;
+                    checkrow.updated_at = DateTime.Now;
+                    db.SaveChanges();
+                }
+
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+
         public IActionResult SH_IR_propose_agenda_DataDetails()
         {
             return View();
@@ -2657,8 +2715,412 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+        public IActionResult SH_IR_propose_agenda_mailTitles_getTable()
+        {
+            try
+            {
+                var Raw_list = db.SH_IR_propose_agenda_mailTitles.ToList();
+                var add_count = new List<IR_sharHolderTable_model.SH_IR_propose_agenda_mailTitles_table>();
+                var count = 1;
+                foreach (var items in Raw_list)
+                {
+                    add_count.Add(new IR_sharHolderTable_model.SH_IR_propose_agenda_mailTitles_table
+                    {
+                        count_row = count,
+                        id = items.id,
+                        titleTH = items.titleTH,
+                        titleENG = items.titleENG,
+                        active_status = items.active_status,
+                        created_at = items.created_at,
+                        updated_at = items.updated_at,
+                    });
+                    count++;
+                }
+                return Json(new { data = add_count });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
 
+        }
+        public IActionResult SH_IR_propose_agenda_mailTitles_changeStatus(int? id, string? status)
+        {
+            var i = 0;
+            try
+            {
+                var DB = db.SH_IR_propose_agenda_mailTitles.FirstOrDefault(x => x.id == id);
+                if (DB != null)
+                {
+                    if (DB.active_status != 1)
+                    {
+                        var Change = db.SH_IR_propose_agenda_mailTitles.ToList();
+                        foreach (var item in Change)
+                        {
+                            item.active_status = 0;
+                            db.Entry(item).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        if (DB.active_status == 1)
+                        {
+                            DB.active_status = 0;
+                            db.Entry(DB).State = EntityState.Modified;
+                            db.SaveChanges();
+                            i = 1;
+                        }
+                        else
+                        {
+                            DB.active_status = 1;
+                            db.Entry(DB).State = EntityState.Modified;
+                            db.SaveChanges();
+                            i = 1;
+                        }
+                    }
+                    else
+                    {
+                        i = 2;
+                    }
+                }
+                return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Error = ex.Message, alert = i });
+            }
 
+            //var get_data = db.SH_IR_propose_agenda_mailTitles.Where(x => x.id == id).FirstOrDefault();
+
+            //if (status == "true")
+            //{
+            //    get_data.active_status = 1;
+            //}
+            //else
+            //{
+            //    get_data.active_status = 0;
+            //}
+            //db.SaveChanges();
+
+            //return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
+        }
+        public IActionResult SH_IR_propose_agenda_mailTitles_creat()
+        {
+            return View();
+        }
+        public IActionResult SH_IR_propose_agenda_mailTitles_create_submit(SH_IR_propose_agenda_mailTitles mailTitles)
+        {
+            try
+            {
+                if (mailTitles.active_status == 1)
+                {
+                    var check_other = from up2 in db.SH_IR_propose_agenda_mailTitles
+                                      where up2.active_status == 1
+                                      select up2;
+                    foreach (SH_IR_propose_agenda_mailTitles up2 in check_other)
+                    {
+                        up2.active_status = 0;
+                    }
+                    db.SaveChanges();
+                }
+
+                if (mailTitles.active_status != 1)
+                {
+                    mailTitles.active_status = 0;
+                }
+                else
+                {
+                    mailTitles.active_status = 1;
+                }
+
+                mailTitles.created_at = DateTime.Now;
+                mailTitles.updated_at = DateTime.Now;
+                db.SH_IR_propose_agenda_mailTitles.Add(mailTitles);
+                db.SaveChanges();
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult SH_IR_propose_agenda_mailTitles_edit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("SH_IR_propose_agenda", "Information_Share");
+            }
+            var get_detail = db.SH_IR_propose_agenda_mailTitles.Where(x => x.id == id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("SH_IR_propose_agenda", "Information_Share");
+            }
+            var model = new model_input { SH_IR_propose_agenda_mailTitles = get_detail };
+            return View(model);
+        }
+        public IActionResult SH_IR_propose_agenda_mailTitles_Submit(SH_IR_propose_agenda_mailTitles mailTitles_edit)
+        {
+            try
+            {
+                if (mailTitles_edit.active_status == 1)
+                {
+                    var check_other = from up2 in db.SH_IR_propose_agenda_mailTitles
+                                      where up2.id != mailTitles_edit.id && up2.active_status == 1
+                                      select up2;
+                    foreach (SH_IR_propose_agenda_mailTitles up2 in check_other)
+                    {
+                        up2.active_status = 0;
+                    }
+                    db.SaveChanges();
+                }
+
+                var old_data = db.SH_IR_propose_agenda_mailTitles.Where(x => x.id == mailTitles_edit.id).FirstOrDefault();
+
+                if (mailTitles_edit.active_status != 1)
+                {
+                    old_data.active_status = 0;
+                }
+                else
+                {
+                    old_data.active_status = 1;
+                }
+                old_data.titleTH = mailTitles_edit.titleTH;
+                old_data.titleENG = mailTitles_edit.titleENG;
+                old_data.nameTitleTH = mailTitles_edit.nameTitleTH;
+                old_data.nameTitleENG = mailTitles_edit.nameTitleENG;
+                old_data.nameTitlePlaceholderTH = mailTitles_edit.nameTitlePlaceholderTH;
+                old_data.nameTitlePlaceholderENG = mailTitles_edit.nameTitlePlaceholderENG;
+                old_data.emailTitleTH = mailTitles_edit.emailTitleTH;
+                old_data.emailTitleENG = mailTitles_edit.emailTitleENG;
+                old_data.emailTitlePlaceholderTH = mailTitles_edit.emailTitlePlaceholderTH;
+                old_data.emailTitlePlaceholderENG = mailTitles_edit.emailTitlePlaceholderENG;
+                old_data.phoneTH = mailTitles_edit.phoneTH;
+                old_data.phoneENG = mailTitles_edit.phoneENG;
+                old_data.phoneTitlePlaceholder = mailTitles_edit.phoneTitlePlaceholder;
+                old_data.proposeTitleTH = mailTitles_edit.proposeTitleTH;
+                old_data.proposeTitleENG = mailTitles_edit.proposeTitleENG;
+                old_data.wantProposeTitleTH = mailTitles_edit.wantProposeTitleTH;
+                old_data.wantProposeTitleENG = mailTitles_edit.wantProposeTitleENG;
+                old_data.wantProposePlaceholderTitleTH = mailTitles_edit.wantProposePlaceholderTitleTH;
+                old_data.wantProposePlaceholderTitleENG = mailTitles_edit.wantProposePlaceholderTitleENG;
+                old_data.detailsTitleTH = mailTitles_edit.detailsTitleTH;
+                old_data.detailsTitleENG = mailTitles_edit.detailsTitleENG;
+                old_data.detailsPlaceholderTitleTH = mailTitles_edit.detailsPlaceholderTitleTH;
+                old_data.detailsPlaceholderTitleENG = mailTitles_edit.detailsPlaceholderTitleENG;
+                old_data.detailsTH = mailTitles_edit.detailsTH;
+                old_data.detailsENG = mailTitles_edit.detailsENG;
+                old_data.remarkTH = mailTitles_edit.remarkTH;
+                old_data.remarkENG = mailTitles_edit.remarkENG;
+
+                old_data.updated_at = DateTime.Now;
+                db.SaveChanges();
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult SH_IR_propose_agenda_mailTitles_delete(int? id)
+        {
+            try
+            {
+                var checkrow = db.SH_IR_propose_agenda_mailTitles.Where(x => x.id == id).FirstOrDefault();
+
+                if (checkrow != null)
+                {
+                    db.SH_IR_propose_agenda_mailTitles.Remove(checkrow);
+                    db.SaveChanges();
+                }
+
+                return Json(new { status = "success", message = "ลบข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+
+        public IActionResult type_of_agenda_Propose_getTable()
+        {
+            try
+            {
+                var Raw_list = db.type_of_agenda_Propose.ToList();
+                var add_count = new List<IR_sharHolderTable_model.type_of_agenda_Propose_table>();
+                var count = 1;
+                foreach (var items in Raw_list)
+                {
+                    add_count.Add(new IR_sharHolderTable_model.type_of_agenda_Propose_table
+                    {
+                        count_row = count,
+                        id = items.id,
+                        titleTH = items.titleTH,
+                        titleENG = items.titleENG,
+                        active_status = items.active_status,
+                        created_at = items.created_at,
+                        updated_at = items.updated_at,
+                    });
+                    count++;
+                }
+                return Json(new { data = add_count });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+
+        }
+        public IActionResult type_of_agenda_Propose_create()
+        {
+            return View();
+        }
+        public IActionResult type_of_agenda_Propose_edit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("SH_IR_propose_agenda", "Information_Share");
+            }
+            var get_detail = db.type_of_agenda_Propose.Where(x => x.id == id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("SH_IR_propose_agenda", "Information_Share");
+            }
+            var model = new model_input { type_of_agenda_Propose = get_detail };
+            return View(model);
+        }
+        public IActionResult type_of_agenda_Propose_submit(type_of_agenda_Propose type_of_agenda)
+        {
+            try
+            {
+
+                if (type_of_agenda.active_status != 1)
+                {
+                    type_of_agenda.active_status = 0;
+                }
+                else
+                {
+                    type_of_agenda.active_status = 1;
+                }
+
+                type_of_agenda.created_at = DateTime.Now;
+                type_of_agenda.updated_at = DateTime.Now;
+                db.type_of_agenda_Propose.Add(type_of_agenda);
+                db.SaveChanges();
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult type_of_agenda_Propose_edit_Submit(type_of_agenda_Propose type_of_agenda)
+        {
+            try
+            {
+                var old_data = db.type_of_agenda_Propose.Where(x => x.id == type_of_agenda.id).FirstOrDefault();
+
+                if (type_of_agenda.active_status != 1)
+                {
+                    old_data.active_status = 0;
+                }
+                else
+                {
+                    old_data.active_status = 1;
+                }
+                old_data.titleTH = type_of_agenda.titleTH;
+                old_data.titleENG = type_of_agenda.titleENG;
+
+                old_data.updated_at = DateTime.Now;
+                db.SaveChanges();
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult type_of_agenda_Propose_delete(int? id)
+        {
+            try
+            {
+                var checkrow = db.type_of_agenda_Propose.Where(x => x.id == id).FirstOrDefault();
+
+                if (checkrow != null)
+                {
+                    db.type_of_agenda_Propose.Remove(checkrow);
+                    db.SaveChanges();
+                }
+
+                return Json(new { status = "success", message = "ลบข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult type_of_agenda_Propose_changeStatus(int? id, string? status)
+        {
+            var get_data = db.type_of_agenda_Propose.Where(x => x.id == id).FirstOrDefault();
+            if (status == "true")
+            {
+                get_data.active_status = 1;
+            }
+            else
+            {
+                get_data.active_status = 0;
+            }
+            db.SaveChanges();
+
+            return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
+        }
+
+        //mail receive
+        public IActionResult receive_mail_agenda_propose_getTable()
+        {
+            try
+            {
+                var Raw_list = db.receive_mail_propose_agendas.ToList();
+                var add_count = new List<IR_sharHolderTable_model.receive_mail_propose_agendas_table>();
+                var count = 1;
+                foreach (var items in Raw_list)
+                {
+                    add_count.Add(new IR_sharHolderTable_model.receive_mail_propose_agendas_table
+                    {
+                        count_row = count,
+                        id = items.id,
+                        name = items.name,
+                        phone = items.phone,
+                        email = items.email,
+                        created_at = items.created_at,
+                        updated_at = items.updated_at,
+                    });
+                    count++;
+                }
+                return Json(new { data = add_count });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+
+        }
+        public IActionResult receive_mail_propose_agendas_delete(int? id)
+        {
+            try
+            {
+                var checkrow = db.receive_mail_propose_agendas.Where(x => x.id == id).FirstOrDefault();
+
+                if (checkrow != null)
+                {
+                    db.receive_mail_propose_agendas.Remove(checkrow);
+                    db.SaveChanges();
+                }
+
+                return Json(new { status = "success", message = "ลบข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
 
     }
 }

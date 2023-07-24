@@ -35,6 +35,11 @@
                                     <h1>@item.detailsTitleENG</h1>
                                 }
                             }
+                            else
+                            {
+                                <h5>การนำเสนอข้อมูล</h5>
+                                <h1>วิดีโอบริษัท</h1>
+                            }
                         }
                         else
                         {
@@ -45,6 +50,11 @@
                                     <h5>@item.titleTH</h5>
                                     <h1>@item.detailsTitleTH</h1>
                                 }
+                            }
+                            else
+                            {
+                                <h5>การนำเสนอข้อมูล</h5>
+                                <h1>วิดีโอบริษัท</h1>
                             }
                         }
 
@@ -70,6 +80,12 @@
                                                 <th>@item.downloadtitleENG</th>
                                             }
                                         }
+                                        else
+                                        {
+                                            <th>กิจกรรม</th>
+                                            <th>ดูเว็บแคสต์</th>
+                                            <th>ดาวน์โหลด</th>
+                                        }
                                     }
                                     else
                                     {
@@ -81,6 +97,12 @@
                                                 <th>@item.webcastTitleTH</th>
                                                 <th>@item.downloadtitleTH</th>
                                             }
+                                        }
+                                        else
+                                        {
+                                            <th>กิจกรรม</th>
+                                            <th>ดูเว็บแคสต์</th>
+                                            <th>ดาวน์โหลด</th>
                                         }
                                     }
 
@@ -137,7 +159,7 @@
                                 }
                                 }*@
 
-                                
+
 
                             </tbody>
                         </table>
@@ -181,7 +203,7 @@
 
         var getPagination;
 
-        $(function () { 
+        $(function () {
             let container = $('#pagination');
             getPagination = function (dto) {
                 var local = "@language";
@@ -214,14 +236,14 @@
 
                 var file = function ({ file_name, file_name_ENG }, lag) {
                     if (lag === "TH") {
-                        if (file_name.toLowerCase() == "null") {
+                        if (file_name == "null") {
                             return file_name;
                         } else {
                             return file_name;
                         }
                         //return FileDownload_TH;
                     } else if (lag === "EN") {
-                        if (file_name_ENG.toLowerCase() == "null") {
+                        if (file_name_ENG == "null") {
                             return file_name_ENG;
                         } else {
                             return file_name_ENG;
@@ -255,32 +277,42 @@
                             var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
 
                             dataHtml += `<tr>
-                                             <td>`+ title(item, local) + ` &nbsp;`;
+                                                             <td>`+ title(item, local) + ` &nbsp;`;
                             if (local == "TH") {
                                 dataHtml += formattedDateTH
                             } else {
                                 dataHtml += formattedDateEN
                             }
                             dataHtml += `</td>
-                                            <td>
-                                                    <a class="download-button viewBT" href="`+ link(item, local) + `" target="_blank">`; 
+                                                            <td>
+                                                                    <a class="download-button viewBT" href="`+ link(item, local) + `" target="_blank">`;
                             if (local == "TH") {
                                 dataHtml += `<span>ดูเว็บแคสต์ </span>`;
                             } else {
                                 dataHtml += `<span>View Video </span>`;
                             }
                             dataHtml += `</a>
-                                                    </td>
-                                                    <td>
-                                                        <a class="download-button" href="../upload_file/SH_IR_PresentationWebcast/`+ file(item, local) + `" target="_blank">`;
+                                                                    </td>
+                                                                            <td>`;
+                            if (file(item, local) != null) { 
+                                dataHtml += ` <a class="download-button" href="../upload_file/SH_IR_PresentationWebcast/` + file(item, local) + `" target="_blank">`; 
+                            }
                             if (local == "TH") {
-                                dataHtml += `<span>ดูเว็บแคสต์ </span>`;
+                                if (file(item, local) == null) {
+                                    dataHtml += `<span> </span>`;
+                                } else {
+                                    dataHtml += `<span>ดาวน์โหลด </span>`;
+                                }
                             } else {
-                                dataHtml += `<span>Download </span>`;
+                                if (file(item, local) == null) {
+                                    dataHtml += `<span> </span>`;
+                                } else {
+                                    dataHtml += `<span>Download </span>`;
+                                }
                             }
                             dataHtml += `</a>
-                                                    </td>
-                                                </tr>`;
+                                                                    </td>
+                                                                </tr>`;
 
                         });
 
@@ -292,7 +324,7 @@
 
             }
 
-            getPagination(function (done) { 
+            getPagination(function (done) {
                 $.ajax({
                     url: '/Frontend_IR/Get_IR_presentation_webcast',
                     type: 'GET',

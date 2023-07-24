@@ -5,6 +5,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Globalization;
 
+using UAParser;
+using System.Net.NetworkInformation;
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+using Castle.Core.Resource;
+using MailKit.Security;
+using MimeKit;
+using System.Net.Mime;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json.Linq;
+using System.Text;
+
 namespace Lighting.Controllers.Frontend
 {
     public class Frontend_IRController : Controller
@@ -71,8 +83,8 @@ namespace Lighting.Controllers.Frontend
                 titleENG = op.titleENG,
                 file_name = op.file_name,
                 file_name_ENG = op.file_name_ENG,
-                upload_image=op.upload_image,
-                upload_image_ENG=op.upload_image_ENG,
+                upload_image = op.upload_image,
+                upload_image_ENG = op.upload_image_ENG,
                 year = op.year
             }).ToList();
 
@@ -80,7 +92,6 @@ namespace Lighting.Controllers.Frontend
 
             //return View();
         }
-
 
         public IActionResult IR_anti_corruption_policy()
         {
@@ -102,9 +113,11 @@ namespace Lighting.Controllers.Frontend
                         use_status = items.use_status,
                         created_at = items.created_at,
                         file_name = items.file_name,
+                        file_name_ENG = items.file_name_ENG,
                         file_type = items.file_type,
                         id = items.id,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         title_file_en = items.title_file_en,
                         title_file_th = items.title_file_th,
                         updated_at = items.updated_at
@@ -115,6 +128,12 @@ namespace Lighting.Controllers.Frontend
             {
                 count_data = 1;
                 main_content.id = getdata.id;
+                main_content.title_TH = getdata.title_TH;
+                main_content.title_ENG = getdata.title_ENG;
+                main_content.titleDetails_TH = getdata.titleDetails_TH;
+                main_content.titleDetails_ENG = getdata.titleDetails_ENG;
+                main_content.detailsTitleTH = getdata.detailsTitleTH;
+                main_content.detailsTitleENG = getdata.detailsTitleENG;
                 main_content.detail_en = getdata.detail_en;
                 main_content.detail_th = getdata.detail_th;
             }
@@ -153,9 +172,11 @@ namespace Lighting.Controllers.Frontend
                         use_status = items.use_status,
                         created_at = items.created_at,
                         file_name = items.file_name,
+                        file_name_ENG = items.file_name_ENG,
                         file_type = items.file_type,
                         id = items.id,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         title_file_en = items.title_file_en,
                         title_file_th = items.title_file_th,
                         updated_at = items.updated_at
@@ -166,6 +187,12 @@ namespace Lighting.Controllers.Frontend
             {
                 count_data = 1;
                 main_content.id = getdata.id;
+                main_content.title_TH = getdata.title_TH;
+                main_content.title_ENG = getdata.title_ENG;
+                main_content.titleDetails_TH = getdata.titleDetails_TH;
+                main_content.titleDetails_ENG = getdata.titleDetails_ENG;
+                main_content.detailsTitleTH = getdata.detailsTitleTH;
+                main_content.detailsTitleENG = getdata.detailsTitleENG;
                 main_content.detail_en = getdata.detail_en;
                 main_content.detail_th = getdata.detail_th;
             }
@@ -204,9 +231,11 @@ namespace Lighting.Controllers.Frontend
                         use_status = items.use_status,
                         created_at = items.created_at,
                         file_name = items.file_name,
+                        file_name_ENG = items.file_name_ENG,
                         file_type = items.file_type,
                         id = items.id,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         title_file_en = items.title_file_en,
                         title_file_th = items.title_file_th,
                         updated_at = items.updated_at
@@ -217,6 +246,12 @@ namespace Lighting.Controllers.Frontend
             {
                 count_data = 1;
                 main_content.id = getdata.id;
+                main_content.title_TH = getdata.title_TH;
+                main_content.title_ENG = getdata.title_ENG;
+                main_content.titleDetails_TH = getdata.titleDetails_TH;
+                main_content.titleDetails_ENG = getdata.titleDetails_ENG;
+                main_content.detailsTitleTH = getdata.detailsTitleTH;
+                main_content.detailsTitleENG = getdata.detailsTitleENG;
                 main_content.detail_en = getdata.detail_en;
                 main_content.detail_th = getdata.detail_th;
             }
@@ -255,9 +290,11 @@ namespace Lighting.Controllers.Frontend
                         use_status = items.use_status,
                         created_at = items.created_at,
                         file_name = items.file_name,
+                        file_name_ENG = items.file_name_ENG,
                         file_type = items.file_type,
                         id = items.id,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         title_file_en = items.title_file_en,
                         title_file_th = items.title_file_th,
                         updated_at = items.updated_at
@@ -268,6 +305,12 @@ namespace Lighting.Controllers.Frontend
             {
                 count_data = 1;
                 main_content.id = getdata.id;
+                main_content.title_TH = getdata.title_TH;
+                main_content.title_ENG = getdata.title_ENG;
+                main_content.titleDetails_TH = getdata.titleDetails_TH;
+                main_content.titleDetails_ENG = getdata.titleDetails_ENG;
+                main_content.detailsTitleTH = getdata.detailsTitleTH;
+                main_content.detailsTitleENG = getdata.detailsTitleENG;
                 main_content.detail_en = getdata.detail_en;
                 main_content.detail_th = getdata.detail_th;
             }
@@ -306,9 +349,11 @@ namespace Lighting.Controllers.Frontend
                         use_status = items.use_status,
                         created_at = items.created_at,
                         file_name = items.file_name,
+                        file_name_ENG = items.file_name_ENG,
                         file_type = items.file_type,
                         id = items.id,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         title_file_en = items.title_file_en,
                         title_file_th = items.title_file_th,
                         updated_at = items.updated_at
@@ -319,10 +364,15 @@ namespace Lighting.Controllers.Frontend
             {
                 count_data = 1;
                 main_content.id = getdata.id;
+                main_content.title_TH = getdata.title_TH;
+                main_content.title_ENG = getdata.title_ENG;
+                main_content.titleDetails_TH = getdata.titleDetails_TH;
+                main_content.titleDetails_ENG = getdata.titleDetails_ENG;
+                main_content.detailsTitleTH = getdata.detailsTitleTH;
+                main_content.detailsTitleENG = getdata.detailsTitleENG;
                 main_content.detail_en = getdata.detail_en;
                 main_content.detail_th = getdata.detail_th;
             }
-
 
             var model = new model_input
             {
@@ -357,9 +407,11 @@ namespace Lighting.Controllers.Frontend
                         use_status = items.use_status,
                         created_at = items.created_at,
                         file_name = items.file_name,
+                        file_name_ENG = items.file_name_ENG,
                         file_type = items.file_type,
                         id = items.id,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         title_file_en = items.title_file_en,
                         title_file_th = items.title_file_th,
                         updated_at = items.updated_at
@@ -370,6 +422,12 @@ namespace Lighting.Controllers.Frontend
             {
                 count_data = 1;
                 main_content.id = getdata.id;
+                main_content.title_TH = getdata.title_TH;
+                main_content.title_ENG = getdata.title_ENG;
+                main_content.titleDetails_TH = getdata.titleDetails_TH;
+                main_content.titleDetails_ENG = getdata.titleDetails_ENG;
+                main_content.detailsTitleTH = getdata.detailsTitleTH;
+                main_content.detailsTitleENG = getdata.detailsTitleENG;
                 main_content.detail_en = getdata.detail_en;
                 main_content.detail_th = getdata.detail_th;
             }
@@ -408,9 +466,11 @@ namespace Lighting.Controllers.Frontend
                         use_status = items.use_status,
                         created_at = items.created_at,
                         file_name = items.file_name,
+                        file_name_ENG = items.file_name_ENG,
                         file_type = items.file_type,
                         id = items.id,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         title_file_en = items.title_file_en,
                         title_file_th = items.title_file_th,
                         updated_at = items.updated_at
@@ -421,6 +481,12 @@ namespace Lighting.Controllers.Frontend
             {
                 count_data = 1;
                 main_content.id = getdata.id;
+                main_content.title_TH = getdata.title_TH;
+                main_content.title_ENG = getdata.title_ENG;
+                main_content.titleDetails_TH = getdata.titleDetails_TH;
+                main_content.titleDetails_ENG = getdata.titleDetails_ENG;
+                main_content.detailsTitleTH = getdata.detailsTitleTH;
+                main_content.detailsTitleENG = getdata.detailsTitleENG;
                 main_content.detail_en = getdata.detail_en;
                 main_content.detail_th = getdata.detail_th;
             }
@@ -459,9 +525,11 @@ namespace Lighting.Controllers.Frontend
                         use_status = items.use_status,
                         created_at = items.created_at,
                         file_name = items.file_name,
+                        file_name_ENG = items.file_name_ENG,
                         file_type = items.file_type,
                         id = items.id,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         title_file_en = items.title_file_en,
                         title_file_th = items.title_file_th,
                         updated_at = items.updated_at
@@ -472,6 +540,12 @@ namespace Lighting.Controllers.Frontend
             {
                 count_data = 1;
                 main_content.id = getdata.id;
+                main_content.title_TH = getdata.title_TH;
+                main_content.title_ENG = getdata.title_ENG;
+                main_content.titleDetails_TH = getdata.titleDetails_TH;
+                main_content.titleDetails_ENG = getdata.titleDetails_ENG;
+                main_content.detailsTitleTH = getdata.detailsTitleTH;
+                main_content.detailsTitleENG = getdata.detailsTitleENG;
                 main_content.detail_en = getdata.detail_en;
                 main_content.detail_th = getdata.detail_th;
             }
@@ -595,9 +669,11 @@ namespace Lighting.Controllers.Frontend
                         use_status = items.use_status,
                         created_at = items.created_at,
                         file_name = items.file_name,
+                        file_name_ENG = items.file_name_ENG,
                         file_type = items.file_type,
                         id = items.id,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         title_file_en = items.title_file_en,
                         title_file_th = items.title_file_th,
                         updated_at = items.updated_at
@@ -608,6 +684,12 @@ namespace Lighting.Controllers.Frontend
             {
                 count_data = 1;
                 main_content.id = getdata.id;
+                main_content.title_TH = getdata.title_TH;
+                main_content.title_ENG = getdata.title_ENG;
+                main_content.titleDetails_TH = getdata.titleDetails_TH;
+                main_content.titleDetails_ENG = getdata.titleDetails_ENG;
+                main_content.detailsTitleTH = getdata.detailsTitleTH;
+                main_content.detailsTitleENG = getdata.detailsTitleENG;
                 main_content.detail_en = getdata.detail_en;
                 main_content.detail_th = getdata.detail_th;
             }
@@ -764,9 +846,11 @@ namespace Lighting.Controllers.Frontend
                         use_status = items.use_status,
                         created_at = items.created_at,
                         file_name = items.file_name,
+                        file_name_ENG = items.file_name_ENG,
                         file_type = items.file_type,
                         id = items.id,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         title_file_en = items.title_file_en,
                         title_file_th = items.title_file_th,
                         updated_at = items.updated_at
@@ -777,10 +861,15 @@ namespace Lighting.Controllers.Frontend
             {
                 count_data = 1;
                 main_content.id = getdata.id;
+                main_content.title_TH = getdata.title_TH;
+                main_content.title_ENG = getdata.title_ENG;
+                main_content.titleDetails_TH = getdata.titleDetails_TH;
+                main_content.titleDetails_ENG = getdata.titleDetails_ENG;
+                main_content.detailsTitleTH = getdata.detailsTitleTH;
+                main_content.detailsTitleENG = getdata.detailsTitleENG;
                 main_content.detail_en = getdata.detail_en;
                 main_content.detail_th = getdata.detail_th;
             }
-
 
             var model = new model_input
             {
@@ -795,7 +884,7 @@ namespace Lighting.Controllers.Frontend
             };
             return View(model);
         }
-        public IActionResult IR_dividend()
+        public async Task<IActionResult> IR_dividend()
         {
             var data = db.SH_dividen.ToList();
             if (data.Count != 0)
@@ -828,7 +917,7 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Header = data;
             }
 
-            var details = db.ImportInfo_ShareHolderData.Where(x=>x.use_status==1).ToList();
+            var details = db.ImportInfo_ShareHolderData.Where(x => x.use_status == 1).ToList();
             if (details.Count != 0)
             {
                 ViewBag.Body = details;
@@ -841,7 +930,7 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_faq_Detail = await db.IR_faq_Detail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
-        public IActionResult IR_finance_statement()
+        public async Task<IActionResult> IR_finance_statement()
         {
             var data = db.SH_IR_important_financial.ToList();
             if (data.Count != 0)
@@ -872,7 +961,7 @@ namespace Lighting.Controllers.Frontend
             {
                 ViewBag.ContentProfit_LoseOthers = detailsProfit_LoseOthers;
             }
-             
+
             var detailsCash_flow = db.SH_IR_cashFlow_statements.ToList();
             if (detailsCash_flow.Count != 0)
             {
@@ -888,10 +977,10 @@ namespace Lighting.Controllers.Frontend
             return View();
         }
         public IActionResult Get_IR_Finance_Statement()
-        { 
+        {
             var IR_DFS = db.SH_IR_download_financial_statements.Where(x => x.active_status == 1).OrderByDescending(x => x.inputDate).AsEnumerable().Select((op, index) => new IR_Important_Financial_model.ResponserDFStatement
             {
-                id = op.id, 
+                id = op.id,
                 titleTH = op.titleTH,
                 titleENG = op.titleENG,
                 file_name = op.file_name,
@@ -899,9 +988,9 @@ namespace Lighting.Controllers.Frontend
                 inputDate = op.inputDate
             }).ToList();
 
-            return Json(new { obj = IR_DFS }); 
+            return Json(new { obj = IR_DFS });
         }
-        public IActionResult IR_financial_highlight()
+        public async Task<IActionResult> IR_financial_highlight()
         {
             var data = db.SH_IR_financial_highlight.ToList();
             if (data.Count != 0)
@@ -909,26 +998,39 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Header = data;
             }
 
-            var details = db.SH_IR_financial_highlight_Data.ToList();
-            if (details.Count != 0)
+            var topTitle = db.SH_IR_financial_highlight_Data.Where(x => x.active_status == 1).ToList();
+            if (topTitle.Count != 0)
             {
-                ViewBag.ContentTop = details;
-            } 
-
-            var details_item = db.SH_IR_financial_highlight_Details.Where(x => x.active_status == 1).ToList();
-            if (details_item.Count != 0)
-            {
-                ViewBag.Body = details_item;
+                ViewBag.ContentTop = topTitle;
             }
 
-            var data_details = db.SH_IR_financial_highlight_DetailsData.ToList();
+            var topDetails = db.SH_IR_financial_highlight_DataDetails.OrderByDescending(x => x.year).ToList();
+            if (topDetails.Count != 0)
+            {
+                ViewBag.ContentTopDetails = topDetails;
+            }
+
+            var details_title = db.SH_IR_financial_highlight_Details.Where(x => x.active_status == 1).ToList();
+            if (details_title.Count != 0)
+            {
+                ViewBag.BodyItem = details_title;
+            }
+
+            var data_details = db.SH_IR_financial_highlight_DetailsData.Where(x => x.active_status == 1).ToList();
             if (data_details.Count != 0)
             {
-                ViewBag.BodyDetails = data_details;
+                ViewBag.BodyTitle = data_details;
             }
+
+            var data_details_Item = db.SH_IR_financial_highlight_DetailsData_Items.ToList();
+            if (data_details_Item.Count != 0)
+            {
+                ViewBag.BodyDetails = data_details_Item;
+            }
+
             return View();
         }
-        public IActionResult IR_form56()
+        public async Task<IActionResult> IR_form56()
         {
             var data = db.SH_IR_Form.ToList();
             if (data.Count != 0)
@@ -936,22 +1038,22 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Header = data;
             }
 
-            var details = db.SH_IR_FormData.Where(x=>x.active_status==1).ToList();
+            var details = db.SH_IR_FormData.Where(x => x.active_status == 1).OrderByDescending(x => x.year).ToList();
             if (details.Count != 0)
             {
                 ViewBag.Body = details;
             }
             return View();
         }
-        public IActionResult IR_general_meeting()
-        { 
+        public async Task<IActionResult> IR_general_meeting()
+        {
             var data = db.SH_generalMeeting.ToList();
             if (data.Count != 0)
             {
                 ViewBag.Header = data;
             }
 
-            var details = db.SH_generalMeeting_Data.Where(x => x.use_status == 1).ToList();
+            var details = db.SH_generalMeeting_Data.Where(x => x.use_status == 1).OrderByDescending(x => x.year).ToList();
             if (details.Count != 0)
             {
                 ViewBag.Body = details;
@@ -978,9 +1080,11 @@ namespace Lighting.Controllers.Frontend
                         use_status = items.use_status,
                         created_at = items.created_at,
                         file_name = items.file_name,
+                        file_name_ENG = items.file_name_ENG,
                         file_type = items.file_type,
                         id = items.id,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         title_file_en = items.title_file_en,
                         title_file_th = items.title_file_th,
                         updated_at = items.updated_at
@@ -991,6 +1095,12 @@ namespace Lighting.Controllers.Frontend
             {
                 count_data = 1;
                 main_content.id = getdata.id;
+                main_content.title_TH = getdata.title_TH;
+                main_content.title_ENG = getdata.title_ENG;
+                main_content.titleDetails_TH = getdata.titleDetails_TH;
+                main_content.titleDetails_ENG = getdata.titleDetails_ENG;
+                main_content.detailsTitleTH = getdata.detailsTitleTH;
+                main_content.detailsTitleENG = getdata.detailsTitleENG;
                 main_content.detail_en = getdata.detail_en;
                 main_content.detail_th = getdata.detail_th;
             }
@@ -1013,7 +1123,7 @@ namespace Lighting.Controllers.Frontend
         {
             return View();
         }
-        public IActionResult IR_mda()
+        public async Task<IActionResult> IR_mda()
         {
             var data = db.SH_IR_MDA.ToList();
             if (data.Count != 0)
@@ -1027,7 +1137,7 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Body = data_details;
             }
 
-            var file_details = db.SH_IR_MDA_DataDetails.Where(x => x.active_status == 1).OrderByDescending(x=>x.year).ToList();
+            var file_details = db.SH_IR_MDA_DataDetails.Where(x => x.active_status == 1).OrderByDescending(x => x.year).ToList();
             if (file_details.Count != 0)
             {
                 ViewBag.BodyFile = file_details;
@@ -1102,7 +1212,7 @@ namespace Lighting.Controllers.Frontend
             var model = new model_input { list_philosophy = getData, count_list_philosophy = count };
             return View(model);
         }
-        public IActionResult IR_presentation_doc()
+        public async Task<IActionResult> IR_presentation_doc()
         {
             var data = db.SH_IR_presentation_doc.ToList();
             if (data.Count != 0)
@@ -1110,14 +1220,14 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Header = data;
             }
 
-            var details = db.SH_IR_presentation_doc_Data.Where(x => x.active_status == 1).ToList();
+            var details = db.SH_IR_presentation_doc_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.document_date).ToList();
             if (details.Count != 0)
             {
                 ViewBag.Body = details;
             }
             return View();
         }
-        public IActionResult Get_IR_presentation_doc()
+        public async Task<IActionResult> Get_IR_presentation_doc()
         {
             var IR_PWevcast = db.SH_IR_presentation_doc_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.document_date).AsEnumerable().Select((op, index) => new IR_Presentation_Infor_model.Presentation_doc
             {
@@ -1126,27 +1236,27 @@ namespace Lighting.Controllers.Frontend
                 titleENG = op.titleENG,
                 file_name = op.file_name,
                 file_name_ENG = op.file_name_ENG,
-                document_date = op.document_date, 
+                document_date = op.document_date,
             }).ToList();
 
             return Json(new { obj = IR_PWevcast });
         }
-        public IActionResult IR_presentation_webcast()
+        public async Task<IActionResult> IR_presentation_webcast()
         {
             var data = db.SH_IR_presentation_webcast.ToList();
             if (data.Count != 0)
             {
                 ViewBag.Header = data;
-            } 
+            }
 
-            var details = db.SH_IR_presentation_webcast_Data.Where(x => x.active_status == 1).ToList();
+            var details = db.SH_IR_presentation_webcast_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.activity_date).ToList();
             if (details.Count != 0)
             {
                 ViewBag.Body = details;
             }
             return View();
         }
-        public IActionResult Get_IR_presentation_webcast()
+        public async Task<IActionResult> Get_IR_presentation_webcast()
         {
             var IR_PWevcast = db.SH_IR_presentation_webcast_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.activity_date).AsEnumerable().Select((op, index) => new IR_Presentation_Infor_model.Presentation_webcast
             {
@@ -1156,28 +1266,100 @@ namespace Lighting.Controllers.Frontend
                 file_name = op.file_name,
                 file_name_ENG = op.file_name_ENG,
                 activity_date = op.activity_date,
-                linkVideo=op.linkVideo
+                linkVideo = op.linkVideo
             }).ToList();
 
             return Json(new { obj = IR_PWevcast });
 
         }
-        public IActionResult IR_propose_agenda()
+        public async Task<IActionResult> IR_propose_agenda()
         {
-            var data = db.SH_IR_propose_agenda.ToList();
-            if (data.Count != 0)
-            {
-                ViewBag.Header = data;
-            }
+            ViewBag.Header = await db.SH_IR_propose_agenda.ToListAsync();
 
-            var details = db.SH_IR_propose_agenda_DataDetails.Where(x => x.active_status == 1).ToList();
-            if (details.Count != 0)
-            {
-                ViewBag.Body = details;
-            }
-             
+            ViewBag.Body = await db.SH_IR_propose_agenda_DataDetails.Where(x => x.active_status == 1).ToListAsync();
+
+            ViewBag.mailTitles = await db.SH_IR_propose_agenda_mailTitles.Where(x => x.active_status == 1).ToListAsync();
+
             return View();
         }
+        public IActionResult Get_TypeOfPropose()
+        {
+            var DB = db.type_of_agenda_Propose.Where(x => x.active_status == 1).ToList();
+            return Json(new { DB = DB });
+        }
+        public async Task<IActionResult> IR_propose_agenda_sentMail(receive_mail_propose_agendas mailReceive)
+        {
+            try
+            {
+                if (mailReceive.typeOfPropose == "0" || mailReceive.name == null || mailReceive.name == ""
+                    || mailReceive.phone == null || mailReceive.phone == "" || mailReceive.wantProposeTitle == null || mailReceive.wantProposeTitle == ""
+                    || mailReceive.details == null || mailReceive.details == "")
+                {
+                    return Json(new { status = "warning", message = "กรุณากรอกข้อมูลทั้งหมด" });
+                }
+                {
+                    await SendEmailAsyncCareer(mailReceive);
+
+                    var getdata = db.type_of_agenda_Propose.Where(x => x.id == Convert.ToInt32(mailReceive.typeOfPropose)).FirstOrDefault();
+                    mailReceive.typeOfPropose = getdata.titleTH + "(" + getdata.titleENG + ")";
+                    mailReceive.created_at = DateTime.Now;
+                    mailReceive.updated_at = DateTime.Now;
+                    db.receive_mail_propose_agendas.Add(mailReceive);
+                    db.SaveChanges();
+                    return Json(new { status = "success", message = "งเมลล์สำเร็จ" });
+                }
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = "ส่งเมลล์ไม่สำเร็จ", inner = e.InnerException });
+            }
+        }
+        public async Task SendEmailAsyncCareer(receive_mail_propose_agendas mailRequest)
+        { 
+
+            //string Email = System.Configuration.ConfigurationManager.AppSettings["EmailSender"];
+            //string Password = System.Configuration.ConfigurationManager.AppSettings["EmailPassswordSender"];
+            //string Smtp = System.Configuration.ConfigurationManager.AppSettings["EmailSmtpSender"];
+            //string SmtpPort = System.Configuration.ConfigurationManager.AppSettings["EmailSmtpPort"];
+
+            string Email = "saimonnlaing1500@gmail.com";
+            string Password = "ffrpojpekljhdqnb";
+            string Smtp = "smtp.gmail.com";
+            string SmtpPort = "587";
+
+            var to_mail = db.receive_agenda_mail_accounts.FirstOrDefault().account;
+            var tomails = to_mail.Split(',', ' ');
+            var email = new MimeMessage();
+            email.Sender = MailboxAddress.Parse(Email);
+            foreach (var tomail in tomails)
+            {
+                email.To.Add(MailboxAddress.Parse(tomail));
+            }
+
+            var getdata = db.type_of_agenda_Propose.Where(x => x.id == Convert.ToInt32(mailRequest.typeOfPropose)).FirstOrDefault();
+            var builder = new BodyBuilder();
+            string Data_head = "ข้อมูลสำหรับผู้ถือหุ้น";
+            string DataBody = "เสนอวาระ/กรรมการ/คำถามล่วงหน้า" +
+                              "ชื่อผู้ติดต่อ      : " + mailRequest.name + "<br/>" +
+                              "เบอร์โทรศัพท์   : " + mailRequest.phone + "<br/>" +
+                              "อีเมล         : " + mailRequest.email + "<br/>" +
+                              "หัวข้อที่ต้องการเสนอ    : " + getdata.titleTH + "(" + getdata.titleENG + ")" + "<br/>" +
+                              "ชื่อหัวข้อที่ต้องการเสนอ : "+mailRequest.wantProposeTitle + "<br/>" +
+                              "รายละเอียด        : " + mailRequest.details;
+
+            builder.HtmlBody = DataBody;
+
+            email.Body = builder.ToMessageBody();
+            email.Subject = Data_head;
+            using (var smtp = new MailKit.Net.Smtp.SmtpClient())
+            {
+                await smtp.ConnectAsync(Smtp, int.Parse(SmtpPort), SecureSocketOptions.Auto);
+                await smtp.AuthenticateAsync(Email, Password);
+                await smtp.SendAsync(email);
+                await smtp.DisconnectAsync(true);
+            }
+        }
+
         public async Task<IActionResult> IR_public_relation()
         {
             ViewBag.IR_MassMedia = await db.IR_MassMedia.Where(x => x.Status == 1).ToListAsync();
@@ -1207,7 +1389,7 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Header = data;
             }
 
-            var details = db.SH_IR_Report_MeetingData.Where(x => x.active_status == 1).OrderByDescending(x=>x.year).ToList();
+            var details = db.SH_IR_Report_MeetingData.Where(x => x.active_status == 1).OrderByDescending(x => x.year).ToList();
             if (details.Count != 0)
             {
                 ViewBag.Body = details;
@@ -1223,6 +1405,7 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> IR_request_inquiry()
         {
             ViewBag.IR_Request_Inquiry = await db.IR_Request_Inquiry.Where(x => x.Status == 1).ToListAsync();
+
             return View();
         }
         public async Task<IActionResult> IR_set_announcement()

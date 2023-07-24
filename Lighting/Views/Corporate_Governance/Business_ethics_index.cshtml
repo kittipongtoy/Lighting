@@ -57,7 +57,9 @@
                                     #
                                 </th>
                                 <th class="min-w-125px">หัวข้อ TH</th>
-                                <th class="min-w-125px">รูปหน้าปก</th>
+                                <th class="min-w-125px">หัวข้อ EN</th>@*
+                                <th class="min-w-125px">รูปหน้าปก TH</th>
+                                <th class="min-w-125px">รูปหน้าปก EN</th>*@
                                 <th class="min-w-125px">สถานะการใช้งาน</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
@@ -71,22 +73,41 @@
                         @{
                             if (Model.count_row_O_business_ethics == 0)
                             {
+                                    <div class="row mb-3">
+                                        <div class="col-2">
+                                            <span>
+                                                หัวข้อ TH
+                                            </span>
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" name="title_TH" />
+                                        </div>
+                                        <div class="col-2">
+                                            <span>
+                                                หัวข้อ ENG
+                                            </span>
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" name="title_ENG" />
+                                        </div>
+                                    </div>
+
                                 <div class="row mb-3">
                                     <div class="col-2">
                                         <span>
-                                            หัวข้อ TH
+                                            รายละเอียด หัวข้อ TH
                                         </span>
                                     </div>
                                     <div class="col-4">
-                                        <input type="text" class="form-control" name="title_TH" />
+                                        <textarea type="text" class="form-control" name="detailsTitleTH" autocomplete="off"></textarea>
                                     </div>
                                     <div class="col-2">
                                         <span>
-                                            หัวข้อ ENG
+                                            รายละเอียด หัวข้อ ENG
                                         </span>
                                     </div>
                                     <div class="col-4">
-                                        <input type="text" class="form-control" name="title_ENG" />
+                                        <textarea type="text" class="form-control" name="detailsTitleENG" autocomplete="off"></textarea>
                                     </div>
                                 </div>
 
@@ -97,7 +118,7 @@
                                         </span>
                                     </div>
                                     <div class="col-4">
-                                        <input type="text" class="form-control" name="detailsTitleTH" autocomplete="off" />
+                                        <textarea type="text" class="form-control" name="titleDetails_TH" autocomplete="off"></textarea>
                                     </div>
                                     <div class="col-2">
                                         <span>
@@ -105,129 +126,110 @@
                                         </span>
                                     </div>
                                     <div class="col-4">
-                                        <input type="text" class="form-control" name="detailsTitleENG" autocomplete="off" />
+                                        <textarea type="text" class="form-control" name="titleDetails_ENG" autocomplete="off"></textarea>
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
-                                    <div class="col-2">
-                                        <span>
-                                            หัวข้อ รายละเอียด TH
-                                        </span>
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <span>
+                                                เนื้อหา TH
+                                            </span>
+                                        </div>
+                                        <div class="col-12">
+                                            <textarea id="kt_docs_ckeditor_document_TH" name=""></textarea>
+                                        </div>
                                     </div>
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" name="titleDetails_TH" autocomplete="off" />
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <span>
+                                                เนื้อหา EN
+                                            </span>
+                                        </div>
+                                        <div class="col-12">
+                                            <textarea id="kt_docs_ckeditor_document_EN" name=""></textarea>
+                                        </div>
                                     </div>
-                                    <div class="col-2">
-                                        <span>
-                                            หัวข้อ รายละเอียด ENG
-                                        </span>
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" name="titleDetails_ENG" autocomplete="off" />
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="col-12">
-                                        <span>
-                                            เนื้อหา TH
-                                        </span>
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea id="kt_docs_ckeditor_document_TH" name=""></textarea>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-12">
-                                        <span>
-                                            เนื้อหา EN
-                                        </span>
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea id="kt_docs_ckeditor_document_EN" name=""></textarea>
-                                    </div>
-                                </div>
                             }
                             else
                             {
-                                <div class="row mb-3">
-                                    <div class="col-2">
-                                        <span>
-                                            หัวข้อ TH
-                                        </span>
+                                    <div class="row mb-3">
+                                        <div class="col-2">
+                                            <span>
+                                                หัวข้อ TH
+                                            </span>
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" name="title_TH" id="title_TH" autocomplete="off" value="@Model.fod_O_business_ethics.title_TH" />
+                                        </div>
+                                        <div class="col-2">
+                                            <span>
+                                                หัวข้อ ENG
+                                            </span>
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" name="title_ENG" id="title_ENG" autocomplete="off" value="@Model.fod_O_business_ethics.title_ENG" />
+                                        </div>
                                     </div>
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" name="title_TH" id="title_TH" autocomplete="off" value="@Model.fod_O_business_ethics.title_TH"/>
-                                    </div>
-                                    <div class="col-2">
-                                        <span>
-                                            หัวข้อ ENG
-                                        </span>
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" name="title_ENG" id="title_ENG" autocomplete="off" value="@Model.fod_O_business_ethics.title_ENG"/>
-                                    </div>
-                                </div>
 
-                                <div class="row mb-3">
-                                    <div class="col-2">
-                                        <span>
-                                            หัวข้อ รายละเอียด TH
-                                        </span>
+                                    <div class="row mb-3">
+                                        <div class="col-2">
+                                            <span>
+                                                หัวข้อ รายละเอียด TH
+                                            </span>
+                                        </div>
+                                        <div class="col-4">
+                                            <textarea type="text" class="form-control" name="detailsTitleTH" id="detailsTitleTH" autocomplete="off" >@Model.fod_O_business_ethics.detailsTitleTH</textarea>
+                                        </div>
+                                        <div class="col-2">
+                                            <span>
+                                                หัวข้อ รายละเอียด ENG
+                                            </span>
+                                        </div>
+                                        <div class="col-4">
+                                        <textarea type="text" class="form-control" name="detailsTitleENG" id="detailsTitleENG" autocomplete="off">@Model.fod_O_business_ethics.detailsTitleENG</textarea>
+                                        </div>
                                     </div>
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" name="detailsTitleTH" id="detailsTitleTH" autocomplete="off" value="@Model.fod_O_business_ethics.detailsTitleTH" />
-                                    </div>
-                                    <div class="col-2">
-                                        <span>
-                                            หัวข้อ รายละเอียด ENG
-                                        </span>
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" name="detailsTitleENG" id="detailsTitleENG" autocomplete="off" value="@Model.fod_O_business_ethics.detailsTitleENG"/>
-                                    </div>
-                                </div>
 
-                                <div class="row mb-3">
-                                    <div class="col-2">
-                                        <span>
-                                            หัวข้อ รายละเอียด TH
-                                        </span>
+                                    <div class="row mb-3">
+                                        <div class="col-2">
+                                            <span>
+                                                หัวข้อ รายละเอียด TH
+                                            </span>
+                                        </div>
+                                        <div class="col-4">
+                                            <textarea type="text" class="form-control" name="titleDetails_TH" id="titleDetails_TH" autocomplete="off" >@Model.fod_O_business_ethics.titleDetails_TH</textarea>
+                                        </div>
+                                        <div class="col-2">
+                                            <span>
+                                                หัวข้อ รายละเอียด ENG
+                                            </span>
+                                        </div>
+                                        <div class="col-4">
+                                        <textarea type="text" class="form-control" name="titleDetails_ENG" id="titleDetails_ENG" autocomplete="off">@Model.fod_O_business_ethics.titleDetails_ENG</textarea>
+                                        </div>
                                     </div>
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" name="titleDetails_TH" id="titleDetails_TH" autocomplete="off" value="@Model.fod_O_business_ethics.titleDetails_TH" />
-                                    </div>
-                                    <div class="col-2">
-                                        <span>
-                                            หัวข้อ รายละเอียด ENG
-                                        </span>
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" name="titleDetails_ENG" id="titleDetails_ENG" autocomplete="off" value="@Model.fod_O_business_ethics.titleDetails_ENG"/>
-                                    </div>
-                                </div>
 
-                                <div class="row mb-3">
-                                    <div class="col-12">
-                                        <span>
-                                            เนื้อหา TH
-                                        </span>
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <span>
+                                                เนื้อหา TH
+                                            </span>
+                                        </div>
+                                        <div class="col-12">
+                                            <textarea id="kt_docs_ckeditor_document_TH" name="">@Model.fod_O_business_ethics.detail_th</textarea>
+                                        </div>
                                     </div>
-                                    <div class="col-12">
-                                        <textarea id="kt_docs_ckeditor_document_TH" name="">@Model.fod_O_business_ethics.detail_th</textarea>
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <span>
+                                                เนื้อหา EN
+                                            </span>
+                                        </div>
+                                        <div class="col-12">
+                                            <textarea id="kt_docs_ckeditor_document_EN" name="">@Model.fod_O_business_ethics.detail_en</textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-12">
-                                        <span>
-                                            เนื้อหา EN
-                                        </span>
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea id="kt_docs_ckeditor_document_EN" name="">@Model.fod_O_business_ethics.detail_en</textarea>
-                                    </div>
-                                </div>
                             }
                         }
                     </form>
@@ -236,8 +238,8 @@
                             <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
                         </div>
                     </div>
-                </div> 
-
+                </div>
+@*
                 <div class="card-header border-0 pt-6">
                     <div class="card-title">
                         <div class="d-flex align-items-center position-relative my-1">
@@ -252,7 +254,7 @@
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                            <a type="button" class="btn btn-primary" href="@Url.Action("Corporate_governance_create_cate","corporate_governance")">เพิ่ม</a>
+                            <a type="button" class="btn btn-primary" href="@Url.Action("Business_ethics_Detailscreate","Corporate_Governance")">เพิ่ม</a>
                         </div>
                     </div>
                 </div>
@@ -264,8 +266,9 @@
                                 <th>
                                     #
                                 </th>
-                                <th class="min-w-125px">ชื่อหมวด</th>
-                                <th class="min-w-125px">สถานะการใช้งาน</th>
+                                <th class="min-w-125px">หัวข้อ TH</th>
+                                <th class="min-w-125px">หัวข้อ ENG</th>
+                                 <th class="min-w-125px">สถานะการใช้งาน</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
                         </thead>
@@ -274,7 +277,7 @@
                     </table>
                     <div class="mb-10">
                     </div>
-                </div>
+                </div>*@
 
             </div>
         </div>
@@ -320,6 +323,10 @@
                 processData: false,
                 contentType: false,
                 cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait!')
+                    Swal.showLoading()
+                },
                 success: function (data) {
                     if (data.status == "success") {
                         Swal.fire({
@@ -377,7 +384,8 @@
         }
 
         function edit_item(id) {
-            window.location.href = "@Url.Action("Business_ethics_edit","Corporate_Governance")/" + id;
+            location.href = '/Corporate_Governance/Business_ethics_edit/?Id=' + id;
+            //location.href = '/Corporate_Governance/Business_ethics_edit/?Id==' + id;
         }
 
         function delete_item(id) {
@@ -429,6 +437,91 @@
                 }
             })
         }
+         
+        //2 table
+        function changeStatus_details(id, checked_obj) {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Corporate_Governance/Business_ethicsDetails_changeStatus",
+                data: {
+                    id: id,
+                    status: checked_obj.checked
+                },    // multiple data sent using ajax
+                success: function (data) {
+                    if (data.status == "success") {
+
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        function edit_item_details(id){
+            location.href = '/Corporate_Governance/Business_ethicsDetails_edit/?Id=' + id;
+        } 
+
+        function delete_item_details(id) {
+            Swal.fire({
+                title: 'คุณต้องการจะลบหรือไม่?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'ใช่',
+                denyButtonText: `ไม่ใช่`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: "/Corporate_Governance/Business_ethicsDetails_delete",
+                        data: {
+                            id: id
+                        },    // multiple data sent using ajax
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then((result) => {
+                                    var oTable = $('#kt_customers_table_2').DataTable();
+                                    oTable.ajax.reload(null, false);
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+                } else if (result.isDenied) {
+
+                }
+            })
+        }
 
         $(document).ready(function () {
 
@@ -438,8 +531,7 @@
                 "ajax": {
                     "url": "/Corporate_Governance/Business_ethics_index_getTable",
                     "type": "POST",
-                    "datatype": "json",
-
+                    "datatype": "json", 
                 },
                 "columns": [
                     {
@@ -449,14 +541,26 @@
                         "name": "title_file_th", "data": "title_file_th"
                     },
                     {
-                        "name": "image_name", "data": "image_name", "class": "text-center", "render": function (data, type, row) {
-                            var text = '<div class="mb-10" style="text-align:center;">' +
-                                '<img src="/upload_image/BusinessEthics/' + row.image_name + '" style="height: 250px;width: 250px;" alt="image">' +
-                                '</div>';
-                            return text;
-
-                        }
+                        "name": "title_file_en", "data": "title_file_en"
                     },
+                    //{
+                    //    "name": "image_name", "data": "image_name", "class": "text-center", "render": function (data, type, row) {
+                    //        var text = '<div class="mb-10" style="text-align:center;">' +
+                    //            '<img src="/upload_image/BusinessEthics/' + row.image_name + '" style="height: 250px;width: 250px;" alt="image">' +
+                    //            '</div>';
+                    //        return text;
+
+                    //    }
+                    //},
+                    //{
+                    //    "name": "image_name_ENG", "data": "image_name_ENG", "class": "text-center", "render": function (data, type, row) {
+                    //        var text = '<div class="mb-10" style="text-align:center;">' +
+                    //            '<img src="/upload_image/BusinessEthics/' + row.image_name_ENG + '" style="height: 250px;width: 250px;" alt="image">' +
+                    //            '</div>';
+                    //        return text;
+
+                    //    }
+                    //},
                     {
                         "name": "use_status", "data": "use_status", "render": function (data, type, row) {
                             if (row.use_status == 1) {
@@ -485,18 +589,17 @@
                         }
                     }
                 ],
-            }); 
+            });
 
             $('#search_table_1').keyup(function () {
                 table_1.search($(this).val()).draw();
-            })
-
+            });
 
             var table_2 = $("#kt_customers_table_2").DataTable({
                 responsive: true,
                 order: [[0, "asc"]],
                 "ajax": {
-                    "url": "/Corporate_Governance/Corporate_governance_index_getTable_cate",
+                    "url": "/Corporate_Governance/Business_ethics_Details_getTable",
                     "type": "POST",
                     "datatype": "json",
 
@@ -506,19 +609,22 @@
                         "name": "count_row", "data": "count_row"
                     },
                     {
-                        "name": "title_th", "data": "title_th"
+                        "name": "title_TH", "data": "title_TH"
+                    },
+                    {
+                        "name": "title_ENG", "data": "title_ENG"
                     },
                     {
                         "name": "use_status", "data": "use_status", "render": function (data, type, row) {
                             if (row.use_status == 1) {
                                 var text = '<div class="form-check form-switch">' +
-                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus_cate(' + row.id + ',this)"> ' +
+                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus_details(' + row.id + ',this)"> ' +
                                     '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
                                     '</div>';
                                 return text;
                             } else {
                                 var text = '<div class="form-check form-switch">' +
-                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus_cate(' + row.id + ',this)"> ' +
+                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus_details(' + row.id + ',this)"> ' +
                                     '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
                                     '</div>';
                                 return text;
@@ -529,8 +635,8 @@
                     },
                     {
                         "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
-                            var text = '<button type="button" class="btn btn-warning" onclick="edit_item_cate(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
-                            text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_item_cate(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
+                            var text = '<button type="button" class="btn btn-warning" onclick="edit_item_details(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
+                            text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_item_details(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
                             return text;
 
                         }

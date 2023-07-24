@@ -34,9 +34,13 @@
                     @{
                         if (Model.count_row_Sustainability_Report > 0)
                         {
-                            <div class="card-toolbar">
+                            <div>
                                 <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                                    <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/SustainabilityReport/@Model.fod_Sustainability_Report.file_name">ดาวน์โหลดไฟล์ปัจจุบัน</a>
+                                    <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/SustainabilityReport/@Model.fod_Sustainability_Report.file_name">ดาวน์โหลดไฟล์ปัจจุบัน TH</a>
+                                </div>
+                                <br />
+                                <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+                                    <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/SustainabilityReport/@Model.fod_Sustainability_Report.file_name_ENG">ดาวน์โหลดไฟล์ปัจจุบัน ENG</a>
                                 </div>
                             </div>
                         }
@@ -48,11 +52,22 @@
                         <div class="row mb-3">
                             <div class="col-2">
                                 <span>
-                                    ไฟล์เอกสาร
+                                    ไฟล์เอกสาร TH
                                 </span>
                             </div>
                             <div class="col-4">
                                 <input type="file" class="form-control" name="uploaded_file" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    ไฟล์เอกสาร ENG
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="file" class="form-control" name="uploaded_file_ENG" />
                             </div>
                         </div>
                     </form>
@@ -66,6 +81,7 @@
         </div>
     </div>
 </div>
+
 @section Scripts{
     <script>
         function submit_form() {
@@ -79,6 +95,10 @@
                 processData: false,
                 contentType: false,
                 cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait!')
+                    Swal.showLoading()
+                },
                 success: function (data) {
                     if (data.status == "success") {
                         Swal.fire({

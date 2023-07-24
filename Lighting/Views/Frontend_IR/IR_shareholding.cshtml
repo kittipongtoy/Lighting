@@ -33,6 +33,24 @@
                         </div>
                     }
                 }
+                else
+                {
+                    <div class="row">
+                        <div class="col">
+                            <div class="header-twoline">
+                                <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
+                                <h1>ผู้ถือหุ้นรายใหญ่</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="txt-content text-center f-17">
+                                <p>โครงสร้างผู้ถือหุ้น ณ วันที่ 2022-05-03</p>
+                            </div>
+                        </div>
+                    </div>
+                }
             }
             else
             {
@@ -56,6 +74,24 @@
                             </div>
                         </div>
                     }
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col">
+                            <div class="header-twoline">
+                                <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
+                                <h1>ผู้ถือหุ้นรายใหญ่</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="txt-content text-center f-17">
+                                <p>โครงสร้างผู้ถือหุ้น ณ วันที่ 2022-05-03</p>
+                            </div>
+                        </div>
+                    </div>
                 }
             }
 
@@ -92,6 +128,12 @@
                                                 <th>@item.percentTitleENG</th>
                                             }
                                         }
+                                        else
+                                        {
+                                            <th colspan="2">รายชื่อ</th>
+                                            <th>จำนวนหุ้น</th>
+                                            <th>สัดส่วนร้อยละของหุ้นที่ถือ</th>
+                                        }
                                     }
                                     else
                                     {
@@ -103,6 +145,12 @@
                                                 <th>@item.amountTitleTH</th>
                                                 <th>@item.percentTitleTH</th>
                                             }
+                                        }
+                                        else
+                                        {
+                                            <th colspan="2">รายชื่อ</th>
+                                            <th>จำนวนหุ้น</th>
+                                            <th>สัดส่วนร้อยละของหุ้นที่ถือ</th>
                                         }
                                     }
                                     @* <th colspan="2">รายชื่อ</th>
@@ -215,7 +263,7 @@
     </div>
 </div>
 
-                                
+
 @section Scripts{
 
 

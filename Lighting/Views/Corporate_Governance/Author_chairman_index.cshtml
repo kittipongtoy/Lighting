@@ -57,7 +57,8 @@
                                     #
                                 </th>
                                 <th class="min-w-125px">หัวข้อ TH</th>
-                                <th class="min-w-125px">รูปหน้าปก</th>
+                                <th class="min-w-125px">หัวข้อ ENG</th>
+                                @*<th class="min-w-125px">รูปหน้าปก</th>*@
                                 <th class="min-w-125px">สถานะการใช้งาน</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
@@ -71,6 +72,63 @@
                         @{
                             if (Model.count_row_O_Author_chairman == 0)
                             {
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="title_TH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="title_ENG" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            รายละเอียด หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="detailsTitleTH" autocomplete="off"></textarea>
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            รายละเอียด หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="detailsTitleENG" autocomplete="off"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="titleDetails_TH" autocomplete="off"></textarea>
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="titleDetails_ENG" autocomplete="off"></textarea>
+                                    </div>
+                                </div>
+
                                 <div class="row mb-3">
                                     <div class="col-12">
                                         <span>
@@ -94,6 +152,63 @@
                             }
                             else
                             {
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="title_TH" id="title_TH" autocomplete="off" value="@Model.fod_O_Author_chairman.title_TH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="title_ENG" id="title_ENG" autocomplete="off" value="@Model.fod_O_Author_chairman.title_ENG" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="detailsTitleTH" id="detailsTitleTH" autocomplete="off">@Model.fod_O_Author_chairman.detailsTitleTH</textarea>
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="detailsTitleENG" id="detailsTitleENG" autocomplete="off">@Model.fod_O_Author_chairman.detailsTitleENG</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="titleDetails_TH" id="titleDetails_TH" autocomplete="off">@Model.fod_O_Author_chairman.titleDetails_TH</textarea>
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="titleDetails_ENG" id="titleDetails_ENG" autocomplete="off">@Model.fod_O_Author_chairman.titleDetails_ENG</textarea>
+                                    </div>
+                                </div>
+
                                 <div class="row mb-3">
                                     <div class="col-12">
                                         <span>
@@ -165,6 +280,10 @@
                 processData: false,
                 contentType: false,
                 cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait!')
+                    Swal.showLoading()
+                },
                 success: function (data) {
                     if (data.status == "success") {
                         Swal.fire({
@@ -222,7 +341,8 @@
         }
 
         function edit_item(id) {
-            window.location.href = "@Url.Action("Author_chairman_edit","Corporate_Governance")/" + id;
+            location.href = '/Corporate_Governance/Author_chairman_edit/?Id=' + id;
+            //window.location.href = "Url.Action("Author_chairman_edit","Corporate_Governance")/" + id;
         }
 
         function delete_item(id) {
@@ -293,14 +413,17 @@
                         "name": "title_file_th", "data": "title_file_th"
                     },
                     {
-                        "name": "image_name", "data": "image_name", "class": "text-center", "render": function (data, type, row) {
-                            var text = '<div class="mb-10" style="text-align:center;">' +
-                                '<img src="/upload_image/AntiFraud/' + row.image_name + '" style="height: 250px;width: 250px;" alt="image">' +
-                                '</div>';
-                            return text;
-
-                        }
+                        "name": "title_file_en", "data": "title_file_en"
                     },
+                    //{
+                    //    "name": "image_name", "data": "image_name", "class": "text-center", "render": function (data, type, row) {
+                    //        var text = '<div class="mb-10" style="text-align:center;">' +
+                    //            '<img src="/upload_image/AntiFraud/' + row.image_name + '" style="height: 250px;width: 250px;" alt="image">' +
+                    //            '</div>';
+                    //        return text;
+
+                    //    }
+                    //},
                     {
                         "name": "use_status", "data": "use_status", "render": function (data, type, row) {
                             if (row.use_status == 1) {

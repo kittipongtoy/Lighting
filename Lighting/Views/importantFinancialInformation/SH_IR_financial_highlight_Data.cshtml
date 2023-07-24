@@ -60,7 +60,7 @@
                     <div class="row mb-3" style="padding-top: 1.5rem!important;">
                         <div class="col-6">
                             <h2>
-                                เพิ่มรายการ
+                                เพิ่มรายการ (@Model.fod_SH_IR_financial_highlight_Data.profitTitleTH)
                             </h2>
                             <br />
                         </div>
@@ -68,117 +68,134 @@
                             <a type="button" class="btn btn-secondary" href="@Url.Action("SH_IR_financial_highlight","importantFinancialInformation")">ย้อนกลับ</a>
                         </div>
                     </div>
-                    <form id="form_create" enctype="multipart/form-data">
 
-                        <div class="row mb-3">
-                            <div class="col-2">
-                                <span>
-                                    หัวข้อ TH
+                    <div class="card-header border-0 pt-6">
+                        <div class="card-title">
+                            <div class="d-flex align-items-center position-relative my-1">
+                                <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                        <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+                                    </svg>
                                 </span>
-                            </div>
-                            <div class="col-4">
-                                <textarea type="text" class="form-control" name="profitTitleTH" required autocomplete="off"></textarea>
-                            </div>
-                            <div class="col-2">
-                                <span>
-                                    หัวข้อ ENG
-                                </span>
-                            </div>
-                            <div class="col-4">
-                                <textarea type="text" class="form-control" name="profitTitleENG" required autocomplete="off"></textarea>
+                                <input type="text" data-kt-customer-table-filter="search" id="search_table_1" class="form-control form-control-solid w-250px ps-15" placeholder="ค้นหา" />
                             </div>
                         </div>
-
-                        @{
-                            if (Model.count_row_SH_IR_financial_highlight == 0)
-                            {
-
-                                <div class="row mb-3">
-                                    <div class="col-2">
-                                        <span>
-                                            ล้านบาท 1
-                                        </span>
-                                    </div> <div class="col-4">
-                                        <input type="text" pattern="\d*" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="amount1" required autocomplete="off" />
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="col-2">
-                                        <span>
-                                            ล้านบาท 2
-                                        </span>
-                                    </div> <div class="col-4">
-                                        <input type="text" pattern="\d*" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="amount2" required autocomplete="off" />
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="col-2">
-                                        <span>
-                                            ล้านบาท 3
-                                        </span>
-                                    </div> <div class="col-4">
-                                        <input type="text" pattern="\d*" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="amount3" required autocomplete="off" />
-                                    </div>
-                                </div>
-                            }
-                            else
-                            {
-                                var date1 = (@Model.fod_SH_IR_financial_highlight.date1Title).ToString();
-                                var date_1 = date1.Split(' ');
-                                string date_11= date_1[0];
-
-                                var date2 = (@Model.fod_SH_IR_financial_highlight.date2Title).ToString();
-                                var date_2 = date2.Split(' ');
-                                string date_22 = date_2[0];
-
-                                var date3 = (@Model.fod_SH_IR_financial_highlight.date3Title).ToString();
-                                var date_3 = date3.Split(' ');
-                                string date_33 = date_3[0];
-
-                                <div class="row mb-3">
-                                    <div class="col-2">
-                                        <span>
-                                            @date_11
-                                        </span>
-                                    </div> <div class="col-4">
-                                        <input type="text" pattern="\d*" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="amount1" required autocomplete="off" />
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="col-2">
-                                        <span>
-                                            @date_22
-                                        </span>
-                                    </div> <div class="col-4">
-                                        <input type="text" pattern="\d*" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="amount2" required autocomplete="off" />
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="col-2">
-                                        <span>
-                                            @date_33
-                                        </span>
-                                    </div> <div class="col-4">
-                                        <input type="text" pattern="\d*" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="amount3" required autocomplete="off" />
-                                    </div>
-                                </div>
-
-                            }
-                        }
-
-                    </form>
-
-                    <div class="row mb-3" style="justify-content: right;">
-                        <div class="col-1">
-                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        <div class="card-toolbar">
+                            <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_create">เพิ่ม</button>
+                            </div>
                         </div>
+                    </div>
+                    <div class="card-body pt-0" style="text-align:center;">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+                            <thead>
+                                <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                                    <th>#</th>
+                                    <th class="min-w-125px">Year</th>
+                                    <th class="min-w-125px">Amount</th>
+                                    <th class="text-end min-w-70px">รายละเอียด</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fw-semibold text-gray-600">
+                            </tbody>
+                        </table>
+                        <div class="mb-10">
+                        </div>
+
                     </div>
                 </div>
                 <!--end::Card body-->
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal_create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">เพิ่มรายการ</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="form_create_modal" enctype="multipart/form-data">
+                                    <input name="fH_Data_id" value="@Model.fod_SH_IR_financial_highlight_Data.id" hidden />
+                                    <div class="row mb-3">
+                                        <div class="col-2">
+                                            <span>
+                                                ปี
+                                            </span>
+                                        </div>
+                                        <div class="col-4">
+                                            <input class="col-lg-6 form-control" name="Year_Str" id="Year" type="text" autocomplete="off" multiple required placeholder="กรุณาเลือกปี" />
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-2">
+                                            <span>
+                                                จำนวน
+                                            </span>
+                                        </div>
+                                        <div class="col-10">
+                                            <input type="text" class="form-control" id="amount" name="amount" autocomplete="off" required />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <a type="button" class="btn btn-primary" onclick="submit_form_modal_create()" href="javascript:void(0)">บันทึก</a>
+
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end Modal-->
+                <!-- edit Modal -->
+                <div class="modal fade" id="exampleModal_edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">แก้ไขรายการ</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="form_edit" enctype="multipart/form-data">
+                                    <input name="id" hidden id="edit_id" />
+
+                                    <div class="row mb-3">
+                                        <div class="col-2">
+                                            <span>
+                                                ปี
+                                            </span>
+                                        </div>
+                                        <div class="col-4">
+                                            <input class="col-lg-6 form-control" name="Year_Str" id="edit_Year" type="text" autocomplete="off" multiple required placeholder="กรุณาเลือกปี" />
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-2">
+                                            <span>
+                                                จำนวน
+                                            </span>
+                                        </div>
+                                        <div class="col-10">
+                                            <input type="text" class="form-control" id="edit_amount" name="amount" autocomplete="off" />
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                            <div class="modal-footer">
+                                <a type="button" class="btn btn-primary" onclick="submit_form_modal_edit()" href="javascript:void(0)">บันทึก</a>
+
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end edit Modal-->
+
             </div>
             <!--end::Card-->
 
@@ -190,15 +207,44 @@
 <!--end::Content-->
 @section Scripts{
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+
     <script>
 
-        function submit_form() {
-            var raw_form = document.getElementById('form_create');
+        $("#Year").datepicker({
+            format: "yyyy",
+            startView: "years",
+            minViewMode: "years"
+        });
+
+        $("#edit_Year").datepicker({
+            format: "yyyy",
+            startView: "years",
+            minViewMode: "years"
+        });
+
+        function toDateENGFormat(datedd) {
+
+            if (datedd != null) {
+                var date = new Date(datedd);
+                var day = ("0" + date.getDate()).slice(-2);
+                var month = ("0" + (date.getMonth() + 1)).slice(-2);
+                var n = /*(day) + "/" + (month) + "/" +*/ (date.getFullYear());
+                return n;
+            } else {
+                return datedd;
+            }
+        }
+
+        function submit_form_modal_create() {
+            var raw_form = document.getElementById('form_create_modal');
             var formData = new FormData(raw_form);
 
             $.ajax({
                 type: 'POST',
-                url: '/importantFinancialInformation/SH_IR_financial_highlight_Submit',
+                url: '/importantFinancialInformation/SH_IR_financial_highlight_DataDetails_Submit',
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -215,7 +261,10 @@
                             showConfirmButton: false,
                             timer: 2000
                         }).then(() => {
-                            window.location.href = "@Url.Action("SH_IR_financial_highlight","importantFinancialInformation")";
+                            // $("#exampleModal_create").modal('toggle');
+                            //var oTable = $('#kt_customers_table').DataTable();
+                            //oTable.ajax.reload(null, false);
+                            location.href = "/importantFinancialInformation/SH_IR_financial_highlight_Data/?Id=@Model.fod_SH_IR_financial_highlight_Data.id";
                         });
                     }
                     else {
@@ -234,6 +283,179 @@
                 }
             });
         }
+
+        function submit_form_modal_edit() {
+            var raw_form = document.getElementById('form_edit');
+            var formData = new FormData(raw_form);
+
+            $.ajax({
+                type: 'POST',
+                url: '/importantFinancialInformation/SH_IR_financial_highlight_DataDetails_edit_Submit',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            $("#exampleModal_edit").modal('toggle');
+                            var oTable = $('#kt_customers_table').DataTable();
+                            oTable.ajax.reload(null, false);
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        function edit_itemTable_1(id) {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/importantFinancialInformation/SH_IR_financial_highlight_DataDetails_getEditData",
+                data: {
+                    id: id,
+                },    // multiple data sent using ajax
+                success: function (data) {
+                    if (data.status == "success") {
+                        console.log("data=>", data.data);
+                        $("#exampleModal_edit").modal('toggle');
+                        $("#edit_id").val(data.data.id);
+                        var year = toDateENGFormat(data.data.year); 
+                        $("#edit_amount").val(data.data.amount);
+                        $("#edit_Year").val(year);
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+            //location.href = '/importantFinancialInformation/SH_IR_financial_highlight_edit/?Id=' + id;
+            //window.location.href = "Url.Action("SH_IR_financial_highlight_edit","importantFinancialInformation")/" + id;
+        }
+
+        function delete_itemTable_1(id) {
+            Swal.fire({
+                title: 'คุณต้องการจะลบหรือไม่?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'ใช่',
+                denyButtonText: `ไม่ใช่`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: "/importantFinancialInformation/SH_IR_financial_highlight_DataDetails_delete",
+                        data: {
+                            id: id
+                        },    // multiple data sent using ajax
+                        beforeSend: function () {
+                            Swal.fire('Please wait')
+                            Swal.showLoading()
+                        },
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then((result) => {
+                                    var oTable = $('#kt_customers_table').DataTable();
+                                    oTable.ajax.reload(null, false);
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+                } else if (result.isDenied) {
+
+                }
+            })
+        }
+
+        $(document).ready(function () {
+
+            var table_1 = $("#kt_customers_table").DataTable({
+                responsive: true,
+                order: [[0, "asc"]],
+                ajax: {
+                    url: "/importantFinancialInformation/SH_IR_financial_highlight_DataDetails_getTable",
+                    type: "POST",
+                    datatype: "json",
+                    data: { id: @Model.fod_SH_IR_financial_highlight_Data.id},
+                },
+                "columns": [
+                    {
+                        "name": "count_row", "data": "count_row"
+                    },
+                    {
+                        "name": "year", "data": "year"
+                    },
+                    {
+                        "name": "amount", "data": "amount"
+                    },
+                    {
+                        "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
+                            var text = '<button type="button" class="btn btn-warning" onclick="edit_itemTable_1(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
+                            text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_itemTable_1(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
+                            return text;
+
+                        }
+                    }
+                ],
+            });
+
+            $('#search_table_1').keyup(function () {
+                table_1.search($(this).val()).draw();
+            })
+
+        });
 
     </script>
 

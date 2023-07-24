@@ -72,6 +72,17 @@
                         <div class="row mb-3">
                             <div class="col-2">
                                 <span>
+                                    ปี
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input class="col-lg-6 form-control" name="Year_Str" id="Year" type="text" autocomplete="off" multiple required placeholder="กรุณาเลือกปี" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
                                     หัวข้อ TH
                                 </span>
                             </div>
@@ -155,6 +166,48 @@
 @section Scripts{
 
     <script>
+
+        $("#Year").datepicker({
+            format: "yyyy",
+            startView: "years",
+            minViewMode: "years"
+        });
+
+        function toDateENGFormat(datedd) {
+
+            if (datedd != null) {
+                var date = new Date(datedd);
+                var day = ("0" + date.getDate()).slice(-2);
+                var month = ("0" + (date.getMonth() + 1)).slice(-2);
+                var n = /*(day) + "/" + (month) + "/" +*/ (date.getFullYear());
+                return n;
+            } else {
+                return datedd;
+            }
+        }
+
+        var Parmeter_id = @Model.SH_generalMeeting_Data.id;
+
+        $(document).ready(function () {
+
+            if (Parmeter_id != null) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Information_ShareHolder/Get_Edit_SH_generalMeeting_Data',
+                    data: { id: Parmeter_id },
+                    success: function (data) {
+                        console.log(data);
+                        //debugger;
+
+                        var convert_date = toDateENGFormat(data.year)
+
+                        $("#Year").val(convert_date);
+                    }
+                })
+            }
+
+        });
         function submit_form() {
             var raw_form = document.getElementById('form_create');
             var formData = new FormData(raw_form);

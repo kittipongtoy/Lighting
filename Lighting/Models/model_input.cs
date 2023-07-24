@@ -4,6 +4,42 @@ namespace Lighting.Models
 {
     public class model_input
     {
+        public int? count_receive_agenda_mail_accounts { get; set; }    
+        public receive_agenda_mail_accounts? receive_agenda_mail_accounts { get; set; }
+        public class IR_csr_policy_file
+        {
+            public int id { get; set; }
+            public string? image_name { get; set; }
+            public string? image_name_ENG { get; set; }
+            public string? title_file_th { get; set; }
+            public string? title_file_en { get; set; }
+            public string? file_name { get; set; }
+            public string? file_name_ENG { get; set; }
+            public string? file_type { get; set; }
+            public int? use_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+
+        }
+        public class IR_csr_policy_content
+        {
+            public int id { get; set; }
+            public string? title_TH { get; set; }
+            public string? title_ENG { get; set; }
+            public string? detailsTitleTH { get; set; }
+            public string? detailsTitleENG { get; set; }
+            public string? titleDetails_TH { get; set; }
+            public string? titleDetails_ENG { get; set; }
+            public string? detail_th { get; set; }
+            public string? detail_en { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+
+        } 
+        public List<IR_csr_policy_file>? list_IR_csr_policy_file_file { get; set; }
+        public IR_csr_policy_content? fod_IR_csr_policy_content { get; set; }
+        public int? count_list_IR_csr_policy_file_file { get; set; }
+        public int? count_fod_IR_csr_policy_content { get; set; }
         public class page_corporate_governance_file
         {
             public int id { get; set; }
@@ -18,9 +54,16 @@ namespace Lighting.Models
             public DateTime? created_at { get; set; }
             public DateTime? updated_at { get; set; }
         }
+
         public class page_corporate_governance_content
         {
             public int id { get; set; }
+            public string? title_TH { get; set; }
+            public string? title_ENG { get; set; }
+            public string? detailsTitleTH { get; set; }
+            public string? detailsTitleENG { get; set; }
+            public string? titleDetails_TH { get; set; }
+            public string? titleDetails_ENG { get; set; }
             public string? detail_th { get; set; }
             public string? detail_en { get; set; }
             public DateTime? created_at { get; set; }
@@ -61,6 +104,7 @@ namespace Lighting.Models
         public CorporateGovernance_Cate? fod_CorporateGovernance_Cate { get; set; }
         public O_business_ethics? fod_O_business_ethics { get; set; }
         public O_business_ethics_File? fod_O_business_ethics_File { get; set; }
+        public O_business_ethics_details? fod_O_business_ethics_Details { get; set; }
         public O_CRS_policy? fod_O_CRS_policy { get; set; }
         public O_CRS_policy_File? fod_O_CRS_policy_File { get; set; }
         public O_Author_board_director? fod_O_Author_board_director { get; set; }
@@ -153,9 +197,11 @@ namespace Lighting.Models
         public SH_IR_Report_MeetingData? SH_IR_Report_MeetingData { get; set; }
         public int? count_row_SH_IR_Report_MeetingData { get; set; }
         public SH_IR_Report_Meeting_DataDetails? SH_IR_Report_Meeting_DataDetails { get; set; }
-        public SH_IR_propose_agenda? fod_SH_IR_propose_agenda { get; set; }
+        public SH_IR_propose_agenda? fod_SH_IR_propose_agenda { get; set; } 
         public int? count_row_SH_IR_propose_agenda { get; set; }
         public SH_IR_propose_agenda_DataDetails? SH_IR_propose_agenda_DataDetails { get; set; }
+        public type_of_agenda_Propose? type_of_agenda_Propose { get; set; }
+        public SH_IR_propose_agenda_mailTitles? SH_IR_propose_agenda_mailTitles { get; set; }
         public SH_IR_presentation_doc? fod_SH_IR_presentation_doc { get; set; }
         public int? count_row_SH_IR_presentation_doc { get; set; }
         public SH_IR_presentation_doc_Data? SH_IR_presentation_doc_Data { get; set; }
@@ -181,10 +227,14 @@ namespace Lighting.Models
         public SH_IR_financial_highlight? fod_SH_IR_financial_highlight { get; set; }
         public int? count_row_SH_IR_financial_highlight { get; set; } 
         public SH_IR_financial_highlight_Data? SH_IR_financial_highlight_Data { get; set; }
+        public SH_IR_financial_highlight_Data? fod_SH_IR_financial_highlight_Data { get; set; }
+        public int? count_row_SH_IR_financial_highlight_Data { get; set; }
         public SH_IR_financial_highlight_Details? SH_IR_financial_highlight_Details { get; set; }
         public SH_IR_financial_highlight_Details? fod_SH_IR_financial_highlight_Details { get; set; }
         public int? count_row_SH_IR_financial_highlight_Details { get; set; }
         public SH_IR_financial_highlight_DetailsData? SH_IR_financial_highlight_DetailsData { get; set; }
+        public int? count_row_SH_IR_financial_highlight_DetailsData { get; set; }
+        public SH_IR_financial_highlight_DetailsData? fod_SH_IR_financial_highlight_DetailsData { get; set; }
 
 
 

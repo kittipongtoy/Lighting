@@ -11,6 +11,7 @@ namespace Lighting.Areas.Identity.Data
         public string? title_ENG { get; set; }
         public string? image_name { get; set; }
         public string? image_name_ENG { get; set; }
+        public int? use_status { get; set; }
         public DateTime? created_at { get; set; }
         public DateTime? updated_at { get; set; }
     }

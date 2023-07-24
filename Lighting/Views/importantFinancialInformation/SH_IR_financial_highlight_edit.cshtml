@@ -90,8 +90,7 @@
                         </div>
 
                         @{
-                            if (Model.count_row_SH_IR_financial_highlight == 0)
-                            {
+                            
 
                                 <div class="row mb-3">
                                     <div class="col-2">
@@ -99,7 +98,7 @@
                                             ล้านบาท 1
                                         </span>
                                     </div> <div class="col-4">
-                                        <input type="text" pattern="\d*" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="amount1" required autocomplete="off" value="@Model.SH_IR_financial_highlight_Data.amount1" />
+                                        <input type="text" pattern="\d*" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="amount1" required autocomplete="off" />
                                     </div>
                                 </div>
 
@@ -109,7 +108,7 @@
                                             ล้านบาท 2
                                         </span>
                                     </div> <div class="col-4">
-                                        <input type="text" pattern="\d*" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="amount2" required autocomplete="off" value="@Model.SH_IR_financial_highlight_Data.amount2" />
+                                        <input type="text" pattern="\d*" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="amount2" required autocomplete="off"/>
                                     </div>
                                 </div>
 
@@ -119,55 +118,10 @@
                                             ล้านบาท 2
                                         </span>
                                     </div> <div class="col-4">
-                                        <input type="text" pattern="\d*" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="amount3" required autocomplete="off" value="@Model.SH_IR_financial_highlight_Data.amount3" />
+                                        <input type="text" pattern="\d*" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="amount3" required autocomplete="off" />
                                     </div>
                                 </div>
-                            }
-                            else
-                            {
-                                var date1 = (@Model.fod_SH_IR_financial_highlight.date1Title).ToString();
-                                var date_1 = date1.Split(' ');
-                                string date_11 = date_1[0];
-
-                                var date2 = (@Model.fod_SH_IR_financial_highlight.date2Title).ToString();
-                                var date_2 = date2.Split(' ');
-                                string date_22 = date_2[0];
-
-                                var date3 = (@Model.fod_SH_IR_financial_highlight.date3Title).ToString();
-                                var date_3 = date3.Split(' ');
-                                string date_33 = date_3[0];
-
-                                <div class="row mb-3">
-                                    <div class="col-2">
-                                        <span>
-                                            @date_11
-                                        </span>
-                                    </div> <div class="col-4">
-                                        <input type="text" pattern="\d*" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="amount1" required autocomplete="off" value="@Model.SH_IR_financial_highlight_Data.amount1" />
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="col-2">
-                                        <span>
-                                            @date_22
-                                        </span>
-                                    </div> <div class="col-4">
-                                        <input type="text" pattern="\d*" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="amount2" required autocomplete="off" value="@Model.SH_IR_financial_highlight_Data.amount2" />
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="col-2">
-                                        <span>
-                                            @date_33
-                                        </span>
-                                    </div> <div class="col-4">
-                                        <input type="text" pattern="\d*" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="amount3" required autocomplete="off" value="@Model.SH_IR_financial_highlight_Data.amount3" />
-                                    </div>
-                                </div>
-
-                            }
+                             
                         }
 
                     </form>

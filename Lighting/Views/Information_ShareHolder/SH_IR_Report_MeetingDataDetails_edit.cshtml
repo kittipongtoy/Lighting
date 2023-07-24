@@ -3,6 +3,9 @@
 @{
     ViewData["Title"] = "SH_IR_Report_MeetingDataDetails_edit";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+
+    DateTime? dds = Model.SH_IR_Report_Meeting_DataDetails.year;
+    var year = dds.Value.Year.ToString();
 }
 
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -59,9 +62,16 @@
                 <div class="card-body pt-0">
                     <div class="row mb-3" style="padding-top: 1.5rem!important;">
                         <div class="col-6">
-                            <h2>
-                                แก้ไขรายการ
-                            </h2>
+
+                            <div class="col-6">
+                                <h2>
+                                    แก้ไขรายการ
+                                </h2>
+                                <h2>
+                                    @Model.SH_IR_Report_Meeting_DataDetails.titleTH (@year)
+                                </h2>
+                                <br />
+                            </div>
                         </div>
                         <div class="col-6" style="text-align:right;">
                             <a type="button" class="btn btn-secondary" href="@Url.Action("SH_IR_Report_Meeting","Information_ShareHolder")">ย้อนกลับ</a>
@@ -97,8 +107,8 @@
                                 </span>
                             </div>
                             <div class="col-4">
-                                <input class="col-lg-6 form-control" name="Year_Str" id="Year" type="text" autocomplete="off" multiple required placeholder="กรุณาเลือกปี" />
-                            </div> 
+                                <input class="col-lg-6 form-control" name="Year_Str" id="Year" type="text" autocomplete="off" multiple required placeholder="กรุณาเลือกปี" value="@year" readonly/>
+                            </div>
                         </div>
 
                         <div class="row mb-3">
@@ -159,19 +169,19 @@
 </div>
 <!--end::Content-->
 @section Scripts{
-     
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
 
     <script>
 
-        $("#Year").datepicker({
-            format: "yyyy",
-            startView: "years",
-            minViewMode: "years"
-        });
-         
+        //$("#Year").datepicker({
+        //    format: "yyyy",
+        //    startView: "years",
+        //    minViewMode: "years"
+        //});
+
         function toDateENGFormat(datedd) {
 
             if (datedd != null) {
@@ -184,7 +194,7 @@
                 return datedd;
             }
         }
-         
+
 
         var Parmeter_id = @Model.SH_IR_Report_Meeting_DataDetails.id;
 
@@ -200,9 +210,9 @@
                         console.log(data);
                         //debugger;
 
-                        var convert_date = toDateENGFormat(data.year) 
+                        var convert_date = toDateENGFormat(data.year)
 
-                        $("#Year").val(convert_date); 
+                        $("#Year").val(convert_date);
                     }
                 })
             }
