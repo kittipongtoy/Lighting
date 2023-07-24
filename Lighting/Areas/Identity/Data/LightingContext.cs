@@ -23,6 +23,7 @@ namespace Lighting.Areas.Identity.Data
         #endregion
 
         #region Project Ref
+        public DbSet<ProjectRef_Product> ProjectRef_Products { get; set; }
         public DbSet<Category_Project> Category_Projects { get; set; }
         public DbSet<ProjectRef> ProjectRefs { get; set; }
         #endregion

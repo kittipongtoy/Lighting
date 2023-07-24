@@ -139,7 +139,49 @@ namespace Lighting.Controllers.Frontend
                                     Title_EN = proj.Title_EN,
                                     Title_TH = proj.Title_TH,
                                     Profile_Image = Path.Combine(proj.Folder_Path, proj.Profile_Image),
+                                     CategoryId = proj.ProjectRef_CategoryId
                                 }).FirstOrDefault();
+
+                 var project_product = await _db.ProjectRef_Products.AsNoTracking().Where(project => project.ProjectId == id).ToListAsync();
+                if(project_product != null)
+                {
+                    var products = new List<Product>();
+                    foreach( var product in project_product)
+                    {
+                        products.Add(await _db.Products.AsNoTracking()
+                            .Where(pro => pro.Id == product.ProductId)
+                            .Select(product => 
+                            new Product { 
+                                 Id = product.Id,
+                             Preview_Image = Path.Combine("upload_image", "Product", product.Folder_Path,product.Preview_Image),
+                              Product_CategoryId = product.Product_CategoryId,
+                               Product_ModelId = product.Product_ModelId,
+                             })
+                            .FirstOrDefaultAsync());
+                    }
+                    if(products.Count > 0) {
+                        ViewBag.CategoryId = products.First().Product_CategoryId;
+                        ViewBag.SubCategoryId = products.First().Product_ModelId;
+
+                        ViewData["products"] = products;
+                        ViewData["categorys"] = await _db.ProjectRefs
+                            .AsNoTracking()
+                            .Where(proj => proj.ProjectRef_CategoryId == proj_output.CategoryId)
+                            .OrderByDescending(proj => proj.Id)
+                            .Select(pro => 
+                            new ProjectRef {
+                                Profile_Image = Path.Combine( pro.Folder_Path, pro.Profile_Image),
+                                Location_EN = pro.Location_EN,
+                                Location_TH = pro.Location_TH,
+                                Id = pro.Id
+                            })
+                            //.Take(10)
+                            .ToListAsync(); 
+                    }
+
+                }
+               
+
                 return View(proj_output);
             }
 

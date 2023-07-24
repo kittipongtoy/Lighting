@@ -12,8 +12,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lighting.Migrations
 {
     [DbContext(typeof(LightingContext))]
+<<<<<<<< HEAD:Lighting/Migrations/20230721072048_xx.Designer.cs
     [Migration("20230721072048_xx")]
     partial class xx
+========
+    [Migration("20230721023612_init")]
+    partial class init
+>>>>>>>> origin/add-contactus-news-applyjob-(download-inprogress):Lighting/Migrations/20230721023612_init.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1629,9 +1634,15 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:Lighting/Migrations/20230721072048_xx.Designer.cs
                             Id = "00fe9107-3aff-4a73-a665-60fc46977aa9",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "41cb3b4a-7777-454b-8265-121446b257a4",
+========
+                            Id = "856b3ef2-08e6-4342-a7aa-badefa1f940e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a740d010-0def-4c93-b25f-93ac6a9bfb6a",
+>>>>>>>> origin/add-contactus-news-applyjob-(download-inprogress):Lighting/Migrations/20230721023612_init.Designer.cs
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -1641,9 +1652,15 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
+<<<<<<<< HEAD:Lighting/Migrations/20230721072048_xx.Designer.cs
                             PasswordHash = "AQAAAAEAACcQAAAAEMev66MoYWtZVBPVRnkGBjwKTh3dEAL1wwW4SCCpVzVmX6G+2EhusSbUADswxSFE4w==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "0bcf2ff2-23d6-485f-b8cc-a72259799fb2",
+========
+                            PasswordHash = "AQAAAAEAACcQAAAAEEs4RhWC33CSI38x/K3zP6olznmDYGNnOIuS0EzVbLrPx0cMEO+ULnlygI2Yj0iq3Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a26c9ea1-fada-4bd1-bef5-37a2a9802075",
+>>>>>>>> origin/add-contactus-news-applyjob-(download-inprogress):Lighting/Migrations/20230721023612_init.Designer.cs
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -2702,6 +2719,13 @@ namespace Lighting.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+<<<<<<<< HEAD:Lighting/Migrations/20230721072048_xx.Designer.cs
+========
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+>>>>>>>> origin/add-contactus-news-applyjob-(download-inprogress):Lighting/Migrations/20230721023612_init.Designer.cs
                     b.Property<string>("Name_EN")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -2844,6 +2868,7 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:Lighting/Migrations/20230721072048_xx.Designer.cs
                             Id = "277ee3e4-2e51-4d16-a3d5-7c4d967250ce",
                             ConcurrencyStamp = "a87371c6-8c50-4c57-bc7f-f746f0b69073",
                             Name = "Admin",
@@ -2851,6 +2876,15 @@ namespace Lighting.Migrations
                             NormalizedName = "Admin",
                             created_at = new DateTime(2023, 7, 21, 7, 20, 47, 514, DateTimeKind.Utc).AddTicks(1225),
                             updated_at = new DateTime(2023, 7, 21, 7, 20, 47, 514, DateTimeKind.Utc).AddTicks(1229)
+========
+                            Id = "cf9a0bce-8fa9-4f9a-96e3-40fb7c45b33d",
+                            ConcurrencyStamp = "1cf125cf-aa20-4bd9-8bc1-bb9b38d0f4ba",
+                            Name = "Admin",
+                            NameThai = "Admin",
+                            NormalizedName = "Admin",
+                            created_at = new DateTime(2023, 7, 21, 2, 36, 12, 433, DateTimeKind.Utc).AddTicks(2665),
+                            updated_at = new DateTime(2023, 7, 21, 2, 36, 12, 433, DateTimeKind.Utc).AddTicks(2668)
+>>>>>>>> origin/add-contactus-news-applyjob-(download-inprogress):Lighting/Migrations/20230721023612_init.Designer.cs
                         });
                 });
 
@@ -4349,8 +4383,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:Lighting/Migrations/20230721072048_xx.Designer.cs
                             UserId = "00fe9107-3aff-4a73-a665-60fc46977aa9",
                             RoleId = "277ee3e4-2e51-4d16-a3d5-7c4d967250ce"
+========
+                            UserId = "856b3ef2-08e6-4342-a7aa-badefa1f940e",
+                            RoleId = "cf9a0bce-8fa9-4f9a-96e3-40fb7c45b33d"
+>>>>>>>> origin/add-contactus-news-applyjob-(download-inprogress):Lighting/Migrations/20230721023612_init.Designer.cs
                         });
                 });
 
