@@ -127,7 +127,11 @@ namespace Lighting.Areas.Identity.Data
 		public DbSet<IR_Request_Inquiry> IR_Request_Inquiry { get; set; }
         public DbSet<IR_InvestorCalendarDetail> IR_InvestorCalendarDetail { get; set; }
         public DbSet<IR_Cancel_Email> IR_Cancel_Email { get; set; }
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public DbSet<IR_Stock_Chart> IR_Stock_Chart { get; set; }
+        public DbSet<IR_Stock_Link> IR_Stock_Link { get; set; }
+        public DbSet<IR_Stock_Quote> IR_Stock_Quote { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
            optionsBuilder.EnableSensitiveDataLogging();
         }

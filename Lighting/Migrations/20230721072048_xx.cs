@@ -761,6 +761,36 @@ namespace Lighting.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "IR_Stock_Chart",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Link_IR_Stock_Chart = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IR_Stock_Chart", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IR_Stock_Link",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Link_IR_Stock_Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IR_Stock_Link", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "IR_Stock_Market",
                 columns: table => new
                 {
@@ -777,6 +807,21 @@ namespace Lighting.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_IR_Stock_Market", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IR_Stock_Quote",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Link_IR_Stock_Quote = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IR_Stock_Quote", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -2262,17 +2307,17 @@ namespace Lighting.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NameThai", "NormalizedName", "created_at", "updated_at" },
-                values: new object[] { "31c5745b-00e8-45ea-aaec-16ef40c670af", "1a050b47-9fb7-43d7-9a8f-85b6adbeae18", "Admin", "Admin", "Admin", new DateTime(2023, 7, 20, 6, 44, 26, 961, DateTimeKind.Utc).AddTicks(8291), new DateTime(2023, 7, 20, 6, 44, 26, 961, DateTimeKind.Utc).AddTicks(8295) });
+                values: new object[] { "277ee3e4-2e51-4d16-a3d5-7c4d967250ce", "a87371c6-8c50-4c57-bc7f-f746f0b69073", "Admin", "Admin", "Admin", new DateTime(2023, 7, 21, 7, 20, 47, 514, DateTimeKind.Utc).AddTicks(1225), new DateTime(2023, 7, 21, 7, 20, 47, 514, DateTimeKind.Utc).AddTicks(1229) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ApplicationFile", "ConcurrencyStamp", "Email", "EmailConfirmed", "EmployeeCode", "EmployeeCodeInt", "Firstname", "GuarantorIdentificationCardFile", "Isactive", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePath", "ReceptionistFile", "SecurityStamp", "TwoFactorEnabled", "UserName", "created_at", "updated_at" },
-                values: new object[] { "f2206923-16c6-463c-b105-eb979a6abc70", 0, null, null, "0146e4bf-26c5-497c-9b74-af93f40fb6e7", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEGuPdGbU4370CpPdu0DVG1CivdU15ytAVzlIKvtRxCnoILeDOjBfY0FWcbal1yh//g==", null, false, null, null, "00127fc4-1d2f-42e9-b523-718778e371b6", false, "Admin@Lighting.com", null, null });
+                values: new object[] { "00fe9107-3aff-4a73-a665-60fc46977aa9", 0, null, null, "41cb3b4a-7777-454b-8265-121446b257a4", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEMev66MoYWtZVBPVRnkGBjwKTh3dEAL1wwW4SCCpVzVmX6G+2EhusSbUADswxSFE4w==", null, false, null, null, "0bcf2ff2-23d6-485f-b8cc-a72259799fb2", false, "Admin@Lighting.com", null, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "31c5745b-00e8-45ea-aaec-16ef40c670af", "f2206923-16c6-463c-b105-eb979a6abc70" });
+                values: new object[] { "277ee3e4-2e51-4d16-a3d5-7c4d967250ce", "00fe9107-3aff-4a73-a665-60fc46977aa9" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -2427,7 +2472,16 @@ namespace Lighting.Migrations
                 name: "IR_Request_Inquiry");
 
             migrationBuilder.DropTable(
+                name: "IR_Stock_Chart");
+
+            migrationBuilder.DropTable(
+                name: "IR_Stock_Link");
+
+            migrationBuilder.DropTable(
                 name: "IR_Stock_Market");
+
+            migrationBuilder.DropTable(
+                name: "IR_Stock_Quote");
 
             migrationBuilder.DropTable(
                 name: "M_chairman");

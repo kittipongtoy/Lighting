@@ -1423,6 +1423,50 @@ namespace Lighting.Migrations
                     b.ToTable("IR_Request_Inquiry");
                 });
 
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Stock_Chart", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<string>("Link_IR_Stock_Chart")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("updated_at")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("id");
+
+                    b.ToTable("IR_Stock_Chart");
+                });
+
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Stock_Link", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<string>("Link_IR_Stock_Link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("updated_at")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("id");
+
+                    b.ToTable("IR_Stock_Link");
+                });
+
             modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Stock_Market", b =>
                 {
                     b.Property<int>("Id")
@@ -1455,6 +1499,28 @@ namespace Lighting.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("IR_Stock_Market");
+                });
+
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Stock_Quote", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<string>("Link_IR_Stock_Quote")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("updated_at")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("id");
+
+                    b.ToTable("IR_Stock_Quote");
                 });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.LightingUser", b =>
@@ -1561,9 +1627,9 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f2206923-16c6-463c-b105-eb979a6abc70",
+                            Id = "00fe9107-3aff-4a73-a665-60fc46977aa9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0146e4bf-26c5-497c-9b74-af93f40fb6e7",
+                            ConcurrencyStamp = "41cb3b4a-7777-454b-8265-121446b257a4",
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -1573,9 +1639,9 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGuPdGbU4370CpPdu0DVG1CivdU15ytAVzlIKvtRxCnoILeDOjBfY0FWcbal1yh//g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMev66MoYWtZVBPVRnkGBjwKTh3dEAL1wwW4SCCpVzVmX6G+2EhusSbUADswxSFE4w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "00127fc4-1d2f-42e9-b523-718778e371b6",
+                            SecurityStamp = "0bcf2ff2-23d6-485f-b8cc-a72259799fb2",
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -2776,13 +2842,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "31c5745b-00e8-45ea-aaec-16ef40c670af",
-                            ConcurrencyStamp = "1a050b47-9fb7-43d7-9a8f-85b6adbeae18",
+                            Id = "277ee3e4-2e51-4d16-a3d5-7c4d967250ce",
+                            ConcurrencyStamp = "a87371c6-8c50-4c57-bc7f-f746f0b69073",
                             Name = "Admin",
                             NameThai = "Admin",
                             NormalizedName = "Admin",
-                            created_at = new DateTime(2023, 7, 20, 6, 44, 26, 961, DateTimeKind.Utc).AddTicks(8291),
-                            updated_at = new DateTime(2023, 7, 20, 6, 44, 26, 961, DateTimeKind.Utc).AddTicks(8295)
+                            created_at = new DateTime(2023, 7, 21, 7, 20, 47, 514, DateTimeKind.Utc).AddTicks(1225),
+                            updated_at = new DateTime(2023, 7, 21, 7, 20, 47, 514, DateTimeKind.Utc).AddTicks(1229)
                         });
                 });
 
@@ -4281,8 +4347,8 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "f2206923-16c6-463c-b105-eb979a6abc70",
-                            RoleId = "31c5745b-00e8-45ea-aaec-16ef40c670af"
+                            UserId = "00fe9107-3aff-4a73-a665-60fc46977aa9",
+                            RoleId = "277ee3e4-2e51-4d16-a3d5-7c4d967250ce"
                         });
                 });
 

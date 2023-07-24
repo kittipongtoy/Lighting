@@ -151,6 +151,1076 @@
                         <a class="mainlogo" asp-controller="Lighting" asp-action="Index"><img src="~/Frontend_assets/images/L&E-logo.svg"></a>
                     </div>
                     <div class="col-lg-10 col-md-10 col-8">
+
+                        <div class="row">
+                            <div class="col">
+                                <!-- MAIN - MENU :: IPAD & MOBILE -->
+                                <div class="d-block d-md-block d-lg-none">
+                                    <!-- HAMBURGER - MENU -->
+                                    <button type="button" class="btn nav-menu" data-toggle="modal" data-target="#menu-mobile">
+                                        <i class="fas fa-bars"></i>
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal left fade" id="menu-mobile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-header">
+                                                <a class="mainlogo" href="@Url.Action("Index","Lighting")" "></a>
+                                                <button type="button" class="close btn " data-dismiss="modal" aria-label="Close">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+
+                                            <div class="modal-content pt-0">
+                                                <!-- MAINMENU -->
+                                                <div class="modal-body">
+                                                    <div id="menu">
+                                                        <div class="menu-box">
+                                                            <div class="menu-wrapper-inner">
+                                                                <div class="menu-wrapper">
+                                                                    <div class="menu-slider">
+                                                                        <div class="menu">
+                                                                            <ul>
+                                                                                <li data-page="home">
+                                                                                    <div class="menu-item"><a href="@Url.Action("Index","Lighting")">หน้าหลัก</a></div>
+                                                                                </li>
+                                                                                <li data-page="resource">
+                                                                                    <div class="menu-item">
+                                                                                        <a href="#" class="menu-anchor" data-menu="2">ข้อมูลองค์กร</a>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li data-page="solution">
+                                                                                    <div class="menu-item">
+                                                                                        <a href="#" class="menu-anchor" data-menu="3">สมาร์ท โซลูชั่น</a>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li data-page="product">
+                                                                                    <div class="menu-item">
+                                                                                        <a href="#" class="menu-anchor" data-menu="4">สินค้า</a>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li data-page="project">
+                                                                                    <div class="menu-item">
+                                                                                        <a href="@Url.Action("Project","Project")" class="menu-anchor" data-menu="5">ผลงาน</a>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li data-page="download">
+                                                                                    <div class="menu-item">
+                                                                                        <a href="@Url.Action("CATALOGUE_Page","Download")" class="menu-anchor" data-menu="6">ดาวน์โหลด</a>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li data-page="news">
+                                                                                    <div class="menu-item"><a href="@Url.Action("New","New")">ข่าวสาร</a></div>
+                                                                                </li>
+                                                                                <li data-page="ir">
+                                                                                    <div class="menu-item"><a href="">นักลงทุนสัมพันธ์</a></div>
+                                                                                </li>
+                                                                                <li data-page="job">
+                                                                                    <div class="menu-item"><a href="@Url.Action("ApplyJob","ApplyJob")">สมัครงาน</a></div>
+                                                                                </li>
+                                                                                <li data-page="contact">
+                                                                                    <div class="menu-item"><a href="@Url.Action("Contact","Contact")">ติดต่อเรา</a></div>
+                                                                                </li>
+                                                                                <li data-page="privacy">
+                                                                                    <div class="menu-item"><a href="privacy_policy.php">PRIVACY POLICY</a></div>
+                                                                                </li>
+                                                                                <li data-page="cookie">
+                                                                                    <div class="menu-item"><a href="cookies_policy.php">COOKIES POLICY</a></div>
+                                                                                </li>
+
+                                                                                <li>
+                                                                                    <div class="menu-item lang-menu">
+                                                                                        <a href="#" class="menu-anchor pt-3" data-menu="1">EN</a>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+
+                                                                        <!-- LANG -->
+                                                                        <div class="submenu menu" data-menu="1">
+                                                                            <div class="submenu-back">
+                                                                                <div class="menu-item">
+                                                                                    <a href="#" class="menu-back">Back</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <ul class="lang-menu">
+                                                                                <li>
+                                                                                    <div class="menu-item">
+                                                                                        <a href="">TH</a>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item">
+                                                                                        <a href="">EN</a>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+
+                                                                        <!-- RESOURCE & FACILITY -->
+                                                                        <div class="submenu menu" data-menu="2">
+                                                                            <div class="submenu-back">
+                                                                                <div class="menu-item">
+                                                                                    <a href="#" class="menu-back">Back</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <ul>
+                                                                                <li class="m-sub-topic">PROFILE</li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Profile_History","Resource_Facility")">History</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Profile_Our_Philosophy_Vision_Misson","Resource_Facility")">Our Philosophy Vision & Mission</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Profile_Organization_Chart","Resource_Facility")">Organization Chart</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Profile_Awards","Resource_Facility")">Awards</a></div>
+                                                                                </li>
+                                                                                <li class="m-sub-topic">SUBSIDIARIES PROFILE</li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Subsidiaries_Lighting_Innovation_Center","Resource_Facility")">L&E Lighting Innovation Center</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Subsidiaries_SolidState","Resource_Facility")">L&E Solid State Co.,Ltd</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Subsidiaries_Manufacturing","Resource_Facility")">L&E Manufacturing Co.,Ltd</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">L&E Assembly / Service</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Subsidiaries_Warehouse_Logistics","Resource_Facility")">L&E Warehouse & Logistics</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Subsidiaries_Lighting_Solution_Center","Resource_Facility")">L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Subsidiaries_Overseas_Offices","Resource_Facility")">L&E Overseas Offices</a></div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+
+                                                                        <!-- SMART SOLUTION -->
+                                                                        <div class="submenu menu" data-menu="3">
+                                                                            <div class="submenu-back">
+                                                                                <div class="menu-item">
+                                                                                    <a href="#" class="menu-back">Back</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <ul>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("SmartSolution","SmartSolution")">All</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">ICON LINK (APP)</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">WISE PLUS (APP)</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">WISE PLAY (APP)</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">WISE PRO (BROWSER)</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">WISE NB (BROWSER)</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">LIGHTING MANAGEMENT SYSTEM (APP/BROWSER)</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">SMART BUILDING</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">SMART STREET POLE (BROWSER)</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">SMART URBAN POLE (BROWSER)</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">SMART SOLAR STREET POLE (BROWSER)</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">SMART FARMING (BROWSER)</a></div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+
+                                                                        <!-- PRODUCT -->
+                                                                        <div class="submenu menu" data-menu="4">
+                                                                            <div class="submenu-back">
+                                                                                <div class="menu-item">
+                                                                                    <a href="#" class="menu-back">Back</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <ul>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Product","Product")">All</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">INDOOR</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">OUTDOOR</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">DECORATIVE</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">ENTERTAINMENT</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">SPECIAL</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">SWITCH / RECEPTACLE / SIGNAGE</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">LAMP</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">COMPONENT / CONTROL EQUIPMENT</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">HORTICULTURE / BIOLOGICAL LIGHTING</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">POLE</a></div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+
+                                                                        <!-- PROJECT REF -->
+                                                                        <div class="submenu menu" data-menu="5">
+                                                                            <div class="submenu-back">
+                                                                                <div class="menu-item">
+                                                                                    <a href="#" class="menu-back">Back</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <ul>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Project","Project")">All</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">RESIDENTIAL</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">HOTEL / RESORT</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">SHOP / SHOWROOM</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">BANK / OFFICE / COMMERCIAL BUILDING</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">FACADE / HISTORICAL STRUCTURE</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">SPORT</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">EVENT / EXHIBITION</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">AIRPORT</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">FACTORY</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">SHOPPING MALL</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">SPA</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">STREETLIGHT / TUNNEL</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">OUTDOOR / LANDSCAPE</a></div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+
+                                                                        <!-- DOWNLOAD -->
+                                                                        <div class="submenu menu" data-menu="6">
+                                                                            <div class="submenu-back">
+                                                                                <div class="menu-item">
+                                                                                    <a href="#" class="menu-back">Back</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <ul>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Download","Download")">L&E BIM OBJECTS</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Download","Download")">CATALOGUE</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Download","Download")">COMPANY PROFILE</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Download","Download")">IES FILE</a></div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="@Url.Action("Download","Download")">LEAFLET</a></div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- LANG :: PC & IPAD PRO -->
+                                <div class="d-none d-lg-block">
+                                    <ul class="lang">
+                                                @{
+                                                    var get_cookies = Context.Request.Cookies["lang"];
+                                                    if (get_cookies == "EN")
+                                                    {
+                                                <li id="butt_th">
+                                                    <button onclick="setLang('TH')">TH</button>
+                                                </li>
+                                                <li id="butt_en" class="active">
+                                                    <button onclick="setLang('EN')">EN</button>
+                                                </li>
+                                                    }
+                                                    else
+                                                    {
+                                                <li id="butt_th" class="active">
+                                                    <button onclick="setLang('TH')">TH</button>
+                                                </li>
+                                                <li id="butt_en" class="">
+                                                    <button onclick="setLang('EN')">EN</button>
+                                                </li>
+                                                    }
+                                                }
+                                    </ul>
+                                </div>
+
+                                <ul class="top-menu">
+                                    <!-- SEARCH -->
+                                    <li>
+                                        <div class="search-container">
+                                            <div class="search-icon-btn">
+                                                <i class="fa fa-search"></i>
+                                            </div>
+                                            <div class="search-input">
+                                                <input type="search" class="search-bar" placeholder="search">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!-- CART -->
+                                    <li>
+                                        <a href="https://www.lightingshoponline.com/" target="_blank"><i class="fas fa-shopping-cart"></i></a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                        <!-- MAIN - MENU :: PC & IPAD PRO -->
+                        <div class="d-none d-md-none d-lg-block">
+                            <div class="row ">
+                                <div class="col">
+                                    <ul class="mainmenu">
+                                        <li data-page="resource">
+                                            <a href="https://www.mydevdemosites.com/resource-facility/history">RESOURCE & FACILITY</a>
+                                            <div class="dropdown-container">
+                                                <div class="menu-container">
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <h6>PROFILE</h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <ul class="dropdown-submenu">
+                                                                        <li>
+                                                                            @*<a href="@Url.Action("Profile_History","Resource_Facility")">
+                                                                                <p>History</p>
+                                                                            </a>*@
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/history">
+                                                                                <p>History</p>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            @*<a href="@Url.Action("Profile_Our_Philosophy_Vision_Misson","Resource_Facility")">
+                                                                                <p>Our Philosophy Vision & Mission</p>
+                                                                            </a>*@
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/our-philosophy-vision-mission">
+                                                                                <p>Our Philosophy Vision & Mission</p>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            @*<a href="@Url.Action("Profile_Organization_Chart","Resource_Facility")">
+                                                                                <p>Organization Chart</p>
+                                                                            </a>*@
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/organization-chart">
+                                                                                <p>Organization Chart</p>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            @*<a href="@Url.Action("Profile_Awards","Resource_Facility")">
+                                                                                <p>Awards</p>
+                                                                            </a>*@
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/awards">
+                                                                                <p>Awards</p>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <h6>SUBSIDIARIES PROFILE</h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <ul class="dropdown-submenu w-half">
+                                                                    @*
+                                                                            <li>
+                                                                            <a href="@Url.Action("Subsidiaries_Lighting_Innovation_Center","Resource_Facility")">
+                                                                            <p>L&E Lighting Innovation Center</p>
+                                                                            </a>
+                                                                            </li>
+                                                                            <li>
+                                                                            <a href="@Url.Action("Subsidiaries_SolidState","Resource_Facility")">
+                                                                            <p>L&E Solid State Co.,Ltd</p>
+                                                                            </a>
+                                                                            </li>
+                                                                            <li>
+                                                                            <a href="@Url.Action("Subsidiaries_Manufacturing","Resource_Facility")">
+                                                                            <p>L&E Manufacturing Co.,Ltd</p>
+                                                                            </a>
+                                                                            </li>
+                                                                            <li>
+                                                                            <a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">
+                                                                            <p>L&E Assembly / Service</p>
+                                                                            </a>
+                                                                            </li>
+                                                                            <li>
+                                                                            <a href="@Url.Action("Subsidiaries_Warehouse_Logistics","Resource_Facility")">
+                                                                            <p>L&E Warehouse & Logistics</p>
+                                                                            </a>
+                                                                            </li>
+                                                                            <li>
+                                                                            <a href="@Url.Action("Subsidiaries_Lighting_Solution_Center","Resource_Facility")">
+                                                                            <p>L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</p>
+                                                                            </a>
+                                                                            </li>
+                                                                            <li>
+                                                                            <a href="@Url.Action("Subsidiaries_Overseas_Offices","Resource_Facility")">
+                                                                            <p>L&E Overseas Offices</p>
+                                                                            </a>
+                                                                            </li>
+                                                                        *@
+                                                                        <li>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/lighting-innovation-center">
+                                                                                <p>L&E Lighting Innovation Center</p>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/le-solid-state-coltd">
+                                                                                <p>L&E Solid State Co.,Ltd</p>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/le-manufacturing-coltd">
+                                                                                <p>L&E Manufacturing Co.,Ltd</p>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/assembly-service">
+                                                                                <p>L&E Assembly / Service</p>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/warehouse-logistics">
+                                                                                <p>L&E Warehouse & Logistics</p>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/lighting-solution-center-ratchadapisek-%C2%A0rachapruek">
+                                                                                <p>L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</p>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/overseas-offices">
+                                                                                <p>L&E Overseas Offices</p>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li data-page="solution">
+                                            @*<a href="@Url.Action("SmartSolution","SmartSolution")">SMART SOLUTION</a>*@
+                                            <a href="https://www.mydevdemosites.com/smart_solution">SMART SOLUTION</a>
+                                            <div class="dropdown-container">
+                                                <div class="imgHover-container">
+                                                    <div class="imgHover-containerBG"></div>
+                                                </div>
+                                                <div class="menu-container w-img">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <h6>SMART SOLUTION</h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <ul class="dropdown-submenu w-half">
+                                                                                @*
+                                                                <li>
+                                                                <a href="@Url.Action("SmartSolutionDetail","SmartSolution")">
+                                                                <p>ICON LINK (APP)</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution01.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("SmartSolutionDetail","SmartSolution")">
+                                                                <p>WISE PLUS (APP)</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution02.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("SmartSolutionDetail","SmartSolution")">
+                                                                <p>WISE PLAY (APP)</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution03.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("SmartSolutionDetail","SmartSolution")">
+                                                                <p>WISE PRO (BROWSER)</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution04.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("SmartSolutionDetail","SmartSolution")">
+                                                                <p>WISE NB (BROWSER)</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution05.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("SmartSolutionDetail","SmartSolution")">
+                                                                <p>LIGHTING MANAGEMENT SYSTEM (APP/BROWSER)</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution06.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("SmartSolutionDetail","SmartSolution")">
+                                                                <p>SMART BUILDING</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution07.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("SmartSolutionDetail","SmartSolution")">
+                                                                <p>SMART STREET POLE (BROWSER)</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution08.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("SmartSolutionDetail","SmartSolution")">
+                                                                <p>SMART URBAN POLE (BROWSER)</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution09.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("SmartSolutionDetail","SmartSolution")">
+                                                                <p>SMART SOLAR STREET POLE (BROWSER)</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution10.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("SmartSolutionDetail","SmartSolution")">
+                                                                <p>SMART FARMING (BROWSER)</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution11.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                *@
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/smart_solution/icon-link-app">
+                                                                        <p>ICON LINK (APP)</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution01.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/smart_solution/icon-link-app">
+                                                                        <p>WISE PLUS (APP)</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution02.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/smart_solution/wise-plus-app">
+                                                                        <p>WISE PLAY (APP)</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution03.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/smart_solution/wise-play-app">
+                                                                        <p>WISE PRO (BROWSER)</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution04.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/smart_solution/wise-pro-browser">
+                                                                        <p>WISE NB (BROWSER)</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution05.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/smart_solution/lighting-management-system-appbrowser">
+                                                                        <p>LIGHTING MANAGEMENT SYSTEM (APP/BROWSER)</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution06.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/smart_solution/smart-building">
+                                                                        <p>SMART BUILDING</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution07.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/smart_solution/smart-building">
+                                                                        <p>SMART STREET POLE (BROWSER)</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution08.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/smart_solution/smart-urban-pole-browser">
+                                                                        <p>SMART URBAN POLE (BROWSER)</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution09.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/smart_solution/smart-solar-street-polebrowser">
+                                                                        <p>SMART SOLAR STREET POLE (BROWSER)</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution10.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="@Url.Action("SmartSolutionDetail","SmartSolution")">
+                                                                        <p>SMART FARMING (BROWSER)</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/smart-solution/solution11.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li data-page="product">
+                                           @* <a href="@Url.Action("Product","Product")">PRODUCTS</a>*@
+                                            <a href="https://www.mydevdemosites.com/category/indoor">PRODUCTS</a>
+                                            <div class="dropdown-container min-pad">
+                                                <div class="menu-container">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <ul class="product-dropdownmenu">
+                                                                                @*
+                                                                <li>
+                                                                <a href="@Url.Action("Product_Category","Product")">
+                                                                <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                <div class="product-cate">
+                                                                <p>INDOOR</p>
+                                                                </div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Product_Category","Product")">
+                                                                <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                <div class="product-cate">
+                                                                <p>OUTDOOR</p>
+                                                                </div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Product_Category","Product")">
+                                                                <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                <div class="product-cate">
+                                                                <p>DECORATIVE</p>
+                                                                </div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Product_Category","Product")">
+                                                                <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                <div class="product-cate">
+                                                                <p>ENTERTAINMENT</p>
+                                                                </div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Product_Category","Product")">
+                                                                <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                <div class="product-cate">
+                                                                <p>SPECIAL</p>
+                                                                </div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Product_Category","Product")">
+                                                                <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                <div class="product-cate">
+                                                                <p>SWITCH / RECEPTACLE / SIGNAGE</p>
+                                                                </div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Product_Category","Product")">
+                                                                <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                <div class="product-cate">
+                                                                <p>LAMP</p>
+                                                                </div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Product_Category","Product")">
+                                                                <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                <div class="product-cate">
+                                                                <p>COMPONENT / CONTROL EQUIPMENT</p>
+                                                                </div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Product_Category","Product")">
+                                                                <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                <div class="product-cate">
+                                                                <p>HORTICULTURE / BIOLOGICAL LIGHTING</p>
+                                                                </div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Product_Category","Product")">
+                                                                <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                <div class="product-cate">
+                                                                <p>POLE</p>
+                                                                </div>
+                                                                </a>
+                                                                </li>
+                                                                *@
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/category/indoor">
+                                                                        <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                        <div class="product-cate">
+                                                                            <p>INDOOR</p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/category/outdoor">
+                                                                        <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                        <div class="product-cate">
+                                                                            <p>OUTDOOR</p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/category/decorative">
+                                                                        <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                        <div class="product-cate">
+                                                                            <p>DECORATIVE</p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/category/entertainment">
+                                                                        <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                        <div class="product-cate">
+                                                                            <p>ENTERTAINMENT</p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/category/special-lighting">
+                                                                        <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                        <div class="product-cate">
+                                                                            <p>SPECIAL</p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/category/special-lighting">
+                                                                        <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                        <div class="product-cate">
+                                                                            <p>SWITCH / RECEPTACLE / SIGNAGE</p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/category/lamp">
+                                                                        <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                        <div class="product-cate">
+                                                                            <p>LAMP</p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/category/lamp">
+                                                                        <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                        <div class="product-cate">
+                                                                            <p>COMPONENT / CONTROL EQUIPMENT</p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="@Url.Action("Product_Category","Product")">
+                                                                        <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                        <div class="product-cate">
+                                                                            <p>HORTICULTURE / BIOLOGICAL LIGHTING</p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/category/post-top-pole">
+                                                                        <img src="~/Frontend_assets/images/product/icon-product.svg">
+                                                                        <div class="product-cate">
+                                                                            <p>POLE</p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li data-page="project">
+                                            @*<a href="@Url.Action("Project","Project")">PROJECT REF</a>*@
+                                            <a href="https://www.mydevdemosites.com/projects">PROJECT REF</a>
+                                            <div class="dropdown-container">
+                                                <div class="imgHover-container">
+                                                    <div class="imgHover-containerBG"></div>
+                                                </div>
+                                                <div class="menu-container w-img">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <h6>PROJECT REF</h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <ul class="dropdown-submenu w-half">
+                                                                                @*
+                                                                <li>
+                                                                <a href="@Url.Action("Project_Category","Project")">
+                                                                <p>RESIDENTIAL</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project01.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Project_Category","Project")">
+                                                                <p>HOTEL / RESORT</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project02.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Project_Category","Project")">
+                                                                <p>SHOP / SHOWROOM</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project03.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Project_Category","Project")">
+                                                                <p>BANK / OFFICE / COMMERCIAL BUILDING</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project04.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Project_Category","Project")">
+                                                                <p>FACADE / HISTORICAL STRUCTURE</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project05.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Project_Category","Project")">
+                                                                <p>SPORT</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project06.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Project_Category","Project")">
+                                                                <p>EVENT / EXHIBITION</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project07.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Project_Category","Project")">
+                                                                <p>AIRPORT</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project08.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Project_Category","Project")">
+                                                                <p>FACTORY</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project09.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Project_Category","Project")">
+                                                                <p>SHOPPING MALL</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project10.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Project_Category","Project")">
+                                                                <p>SPA</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project11.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Project_Category","Project")">
+                                                                <p>STREETLIGHT / TUNNEL</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project12.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="@Url.Action("Project_Category","Project")">
+                                                                <p>OUTDOOR / LANDSCAPE</p>
+                                                                <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project13.jpg"></div>
+                                                                </a>
+                                                                </li>
+                                                                *@
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/project-category/residential">
+                                                                        <p>RESIDENTIAL</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project01.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/project-category/hotel-resort">
+                                                                        <p>HOTEL / RESORT</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project02.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/project-category/hotel-resort">
+                                                                        <p>SHOP / SHOWROOM</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project03.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/project-category/bank-office-commercial-building">
+                                                                        <p>BANK / OFFICE / COMMERCIAL BUILDING</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project04.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/project-category/facade-historical-structure">
+                                                                        <p>FACADE / HISTORICAL STRUCTURE</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project05.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/project-category/sport">
+                                                                        <p>SPORT</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project06.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/project-category/event-exhibition">
+                                                                        <p>EVENT / EXHIBITION</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project07.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/project-category/airport">
+                                                                        <p>AIRPORT</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project08.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/project-category/airport">
+                                                                        <p>FACTORY</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project09.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/project-category/shopping-mall">
+                                                                        <p>SHOPPING MALL</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project10.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/project-category/spa">
+                                                                        <p>SPA</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project11.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/project-category/streetlight-tunnel">
+                                                                        <p>STREETLIGHT / TUNNEL</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project12.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="https://www.mydevdemosites.com/project-category/outdoor-landscape">
+                                                                        <p>OUTDOOR / LANDSCAPE</p>
+                                                                        <div class="menu-img"><img src="~/Frontend_assets/images/project/menu-project13.jpg"></div>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                                        @*
+                                        <li data-page="download"><a href="@Url.Action("Download","Download")">DOWNLOAD</a></li>
+                                        <li data-page="news"><a href="@Url.Action("New","New")">NEWS</a></li>
+                                        <li data-page="ir"><a href="@Url.Action("IR_index","Frontend_IR")">INVESTOR</a></li>
+                                        <li data-page="job"><a href="@Url.Action("ApplyJob","ApplyJob")">APPLY JOB</a></li>
+                                        <li data-page="contact"><a href="@Url.Action("Contact","Contact")">CONTACT</a></li>
+                                        *@
+                                        <li data-page="download"><a href="https://www.mydevdemosites.com/catalogues">DOWNLOAD</a></li>
+                                        <li data-page="news"><a href="#">NEWS</a></li>
+                                        <li data-page="ir"><a href="@Url.Action("IR_index","Frontend_IR")">INVESTOR</a></li>
+                                        <li data-page="job"><a href="https://www.mydevdemosites.com/apply_job">APPLY JOB</a></li>
+                                        <li data-page="contact"><a href="@Url.Action("Contact","Contact")">CONTACT</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+   @* <header>
+        <div class="container-fluid">
+            <div class="wrap-pad more-w">
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-4">
+                        <a class="mainlogo" asp-controller="Lighting" asp-action="Index"><img src="~/Frontend_assets/images/L&E-logo.svg"></a>
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-8">
                         <div class="row">
                             <div class="col">
                                 <div class="d-block d-md-block d-lg-none">
@@ -317,7 +1387,7 @@
                                     <li data-page="job"><a href="">สมัครงาน</a></li>
                                     <li data-page="contact"><a href="">ติดต่อเรา</a></li>*@
 
-                                    <li data-page="about"><a href="">RESOURCE & FACILITY</a></li>
+                                    @*<li data-page="about"><a href="">RESOURCE & FACILITY</a></li>
                                     <li data-page="solution"><a href="@Url.Action("SmartSolution","SmartSolution")">SMART SOLUTION</a></li>
                                     <li data-page="product"><a href="@Url.Action("Product","Product")">PRODUCTS</a></li>
                                     <li data-page="portfolio"><a href="@Url.Action("Project","Project")">PROJECT REF</a></li>
@@ -326,16 +1396,6 @@
                                     <li data-page="ir"><a href="@Url.Action("IR_index","Frontend_IR")">INVESTOR</a></li>
                                     <li data-page="job"><a href="@Url.Action("ApplyJob","ApplyJob")">APPLY JOB</a></li>
                                     <li data-page="contact"><a href="@Url.Action("Contact","Contact")">CONTACT</a></li>
-                                    @*
-                                    <li><a href="">Resource & Facility</a></li>
-                                    <li><a href="">Smart Solution</a></li>
-                                    <li><a href="@Url.Action("new","new")">News</a></li>
-                                    <li><a href="">Investor</a></li>
-                                    <li><a href="@Url.Action("ApplyJob","ApplyJob")">Apply Job</a></li>
-                                    <li><a href="@Url.Action("Contact","Contact")">Contact us</a></li>
-                                    <li><a href="">Privacy Policy</a></li>
-                                    <li><a href="">Cookies Policy</a></li>
-                                    *@
                                 </ul>
                             </div>
                         </div>
@@ -344,7 +1404,7 @@
                 </div>
             </div>
         </div>
-    </header>
+    </header>*@
     <div class="d-none d-md-block">
         <nav class="side-menu">
             <ul>

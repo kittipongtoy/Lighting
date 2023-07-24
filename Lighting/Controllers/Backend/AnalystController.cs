@@ -3,6 +3,8 @@ using Lighting.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Lighting.Controllers.Backend
 {
@@ -10,10 +12,14 @@ namespace Lighting.Controllers.Backend
     public class AnalystController : Controller
 	{
         private readonly LightingContext _context;
+        private readonly ILogger<NewRoomController> _logger;
+        private IWebHostEnvironment _hostEnvironment;
 
-        public AnalystController(LightingContext context) 
+        public AnalystController(ILogger<NewRoomController> logger, LightingContext context, IWebHostEnvironment hostEnvironment) 
         {
+            _logger = logger;
             _context = context;
+            _hostEnvironment = hostEnvironment;
         }
 
         public IActionResult Analyst()
@@ -81,43 +87,177 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPost]
-        public IActionResult Analyst_Add_Submit(RequestDTO.IR_AnalystRequest model)
+        public async Task<IActionResult> Analyst_Add_Submit(RequestDTO.IR_AnalystRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
         {
             try
             {
                 IR_Analyst iR_Analyst = new IR_Analyst();
+                foreach (var formFile in uploaded_fileTH)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.Ticks.ToString();
+                        var extension = Path.GetExtension(formFile.FileName);
+                        iR_Analyst.FileName_TH = datestr + extension;
+                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + datestr + extension);
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFile.CopyTo(stream);
+                        }
+                    }
+                }
+
+                foreach (var formFile in uploaded_fileEN)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.Ticks.ToString();
+                        var extension = Path.GetExtension(formFile.FileName);
+                        iR_Analyst.FileName_EN = datestr + extension;
+                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + datestr + extension);
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFile.CopyTo(stream);
+                        }
+                    }
+                }
                 iR_Analyst.Status = model.Status;
-                
+                iR_Analyst.created_at = DateTime.Now;
+                iR_Analyst.updated_at = DateTime.Now;
+                _context.IR_Analysts.Add(iR_Analyst);
+                await _context.SaveChangesAsync();
                 return new JsonResult(new { status = "success", messageArray = "success" });
             }
             catch (Exception error)
             {
                 throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
             }
-            return View();
         }
 
-        public IActionResult Analyst_Edit()
+        public IActionResult Analyst_Edit(int? Id)
         {
             return View();
         }
 
         [HttpGet]
-        public IActionResult GetAnalyst_Edit()
+        public async Task<IActionResult> GetAnalyst_Edit(int? Id)
         {
-            return View();
+            try
+            {
+                var DB = await _context.IR_Analysts.FirstOrDefaultAsync(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    return Ok(DB);
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
 
         [HttpPut]
-        public IActionResult Analyst_Edit_Submit()
+        public async Task<IActionResult> Analyst_Edit_Submit(RequestDTO.IR_AnalystRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
         {
-            return View();
+            try
+            {
+                var iR_Analyst = await _context.IR_Analysts.FirstOrDefaultAsync(x => x.Id == model.Id);
+                foreach (var formFile in uploaded_fileTH)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        if (iR_Analyst.FileName_TH is not null)
+                        {
+                            var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + iR_Analyst.FileName_TH);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+                        }
+
+                        var datestr = DateTime.Now.Ticks.ToString();
+                        var extension = Path.GetExtension(formFile.FileName);
+                        iR_Analyst.FileName_TH = datestr + extension;
+                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + datestr + extension);
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFile.CopyTo(stream);
+                        }
+                    }
+                }
+
+                foreach (var formFile in uploaded_fileEN)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        if (iR_Analyst.FileName_EN is not null)
+                        {
+                            var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + iR_Analyst.FileName_EN);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+                        }
+
+                        var datestr = DateTime.Now.Ticks.ToString();
+                        var extension = Path.GetExtension(formFile.FileName);
+                        iR_Analyst.FileName_EN = datestr + extension;
+                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + datestr + extension);
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFile.CopyTo(stream);
+                        }
+                    }
+                }
+                iR_Analyst.Status = model.Status;
+                iR_Analyst.updated_at = DateTime.Now;
+                _context.Entry(iR_Analyst).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
 
         [HttpDelete]
-        public IActionResult Analyst_Delete()
+        public async Task<IActionResult> Analyst_Delete(int? Id)
         {
-            return View();
+            try
+            {
+                var DB = _context.IR_Analysts.FirstOrDefault(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + DB.FileName_EN);
+                    if (System.IO.File.Exists(old_filePath) == true)
+                    {
+                        System.IO.File.Delete(old_filePath);
+                    }
+
+                    var old_filePatho = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + DB.FileName_TH);
+                    if (System.IO.File.Exists(old_filePatho) == true)
+                    {
+                        System.IO.File.Delete(old_filePatho);
+                    }
+
+                    _context.IR_Analysts.Remove(DB);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
 
         public IActionResult Analyst_Chapter()
@@ -184,32 +324,172 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPost]
-        public IActionResult Analyst_Chapter_Add_Submit()
+        public async Task<IActionResult> Analyst_Chapter_Add_Submit(RequestDTO.IR_Analyst_Chapter model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
         {
-            return View();
+            try
+            {
+                IR_Analyst_Chapter iR_Analyst_Chapter = new IR_Analyst_Chapter();
+                foreach (var formFile in uploaded_fileTH)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.Ticks.ToString();
+                        var extension = Path.GetExtension(formFile.FileName);
+                        iR_Analyst_Chapter.FileName_TH = datestr + extension;
+                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + datestr + extension);
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFile.CopyTo(stream);
+                        }
+                    }
+                }
+
+                foreach (var formFile in uploaded_fileEN)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.Ticks.ToString();
+                        var extension = Path.GetExtension(formFile.FileName);
+                        iR_Analyst_Chapter.FileName_EN = datestr + extension;
+                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + datestr + extension);
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFile.CopyTo(stream);
+                        }
+                    }
+                }
+                iR_Analyst_Chapter.Status = model.Status;
+                iR_Analyst_Chapter.created_at = DateTime.Now;
+                iR_Analyst_Chapter.updated_at = DateTime.Now;
+                _context.IR_Analyst_Chapter.Add(iR_Analyst_Chapter);
+                await _context.SaveChangesAsync();
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
 
-        public IActionResult Analyst_Chapter_Edit()
+        public IActionResult Analyst_Chapter_Edit(int? Id)
         {
             return View();
         }
 
         [HttpGet]
-        public IActionResult GetAnalyst_ChapterEdit()
+        public async Task<IActionResult> GetAnalyst_ChapterEdit(int? Id)
         {
-            return View();
+            try
+            {
+                var DB = await _context.IR_Analyst_Chapter.FirstOrDefaultAsync(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    return Ok(DB);
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
 
         [HttpPut]
-        public IActionResult Analyst_ChapterEdit_Submit()
+        public async Task<IActionResult> Analyst_ChapterEdit_Submit(RequestDTO.IR_Analyst_Chapter model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
         {
-            return View();
+            try
+            {
+                var iR_Analyst_Chapter = _context.IR_Analyst_Chapter.FirstOrDefault(x => x.Id == model.Id);
+                foreach (var formFile in uploaded_fileTH)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + iR_Analyst_Chapter.FileName_TH);
+                        if (System.IO.File.Exists(old_filePath) == true)
+                        {
+                            System.IO.File.Delete(old_filePath);
+                        }
+
+                        var datestr = DateTime.Now.Ticks.ToString();
+                        var extension = Path.GetExtension(formFile.FileName);
+                        iR_Analyst_Chapter.FileName_TH = datestr + extension;
+                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + datestr + extension);
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFile.CopyTo(stream);
+                        }
+                    }
+                }
+
+                foreach (var formFile in uploaded_fileEN)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + iR_Analyst_Chapter.FileName_EN);
+                        if (System.IO.File.Exists(old_filePath) == true)
+                        {
+                            System.IO.File.Delete(old_filePath);
+                        }
+
+                        var datestr = DateTime.Now.Ticks.ToString();
+                        var extension = Path.GetExtension(formFile.FileName);
+                        iR_Analyst_Chapter.FileName_EN = datestr + extension;
+                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + datestr + extension);
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFile.CopyTo(stream);
+                        }
+                    }
+                }
+                iR_Analyst_Chapter.Status = model.Status;
+                iR_Analyst_Chapter.created_at = DateTime.Now;
+                iR_Analyst_Chapter.updated_at = DateTime.Now;
+                _context.IR_Analyst_Chapter.Add(iR_Analyst_Chapter);
+                await _context.SaveChangesAsync();
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
 
         [HttpDelete]
-        public IActionResult Analyst_Chapter_Delete()
+        public async Task<IActionResult> Analyst_Chapter_Delete(int? Id)
         {
-            return View();
+            try
+            {
+                var DB = _context.IR_Analyst_Chapter.FirstOrDefault(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + DB.FileName_EN);
+                    if (System.IO.File.Exists(old_filePath) == true)
+                    {
+                        System.IO.File.Delete(old_filePath);
+                    }
+
+                    var old_filePatho = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + DB.FileName_TH);
+                    if (System.IO.File.Exists(old_filePatho) == true)
+                    {
+                        System.IO.File.Delete(old_filePatho);
+                    }
+
+                    _context.IR_Analyst_Chapter.Remove(DB);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
     }
 }
