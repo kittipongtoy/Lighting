@@ -141,6 +141,10 @@
                 processData: false,
                 contentType: false,
                 cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait!')
+                    Swal.showLoading()
+                },
                 success: function (data) {
                     if (data.status == "success") {
                         Swal.fire({

@@ -58,10 +58,11 @@
                                 <input type="text" class="form-control" name="title_file_en" />
                             </div>
                         </div>
+
                         <div class="row mb-3">
                             <div class="col-2">
                                 <span>
-                                    รูปหน้าปก
+                                    รูปหน้าปก TH
                                 </span>
                             </div>
                             <div class="col-4">
@@ -69,11 +70,30 @@
                             </div>
                             <div class="col-2">
                                 <span>
-                                    ไฟล์เอกสาร
+                                    รูปหน้าปก ENG
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="file" class="form-control" name="uploaded_image_ENG" accept="image/*" />
+                            </div>
+
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    ไฟล์เอกสาร TH
                                 </span>
                             </div>
                             <div class="col-4">
                                 <input type="file" class="form-control" name="uploaded_file" />
+                            </div>
+                            <div class="col-2">
+                                <span>
+                                    ไฟล์เอกสาร ENG
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="file" class="form-control" name="uploaded_file_ENG" />
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -100,6 +120,7 @@
         </div>
     </div>
 </div>
+
 @section Scripts{
     <script>
         function submit_form() {
@@ -113,6 +134,10 @@
                 processData: false,
                 contentType: false,
                 cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait!')
+                    Swal.showLoading()
+                },
                 success: function (data) {
                     if (data.status == "success") {
                         Swal.fire({

@@ -8,10 +8,8 @@ namespace Lighting.Areas.Identity.Data
         [Key]
         public int id { get; set; }
         public string? profitTitleTH { get; set; }
-        public string? profitTitleENG { get; set; } 
-        public string? amount1 { get; set; }
-        public string? amount2 { get; set; }
-        public string? amount3 { get; set; }
+        public string? profitTitleENG { get; set; }
+        public int? active_status { get; set; } 
         public DateTime? created_at { get; set; }
         public DateTime? updated_at { get; set; }
     }

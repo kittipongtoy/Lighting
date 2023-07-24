@@ -103,6 +103,171 @@ namespace Lighting.Models
             public int? use_status { get; set; }
             public DateTime? created_at { get; set; }
             public DateTime? updated_at { get; set; }
+        } 
+        public class Business_ethics_details_table
+        {
+            public int? count_row { get; set; }
+            public int id { get; set; }
+            public string? title_TH { get; set; }
+            public string? title_ENG { get; set; }
+            public string? image_name { get; set; }
+            public string? image_name_ENG { get; set; }
+            public int? use_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+
+        }
+        public class CRS_policy_File_table
+        {
+            public int? count_row { get; set; }
+            public int id { get; set; }
+            public string? image_name { get; set; }
+            public string? image_name_ENG { get; set; }
+            public string? title_file_th { get; set; }
+            public string? title_file_en { get; set; }
+            public string? file_name { get; set; }
+            public string? file_name_ENG { get; set; }
+            public string? file_type { get; set; }
+            public int? use_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        } 
+        public class Anti_fraud_File_table
+        {
+            public int? count_row { get; set; } 
+            public int id { get; set; }
+            public string? image_name { get; set; }
+            public string? image_name_ENG { get; set; }
+            public string? title_file_th { get; set; }
+            public string? title_file_en { get; set; }
+            public string? file_name { get; set; }
+            public string? file_name_ENG { get; set; }
+            public string? file_type { get; set; }
+            public int? use_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        } 
+        public class O_Gift_entertainment_File_table
+        { 
+            public int? count_row { get; set; }
+            public int id { get; set; }
+            public string? image_name { get; set; }
+            public string? image_name_ENG { get; set; }
+            public string? title_file_th { get; set; }
+            public string? title_file_en { get; set; }
+            public string? file_name { get; set; }
+            public string? file_name_ENG { get; set; }
+            public string? file_type { get; set; }
+            public int? use_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        }
+        public class O_Channel_clue_File_table
+        { 
+            public int? count_row { get; set; }
+            public int id { get; set; }
+            public string? image_name { get; set; }
+            public string? image_name_ENG { get; set; }
+            public string? title_file_th { get; set; }
+            public string? title_file_en { get; set; }
+            public string? file_name { get; set; }
+            public string? file_name_ENG { get; set; }
+            public string? file_type { get; set; }
+            public int? use_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        }
+        public class O_Author_chairman_File_table
+        {
+            public int? count_row { get; set; }
+            public int id { get; set; }
+            public string? image_name { get; set; }
+            public string? image_name_ENG { get; set; }
+            public string? title_file_th { get; set; }
+            public string? title_file_en { get; set; }
+            public string? file_name { get; set; }
+            public string? file_name_ENG { get; set; }
+            public string? file_type { get; set; }
+            public int? use_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+
+        }
+        public class O_Author_chairman_executive_File_table
+        { 
+            public int? count_row { get; set; }
+            public int id { get; set; }
+            public string? image_name { get; set; }
+            public string? image_name_ENG { get; set; }
+            public string? title_file_th { get; set; }
+            public string? title_file_en { get; set; }
+            public string? file_name { get; set; }
+            public string? file_name_ENG { get; set; }
+            public string? file_type { get; set; }
+            public int? use_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        }
+        public class O_Author_board_director_File_table
+        {
+            public int? count_row { get; set; }
+            public int id { get; set; }
+            public string? image_name { get; set; }
+            public string? image_name_ENG { get; set; }
+            public string? title_file_th { get; set; }
+            public string? title_file_en { get; set; }
+            public string? file_name { get; set; }
+            public string? file_name_ENG { get; set; }
+            public string? file_type { get; set; }
+            public int? use_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+
+        }
+        public class O_Author_audit_committee_File_table
+        {
+            public int? count_row { get; set; }
+            public int id { get; set; }
+            public string? image_name { get; set; }
+            public string? image_name_ENG { get; set; }
+            public string? title_file_th { get; set; }
+            public string? title_file_en { get; set; }
+            public string? file_name { get; set; }
+            public string? file_name_ENG { get; set; }
+            public string? file_type { get; set; }
+            public int? use_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        }
+        public class O_Author_executive_board_File_table
+        {
+            public int? count_row { get; set; }
+            public int id { get; set; }
+            public string? image_name { get; set; }
+            public string? image_name_ENG { get; set; }
+            public string? title_file_th { get; set; }
+            public string? title_file_en { get; set; }
+            public string? file_name { get; set; }
+            public string? file_name_ENG { get; set; }
+            public string? file_type { get; set; }
+            public int? use_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        }
+        public class O_Author_secretary_File_table
+        {
+            public int? count_row { get; set; }
+            public int id { get; set; }
+            public string? image_name { get; set; }
+            public string? image_name_ENG { get; set; }
+            public string? title_file_th { get; set; }
+            public string? title_file_en { get; set; }
+            public string? file_name { get; set; }
+            public string? file_name_ENG { get; set; }
+            public string? file_type { get; set; }
+            public int? use_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
         }
     }
 }

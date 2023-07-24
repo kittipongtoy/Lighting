@@ -2,6 +2,16 @@
 {
     public class IR_Important_Financial_model
     {
+        public class SH_IR_financial_highlight_DataDetailstable
+        { 
+            public int count_row { get; set; }
+            public int id { get; set; }
+            public string? year { get; set; }
+            public string? amount { get; set; }
+            public int fH_Data_id { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        }
         public class ResponserAnnualReport
         {
             public int id { get; set; }
@@ -134,6 +144,7 @@
             public int id { get; set; }
             public string? profitTitleTH { get; set; }
             public string? profitTitleENG { get; set; }
+            public int? active_status { get; set; }
             public string? amount1 { get; set; }
             public string? amount2 { get; set; }
             public string? amount3 { get; set; }
@@ -156,10 +167,20 @@
             public int id { get; set; }
             public string? profitTitleTH { get; set; }
             public string? profitTitleENG { get; set; }
-            public string? amount1 { get; set; }
-            public string? amount2 { get; set; }
-            public string? amount3 { get; set; }
             public int? financial_hilight_id { get; set; }
+            public int? active_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        }
+
+        public class SH_IR_financial_highlight_DetailsData_Items_table
+        {
+            public int count_row { get; set; }
+            public int id { get; set; }
+            public string? year { get; set; }
+            public string? amount { get; set; }
+            public int? fH_Details_id { get; set; }
+            public int? fH_DetailsData_id { get; set; }
             public DateTime? created_at { get; set; }
             public DateTime? updated_at { get; set; }
         }

@@ -1,7 +1,8 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "IR_propose_agenda";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var Count_mailTitles = (List<Lighting.Areas.Identity.Data.SH_IR_propose_agenda_mailTitles>)ViewBag.mailTitles;
+
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
@@ -24,6 +25,11 @@
                                     <h1>@item.detailsTitleENG</h1>
                                 }
                             }
+                            else
+                            {
+                                <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
+                                <h1>เสนอวาระ/กรรมการ/คำถามล่วงหน้า</h1>
+                            }
                         }
                         else
                         {
@@ -35,9 +41,14 @@
                                     <h1>@item.detailsTitleTH</h1>
                                 }
                             }
+                            else
+                            {
+                                <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
+                                <h1>เสนอวาระ/กรรมการ/คำถามล่วงหน้า</h1>
+                            }
                         }
 
-                      @*  <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
+                        @*  <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
                         <h1>เสนอวาระ/กรรมการ/คำถามล่วงหน้า</h1>*@
 
                     </div>
@@ -79,37 +90,37 @@
                                         }
                                     }
                                 }
-                                 
-                               @* <tr>
-                                    <td>การให้สิทธิแก่ผู้ถือหุ้นในการเสนอวาระการประชุมผู้ถือหุ้นประจำปี 2566 ส่งคำถาม และการเสนอชื่อบุคคลเพื่อพิจารณาเข้าดำรงตำแหน่งกรรมการล่วงหน้า</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+
+                                @* <tr>
+                                <td>การให้สิทธิแก่ผู้ถือหุ้นในการเสนอวาระการประชุมผู้ถือหุ้นประจำปี 2566 ส่งคำถาม และการเสนอชื่อบุคคลเพื่อพิจารณาเข้าดำรงตำแหน่งกรรมการล่วงหน้า</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>*@
 
-                               @* <tr>
-                                    <td>วิธีปฏิบัติ</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                @* <tr>
+                                <td>วิธีปฏิบัติ</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>แบบเสนอวาระการประชุมสามัญผู้ถือหุ้นประจำปี</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>แบบเสนอวาระการประชุมสามัญผู้ถือหุ้นประจำปี</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>แบบเสนอชื่อบุคคลเพื่อเข้ารับการคัดเลือกดำรงตำแหน่งเป็น กรรมการบริษัท</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>แบบเสนอชื่อบุคคลเพื่อเข้ารับการคัดเลือกดำรงตำแหน่งเป็น กรรมการบริษัท</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>แบบส่งคำถามล่วงหน้าการประชุมผู้ถือหุ้นประจำปี</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>แบบส่งคำถามล่วงหน้าการประชุมผู้ถือหุ้นประจำปี</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>*@
                             </tbody>
 
@@ -120,69 +131,427 @@
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-11 col-md-11 col-12">
                     <div class="formBG input-form">
-                        <div class="row">
-                            <div class="col">
-                                <h5>เชิญผู้ถือหุ้นเสนอวาระ กรรมการ และส่งคำถามล่วงหน้าสำหรับการประชุมสามัญผู้ถือหุ้นประจำปี <br>โดยกรอกแบบฟอร์มด้านล่างให้ครบถ้วน</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p>ชื่อ-นามสกุล<span>*</span></p>
-                                <input type="text" class="form-control" placeholder="โปรดระบุทั้งชื่อและนามสกุลให้ชัดเจน">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <p>โทรศัพท์<span>*</span></p>
-                                <input type="text" class="form-control" placeholder="xxx-xxx-xxxx">
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <p>หัวข้อที่ต้องการเสนอ<span>*</span></p>
-                                <select class="form-select">
-                                    <option selected>เลือกหัวข้อ</option>
-                                    <option value="1">เสนอวาระการประชุม​</option>
-                                    <option value="2">เสนอกรรมการเพื่อเข้าดำรงตำแหน่ง</option>
-                                    <option value="3">ฝากคำถาม / ข้อเสนอแนะ / อื่นๆ​</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p>ชื่อหัวข้อที่ต้องการเสนอ</p>
-                                <input type="text" class="form-control" placeholder="โปรดระบุหัวข้อที่ต้องการเสนอ">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p>รายละเอียด</p>
-                                <textarea class="form-control" placeholder="โปรดกรอกรายละเอียดที่ต้องการเสนอ"></textarea>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="accept-term">
-                                    <label class="form-check-label" for="accept-term">
-                                        ฉันได้อ่านและยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href="">นโยบายความเป็นส่วนตัว</a> และยินยอมให้รวบรวมประมวลผลและ / หรือเปิดเผยข้อมูลส่วนบุคคลที่ฉันให้ไว้เพื่อบรรลุวัตถุประสงค์ดังกล่าวข้างต้น
-                                    </label>
+                        @if (Count_mailTitles.Count() != 0)
+                        {
+                            foreach (var item in ViewBag.mailTitles)
+                            {
+                                <form id="form_createSentMail" enctype="multipart/form-data">
+
+                                    <div class="row">
+                                        <div class="col">
+
+                                            @if (Context.Request.Cookies["lang"] == "EN")
+                                            {
+                                                <h5>@item.titleENG</h5>
+                                            }
+                                            else if (Context.Request.Cookies["lang"] == "TH")
+                                            {
+                                                <h5>@item.titleTH</h5>
+                                            }
+                                            else
+                                            {
+                                                <h5>เชิญผู้ถือหุ้นเสนอวาระ กรรมการ และส่งคำถามล่วงหน้าสำหรับการประชุมสามัญผู้ถือหุ้นประจำปี <br>โดยกรอกแบบฟอร์มด้านล่างให้ครบถ้วน</h5>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+
+                                            @if (Context.Request.Cookies["lang"] == "EN")
+                                            {
+                                                <p>@item.nameTitleENG<span>*</span></p>
+                                                <input type="text" class="form-control" name="name" placeholder="@item.nameTitlePlaceholderENG">
+                                            }
+                                            else if (Context.Request.Cookies["lang"] == "TH")
+                                            {
+                                                <p>@item.nameTitleTH<span>*</span></p>
+                                                <input type="text" class="form-control" name="name" placeholder="@item.nameTitlePlaceholderTH">
+                                            }
+                                            else
+                                            {
+                                                <p>ชื่อ-นามสกุล<span>*</span></p>
+                                                <input type="text" class="form-control" name="name" placeholder="โปรดระบุทั้งชื่อและนามสกุลให้ชัดเจน">
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            @if (Context.Request.Cookies["lang"] == "EN")
+                                            {
+                                                <p>@item.emailTitleENG <span>*</span></p>
+                                                <input type="text" class="form-control" name="email" placeholder="@item.emailTitlePlaceholderENG">
+                                            }
+                                            else if (Context.Request.Cookies["lang"] == "TH")
+                                            {
+                                                <p>@item.emailTitleTH <span>*</span></p>
+                                                <input type="text" class="form-control" name="email" placeholder="@item.emialTitlePlaceholderTH">
+                                            }
+                                            else
+                                            {
+                                                <p>E-mail<span>*</span></p>
+                                                <input type="text" class="form-control" name="email" placeholder="example@@gmail.com">
+                                            }
+
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-12">
+
+                                            @if (Context.Request.Cookies["lang"] == "EN")
+                                            {
+                                                <p>@item.phoneENG <span>*</span></p>
+                                                <input type="text" class="form-control" name="phone" placeholder="@item.phoneTitlePlaceholder">
+                                            }
+                                            else if (Context.Request.Cookies["lang"] == "TH")
+                                            {
+                                                <p>@item.phoneTH <span>*</span></p>
+                                                <input type="text" class="form-control" name="phone" placeholder="@item.phoneTitlePlaceholder">
+                                            }
+                                            else
+                                            {
+                                                <p>โทรศัพท์<span>*</span></p>
+                                                <input type="text" class="form-control" name="phone" placeholder="xxx-xxx-xxxx">
+                                            }
+
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+
+                                            @if (Context.Request.Cookies["lang"] == "EN")
+                                            {
+                                                <p>@item.proposeTitleENG<span>*</span></p>
+                                                <select class="form-select" id="select2_TypeOfProposeENG" name="typeOfPropose">
+                                                </select>
+                                            }
+                                            else if (Context.Request.Cookies["lang"] == "TH")
+                                            {
+                                                <p>@item.proposeTitleTH<span>*</span></p>
+                                                <select class="form-select" id="select2_TypeOfProposeTH" name="typeOfPropose">
+                                                </select>
+                                            }
+                                            else
+                                            {
+                                                <p>หัวข้อที่ต้องการเสนอ<span>*</span></p>
+                                                <select class="form-select" name="typeOfPropose">
+                                                    <option selected value="0">เลือกหัวข้อ</option>
+                                                    <option value="1" name="typeOfPropose">เสนอวาระการประชุม​</option>
+                                                    <option value="2" name="typeOfPropose">เสนอกรรมการเพื่อเข้าดำรงตำแหน่ง</option>
+                                                    <option value="3" name="typeOfPropose">ฝากคำถาม / ข้อเสนอแนะ / อื่นๆ​</option>
+                                                </select>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+
+                                            @if (Context.Request.Cookies["lang"] == "EN")
+                                            {
+                                                <p>@item.wantProposeTitleENG</p>
+                                                <input type="text" class="form-control" name="wantProposeTitle" placeholder="@item.wantProposePlaceholderTitleENG">
+                                            }
+                                            else if (Context.Request.Cookies["lang"] == "TH")
+                                            {
+                                                <p>@item.wantProposeTitleTH</p>
+                                                <input type="text" class="form-control" name="wantProposeTitle" placeholder="@item.wantProposePlaceholderTitleTH">
+                                            }
+                                            else
+                                            {
+                                                <p>ชื่อหัวข้อที่ต้องการเสนอ</p>
+                                                <input type="text" class="form-control" name="wantProposeTitle" placeholder="โปรดระบุหัวข้อที่ต้องการเสนอ">
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+
+                                            @if (Context.Request.Cookies["lang"] == "EN")
+                                            {
+                                                <p>@item.detailsTitleENG </p>
+                                                <textarea class="form-control" name="details" placeholder="@item.detailsPlaceholderTitleENG"></textarea>
+                                            }
+                                            else if (Context.Request.Cookies["lang"] == "TH")
+                                            {
+                                                <p>@item.detailsTitleTH </p>
+                                                <textarea class="form-control" name="details" placeholder="@item.detailsPlaceholderTitleTH"></textarea>
+                                            }
+                                            else
+                                            {
+                                                <p>รายละเอียด</p>
+                                                <textarea class="form-control" name="details" placeholder="โปรดกรอกรายละเอียดที่ต้องการเสนอ"></textarea>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="check1" name="option1">
+
+                                                @if (Context.Request.Cookies["lang"] == "EN")
+                                                {
+                                                    <label class="form-check-label" for="accept-term">
+                                                        @Html.Raw(item.detailsENG)
+                                                    </label>
+                                                }
+                                                else if (Context.Request.Cookies["lang"] == "TH")
+                                                {
+                                                    <label class="form-check-label" for="accept-term">
+                                                        @Html.Raw(item.detailsTH)
+                                                    </label>
+                                                }
+                                                else
+                                                {
+                                                    <label class="form-check-label" for="accept-term">
+                                                        ฉันได้อ่านและยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน < a href = "" > นโยบายความเป็นส่วนตัว </ a > และยินยอมให้รวบรวมประมวลผลและ / หรือเปิดเผยข้อมูลส่วนบุคคลที่ฉันให้ไว้เพื่อบรรลุวัตถุประสงค์ดังกล่าวข้างต้น
+                                                    </label>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+
+                                            @if (Context.Request.Cookies["lang"] == "EN")
+                                            {
+                                                <div class="note mb-5">@item.remarkENG </div>
+                                            }
+                                            else if (Context.Request.Cookies["lang"] == "TH")
+                                            {
+                                                <div class="note mb-5">@item.remarkTH </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="note mb-5">หมายเหตุ : * จำเป็นต้องกรอกข้อมูล</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="content-center">
+                                            @*<a class="buttonB m-size" href="" disabled="disabled"></a>*@
+                                            <button type="button" class="buttonB m-size" name="submit" id="submit" disabled="disabled" onclick="submit_form()">
+                                                @if (Context.Request.Cookies["lang"] == "EN")
+                                                {
+                                                    <span>Sent Mail </span>
+                                                }
+                                                else if (Context.Request.Cookies["lang"] == "TH")
+                                                {
+                                                    <span>ส่งข้อมูล </span>
+                                                }
+                                                else
+                                                {
+                                                    <span>ส่งข้อมูล </span>
+                                                }
+                                                <i class="fas fa-paper-plane"></i>
+                                            </button>
+                                            <button type="button" class="buttonB m-size" data-bs-dismiss="modal" onclick="Reset_Data()">
+                                                @if (Context.Request.Cookies["lang"] == "EN")
+                                                {
+                                                    <div>Reset </div>
+                                                }
+                                                else if (Context.Request.Cookies["lang"] == "TH")
+                                                {
+                                                    <div>รีเซ็ต </div>
+                                                }
+                                                else
+                                                {
+                                                    <div>Reset </div>
+                                                }
+
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+
+                            }
+
+                        }
+                        @*<div class="row">
+                        <div class="col">
+                        <h5>เชิญผู้ถือหุ้นเสนอวาระ กรรมการ และส่งคำถามล่วงหน้าสำหรับการประชุมสามัญผู้ถือหุ้นประจำปี <br>โดยกรอกแบบฟอร์มด้านล่างให้ครบถ้วน</h5>
+                        </div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <div class="note mb-5">หมายเหตุ : * จำเป็นต้องกรอกข้อมูล</div>
-                            </div>
+                        <div class="col">
+                        <p>ชื่อ-นามสกุล<span>*</span></p>
+                        <input type="text" class="form-control" placeholder="โปรดระบุทั้งชื่อและนามสกุลให้ชัดเจน">
+                        </div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <div class="content-center">
-                                    <a class="buttonB m-size" href="">ส่งข้อมูล<i class="fas fa-paper-plane"></i></a>
-                                </div>
-                            </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                        <p>โทรศัพท์<span>*</span></p>
+                        <input type="text" class="form-control" placeholder="xxx-xxx-xxxx">
                         </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                        <p>หัวข้อที่ต้องการเสนอ<span>*</span></p>
+                        <select class="form-select">
+                        <option selected value="0">เลือกหัวข้อ</option>
+                        <option value="1">เสนอวาระการประชุม​</option>
+                        <option value="2">เสนอกรรมการเพื่อเข้าดำรงตำแหน่ง</option>
+                        <option value="3">ฝากคำถาม / ข้อเสนอแนะ / อื่นๆ​</option>
+                        </select>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col">
+                        <p>ชื่อหัวข้อที่ต้องการเสนอ</p>
+                        <input type="text" class="form-control" placeholder="โปรดระบุหัวข้อที่ต้องการเสนอ">
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col">
+                        <p>รายละเอียด</p>
+                        <textarea class="form-control" placeholder="โปรดกรอกรายละเอียดที่ต้องการเสนอ"></textarea>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col">
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check1" name="option1">
+                        <label class="form-check-label" for="accept-term">
+                        ฉันได้อ่านและยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href="">นโยบายความเป็นส่วนตัว</a> และยินยอมให้รวบรวมประมวลผลและ / หรือเปิดเผยข้อมูลส่วนบุคคลที่ฉันให้ไว้เพื่อบรรลุวัตถุประสงค์ดังกล่าวข้างต้น
+                        </label>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col">
+                        <div class="note mb-5">หมายเหตุ : * จำเป็นต้องกรอกข้อมูล</div>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col">
+                        <div class="content-center">
+                        <a class="buttonB m-size" href="" disabled="disabled">ส่งข้อมูล<i class="fas fa-paper-plane"></i></a>
+                        </div>
+                        </div>
+                        </div>*@
+
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+
+        $(function () {
+            $("#check1").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#submit").removeAttr("disabled");
+                    $("#submit").focus();
+                } else {
+                    $("#submit").attr("disabled", "disabled");
+                }
+            });
+        });
+
+        function submit_form() {
+            var raw_form = document.getElementById('form_createSentMail');
+            var formData = new FormData(raw_form);
+
+            $.ajax({
+                type: 'POST',
+                url: '/Frontend_IR/IR_propose_agenda_sentMail',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                        location.href = "/Frontend_IR/IR_propose_agenda";
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        function Select2_TypeOfProposeTH() {
+            $.ajax({
+                type: 'POST',
+                url: '/Frontend_IR/Get_TypeOfPropose',
+                success: function (data) {
+
+                    if (data !== null) {
+                        var s = '<option value="0" selected>- เลือกหัวข้อ -</option>';
+
+                        $.each(data.db, function (v, c) {
+                            s += '<option value="' + c.id + '" name="typeOfPropose">' + c.titleTH + '</option>';
+                        });
+                        $("#select2_TypeOfProposeTH").html(s);
+                    } else {
+                        console.error("Invalid data format or no data received.");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX request failed:", status, error);
+                }
+            });
+        }
+
+        function Select2_TypeOfProposeENG() {
+            $.ajax({
+                type: 'POST',
+                url: '/Frontend_IR/Get_TypeOfPropose',
+                success: function (data) {
+
+                    if (data !== null) {
+                        var s = '<option value="0" selected>- selecet plah plah -</option>';
+
+                        $.each(data.db, function (v, c) {
+                            s += '<option value="' + c.id + '" name="typeOfPropose">' + c.titleENG + '</option>';
+                        });
+                        $("#select2_TypeOfProposeENG").html(s);
+                    } else {
+                        console.error("Invalid data format or no data received.");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX request failed:", status, error);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+
+            Select2_TypeOfProposeTH();
+            Select2_TypeOfProposeENG();
+
+        });
+
+
+        function Reset_Data() {
+            location.href = '/Frontend_IR/IR_propose_agenda';
+        }
+
+    </script>
+}

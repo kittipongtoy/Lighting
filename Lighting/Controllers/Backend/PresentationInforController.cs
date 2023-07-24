@@ -495,10 +495,10 @@ namespace Lighting.Controllers.Backend
                 }
                 DateTime InsertDate = DateTime.ParseExact(Date_Str, "MM/yyyy", new CultureInfo("en-US"));
 
-                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
-                {
-                    return Json(new { status = "warning", message = "กรุณากรอกข้อมูลให้ครบ!" });
-                }
+                //if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
+                //{
+                //    return Json(new { status = "warning", message = "กรุณากรอกข้อมูลให้ครบ!" });
+                //}
                 foreach (var formFile in uploaded_file)
                 {
                     if (formFile.Length > 0)

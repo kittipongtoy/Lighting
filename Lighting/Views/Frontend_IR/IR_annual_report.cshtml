@@ -35,6 +35,11 @@
                                     <h1>@item.detailsTitleENG</h1>
                                 }
                             }
+                            else
+                            {
+                                <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
+                                <h1>รายงานประจำปี / ONE REPORT</h1>
+                            }
                         }
                         else
                         {
@@ -45,6 +50,11 @@
                                     <h5>@item.titleTH</h5>
                                     <h1>@item.detailsTitleTH</h1>
                                 }
+                            }
+                            else
+                            {
+                                <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
+                                <h1>รายงานประจำปี / ONE REPORT</h1>
                             }
                         }
 
@@ -213,9 +223,9 @@
 
             let container = $('#pagination');
             var dto = [];
-            getPagination = function (dto) { 
-                 
-                var local = "@language"; 
+            getPagination = function (dto) {
+
+                var local = "@language";
 
                 var date = function ({ year }, lag) {
                     if (lag === "TH") {
@@ -293,7 +303,7 @@
                     position: 'center',
                     callback: function (data, pagination) {
                         var dataHtml = `<div class="three-colPad">
-                                                                <div class="row justify-content-center">`;
+                                                                        <div class="row justify-content-center">`;
                         console.log(data)
                         $.each(data, function (index, item) {
 
@@ -307,33 +317,33 @@
                             //let { date } = convertDate(item.year, local);
 
                             dataHtml += `<div class="col-lg-4 col-md-4 col-6" >
-                                            <a class="coverBox" href="../upload_file/SH_annualReport/`+ file(item, local) + `" target="_blank">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="book-cover">
-                                                                <img src="../upload_image/SH_annualReport/`+ image(item, local) + `" >
+                                                    <a class="coverBox" href="../upload_file/SH_annualReport/`+ file(item, local) + `" target="_blank">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="book-cover">
+                                                                        <img src="../upload_image/SH_annualReport/`+ image(item, local) + `" >
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="cover-topic">
+                                                                            <p>`+ title(item, local) + `&nbsp;`;
+                            if (local == "TH") {
+                                dataHtml += formattedDateTH
+                            } else {
+                                dataHtml += formattedDateEN
+                            }
+                            dataHtml += `</p>
                                                         </div>
-                                                    </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <div class="cover-topic">
-                                                                    <p>`+ title(item, local) + `&nbsp;`;
-                                                        if (local == "TH") {
-                                                            dataHtml += formattedDateTH
-                                                        } else {
-                                                            dataHtml += formattedDateEN
-                                                        }
-                                                        dataHtml += `</p>
                                                 </div>
                                         </div>
-                                </div>
-                            </a>
-                        </div>`;
+                                    </a>
+                                </div>`;
                         });
 
                         dataHtml += ` </div>
-                                                             </div>`;
+                                                                     </div>`;
 
                         $("#data-container").html(dataHtml);
                     }

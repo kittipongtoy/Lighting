@@ -25,6 +25,11 @@
                                     <h1>@item.detailsTitleENG</h1>
                                 }
                             }
+                            else
+                            {
+                                <h5>ข้อมูลสำคัญทางการเงิน</h5>
+                                <h1>คำอธิบาย และการวิเคราะห์</h1>
+                            }
                         }
                         else
                         {
@@ -35,6 +40,11 @@
                                     <h5>@item.titleTH</h5>
                                     <h1>@item.detailsTitleTH</h1>
                                 }
+                            }
+                            else
+                            {
+                                <h5>ข้อมูลสำคัญทางการเงิน</h5>
+                                <h1>คำอธิบาย และการวิเคราะห์</h1>
                             }
                         }
 
@@ -47,7 +57,7 @@
             <div class="row">
                 <div class="col">
                     <ul class="display-tab center m-half">
-                        <li class="active" rel="1">
+                       @* <li class="active" rel="1">
                             <a href="javascript:void(0)">
                                 <div class="cate-txtBox">
                                     @if (Context.Request.Cookies["lang"] == "EN")
@@ -71,12 +81,12 @@
                                         }
                                     }
 
-                                    @*<div>ข้อมูล</div>*@
+                                    //<div>ข้อมูล</div>//
 
                                 </div>
                             </a>
-                        </li>
-                        <li rel="2">
+                        </li>*@
+                        <li class="active" rel="2">
                             <a href="javascript:void(0)">
                                 <div class="cate-txtBox">
                                     @if (Context.Request.Cookies["lang"] == "EN")
@@ -87,6 +97,8 @@
                                             {
                                                 <div>@item.downloadTitleENG</div>
                                             }
+                                        }else{
+                                            <div>ดาวน์โหลด</div>
                                         }
                                     }
                                     else
@@ -97,6 +109,8 @@
                                             {
                                                 <div>@item.downloadTitleTH</div>
                                             }
+                                        }else{
+                                            <div>ดาวน์โหลด</div>
                                         }
                                     }
 
@@ -112,7 +126,7 @@
                 <div class="col">
                     <div class="display-group">
                         <!---------- INFO ---------->
-                        <div class="display-info" rel="1">
+@*                        <div class="display-info" rel="1">
                             <div class="row">
 
                                 @if (Context.Request.Cookies["lang"] == "EN")
@@ -346,8 +360,9 @@
                                 </a>
                                 </div>*@
 
-                            </div>
-                        </div><!-- END/INFO -->
+                            @*</div>
+                        </div>*@
+                      <!-- END/INFO -->
                         <!---------- DOWNLOAD ---------->
                         <div class="display-info" rel="2">
                             <div class="row justify-content-center">
@@ -366,6 +381,9 @@
                                                                 <th>@item.nameTitleENG</th>
                                                                 <th>@item.downloadTitleENG</th>
                                                             }
+                                                        }else{
+                                                            <th>หัวข้อ</th>
+                                                            <th>ดาวน์โหลด</th>
                                                         }
                                                     }
                                                     else
@@ -377,6 +395,9 @@
                                                                 <th>@item.nameTitleTH</th>
                                                                 <th>@item.downloadTitleTH</th>
                                                             }
+                                                        }else{
+                                                            <th>หัวข้อ</th>
+                                                            <th>ดาวน์โหลด</th>
                                                         }
                                                     }
 

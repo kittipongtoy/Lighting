@@ -14,8 +14,24 @@
             <div class="row">
                 <div class="col">
                     <div class="header-twoline">
-                        <h5>นโยบายการกำกับดูแลกิจการ</h5>
-                        <h1>นโยบายการให้หรือรับของขวัญ และการเลี้ยงรับรอง</h1>
+                        @if (Model.count_fod_page_corporate_governance_content > 0)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                <h5>@Model.fod_page_corporate_governance_content.title_ENG</h5>
+                                <h1>@Model.fod_page_corporate_governance_content.detailsTitleENG</h1>
+                            }
+                            else
+                            {
+                                <h5>@Model.fod_page_corporate_governance_content.title_TH</h5>
+                                <h1>@Model.fod_page_corporate_governance_content.detailsTitleTH</h1>
+                            }
+                        }
+                        else
+                        {
+                            <h5>นโยบายการกำกับดูแลกิจการ</h5>
+                            <h1>นโยบายการให้หรือรับของขวัญ และการเลี้ยงรับรอง</h1>
+                        }
                     </div>
                 </div>
             </div>

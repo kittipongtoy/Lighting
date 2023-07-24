@@ -1616,6 +1616,7 @@ namespace Lighting.Controllers.Backend
                     {
                         count_row = count,
                         id = items.id,
+                        active_status=items.active_status,
                         created_at = items.created_at,
                         updated_at = items.updated_at,
                         profitTitleTH = items.profitTitleTH,
@@ -1630,15 +1631,15 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
-        public IActionResult SH_IR_financial_highlight_Data()
+        public IActionResult SH_IR_financial_highlight_Data(int? id)
         {
-            var checkrow = db.SH_IR_financial_highlight.FirstOrDefault();
+            var checkrow = db.SH_IR_financial_highlight_Data.FirstOrDefault(x=>x.id==id);
             var count_row = 0;
             if (checkrow != null)
             {
                 count_row = 1;
             }
-            var model = new model_input { count_row_SH_IR_financial_highlight = count_row, fod_SH_IR_financial_highlight = checkrow };
+            var model = new model_input { count_row_SH_IR_financial_highlight_Data = count_row, fod_SH_IR_financial_highlight_Data = checkrow };
             return View(model);
         }
         public IActionResult SH_IR_financial_highlight_edit(int? id)
@@ -1675,10 +1676,12 @@ namespace Lighting.Controllers.Backend
                 {
                     return Json(new { status = "error", message = "กรุณาระบุ วันที่ทั้งหมด!" });
                 }
-
-                if (upload_image.Count == 0 || upload_image_ENG.Count == 0)
+                if (checkrow == null)
                 {
-                    return Json(new { status = "warning", message = "กรุณากรอกข้อมูลให้ครบ!" });
+                    if (upload_image.Count == 0 || upload_image_ENG.Count == 0)
+                    {
+                        return Json(new { status = "warning", message = "กรุณากรอกข้อมูลให้ครบ!" });
+                    }
                 }
                 DateTime InsertDate_1 = DateTime.ParseExact(date1Title_Str, "dd/MM/yyyy", new CultureInfo("en-US"));
                 DateTime InsertDate_2 = DateTime.ParseExact(date2Title_Str, "dd/MM/yyyy", new CultureInfo("en-US"));
@@ -1823,8 +1826,7 @@ namespace Lighting.Controllers.Backend
         public IActionResult SH_IR_financial_highlight_Submit(SH_IR_financial_highlight_Data SH_IR_financial_highlight_Data)
         {
             try
-            {
-
+            { 
                 SH_IR_financial_highlight_Data.created_at = DateTime.Now;
                 SH_IR_financial_highlight_Data.updated_at = DateTime.Now;
                 db.SH_IR_financial_highlight_Data.Add(SH_IR_financial_highlight_Data);
@@ -1844,6 +1846,17 @@ namespace Lighting.Controllers.Backend
 
                 if (checkrow != null)
                 {
+                    var dataDeatils=db.SH_IR_financial_highlight_DataDetails.Where(x => x.fH_Data_id == checkrow.id).ToList();
+                    foreach(var item in dataDeatils)
+                    {
+                        var getData = db.SH_IR_financial_highlight_DataDetails.Where(x => x.id == item.id).FirstOrDefault();
+                        if (getData != null)
+                        {
+                            db.SH_IR_financial_highlight_DataDetails.Remove(getData);
+                            db.SaveChanges();
+                        }
+                    }
+
                     db.SH_IR_financial_highlight_Data.Remove(checkrow);
                     db.SaveChanges();
 
@@ -1866,14 +1879,11 @@ namespace Lighting.Controllers.Backend
                     return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ TH / ENG " });
                 }
 
-                var old_data = db.SH_IR_financial_highlight_Data.Where(x => x.id == SH_IR_financial_highlight_Data.id).FirstOrDefault();
-
+                var old_data = db.SH_IR_financial_highlight_Data.Where(x => x.id == SH_IR_financial_highlight_Data.id).FirstOrDefault(); 
 
                 old_data.profitTitleTH = SH_IR_financial_highlight_Data.profitTitleTH;
                 old_data.profitTitleENG = SH_IR_financial_highlight_Data.profitTitleENG;
-                old_data.amount1 = SH_IR_financial_highlight_Data.amount1;
-                old_data.amount2 = SH_IR_financial_highlight_Data.amount2;
-                old_data.amount3 = SH_IR_financial_highlight_Data.amount3;
+                old_data.active_status = SH_IR_financial_highlight_Data.active_status; 
 
                 old_data.updated_at = DateTime.Now;
                 db.SaveChanges();
@@ -1884,6 +1894,136 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+        public IActionResult SH_IR_financial_highlight_Data_getEditData(int? id)
+        {
+            var get_data = db.SH_IR_financial_highlight_Data.Where(x => x.id == id).FirstOrDefault();
+
+            return Json(new { status = "success", message = "", data = get_data });
+        }
+        public IActionResult SH_IR_financial_highlight_DataDetails_getTable(int? id)
+        {
+            try
+            {
+                var Raw_list = db.SH_IR_financial_highlight_DataDetails.Where(x => x.fH_Data_id == id).OrderByDescending(x=>x.year).ToList();
+                var add_count = new List<IR_Important_Financial_model.SH_IR_financial_highlight_DataDetailstable>();
+                var count = 1;
+                foreach (var items in Raw_list)
+                {
+                    var dateDatas = Convert.ToDateTime(items.year);
+                    var InsertDates = dateDatas.ToString("yyyy", new CultureInfo("en-US"));
+
+                    add_count.Add(new IR_Important_Financial_model.SH_IR_financial_highlight_DataDetailstable
+                    {
+                        count_row = count,
+                        id = items.id,
+                        created_at = items.created_at,
+                        updated_at = items.updated_at,
+                        fH_Data_id = items.fH_Data_id,
+                        year = InsertDates,
+                        amount=items.amount
+                    });
+                    count++;
+                }
+                return Json(new { data = add_count });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult SH_IR_financial_highlight_DataDetails_Submit(SH_IR_financial_highlight_DataDetails fH_DataDetails, string Year_Str)
+        {
+            try
+            {
+                if (Year_Str == null)
+                {
+                    return Json(new { status = "warning", message = "กรุณาระบุ ปี!" });
+                }
+                DateTime InsertDate_year = DateTime.ParseExact(Year_Str, "yyyy", new CultureInfo("en-US"));
+
+                var checkData = db.SH_IR_financial_highlight_DataDetails.Where(x=>x.fH_Data_id==fH_DataDetails.fH_Data_id).ToList();
+                foreach(var item in checkData)
+                {
+                    var getData = db.SH_IR_financial_highlight_DataDetails.FirstOrDefault(x => x.id == item.id);
+                    if (InsertDate_year.Year == getData.year.Value.Year)
+                    {
+                        return Json(new { status = "warning", message = "ปีที่เลือกมีอยู่แล้ว!" });
+                    }
+                }
+                fH_DataDetails.created_at = DateTime.Now;
+                fH_DataDetails.updated_at = DateTime.Now;
+                fH_DataDetails.year = InsertDate_year;
+
+                db.SH_IR_financial_highlight_DataDetails.Add(fH_DataDetails);
+                db.SaveChanges();
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult SH_IR_financial_highlight_DataDetails_getEditData(int? id)
+        {
+            var get_data = db.SH_IR_financial_highlight_DataDetails.Where(x => x.id == id).FirstOrDefault();
+
+            return Json(new { status = "success", message = "", data = get_data });
+        }
+        public IActionResult SH_IR_financial_highlight_DataDetails_edit_Submit(SH_IR_financial_highlight_DataDetails fH_dataDetails,string? Year_Str)
+        { 
+            try
+            {
+                if (Year_Str == null)
+                {
+                    return Json(new { status = "warning", message = "กรุณาระบุ ปี!" });
+                }
+                DateTime InsertDate_year = DateTime.ParseExact(Year_Str, "yyyy", new CultureInfo("en-US"));
+
+                var get_oldData = db.SH_IR_financial_highlight_DataDetails.Where(x => x.id == fH_dataDetails.id).FirstOrDefault();
+                 
+                var checkData = db.SH_IR_financial_highlight_DataDetails.Where(x => x.fH_Data_id == get_oldData.fH_Data_id&&x.id!=get_oldData.id).ToList();
+                foreach (var item in checkData)
+                {
+                    var getData = db.SH_IR_financial_highlight_DataDetails.FirstOrDefault(x => x.id == item.id);
+                    if (InsertDate_year.Year == getData.year.Value.Year)
+                    {
+                        return Json(new { status = "warning", message = "ปีที่เลือกมีอยู่แล้ว!" });
+                    }
+                }
+
+                get_oldData.amount = fH_dataDetails.amount;
+                get_oldData.year = InsertDate_year;
+
+                get_oldData.updated_at = DateTime.Now;
+                db.SaveChanges();
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult SH_IR_financial_highlight_DataDetails_delete(int? id)
+        {
+            try
+            {
+                var checkrow = db.SH_IR_financial_highlight_DataDetails.Where(x => x.id == id).FirstOrDefault();
+
+                if (checkrow != null)
+                {
+                    db.SH_IR_financial_highlight_DataDetails.Remove(checkrow);
+                    db.SaveChanges();
+
+                }
+
+                return Json(new { status = "success", message = "ลบข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        } 
+
         public IActionResult SH_IR_financial_highlight_Details_getTable()
         {
             try
@@ -1923,7 +2063,7 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { count_row_SH_IR_financial_highlight_Details = count_row, SH_IR_financial_highlight_Details = checkrow };
             return View(model);
         }
-        public IActionResult SH_IR_financial_highlight_DataDetails_getTable(int? id)
+        public IActionResult SH_IR_financial_highlight_DetailsData_getTable(int? id)
         {
             try
             {
@@ -1938,6 +2078,7 @@ namespace Lighting.Controllers.Backend
                         id = items.id,
                         created_at = items.created_at,
                         updated_at = items.updated_at,
+                        active_status=items.active_status,
                         profitTitleTH = items.profitTitleTH,
                         profitTitleENG = items.profitTitleENG
                     });
@@ -2050,7 +2191,17 @@ namespace Lighting.Controllers.Backend
                 var checkrow = db.SH_IR_financial_highlight_DetailsData.Where(x => x.id == id).FirstOrDefault();
 
                 if (checkrow != null)
-                {
+                { 
+                    var checkData=db.SH_IR_financial_highlight_DetailsData_Items.Where(x => x.fH_DetailsData_id == checkrow.id).ToList();
+                    foreach(var item in checkData)
+                    {
+                        var getData = db.SH_IR_financial_highlight_DetailsData_Items.Where(x => x.id == item.id).FirstOrDefault();
+                        if(getData!= null)
+                        {
+                            db.SH_IR_financial_highlight_DetailsData_Items.Remove(getData);
+                            db.SaveChanges();
+                        }
+                    }
 
                     db.SH_IR_financial_highlight_DetailsData.Remove(checkrow);
                     db.SaveChanges();
@@ -2067,14 +2218,11 @@ namespace Lighting.Controllers.Backend
         public IActionResult SH_IR_financial_highlight_DetailsData_submit(SH_IR_financial_highlight_DetailsData SH_IR_financial_highlight_DetailsData)
         {
             try
-            {
-
+            { 
                 SH_IR_financial_highlight_DetailsData.financial_hilight_id = SH_IR_financial_highlight_DetailsData.financial_hilight_id;
                 SH_IR_financial_highlight_DetailsData.profitTitleTH = SH_IR_financial_highlight_DetailsData.profitTitleTH;
                 SH_IR_financial_highlight_DetailsData.profitTitleENG = SH_IR_financial_highlight_DetailsData.profitTitleENG;
-                SH_IR_financial_highlight_DetailsData.amount1 = SH_IR_financial_highlight_DetailsData.amount1;
-                SH_IR_financial_highlight_DetailsData.amount2 = SH_IR_financial_highlight_DetailsData.amount2;
-                SH_IR_financial_highlight_DetailsData.amount3 = SH_IR_financial_highlight_DetailsData.amount3;
+                SH_IR_financial_highlight_DetailsData.active_status = SH_IR_financial_highlight_DetailsData.active_status;
                 SH_IR_financial_highlight_DetailsData.created_at = DateTime.Now;
                 SH_IR_financial_highlight_DetailsData.updated_at = DateTime.Now;
                 db.SH_IR_financial_highlight_DetailsData.Add(SH_IR_financial_highlight_DetailsData);
@@ -2099,9 +2247,7 @@ namespace Lighting.Controllers.Backend
 
                 old_data.profitTitleTH = SH_IR_financial_highlight_DetailsData.profitTitleTH;
                 old_data.profitTitleENG = SH_IR_financial_highlight_DetailsData.profitTitleENG;
-                old_data.amount1 = SH_IR_financial_highlight_DetailsData.amount1;
-                old_data.amount2 = SH_IR_financial_highlight_DetailsData.amount2;
-                old_data.amount3 = SH_IR_financial_highlight_DetailsData.amount3;
+                old_data.active_status = SH_IR_financial_highlight_DetailsData.active_status;
 
                 old_data.updated_at = DateTime.Now;
                 db.SaveChanges();
@@ -2129,7 +2275,16 @@ namespace Lighting.Controllers.Backend
                             {
                                 if (deleteitem != null)
                                 {
-
+                                    var checkDetails = db.SH_IR_financial_highlight_DetailsData_Items.Where(x => x.fH_DetailsData_id == deleteitem.id).ToList();
+                                    foreach (var data in checkDetails)
+                                    {
+                                        var deleteData = db.SH_IR_financial_highlight_DetailsData_Items.Where(x => x.id == data.id).FirstOrDefault();
+                                        if (deleteData != null)
+                                        {
+                                            db.SH_IR_financial_highlight_DetailsData_Items.Remove(deleteData);
+                                            db.SaveChanges();
+                                        }
+                                    }
                                     db.SH_IR_financial_highlight_DetailsData.Remove(deleteitem);
                                     db.SaveChanges();
                                 }
@@ -2149,11 +2304,193 @@ namespace Lighting.Controllers.Backend
             {
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
+        } 
+        public IActionResult SH_IR_financial_highlight_Details_changeStatus(int? id, string? status)
+        {
+            var get_data = db.SH_IR_financial_highlight_Details.Where(x => x.id == id).FirstOrDefault();
+            if (status == "true")
+            {
+                get_data.active_status = 1;
+            }
+            else
+            {
+                get_data.active_status = 0;
+            }
+            db.SaveChanges();
+
+            return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
+        } 
+        public IActionResult SH_IR_financial_highlight_Data_changeStatus(int? id, string? status)
+        {
+            var get_data = db.SH_IR_financial_highlight_Data.Where(x => x.id == id).FirstOrDefault();
+            if (status == "true")
+            {
+                get_data.active_status = 1;
+            }
+            else
+            {
+                get_data.active_status = 0;
+            }
+            db.SaveChanges();
+
+            return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
         }
+        public IActionResult SH_IR_financial_highlight_DetailsData_changeStatus(int? id, string? status)
+        {
+            var get_data = db.SH_IR_financial_highlight_DetailsData.Where(x => x.id == id).FirstOrDefault();
+            if (status == "true")
+            {
+                get_data.active_status = 1;
+            }
+            else
+            {
+                get_data.active_status = 0;
+            }
+            db.SaveChanges();
 
+            return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
+        }
+        public IActionResult SH_IR_financial_highlight_DetailsDataItem(int? id)
+        { 
+            var checkrow = db.SH_IR_financial_highlight_DetailsData.FirstOrDefault(x => x.id == id); 
+            if (checkrow == null)
+            {
+                return RedirectToAction("SH_IR_financial_highlight", "importantFinancialInformation");
+            }
+            var count_row = 0;
+            if (checkrow != null)
+            {
+                count_row = 1;
+            }
+            var model = new model_input { count_row_SH_IR_financial_highlight_DetailsData = count_row, fod_SH_IR_financial_highlight_DetailsData = checkrow };
+            return View(model);
+        }
+        public IActionResult SH_IR_financial_highlight_DetailsDataItem_getTable(int? id)
+        {
+            try
+            {   
+                var Raw_list = db.SH_IR_financial_highlight_DetailsData_Items.Where(x => x.fH_DetailsData_id == id).OrderByDescending(x => x.year).ToList();
+                var add_count = new List<IR_Important_Financial_model.SH_IR_financial_highlight_DetailsData_Items_table>();
+                var count = 1;
+                foreach (var items in Raw_list)
+                {
+                    var dateDatas = Convert.ToDateTime(items.year);
+                    var InsertDates = dateDatas.ToString("yyyy", new CultureInfo("en-US"));
 
+                    add_count.Add(new IR_Important_Financial_model.SH_IR_financial_highlight_DetailsData_Items_table
+                    {
+                        count_row = count,
+                        id = items.id,
+                        created_at = items.created_at,
+                        updated_at = items.updated_at,
+                        year = InsertDates,
+                        amount = items.amount,
+                        fH_DetailsData_id = items.fH_DetailsData_id
+                    });
+                    count++;
+                }
+                return Json(new { data = add_count });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult SH_IR_financial_highlight_DetailsDataItem_Submit(SH_IR_financial_highlight_DetailsData_Items fH_DetailsData_Item, string Year_Str)
+        {
+            try
+            {
+                if (Year_Str == null)
+                {
+                    return Json(new { status = "warning", message = "กรุณาระบุ ปี!" });
+                }
+                DateTime InsertDate_year = DateTime.ParseExact(Year_Str, "yyyy", new CultureInfo("en-US"));
 
+                var checkData = db.SH_IR_financial_highlight_DetailsData_Items.Where(x => x.fH_DetailsData_id == fH_DetailsData_Item.fH_DetailsData_id).ToList();
+                foreach (var item in checkData)
+                {
+                    var getData = db.SH_IR_financial_highlight_DetailsData_Items.FirstOrDefault(x => x.id == item.id);
+                    if (InsertDate_year.Year == getData.year.Value.Year)
+                    {
+                        return Json(new { status = "warning", message = "ปีที่เลือกมีอยู่แล้ว!" });
+                    }
+                }
+                fH_DetailsData_Item.created_at = DateTime.Now;
+                fH_DetailsData_Item.updated_at = DateTime.Now;
+                fH_DetailsData_Item.year = InsertDate_year;
+                var getData_Id = db.SH_IR_financial_highlight_DetailsData.Where(x => x.id == fH_DetailsData_Item.fH_DetailsData_id).FirstOrDefault();
 
+                fH_DetailsData_Item.fH_Details_id = getData_Id.financial_hilight_id;
+
+                db.SH_IR_financial_highlight_DetailsData_Items.Add(fH_DetailsData_Item);
+                db.SaveChanges();
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult SH_IR_financial_highlight_DetailsDataItem_edit_Submit(SH_IR_financial_highlight_DetailsData_Items fH_DetailsData_Item, string? Year_Str)
+        {
+            try
+            {
+                if (Year_Str == null)
+                {
+                    return Json(new { status = "warning", message = "กรุณาระบุ ปี!" });
+                }
+                DateTime InsertDate_year = DateTime.ParseExact(Year_Str, "yyyy", new CultureInfo("en-US"));
+
+                var get_oldData = db.SH_IR_financial_highlight_DetailsData_Items.Where(x => x.id == fH_DetailsData_Item.id).FirstOrDefault();
+
+                var checkData = db.SH_IR_financial_highlight_DetailsData_Items.Where(x => x.fH_DetailsData_id == get_oldData.fH_DetailsData_id && x.id != get_oldData.id && x.fH_Details_id != get_oldData.fH_Details_id).ToList();
+                foreach (var item in checkData)
+                {
+                    var getData = db.SH_IR_financial_highlight_DetailsData_Items.FirstOrDefault(x => x.id == item.id);
+                    if (InsertDate_year.Year == getData.year.Value.Year)
+                    {
+                        return Json(new { status = "warning", message = "ปีที่เลือกมีอยู่แล้ว!" });
+                    }
+                }
+
+                get_oldData.amount = fH_DetailsData_Item.amount;
+                get_oldData.year = InsertDate_year;
+
+                get_oldData.updated_at = DateTime.Now;
+                db.SaveChanges();
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult SH_IR_financial_highlight_DetailsDataItem_delete(int? id)
+        {
+            try
+            {
+                var checkrow = db.SH_IR_financial_highlight_DetailsData_Items.Where(x => x.id == id).FirstOrDefault();
+
+                if (checkrow != null)
+                {
+                    db.SH_IR_financial_highlight_DetailsData_Items.Remove(checkrow);
+                    db.SaveChanges();
+
+                }
+
+                return Json(new { status = "success", message = "ลบข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult SH_IR_financial_highlight_DetailsDataItem_getEditData(int? id)
+        {
+            var get_data = db.SH_IR_financial_highlight_DetailsData_Items.Where(x => x.id == id).FirstOrDefault();
+
+            return Json(new { status = "success", message = "", data = get_data });
+        }
 
 
     }

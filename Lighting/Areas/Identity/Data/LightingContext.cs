@@ -1,12 +1,12 @@
 ﻿using Lighting.Extension;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Lighting.Areas.Identity.Data
 {
     public class LightingContext : IdentityDbContext<LightingUser, Role, string>
-    {
-
+    {  
         public LightingContext(DbContextOptions<LightingContext> options)
             : base(options)
         {
@@ -57,7 +57,7 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<O_Gift_entertainment_File> O_Gift_entertainment_File { get; set; }
         public DbSet<O_business_ethics> O_business_ethics { get; set; }
         public DbSet<O_business_ethics_File> O_business_ethics_File { get; set; }
-        public DbSet<O_business_ethics_File> O_business_ethics_details { get; set; }
+        public DbSet<O_business_ethics_details> O_business_ethics_details { get; set; }
         public DbSet<OrganizationalStructure> OrganizationalStructure { get; set; }
         public DbSet<P_philosophy> P_philosophy { get; set; }
         public DbSet<Sustainability_Report> Sustainability_Report { get; set; }
@@ -77,7 +77,12 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<SH_IR_Report_MeetingData> SH_IR_Report_MeetingData { get; set; }
         public DbSet<SH_IR_Report_Meeting_DataDetails> SH_IR_Report_Meeting_DataDetails { get; set; }
         public DbSet<SH_IR_propose_agenda> SH_IR_propose_agenda { get; set; }
-        public DbSet<SH_IR_propose_agenda_DataDetails> SH_IR_propose_agenda_DataDetails { get; set; }
+        public DbSet<SH_IR_propose_agenda_receive_mails> SH_IR_propose_agenda_receive_mails { get; set; }
+        public DbSet<SH_IR_propose_agenda_mailTitles> SH_IR_propose_agenda_mailTitles { get; set; }
+        public DbSet<receive_mail_propose_agendas> receive_mail_propose_agendas { get; set; }
+        public DbSet<receive_agenda_mail_accounts> receive_agenda_mail_accounts { get; set; }
+        public DbSet<SH_IR_propose_agenda_DataDetails> SH_IR_propose_agenda_DataDetails { get; set; } 
+        public DbSet<type_of_agenda_Propose> type_of_agenda_Propose { get; set; }
         public DbSet<SH_IR_presentation_doc> SH_IR_presentation_doc { get; set; }
         public DbSet<SH_IR_presentation_doc_Data> SH_IR_presentation_doc_Data { get; set; }
         public DbSet<SH_IR_presentation_webcast> SH_IR_presentation_webcast { get; set; }
@@ -87,9 +92,11 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<SH_IR_MDA_DataDetails> SH_IR_MDA_DataDetails { get; set; }
         public DbSet<SH_IR_financial_highlight> SH_IR_financial_highlight { get; set; }
         public DbSet<SH_IR_financial_highlight_Data> SH_IR_financial_highlight_Data { get; set; }
+        public DbSet<SH_IR_financial_highlight_DataDetails> SH_IR_financial_highlight_DataDetails { get; set; }
         public DbSet<SH_IR_important_financial> SH_IR_important_financial { get; set; }
         public DbSet<SH_IR_financial_position> SH_IR_financial_position { get; set; }
         public DbSet<SH_IR_financial_position_DataDetails> SH_IR_financial_position_DataDetails { get; set; }
+        public DbSet<SH_IR_financial_highlight_DetailsData_Items> SH_IR_financial_highlight_DetailsData_Items { get; set; }
         public DbSet<SH_IR_Profit_Lose> SH_IR_Profit_Lose { get; set; }
         public DbSet<SH_IR_Profit_Lose_others> SH_IR_Profit_Lose_others { get; set; }
         public DbSet<SH_IR_cashFlow_statements> SH_IR_cashFlow_statements { get; set; }

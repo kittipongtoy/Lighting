@@ -28,6 +28,11 @@
                                 <h1>@Model.fod_CorporateGovernance.detailsTitleTH</h1>
                             }
                         }
+                        else
+                        {
+                            <h5>นโยบายการกำกับดูแลกิจการ</h5>
+                            <h1>นโยบายการกำกับดูแลกิจการ</h1>
+                        }
                         @* <h5>นโยบายการกำกับดูแลกิจการ</h5>
                         <h1>นโยบายการกำกับดูแลกิจการ</h1>*@
                     </div>
@@ -103,6 +108,10 @@
                                         {
                                             @Model.fod_CorporateGovernance.title_TH
                                         }
+                                    }
+                                    else
+                                    {
+                                        <div>นโยบายการกำกับดูแลกิจการ</div>
                                     }
                                     @*นโยบายการกำกับดูแลกิจการ*@
                                 </div>
@@ -225,8 +234,6 @@
                                             count_2++;
                                         }
                                     }
-
-
                                 }
                             }
                         </div>
@@ -236,6 +243,7 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $(".display-tab > li").click(function () {

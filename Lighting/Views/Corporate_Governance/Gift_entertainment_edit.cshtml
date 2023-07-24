@@ -43,9 +43,9 @@
                     </div>
                     <form id="form_create" enctype="multipart/form-data">
                         <input class="form-control" name="id" hidden value="@Model.fod_O_Gift_entertainment_File.id" />
-                        <div class="mb-10" style="text-align:center;">
+                       @* <div class="mb-10" style="text-align:center;">
                             <img src="~/upload_image/BusinessEthics/@Model.fod_O_Gift_entertainment_File.image_name" onclick="window.location.href='/upload_file/BusinessEthics/@Model.fod_O_Gift_entertainment_File.file_name'" style="height: 250px;width: 250px; cursor:pointer;" alt="image">
-                        </div>
+                        </div>*@
                         <div class="row mb-3">
                             <div class="col-2">
                                 <span>
@@ -67,19 +67,44 @@
                         <div class="row mb-3">
                             <div class="col-2">
                                 <span>
-                                    รูปหน้าปก
+                                    รูปหน้าปก TH
                                 </span>
                             </div>
                             <div class="col-4">
+                                <div class="mb-10" style="text-align:center;">
+                                    <img src="~/upload_image/Gift_entertainment/@Model.fod_O_Gift_entertainment_File.image_name" onclick="window.location.href='/upload_file/Gift_entertainment/@Model.fod_O_Gift_entertainment_File.file_name'" style="height: 250px;width: 250px; cursor:pointer;" alt="image">
+                                </div>
                                 <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
                             </div>
                             <div class="col-2">
                                 <span>
-                                    ไฟล์เอกสาร
+                                    รูปหน้าปก ENG
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <div class="mb-10" style="text-align:center;">
+                                    <img src="~/upload_image/Gift_entertainment/@Model.fod_O_Gift_entertainment_File.image_name_ENG" onclick="window.location.href='/upload_file/Gift_entertainment/@Model.fod_O_Gift_entertainment_File.file_name_ENG'" style="height: 250px;width: 250px; cursor:pointer;" alt="image">
+                                </div>
+                                <input type="file" class="form-control" name="uploaded_image_ENG" accept="image/*" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    ไฟล์เอกสาร TH
                                 </span>
                             </div>
                             <div class="col-4">
                                 <input type="file" class="form-control" name="uploaded_file" />
+                            </div>
+                            <div class="col-2">
+                                <span>
+                                    ไฟล์เอกสาร ENG
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="file" class="form-control" name="uploaded_file_ENG" />
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -126,6 +151,10 @@
                 processData: false,
                 contentType: false,
                 cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait!')
+                    Swal.showLoading()
+                },
                 success: function (data) {
                     if (data.status == "success") {
                         Swal.fire({

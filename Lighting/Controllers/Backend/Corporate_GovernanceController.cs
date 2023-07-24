@@ -299,8 +299,8 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { fod_CorporateGovernance_File = get_detail };
             return View(model);
         }
-        public IActionResult Corporate_governance_edit_file_update(CorporateGovernance_File corporateGovernance_File, 
-            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file,List<IFormFile> uploaded_file_ENG)
+        public IActionResult Corporate_governance_edit_file_update(CorporateGovernance_File corporateGovernance_File,
+            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
@@ -553,7 +553,7 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
-        
+
         // 
         public IActionResult Business_ethics_index()
         {
@@ -626,11 +626,13 @@ namespace Lighting.Controllers.Backend
                     {
                         count_row = count,
                         id = items.id,
-                        created_at = items.created_at,
+                        title_file_th = items.title_file_th,
+                        title_file_en = items.title_file_en,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
+                        created_at = items.created_at,
                         updated_at = items.updated_at,
-                        use_status = items.use_status,
-                        title_file_th = items.title_file_th
+                        use_status = items.use_status
                     });
                     count++;
                 }
@@ -651,11 +653,11 @@ namespace Lighting.Controllers.Backend
         {
             try
             {
-                if (uploaded_image.Count == 0||uploaded_image_ENG.Count==0)
+                if (uploaded_image.Count == 0 || uploaded_image_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
-                if (uploaded_file.Count == 0||uploaded_file_ENG.Count==0)
+                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload ไฟล์" });
                 }
@@ -730,7 +732,7 @@ namespace Lighting.Controllers.Backend
                             engFile.CopyTo(stream);
                         }
                     }
-                } 
+                }
 
                 if (o_Business_Ethics_File.use_status != 1)
                 {
@@ -765,7 +767,7 @@ namespace Lighting.Controllers.Backend
             return View(model);
         }
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public IActionResult Business_ethics_edit_update(O_business_ethics_File o_Business_Ethics_File, 
+        public IActionResult Business_ethics_edit_update(O_business_ethics_File o_Business_Ethics_File,
             List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
@@ -942,12 +944,43 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+        public IActionResult Business_ethics_Details_getTable()
+        {
+            try
+            {
+                var Raw_list = db.O_business_ethics_details.ToList();
+                var add_count = new List<table_model.Business_ethics_details_table>();
+                var count = 1;
+                foreach (var items in Raw_list)
+                {
+                    add_count.Add(new table_model.Business_ethics_details_table
+                    {
+                        count_row = count,
+                        id = items.id,
+                        title_TH = items.title_TH,
+                        title_ENG = items.title_ENG,
+                        image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
+                        created_at = items.created_at,
+                        updated_at = items.updated_at,
+                        use_status = items.use_status
+                    });
+                    count++;
+                }
+                return Json(new { data = add_count });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+
         public IActionResult Business_ethics_Detailscreate()
         {
             return View();
         }
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public IActionResult Business_ethics_Detailscreate_insert(O_business_ethics_File o_Business_Ethics_File,
+        public IActionResult Business_ethics_Detailscreate_insert(O_business_ethics_details o_Business_ethics_details,
             List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG)
         {
             try
@@ -956,12 +989,12 @@ namespace Lighting.Controllers.Backend
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
-                
-                if (o_Business_Ethics_File.title_file_th == null || o_Business_Ethics_File.title_file_th == "")
+
+                if (o_Business_ethics_details.title_TH == null || o_Business_ethics_details.title_TH == "")
                 {
                     return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ TH" });
                 }
-                if (o_Business_Ethics_File.title_file_en == null || o_Business_Ethics_File.title_file_en == "")
+                if (o_Business_ethics_details.title_ENG == null || o_Business_ethics_details.title_ENG == "")
                 {
                     return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ EN" });
                 }
@@ -972,7 +1005,7 @@ namespace Lighting.Controllers.Backend
                     {
                         var datestr = DateTime.Now.Ticks.ToString();
                         var extension = Path.GetExtension(formFile.FileName);
-                        o_Business_Ethics_File.image_name = datestr + extension;
+                        o_Business_ethics_details.image_name = datestr + extension;
                         var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BusinessEthics/" + datestr + extension);
 
                         using (var stream = System.IO.File.Create(filePath))
@@ -987,7 +1020,7 @@ namespace Lighting.Controllers.Backend
                     {
                         var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
                         var extension = Path.GetExtension(formFileENG.FileName);
-                        o_Business_Ethics_File.image_name_ENG = datestr + extension;
+                        o_Business_ethics_details.image_name_ENG = datestr + extension;
                         var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BusinessEthics/" + datestr + extension);
 
                         using (var stream = System.IO.File.Create(filePath))
@@ -997,16 +1030,16 @@ namespace Lighting.Controllers.Backend
                     }
                 }
 
-                if (o_Business_Ethics_File.use_status != 1)
+                if (o_Business_ethics_details.use_status != 1)
                 {
-                    o_Business_Ethics_File.use_status = 0;
+                    o_Business_ethics_details.use_status = 0;
                 }
                 else
                 {
-                    o_Business_Ethics_File.use_status = 1;
+                    o_Business_ethics_details.use_status = 1;
                 }
-                o_Business_Ethics_File.created_at = DateTime.Now;
-                db.O_business_ethics_File.Add(o_Business_Ethics_File);
+                o_Business_ethics_details.created_at = DateTime.Now;
+                db.O_business_ethics_details.Add(o_Business_ethics_details);
                 db.SaveChanges();
                 return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
             }
@@ -1015,8 +1048,154 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+        public IActionResult Business_ethicsDetails_edit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Business_ethics_index", "Corporate_Governance");
+            }
+            var get_detail = db.O_business_ethics_details.Where(x => x.id == id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("Business_ethics_index", "Corporate_Governance");
+            }
+            var model = new model_input { fod_O_business_ethics_Details = get_detail };
+            return View(model);
+        }
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Business_ethicsDetails_edit_update(O_business_ethics_details o_Business_ethics_details,
+           List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG)
+        {
+            try
+            {
+
+                if (o_Business_ethics_details.title_TH == null || o_Business_ethics_details.title_TH == "")
+                {
+                    return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ TH" });
+                }
+                if (o_Business_ethics_details.title_ENG == null || o_Business_ethics_details.title_ENG == "")
+                {
+                    return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ EN" });
+                }
+
+                var old_data = db.O_business_ethics_details.Where(x => x.id == o_Business_ethics_details.id).FirstOrDefault();
+                if (uploaded_image.Count > 0)
+                {
+                    foreach (var formFile in uploaded_image)
+                    {
+                        if (formFile.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BusinessEthics/" + old_data.image_name);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            old_data.image_name = datestr + extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BusinessEthics/" + datestr + extension);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+                if (uploaded_image_ENG.Count > 0)
+                {
+                    foreach (var formFileENG in uploaded_image_ENG)
+                    {
+                        if (formFileENG.Length > 0)
+                        {
+                            var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BusinessEthics/" + old_data.image_name_ENG);
+                            if (System.IO.File.Exists(old_filePath2) == true)
+                            {
+                                System.IO.File.Delete(old_filePath2);
+                            }
+
+                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                            var extension = Path.GetExtension(formFileENG.FileName);
+                            old_data.image_name_ENG = datestr + extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BusinessEthics/" + datestr + extension);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFileENG.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+
+                if (o_Business_ethics_details.use_status != 1)
+                {
+                    old_data.use_status = 0;
+                }
+                else
+                {
+                    old_data.use_status = 1;
+                }
+                old_data.updated_at = DateTime.Now;
+                old_data.title_TH = o_Business_ethics_details.title_TH;
+                old_data.title_ENG = o_Business_ethics_details.title_ENG;
+                db.SaveChanges();
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult Business_ethicsDetails_changeStatus(int? id, string? status)
+        {
+            var get_data = db.O_business_ethics_details.Where(x => x.id == id).FirstOrDefault();
+            if (status == "true")
+            {
+                get_data.use_status = 1;
+            }
+            else
+            {
+                get_data.use_status = 0;
+            }
+            db.SaveChanges();
+
+            return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
+        }
+        public IActionResult Business_ethicsDetails_delete(int? id)
+        {
+            try
+            {
+                var checkrow = db.O_business_ethics_details.Where(x => x.id == id).FirstOrDefault();
+
+                if (checkrow != null)
+                {
+                    var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BusinessEthics/" + checkrow.image_name);
+                    if (System.IO.File.Exists(old_filePath) == true)
+                    {
+                        System.IO.File.Delete(old_filePath);
+                    }
+
+                    var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/BusinessEthics/" + checkrow.image_name_ENG);
+                    if (System.IO.File.Exists(old_filePath2) == true)
+                    {
+                        System.IO.File.Delete(old_filePath2);
+                    }
+
+                    db.O_business_ethics_details.Remove(checkrow);
+                    db.SaveChanges();
+                }
+
+                return Json(new { status = "success", message = "ลบข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
 
 
+        //
         public IActionResult SustainabilityReport_index()
         {
             var get_data = db.Sustainability_Report.FirstOrDefault();
@@ -1028,7 +1207,9 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { count_row_Sustainability_Report = count, fod_Sustainability_Report = get_data };
             return View(model);
         }
-        public IActionResult SustainabilityReport_index_update(Sustainability_Report sustainability_Report, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult SustainabilityReport_index_update(Sustainability_Report sustainability_Report,
+            List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
@@ -1045,12 +1226,28 @@ namespace Lighting.Controllers.Backend
                         {
                             var datestr = DateTime.Now.Ticks.ToString();
                             var extension = Path.GetExtension(formFile.FileName);
-                            sustainability_Report.file_name = datestr + extension;
-                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/SustainabilityReport/" + datestr + extension);
+                            sustainability_Report.file_name = datestr + formFile.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/SustainabilityReport/" + datestr + formFile.FileName);
 
                             using (var stream = System.IO.File.Create(filePath))
                             {
                                 formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+
+                    foreach (var formFileENG in uploaded_file_ENG)
+                    {
+                        if (formFileENG.Length > 0)
+                        {
+                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                            var extension = Path.GetExtension(formFileENG.FileName);
+                            sustainability_Report.file_name_ENG = datestr + formFileENG.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/SustainabilityReport/" + datestr + formFileENG.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFileENG.CopyTo(stream);
                             }
                         }
                     }
@@ -1071,12 +1268,34 @@ namespace Lighting.Controllers.Backend
 
                             var datestr = DateTime.Now.Ticks.ToString();
                             var extension = Path.GetExtension(formFile.FileName);
-                            checkrow.file_name = datestr + extension;
-                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/SustainabilityReport/" + datestr + extension);
+                            checkrow.file_name = datestr + formFile.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/SustainabilityReport/" + datestr + formFile.FileName);
 
                             using (var stream = System.IO.File.Create(filePath))
                             {
                                 formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+
+                    foreach (var engFile in uploaded_file_ENG)
+                    {
+                        if (engFile.Length > 0)
+                        {
+                            var old_filePathENG = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/SustainabilityReport/" + checkrow.file_name_ENG);
+                            if (System.IO.File.Exists(old_filePathENG) == true)
+                            {
+                                System.IO.File.Delete(old_filePathENG);
+                            }
+
+                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                            var extension = Path.GetExtension(engFile.FileName);
+                            checkrow.file_name_ENG = datestr + engFile.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/SustainabilityReport/" + datestr + engFile.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                engFile.CopyTo(stream);
                             }
                         }
                     }
@@ -1090,6 +1309,8 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+
+        //
         public IActionResult CRS_policy_index()
         {
             var checkrow = db.O_CRS_policy.FirstOrDefault();
@@ -1115,6 +1336,12 @@ namespace Lighting.Controllers.Backend
                 else
                 {
                     checkrow.updated_at = DateTime.Now;
+                    checkrow.title_TH = o_CRS_Policy.title_TH;
+                    checkrow.title_ENG = o_CRS_Policy.title_ENG;
+                    checkrow.titleDetails_TH = o_CRS_Policy.titleDetails_TH;
+                    checkrow.titleDetails_ENG = o_CRS_Policy.titleDetails_ENG;
+                    checkrow.detailsTitleTH = o_CRS_Policy.detailsTitleTH;
+                    checkrow.detailsTitleENG = o_CRS_Policy.detailsTitleENG;
                     checkrow.detail_th = o_CRS_Policy.detail_th;
                     checkrow.detail_en = o_CRS_Policy.detail_en;
                     db.SaveChanges();
@@ -1147,19 +1374,22 @@ namespace Lighting.Controllers.Backend
             try
             {
                 var Raw_list = db.O_CRS_policy_File.ToList();
-                var add_count = new List<table_model.CorporateGovernance_File_table>();
+                var add_count = new List<table_model.CRS_policy_File_table>();
                 var count = 1;
                 foreach (var items in Raw_list)
                 {
-                    add_count.Add(new table_model.CorporateGovernance_File_table
+                    add_count.Add(new table_model.CRS_policy_File_table
                     {
                         count_row = count,
                         id = items.id,
                         created_at = items.created_at,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         updated_at = items.updated_at,
                         use_status = items.use_status,
-                        title_file_th = items.title_file_th
+                        title_file_th = items.title_file_th,
+                        title_file_en = items.title_file_en
+
                     });
                     count++;
                 }
@@ -1174,15 +1404,17 @@ namespace Lighting.Controllers.Backend
         {
             return View();
         }
-        public IActionResult CRS_policy_create_insert(O_CRS_policy_File o_CRS_Policy_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult CRS_policy_create_insert(O_CRS_policy_File o_CRS_Policy_File,
+            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
-                if (uploaded_image.Count == 0)
+                if (uploaded_image.Count == 0 || uploaded_file_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
-                if (uploaded_file.Count == 0)
+                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload ไฟล์" });
                 }
@@ -1210,6 +1442,21 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                foreach (var formFileENG in uploaded_image_ENG)
+                {
+                    if (formFileENG.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(formFileENG.FileName);
+                        o_CRS_Policy_File.image_name_ENG = datestr + formFileENG.FileName;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/CRSpolicy/" + datestr + formFileENG.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFileENG.CopyTo(stream);
+                        }
+                    }
+                }
 
                 foreach (var formFile in uploaded_file)
                 {
@@ -1224,6 +1471,23 @@ namespace Lighting.Controllers.Backend
                         using (var stream = System.IO.File.Create(filePath))
                         {
                             formFile.CopyTo(stream);
+                        }
+                    }
+                }
+
+                foreach (var engFile in uploaded_file_ENG)
+                {
+                    if (engFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(engFile.FileName);
+                        o_CRS_Policy_File.file_name_ENG = datestr + engFile.FileName;
+                        o_CRS_Policy_File.file_type = extension;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/CRSpolicy/" + datestr + engFile.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            engFile.CopyTo(stream);
                         }
                     }
                 }
@@ -1259,7 +1523,9 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { fod_O_CRS_policy_File = get_detail };
             return View(model);
         }
-        public IActionResult CRS_policy_edit_update(O_CRS_policy_File o_CRS_Policy_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult CRS_policy_edit_update(O_CRS_policy_File o_CRS_Policy_File,
+            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
@@ -1298,7 +1564,30 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                if (uploaded_image_ENG.Count > 0)
+                {
+                    foreach (var formFileENG in uploaded_image_ENG)
+                    {
+                        if (formFileENG.Length > 0)
+                        {
+                            var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/CRSpolicy/" + old_data.image_name_ENG);
+                            if (System.IO.File.Exists(old_filePath2) == true)
+                            {
+                                System.IO.File.Delete(old_filePath2);
+                            }
 
+                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                            var extension = Path.GetExtension(formFileENG.FileName);
+                            old_data.image_name_ENG = datestr + formFileENG.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/CRSpolicy/" + datestr + formFileENG.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFileENG.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
 
                 if (uploaded_file.Count > 0)
                 {
@@ -1321,6 +1610,31 @@ namespace Lighting.Controllers.Backend
                             using (var stream = System.IO.File.Create(filePath))
                             {
                                 formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+                if (uploaded_file.Count > 0)
+                {
+                    foreach (var engFile in uploaded_file_ENG)
+                    {
+                        if (engFile.Length > 0)
+                        {
+                            var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/CRSpolicy/" + old_data.file_name_ENG);
+                            if (System.IO.File.Exists(old_filePath4) == true)
+                            {
+                                System.IO.File.Delete(old_filePath4);
+                            }
+
+                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                            var extension = Path.GetExtension(engFile.FileName);
+                            old_data.file_name_ENG = datestr + engFile.FileName;
+                            old_data.file_type = extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/CRSpolicy/" + datestr + engFile.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                engFile.CopyTo(stream);
                             }
                         }
                     }
@@ -1358,12 +1672,24 @@ namespace Lighting.Controllers.Backend
                     {
                         System.IO.File.Delete(old_filePath);
                     }
+                    var old_filePath3 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/CRSpolicy/" + checkrow.image_name_ENG);
+                    if (System.IO.File.Exists(old_filePath3) == true)
+                    {
+                        System.IO.File.Delete(old_filePath3);
+                    }
 
                     var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/CRSpolicy/" + checkrow.file_name);
                     if (System.IO.File.Exists(old_filePath2) == true)
                     {
                         System.IO.File.Delete(old_filePath2);
                     }
+                    var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/CRSpolicy/" + checkrow.file_name_ENG);
+                    if (System.IO.File.Exists(old_filePath4) == true)
+                    {
+                        System.IO.File.Delete(old_filePath4);
+                    }
+
+
                     db.O_CRS_policy_File.Remove(checkrow);
                     db.SaveChanges();
                 }
@@ -1375,6 +1701,8 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+
+        //
         public IActionResult Anti_fraud_index()
         {
             var checkrow = db.O_Anti_fraud.FirstOrDefault();
@@ -1400,6 +1728,12 @@ namespace Lighting.Controllers.Backend
                 else
                 {
                     checkrow.updated_at = DateTime.Now;
+                    checkrow.title_TH = o_Anti_fraud.title_TH;
+                    checkrow.title_ENG = o_Anti_fraud.title_ENG;
+                    checkrow.titleDetails_TH = o_Anti_fraud.titleDetails_TH;
+                    checkrow.titleDetails_ENG = o_Anti_fraud.titleDetails_ENG;
+                    checkrow.detailsTitleTH = o_Anti_fraud.detailsTitleTH;
+                    checkrow.detailsTitleENG = o_Anti_fraud.detailsTitleENG;
                     checkrow.detail_th = o_Anti_fraud.detail_th;
                     checkrow.detail_en = o_Anti_fraud.detail_en;
                     db.SaveChanges();
@@ -1432,19 +1766,21 @@ namespace Lighting.Controllers.Backend
             try
             {
                 var Raw_list = db.O_Anti_fraud_File.ToList();
-                var add_count = new List<table_model.CorporateGovernance_File_table>();
+                var add_count = new List<table_model.Anti_fraud_File_table>();
                 var count = 1;
                 foreach (var items in Raw_list)
                 {
-                    add_count.Add(new table_model.CorporateGovernance_File_table
+                    add_count.Add(new table_model.Anti_fraud_File_table
                     {
                         count_row = count,
                         id = items.id,
                         created_at = items.created_at,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         updated_at = items.updated_at,
                         use_status = items.use_status,
-                        title_file_th = items.title_file_th
+                        title_file_th = items.title_file_th,
+                        title_file_en = items.title_file_en
                     });
                     count++;
                 }
@@ -1459,15 +1795,17 @@ namespace Lighting.Controllers.Backend
         {
             return View();
         }
-        public IActionResult Anti_fraud_create_insert(O_Anti_fraud_File o_Anti_fraud_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Anti_fraud_create_insert(O_Anti_fraud_File o_Anti_fraud_File,
+            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
-                if (uploaded_image.Count == 0)
+                if (uploaded_image.Count == 0 || uploaded_image_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
-                if (uploaded_file.Count == 0)
+                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload ไฟล์" });
                 }
@@ -1495,6 +1833,21 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                foreach (var formFileENG in uploaded_image_ENG)
+                {
+                    if (formFileENG.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(formFileENG.FileName);
+                        o_Anti_fraud_File.image_name_ENG = datestr + formFileENG.FileName;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/AntiFraud/" + datestr + formFileENG.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFileENG.CopyTo(stream);
+                        }
+                    }
+                }
 
                 foreach (var formFile in uploaded_file)
                 {
@@ -1509,6 +1862,23 @@ namespace Lighting.Controllers.Backend
                         using (var stream = System.IO.File.Create(filePath))
                         {
                             formFile.CopyTo(stream);
+                        }
+                    }
+                }
+
+                foreach (var engFile in uploaded_file_ENG)
+                {
+                    if (engFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(engFile.FileName);
+                        o_Anti_fraud_File.file_name_ENG = datestr + engFile.FileName;
+                        o_Anti_fraud_File.file_type = extension;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/AntiFraud/" + datestr + engFile.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            engFile.CopyTo(stream);
                         }
                     }
                 }
@@ -1544,7 +1914,9 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { fod_O_Anti_fraud_File = get_detail };
             return View(model);
         }
-        public IActionResult Anti_fraud_edit_update(O_Anti_fraud_File o_Anti_fraud_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Anti_fraud_edit_update(O_Anti_fraud_File o_Anti_fraud_File,
+            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
@@ -1583,6 +1955,30 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                if (uploaded_image_ENG.Count > 0)
+                {
+                    foreach (var formFileENG in uploaded_image_ENG)
+                    {
+                        if (formFileENG.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/AntiFraud/" + old_data.image_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                            var extension = Path.GetExtension(formFileENG.FileName);
+                            old_data.image_name_ENG = datestr + formFileENG.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/AntiFraud/" + datestr + formFileENG.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFileENG.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
 
 
                 if (uploaded_file.Count > 0)
@@ -1606,6 +2002,31 @@ namespace Lighting.Controllers.Backend
                             using (var stream = System.IO.File.Create(filePath))
                             {
                                 formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+                if (uploaded_file_ENG.Count > 0)
+                {
+                    foreach (var engFile in uploaded_file_ENG)
+                    {
+                        if (engFile.Length > 0)
+                        {
+                            var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/AntiFraud/" + old_data.file_name_ENG);
+                            if (System.IO.File.Exists(old_filePath4) == true)
+                            {
+                                System.IO.File.Delete(old_filePath4);
+                            }
+
+                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                            var extension = Path.GetExtension(engFile.FileName);
+                            old_data.file_name_ENG = datestr + engFile.FileName;
+                            old_data.file_type = extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/AntiFraud/" + datestr + engFile.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                engFile.CopyTo(stream);
                             }
                         }
                     }
@@ -1643,11 +2064,21 @@ namespace Lighting.Controllers.Backend
                     {
                         System.IO.File.Delete(old_filePath);
                     }
+                    var old_filePath3 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/AntiFraud/" + checkrow.image_name_ENG);
+                    if (System.IO.File.Exists(old_filePath3) == true)
+                    {
+                        System.IO.File.Delete(old_filePath3);
+                    }
 
                     var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/AntiFraud/" + checkrow.file_name);
                     if (System.IO.File.Exists(old_filePath2) == true)
                     {
                         System.IO.File.Delete(old_filePath2);
+                    }
+                    var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/AntiFraud/" + checkrow.file_name_ENG);
+                    if (System.IO.File.Exists(old_filePath4) == true)
+                    {
+                        System.IO.File.Delete(old_filePath4);
                     }
                     db.O_Anti_fraud_File.Remove(checkrow);
                     db.SaveChanges();
@@ -1660,6 +2091,8 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+
+        //
         public IActionResult Gift_entertainment_index()
         {
             var checkrow = db.O_Gift_entertainment.FirstOrDefault();
@@ -1685,6 +2118,12 @@ namespace Lighting.Controllers.Backend
                 else
                 {
                     checkrow.updated_at = DateTime.Now;
+                    checkrow.title_TH = o_Gift_entertainment.title_TH;
+                    checkrow.title_ENG = o_Gift_entertainment.title_ENG;
+                    checkrow.titleDetails_TH = o_Gift_entertainment.titleDetails_TH;
+                    checkrow.titleDetails_ENG = o_Gift_entertainment.titleDetails_ENG;
+                    checkrow.detailsTitleTH = o_Gift_entertainment.detailsTitleTH;
+                    checkrow.detailsTitleENG = o_Gift_entertainment.detailsTitleENG;
                     checkrow.detail_th = o_Gift_entertainment.detail_th;
                     checkrow.detail_en = o_Gift_entertainment.detail_en;
                     db.SaveChanges();
@@ -1717,19 +2156,21 @@ namespace Lighting.Controllers.Backend
             try
             {
                 var Raw_list = db.O_Gift_entertainment_File.ToList();
-                var add_count = new List<table_model.CorporateGovernance_File_table>();
+                var add_count = new List<table_model.O_Gift_entertainment_File_table>();
                 var count = 1;
                 foreach (var items in Raw_list)
                 {
-                    add_count.Add(new table_model.CorporateGovernance_File_table
+                    add_count.Add(new table_model.O_Gift_entertainment_File_table
                     {
                         count_row = count,
                         id = items.id,
                         created_at = items.created_at,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         updated_at = items.updated_at,
                         use_status = items.use_status,
-                        title_file_th = items.title_file_th
+                        title_file_th = items.title_file_th,
+                        title_file_en = items.title_file_en
                     });
                     count++;
                 }
@@ -1744,15 +2185,17 @@ namespace Lighting.Controllers.Backend
         {
             return View();
         }
-        public IActionResult Gift_entertainment_create_insert(O_Gift_entertainment_File o_Gift_entertainment_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Gift_entertainment_create_insert(O_Gift_entertainment_File o_Gift_entertainment_File,
+            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
-                if (uploaded_image.Count == 0)
+                if (uploaded_image.Count == 0 || uploaded_image_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
-                if (uploaded_file.Count == 0)
+                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload ไฟล์" });
                 }
@@ -1780,6 +2223,21 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                foreach (var formFileENG in uploaded_image_ENG)
+                {
+                    if (formFileENG.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(formFileENG.FileName);
+                        o_Gift_entertainment_File.image_name = datestr + formFileENG.FileName;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Gift_entertainment/" + datestr + formFileENG.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFileENG.CopyTo(stream);
+                        }
+                    }
+                }
 
                 foreach (var formFile in uploaded_file)
                 {
@@ -1797,6 +2255,23 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                foreach (var engFile in uploaded_file_ENG)
+                {
+                    if (engFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(engFile.FileName);
+                        o_Gift_entertainment_File.file_name = datestr + engFile.FileName;
+                        o_Gift_entertainment_File.file_type = extension;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Gift_entertainment/" + datestr + engFile.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            engFile.CopyTo(stream);
+                        }
+                    }
+                }
+
                 if (o_Gift_entertainment_File.use_status != 1)
                 {
                     o_Gift_entertainment_File.use_status = 0;
@@ -1829,7 +2304,9 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { fod_O_Gift_entertainment_File = get_detail };
             return View(model);
         }
-        public IActionResult Gift_entertainment_edit_update(O_Gift_entertainment_File o_Gift_entertainment_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Gift_entertainment_edit_update(O_Gift_entertainment_File o_Gift_entertainment_File,
+            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
@@ -1868,6 +2345,30 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                if (uploaded_image_ENG.Count > 0)
+                {
+                    foreach (var formFileENG in uploaded_image_ENG)
+                    {
+                        if (formFileENG.Length > 0)
+                        {
+                            var old_filePath3 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Gift_entertainment/" + old_data.image_name_ENG);
+                            if (System.IO.File.Exists(old_filePath3) == true)
+                            {
+                                System.IO.File.Delete(old_filePath3);
+                            }
+
+                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                            var extension = Path.GetExtension(formFileENG.FileName);
+                            old_data.image_name_ENG = datestr + formFileENG.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Gift_entertainment/" + datestr + formFileENG.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFileENG.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
 
 
                 if (uploaded_file.Count > 0)
@@ -1891,6 +2392,31 @@ namespace Lighting.Controllers.Backend
                             using (var stream = System.IO.File.Create(filePath))
                             {
                                 formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+                if (uploaded_file_ENG.Count > 0)
+                {
+                    foreach (var engFile in uploaded_file_ENG)
+                    {
+                        if (engFile.Length > 0)
+                        {
+                            var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Gift_entertainment/" + old_data.file_name_ENG);
+                            if (System.IO.File.Exists(old_filePath4) == true)
+                            {
+                                System.IO.File.Delete(old_filePath4);
+                            }
+
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(engFile.FileName);
+                            old_data.file_name_ENG = datestr + engFile.FileName;
+                            old_data.file_type = extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Gift_entertainment/" + datestr + engFile.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                engFile.CopyTo(stream);
                             }
                         }
                     }
@@ -1928,11 +2454,21 @@ namespace Lighting.Controllers.Backend
                     {
                         System.IO.File.Delete(old_filePath);
                     }
+                    var old_filePath3 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Gift_entertainment/" + checkrow.image_name_ENG);
+                    if (System.IO.File.Exists(old_filePath3) == true)
+                    {
+                        System.IO.File.Delete(old_filePath3);
+                    }
 
                     var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Gift_entertainment/" + checkrow.file_name);
                     if (System.IO.File.Exists(old_filePath2) == true)
                     {
                         System.IO.File.Delete(old_filePath2);
+                    }
+                    var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Gift_entertainment/" + checkrow.file_name_ENG);
+                    if (System.IO.File.Exists(old_filePath4) == true)
+                    {
+                        System.IO.File.Delete(old_filePath4);
                     }
                     db.O_Gift_entertainment_File.Remove(checkrow);
                     db.SaveChanges();
@@ -1945,6 +2481,8 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+
+        //
         public IActionResult Channel_clue_index()
         {
             var checkrow = db.O_Channel_clue.FirstOrDefault();
@@ -1970,6 +2508,12 @@ namespace Lighting.Controllers.Backend
                 else
                 {
                     checkrow.updated_at = DateTime.Now;
+                    checkrow.title_TH = o_Channel_clue.title_TH;
+                    checkrow.title_ENG = o_Channel_clue.title_ENG;
+                    checkrow.titleDetails_TH = o_Channel_clue.titleDetails_TH;
+                    checkrow.titleDetails_ENG = o_Channel_clue.titleDetails_ENG;
+                    checkrow.detailsTitleTH = o_Channel_clue.detailsTitleTH;
+                    checkrow.detailsTitleENG = o_Channel_clue.detailsTitleENG;
                     checkrow.detail_th = o_Channel_clue.detail_th;
                     checkrow.detail_en = o_Channel_clue.detail_en;
                     db.SaveChanges();
@@ -2002,19 +2546,21 @@ namespace Lighting.Controllers.Backend
             try
             {
                 var Raw_list = db.O_Channel_clue_File.ToList();
-                var add_count = new List<table_model.CorporateGovernance_File_table>();
+                var add_count = new List<table_model.O_Channel_clue_File_table>();
                 var count = 1;
                 foreach (var items in Raw_list)
                 {
-                    add_count.Add(new table_model.CorporateGovernance_File_table
+                    add_count.Add(new table_model.O_Channel_clue_File_table
                     {
                         count_row = count,
                         id = items.id,
                         created_at = items.created_at,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         updated_at = items.updated_at,
                         use_status = items.use_status,
-                        title_file_th = items.title_file_th
+                        title_file_th = items.title_file_th,
+                        title_file_en = items.title_file_en
                     });
                     count++;
                 }
@@ -2029,15 +2575,17 @@ namespace Lighting.Controllers.Backend
         {
             return View();
         }
-        public IActionResult Channel_clue_create_insert(O_Channel_clue_File o_Channel_clue_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Channel_clue_create_insert(O_Channel_clue_File o_Channel_clue_File,
+            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
-                if (uploaded_image.Count == 0)
+                if (uploaded_image.Count == 0 || uploaded_image_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
-                if (uploaded_file.Count == 0)
+                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload ไฟล์" });
                 }
@@ -2065,6 +2613,21 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                foreach (var formFileENG in uploaded_image_ENG)
+                {
+                    if (formFileENG.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(formFileENG.FileName);
+                        o_Channel_clue_File.image_name_ENG = datestr + formFileENG.FileName;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Channel_clue/" + datestr + formFileENG.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFileENG.CopyTo(stream);
+                        }
+                    }
+                }
 
                 foreach (var formFile in uploaded_file)
                 {
@@ -2079,6 +2642,23 @@ namespace Lighting.Controllers.Backend
                         using (var stream = System.IO.File.Create(filePath))
                         {
                             formFile.CopyTo(stream);
+                        }
+                    }
+                }
+
+                foreach (var engFile in uploaded_file_ENG)
+                {
+                    if (engFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(engFile.FileName);
+                        o_Channel_clue_File.file_name_ENG = datestr + engFile.FileName;
+                        o_Channel_clue_File.file_type = extension;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Channel_clue/" + datestr + engFile.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            engFile.CopyTo(stream);
                         }
                     }
                 }
@@ -2114,7 +2694,9 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { fod_O_Channel_clue_File = get_detail };
             return View(model);
         }
-        public IActionResult Channel_clue_edit_update(O_Channel_clue_File o_Channel_clue_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Channel_clue_edit_update(O_Channel_clue_File o_Channel_clue_File,
+             List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
@@ -2153,6 +2735,30 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                if (uploaded_image_ENG.Count > 0)
+                {
+                    foreach (var formFileENG in uploaded_image_ENG)
+                    {
+                        if (formFileENG.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Channel_clue/" + old_data.image_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                            var extension = Path.GetExtension(formFileENG.FileName);
+                            old_data.image_name_ENG = datestr + formFileENG.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Channel_clue/" + datestr + formFileENG.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFileENG.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
 
 
                 if (uploaded_file.Count > 0)
@@ -2180,6 +2786,32 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                if (uploaded_file_ENG.Count > 0)
+                {
+                    foreach (var engFile in uploaded_file_ENG)
+                    {
+                        if (engFile.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Channel_clue/" + old_data.file_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(engFile.FileName);
+                            old_data.file_name_ENG = datestr + engFile.FileName;
+                            old_data.file_type = extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Channel_clue/" + datestr + engFile.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                engFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+
 
                 if (o_Channel_clue_File.use_status != 1)
                 {
@@ -2213,11 +2845,21 @@ namespace Lighting.Controllers.Backend
                     {
                         System.IO.File.Delete(old_filePath);
                     }
+                    var old_filePath3 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Channel_clue/" + checkrow.image_name_ENG);
+                    if (System.IO.File.Exists(old_filePath3) == true)
+                    {
+                        System.IO.File.Delete(old_filePath3);
+                    }
 
                     var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Channel_clue/" + checkrow.file_name);
                     if (System.IO.File.Exists(old_filePath2) == true)
                     {
                         System.IO.File.Delete(old_filePath2);
+                    }
+                    var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Channel_clue/" + checkrow.file_name_ENG);
+                    if (System.IO.File.Exists(old_filePath4) == true)
+                    {
+                        System.IO.File.Delete(old_filePath4);
                     }
                     db.O_Channel_clue_File.Remove(checkrow);
                     db.SaveChanges();
@@ -2230,6 +2872,8 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+
+        //
         public IActionResult Author_chairman_index()
         {
             var checkrow = db.O_Author_chairman.FirstOrDefault();
@@ -2255,6 +2899,11 @@ namespace Lighting.Controllers.Backend
                 else
                 {
                     checkrow.updated_at = DateTime.Now;
+                    checkrow.title_TH = o_Author_chairman.title_TH;
+                    checkrow.title_ENG = o_Author_chairman.title_ENG;
+                    checkrow.titleDetails_TH = o_Author_chairman.titleDetails_TH;
+                    checkrow.titleDetails_ENG = o_Author_chairman.titleDetails_ENG;
+                    checkrow.detailsTitleENG = o_Author_chairman.detailsTitleENG;
                     checkrow.detail_th = o_Author_chairman.detail_th;
                     checkrow.detail_en = o_Author_chairman.detail_en;
                     db.SaveChanges();
@@ -2287,19 +2936,21 @@ namespace Lighting.Controllers.Backend
             try
             {
                 var Raw_list = db.O_Author_chairman_File.ToList();
-                var add_count = new List<table_model.CorporateGovernance_File_table>();
+                var add_count = new List<table_model.O_Author_chairman_File_table>();
                 var count = 1;
                 foreach (var items in Raw_list)
                 {
-                    add_count.Add(new table_model.CorporateGovernance_File_table
+                    add_count.Add(new table_model.O_Author_chairman_File_table
                     {
                         count_row = count,
                         id = items.id,
                         created_at = items.created_at,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         updated_at = items.updated_at,
                         use_status = items.use_status,
-                        title_file_th = items.title_file_th
+                        title_file_th = items.title_file_th,
+                        title_file_en = items.title_file_en
                     });
                     count++;
                 }
@@ -2314,15 +2965,17 @@ namespace Lighting.Controllers.Backend
         {
             return View();
         }
-        public IActionResult Author_chairman_create_insert(O_Author_chairman_File o_Author_chairman_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Author_chairman_create_insert(O_Author_chairman_File o_Author_chairman_File,
+           List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
-                if (uploaded_image.Count == 0)
+                if (uploaded_image.Count == 0 || uploaded_image_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
-                if (uploaded_file.Count == 0)
+                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload ไฟล์" });
                 }
@@ -2351,6 +3004,22 @@ namespace Lighting.Controllers.Backend
                     }
                 }
 
+                foreach (var formFileENG in uploaded_image_ENG)
+                {
+                    if (formFileENG.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(formFileENG.FileName);
+                        o_Author_chairman_File.image_name_ENG = datestr + formFileENG.FileName;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_chairman/" + datestr + formFileENG.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFileENG.CopyTo(stream);
+                        }
+                    }
+                }
+
                 foreach (var formFile in uploaded_file)
                 {
                     if (formFile.Length > 0)
@@ -2367,6 +3036,23 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                foreach (var engFile in uploaded_file_ENG)
+                {
+                    if (engFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(engFile.FileName);
+                        o_Author_chairman_File.file_name_ENG = datestr + engFile.FileName;
+                        o_Author_chairman_File.file_type = extension;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_chairman/" + datestr + engFile.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            engFile.CopyTo(stream);
+                        }
+                    }
+                }
+
                 if (o_Author_chairman_File.use_status != 1)
                 {
                     o_Author_chairman_File.use_status = 0;
@@ -2399,7 +3085,9 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { fod_O_Author_chairman_File = get_detail };
             return View(model);
         }
-        public IActionResult Author_chairman_edit_update(O_Author_chairman_File o_Author_chairman_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Author_chairman_edit_update(O_Author_chairman_File o_Author_chairman_File,
+             List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
@@ -2438,6 +3126,30 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                if (uploaded_image_ENG.Count > 0)
+                {
+                    foreach (var formFileENG in uploaded_image_ENG)
+                    {
+                        if (formFileENG.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_chairman/" + old_data.image_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFileENG.FileName);
+                            old_data.image_name_ENG = datestr + formFileENG.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_chairman/" + datestr + formFileENG.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFileENG.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
 
 
                 if (uploaded_file.Count > 0)
@@ -2465,6 +3177,33 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+
+                if (uploaded_file_ENG.Count > 0)
+                {
+                    foreach (var engFile in uploaded_file_ENG)
+                    {
+                        if (engFile.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_chairman/" + old_data.file_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.ToString();
+                            var extension = Path.GetExtension(engFile.FileName);
+                            old_data.file_name_ENG = datestr + engFile.FileName;
+                            old_data.file_type = extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_chairman/" + datestr + engFile.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                engFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+
 
                 if (o_Author_chairman_File.use_status != 1)
                 {
@@ -2498,11 +3237,21 @@ namespace Lighting.Controllers.Backend
                     {
                         System.IO.File.Delete(old_filePath);
                     }
+                    var old_filePath3 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_chairman/" + checkrow.image_name_ENG);
+                    if (System.IO.File.Exists(old_filePath3) == true)
+                    {
+                        System.IO.File.Delete(old_filePath3);
+                    }
 
                     var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_chairman/" + checkrow.file_name);
                     if (System.IO.File.Exists(old_filePath2) == true)
                     {
                         System.IO.File.Delete(old_filePath2);
+                    }
+                    var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_chairman/" + checkrow.file_name_ENG);
+                    if (System.IO.File.Exists(old_filePath4) == true)
+                    {
+                        System.IO.File.Delete(old_filePath4);
                     }
                     db.O_Author_chairman_File.Remove(checkrow);
                     db.SaveChanges();
@@ -2515,6 +3264,8 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+
+        //
         public IActionResult Author_chairman_executive_index()
         {
             var checkrow = db.O_Author_chairman_executive.FirstOrDefault();
@@ -2540,6 +3291,11 @@ namespace Lighting.Controllers.Backend
                 else
                 {
                     checkrow.updated_at = DateTime.Now;
+                    checkrow.title_TH = o_Author_chairman_executive.title_TH;
+                    checkrow.title_ENG = o_Author_chairman_executive.title_ENG;
+                    checkrow.titleDetails_TH = o_Author_chairman_executive.titleDetails_TH;
+                    checkrow.titleDetails_ENG = o_Author_chairman_executive.titleDetails_ENG;
+                    checkrow.detailsTitleENG = o_Author_chairman_executive.detailsTitleENG;
                     checkrow.detail_th = o_Author_chairman_executive.detail_th;
                     checkrow.detail_en = o_Author_chairman_executive.detail_en;
                     db.SaveChanges();
@@ -2572,19 +3328,21 @@ namespace Lighting.Controllers.Backend
             try
             {
                 var Raw_list = db.O_Author_chairman_executive_File.ToList();
-                var add_count = new List<table_model.CorporateGovernance_File_table>();
+                var add_count = new List<table_model.O_Author_chairman_executive_File_table>();
                 var count = 1;
                 foreach (var items in Raw_list)
                 {
-                    add_count.Add(new table_model.CorporateGovernance_File_table
+                    add_count.Add(new table_model.O_Author_chairman_executive_File_table
                     {
                         count_row = count,
                         id = items.id,
                         created_at = items.created_at,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         updated_at = items.updated_at,
                         use_status = items.use_status,
-                        title_file_th = items.title_file_th
+                        title_file_th = items.title_file_th,
+                        title_file_en = items.title_file_en
                     });
                     count++;
                 }
@@ -2599,15 +3357,17 @@ namespace Lighting.Controllers.Backend
         {
             return View();
         }
-        public IActionResult Author_chairman_executive_create_insert(O_Author_chairman_executive_File o_Author_chairman_executive_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Author_chairman_executive_create_insert(O_Author_chairman_executive_File o_Author_chairman_executive_File,
+             List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
-                if (uploaded_image.Count == 0)
+                if (uploaded_image.Count == 0 || uploaded_image_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
-                if (uploaded_file.Count == 0)
+                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload ไฟล์" });
                 }
@@ -2636,6 +3396,23 @@ namespace Lighting.Controllers.Backend
                     }
                 }
 
+                foreach (var formFileENG in uploaded_image_ENG)
+                {
+                    if (formFileENG.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(formFileENG.FileName);
+                        o_Author_chairman_executive_File.image_name_ENG = datestr + formFileENG.FileName;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_chairman_executive/" + datestr + formFileENG.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFileENG.CopyTo(stream);
+                        }
+                    }
+                }
+
+
                 foreach (var formFile in uploaded_file)
                 {
                     if (formFile.Length > 0)
@@ -2649,6 +3426,22 @@ namespace Lighting.Controllers.Backend
                         using (var stream = System.IO.File.Create(filePath))
                         {
                             formFile.CopyTo(stream);
+                        }
+                    }
+                }
+                foreach (var engFile in uploaded_file_ENG)
+                {
+                    if (engFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(engFile.FileName);
+                        o_Author_chairman_executive_File.file_name_ENG = datestr + engFile.FileName;
+                        o_Author_chairman_executive_File.file_type = extension;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_chairman_executive/" + datestr + engFile.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            engFile.CopyTo(stream);
                         }
                     }
                 }
@@ -2684,7 +3477,9 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { fod_O_Author_chairman_executive_File = get_detail };
             return View(model);
         }
-        public IActionResult Author_chairman_executive_edit_update(O_Author_chairman_executive_File o_Author_chairman_executive_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Author_chairman_executive_edit_update(O_Author_chairman_executive_File o_Author_chairman_executive_File,
+            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
@@ -2723,6 +3518,30 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                if (uploaded_image_ENG.Count > 0)
+                {
+                    foreach (var formFileENG in uploaded_image_ENG)
+                    {
+                        if (formFileENG.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_chairman_executive/" + old_data.image_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFileENG.FileName);
+                            old_data.image_name_ENG = datestr + formFileENG.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_chairman_executive/" + datestr + formFileENG.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFileENG.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
 
 
                 if (uploaded_file.Count > 0)
@@ -2746,6 +3565,31 @@ namespace Lighting.Controllers.Backend
                             using (var stream = System.IO.File.Create(filePath))
                             {
                                 formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+                if (uploaded_file_ENG.Count > 0)
+                {
+                    foreach (var engFile in uploaded_file_ENG)
+                    {
+                        if (engFile.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_chairman_executive/" + old_data.file_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.ToString();
+                            var extension = Path.GetExtension(engFile.FileName);
+                            old_data.file_name_ENG = datestr + engFile.FileName;
+                            old_data.file_type = extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_chairman_executive/" + datestr + engFile.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                engFile.CopyTo(stream);
                             }
                         }
                     }
@@ -2783,11 +3627,21 @@ namespace Lighting.Controllers.Backend
                     {
                         System.IO.File.Delete(old_filePath);
                     }
+                    var old_filePath3 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_chairman_executive/" + checkrow.image_name_ENG);
+                    if (System.IO.File.Exists(old_filePath3) == true)
+                    {
+                        System.IO.File.Delete(old_filePath3);
+                    }
 
                     var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_chairman_executive/" + checkrow.file_name);
                     if (System.IO.File.Exists(old_filePath2) == true)
                     {
                         System.IO.File.Delete(old_filePath2);
+                    }
+                    var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_chairman_executive/" + checkrow.file_name_ENG);
+                    if (System.IO.File.Exists(old_filePath4) == true)
+                    {
+                        System.IO.File.Delete(old_filePath4);
                     }
                     db.O_Author_chairman_executive_File.Remove(checkrow);
                     db.SaveChanges();
@@ -2800,6 +3654,8 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+
+        //
         public IActionResult Author_board_director_index()
         {
             var checkrow = db.O_Author_board_director.FirstOrDefault();
@@ -2825,6 +3681,11 @@ namespace Lighting.Controllers.Backend
                 else
                 {
                     checkrow.updated_at = DateTime.Now;
+                    checkrow.title_TH = o_Author_board_director.title_TH;
+                    checkrow.title_ENG = o_Author_board_director.title_ENG;
+                    checkrow.titleDetails_TH = o_Author_board_director.titleDetails_TH;
+                    checkrow.titleDetails_ENG = o_Author_board_director.titleDetails_ENG;
+                    checkrow.detailsTitleENG = o_Author_board_director.detailsTitleENG;
                     checkrow.detail_th = o_Author_board_director.detail_th;
                     checkrow.detail_en = o_Author_board_director.detail_en;
                     db.SaveChanges();
@@ -2857,19 +3718,21 @@ namespace Lighting.Controllers.Backend
             try
             {
                 var Raw_list = db.O_Author_board_director_File.ToList();
-                var add_count = new List<table_model.CorporateGovernance_File_table>();
+                var add_count = new List<table_model.O_Author_board_director_File_table>();
                 var count = 1;
                 foreach (var items in Raw_list)
                 {
-                    add_count.Add(new table_model.CorporateGovernance_File_table
+                    add_count.Add(new table_model.O_Author_board_director_File_table
                     {
                         count_row = count,
                         id = items.id,
                         created_at = items.created_at,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         updated_at = items.updated_at,
                         use_status = items.use_status,
-                        title_file_th = items.title_file_th
+                        title_file_th = items.title_file_th,
+                        title_file_en = items.title_file_en
                     });
                     count++;
                 }
@@ -2884,15 +3747,18 @@ namespace Lighting.Controllers.Backend
         {
             return View();
         }
-        public IActionResult Author_board_director_create_insert(O_Author_board_director_File o_Author_board_director_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Author_board_director_create_insert(O_Author_board_director_File o_Author_board_director_File,
+             List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
-                if (uploaded_image.Count == 0)
+
+                if (uploaded_image.Count == 0 || uploaded_image_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
-                if (uploaded_file.Count == 0)
+                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload ไฟล์" });
                 }
@@ -2921,6 +3787,22 @@ namespace Lighting.Controllers.Backend
                     }
                 }
 
+                foreach (var formFileENG in uploaded_image_ENG)
+                {
+                    if (formFileENG.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(formFileENG.FileName);
+                        o_Author_board_director_File.image_name_ENG = datestr + formFileENG.FileName;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_board_director/" + datestr + formFileENG.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFileENG.CopyTo(stream);
+                        }
+                    }
+                }
+                 
                 foreach (var formFile in uploaded_file)
                 {
                     if (formFile.Length > 0)
@@ -2937,6 +3819,23 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                foreach (var engFile in uploaded_file_ENG)
+                {
+                    if (engFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(engFile.FileName);
+                        o_Author_board_director_File.file_name_ENG = datestr + engFile.FileName;
+                        o_Author_board_director_File.file_type = extension;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_board_director/" + datestr + engFile.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            engFile.CopyTo(stream);
+                        }
+                    }
+                }
+
                 if (o_Author_board_director_File.use_status != 1)
                 {
                     o_Author_board_director_File.use_status = 0;
@@ -2969,7 +3868,9 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { fod_O_Author_board_director_File = get_detail };
             return View(model);
         }
-        public IActionResult Author_board_director_edit_update(O_Author_board_director_File o_Author_board_director_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Author_board_director_edit_update(O_Author_board_director_File o_Author_board_director_File,
+             List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
@@ -3008,7 +3909,30 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                if (uploaded_image_ENG.Count > 0)
+                {
+                    foreach (var formFileENG in uploaded_image_ENG)
+                    {
+                        if (formFileENG.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_board_director/" + old_data.image_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
 
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFileENG.FileName);
+                            old_data.image_name_ENG = datestr + formFileENG.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_board_director/" + datestr + formFileENG.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFileENG.CopyTo(stream);
+                            }
+                        }
+                    }
+                }                 
 
                 if (uploaded_file.Count > 0)
                 {
@@ -3031,6 +3955,32 @@ namespace Lighting.Controllers.Backend
                             using (var stream = System.IO.File.Create(filePath))
                             {
                                 formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+
+                if (uploaded_file_ENG.Count > 0)
+                {
+                    foreach (var engFile in uploaded_file_ENG)
+                    {
+                        if (engFile.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_board_director/" + old_data.file_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                            var extension = Path.GetExtension(engFile.FileName);
+                            old_data.file_name_ENG = datestr + engFile.FileName;
+                            old_data.file_type = extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_board_director/" + datestr + engFile.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                engFile.CopyTo(stream);
                             }
                         }
                     }
@@ -3068,11 +4018,21 @@ namespace Lighting.Controllers.Backend
                     {
                         System.IO.File.Delete(old_filePath);
                     }
+                    var old_filePath3 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_board_director/" + checkrow.image_name_ENG);
+                    if (System.IO.File.Exists(old_filePath3) == true)
+                    {
+                        System.IO.File.Delete(old_filePath3);
+                    }
 
                     var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_board_director/" + checkrow.file_name);
                     if (System.IO.File.Exists(old_filePath2) == true)
                     {
                         System.IO.File.Delete(old_filePath2);
+                    }
+                    var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_board_director/" + checkrow.file_name_ENG);
+                    if (System.IO.File.Exists(old_filePath4) == true)
+                    {
+                        System.IO.File.Delete(old_filePath4);
                     }
                     db.O_Author_board_director_File.Remove(checkrow);
                     db.SaveChanges();
@@ -3085,6 +4045,8 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+
+        //
         public IActionResult Author_audit_committee_index()
         {
             var checkrow = db.O_Author_audit_committee.FirstOrDefault();
@@ -3110,6 +4072,11 @@ namespace Lighting.Controllers.Backend
                 else
                 {
                     checkrow.updated_at = DateTime.Now;
+                    checkrow.title_TH = o_Author_audit_committee.title_TH;
+                    checkrow.title_ENG = o_Author_audit_committee.title_ENG;
+                    checkrow.titleDetails_TH = o_Author_audit_committee.titleDetails_TH;
+                    checkrow.titleDetails_ENG = o_Author_audit_committee.titleDetails_ENG;
+                    checkrow.detailsTitleENG = o_Author_audit_committee.detailsTitleENG;
                     checkrow.detail_th = o_Author_audit_committee.detail_th;
                     checkrow.detail_en = o_Author_audit_committee.detail_en;
                     db.SaveChanges();
@@ -3142,19 +4109,21 @@ namespace Lighting.Controllers.Backend
             try
             {
                 var Raw_list = db.O_Author_audit_committee_File.ToList();
-                var add_count = new List<table_model.CorporateGovernance_File_table>();
+                var add_count = new List<table_model.O_Author_audit_committee_File_table>();
                 var count = 1;
                 foreach (var items in Raw_list)
                 {
-                    add_count.Add(new table_model.CorporateGovernance_File_table
+                    add_count.Add(new table_model.O_Author_audit_committee_File_table
                     {
                         count_row = count,
                         id = items.id,
                         created_at = items.created_at,
                         image_name = items.image_name,
+                        image_name_ENG = items.image_name_ENG,
                         updated_at = items.updated_at,
                         use_status = items.use_status,
-                        title_file_th = items.title_file_th
+                        title_file_th = items.title_file_th,
+                        title_file_en = items.title_file_en
                     });
                     count++;
                 }
@@ -3169,15 +4138,17 @@ namespace Lighting.Controllers.Backend
         {
             return View();
         }
-        public IActionResult Author_audit_committee_create_insert(O_Author_audit_committee_File o_Author_audit_committee_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Author_audit_committee_create_insert(O_Author_audit_committee_File o_Author_audit_committee_File,
+           List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
-            {
-                if (uploaded_image.Count == 0)
+            { 
+                if (uploaded_image.Count == 0 || uploaded_image_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
-                if (uploaded_file.Count == 0)
+                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload ไฟล์" });
                 }
@@ -3205,7 +4176,22 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                foreach (var formFileENG in uploaded_image_ENG)
+                {
+                    if (formFileENG.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(formFileENG.FileName);
+                        o_Author_audit_committee_File.image_name_ENG = datestr + formFileENG.FileName;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_audit_committee/" + datestr + formFileENG.FileName);
 
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFileENG.CopyTo(stream);
+                        }
+                    }
+                }
+                 
                 foreach (var formFile in uploaded_file)
                 {
                     if (formFile.Length > 0)
@@ -3222,6 +4208,23 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                foreach (var engFile in uploaded_file_ENG)
+                {
+                    if (engFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(engFile.FileName);
+                        o_Author_audit_committee_File.file_name_ENG = datestr + engFile.FileName;
+                        o_Author_audit_committee_File.file_type = extension;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_audit_committee/" + datestr + engFile.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            engFile.CopyTo(stream);
+                        }
+                    }
+                }
+
                 if (o_Author_audit_committee_File.use_status != 1)
                 {
                     o_Author_audit_committee_File.use_status = 0;
@@ -3254,7 +4257,9 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { fod_O_Author_audit_committee_File = get_detail };
             return View(model);
         }
-        public IActionResult Author_audit_committee_edit_update(O_Author_audit_committee_File o_Author_audit_committee_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Author_audit_committee_edit_update(O_Author_audit_committee_File o_Author_audit_committee_File,
+            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
@@ -3294,6 +4299,30 @@ namespace Lighting.Controllers.Backend
                     }
                 }
 
+                if (uploaded_image_ENG.Count > 0)
+                {
+                    foreach (var formFileENG in uploaded_image_ENG)
+                    {
+                        if (formFileENG.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_audit_committee/" + old_data.image_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFileENG.FileName);
+                            old_data.image_name_ENG = datestr + formFileENG.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_audit_committee/" + datestr + formFileENG.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFileENG.CopyTo(stream);
+                            }
+                        }
+                    }
+                } 
 
                 if (uploaded_file.Count > 0)
                 {
@@ -3316,6 +4345,31 @@ namespace Lighting.Controllers.Backend
                             using (var stream = System.IO.File.Create(filePath))
                             {
                                 formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+                if (uploaded_file_ENG.Count > 0)
+                {
+                    foreach (var engFile in uploaded_file_ENG)
+                    {
+                        if (engFile.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_audit_committee/" + old_data.file_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                            var extension = Path.GetExtension(engFile.FileName);
+                            old_data.file_name_ENG = datestr + engFile.FileName;
+                            old_data.file_type = extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_audit_committee/" + datestr + engFile.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                engFile.CopyTo(stream);
                             }
                         }
                     }
@@ -3353,11 +4407,21 @@ namespace Lighting.Controllers.Backend
                     {
                         System.IO.File.Delete(old_filePath);
                     }
+                    var old_filePath3 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_audit_committee/" + checkrow.image_name_ENG);
+                    if (System.IO.File.Exists(old_filePath3) == true)
+                    {
+                        System.IO.File.Delete(old_filePath3);
+                    }
 
                     var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_audit_committee/" + checkrow.file_name);
                     if (System.IO.File.Exists(old_filePath2) == true)
                     {
                         System.IO.File.Delete(old_filePath2);
+                    }
+                    var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_audit_committee/" + checkrow.file_name_ENG);
+                    if (System.IO.File.Exists(old_filePath4) == true)
+                    {
+                        System.IO.File.Delete(old_filePath4);
                     }
                     db.O_Author_audit_committee_File.Remove(checkrow);
                     db.SaveChanges();
@@ -3369,7 +4433,9 @@ namespace Lighting.Controllers.Backend
             {
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
-        }
+        } 
+
+        //
         public IActionResult Author_cg_index()
         {
             var checkrow = db.O_Author_cg.FirstOrDefault();
@@ -3395,6 +4461,11 @@ namespace Lighting.Controllers.Backend
                 else
                 {
                     checkrow.updated_at = DateTime.Now;
+                    checkrow.title_TH = o_Author_cg.title_TH;
+                    checkrow.title_ENG = o_Author_cg.title_ENG;
+                    checkrow.titleDetails_TH = o_Author_cg.titleDetails_TH;
+                    checkrow.titleDetails_ENG = o_Author_cg.titleDetails_ENG;
+                    checkrow.detailsTitleENG = o_Author_cg.detailsTitleENG;
                     checkrow.detail_th = o_Author_cg.detail_th;
                     checkrow.detail_en = o_Author_cg.detail_en;
                     db.SaveChanges();
@@ -3439,7 +4510,8 @@ namespace Lighting.Controllers.Backend
                         image_name = items.image_name,
                         updated_at = items.updated_at,
                         use_status = items.use_status,
-                        title_file_th = items.title_file_th
+                        title_file_th = items.title_file_th,
+                        title_file_en = items.title_file_en
                     });
                     count++;
                 }
@@ -3454,15 +4526,17 @@ namespace Lighting.Controllers.Backend
         {
             return View();
         }
-        public IActionResult Author_cg_create_insert(O_Author_cg_File o_Author_cg_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Author_cg_create_insert(O_Author_cg_File o_Author_cg_File,
+            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
-            {
-                if (uploaded_image.Count == 0)
+            { 
+                if (uploaded_image.Count == 0 || uploaded_image_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
-                if (uploaded_file.Count == 0)
+                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload ไฟล์" });
                 }
@@ -3491,6 +4565,22 @@ namespace Lighting.Controllers.Backend
                     }
                 }
 
+                foreach (var formFileENG in uploaded_image_ENG)
+                {
+                    if (formFileENG.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(formFileENG.FileName);
+                        o_Author_cg_File.image_name_ENG = datestr + formFileENG.FileName;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_cg/" + datestr + formFileENG.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFileENG.CopyTo(stream);
+                        }
+                    }
+                }
+                 
                 foreach (var formFile in uploaded_file)
                 {
                     if (formFile.Length > 0)
@@ -3507,6 +4597,23 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                foreach (var engFile in uploaded_file_ENG)
+                {
+                    if (engFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(engFile.FileName);
+                        o_Author_cg_File.file_name_ENG = datestr + engFile.FileName;
+                        o_Author_cg_File.file_type = extension;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_cg/" + datestr + engFile.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            engFile.CopyTo(stream);
+                        }
+                    }
+                }
+
                 if (o_Author_cg_File.use_status != 1)
                 {
                     o_Author_cg_File.use_status = 0;
@@ -3539,7 +4646,9 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { fod_O_Author_cg_File = get_detail };
             return View(model);
         }
-        public IActionResult Author_cg_edit_update(O_Author_cg_File o_Author_cg_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Author_cg_edit_update(O_Author_cg_File o_Author_cg_File,
+            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
@@ -3578,7 +4687,30 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                if (uploaded_image_ENG.Count > 0)
+                {
+                    foreach (var formFileENG in uploaded_image_ENG)
+                    {
+                        if (formFileENG.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_cg/" + old_data.image_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
 
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFileENG.FileName);
+                            old_data.image_name_ENG = datestr + formFileENG.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_cg/" + datestr + formFileENG.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFileENG.CopyTo(stream);
+                            }
+                        }
+                    }
+                } 
 
                 if (uploaded_file.Count > 0)
                 {
@@ -3601,6 +4733,31 @@ namespace Lighting.Controllers.Backend
                             using (var stream = System.IO.File.Create(filePath))
                             {
                                 formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+                if (uploaded_file_ENG.Count > 0)
+                {
+                    foreach (var engFile in uploaded_file_ENG)
+                    {
+                        if (engFile.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_cg/" + old_data.file_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                            var extension = Path.GetExtension(engFile.FileName);
+                            old_data.file_name_ENG = datestr + engFile.FileName;
+                            old_data.file_type = extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_cg/" + datestr + engFile.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                engFile.CopyTo(stream);
                             }
                         }
                     }
@@ -3638,11 +4795,20 @@ namespace Lighting.Controllers.Backend
                     {
                         System.IO.File.Delete(old_filePath);
                     }
-
+                    var old_filePath3 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_cg/" + checkrow.image_name_ENG);
+                    if (System.IO.File.Exists(old_filePath3) == true)
+                    {
+                        System.IO.File.Delete(old_filePath3);
+                    }
                     var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_cg/" + checkrow.file_name);
                     if (System.IO.File.Exists(old_filePath2) == true)
                     {
                         System.IO.File.Delete(old_filePath2);
+                    }
+                    var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_cg/" + checkrow.file_name_ENG);
+                    if (System.IO.File.Exists(old_filePath4) == true)
+                    {
+                        System.IO.File.Delete(old_filePath4);
                     }
                     db.O_Author_cg_File.Remove(checkrow);
                     db.SaveChanges();
@@ -3655,6 +4821,8 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+
+        //
         public IActionResult Author_executive_board_index()
         {
             var checkrow = db.O_Author_executive_board.FirstOrDefault();
@@ -3680,6 +4848,11 @@ namespace Lighting.Controllers.Backend
                 else
                 {
                     checkrow.updated_at = DateTime.Now;
+                    checkrow.title_TH = o_Author_executive_board.title_TH;
+                    checkrow.title_ENG = o_Author_executive_board.title_ENG;
+                    checkrow.titleDetails_TH = o_Author_executive_board.titleDetails_TH;
+                    checkrow.titleDetails_ENG = o_Author_executive_board.titleDetails_ENG;
+                    checkrow.detailsTitleENG = o_Author_executive_board.detailsTitleENG;
                     checkrow.detail_th = o_Author_executive_board.detail_th;
                     checkrow.detail_en = o_Author_executive_board.detail_en;
                     db.SaveChanges();
@@ -3712,11 +4885,11 @@ namespace Lighting.Controllers.Backend
             try
             {
                 var Raw_list = db.O_Author_executive_board_File.ToList();
-                var add_count = new List<table_model.CorporateGovernance_File_table>();
+                var add_count = new List<table_model.O_Author_executive_board_File_table>();
                 var count = 1;
                 foreach (var items in Raw_list)
                 {
-                    add_count.Add(new table_model.CorporateGovernance_File_table
+                    add_count.Add(new table_model.O_Author_executive_board_File_table
                     {
                         count_row = count,
                         id = items.id,
@@ -3724,7 +4897,8 @@ namespace Lighting.Controllers.Backend
                         image_name = items.image_name,
                         updated_at = items.updated_at,
                         use_status = items.use_status,
-                        title_file_th = items.title_file_th
+                        title_file_th = items.title_file_th,
+                        title_file_en = items.title_file_en
                     });
                     count++;
                 }
@@ -3739,15 +4913,17 @@ namespace Lighting.Controllers.Backend
         {
             return View();
         }
-        public IActionResult Author_executive_board_create_insert(O_Author_executive_board_File o_Author_executive_board_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Author_executive_board_create_insert(O_Author_executive_board_File o_Author_executive_board_File,
+           List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
-                if (uploaded_image.Count == 0)
+                if (uploaded_image.Count == 0 || uploaded_image_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
-                if (uploaded_file.Count == 0)
+                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload ไฟล์" });
                 }
@@ -3776,6 +4952,22 @@ namespace Lighting.Controllers.Backend
                     }
                 }
 
+                foreach (var formFileENG in uploaded_image_ENG)
+                {
+                    if (formFileENG.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(formFileENG.FileName);
+                        o_Author_executive_board_File.image_name_ENG = datestr + formFileENG.FileName;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_executive_board/" + datestr + formFileENG.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFileENG.CopyTo(stream);
+                        }
+                    }
+                }
+                 
                 foreach (var formFile in uploaded_file)
                 {
                     if (formFile.Length > 0)
@@ -3792,6 +4984,23 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                foreach (var engFile in uploaded_file_ENG)
+                {
+                    if (engFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(engFile.FileName);
+                        o_Author_executive_board_File.file_name_ENG = datestr + engFile.FileName;
+                        o_Author_executive_board_File.file_type = extension;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_executive_board/" + datestr + engFile.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            engFile.CopyTo(stream);
+                        }
+                    }
+                }
+
                 if (o_Author_executive_board_File.use_status != 1)
                 {
                     o_Author_executive_board_File.use_status = 0;
@@ -3824,7 +5033,9 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { fod_O_Author_executive_board_File = get_detail };
             return View(model);
         }
-        public IActionResult Author_executive_board_edit_update(O_Author_executive_board_File o_Author_executive_board_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Author_executive_board_edit_update(O_Author_executive_board_File o_Author_executive_board_File,
+           List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
@@ -3862,9 +5073,33 @@ namespace Lighting.Controllers.Backend
                             }
                         }
                     }
-                }
+                } 
 
+                if (uploaded_image_ENG.Count > 0)
+                {
+                    foreach (var formFileENG in uploaded_image_ENG)
+                    {
+                        if (formFileENG.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_executive_board/" + old_data.image_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
 
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFileENG.FileName);
+                            old_data.image_name_ENG = datestr + formFileENG.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_executive_board/" + datestr + formFileENG.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFileENG.CopyTo(stream);
+                            }
+                        }
+                    }
+                } 
+                
                 if (uploaded_file.Count > 0)
                 {
                     foreach (var formFile in uploaded_file)
@@ -3886,6 +5121,31 @@ namespace Lighting.Controllers.Backend
                             using (var stream = System.IO.File.Create(filePath))
                             {
                                 formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+                if (uploaded_file_ENG.Count > 0)
+                {
+                    foreach (var engFile in uploaded_file_ENG)
+                    {
+                        if (engFile.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_executive_board/" + old_data.file_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                            var extension = Path.GetExtension(engFile.FileName);
+                            old_data.file_name_ENG = datestr + engFile.FileName;
+                            old_data.file_type = extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_executive_board/" + datestr + engFile.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                engFile.CopyTo(stream);
                             }
                         }
                     }
@@ -3923,11 +5183,20 @@ namespace Lighting.Controllers.Backend
                     {
                         System.IO.File.Delete(old_filePath);
                     }
-
+                    var old_filePath3 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_executive_board/" + checkrow.image_name_ENG);
+                    if (System.IO.File.Exists(old_filePath3) == true)
+                    {
+                        System.IO.File.Delete(old_filePath3);
+                    }
                     var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_executive_board/" + checkrow.file_name);
                     if (System.IO.File.Exists(old_filePath2) == true)
                     {
                         System.IO.File.Delete(old_filePath2);
+                    }
+                    var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_executive_board/" + checkrow.image_name_ENG);
+                    if (System.IO.File.Exists(old_filePath4) == true)
+                    {
+                        System.IO.File.Delete(old_filePath4);
                     }
                     db.O_Author_executive_board_File.Remove(checkrow);
                     db.SaveChanges();
@@ -3940,6 +5209,8 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+
+        //
         public IActionResult Author_secretary_index()
         {
             var checkrow = db.O_Author_secretary.FirstOrDefault();
@@ -3965,6 +5236,11 @@ namespace Lighting.Controllers.Backend
                 else
                 {
                     checkrow.updated_at = DateTime.Now;
+                    checkrow.title_TH = o_Author_secretary.title_TH;
+                    checkrow.title_ENG = o_Author_secretary.title_ENG;
+                    checkrow.titleDetails_TH = o_Author_secretary.titleDetails_TH;
+                    checkrow.titleDetails_ENG = o_Author_secretary.titleDetails_ENG;
+                    checkrow.detailsTitleENG = o_Author_secretary.detailsTitleENG;
                     checkrow.detail_th = o_Author_secretary.detail_th;
                     checkrow.detail_en = o_Author_secretary.detail_en;
                     db.SaveChanges();
@@ -3997,11 +5273,11 @@ namespace Lighting.Controllers.Backend
             try
             {
                 var Raw_list = db.O_Author_secretary_File.ToList();
-                var add_count = new List<table_model.CorporateGovernance_File_table>();
+                var add_count = new List<table_model.O_Author_secretary_File_table>();
                 var count = 1;
                 foreach (var items in Raw_list)
                 {
-                    add_count.Add(new table_model.CorporateGovernance_File_table
+                    add_count.Add(new table_model.O_Author_secretary_File_table
                     {
                         count_row = count,
                         id = items.id,
@@ -4009,7 +5285,8 @@ namespace Lighting.Controllers.Backend
                         image_name = items.image_name,
                         updated_at = items.updated_at,
                         use_status = items.use_status,
-                        title_file_th = items.title_file_th
+                        title_file_th = items.title_file_th,
+                        title_file_en = items.title_file_en
                     });
                     count++;
                 }
@@ -4024,15 +5301,17 @@ namespace Lighting.Controllers.Backend
         {
             return View();
         }
-        public IActionResult Author_secretary_create_insert(O_Author_secretary_File o_Author_secretary_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Author_secretary_board_create_insert(O_Author_secretary_File o_Author_secretary_File,
+            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
-            {
-                if (uploaded_image.Count == 0)
+            { 
+                if (uploaded_image.Count == 0 || uploaded_image_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
-                if (uploaded_file.Count == 0)
+                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload ไฟล์" });
                 }
@@ -4060,6 +5339,22 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                foreach (var formFileENG in uploaded_image_ENG)
+                {
+                    if (formFileENG.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(formFileENG.FileName);
+                        o_Author_secretary_File.image_name_ENG = datestr + formFileENG.FileName;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_secretary/" + datestr + formFileENG.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            formFileENG.CopyTo(stream);
+                        }
+                    }
+                }
+                 
 
                 foreach (var formFile in uploaded_file)
                 {
@@ -4077,6 +5372,23 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
+                foreach (var engFile in uploaded_file_ENG)
+                {
+                    if (engFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(engFile.FileName);
+                        o_Author_secretary_File.file_name_ENG = datestr + engFile.FileName;
+                        o_Author_secretary_File.file_type = extension;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_secretary/" + datestr + engFile.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            engFile.CopyTo(stream);
+                        }
+                    }
+                }
+
                 if (o_Author_secretary_File.use_status != 1)
                 {
                     o_Author_secretary_File.use_status = 0;
@@ -4109,7 +5421,9 @@ namespace Lighting.Controllers.Backend
             var model = new model_input { fod_O_Author_secretary_File = get_detail };
             return View(model);
         }
-        public IActionResult Author_secretary_edit_update(O_Author_secretary_File o_Author_secretary_File, List<IFormFile> uploaded_image, List<IFormFile> uploaded_file)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public IActionResult Author_secretary_edit_update(O_Author_secretary_File o_Author_secretary_File,
+            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
             {
@@ -4149,6 +5463,31 @@ namespace Lighting.Controllers.Backend
                     }
                 }
 
+                if (uploaded_image_ENG.Count > 0)
+                {
+                    foreach (var formFileENG in uploaded_image_ENG)
+                    {
+                        if (formFileENG.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_secretary/" + old_data.image_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFileENG.FileName);
+                            old_data.image_name_ENG = datestr + formFileENG.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_secretary/" + datestr + formFileENG.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFileENG.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+                 
 
                 if (uploaded_file.Count > 0)
                 {
@@ -4171,6 +5510,32 @@ namespace Lighting.Controllers.Backend
                             using (var stream = System.IO.File.Create(filePath))
                             {
                                 formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+
+                if (uploaded_file_ENG.Count > 0)
+                {
+                    foreach (var engFile in uploaded_file_ENG)
+                    {
+                        if (engFile.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_secretary/" + old_data.file_name_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                            var extension = Path.GetExtension(engFile.FileName);
+                            old_data.file_name_ENG = datestr + engFile.FileName;
+                            old_data.file_type = extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_secretary/" + datestr + engFile.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                engFile.CopyTo(stream);
                             }
                         }
                     }
@@ -4208,11 +5573,20 @@ namespace Lighting.Controllers.Backend
                     {
                         System.IO.File.Delete(old_filePath);
                     }
-
+                    var old_filePath3 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Author_secretary/" + checkrow.image_name_ENG);
+                    if (System.IO.File.Exists(old_filePath3) == true)
+                    {
+                        System.IO.File.Delete(old_filePath3);
+                    }
                     var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_secretary/" + checkrow.file_name);
                     if (System.IO.File.Exists(old_filePath2) == true)
                     {
                         System.IO.File.Delete(old_filePath2);
+                    }
+                    var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Author_secretary/" + checkrow.file_name_ENG);
+                    if (System.IO.File.Exists(old_filePath4) == true)
+                    {
+                        System.IO.File.Delete(old_filePath4);
                     }
                     db.O_Author_secretary_File.Remove(checkrow);
                     db.SaveChanges();

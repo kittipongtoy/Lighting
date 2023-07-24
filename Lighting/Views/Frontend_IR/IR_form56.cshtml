@@ -25,6 +25,11 @@
                                     <h1>@item.detailsTitleENG</h1>
                                 }
                             }
+                            else
+                            {
+                                <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
+                                <h1>แบบฟอร์ม 56-1</h1>
+                            }
                         }
                         else
                         {
@@ -35,6 +40,11 @@
                                     <h5>@item.titleTH</h5>
                                     <h1>@item.detailsTitleTH</h1>
                                 }
+                            }
+                            else
+                            {
+                                <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
+                                <h1>แบบฟอร์ม 56-1</h1>
                             }
                         }
 
@@ -61,6 +71,13 @@
                                                 <th>@item.detailsENG</th>
                                             }
                                         }
+                                        else
+                                        {
+                                            <th>ชื่อบริษัท</th>
+                                            <th>ประจำปี</th>
+                                            <th>วันที่ได้รับข้อมูล</th>
+                                            <th>รายละเอียด</th>
+                                        }
                                     }
                                     else
                                     {
@@ -74,6 +91,13 @@
                                                 <th>@item.dateConfrimTitleTH</th>
                                                 <th>@item.detailsTH</th>
                                             }
+                                        }
+                                        else
+                                        {
+                                            <th>ชื่อบริษัท</th>
+                                            <th>ประจำปี</th>
+                                            <th>วันที่ได้รับข้อมูล</th>
+                                            <th>รายละเอียด</th>
                                         }
                                     }
 
@@ -132,141 +156,141 @@
                                     }
                                 }
 
-                              @*  <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2564</td>
-                                    <td>29/03/2565</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                @*  <tr>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2564</td>
+                                <td>29/03/2565</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2563</td>
-                                    <td>25/03/2564</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2563</td>
+                                <td>25/03/2564</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2562</td>
-                                    <td>31/03/2563</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2562</td>
+                                <td>31/03/2563</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2560</td>
-                                    <td>27/03/2561</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2560</td>
+                                <td>27/03/2561</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2559</td>
-                                    <td>29/03/2560</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2559</td>
+                                <td>29/03/2560</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2558</td>
-                                    <td>31/03/2559</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2558</td>
+                                <td>31/03/2559</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2557</td>
-                                    <td>24/03/2558</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2557</td>
+                                <td>24/03/2558</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2556</td>
-                                    <td>27/03/2557</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2556</td>
+                                <td>27/03/2557</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2555</td>
-                                    <td>27/03/2556</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2555</td>
+                                <td>27/03/2556</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2554</td>
-                                    <td>03/04/2555</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2554</td>
+                                <td>03/04/2555</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2553</td>
-                                    <td>24/03/2554</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2553</td>
+                                <td>24/03/2554</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2552</td>
-                                    <td>26/03/2553</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2552</td>
+                                <td>26/03/2553</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2551</td>
-                                    <td>30/03/2552</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2551</td>
+                                <td>30/03/2552</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2550</td>
-                                    <td>23/07/2551</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2550</td>
+                                <td>23/07/2551</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2549</td>
-                                    <td>24/04/2550</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2549</td>
+                                <td>24/04/2550</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2548</td>
-                                    <td>20/03/2549</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2548</td>
+                                <td>20/03/2549</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>
                                 <tr>
-                                    <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
-                                    <td>2547</td>
-                                    <td>23/03/2548</td>
-                                    <td>
-                                        <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
-                                    </td>
+                                <td>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</td>
+                                <td>2547</td>
+                                <td>23/03/2548</td>
+                                <td>
+                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
                                 </tr>*@
 
                             </tbody>

@@ -25,6 +25,11 @@
                                     <h1>@item.detailsTitleENG</h1>
                                 }
                             }
+                            else
+                            {
+                                <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
+                                <h1>นโยบายจ่ายเงินปันผล</h1>
+                            }
                         }
                         else
                         {
@@ -35,6 +40,11 @@
                                     <h5>@item.titleTH</h5>
                                     <h1>@item.detailsTitleTH</h1>
                                 }
+                            }
+                            else
+                            {
+                                <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
+                                <h1>นโยบายจ่ายเงินปันผล</h1>
                             }
                         }
 
@@ -93,6 +103,16 @@
                                                 <th>@item.earningDayTitleENG</th>
                                             }
                                         }
+                                        else
+                                        {
+                                            <th>หลักทรัพย์</th>
+                                            <th>วันที่คณะกรรมการมีมติ</th>
+                                            <th>วันที่ขึ้นเครื่องหมาย</th>
+                                            <th>วันที่จ่ายเงินปันผล</th>
+                                            <th>ประเภทเงินปันผล</th>
+                                            <th>จำนวนเงินปันผลต่อหุ้น</th>
+                                            <th>วันผลประกอบการ</th>
+                                        }
                                     }
                                     else
                                     {
@@ -108,6 +128,16 @@
                                                 <th>@item.amountTitleTH</th>
                                                 <th>@item.earningDayTitleTH</th>
                                             }
+                                        }
+                                        else
+                                        {
+                                            <th>หลักทรัพย์</th>
+                                            <th>วันที่คณะกรรมการมีมติ</th>
+                                            <th>วันที่ขึ้นเครื่องหมาย</th>
+                                            <th>วันที่จ่ายเงินปันผล</th>
+                                            <th>ประเภทเงินปันผล</th>
+                                            <th>จำนวนเงินปันผลต่อหุ้น</th>
+                                            <th>วันผลประกอบการ</th>
                                         }
                                     }
 
@@ -126,12 +156,12 @@
                                     if (ViewBag.Body != null)
                                     {
                                         foreach (var item in ViewBag.Body)
-                                        { 
+                                        {
                                             var dateOfBoard = Convert.ToDateTime(item.dateOfBoard);
                                             var date_OfBoard = dateOfBoard.ToString("dd/MM/yyyy", new CultureInfo("en-US"));
 
                                             var dateMaking = Convert.ToDateTime(item.dateMaking);
-                                            var date_Making = dateOfBoard.ToString("dd/MM/yyyy", new CultureInfo("en-US"));
+                                            var date_Making = dateMaking.ToString("dd/MM/yyyy", new CultureInfo("en-US"));
 
                                             var paymentDate = Convert.ToDateTime(item.paymentDate);
                                             var payment_Date = paymentDate.ToString("dd/MM/yyyy", new CultureInfo("en-US"));
@@ -153,16 +183,16 @@
                                     if (ViewBag.Body != null)
                                     {
                                         foreach (var item in ViewBag.Body)
-                                        { 
+                                        {
                                             var dateOfBoard = Convert.ToDateTime(item.dateOfBoard);
                                             var date_OfBoard = dateOfBoard.ToString("dd/MM/yyyy", new CultureInfo("th-TH"));
 
                                             var dateMaking = Convert.ToDateTime(item.dateMaking);
-                                            var date_Making = dateOfBoard.ToString("dd/MM/yyyy", new CultureInfo("th-TH"));
+                                            var date_Making = dateMaking.ToString("dd/MM/yyyy", new CultureInfo("th-TH"));
 
                                             var paymentDate = Convert.ToDateTime(item.paymentDate);
                                             var payment_Date = paymentDate.ToString("dd/MM/yyyy", new CultureInfo("th-TH"));
-                                              
+
                                             <tr>
                                                 <td>@item.title</td>
                                                 <td>@date_OfBoard</td>

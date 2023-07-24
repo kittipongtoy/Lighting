@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "IR_presentation_doc";
-    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml"; 
 
     var language = "";
     if (Context.Request.Cookies["lang"] == "EN")
@@ -16,7 +16,7 @@
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
-<input id="page_name" value="ir" hidden /> 
+<input id="page_name" value="ir" hidden />
 
 <!---------- IR 05 PRESENTATION :: PRESENTATION DOC ---------->
 <div class="content-padding foot-pad minH">
@@ -35,6 +35,11 @@
                                     <h1>@item.detailsTitleENG</h1>
                                 }
                             }
+                            else
+                            {
+                                <h5>การนำเสนอข้อมูล</h5>
+                                <h1>เอกสารนำเสนอ</h1>
+                            }
                         }
                         else
                         {
@@ -45,6 +50,11 @@
                                     <h5>@item.titleTH</h5>
                                     <h1>@item.detailsTitleTH</h1>
                                 }
+                            }
+                            else
+                            {
+                                <h5>การนำเสนอข้อมูล</h5>
+                                <h1>เอกสารนำเสนอ</h1>
                             }
                         }
 
@@ -70,6 +80,11 @@
                                                 <th>@item.downloadTitleENG</th>
                                             }
                                         }
+                                        else
+                                        {
+                                            <th>เอกสารนำเสนอ</th>
+                                            <th>ดาวน์โหลด</th>
+                                        }
                                     }
                                     else
                                     {
@@ -80,6 +95,11 @@
                                                 <th>@item.present_documentTitleTH</th>
                                                 <th>@item.downloadTitleTH</th>
                                             }
+                                        }
+                                        else
+                                        {
+                                            <th>เอกสารนำเสนอ</th>
+                                            <th>ดาวน์โหลด</th>
                                         }
                                     }
 
@@ -94,41 +114,41 @@
 
                             <tbody id="data-container">
 
-                               @* @if (Context.Request.Cookies["lang"] == "EN")
+                                @* @if (Context.Request.Cookies["lang"] == "EN")
                                 {
-                                    if (ViewBag.Body != null)
-                                    {
-                                        foreach (var item in ViewBag.Body)
-                                        {
-                                            var confrimDate = Convert.ToDateTime(item.document_date);
-                                            var Insert_Date = confrimDate.ToString("MM/yyyy", new CultureInfo("en-US"));
+                                if (ViewBag.Body != null)
+                                {
+                                foreach (var item in ViewBag.Body)
+                                {
+                                var confrimDate = Convert.ToDateTime(item.document_date);
+                                var Insert_Date = confrimDate.ToString("MM/yyyy", new CultureInfo("en-US"));
 
-                                            <tr>
-                                                <td>@item.titleENG &nbsp; @Insert_Date</td>
-                                                <td>
-                                                    <a class="download-button" href="~/upload_file/SH_IR_Presentation/@item.file_name_ENG" target="_blank"><span>Download</span></a>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
+                                <tr>
+                                <td>@item.titleENG &nbsp; @Insert_Date</td>
+                                <td>
+                                <a class="download-button" href="~/upload_file/SH_IR_Presentation/@item.file_name_ENG" target="_blank"><span>Download</span></a>
+                                </td>
+                                </tr>
+                                }
+                                }
                                 }
                                 else
                                 {
-                                    if (ViewBag.Body != null)
-                                    {
-                                        foreach (var item in ViewBag.Body)
-                                        {
-                                            var confrimDate = Convert.ToDateTime(item.document_date);
-                                            var Insert_Date = confrimDate.ToString("MM/yyyy", new CultureInfo("th-TH"));
+                                if (ViewBag.Body != null)
+                                {
+                                foreach (var item in ViewBag.Body)
+                                {
+                                var confrimDate = Convert.ToDateTime(item.document_date);
+                                var Insert_Date = confrimDate.ToString("MM/yyyy", new CultureInfo("th-TH"));
 
-                                            <tr>
-                                                <td>@item.titleTH &nbsp; @Insert_Date</td>
-                                                <td>
-                                                    <a class="download-button" href="~/upload_file/SH_IR_Presentation/@item.file_name" target="_blank"><span>ดาวน์โหลด</span></a>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
+                                <tr>
+                                <td>@item.titleTH &nbsp; @Insert_Date</td>
+                                <td>
+                                <a class="download-button" href="~/upload_file/SH_IR_Presentation/@item.file_name" target="_blank"><span>ดาวน์โหลด</span></a>
+                                </td>
+                                </tr>
+                                }
+                                }
                                 }*@
 
 
@@ -249,23 +269,23 @@
                             var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
 
                             dataHtml += `<tr>
-                                                <td>`+ title(item, local) + ` &nbsp;`;
+                                                        <td>`+ title(item, local) + ` &nbsp;`;
                             if (local == "TH") {
                                 dataHtml += formattedDateTH
                             } else {
                                 dataHtml += formattedDateEN
                             }
                             dataHtml += `</td>
-                                        <td>
-                                                            <a class="download-button" href="../upload_file/SH_IR_Presentation/`+ file(item, local) + `" target="_blank">`;
+                                                <td>
+                                                                    <a class="download-button" href="../upload_file/SH_IR_Presentation/`+ file(item, local) + `" target="_blank">`;
                             if (local == "TH") {
                                 dataHtml += `<span>ดูเว็บแคสต์ </span>`;
                             } else {
                                 dataHtml += `<span>Download </span>`;
                             }
                             dataHtml += `</a>
-                                        </td>
-                                    </tr>`;  
+                                                </td>
+                                            </tr>`;
 
                         });
 
