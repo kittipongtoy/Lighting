@@ -20,7 +20,7 @@
         width: 80%;
         height: auto;
         display: grid;
-        grid-template-rows: 30vw auto auto auto auto auto auto auto auto auto auto;
+        grid-template-rows: 30vw auto auto auto auto auto auto auto auto auto auto auto;
         gap: 2rem;
     }
 
@@ -38,7 +38,9 @@
         background-color: rgba(0,0,0,0.2);
         padding: 2rem;
         border-radius: 10px;
-        & > h2{
+        & > h2
+
+    {
         background-color: gray;
         display: flex;
         flex-direction: column;
@@ -49,44 +51,65 @@
 
     }
 </style>
-
+<div style="display:flex;justify-content:space-between;margin:1rem 10%;">
+    <div></div>
+    <a href="@Url.Action("Manage_Product_Page","ManageProduct")" class="btn btn-primary">กลับ/back</a>
+</div>
 <div class="add-product-container">
     <div class="add-product">
 
         <div>
-            <img src="" style="width:100%;height:100%;display:none;" id="img_preview" />
+            <img src="@Model.Preview_Imamge" style="width:100%;height:100%;" id="img_preview" />
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">รูปโชว์/Preview Image</label>
+            <label class="h4">เปลี่ยนรูปโชว์/Change Preview Image</label>
             <input type="file" id="file_img_preview" />
+        </div>
+
+        <div class="add-product-grid-item">
+            <label class="h4">Spact image  <a href="ManageProduct/DwonloadFile?path=@Model.SUB_IMG" target="_blank">download click  @Model?.SUB_IMG?.Split("\\").Reverse().Take(1).FirstOrDefault()</a></label>
+            <input type="file" id="sub_img_file" />
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4">เลือกหมวดหมู่/category</label>
             <select class="form-control" id="product_category_id">
-                <option class="h5" selected>กรุณาเลือก</option>
-                    @foreach (var cat in (IEnumerable<Product_Category>)ViewData["category"])
+                @foreach (var cat in (IEnumerable<Product_Category>)ViewData["category"])
+                {
+                    if (Model.Product_CategoryId == cat.Id)
+                    {
+                        <option class="h5" value="@cat.Id" selected>@cat.Name_TH/@cat.Name_EN</option>
+                    }
+                    else
                     {
                         <option class="h5" value="@cat.Id">@cat.Name_TH/@cat.Name_EN</option>
                     }
+                }
             </select>
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4">เลือกชื่อรุ่น/model series</label>
             <select class="form-control" id="product_model_id">
-                <option class="h5" selected>กรุณาเลือก</option>
-                    @foreach (var model_data in (IEnumerable<Product_Model>)ViewData["model"])
+                @foreach (var model_data in (IEnumerable<Product_Model>)ViewData["model"])
+                {
+                    if (Model.Product_ModelId == model_data.Id)
                     {
-                        <option class="h5" value="@model_data.Id">@model_data.Name_TH/>@model_data.Name_EN</option>
+                        <option class="h5" value="@model_data.Id" selected>@model_data.Name_TH/@model_data.Name_EN</option>
                     }
+                    else
+                    {
+                        <option class="h5" value="@model_data.Id">@model_data.Name_TH/@model_data.Name_EN</option>
+                    }
+
+                }
             </select>
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4">ชื่อรุ่น/model name</label>
-            <input type="text" placeholder="ชื่อรุ่น" id="model_name" />
+            <input type="text" placeholder="ชื่อรุ่น" value="@Model?.Model" id="model_name" />
         </div>
 
         <div>
@@ -94,44 +117,65 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" i>ชื่อประเภท/Category Name</span>
                 </div>
-                <input type="text" class="form-control" id="category_name_th" placeholder="ภาษาไทย">
-                <input type="text" class="form-control" id="category_name_en" placeholder="English">
+                <input type="text" class="form-control" id="category_name_th" placeholder="ภาษาไทย" value="@Model?.Type_TH">
+                <input type="text" class="form-control" id="category_name_en" placeholder="English" value="@Model?.Type_EN">
             </div>
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">CUTSHEET</label>
+            <label class="h4">CUTSHEET <a href="ManageProduct/DwonloadFile?path=@Model?.CUTSHEET" target="_blank">download click @Model?.CUTSHEET?.Split("\\").Reverse().Take(1).FirstOrDefault()</a></label>
             <input type="file" id="cut_sheet_file" />
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">IES FILE</label>
+            <label class="h4">IES FILE  <a href="ManageProduct/DwonloadFile?path=@Model?.IESFILE" target="_blank">download click  @Model?.IESFILE?.Split("\\").Reverse().Take(1).FirstOrDefault()</a></label>
             <input type="file" id="ies_file" />
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">CATALOGUE</label>
+            <label class="h4">CATALOGUE  <a href="ManageProduct/DwonloadFile?path=@Model?.CATALOGUE" target="_blank">download click  @Model?.CATALOGUE?.Split("\\").Reverse().Take(1).FirstOrDefault()</a></label>
             <input type="file" id="catalogue_file" />
         </div>
 
         <div class="add-product-grid-item">
+            <label class="h4">RFA FILE  <a href="ManageProduct/DwonloadFile?path=@Model?.RFA" target="_blank">download click  @Model?.RFA?.Split("\\").Reverse().Take(1).FirstOrDefault()</a></label>
+            <input type="file" id="rfa_file" />
+        </div>
+
+        <div class="add-product-grid-item">
             <label class="h4">More Information</label>
-            <input type="text" placeholder="https://More.Information" id="more_info" />
+            <input type="text" placeholder="https://MoreInformation.com" id="more_info" value="@Model?.MORE_INFORMATION"/>
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4">การใช้งาน/Application</label>
-            <textarea id="application"></textarea>
+            <textarea id="application">@Model?.Application</textarea>
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">Technical Drawing Image</label>
-            <input type="file" multiple id="technical_img_file" />
+            <label class="h4">Technical Drawing Image 
+                @if(Model?.Technical_Drawing_Img != null)
+                {
+                    foreach (var img in Model.Technical_Drawing_Img)
+                    {
+                        <img src="@img" style="width:3rem;height:3rem;" />
+                    }
+                }
+            </label>
+            <input type="file" multiple id="technical_img_file" accept="image/*" />
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4"> Light Distribution Image</label>
-            <input type="file" multiple id="light_distribute_file" />
+            <label class="h4"> Light Distribution Image 
+                @if(Model?.LIGHT_DISTRIBUTION != null)
+                {
+                    foreach (var img in Model.LIGHT_DISTRIBUTION)
+                    {
+                        <img src="@img" style="width:3rem;height:3rem;" />
+                    }
+                }
+            </label>
+            <input type="file" multiple id="light_distribute_file" accept="image/*" />
         </div>
 
         <div class="add-product-grid-spec">
@@ -139,81 +183,81 @@
 
             <div class="add-product-grid-item">
                 <label class="h4">Housing</label>
-                <input type="text" placeholder="Housing" id="Housing" />
+                <input type="text" placeholder="Housing" id="Housing" value="@Model?.Housing"/>
             </div>
 
             <div class="add-product-grid-item">
                 <label class="h4">Finishing</label>
-                <input type="text" placeholder="Finishing" id="Finishing" />
+                <input type="text" placeholder="Finishing" id="Finishing" value="@Model?.Finishing" />
             </div>
 
             <div class="add-product-grid-item">
                 <label class="h4">Lens</label>
-                <input type="text" placeholder="Lens" id="Lens" />
+                <input type="text" placeholder="Lens" id="Lens" value="@Model?.Lens" />
             </div>
 
             <div class="add-product-grid-item">
                 <label class="h4">Gasket</label>
-                <input type="text" placeholder="Gasket" id="Gasket" />
+                <input type="text" placeholder="Gasket" id="Gasket" value="@Model?.Gasket" />
             </div>
 
             <div class="add-product-grid-item">
                 <label class="h4">Dimension</label>
-                <input type="text" placeholder="Dimension" id="Dimension" />
+                <input type="text" placeholder="Dimension" id="Dimension" value="@Model?.Dimension" />
             </div>
             <div class="add-product-grid-item">
                 <label class="h4">Mounting</label>
-                <input type="text" placeholder="Mounting" id="Mounting" />
+                <input type="text" placeholder="Mounting" id="Mounting" value="@Model?.Mounting" />
             </div>
 
             <div class="add-product-grid-item">
                 <label class="h4">Power</label>
-                <input type="text" placeholder="Power" id="Power" />
+                <input type="text" placeholder="Power" id="Power" value="@Model?.Power" />
             </div>
 
             <div class="add-product-grid-item">
                 <label class="h4">Source</label>
-                <input type="text" placeholder="Source" id="Source" />
+                <input type="text" placeholder="Source" id="Source" value="@Model?.Source" />
             </div>
 
             <div class="add-product-grid-item">
                 <label class="h4">Lamp Colour</label>
-                <input type="text" placeholder="Lamp Colour" id="Lamp_Colour" />
+                <input type="text" placeholder="Lamp Colour" id="Lamp_Colour" value="@Model?.Lamp_Colour" />
             </div>
 
             <div class="add-product-grid-item">
                 <label class="h4">Luminaire Output</label>
-                <input type="text" placeholder="Luminaire Output" id="Luminaire_Output" />
+                <input type="text" placeholder="Luminaire Output" id="Luminaire_Output" value="@Model?.Luminaire_Output" />
             </div>
 
             <div class="add-product-grid-item">
                 <label class="h4">Beam Angle</label>
-                <input type="text" placeholder="Beam Angle" id="Beam_Angle" />
+                <input type="text" placeholder="Beam Angle" id="Beam_Angle" value="@Model?.Beam_Angle" />
             </div>
 
             <div class="add-product-grid-item">
                 <label class="h4">Control Gear</label>
-                <input type="text" placeholder="Control Gear" id="Control_Gear" />
+                <input type="text" placeholder="Control Gear" id="Control_Gear" value="@Model?.Control_Gear" />
             </div>
 
             <div class="add-product-grid-item">
                 <label class="h4">Power Supply</label>
-                <input type="text" placeholder="Power Supply" id="Power_Supply" />
+                <input type="text" placeholder="Power Supply" id="Power_Supply" value="@Model?.Power_Supply" />
             </div>
 
             <div class="add-product-grid-item">
                 <label class="h4">IP Rating</label>
-                <input type="text" placeholder="IP Rating" id="IP_Rating" />
+                <input type="text" placeholder="IP Rating" id="IP_Rating" value="@Model?.IP_Rating" />
             </div>
 
             <div class="add-product-grid-item">
                 <label class="h4">Luminaire Lifetime</label>
-                <input type="text" placeholder="Luminaire Lifetime" id="Luminaire_Lifetime" />
+                <input type="text" placeholder="Luminaire Lifetime" id="Luminaire_Lifetime" value="@Model?.Luminaire_Lifetime" />
             </div>
 
             <div class="add-product-grid-item">
                 <label class="h4">Equivalent</label>
-                <input type="text" placeholder="Equivalent" id="Equivalent" />
+                <input type="text" placeholder="Equivalent" id="Equivalent" value="@Model?.Equivalent" />
             </div>
 
         </div>
@@ -222,18 +266,23 @@
     </div>
     <br />
     <br />
-    <centter style="margin-bottom:3rem;"><button onclick="addProduct()" class="btn btn-primary">บันทึก/save</button></centter>
+    <centter style="margin-bottom:3rem;"><button onclick="editProduct(@Model?.Id)" class="btn btn-primary">บันทึก/save</button></centter>
 </div>
 
 @section Scripts{
     <script>
-        var preview_img, CutSheet_file, IesFile_file, Catalogue_file, technical_file, light_distribute_file;
+        var preview_img, sub_img_file, CutSheet_file, IesFile_file, Catalogue_file, rfa_file, technical_file, light_distribute_file;
 
         $(document).ready(function () {
             $('#file_img_preview').change(async function (e) {
                 if (e.target.files.length === 1) {
                     preview_img = e.target.files[0];
                     $('#img_preview').attr('src', await blobToBase64DataURL(preview_img)).css("display", "block");
+                }
+            });
+            $('#sub_img_file').change(function (e) {
+                if (e.target.files.length === 1) {
+                    sub_img_file = e.target.files[0];
                 }
             });
             $('#cut_sheet_file').change(function (e) {
@@ -251,6 +300,11 @@
                     Catalogue_file = e.target.files[0];
                 }
             });
+            $('#rfa_file').change(function (e) {
+                if (e.target.files.length === 1) {
+                    rfa_file = e.target.files[0];
+                }
+            });
             $('#technical_img_file').change(function (e) {
                 if (e.target.files.length >= 1) {
                     technical_file = e.target.files;
@@ -263,7 +317,7 @@
             });
         });
 
-        function addProduct() {
+        function editProduct(id) {
 
             let form = new FormData();
 
@@ -273,9 +327,11 @@
             form.append("Type_TH", $("#category_name_th").val());
             form.append("Type_EN", $("#category_name_en").val());
             form.append("Preview_Image", preview_img);
+            form.append("SUB_IMG", sub_img_file);
             form.append("CUTSHEET", CutSheet_file);
             form.append("IESFILE", IesFile_file);
             form.append("CATALOGUE", Catalogue_file);
+            form.append("RFA", rfa_file);
             form.append("MORE_INFORMATION", $("#more_info").val());
             form.append("Application", $("#application").val());
             //form.append("Technical_Drawing", $("#").val());
@@ -309,11 +365,9 @@
                 }
             }
 
-
-
             $.ajax({
                 type: 'POST',
-                url: '/ManageProduct/Add_Product',
+                url: '/ManageProduct/Edit_Product?id='+id,
                 data: form,
                 processData: false,
                 contentType: false,

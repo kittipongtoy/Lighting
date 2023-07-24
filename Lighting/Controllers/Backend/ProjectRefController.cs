@@ -30,12 +30,12 @@ namespace Lighting.Controllers.Backend
                     var category = await _db.Category_Projects.FirstOrDefaultAsync(cat => cat.Id == input.CategoryId);
                     if (category == null) throw new Exception("Category not found");
                     var profile_img_name = Guid.NewGuid().ToString().Substring(0, 5) + ".jpg";
-                    using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, profile_img_name), FileMode.CreateNew))
+                    using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, profile_img_name), FileMode.Create))
                     {
                         await input.Profile_Image.CopyToAsync(stream);
                     }
 
-                    using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, input.File_Download.FileName), FileMode.CreateNew))
+                    using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, input.File_Download.FileName), FileMode.Create))
                     {
                         await input.File_Download.CopyToAsync(stream);
                     }
@@ -43,14 +43,13 @@ namespace Lighting.Controllers.Backend
                     foreach (var file in input.Image_List)
                     {
                         var sub_img_name = Guid.NewGuid().ToString().Substring(0, 5) + ".jpg";
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, sub_img_name), FileMode.CreateNew))
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, sub_img_name), FileMode.Create))
                         {
                             await file.CopyToAsync(stream);
                         }
                     }
 
-
-                    await _db.ProjectRefs.AddRangeAsync(new ProjectRef
+                    var projectRef = new ProjectRef
                     {
                         Title_TH = input.Title_TH,
                         Title_EN = input.Title_EN,
@@ -66,9 +65,19 @@ namespace Lighting.Controllers.Backend
                         ProjectRef_Category = category,
                         File_Download = input.File_Download.FileName,
                         Profile_Image = profile_img_name,
-                    });
-                    await _db.SaveChangesAsync();
+                    };
 
+                    await _db.ProjectRefs.AddAsync(projectRef);
+                    await _db.SaveChangesAsync();
+                    if(input.ProductId != null)
+                    {
+                        foreach (var productId in input.ProductId)
+                        {
+                            await _db.ProjectRef_Products.AddAsync(new ProjectRef_Product { ProductId= productId , ProjectId = projectRef.Id});
+                            await _db.SaveChangesAsync();
+                        }
+                    }
+                    
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
                 }
                 catch (Exception ex)
@@ -98,6 +107,7 @@ namespace Lighting.Controllers.Backend
                     Name_TH = cat.Name_TH,
                 })
                 .ToListAsync();
+            ViewData["category"] = await _db.Product_Categorys.ToListAsync();
             return View(category);
         }
 
@@ -134,6 +144,14 @@ namespace Lighting.Controllers.Backend
                     }
                     _db.ProjectRefs.Remove(project);
                     await _db.SaveChangesAsync();
+
+                   var products = await _db.ProjectRef_Products.Where(project => project.ProjectId == id).ToListAsync();
+                    if (products != null)
+                    {
+                        _db.ProjectRef_Products.RemoveRange(products);
+                        await _db.SaveChangesAsync();
+                    }
+
                     return Json(new { status = "success", message = "ลบข้อมูลเรียบร้อย" });
                 }
                 return Json(new { status = "error", message = "ไม่พบข้อมูล" });
@@ -142,6 +160,18 @@ namespace Lighting.Controllers.Backend
             {
                 return Json(new { status = "error", message = "เกิดข้อผิดพลาด " + ex.Message });
             }
+        }
+
+        public async Task<IActionResult> DeleteSubProduct(int projectId,int productId)
+        {
+            var products = await _db.ProjectRef_Products.Where(project => project.ProjectId==projectId && project.ProductId == productId).FirstOrDefaultAsync();
+            if (products != null)
+            {
+                _db.ProjectRef_Products.Remove(products);
+                await _db.SaveChangesAsync();
+                return Json(new { status = "success", message = "ลบข้อมูลเรียบร้อย" });
+            }
+            return Json(new { status = "error", message = "ไม่พบข้อมูล" });
         }
 
         public async Task<IActionResult> Edit([FromForm] Input_ProjectRefVM input, [FromQuery] int id)
@@ -211,6 +241,15 @@ namespace Lighting.Controllers.Backend
                     project.ProjectRef_Category = category;
 
                     await _db.SaveChangesAsync();
+
+                    if (input.ProductId != null)
+                    {
+                        foreach (var productId in input.ProductId)
+                        {
+                            await _db.ProjectRef_Products.AddAsync(new ProjectRef_Product { ProductId = productId, ProjectId = project.Id });
+                            await _db.SaveChangesAsync();
+                        }
+                    }
 
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
                 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Lighting.Areas.Identity.Data;
 
 namespace Lighting.Models.InputFilterModels.ProjectRef
 {
@@ -41,6 +42,7 @@ namespace Lighting.Models.InputFilterModels.ProjectRef
         [Required]
         public string Content_EN { get; set; }
         public IFormFile File_Download { get; set; }
+        public List<int>? ProductId { get; set; }
     }
 
     public class Output_ProjectRefVM
@@ -59,6 +61,7 @@ namespace Lighting.Models.InputFilterModels.ProjectRef
         public string Content_TH { get; set; }
         public string Content_EN { get; set; }
         public string File_Download { get; set; }
+
     }
     public class Output_ProjectRef_PreviewVM
     {

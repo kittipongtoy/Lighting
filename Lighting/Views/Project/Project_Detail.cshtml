@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Lighting.Areas.Identity.Data
+@{
     ViewData["Title"] = "Project_Detail";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var lang = Context.Request.Cookies["lang"];
@@ -104,15 +105,22 @@
                             <div class="col">
                                 <div class="projectGal-slide detail_slide">
                                     <div id="big" class="owl-carousel owl-theme big-img slider">
-                                        @foreach (var img in Model.Image_List)
+                                        @if (Model.Image_List != null)
                                         {
-                                            <a class="item" data-fancybox="gallery" href="~/@img"><img src="~/@img"></a>
+                                            foreach (var img in Model.Image_List)
+                                            {
+                                                <a class="item" data-fancybox="gallery" href="~/@img"><img src="~/@img"></a>
+                                            }
+
                                         }
                                     </div>
                                     <div id="thumbs" class="owl-carousel owl-theme thumbs-img navigation-thumbs">
-                                        @foreach (var img in Model.Image_List)
+                                        @if (Model.Image_List != null)
                                         {
-                                            <div class="item"><img src="~/@img"></div>
+                                            @foreach (var img in Model.Image_List)
+                                            {
+                                                <div class="item"><img src="~/@img"></div>
+                                            }
                                         }
                                     </div>
                                 </div>
@@ -170,98 +178,35 @@
             </div>
             <div class="three-colPad">
                 <div class="row">
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <a class="productBox" href="@Url.Action("Product_Detail","Product")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width">
-                                        <img src="~/Frontend_assets/images/project/project-product01.jpg">
-                                        <ul class="hover-detail">
-                                            <li>Dimension : 92x140x120 mm.</li>
-                                            <li>Power : 5W</li>
-                                            <li>IP Rating : 66</li>
-                                        </ul>
+                    @if (ViewData["products"] is not null)
+                    {
+                        foreach (var product in (IEnumerable<Product>)ViewData["products"])
+                        {
+                            <div class="col-lg-3 col-md-4 col-6">
+                                <a class="productBox" href="@Url.Action("Product_Detail","Product",new {categoryId=product.Product_CategoryId, sub_categoryId=product.Product_ModelId,id=product.Id})">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="img-width">
+                                                <img src="~/@product.Preview_Image">
+                                                <ul class="hover-detail">
+                                                    <li>Dimension : @product.Dimension</li>
+                                                    <li>Power : @product.Power</li>
+                                                    <li>IP Rating : @product.IP_Rating</li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="productBox-topic">
-                                        <p>FL400-380W 2200K LED</p>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="productBox-topic">
+                                                <p>@product.Model</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <a class="productBox" href="@Url.Action("Product_Detail","Product")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width">
-                                        <img src="~/Frontend_assets/images/project/project-product02.jpg">
-                                        <ul class="hover-detail">
-                                            <li>Dimension : 92x140x120 mm.</li>
-                                            <li>Power : 5W</li>
-                                            <li>IP Rating : 66</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="productBox-topic">
-                                        <p>SLS3144-100W 3000K LED</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <a class="productBox" href="@Url.Action("Product_Detail","Product")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width">
-                                        <img src="~/Frontend_assets/images/project/project-product03.jpg">
-                                        <ul class="hover-detail">
-                                            <li>Dimension : 92x140x120 mm.</li>
-                                            <li>Power : 5W</li>
-                                            <li>IP Rating : 66</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="productBox-topic">
-                                        <p>Ardilla66-4W 2700K LED</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <a class="productBox" href="@Url.Action("Product_Detail","Product")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width">
-                                        <img src="~/Frontend_assets/images/project/project-product04.jpg">
-                                        <ul class="hover-detail">
-                                            <li>Dimension : 92x140x120 mm.</li>
-                                            <li>Power : 5W</li>
-                                            <li>IP Rating : 66</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="productBox-topic">
-                                        <p>Nudus Mono-18W 3000K LED</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                        }
+                    }
                 </div>
             </div>
 
@@ -283,70 +228,34 @@
                 <div class="col">
                     <div class="slide-navButton">
                         <div class="project-slide owl-carousel owl-theme">
-                            <div class="items">
-                                <a class="contentBox" href="@Url.Action("Project_Detail","Project")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/project/project03.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>RAMA VIII BRIDGE</p>
+                            @if (ViewData["categorys"] is not null)
+                            {
+                                foreach (var cat in (IEnumerable<ProjectRef>)ViewData["categorys"])
+                                {
+                                    <div class="items">
+                                        <a class="contentBox" href="@Url.Action("Project_Detail","Project",new {id = cat.Id})">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="img-width"><img src="~/@cat.Profile_Image"></div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="items">
-                                <a class="contentBox" href="@Url.Action("Project_Detail","Project")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/project/project04.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>SAINT JOSEPH CATHOLIC CHURCH</p>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="contentBox-topic">
+                                                        @if (lang == "EN")
+                                                        {
+                                                            <p>@cat.Location_EN</p>
+                                                        }else
+                                                        {
+                                                            <p>@cat.Location_TH</p>
+                                                        }
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="items">
-                                <a class="contentBox" href="@Url.Action("Project_Detail","Project")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/project/project05.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>SUN WHEEL VIETNAM</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="items">
-                                <a class="contentBox" href="@Url.Action("Project_Detail","Project")">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/project/project06.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>NONTHABURI PIER</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+                                }
+                            }
                         </div>
                     </div>
 

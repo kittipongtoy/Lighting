@@ -14,9 +14,11 @@ namespace Lighting.Models.InputFilterModels.Product
         public string? Type_EN { get; set; }
         [Required]
         public IFormFile Preview_Image { get; set; }
+        public IFormFile? SUB_IMG { get; set; }
         public IFormFile? CUTSHEET { get; set; }
         public IFormFile? IESFILE { get; set; }
         public IFormFile? CATALOGUE { get; set; }
+        public IFormFile? RFA { get; set; }
         public string? MORE_INFORMATION { get; set; }
 
         public string? Application { get; set; }
@@ -55,9 +57,11 @@ namespace Lighting.Models.InputFilterModels.Product
         public string? Type_EN { get; set; }
 
         public string Preview_Imamge { get; set; }
+        public string? SUB_IMG { get; set; }
         public string? CUTSHEET { get; set; }
         public string? IESFILE { get; set; }
         public string? CATALOGUE { get; set; }
+        public string? RFA { get; set; }
         public string? MORE_INFORMATION { get; set; }
 
         public string? Application { get; set; }
@@ -87,6 +91,7 @@ namespace Lighting.Models.InputFilterModels.Product
 
     public class Input_ProductCategoryVM
     {
+        public IFormFile? Image { get; set; }
         [Required]
         public string Name_EN { get; set; }
         [Required]
@@ -98,6 +103,7 @@ namespace Lighting.Models.InputFilterModels.Product
         public int Id { get; set; } 
         public string Name_EN { get; set; }
         public string Name_TH { get; set; }
+        public string Image { get; set; }
     }
 
     public class Input_ProductModelVM

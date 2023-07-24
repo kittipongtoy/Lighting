@@ -20,7 +20,7 @@
         height:auto;
 
         display:grid;
-        grid-template-rows: 30vw auto auto auto auto auto auto auto auto auto auto;
+        grid-template-rows: 30vw auto auto auto auto auto auto auto auto auto auto auto auto;
         gap:2rem;
     }
 
@@ -29,6 +29,15 @@
         grid-template-rows:1fr 2fr;
     }
 
+    .add-product-grid-link {
+        height:8rem;
+        margin:10px;
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        & > *{
+            height:4rem;
+        }
+    }
     .add-product-grid-spec {
         height:auto;
         width:100%;
@@ -67,6 +76,11 @@
         </div>
 
         <div class="add-product-grid-item">
+            <label class="h4">รูปสเปค/Spact Image</label>
+            <input type="file" id="spact_img_file" />
+        </div>
+
+        <div class="add-product-grid-item">
             <label class="h4">เลือกหมวดหมู่/category</label>
             <select class="form-control" id="product_category_id">
                 <option class="h5" selected>กรุณาเลือก</option>
@@ -83,7 +97,7 @@
                 <option class="h5" selected>กรุณาเลือก</option>
                 @foreach (var model_data in (IEnumerable<Product_Model>)ViewData["model"])
                 {
-                    <option class="h5" value="@model_data.Id">@model_data.Name_TH/>@model_data.Name_EN</option>
+                    <option class="h5" value="@model_data.Id">@model_data.Name_TH/@model_data.Name_EN</option>
                 }
             </select>
         </div>
@@ -102,7 +116,7 @@
                 <input type="text" class="form-control" id="category_name_en" placeholder="English">
             </div>
         </div>
-
+        
         <div class="add-product-grid-item">
             <label class="h4">CUTSHEET</label>
             <input type="file" id="cut_sheet_file"/>
@@ -119,10 +133,15 @@
         </div>
 
         <div class="add-product-grid-item">
+            <label class="h4">RFA FILE</label>
+            <input type="file" id="rfa_file" />
+        </div>
+
+        <div class="add-product-grid-item">
             <label class="h4">More Information</label>
             <input type="text" placeholder="https://More.Information" id="more_info" />
         </div>
-
+        
         <div class="add-product-grid-item">
             <label class="h4">การใช้งาน/Application</label>
             <textarea id="application"></textarea>
@@ -130,12 +149,12 @@
 
         <div class="add-product-grid-item">
             <label class="h4">Technical Drawing Image</label>
-            <input type="file" multiple id="technical_img_file" />
+            <input type="file" multiple id="technical_img_file" accept="image/*" />
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4"> Light Distribution Image</label>
-            <input type="file" multiple id="light_distribute_file" />
+            <input type="file" multiple id="light_distribute_file" accept="image/*" />
         </div>
 
         <div class="add-product-grid-spec">
@@ -231,13 +250,18 @@
 
 @section Scripts{
     <script>
-        var preview_img,CutSheet_file,IesFile_file,Catalogue_file,technical_file,light_distribute_file;
+        var preview_img,spact_img_file,CutSheet_file,IesFile_file,Catalogue_file,rfa_file,technical_file,light_distribute_file;
 
         $(document).ready(function () {
             $('#file_img_preview').change(async function (e) {
                 if (e.target.files.length === 1) {
                     preview_img = e.target.files[0];
                     $('#img_preview').attr('src', await blobToBase64DataURL(preview_img)).css("display", "block");
+                }
+            });
+            $('#spact_img_file').change(function (e) {
+                if (e.target.files.length === 1) {
+                    spact_img_file = e.target.files[0];
                 }
             });
             $('#cut_sheet_file').change(function (e) {
@@ -255,6 +279,13 @@
                     Catalogue_file = e.target.files[0];
                 }
             });
+
+            $('#rfa_file').change(function (e) {
+                if (e.target.files.length === 1) {
+                    rfa_file = e.target.files[0];
+                }
+            });
+
             $('#technical_img_file').change(function (e) {
                 if (e.target.files.length >= 1) {
                     technical_file = e.target.files;
@@ -267,6 +298,12 @@
             });
         });
 
+        //function addLink(){
+        //    let textbox = '<div class="add-product-grid-link" id="link-container"><input type = "text" placeholder="ชื่อลิ้ง/link name" /><input type = "text" placeholder="ลิ้ง/link" /></div>';
+        //    $("#addlink").append(textbox);
+
+        //        }
+
         function addProduct(){
 
             let form = new FormData();
@@ -277,10 +314,14 @@
             form.append("Type_TH", $("#category_name_th").val());
             form.append("Type_EN", $("#category_name_en").val());
             form.append("Preview_Image", preview_img);
+
             form.append("CUTSHEET", CutSheet_file);
             form.append("IESFILE", IesFile_file);
             form.append("CATALOGUE", Catalogue_file);
+            form.append("SUB_IMG", spact_img_file);
+            form.append("RFA", rfa_file);
             form.append("MORE_INFORMATION", $("#more_info").val());
+
             form.append("Application", $("#application").val());
             //form.append("Technical_Drawing", $("#").val());
 

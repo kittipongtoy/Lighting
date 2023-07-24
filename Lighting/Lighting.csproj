@@ -473,6 +473,7 @@
     <Folder Include="wwwroot\upload_image\IR_NewRoom\" />
     <Folder Include="wwwroot\upload_image\contact\" />
     <Folder Include="wwwroot\upload_image\Image_Category\" />
+    <Folder Include="wwwroot\upload_image\Product_Category\" />
     <Folder Include="wwwroot\upload_image\Product\" />
     <Folder Include="wwwroot\upload_image\Product_Model\" />
     <Folder Include="wwwroot\upload_image\ProjectRef\" />

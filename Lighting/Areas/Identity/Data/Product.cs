@@ -17,9 +17,11 @@ namespace Lighting.Areas.Identity.Data
         public string? Type_TH { get; set; }
         public string? Type_EN { get; set; }
         public string Preview_Image { get; set; }
+        public string? SUB_IMG { get; set; }
         public string? CUTSHEET { get; set; }
         public string? IESFILE { get; set; }
         public string? CATALOGUE { get; set; }
+        public string? RFA { get; set; }
         public string? MORE_INFORMATION { get; set; }
 
         public string? Application { get; set; }

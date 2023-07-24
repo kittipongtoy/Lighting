@@ -1,5 +1,6 @@
 ﻿using Lighting.Areas.Identity.Data;
 using Lighting.Models.InputFilterModels.Product;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Evaluation;
 using Microsoft.CodeAnalysis.CSharp;
@@ -23,17 +24,6 @@ namespace Lighting.Controllers.Backend
         {
             ViewData["category"] = await _db.Product_Categorys.ToListAsync();
             ViewData["model"] = await _db.Product_Models.ToListAsync();
-            return View();
-        }
-
-        public  ActionResult Edit_Category_Page()
-        {
-
-            return View();
-        }
-
-        public ActionResult Edit_Model_page()
-        {
             return View();
         }
 
@@ -75,21 +65,23 @@ namespace Lighting.Controllers.Backend
                     CUTSHEET = pro.CUTSHEET == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CUTSHEET),
                     CATALOGUE = pro.CATALOGUE == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CATALOGUE),
                     IESFILE = pro.IESFILE == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.IESFILE),
+                    RFA = pro.RFA == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.RFA),
                     Preview_Imamge = pro.Preview_Image == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.Preview_Image),
+                    SUB_IMG = pro.SUB_IMG == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.SUB_IMG),
 
                 }).FirstOrDefaultAsync();
 
-            if(product != null)
+            if (product != null)
             {
-                //product.Technical_Drawing_Img = GET_FILE(Path.Combine("upload_image", "Product", productItem.Folder_Path, "technical_img"));
-                //product.LIGHT_DISTRIBUTION = GET_FILE(Path.Combine("upload_image", "Product", productItem.Folder_Path, "light_ditribute_img"));
-                
+                product.Technical_Drawing_Img = GET_FILE(Path.Combine("upload_image", "Product", product.Folder_Path, "technical_img"));
+                product.LIGHT_DISTRIBUTION = GET_FILE(Path.Combine("upload_image", "Product", product.Folder_Path, "light_ditribute_img"));
+
                 ViewData["category"] = await _db.Product_Categorys.ToListAsync();
                 ViewData["model"] = await _db.Product_Models.ToListAsync();
 
                 return View(product);
             }
-            return  NotFound("product not found");
+            return NotFound("product not found");
         }
 
         [HttpPost]
@@ -98,11 +90,35 @@ namespace Lighting.Controllers.Backend
             var category = await _db.Product_Categorys.FirstOrDefaultAsync(cat => cat.Id == id);
             if (category != null)
             {
-                category.Name_TH = input.Name_TH;
-                category.Name_EN = input.Name_EN;
+                try
+                {
+                    if (input.Image != null)
+                    {
+                        var path_old_path = Path.Combine(_env.WebRootPath, category.Image);
+                        if (System.IO.File.Exists(path_old_path))
+                        {
+                            System.IO.File.Delete(path_old_path);
+                        }
+                        var image_name = Guid.NewGuid().ToString().Substring(0, 6) + ".jpg";
+                        var path = Path.Combine("upload_image", "Product_Category", image_name);
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path), FileMode.Create))
+                        {
+                            await input.Image.CopyToAsync(stream);
+                        }
+                        category.Image = path;
 
-                await _db.SaveChangesAsync();
-                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+                    }
+                    category.Name_TH = input.Name_TH;
+                    category.Name_EN = input.Name_EN;
+
+                    await _db.SaveChangesAsync();
+                    return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+                }
+                catch (Exception ex)
+                {
+
+                }
+
             }
             return Json(new { status = "faile", message = "ไม่พบข้อมูล" });
         }
@@ -113,9 +129,21 @@ namespace Lighting.Controllers.Backend
             var category = await _db.Product_Categorys.FirstOrDefaultAsync(cat => cat.Id == id);
             if (category != null)
             {
-                _db.Product_Categorys.Remove(category);
-                await _db.SaveChangesAsync();
-                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+                try
+                {
+                    var delete_file = Path.Combine(_env.WebRootPath, category.Image);
+                    if (System.IO.File.Exists(delete_file))
+                    {
+                        System.IO.File.Delete(delete_file);
+                    }
+                    _db.Product_Categorys.Remove(category);
+                    await _db.SaveChangesAsync();
+                    return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { status = "faile", message = "เกิดข้อผิดพลาด" });
+                }
             }
             return Json(new { status = "faile", message = "ไม่พบข้อมูล" });
         }
@@ -125,16 +153,33 @@ namespace Lighting.Controllers.Backend
         {
             if (ModelState.IsValid)
             {
-                await _db
-                    .Product_Categorys
-                    .AddAsync(
-                    new Product_Category
+                try
+                {
+                    var image_name = Guid.NewGuid().ToString().Substring(0, 6) + ".jpg";
+                    var path = Path.Combine("upload_image", "Product_Category", image_name);
+                    if (input.Image != null)
                     {
-                        Name_EN = input.Name_EN,
-                        Name_TH = input.Name_TH,
-                    });
-                await _db.SaveChangesAsync();
-                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path), FileMode.Create))
+                        {
+                            await input.Image.CopyToAsync(stream);
+                        }
+                    }
+                    await _db
+                        .Product_Categorys
+                        .AddAsync(
+                        new Product_Category
+                        {
+                            Name_EN = input.Name_EN,
+                            Name_TH = input.Name_TH,
+                            Image = input.Image == null ? "" : path
+                        });
+                    await _db.SaveChangesAsync();
+                    return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { status = "fail", message = "เกิดข้อผิดพลาด" });
+                }
             }
             return Json(new { status = "fail", message = "กรุณกรอกข้อมูลให้ครับ" });
         }
@@ -149,6 +194,7 @@ namespace Lighting.Controllers.Backend
                     Id = cat.Id,
                     Name_EN = cat.Name_EN,
                     Name_TH = cat.Name_TH,
+                    Image = cat.Image
                 }).ToListAsync();
             return View(category);
         }
@@ -170,7 +216,7 @@ namespace Lighting.Controllers.Backend
                             System.IO.File.Delete(old_img_path);
                         }
                         var new_img_path = Path.Combine(_env.WebRootPath, "upload_image", "Product_Model", new_file_img);
-                        using (var stream = new FileStream(new_img_path, FileMode.CreateNew))
+                        using (var stream = new FileStream(new_img_path, FileMode.Create))
                         {
                             await input.Image.CopyToAsync(stream);
                         }
@@ -230,7 +276,7 @@ namespace Lighting.Controllers.Backend
 
                     if (input.Image != null)
                     {
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path), FileMode.CreateNew))
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path), FileMode.Create))
                         {
                             await input.Image.CopyToAsync(stream);
                         }
@@ -295,15 +341,24 @@ namespace Lighting.Controllers.Backend
                 try
                 {
                     var preview_img = Path.Combine(directory, input.Preview_Image.FileName);
-                    using (var stream = new FileStream(preview_img, FileMode.CreateNew))
+                    using (var stream = new FileStream(preview_img, FileMode.Create))
                     {
                         await input.Preview_Image.CopyToAsync(stream);
+                    }
+
+                    if (input.SUB_IMG != null)
+                    {
+                        var sub_img = Path.Combine(_env.WebRootPath, path, input.SUB_IMG.FileName);
+                        using (var stream = new FileStream(sub_img, FileMode.Create))
+                        {
+                            await input.SUB_IMG.CopyToAsync(stream);
+                        }
                     }
 
                     if (input.CUTSHEET != null)
                     {
                         var cut_sheet = Path.Combine(_env.WebRootPath, path, input.CUTSHEET.FileName);
-                        using (var stream = new FileStream(cut_sheet, FileMode.CreateNew))
+                        using (var stream = new FileStream(cut_sheet, FileMode.Create))
                         {
                             await input.CUTSHEET.CopyToAsync(stream);
                         }
@@ -312,7 +367,7 @@ namespace Lighting.Controllers.Backend
                     if (input.IESFILE != null)
                     {
                         var ies_file = Path.Combine(_env.WebRootPath, path, input.IESFILE.FileName);
-                        using (var stream = new FileStream(ies_file, FileMode.CreateNew))
+                        using (var stream = new FileStream(ies_file, FileMode.Create))
                         {
                             await input.IESFILE.CopyToAsync(stream);
                         }
@@ -321,9 +376,18 @@ namespace Lighting.Controllers.Backend
                     if (input.CATALOGUE != null)
                     {
                         var catalogue = Path.Combine(_env.WebRootPath, path, input.CATALOGUE.FileName);
-                        using (var stream = new FileStream(catalogue, FileMode.CreateNew))
+                        using (var stream = new FileStream(catalogue, FileMode.Create))
                         {
                             await input.CATALOGUE.CopyToAsync(stream);
+                        }
+                    }
+
+                    if (input.RFA != null)
+                    {
+                        var rfa = Path.Combine(_env.WebRootPath, path, input.RFA.FileName);
+                        using (var stream = new FileStream(rfa, FileMode.Create))
+                        {
+                            await input.RFA.CopyToAsync(stream);
                         }
                     }
 
@@ -334,7 +398,7 @@ namespace Lighting.Controllers.Backend
                         foreach (var tect_img in input.Technical_Drawing_Img)
                         {
                             var more_infor = Path.Combine(_env.WebRootPath, path, "technical_img", tect_img.FileName);
-                            using (var stream = new FileStream(more_infor, FileMode.CreateNew))
+                            using (var stream = new FileStream(more_infor, FileMode.Create))
                             {
                                 await tect_img.CopyToAsync(stream);
                             }
@@ -348,7 +412,7 @@ namespace Lighting.Controllers.Backend
                         foreach (var light_ditribute in input.LIGHT_DISTRIBUTION)
                         {
                             var more_infor = Path.Combine(_env.WebRootPath, path, "light_ditribute_img", light_ditribute.FileName);
-                            using (var stream = new FileStream(more_infor, FileMode.CreateNew))
+                            using (var stream = new FileStream(more_infor, FileMode.Create))
                             {
                                 await light_ditribute.CopyToAsync(stream);
                             }
@@ -358,9 +422,11 @@ namespace Lighting.Controllers.Backend
                     product.Folder_Path = folder_name;
                     //file
                     product.Preview_Image = input.Preview_Image.FileName;
-                    product.CUTSHEET = input.CUTSHEET.FileName;
-                    product.CATALOGUE = input.CATALOGUE.FileName;
-                    product.IESFILE = input.IESFILE.FileName;
+                    product.SUB_IMG = input.SUB_IMG?.FileName;
+                    product.CUTSHEET = input.CUTSHEET?.FileName;
+                    product.CATALOGUE = input.CATALOGUE?.FileName;
+                    product.RFA = input.RFA?.FileName;
+                    product.IESFILE = input.IESFILE?.FileName;
                     product.MORE_INFORMATION = input.MORE_INFORMATION;
 
                     product.Product_CategoryId = input.Product_CategoryId;
@@ -411,7 +477,7 @@ namespace Lighting.Controllers.Backend
                 var product = await _db.Products.FirstOrDefaultAsync(pro => pro.Id == id);
                 if (product != null)
                 {
-                    var path = Path.Combine(_env.WebRootPath, product.Folder_Path);
+                    var path = Path.Combine(_env.WebRootPath, "upload_image", "Product", product.Folder_Path);
                     if (Directory.Exists(path))
                     {
                         Directory.Delete(path, true);
@@ -440,21 +506,40 @@ namespace Lighting.Controllers.Backend
                 var directory = Path.Combine(_env.WebRootPath, path);
                 try
                 {
-                    var preview_img = Path.Combine(directory, input.Preview_Image.FileName);
+
                     if (input.Preview_Image != null)
                     {
+                        var preview_img = Path.Combine(directory, input.Preview_Image.FileName);
                         if (product.Preview_Image != null)
                         {
-                            var delete_file = Path.Combine(preview_img, product.Preview_Image);
+                            var delete_file = Path.Combine(_env.WebRootPath,path, product.Preview_Image);
                             if (System.IO.File.Exists(delete_file))
                             {
                                 System.IO.File.Delete(delete_file);
                             }
                         }
 
-                        using (var stream = new FileStream(preview_img, FileMode.CreateNew))
+                        using (var stream = new FileStream(preview_img, FileMode.Create))
                         {
                             await input.Preview_Image.CopyToAsync(stream);
+                        }
+                    }
+
+                    if (input.SUB_IMG != null)
+                    {
+                        var sub_img = Path.Combine(directory, input.SUB_IMG.FileName);
+                        if (product.SUB_IMG != null)
+                        {
+                            var delete_file = Path.Combine(_env.WebRootPath, path, product.SUB_IMG);
+                            if (System.IO.File.Exists(delete_file))
+                            {
+                                System.IO.File.Delete(delete_file);
+                            }
+                        }
+
+                        using (var stream = new FileStream(sub_img, FileMode.Create))
+                        {
+                            await input.SUB_IMG.CopyToAsync(stream);
                         }
                     }
 
@@ -462,7 +547,7 @@ namespace Lighting.Controllers.Backend
                     {
                         if (product.CUTSHEET != null)
                         {
-                            var delete_file = Path.Combine(preview_img, product.CUTSHEET);
+                            var delete_file = Path.Combine(_env.WebRootPath, path, product.CUTSHEET);
                             if (System.IO.File.Exists(delete_file))
                             {
                                 System.IO.File.Delete(delete_file);
@@ -470,7 +555,7 @@ namespace Lighting.Controllers.Backend
                         }
 
                         var cut_sheet = Path.Combine(_env.WebRootPath, path, input.CUTSHEET.FileName);
-                        using (var stream = new FileStream(cut_sheet, FileMode.CreateNew))
+                        using (var stream = new FileStream(cut_sheet, FileMode.Create))
                         {
                             await input.CUTSHEET.CopyToAsync(stream);
                         }
@@ -480,14 +565,14 @@ namespace Lighting.Controllers.Backend
                     {
                         if (product.IESFILE != null)
                         {
-                            var delete_file = Path.Combine(preview_img, product.IESFILE);
+                            var delete_file = Path.Combine(_env.WebRootPath, path, product.IESFILE);
                             if (System.IO.File.Exists(delete_file))
                             {
                                 System.IO.File.Delete(delete_file);
                             }
                         }
                         var ies_file = Path.Combine(_env.WebRootPath, path, input.IESFILE.FileName);
-                        using (var stream = new FileStream(ies_file, FileMode.CreateNew))
+                        using (var stream = new FileStream(ies_file, FileMode.Create))
                         {
                             await input.IESFILE.CopyToAsync(stream);
                         }
@@ -497,29 +582,48 @@ namespace Lighting.Controllers.Backend
                     {
                         if (product.CATALOGUE != null)
                         {
-                            var delete_file = Path.Combine(preview_img, product.CATALOGUE);
+                            var delete_file = Path.Combine(path, product.CATALOGUE);
                             if (System.IO.File.Exists(delete_file))
                             {
                                 System.IO.File.Delete(delete_file);
                             }
                         }
                         var catalogue = Path.Combine(_env.WebRootPath, path, input.CATALOGUE.FileName);
-                        using (var stream = new FileStream(catalogue, FileMode.CreateNew))
+                        using (var stream = new FileStream(catalogue, FileMode.Create))
                         {
                             await input.CATALOGUE.CopyToAsync(stream);
                         }
                     }
 
+                    if (input.RFA != null)
+                    {
+                        if (product.RFA != null)
+                        {
+                            var delete_file = Path.Combine(path, product.RFA);
+                            if (System.IO.File.Exists(delete_file))
+                            {
+                                System.IO.File.Delete(delete_file);
+                            }
+                        }
+                        var rfa = Path.Combine(_env.WebRootPath, path, input.RFA.FileName);
+                        using (var stream = new FileStream(rfa, FileMode.Create))
+                        {
+                            await input.RFA.CopyToAsync(stream);
+                        }
+                    }
 
                     if (input.Technical_Drawing_Img != null)
                     {
                         var folder = Path.Combine(_env.WebRootPath, path, "technical_img");
-                        Directory.Delete(folder, true);
+                        if (Directory.Exists(folder))
+                        {
+                            Directory.Delete(folder, true);
+                        }
                         Directory.CreateDirectory(folder);
                         foreach (var tect_img in input.Technical_Drawing_Img)
                         {
                             var more_infor = Path.Combine(_env.WebRootPath, path, "technical_img", tect_img.FileName);
-                            using (var stream = new FileStream(more_infor, FileMode.CreateNew))
+                            using (var stream = new FileStream(more_infor, FileMode.Create))
                             {
                                 await tect_img.CopyToAsync(stream);
                             }
@@ -529,12 +633,15 @@ namespace Lighting.Controllers.Backend
                     if (input.LIGHT_DISTRIBUTION != null)
                     {
                         var folder = Path.Combine(_env.WebRootPath, path, "light_ditribute_img");
-                        Directory.Delete(folder, true);
+                        if (Directory.Exists(folder))
+                        {
+                            Directory.Delete(folder, true);
+                        }
                         Directory.CreateDirectory(folder);
                         foreach (var light_ditribute in input.LIGHT_DISTRIBUTION)
                         {
                             var more_infor = Path.Combine(_env.WebRootPath, path, "light_ditribute_img", light_ditribute.FileName);
-                            using (var stream = new FileStream(more_infor, FileMode.CreateNew))
+                            using (var stream = new FileStream(more_infor, FileMode.Create))
                             {
                                 await light_ditribute.CopyToAsync(stream);
                             }
@@ -543,10 +650,13 @@ namespace Lighting.Controllers.Backend
 
                     //product.Folder_Path = folder_name;
                     //file
-                    product.Preview_Image = input.Preview_Image.FileName;
-                    product.CUTSHEET = input.CUTSHEET.FileName;
-                    product.CATALOGUE = input.CATALOGUE.FileName;
-                    product.IESFILE = input.IESFILE.FileName;
+                    product.Preview_Image = input.Preview_Image != null ? input.Preview_Image.FileName : product.Preview_Image;
+                    product.SUB_IMG = input.SUB_IMG != null ? input.SUB_IMG.FileName : product.SUB_IMG;
+                    product.CUTSHEET = input.CUTSHEET != null ? input.CUTSHEET.FileName : product.CUTSHEET;
+                    product.CATALOGUE = input.CATALOGUE != null ? input.CATALOGUE.FileName : product.CATALOGUE;
+                    product.RFA = input.RFA != null ? input.RFA.FileName : product.RFA;
+                    product.IESFILE = input.IESFILE != null ? input.IESFILE.FileName : product.Preview_Image;
+
                     product.MORE_INFORMATION = input.MORE_INFORMATION;
 
                     product.Product_CategoryId = input.Product_CategoryId;
@@ -581,8 +691,8 @@ namespace Lighting.Controllers.Backend
                 }
                 catch (Exception ex)
                 {
-                    Directory.Delete(directory, true);
-                    return Json(new { status = "fail", message = "เกิดข้อผิดพลาด อาจมีชื่อไฟล์ซ้ำกัน" });
+                    //Directory.Delete(directory, true);
+                    return Json(new { status = "fail", message = "เกิดข้อผิดพลาด อาจมีชื่อไฟล์ซ้ำกัน:"+ex.Message });
                 }
             }
             return Json(new { status = "fail", message = "ไท่พบข้อมูล" });
@@ -608,7 +718,7 @@ namespace Lighting.Controllers.Backend
                     Finishing = pro.Finishing,
                     Gasket = pro.Gasket,
                     Housing = pro.Housing,
-                    
+
                     IP_Rating = pro.IP_Rating,
                     Lamp_Colour = pro.Lamp_Colour,
                     Lens = pro.Lens,
@@ -620,12 +730,14 @@ namespace Lighting.Controllers.Backend
                     Power_Supply = pro.Power_Supply,
                     Source = pro.Source,
                     Luminaire_Output = pro.Luminaire_Output,
-                   
+
                     Folder_Path = pro.Folder_Path,
-                    CUTSHEET = pro.CUTSHEET == null ? null:Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CUTSHEET),
-                    CATALOGUE = pro.CATALOGUE == null ? null:Path.Combine("upload_image", "Product",pro.Folder_Path, pro.CATALOGUE),
-                    IESFILE = pro.IESFILE == null ? null:Path.Combine("upload_image", "Product",pro.Folder_Path, pro.IESFILE),
-                    Preview_Imamge = pro.Preview_Image == null ? null:Path.Combine("upload_image", "Product",pro.Folder_Path, pro.Preview_Image),
+                    CUTSHEET = pro.CUTSHEET == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CUTSHEET),
+                    CATALOGUE = pro.CATALOGUE == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CATALOGUE),
+                    RFA = pro.RFA == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.RFA),
+                     SUB_IMG = pro.SUB_IMG == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.SUB_IMG),
+                    IESFILE = pro.IESFILE == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.IESFILE),
+                    Preview_Imamge = pro.Preview_Image == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.Preview_Image),
 
                 })
                 .ToListAsync();
@@ -636,7 +748,67 @@ namespace Lighting.Controllers.Backend
                 productItem.LIGHT_DISTRIBUTION = GET_FILE(Path.Combine("upload_image", "Product", productItem.Folder_Path, "light_ditribute_img"));
             });
 
+            ViewData["category"] = await _db.Product_Categorys.ToListAsync();
+
             return View(product);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Search()
+        {
+            var product = await _db.Products
+    .AsNoTracking()
+    .OrderByDescending(cat => cat.Id)
+    .Select(pro =>
+    new
+    {
+        Id = pro.Id,
+        Product_CategoryId = pro.Product_CategoryId,
+        Product_ModelId = pro.Product_ModelId,
+        Application = pro.Application,
+        //Beam_Angle = pro.Beam_Angle,
+        Type_EN = pro.Type_EN,
+        Type_TH = pro.Type_TH,
+
+        //Control_Gear = pro.Control_Gear,
+        //Dimension = pro.Dimension,
+        //Equivalent = pro.Equivalent,
+        //Finishing = pro.Finishing,
+        //Gasket = pro.Gasket,
+        //Housing = pro.Housing,
+
+        //IP_Rating = pro.IP_Rating,
+        //Lamp_Colour = pro.Lamp_Colour,
+        //Lens = pro.Lens,
+        //Luminaire_Lifetime = pro.Luminaire_Lifetime,
+        Model = pro.Model,
+        //Mounting = pro.Mounting,
+        //MORE_INFORMATION = pro.MORE_INFORMATION,
+        Power = pro.Power,
+        //Power_Supply = pro.Power_Supply,
+        //Source = pro.Source,
+        //Luminaire_Output = pro.Luminaire_Output,
+
+        //Folder_Path = pro.Folder_Path,
+        //CUTSHEET = pro.CUTSHEET == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CUTSHEET),
+        //CATALOGUE = pro.CATALOGUE == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CATALOGUE),
+        //IESFILE = pro.IESFILE == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.IESFILE),
+        Preview_Imamge = pro.Preview_Image == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.Preview_Image),
+
+    })
+    .ToListAsync();
+            return Json(product);
+        }
+        [AllowAnonymous]
+        public IActionResult DwonloadFile(string? path)
+        {
+            if (path == null) return NotFound();
+            var dowload_path = Path.Combine(_env.WebRootPath, path);
+            if (System.IO.File.Exists(dowload_path))
+            {
+                byte[] file = System.IO.File.ReadAllBytes(dowload_path);
+                return File(file, "text/plain", Path.GetFileName(dowload_path));
+            }
+            return NotFound();
         }
 
         private List<string> GET_FILE(string path)
@@ -649,11 +821,12 @@ namespace Lighting.Controllers.Backend
                         var arStr = path.Split("\\").Reverse().Take(5).Reverse();
                         return string.Join("/", arStr);
                     }).ToList();
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return new();
             }
-          
+
         }
     }
 }
