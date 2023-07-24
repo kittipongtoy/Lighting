@@ -200,9 +200,7 @@
 	|| ViewData["Title"] == "SH_IR_prospectus")
 	{
 		show_important_financial_information = "show";
-		here_important_financial_information = "here";
-		show_investerRelation = "show";
-		here_investerRelation = "here";
+		here_important_financial_information = "here"; 
 	} 
 
 	var Show_Authorization = "";
@@ -213,6 +211,25 @@
 	{
 		Show_Authorization = "show";
 		Here_Authorization = "here";
+	}
+
+	
+	var show_privacy = "";
+	var here_privacy = "";
+	if (ViewData["Title"] == "privacy_index"
+	|| ViewData["Title"] == "privacy_create"
+	|| ViewData["Title"] == "privacy_edit")
+	{
+		show_privacy = "show";
+		here_privacy = "here"; 
+	}
+	
+	var show_cookies = "";
+	var here_cookies = "";
+	if (ViewData["Title"] == "cookies_index")
+	{
+		show_cookies = "show";
+		here_cookies = "here"; 
 	}
 
 }
@@ -1578,6 +1595,70 @@
 												</span>
 												<span class="menu-title">หน้าแรก</span>
 											</a>
+									</div>
+								</div>
+							</div> 
+							<div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_privacy @here_privacy">
+								<span class="menu-link">
+									<span class="menu-icon">
+										<i class="bi bi-briefcase-fill fs-3"></i>
+									</span>
+									<span class="menu-title">นโยบายความเป็นส่วนตัว</span>
+									<span class="menu-arrow"></span>
+								</span>
+								<div class="menu-sub menu-sub-accordion">
+									<div class="menu-item">
+										@if (ViewData["Title"] == "privacy_index"
+											|| ViewData["Title"] == "privacy_create"
+											|| ViewData["Title"] == "privacy_edit")
+										{
+											<a class="menu-link active" href="@Url.Action("privacy_index","Privacy")">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">นโยบายความเป็นส่วนตัว</span>
+											</a>
+										}
+										else
+										{
+											<a class="menu-link" href="@Url.Action("privacy_index","Privacy")">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">นโยบายความเป็นส่วนตัว</span>
+											</a>
+										} 
+									</div>
+								</div>
+							</div>
+							<div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_cookies @here_cookies">
+								<span class="menu-link">
+									<span class="menu-icon">
+										<i class="bi bi-briefcase-fill fs-3"></i>
+									</span>
+									<span class="menu-title">นโยบายคุกกี้</span>
+									<span class="menu-arrow"></span>
+								</span>
+								<div class="menu-sub menu-sub-accordion">
+									<div class="menu-item">
+										@if (ViewData["Title"] == "cookies_index")
+										{
+											<a class="menu-link active" href="@Url.Action("cookies_index","Privacy")">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">นโยบายคุกกี้</span>
+											</a>
+										}
+										else
+										{
+											<a class="menu-link" href="@Url.Action("cookies_index","Privacy")">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">นโยบายคุกกี้</span>
+											</a>
+										} 
 									</div>
 								</div>
 							</div>

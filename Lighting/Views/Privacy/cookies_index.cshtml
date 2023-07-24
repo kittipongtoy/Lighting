@@ -1,0 +1,210 @@
+﻿@model Lighting.Models.model_input
+
+@{
+    ViewData["Title"] = "cookies_index";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+ 
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Toolbar-->
+    <h2 style="text-align:center">
+        นโยบายคุกกี้
+    </h2>
+    <!--end::Toolbar-->
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
+            @*start*@
+            <!--begin::Card-->
+            <div class="card">
+
+                <div class="card-body pt-0">
+                    <!--begin::Card body-->
+                    <div class="card-body pt-0">
+                    </div>
+                    <form id="form_create" enctype="multipart/form-data">
+                        @{
+                            if (Model.count_cookies_policy == 0)
+                            {
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="headTitleTH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="headTitleENG" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <span>
+                                            เนื้อหา TH
+                                        </span>
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea id="kt_docs_ckeditor_document_TH" name=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <span>
+                                            เนื้อหา EN
+                                        </span>
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea id="kt_docs_ckeditor_document_EN" name=""></textarea>
+                                    </div>
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="headTitleTH" autocomplete="off" value="@Model.fod_cookies_policy.headTitleTH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="headTitleENG" autocomplete="off" value="@Model.fod_cookies_policy.headTitleENG" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <span>
+                                            เนื้อหา TH
+                                        </span>
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea id="kt_docs_ckeditor_document_TH" name="">@Model.fod_cookies_policy.detailsTH</textarea>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <span>
+                                            เนื้อหา EN
+                                        </span>
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea id="kt_docs_ckeditor_document_EN" name="">@Model.fod_cookies_policy.detailsENG</textarea>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                    </form>
+
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--end::Card body-->
+            @*end*@
+             
+        </div>
+        <!--end::Card-->
+
+    </div>
+    <!--end::Container-->
+</div>
+
+@section Scripts{
+
+    <script>
+
+        var editorTH;
+        var editorEN;
+        ClassicEditor
+            .create(document.querySelector('#kt_docs_ckeditor_document_TH'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                editorTH = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#kt_docs_ckeditor_document_EN'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                editorEN = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        function submit_form() {
+            var raw_form = document.getElementById('form_create');
+            var formData = new FormData(raw_form);
+
+            var get_th = editorTH.getData();
+            var get_en = editorEN.getData();
+            formData.append("detailsTH", get_th);
+            formData.append("detailsENG", get_en);
+
+            $.ajax({
+                type: 'POST',
+                url: '/Privacy/cookies_Policys_submit',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                        window.location.href = "@Url.Action("cookies_index","Privacy")";
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+         
+    </script>
+
+} 

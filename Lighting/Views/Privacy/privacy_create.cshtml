@@ -1,0 +1,185 @@
+﻿@{
+    ViewData["Title"] = "privacy_create";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <div id="kt_content_container" class="container-xxl">
+            <div class="card">
+                <div class="card-body pt-0">
+                    
+                    <div class="row mb-3" style="padding-top: 1.5rem!important;">
+                        <div class="col-6">
+                            <h2>
+                                เพิ่มรายการ
+                            </h2>
+                        </div>
+                        <div class="col-6" style="text-align:right;"> 
+                            <a type="button" class="btn btn-secondary" href="@Url.Action("privacy_index","Privacy")">ย้อนกลับ</a>
+                        </div>
+                    </div>
+
+                    <form id="form_create" enctype="multipart/form-data">
+                        
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    ปี
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input class="col-lg-6 form-control" name="Year_Str" id="Year" type="text" autocomplete="off" multiple required placeholder="กรุณาเลือกปี" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    type of privacy policy
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <select class="form-select" name="typeOfPolicy_id">
+                                    <option selected name="typeOfPolicy_id" value="0">เลือกหัวข้อ</option>
+                                    <option value="1" name="typeOfPolicy_id">Privacy Policy​</option>
+                                    <option value="2" name="typeOfPolicy_id">Privacy Notice สำหรับผู้สมัครงานและพนักงาน </option>
+                                    <option value="3" name="typeOfPolicy_id">CCTV Privacy Policy​</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <span>
+                                    เนื้อหา TH
+                                </span>
+                            </div>
+                            <div class="col-12">
+                                <textarea id="kt_docs_ckeditor_document_TH" name=""></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <span>
+                                    เนื้อหา EN
+                                </span>
+                            </div>
+                            <div class="col-12">
+                                <textarea id="kt_docs_ckeditor_document_EN" name=""></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    สถานะการใช้งาน
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" checked type="checkbox" name="active_status" value="1" id="active_status">
+                                    <label class="form-check-label" for="active_status">ใช้งาน</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        
+        $("#Year").datepicker({
+            format: "yyyy",
+            startView: "years",
+            minViewMode: "years"
+        });
+
+        var editorTH;
+        var editorEN;
+        ClassicEditor
+            .create(document.querySelector('#kt_docs_ckeditor_document_TH'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                editorTH = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#kt_docs_ckeditor_document_EN'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                editorEN = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        function submit_form() {
+            var raw_form = document.getElementById('form_create');
+            var formData = new FormData(raw_form);
+
+            var get_th = editorTH.getData();
+            var get_en = editorEN.getData();
+            formData.append("detailsTH", get_th);
+            formData.append("detailsENG", get_en);
+
+            $.ajax({
+                type: 'POST',
+                url: '/Privacy/privacy_create_submit',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            location.href = "@Url.Action("privacy_index","Privacy")";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+    </script>
+}

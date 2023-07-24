@@ -15,7 +15,10 @@ namespace Lighting.Areas.Identity.Data
         public LightingContext()
         {
         }
-
+        
+        public DbSet<cookies_policy> cookies_policy { get; set; }
+        public DbSet<privacy_PolicyTitles> privacy_PolicyTitles { get; set; }
+        public DbSet<privacy_Policys> privacy_Policys { get; set; }
         public DbSet<Download> Downloads { get; set; }
         public DbSet<ApplyJob> ApplyJobs { get; set; }
         #region contact

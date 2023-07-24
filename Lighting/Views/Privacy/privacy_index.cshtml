@@ -1,0 +1,460 @@
+﻿@model Lighting.Models.model_input
+
+@{
+    ViewData["Title"] = "privacy_index";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Toolbar-->
+    <!--end::Toolbar-->
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
+            @*start*@
+            <!--begin::Card-->
+            <div class="card">
+
+                <div class="card-body pt-0">
+                    <!--begin::Card body-->
+                    <div class="card-body pt-0">
+                    </div>
+                    <form id="form_create" enctype="multipart/form-data">
+                        @{
+                            if (Model.count_privacy_PolicyTitles == 0)
+                            {
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="headTitleTH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="headTitleENG" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="privacy_TitleTH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="privacy_TitleENG" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ เอกสารนำเสนอ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="privacy_NoticeTitleTH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ เอกสารนำเสนอ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="privacy_NoticeTitleENG" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ดาวน์โหลด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="cctv_privacyTitleTH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ดาวน์โหลด ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="cctv_privacyTitleENG" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="headTitleTH" autocomplete="off" value="@Model.fod_privacy_PolicyTitles.headTitleTH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="headTitleENG" autocomplete="off" value="@Model.fod_privacy_PolicyTitles.headTitleENG" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="privacy_TitleTH" autocomplete="off" value="@Model.fod_privacy_PolicyTitles.privacy_TitleTH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="privacy_TitleENG" autocomplete="off" value="@Model.fod_privacy_PolicyTitles.privacy_TitleENG" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ เอกสารนำเสนอ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="privacy_NoticeTitleTH" autocomplete="off" value="@Model.fod_privacy_PolicyTitles.privacy_NoticeTitleTH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ เอกสารนำเสนอ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="privacy_NoticeTitleENG" autocomplete="off" value="@Model.fod_privacy_PolicyTitles.privacy_NoticeTitleENG" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ดาวน์โหลด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="cctv_privacyTitleTH" autocomplete="off" value="@Model.fod_privacy_PolicyTitles.cctv_privacyTitleTH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ดาวน์โหลด ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="cctv_privacyTitleENG" autocomplete="off" value="@Model.fod_privacy_PolicyTitles.cctv_privacyTitleENG" />
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                    </form>
+
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--end::Card body-->
+            @*end*@
+
+
+            <!--begin::Card header-->
+            <div class="card-header border-0 pt-6">
+                <!--begin::Card title-->
+                <div class="card-title">
+                    <!--begin::Search-->
+                    <div class="d-flex align-items-center position-relative my-1">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                        <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        <input type="text" data-kt-customer-table-filter="search" id="search_table_2" class="form-control form-control-solid w-250px ps-15" placeholder="ค้นหา" />
+                    </div>
+                    <!--end::Search-->
+                </div>
+                <!--begin::Card title-->
+                <!--begin::Card toolbar-->
+                <div class="card-toolbar">
+                    <!--begin::Toolbar-->
+                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+                        <!--begin::Add customer-->
+                        <a type="button" class="btn btn-primary" href="@Url.Action("privacy_create","Privacy")">เพิ่ม</a>
+                        <!--end::Add customer-->
+                    </div>
+                    <!--end::Toolbar-->
+                </div>
+                <!--end::Card toolbar-->
+            </div>
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body pt-0">
+                <h3>รายชื่อ</h3>
+                <!--begin::Table-->
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+                    <!--begin::Table head-->
+                    <thead>
+                        <!--begin::Table row-->
+                        <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                            <th>#</th>
+                            <th class="min-w-125px">ปี</th>
+                            <th class="min-w-125px">หัวข้อ</th>
+                            <th class="min-w-125px">สถานะการใช้งาน</th>
+                            <th class="text-end min-w-70px">รายละเอียด</th>
+                        </tr>
+                        <!--end::Table row-->
+                    </thead>
+                    <!--end::Table head-->
+                    <!--begin::Table body-->
+                    <tbody class="fw-semibold text-gray-600">
+                    </tbody>
+                    <!--end::Table body-->
+                </table>
+                <!--end::Table-->
+                <div class="mb-10">
+                </div>
+
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Card-->
+
+    </div>
+    <!--end::Container-->
+</div>
+
+@section Scripts{
+
+    <script>
+
+        function submit_form() {
+            var raw_form = document.getElementById('form_create');
+            var formData = new FormData(raw_form);
+
+            $.ajax({
+                type: 'POST',
+                url: '/Privacy/privacy_PolicysTitles_addData',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                        window.location.href = "@Url.Action("privacy_index","Privacy")";
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+
+        function edit_details(id) {
+            location.href = '/Privacy/privacy_edit/?Id=' + id;
+
+            //window.location.href = "Url.Action("ShareHolder_DataDetails_edit","Information_ShareHolder")/" + id;
+        }
+
+        function delete_details(id) {
+            Swal.fire({
+                title: 'คุณต้องการจะลบหรือไม่?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'ใช่',
+                denyButtonText: `ไม่ใช่`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: "/Privacy/privacy_Policys_delete",
+                        data: {
+                            Id: id
+                        },    // multiple data sent using ajax
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then((result) => {
+                                    var oTable = $('#kt_customers_table').DataTable();
+                                    oTable.ajax.reload(null, false);
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+                } else if (result.isDenied) {
+
+                }
+            })
+        }
+
+        function changeStatus_privacy(id, checked_obj) {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Privacy/privacy_Policys_changeStatus",
+                data: {
+                    id: id,
+                    status: checked_obj.checked
+                },    // multiple data sent using ajax
+                success: function (data) {
+                    if (data.status == "success") {
+                        var oTable = $('#kt_customers_table').DataTable();
+                        oTable.ajax.reload(null, false);
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        //load data details to table
+        $(document).ready(function () {
+
+            var table_2 = $("#kt_customers_table").DataTable({
+                responsive: true,
+                order: [[0, "asc"]],
+                "ajax": {
+                    "url": "/Privacy/privacy_Policys_getTable",
+                    "type": "POST",
+                    "datatype": "json",
+
+                },
+                "columns": [
+                    {
+                        "name": "count_row", "data": "count_row"
+                    },
+                    {
+                        "name": "year", "data": "year"
+                    },
+                    {
+                        "name": "typeOfPolicy", "data": "typeOfPolicy"
+                    },
+                    {
+                        "name": "active_status", "data": "active_status", "render": function (data, type, row) {
+                            if (row.active_status == 1) {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" checked type="checkbox" name="active_status" value="1" id="active_status" onchange="changeStatus_privacy(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="active_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            } else {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" type="checkbox" name="active_status" value="1" id="active_status" onchange="changeStatus_privacy(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="active_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            }
+
+
+                        }
+                    },
+                    {
+                        "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
+                            var text = '<button type="button" class="btn btn-warning" onclick="edit_details(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
+                            text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_details(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
+                            return text;
+
+                        }
+                    }
+                ],
+            });
+
+
+            $('#search_table_2').keyup(function () {
+                table_2.search($(this).val()).draw();
+            })
+        });
+
+    </script> 
+
+} 

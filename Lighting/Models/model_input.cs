@@ -4,6 +4,11 @@ namespace Lighting.Models
 {
     public class model_input
     {
+        public int? count_cookies_policy { get; set; }
+        public cookies_policy? fod_cookies_policy { get; set; }
+        public privacy_PolicyTitles? fod_privacy_PolicyTitles { get; set; }
+        public int? count_privacy_PolicyTitles { get; set; }
+        public privacy_Policys? fod_privacy_Policys { get; set; }
         public int? count_receive_agenda_mail_accounts { get; set; }    
         public receive_agenda_mail_accounts? receive_agenda_mail_accounts { get; set; }
         public class IR_csr_policy_file

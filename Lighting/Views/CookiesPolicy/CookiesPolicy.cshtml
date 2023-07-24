@@ -1,18 +1,60 @@
 ﻿@{
     ViewData["Title"] = "CookiesPolicy";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+
+    var cookies_Contact = (List<Lighting.Areas.Identity.Data.cookies_policy>)ViewBag.cookies_Contact;
+
 }
- <div class="top-page">
-        <div class="container">
-            <div class="row">
+<div class="top-page">
+    <div class="container">
+        <div class="row">
+            @if (cookies_Contact.Count() != 0)
+            {
+                if (Context.Request.Cookies["lang"] == "EN")
+                {
+                    foreach (var item in ViewBag.cookies_Contact)
+                    {
+                        <div class="col">@item.headTitleENG</div>
+                    }
+                }
+                else
+                {
+                    foreach (var item in ViewBag.cookies_Contact)
+                    {
+                        <div class="col">@item.headTitleTH</div>
+                    }
+                }
+            }
+            else
+            {
                 <div class="col">COOKIES POLICY</div>
-            </div>
+            }
         </div>
     </div>
+</div>
 
-    <!---------- COOKIES POLICY ---------->
-    <div class="content-padding foot-pad minH policy-page">
-        <div class="container">
+<!---------- COOKIES POLICY ---------->
+<div class="content-padding foot-pad minH policy-page">
+    <div class="container">
+        @if (cookies_Contact.Count() != 0)
+        {
+            if (Context.Request.Cookies["lang"] == "EN")
+            {
+                foreach (var item in ViewBag.cookies_Contact)
+                {
+                    <div>@Html.Raw(item.detailsENG)</div>
+                }
+            }
+            else
+            {
+                foreach (var item in ViewBag.cookies_Contact)
+                {
+                    <div class="col">@Html.Raw(item.detailsTH)</div>
+                }
+            }
+        }
+        else
+        {
             <div class="row">
                 <div class="col">
                     <div class="policy-header">
@@ -49,5 +91,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        }
     </div>
+</div>

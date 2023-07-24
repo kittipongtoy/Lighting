@@ -15,7 +15,9 @@ using MimeKit;
 using System.Net.Mime;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json.Linq;
-using System.Text;
+using System.Text; 
+using System.Net.Mail;
+using System.Net;
 
 namespace Lighting.Controllers.Frontend
 {
@@ -1236,6 +1238,8 @@ namespace Lighting.Controllers.Frontend
         {
             try
             {
+                // Replace with your email and SMTP server details
+
                 if (mailReceive.typeOfPropose == "0" || mailReceive.name == null || mailReceive.name == ""
                     || mailReceive.phone == null || mailReceive.phone == "" || mailReceive.wantProposeTitle == null || mailReceive.wantProposeTitle == ""
                     || mailReceive.details == null || mailReceive.details == "")
@@ -1245,12 +1249,14 @@ namespace Lighting.Controllers.Frontend
                 {
                     await SendEmailAsyncCareer(mailReceive);
 
-                    var getdata = db.type_of_agenda_Propose.Where(x => x.id == Convert.ToInt32(mailReceive.typeOfPropose)).FirstOrDefault();
-                    mailReceive.typeOfPropose = getdata.titleTH + "(" + getdata.titleENG + ")";
+                    //save record mail sent
+                    var getdata2 = db.type_of_agenda_Propose.Where(x => x.id == Convert.ToInt32(mailReceive.typeOfPropose)).FirstOrDefault();
+                    mailReceive.typeOfPropose = getdata2.titleTH + "(" + getdata2.titleENG + ")";
                     mailReceive.created_at = DateTime.Now;
                     mailReceive.updated_at = DateTime.Now;
                     db.receive_mail_propose_agendas.Add(mailReceive);
                     db.SaveChanges();
+
                     return Json(new { status = "success", message = "งเมลล์สำเร็จ" });
                 }
             }
@@ -1259,50 +1265,102 @@ namespace Lighting.Controllers.Frontend
                 return Json(new { status = "error", message = "ส่งเมลล์ไม่สำเร็จ", inner = e.InnerException });
             }
         }
-        public async Task SendEmailAsyncCareer(receive_mail_propose_agendas mailRequest)
-        { 
-
-            //string Email = System.Configuration.ConfigurationManager.AppSettings["EmailSender"];
-            //string Password = System.Configuration.ConfigurationManager.AppSettings["EmailPassswordSender"];
-            //string Smtp = System.Configuration.ConfigurationManager.AppSettings["EmailSmtpSender"];
-            //string SmtpPort = System.Configuration.ConfigurationManager.AppSettings["EmailSmtpPort"];
-
-            string Email = "saimonnlaing1500@gmail.com";
-            string Password = "ffrpojpekljhdqnb";
-            string Smtp = "smtp.gmail.com";
-            string SmtpPort = "587";
-
-            var to_mail = db.receive_agenda_mail_accounts.FirstOrDefault().account;
-            var tomails = to_mail.Split(',', ' ');
-            var email = new MimeMessage();
-            email.Sender = MailboxAddress.Parse(Email);
-            foreach (var tomail in tomails)
+        private async Task SendEmailAsyncCareer(receive_mail_propose_agendas mailRequest)
+        {  
+            try
             {
-                email.To.Add(MailboxAddress.Parse(tomail));
+                string senderEmail = "AIS-MCT1@mail.csloxinfo.com";
+                var to_mail = db.receive_agenda_mail_accounts.FirstOrDefault().account;
+                var tomails = to_mail.Split(',', ' ');
+                var getdata = db.type_of_agenda_Propose.Where(x => x.id == Convert.ToInt32(mailRequest.typeOfPropose)).FirstOrDefault();
+
+                using (SmtpClient smtpClient = new SmtpClient("mail.csloxinfo.com"))
+                {
+                    // Set the port if different from the default (25)
+
+                    smtpClient.Port = 25;
+                    smtpClient.EnableSsl = true;
+                    smtpClient.UseDefaultCredentials = true;
+
+                    // Set UseDefaultCredentials to true to use the current user's Windows credentials.
+                    //smtpClient.UseDefaultCredentials = true;
+
+                    // Create a new email message
+                    using (MailMessage mailMessage = new MailMessage())
+                    {
+                        mailMessage.From = new MailAddress(senderEmail);
+                        foreach (var tomail in tomails)
+                        {
+                            mailMessage.To.Add(tomail);
+                        }
+
+                        mailMessage.Subject = "ข้อมูลสำหรับผู้ถือหุ้น";
+                        var body = "เสนอวาระ/กรรมการ/คำถามล่วงหน้า" +
+                                  "ชื่อผู้ติดต่อ      : " + mailRequest.name + "<br/>" +
+                                  "เบอร์โทรศัพท์   : " + mailRequest.phone + "<br/>" +
+                                  "อีเมล         : " + mailRequest.email + "<br/>" +
+                                  "หัวข้อที่ต้องการเสนอ    : " + getdata.titleTH + "(" + getdata.titleENG + ")" + "<br/>" +
+                                  "ชื่อหัวข้อที่ต้องการเสนอ : " + mailRequest.wantProposeTitle + "<br/>" +
+                                  "รายละเอียด        : " + mailRequest.details;
+                        mailMessage.Body = body;
+                        mailMessage.IsBodyHtml = true;
+
+                        // Send the email
+                        await smtpClient.SendMailAsync(mailMessage);
+
+                    }
+                } 
+            }
+            catch (SmtpException e)
+            {
+                // Log the exception or handle it as per your requirement
+                // Return an error message to the user
+                throw new Exception("Failed to send email: " + e.Message);
+            }
+            catch (Exception e)
+            {
+                // Log the exception or handle it as per your requirement
+                // Return an error message to the user
+                throw new Exception("An unexpected error occurred while sending the email: " + e.Message);
             }
 
-            var getdata = db.type_of_agenda_Propose.Where(x => x.id == Convert.ToInt32(mailRequest.typeOfPropose)).FirstOrDefault();
-            var builder = new BodyBuilder();
-            string Data_head = "ข้อมูลสำหรับผู้ถือหุ้น";
-            string DataBody = "เสนอวาระ/กรรมการ/คำถามล่วงหน้า" +
-                              "ชื่อผู้ติดต่อ      : " + mailRequest.name + "<br/>" +
-                              "เบอร์โทรศัพท์   : " + mailRequest.phone + "<br/>" +
-                              "อีเมล         : " + mailRequest.email + "<br/>" +
-                              "หัวข้อที่ต้องการเสนอ    : " + getdata.titleTH + "(" + getdata.titleENG + ")" + "<br/>" +
-                              "ชื่อหัวข้อที่ต้องการเสนอ : "+mailRequest.wantProposeTitle + "<br/>" +
-                              "รายละเอียด        : " + mailRequest.details;
+            //string Email = "saimonnlaing1500@gmail.com";
+            //string Password = "ffrpojpekljhdqnb";
+            //string Smtp = "smtp.gmail.com";
+            //string SmtpPort = "587";
+             
+            //var to_mail = db.receive_agenda_mail_accounts.FirstOrDefault().account;
+            //var tomails = to_mail.Split(',', ' ');
+            //var email = new MimeMessage();
+            //email.Sender = MailboxAddress.Parse(Email);
+            //foreach (var tomail in tomails)
+            //{
+            //    email.To.Add(MailboxAddress.Parse(tomail));
+            //}
 
-            builder.HtmlBody = DataBody;
+            //var getdata = db.type_of_agenda_Propose.Where(x => x.id == Convert.ToInt32(mailRequest.typeOfPropose)).FirstOrDefault();
+            //var builder = new BodyBuilder();
+            //string Data_head = "ข้อมูลสำหรับผู้ถือหุ้น";
+            //string DataBody = "เสนอวาระ/กรรมการ/คำถามล่วงหน้า" +
+            //                  "ชื่อผู้ติดต่อ      : " + mailRequest.name + "<br/>" +
+            //                  "เบอร์โทรศัพท์   : " + mailRequest.phone + "<br/>" +
+            //                  "อีเมล         : " + mailRequest.email + "<br/>" +
+            //                  "หัวข้อที่ต้องการเสนอ    : " + getdata.titleTH + "(" + getdata.titleENG + ")" + "<br/>" +
+            //                  "ชื่อหัวข้อที่ต้องการเสนอ : "+mailRequest.wantProposeTitle + "<br/>" +
+            //                  "รายละเอียด        : " + mailRequest.details;
 
-            email.Body = builder.ToMessageBody();
-            email.Subject = Data_head;
-            using (var smtp = new MailKit.Net.Smtp.SmtpClient())
-            {
-                await smtp.ConnectAsync(Smtp, int.Parse(SmtpPort), SecureSocketOptions.Auto);
-                await smtp.AuthenticateAsync(Email, Password);
-                await smtp.SendAsync(email);
-                await smtp.DisconnectAsync(true);
-            }
+            //builder.HtmlBody = DataBody;
+
+            //email.Body = builder.ToMessageBody();
+            //email.Subject = Data_head;
+            //using (var smtp = new MailKit.Net.Smtp.SmtpClient())
+            //{
+            //    await smtp.ConnectAsync(Smtp, int.Parse(SmtpPort), SecureSocketOptions.Auto);
+            //    await smtp.AuthenticateAsync(Email, Password);
+            //    await smtp.SendAsync(email);
+            //    await smtp.DisconnectAsync(true);
+            //}
+
         }
 
         public async Task<IActionResult> IR_public_relation()

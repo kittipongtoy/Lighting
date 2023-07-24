@@ -1,54 +1,166 @@
-﻿@{
+﻿@using Lighting.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@inject LightingContext db
+
+@{
     ViewData["Title"] = "PrivacyPolicy";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var privacy_Header = (List<Lighting.Areas.Identity.Data.privacy_PolicyTitles>)ViewBag.privacy_Header;
+
+    var privacy_Contact_1 = (List<Lighting.Areas.Identity.Data.privacy_Policys>)ViewBag.privacy_Contact_1;
+    var privacy_Contact_2 = (List<Lighting.Areas.Identity.Data.privacy_Policys>)ViewBag.privacy_Contact_2;
+    var privacy_Contact_3 = (List<Lighting.Areas.Identity.Data.privacy_Policys>)ViewBag.privacy_Contact_3;
+
 }
-  <div class="top-page">
-        <div class="container">
-            <div class="row">
+
+<div class="top-page">
+    <div class="container">
+        <div class="row">
+            @if (privacy_Header.Count() != 0)
+            {
+                if (Context.Request.Cookies["lang"] == "EN")
+                {
+                    foreach (var item in ViewBag.privacy_Header)
+                    {
+                        <div class="col">@item.headTitleENG</div>
+                    }
+                }
+                else
+                {
+                    foreach (var item in ViewBag.privacy_Header)
+                    {
+                        <div class="col">@item.headTitleTH</div>
+                    }
+                }
+            }
+            else
+            {
                 <div class="col">PRIVACY POLICY</div>
-            </div>
+            }
         </div>
     </div>
+</div>
 
-    <!---------- PRIVACY POLICY ---------->
-    <div class="content-padding foot-pad policy-page">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <ul class="display-tab center s-txt">
-                        <li class="active" rel="1">
-                            <a href="javascript:void(0)">
-                                <div class="cate-txtBox">
-                                    <div>PRIVACY POLICY</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li rel="2">
-                            <a href="javascript:void(0)">
-                                <div class="cate-txtBox">
+<!---------- PRIVACY POLICY ---------->
+<div class="content-padding foot-pad policy-page">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="display-tab center s-txt">
+                    <li class="active" rel="1">
+                        <a href="javascript:void(0)">
+                            <div class="cate-txtBox">
+                                @if (privacy_Header.Count() != 0)
+                                {
+                                    if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                        foreach (var item in ViewBag.privacy_Header)
+                                        {
+                                            <div class="col">@item.privacy_TitleENG</div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in ViewBag.privacy_Header)
+                                        {
+                                            <div class="col">@item.privacy_TitleTH</div>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="col">PRIVACY POLICY</div>
+                                }
+                            </div>
+                        </a>
+                    </li>
+                    <li rel="2">
+                        <a href="javascript:void(0)">
+                            <div class="cate-txtBox">
+                                @if (privacy_Header.Count() != 0)
+                                {
+                                    if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                        foreach (var item in ViewBag.privacy_Header)
+                                        {
+                                            <div class="col">@item.privacy_NoticeTitleENG</div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in ViewBag.privacy_Header)
+                                        {
+                                            <div class="col">@item.privacy_NoticeTitleTH</div>
+                                        }
+                                    }
+                                }
+                                else
+                                {
                                     <div>PRIVACY NOTICE <br>สำหรับผู้สมัครงานและพนักงาน</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li rel="3">
-                            <a href="javascript:void(0)">
-                                <div class="cate-txtBox">
+                                }
+                            </div>
+                        </a>
+                    </li>
+                    <li rel="3">
+                        <a href="javascript:void(0)">
+                            <div class="cate-txtBox">
+                                @if (privacy_Header.Count() != 0)
+                                {
+                                    if (Context.Request.Cookies["lang"] == "EN")
+                                    {
+                                        foreach (var item in ViewBag.privacy_Header)
+                                        {
+                                            <div class="col">@item.cctv_privacyTitleENG</div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in ViewBag.privacy_Header)
+                                        {
+                                            <div class="col">@item.cctv_privacyTitleTH</div>
+                                        }
+                                    }
+                                }
+                                else
+                                {
                                     <div>CCTV PRIVACY POLICY</div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                                }
+                            </div>
+                        </a>
+                    </li>
+                </ul>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col">
-                    <div class="display-group">
-                        <!---------- 01 PRIVACY POLICY ---------->
-                        <div class="display-info" rel="1">
+        <div class="row">
+            <div class="col">
+                <div class="display-group">
+                    <!---------- 01 PRIVACY POLICY ---------->
+                    <div class="display-info" rel="1">
+                        @if (privacy_Contact_1.Count() != 0)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                foreach (var item in ViewBag.privacy_Contact_1)
+                                {
+                                    <div class="col">@Html.Raw(item.detailsENG)</div>
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.privacy_Contact_1)
+                                {
+                                    <div class="col">@Html.Raw(item.detailsENG)</div>
+                                }
+                            }
+                        }
+                        else
+                        {
                             <div class="row justify-content-center">
                                 <div class="col-xl-6 col-lg-7 col-md-9 col-12">
-                                    <div class="img-width img-mb"><img src="images/privacy-policy/PDPAbanner.jpg"></div>
+                                    <div class="img-width img-mb">
+                                        <img src="~/frontend_assets/images/privacy-policy/pdpabanner.jpg" />
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -67,7 +179,8 @@
                                         <ul class="list-decimal">
                                             <li>การเก็บรวบรวมข้อมูลส่วนบุคคลให้มีการดําเนินการอย่างจํากัดเพียงเท่าที่จําเป็น ตามวัตถุประสงค์ของการใช้งานเท่านั้น และสอดคล้องตามนโยบาย คู่มือ และ/หรือแนวปฏิบัติที่บริษัทฯ กําหนด</li>
                                             <li>คุณภาพของข้อมูลส่วนบุคคลที่จัดเก็บ ให้คํานึงถึงความถูกต้องเหมาะสม มีมาตรการในการรักษาความมั่นคงปลอดภัยของข้อมูลส่วนบุคคลอย่างเหมาะสม มีการบริหารจัดการความเสี่ยง รวมถึงการสร้างจิตสํานึกความรับผิดชอบในด้านความมั่นคงปลอดภัย ของข้อมูลส่วนบุคคล</li>
-                                            <li>วัตถุประสงค์ในการเก็บรวมรวม ใช้ หรือเปิดเผยข้อมูลส่วนบุคคลภายใต้ฐานทางกฎหมายที่เกี่ยวข้องกับ พรบ.คุ้มครองข้อมูลส่วนบุคคลและให้มีการประมวลผลข้อมูลตามวัตถุประสงค์ที่กำหนดเท่านั้น โดยจะไม่เปิดเผยข้อมูลส่วนบุคคลต่อบุคคลภายนอกเว้นแต่ในกรณีดังต่อไปนี้
+                                            <li>
+                                                วัตถุประสงค์ในการเก็บรวมรวม ใช้ หรือเปิดเผยข้อมูลส่วนบุคคลภายใต้ฐานทางกฎหมายที่เกี่ยวข้องกับ พรบ.คุ้มครองข้อมูลส่วนบุคคลและให้มีการประมวลผลข้อมูลตามวัตถุประสงค์ที่กำหนดเท่านั้น โดยจะไม่เปิดเผยข้อมูลส่วนบุคคลต่อบุคคลภายนอกเว้นแต่ในกรณีดังต่อไปนี้
                                                 <ol>
                                                     <li>3.1 เพื่อประโยชน์เกี่ยวกับชีวิต สุขภาพ หรือความปลอดภัย (VITAL INTEREST) </li>
                                                     <li>3.2 เพื่อการปฏิบัติตามสัญญาที่มีความผูกพันระหว่างกัน (CONTRACT) </li>
@@ -95,13 +208,15 @@
                                     <div class="txt-content indent mb-5">
                                         <p class="mb-2">นโยบายคุ้มครองข้อมูลส่วนบุคคลฉบับนี้ ใช้สำหรับกลุ่มบุคคลดังต่อไปนี้</p>
                                         <ul class="list-decimal">
-                                            <li>กลุ่มลูกค้าทั่วไป วัตถุประสงค์ในการจัดเก็บข้อมูลส่วนบุคคลของกลุ่มลูกค้าทั่วไป เพื่อพัฒนาบริการ ปรับปรุงสินค้า สำรวจตลาด ความต้องการของลูกค้าและแก้ไขข้อบกพร่องต่างๆ ซึ่งกลุ่มลูกค้าทั่วไปประกอบด้วย
+                                            <li>
+                                                กลุ่มลูกค้าทั่วไป วัตถุประสงค์ในการจัดเก็บข้อมูลส่วนบุคคลของกลุ่มลูกค้าทั่วไป เพื่อพัฒนาบริการ ปรับปรุงสินค้า สำรวจตลาด ความต้องการของลูกค้าและแก้ไขข้อบกพร่องต่างๆ ซึ่งกลุ่มลูกค้าทั่วไปประกอบด้วย
                                                 <ol>
                                                     <li>1.1 ลูกค้าบุคคลธรรมดา ทั้งที่เป็นลูกค้าของบริษัทฯในอดีต ปัจจุบันและกลุ่มเป้าหมายของบริษัทฯ ซึ่งอาจเป็นลูกค้าของบริษัทฯ ในอนาคต </li>
                                                     <li>1.2 ลูกค้าที่เป็นตัวแทน ตัวแทนโครงการ ผู้มีอํานาจกระทําการแทนนิติบุคคล กรรมการ ลูกค้าผู้เข้ามาติดต่อ และบุคคลธรรมดาที่ทำหน้าที่ในนามนิติบุคคล </li>
                                                 </ol>
                                             </li>
-                                            <li>กลุ่มคู่ค้า คู่สัญญา วัตถุประสงค์ในการจัดเก็บข้อมูลส่วนบุคคลของกลุ่มคู่ค้า คู่สัญญา เพื่อตรวจสอบและยืนยันตัวตนเกี่ยวกับการเข้าทำธุรกรรมหรือนิติกรรมสัญญา ซึ่งกลุ่มคู่ค้า คู่สัญญานั้นประกอบด้วย
+                                            <li>
+                                                กลุ่มคู่ค้า คู่สัญญา วัตถุประสงค์ในการจัดเก็บข้อมูลส่วนบุคคลของกลุ่มคู่ค้า คู่สัญญา เพื่อตรวจสอบและยืนยันตัวตนเกี่ยวกับการเข้าทำธุรกรรมหรือนิติกรรมสัญญา ซึ่งกลุ่มคู่ค้า คู่สัญญานั้นประกอบด้วย
                                                 <ol>
                                                     <li>2.1 บุคคลธรรมดา ซึ่งเป็นคู่ค้าหรือคู่สัญญาของบริษัทฯ ทั้งในอดีต ปัจจุบันและในอนาคต </li>
                                                     <li>2.2 บุคคลที่ทำหน้าที่เป็นตัวแทนหรือผู้มีอํานาจกระทําการแทนนิติบุคคล กรรมการ ผู้ติดต่อและบุคคลธรรมดาที่ทำหน้าที่ในนามนิติบุคคล ซึ่งเป็นคู่ค้าหรือคู่สัญญา นิติบุคคลกับบริษัทฯ</li>
@@ -125,7 +240,9 @@
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-xl-7 col-lg-8 col-md-10 col-12">
-                                    <a class="img-width img-mb imgBD hover-img" data-fancybox href="images/privacy-policy/privacy-policy.jpg"><img src="images/privacy-policy/privacy-policy.jpg"></a>
+                                    <a class="img-width img-mb imgBD hover-img" data-fancybox href="~/frontend_assets/images/privacy-policy/privacy-policy.jpg">
+                                        <img src="~/frontend_assets/images/privacy-policy/privacy-policy.jpg" />
+                                    </a>
                                 </div>
                             </div>
                             <div class="row">
@@ -215,7 +332,8 @@
                                             <li>6.4 สิทธิในการคัดค้านการประมวลผล (RIGHT TO OBJECT) เจ้าของข้อมูลมีสิทธิในการคัดค้านการเก็บรวบรวม ใช้ เปิดเผยข้อมูลส่วนบุคคล หรือระงับการใช้ข้อมูล เว้นแต่จะ มีข้อจํากัดทางกฎหมายที่บริษัทฯ ไม่อาจทำตามความเรียกร้องได้</li>
                                             <li>6.5 สิทธิในการเพิกถอนความยินยอม (RIGHT TO WITHDRAW CONSENT) เจ้าของข้อมูลส่วนบุคคลมีสิทธิเพิกถอนความยินยอมได้ตลอดเวลา เว้นแต่ การเพิกถอนความ ยินยอมจะมีข้อจํากัดตามกฎหมายหรือตามสัญญา ทั้งนี้ การถอนความยินยอมจะไม่ส่งผลกระทบต่อการประมวลผลข้อมูลส่วนบุคคลที่ได้ให้ความยินยอมไว้ก่อนหน้าโคยชอบด้วย กฎหมายและตามฐานสัญญาที่ได้ให้ไว้ </li>
                                             <li>6.6 สิทธิในการลบหรือทำลายข้อมูลส่วนบุคคล (RIGHT TO ERASURE) ท่านมีสิทธิขอให้บริษัทฯ ลบหรือทำลายข้อมูลส่วนบุคคลของท่าน หรือทำให้ข้อมูลส่วนบุคคลของท่าน ไม่สามารถระบุตัวบุคคลที่เป็นเจ้าของข้อมูลได้ต่อไป ทั้งนี้ การใช้สิทธิลบหรือทำลายข้อมูลส่วนบุคคลนี้จะต้องอยู่ภายใต้เงื่อนไขตามที่กฎหมายกำหนด</li>
-                                            <li>6.7 สิทธิในการขอให้ระงับการใช้ข้อมูลส่วนบุคคล (RIGHT TO RESTRICTION OF PROCESSING) ท่านมีสิทธิขอให้ระงับการใช้ข้อมูลส่วนบุคคลของท่าน ทั้งนี้ ในกรณีดังต่อไปนี้
+                                            <li>
+                                                6.7 สิทธิในการขอให้ระงับการใช้ข้อมูลส่วนบุคคล (RIGHT TO RESTRICTION OF PROCESSING) ท่านมีสิทธิขอให้ระงับการใช้ข้อมูลส่วนบุคคลของท่าน ทั้งนี้ ในกรณีดังต่อไปนี้
                                                 <ol>
                                                     <li>6.7.1 เมื่ออยู่ในช่วงเวลาที่บริษัทฯ ทำการตรวจสอบตามคำร้องขอของเจ้าของข้อมูลส่วนบุคคลให้แก้ไขข้อมูลส่วนบุคคลให้ถูกต้อง สมบูรณ์และเป็นปัจจุบัน </li>
                                                     <li>6.7.2 ข้อมูลส่วนบุคคลของเจ้าของข้อมูลส่วนบุคคลถูกเก็บรวบรวม ใช้ หรือเปิดเผยโดยมิชอบด้วยกฎหมาย </li>
@@ -270,10 +388,31 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- END // 01 PRIVACY POLICY -->
 
-                        <!---------- 02 PRIVACY NOTICE ---------->
-                        <div class="display-info" rel="2">
+                        }
+
+                    </div><!-- END // 01 PRIVACY POLICY -->
+                    <!---------- 02 PRIVACY NOTICE ---------->
+                    <div class="display-info" rel="2">
+                        @if (privacy_Contact_2.Count() != 0)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                foreach (var item in ViewBag.privacy_Contact_2)
+                                {
+                                    <div class="col">@Html.Raw(item.detailsENG)</div>
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.privacy_Contact_2)
+                                {
+                                    <div class="col">@Html.Raw(item.detailsENG)</div>
+                                }
+                            }
+                        }
+                        else
+                        {
                             <div class="row">
                                 <div class="col">
                                     <div class="policy-header">
@@ -315,7 +454,9 @@
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-xl-7 col-lg-8 col-md-10 col-12">
-                                    <a class="img-width img-mb imgBD hover-img" data-fancybox href="images/privacy-policy/privact-notice.jpg"><img src="images/privacy-policy/privact-notice.jpg"></a>
+                                    <a class="img-width img-mb imgBD hover-img" data-fancybox href="~/frontend_assets/images/privacy-policy/privact-notice.jpg">
+                                        <img src="~/frontend_assets/images/privacy-policy/privact-notice.jpg" />
+                                    </a>
                                 </div>
                             </div>
 
@@ -404,11 +545,29 @@
                                     </div>
                                 </div>
                             </div>
-
-                        </div><!-- END // 02 PRIVACY NOTICE -->
-
-                        <!---------- 03 CCTV PRIVACY POLICY ---------->
-                        <div class="display-info" rel="3">
+                        }
+                    </div><!-- END // 02 PRIVACY NOTICE -->
+                    <!---------- 03 CCTV PRIVACY POLICY ---------->
+                    <div class="display-info" rel="3">
+                        @if (privacy_Contact_3.Count() != 0)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                foreach (var item in ViewBag.privacy_Contact_3)
+                                {
+                                    <div class="col">@Html.Raw(item.detailsENG)</div>
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.privacy_Contact_3)
+                                {
+                                    <div class="col">@Html.Raw(item.detailsENG)</div>
+                                }
+                            }
+                        }
+                        else
+                        {
                             <div class="row">
                                 <div class="col">
                                     <div class="policy-header">
@@ -512,7 +671,8 @@
                                         <ul>
                                             <li>5.1 สิทธิในการเข้าถึง รับสำเนา และขอให้เปิดเผยที่มาของข้อมูลส่วนบุคคลของท่านที่เราเก็บรวบรวม เว้นแต่กรณีที่เรามีสิทธิปฏิเสธคำขอของท่านตามกฎหมายหรือคำสั่ง ศาล หรือกรณีที่คำขอมีผลกระทบที่อาจก่อให้เกิดความเสียหายต่อสิทธิและเสรีภาพของบุคคลอื่น</li>
                                             <li>5.2 สิทธิในการขอแก้ไขข้อมูลส่วนบุคคลที่ไม่ถูกต้องหรือไม่ครบถ้วน เพื่อให้มีความถูกต้อง เป็นปัจจุบัน สมบูรณ์ และไม่ก่อให้เกิดความเข้าใจผิด </li>
-                                            <li>5.3 สิทธิในการขอให้ระงับการใช้ข้อมูลส่วนบุคคลในกรณีดังต่อไปนี้
+                                            <li>
+                                                5.3 สิทธิในการขอให้ระงับการใช้ข้อมูลส่วนบุคคลในกรณีดังต่อไปนี้
                                                 <ol>
                                                     <li>1. เมื่ออยู่ในช่วงเวลาที่บริษัทฯทำการตรวจสอบตามคำร้องขอให้แก้ไขข้อมูล</li>
                                                     <li>2. ข้อมูลส่วนบุคคลที่ถูกเก็บรวบรวม ถูกใช้หรือเปิดเผยโดยมิชอบด้วยกฎหมาย </li>
@@ -604,10 +764,29 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- END // 03 CCTV PRIVACY POLICY -->
-                    </div>
+                        }
+                    </div><!-- END // 03 CCTV PRIVACY POLICY -->
                 </div>
             </div>
-
         </div>
+
     </div>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".display-tab > li").click(function () {
+                var rel = $(this).attr("rel");
+                console.log(rel);
+                $('.display-info').hide();
+                $('.display-info[rel=' + rel + ']').fadeIn();
+                $(".display-tab > li").removeClass("active");
+                $(this).addClass("active");
+            });
+        });
+         
+    </script>
+
+}
