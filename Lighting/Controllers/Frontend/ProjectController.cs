@@ -167,6 +167,7 @@ namespace Lighting.Controllers.Frontend
                         ViewData["categorys"] = await _db.ProjectRefs
                             .AsNoTracking()
                             .Where(proj => proj.ProjectRef_CategoryId == proj_output.CategoryId)
+                            .OrderByDescending(proj => proj.Id)
                             .Select(pro => 
                             new ProjectRef {
                                 Profile_Image = Path.Combine( pro.Folder_Path, pro.Profile_Image),
@@ -175,7 +176,7 @@ namespace Lighting.Controllers.Frontend
                                 Id = pro.Id
                             })
                             //.Take(10)
-                            .ToListAsync(); //.Where(project => project.ProjectRef_CategoryId == products.First().Product_CategoryId)
+                            .ToListAsync(); 
                     }
 
                 }
