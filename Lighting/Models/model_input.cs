@@ -129,7 +129,7 @@ namespace Lighting.Models
         public O_Gift_entertainment_File? fod_O_Gift_entertainment_File { get; set; }
         public Sustainability_Report? fod_Sustainability_Report { get; set; }
         public ShareHolder? fod_ShareHolder { get; set; }
-        public ShareHolder_DataDetails ShareHolder_Details { get; set; }
+        public ShareHolder_DataDetails? ShareHolder_Details { get; set; }
         public int? count_row_ShareHolder { get; set; }
         public int? count_row_chairman { get; set; }
         public int? count_row_CorporateGovernance { get; set; }

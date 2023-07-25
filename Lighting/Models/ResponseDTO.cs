@@ -123,6 +123,7 @@
             public int? Id { get; set; }
             public string? FileName_TH { get; set; }
             public string? FileName_EN { get; set; }
+            public int? Status { get; set; }
         }
 
         public class IR_AnalystResponse
@@ -137,8 +138,8 @@
         public class AuthorizationResponse
 		{
             public int? Index { get; set; }
-            public string Id { get; set; }
-			public string EmployeeCode { get; set; } = string.Empty;
+            public string? Id { get; set; }
+			public string? EmployeeCode { get; set; }
 			public int EmployeeCodeInt { get; set; } = 0;
 			public string? Firstname { get; set; }
 			public string? Lastname { get; set; }

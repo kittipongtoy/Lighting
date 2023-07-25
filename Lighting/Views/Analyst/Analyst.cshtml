@@ -46,21 +46,16 @@
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="TB_Analyst">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th>#</th>
-                                <th class="min-w-125px">หัวข้อ TH</th>
-                                <th class="min-w-125px">หัวข้อ EN</th>
+                                <th class="min-w-125px">FileName</th>
                                 <th class="min-w-125px">สถานะการใช้งาน</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
                         </thead>
-                        <tbody class="fw-semibold text-gray-600">
-                        </tbody>
                     </table>
-                    <div class="mb-10">
-                    </div>
                 </div>
             </div>
         </div>
@@ -69,7 +64,7 @@
 @section Scripts{
     <script>
         $(() => {
-            var oTable = $("#TB_Latest_News").DataTable({
+            var oTable = $("#TB_Analyst").DataTable({
                 processing: true,
                 serverSide: true,
                 searching: false,
@@ -83,7 +78,7 @@
                 },
                 columns: [
                     { 'data': 'index', name: 'index', className: 'text-center' },
-                    { 'data': 'FileName_TH', name: 'FileName_TH', className: 'text-center' },
+                    { 'data': 'fileName_TH', name: 'fileName_TH', className: 'text-center' },
                     {
                         "name": "status", "data": "status", "render": function (data, type, row) {
                             if (row.status == 1) {
@@ -110,5 +105,88 @@
                     }
                 ]
             });
+        });
+
+        function edit_item(id) {
+            location.href = '/Analyst/Analyst_Edit/?Id=' + id;
+        }
+
+        function changeStatus(id, checked_obj) {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Analyst/Analyst_Change",
+                data: {
+                    Id: id
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        function delete_item(id) {
+            Swal.fire({
+                title: 'คุณต้องการจะลบหรือไม่?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'ใช่',
+                denyButtonText: `ไม่ใช่`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "delete",
+                        cache: false,
+                        url: "/Analyst/Analyst_Delete",
+                        data: {
+                            Id: id
+                        },
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then((result) => {
+                                    var oTable = $('#TB_Analyst').DataTable();
+                                    oTable.ajax.reload(null, false);
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+                } else if (result.isDenied) {
+
+                }
+            })
+        }
     </script>
 }

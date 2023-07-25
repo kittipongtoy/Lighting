@@ -1627,9 +1627,9 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ec1e7eea-f87c-4cd8-8552-5821f65fc9c3",
+                            Id = "ee0f74d0-dcdd-4743-b509-838954608d70",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ea1bd3c2-ce5b-46eb-9b6d-7af5079e1861",
+                            ConcurrencyStamp = "8b0cb9b8-f0e3-460b-8dae-1001d0799ce9",
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -1639,9 +1639,9 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBHe2C4l5sh5r9ygu3BT5rP3Z+ctbgb3SdtnwVLkVCvlMlwruYMuLr5VPtKbKQHxAw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEADeZnfoXNuOfxfG3bWDgIlfhvwkbiSbISmTOO+O729yPtZrxFm6fSGMh52/FaDlkQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e77a8c5e-c8f9-49f3-8b4e-e5d763a2f7a7",
+                            SecurityStamp = "7011d990-2306-4831-b0fe-7289e76d15cd",
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -3230,13 +3230,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "844637b0-e781-461a-ac0c-cabfcf38ddf7",
-                            ConcurrencyStamp = "5af760af-908d-418e-aedc-8e719e78b6d0",
+                            Id = "f7cdee02-9763-4c08-b223-e2ad9ede02e0",
+                            ConcurrencyStamp = "2fbfddae-398d-4214-b8d9-ba51624f9acc",
                             Name = "Admin",
                             NameThai = "Admin",
                             NormalizedName = "Admin",
-                            created_at = new DateTime(2023, 7, 24, 7, 13, 54, 253, DateTimeKind.Utc).AddTicks(8280),
-                            updated_at = new DateTime(2023, 7, 24, 7, 13, 54, 253, DateTimeKind.Utc).AddTicks(8285)
+                            created_at = new DateTime(2023, 7, 25, 4, 50, 54, 969, DateTimeKind.Utc).AddTicks(8987),
+                            updated_at = new DateTime(2023, 7, 25, 4, 50, 54, 969, DateTimeKind.Utc).AddTicks(8992)
                         });
                 });
 
@@ -4941,8 +4941,8 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "ec1e7eea-f87c-4cd8-8552-5821f65fc9c3",
-                            RoleId = "844637b0-e781-461a-ac0c-cabfcf38ddf7"
+                            UserId = "ee0f74d0-dcdd-4743-b509-838954608d70",
+                            RoleId = "f7cdee02-9763-4c08-b223-e2ad9ede02e0"
                         });
                 });
 

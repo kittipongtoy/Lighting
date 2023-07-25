@@ -18,6 +18,8 @@
             public string? FileName_TH { get; set; }
             public string? FileName_EN { get; set; }
             public int? Status { get; set; }
+            public List<IFormFile> uploaded_fileTH { get; set; }
+            public List<IFormFile> uploaded_fileEN { get; set; }
         }
 
         public class IR_AnalystRequest
@@ -26,6 +28,8 @@
             public string? FileName_TH { get; set; }
             public string? FileName_EN { get; set; }
             public int? Status { get; set; }
+            public List<IFormFile> uploaded_fileTH { get; set; }
+            public List<IFormFile> uploaded_fileEN { get; set; }
         }
 
         public class IR_ComplaintsRequest
