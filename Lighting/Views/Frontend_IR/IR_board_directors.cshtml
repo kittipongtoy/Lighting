@@ -268,7 +268,6 @@
                     $("#image_name").removeAttr("src");
                     $("#image_name").attr("src", "/upload_image/BoardOfDirectors/" + data.data.image_name);
                     if ($("#lang").val() == 'EN') {
-                        console.log("EN")
                         $("#position_company").html(data.data.position_company_en);
                         $("#nationality").html(data.data.nationality_en);
                         $("#study").html(data.data.study_en.replace(/\n/g, "<br>"));
@@ -297,7 +296,6 @@
                         }
 
                     } else {
-                        console.log("TH")
                         $("#position_company").html(data.data.position_company_th);
                         $("#nationality").html(data.data.nationality_th);
                         $("#study").html(data.data.study_th.replace(/\n/g, "<br>"));
@@ -337,15 +335,12 @@
                     icon: 'error',
                     text: e.message,
                 });
-                console.log(e.message);
-                console.log(e.inner);
             }
         });
     }
     $(document).ready(function () {
         $(".display-tab > li").click(function () {
             var rel = $(this).attr("rel");
-            console.log(rel);
             $('.display-info').hide();
             $('.display-info[rel=' + rel + ']').fadeIn();
             $(".display-tab > li").removeClass("active");

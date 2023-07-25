@@ -144,8 +144,14 @@
 	var show_IR_Stock = "";
 	var here_IR_Stock = "";
 	if (ViewData["Title"] == "IR_Stock_Quote_Index"
+	|| ViewData["Title"] == "IR_Stock_Quote_Add"
+	|| ViewData["Title"] == "IR_Stock_Quote_Edit"
 	|| ViewData["Title"] == "IR_Stock_Chart_Index"
-	|| ViewData["Title"] == "IR_Stock_Link_Index")
+	|| ViewData["Title"] == "IR_Stock_Chart_Add"
+	|| ViewData["Title"] == "IR_Stock_Chart_Edit"
+	|| ViewData["Title"] == "IR_Stock_Link_Index"
+	|| ViewData["Title"] == "IR_Stock_Link_Add"
+	|| ViewData["Title"] == "IR_Stock_Link_Edit")
 	{
 		show_IR_Stock = "show";
 		here_IR_Stock = "here";
@@ -1261,7 +1267,7 @@
 										</span>
 										<div class="menu-sub menu-sub-accordion menu-active-bg">
 											<div class="menu-item">
-												@if (ViewData["Title"] == "IR_Stock_Quote_Index")
+												@if (ViewData["Title"] == "IR_Stock_Quote_Index" || ViewData["Title"] == "IR_Stock_Quote_Add" || ViewData["Title"] == "IR_Stock_Quote_Edit")
 												{
 													<a class="menu-link active" href="@Url.Action("IR_Stock_Quote_Index","IR_Stock")">
 														<span class="menu-bullet">
@@ -1281,7 +1287,7 @@
 												}																					
 											</div>
 											<div class="menu-item">
-												@if (ViewData["Title"] == "IR_Stock_Chart_Index")
+												@if (ViewData["Title"] == "IR_Stock_Chart_Index" || ViewData["Title"] == "IR_Stock_Chart_Add" || ViewData["Title"] == "IR_Stock_Chart_Edit")
 												{
 													<a class="menu-link active" href="@Url.Action("IR_Stock_Chart_Index","IR_Stock")">
 														<span class="menu-bullet">
@@ -1301,7 +1307,7 @@
 												}										
 											</div>
 											<div class="menu-item">
-												@if (ViewData["Title"] == "IR_Stock_Link_Index")
+												@if (ViewData["Title"] == "IR_Stock_Link_Index" || ViewData["Title"] == "IR_Stock_Link_Add" || ViewData["Title"] == "IR_Stock_Link_Edit")
 												{
 													<a class="menu-link active" href="@Url.Action("IR_Stock_Link_Index","IR_Stock")">
 														<span class="menu-bullet">

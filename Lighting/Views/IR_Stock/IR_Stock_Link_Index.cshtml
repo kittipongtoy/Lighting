@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <div class="post d-flex flex-column-fluid" id="kt_post">
+    <div class="post d-flex flex-column-fluid">
         <div id="kt_content_container" class="container-xxl">
             <div class="card">
                 <div class="card-header border-0 pt-6">
@@ -41,12 +41,12 @@
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                            <a type="button" class="btn btn-primary" href="@Url.Action("Author_audit_committee_create","Corporate_Governance")">เพิ่ม</a>
+                            <a type="button" class="btn btn-primary" href="@Url.Action("IR_Stock_Link_Add","IR_Stock")">เพิ่ม</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="IR_Stock_Link">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th>#</th>
@@ -56,13 +56,218 @@
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
                         </thead>
-                        <tbody class="fw-semibold text-gray-600">
-                        </tbody>
                     </table>
-                    <div class="mb-10">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="post d-flex flex-column-fluid">
+        <div id="kt_content_container" class="container-xxl">
+            <div class="card">
+                <div class="card-header border-0 pt-6">
+                    <div class="card-title">
+                        <div class="d-flex align-items-center position-relative my-1">
+                            <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                    <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <input type="text" data-kt-customer-table-filter="search" id="search_table_1" class="form-control form-control-solid w-250px ps-15" placeholder="ค้นหา" />
+                        </div>
                     </div>
+                    <div class="card-toolbar">
+                        <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+                            <a type="button" class="btn btn-primary" href="@Url.Action("IR_Stock_Link_Add","IR_Stock")">เพิ่ม</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pt-0">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="IR_Stock_LinkDetail">
+                        <thead>
+                            <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                                <th>#</th>
+                                <th class="min-w-125px">หัวข้อ TH</th>
+                                <th class="min-w-125px">หัวข้อ EN</th>
+                                <th class="min-w-125px">สถานะการใช้งาน</th>
+                                <th class="text-end min-w-70px">Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@section Scripts{
+    <script>
+        $(() => {
+            var oTable = $("#IR_Stock_Link").DataTable({
+                processing: true,
+                serverSide: true,
+                searching: false,
+                responsive: true,
+                oLanguage: {
+                    "sEmptyTable": "ไม่มีข้อมูล",
+                },
+                ajax: {
+                    type: "POST",
+                    url: '/IR_Stock/Table_IR_Stock_LinkDetail',
+                },
+                columns: [
+                    { 'data': 'index', name: 'index', className: 'text-center' },
+                    { 'data': 'fileName_TH', name: 'fileName_TH', className: 'text-center' },
+                    {
+                        "name": "status", "data": "status", "render": function (data, type, row) {
+                            if (row.status == 1) {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            } else {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            }
+                        }
+                    },
+                    {
+                        "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
+                            var text = '<button type="button" class="btn btn-warning" onclick="edit_item(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
+                            text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_item(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
+                            return text;
+                        }
+                    }
+                ]
+            });
+
+            var oTable = $("#IR_Stock_LinkDetail").DataTable({
+                processing: true,
+                serverSide: true,
+                searching: false,
+                responsive: true,
+                oLanguage: {
+                    "sEmptyTable": "ไม่มีข้อมูล",
+                },
+                ajax: {
+                    type: "POST",
+                    url: '/IR_Stock/Table_IR_Stock_LinkDetail',
+                },
+                columns: [
+                    { 'data': 'index', name: 'index', className: 'text-center' },
+                    { 'data': 'fileName_TH', name: 'fileName_TH', className: 'text-center' },
+                    {
+                        "name": "status", "data": "status", "render": function (data, type, row) {
+                            if (row.status == 1) {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            } else {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            }
+                        }
+                    },
+                    {
+                        "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
+                            var text = '<button type="button" class="btn btn-warning" onclick="edit_item(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
+                            text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_item(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
+                            return text;
+                        }
+                    }
+                ]
+            });
+        });
+
+        function edit_item(id) {
+            location.href = '/IR_Stock/IR_Stock_Chart_Edit/?Id=' + id;
+        }
+
+        function changeStatus(id, checked_obj) {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/IR_Stock/IR_Stock_Chart_Change",
+                data: {
+                    Id: id
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        function delete_item(id) {
+            Swal.fire({
+                title: 'คุณต้องการจะลบหรือไม่?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'ใช่',
+                denyButtonText: `ไม่ใช่`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "delete",
+                        cache: false,
+                        url: "/IR_Stock/IR_Stock_Chart_Delete",
+                        data: {
+                            Id: id
+                        },
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then((result) => {
+                                    var oTable = $('#IR_Stock_Link').DataTable();
+                                    oTable.ajax.reload(null, false);
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+                } else if (result.isDenied) {
+
+                }
+            })
+        }
+    </script>
+}

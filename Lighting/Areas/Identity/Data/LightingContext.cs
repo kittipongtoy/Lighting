@@ -135,8 +135,11 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<IR_InvestorCalendarDetail> IR_InvestorCalendarDetail { get; set; }
         public DbSet<IR_Cancel_Email> IR_Cancel_Email { get; set; }
         public DbSet<IR_Stock_Chart> IR_Stock_Chart { get; set; }
+        public DbSet<IR_Stock_ChartDetail> IR_Stock_ChartDetails { get; set; }
         public DbSet<IR_Stock_Link> IR_Stock_Link { get; set; }
+        public DbSet<IR_Stock_LinkDetail> IR_Stock_LinkDetail { get; set; }
         public DbSet<IR_Stock_Quote> IR_Stock_Quote { get; set; }
+        public DbSet<IR_Stock_QuoteDetail> IR_Stock_QuoteDetail { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

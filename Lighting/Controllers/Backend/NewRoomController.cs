@@ -2127,12 +2127,12 @@ namespace Lighting.Controllers.Backend
                 int pageSize = length != null ? Convert.ToInt32(length) : 0;
                 int skip = start != null ? Convert.ToInt32(start) : 0;
                 int? recordsTotal = 0;
-                var list = new List<ResponseDTO.InvestorCalendarDetailRequest>();
+                var list = new List<ResponseDTO.IR_InvestorCalendarDetailResponse>();
                 var IR_MassMediaDetail = await _context.IR_InvestorCalendarDetail.ToListAsync();
                 int? runitem = 1;
                 foreach (var item in IR_MassMediaDetail)
                 {
-                    list.Add(new ResponseDTO.InvestorCalendarDetailRequest
+                    list.Add(new ResponseDTO.IR_InvestorCalendarDetailResponse
                     {
                         Index = runitem,
                         Id = Convert.ToInt32(item.Id),

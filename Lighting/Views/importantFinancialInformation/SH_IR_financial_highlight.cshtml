@@ -711,9 +711,6 @@
                 url: '/importantFinancialInformation/Get_Edit_SH_IR_financial_highlight_addData',
                 //data: { id: Parmeter_id },
                 success: function (data) {
-                    console.log(data);
-                    //debugger;
-
                     var convert_date_1 = toDateENGFormat(data.date1Title)
                     var convert_date_2 = toDateENGFormat(data.date2Title)
                     var convert_date_3 = toDateENGFormat(data.date3Title)
@@ -770,8 +767,6 @@
                                 icon: 'error',
                                 text: e.message,
                             });
-                            console.log(e.message);
-                            console.log(e.inner);
                         }
                     });
                 } else if (result.isDenied) {
@@ -824,8 +819,6 @@
                         icon: 'error',
                         text: e.message,
                     });
-                    console.log(e.message);
-                    console.log(e.inner);
                 }
             });
         }
@@ -874,8 +867,6 @@
                         icon: 'error',
                         text: e.message,
                     });
-                    console.log(e.message);
-                    console.log(e.inner);
                 }
             });
         }
@@ -912,8 +903,6 @@
                         icon: 'error',
                         text: e.message,
                     });
-                    console.log(e.message);
-                    console.log(e.inner);
                 }
             });
 
@@ -968,8 +957,6 @@
                         icon: 'error',
                         text: e.message,
                     });
-                    console.log(e.message);
-                    console.log(e.inner);
                 }
             });
         }
@@ -1013,8 +1000,6 @@
                         icon: 'error',
                         text: e.message,
                     });
-                    console.log(e.message);
-                    console.log(e.inner);
                 }
             });
         }
@@ -1056,8 +1041,6 @@
                         icon: 'error',
                         text: e.message,
                     });
-                    console.log(e.message);
-                    console.log(e.inner);
                 }
             });
         }
@@ -1086,8 +1069,6 @@
                         icon: 'error',
                         text: e.message,
                     });
-                    console.log(e.message);
-                    console.log(e.inner);
                 }
             });
         }
@@ -1116,8 +1097,6 @@
                         icon: 'error',
                         text: e.message,
                     });
-                    console.log(e.message);
-                    console.log(e.inner);
                 }
             });
         }
@@ -1154,8 +1133,6 @@
                         icon: 'error',
                         text: e.message,
                     });
-                    console.log(e.message);
-                    console.log(e.inner);
                 }
             });
             //location.href = '/importantFinancialInformation/SH_IR_financial_highlight_edit/?Id=' + id;
@@ -1206,8 +1183,6 @@
                                 icon: 'error',
                                 text: e.message,
                             });
-                            console.log(e.message);
-                            console.log(e.inner);
                         }
                     });
                 } else if (result.isDenied) {

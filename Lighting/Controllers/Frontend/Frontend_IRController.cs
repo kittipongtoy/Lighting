@@ -43,8 +43,8 @@ namespace Lighting.Controllers.Frontend
 
         public async Task<IActionResult> IR_index()
         {
-            ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x=>x.Status == 1).OrderByDescending(o=>o.created_at).Take(5).ToListAsync();
-            ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).Take(5).ToListAsync();
+            ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x=>x.Status == 1).OrderByDescending(o=>o.NewDate).Take(5).ToListAsync();
+            ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).Take(5).ToListAsync();
             return View();
         }
 
@@ -1176,7 +1176,7 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> IR_news_detail(int? Id)
         {
             ViewBag.IR_Latest_News = await db.IR_Latest_News.Where(x => x.Status == 1).ToListAsync();
-            ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1 && x.Id == Id).ToListAsync();
+            ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1 && x.Id == Id).OrderByDescending(o=>o.NewDate).ToListAsync();
             return View();
         }
         public IActionResult IR_organization()
@@ -1414,7 +1414,7 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> IR_set_announcement_detail(int? Id)
         {
             ViewBag.GetIR_Stock_Market = await db.IR_Stock_Market.Where(x => x.Status == 1).ToListAsync();
-            ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1 && x.Id == Id).ToListAsync();
+            ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1 && x.Id == Id).OrderByDescending(o=>o.NewDate).ToListAsync();
             return View();
         }
         public IActionResult IR_shareholding()

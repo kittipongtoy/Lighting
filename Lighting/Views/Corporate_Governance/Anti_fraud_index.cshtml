@@ -250,7 +250,6 @@
         ClassicEditor
             .create(document.querySelector('#kt_docs_ckeditor_document_TH'))
             .then(editor => {
-                console.log('Editor was initialized', editor);
                 editorTH = editor;
             })
             .catch(error => {
@@ -259,7 +258,6 @@
         ClassicEditor
             .create(document.querySelector('#kt_docs_ckeditor_document_EN'))
             .then(editor => {
-                console.log('Editor was initialized', editor);
                 editorEN = editor;
             })
             .catch(error => {
@@ -306,8 +304,6 @@
                         icon: 'error',
                         text: e.message,
                     });
-                    console.log(e.message);
-                    console.log(e.inner);
                 }
             });
         }
@@ -336,8 +332,6 @@
                         icon: 'error',
                         text: e.message,
                     });
-                    console.log(e.message);
-                    console.log(e.inner);
                 }
             });
         }
@@ -387,8 +381,6 @@
                                 icon: 'error',
                                 text: e.message,
                             });
-                            console.log(e.message);
-                            console.log(e.inner);
                         }
                     });
                 } else if (result.isDenied) {

@@ -2,6 +2,37 @@
 {
     public class RequestDTO
     {
+        public class IR_Stock_ChartRequest
+        {
+            public int? Id { get; set; }
+            public string? Link_IR_Stock_Chart { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_LinkRequest
+        {
+            public int? Id { get; set; }
+            public string? Link_IR_Stock_Link { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_QuoteRequest
+        {
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_QuoteDetailRequest
+        {
+            public int? Id { get; set; }
+            public string? Link_IR_Stock_Quote { get; set; }
+            public int? Status { get; set; }
+        }
+
         public class AuthorizationRequest
         { 
             public string? Id { get; set; }
@@ -12,7 +43,7 @@
             public string? Email { get; set; }
         }
 
-        public class IR_Analyst_Chapter
+        public class IR_Analyst_ChapterRequest
         {
             public int Id { get; set; }
             public string? FileName_TH { get; set; }

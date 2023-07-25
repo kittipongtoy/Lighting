@@ -210,8 +210,6 @@
                     icon: 'error',
                     text: e.message,
                 });
-                console.log(e.message);
-                console.log(e.inner);
             }
         });
     }
@@ -219,7 +217,6 @@
     $(document).ready(function () {
         $(".display-tab > li").click(function () {
             var rel = $(this).attr("rel");
-            console.log(rel);
             $('.display-info').hide();
             $('.display-info[rel=' + rel + ']').fadeIn();
             $(".display-tab > li").removeClass("active");

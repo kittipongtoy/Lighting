@@ -362,7 +362,7 @@ namespace Lighting.Controllers.Backend
 
         [HttpPost]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> Analyst_Chapter_Add_Submit(RequestDTO.IR_Analyst_Chapter model)
+        public async Task<IActionResult> Analyst_Chapter_Add_Submit(RequestDTO.IR_Analyst_ChapterRequest model)
         {
             try
             {
@@ -437,7 +437,7 @@ namespace Lighting.Controllers.Backend
 
         [HttpPut]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> Analyst_ChapterEdit_Submit(RequestDTO.IR_Analyst_Chapter model)
+        public async Task<IActionResult> Analyst_ChapterEdit_Submit(RequestDTO.IR_Analyst_ChapterRequest model)
         {
             try
             {

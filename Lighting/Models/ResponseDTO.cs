@@ -2,7 +2,7 @@
 {
     public class ResponseDTO
     {
-        public class InvestorCalendarDetailRequest
+        public class IR_Stock_QuoteResponse
         {
             public int? Index { get; set; }
             public int? Id { get; set; }
@@ -10,6 +10,52 @@
             public string? Title_EN { get; set; }
             public string? SubTitle_TH { get; set; }
             public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_QuoteDetailResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Link_IR_Stock_Quote { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_ChartResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_ChartDetailResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Link_IR_Stock_Chart { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_LinkResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_LinkDetailResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Link_IR_Stock_Link { get; set; }
             public int? Status { get; set; }
         }
 
