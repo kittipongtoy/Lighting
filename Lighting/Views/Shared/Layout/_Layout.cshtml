@@ -222,7 +222,7 @@
 	}
 
 
-///
+	///
 	var show_contactus = "";
 	var here_contactus = "";
 	if (ViewData["Title"] == "Manage_Contact_Page")
@@ -251,14 +251,28 @@
 	var Here_IR_Index = "";
 	if (ViewData["Title"] == "Banner"
 	|| ViewData["Title"] == "Banner_Add"
-	|| ViewData["Title"] == "Banner_Edit")
+	|| ViewData["Title"] == "Banner_Edit"	
+	|| ViewData["Title"] == "Button_Below_Banner"
+	|| ViewData["Title"] == "Button_Below_Banner_Add"
+	|| ViewData["Title"] == "Button_Below_Banner_Edit"
+	|| ViewData["Title"] == "LIGHTING_EQUIPMENT"
+	|| ViewData["Title"] == "LIGHTING_EQUIPMENT_Aadd"
+	|| ViewData["Title"] == "LIGHTING_EQUIPMENT_Edit"
+	|| ViewData["Title"] == "HIGHLIGHT"
+	|| ViewData["Title"] == "HIGHLIGHT_Add"
+	|| ViewData["Title"] == "HIGHLIGHT_Edit"
+	|| ViewData["Title"] == "Summary_Financial_Highlights"
+	|| ViewData["Title"] == "Summary_Financial_Highlights_Add"
+	|| ViewData["Title"] == "Summary_Financial_Highlights_Edit"
+	|| ViewData["Title"] == "Report"
+	|| ViewData["Title"] == "Report_Add"
+	|| ViewData["Title"] == "Report_Edit")
 	{
 		Show_IR_Index = "show";
 		Here_IR_Index = "here";
 		show_investerRelation = "show";
 		here_investerRelation = "here";
 	}
-}
 
 	var show_news = "";
 	var here_news  = "";
@@ -268,6 +282,24 @@
 		here_news = "here";
 	}
 
+	var show_Resource_Facility = "";
+	var here_Resource_Facility = "";
+	if (ViewData["Title"] == "History"
+	|| ViewData["Title"] == "History_Add"
+	|| ViewData["Title"] == "History_Edit"
+	|| ViewData["Title"] == "OUR_PHILOSOPHY_VISION_MISSION"
+	|| ViewData["Title"] == "OUR_PHILOSOPHY_VISION_MISSION_Add"
+	|| ViewData["Title"] == "OUR_PHILOSOPHY_VISION_MISSION_Edit"
+	|| ViewData["Title"] == "ORGANIZATION_CHART"
+	|| ViewData["Title"] == "ORGANIZATION_CHART_Add"
+	|| ViewData["Title"] == "ORGANIZATION_CHART_Edit"
+	|| ViewData["Title"] == "AWARDS"
+	|| ViewData["Title"] == "AWARDS_Add"
+	|| ViewData["Title"] == "AWARDS_Edit")
+	{
+		show_Resource_Facility = "show";
+		here_Resource_Facility = "here";
+	}
 }
 
 <!DOCTYPE html>
@@ -357,7 +389,7 @@
 									</div>
 								</div>
 							</div>
-							<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div data-kt-menu-trigger="click" class="menu-item menu-accordion  @show_Resource_Facility @here_Resource_Facility">
 								<span class="menu-link">
 									<span class="menu-icon">
 										<i class="bi bi-server fs-3"></i>
@@ -367,12 +399,84 @@
 								</span>
 								<div class="menu-sub menu-sub-accordion">
 									<div class="menu-item">
-										<a class="menu-link" href="#">
-											<span class="menu-bullet">
-												<span class="bullet bullet-dot"></span>
-											</span>
-											<span class="menu-title">หน้าแรก</span>
-										</a>
+										@if (ViewData["Title"] == "History" || ViewData["Title"] == "History_Add" || ViewData["Title"] == "History_Edit")
+										{
+											<a class="menu-link active" href="@Url.Action("History","Resource_Facility")">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">History</span>
+											</a>
+										}
+										else
+										{
+											<a class="menu-link" href="@Url.Action("History","Resource_Facility")">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">History</span>
+											</a>
+										}
+									</div>
+									<div class="menu-item">
+										@if (ViewData["Title"] == "OUR_PHILOSOPHY_VISION_MISSION" || ViewData["Title"] == "OUR_PHILOSOPHY_VISION_MISSION_Add" || ViewData["Title"] == "OUR_PHILOSOPHY_VISION_MISSION_Edit")
+										{
+											<a class="menu-link active" href="@Url.Action("OUR_PHILOSOPHY_VISION_MISSION","Resource_Facility")">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">OUR PHILOSOPHY VISION MISSION</span>
+											</a>
+										}
+										else
+										{
+											<a class="menu-link" href="@Url.Action("OUR_PHILOSOPHY_VISION_MISSION","Resource_Facility")">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">OUR PHILOSOPHY VISION MISSION</span>
+											</a>
+										}
+									</div>
+									<div class="menu-item">
+										@if (ViewData["Title"] == "ORGANIZATION_CHART" || ViewData["Title"] == "ORGANIZATION_CHART" || ViewData["Title"] == "ORGANIZATION_CHART")
+										{
+											<a class="menu-link active" href="@Url.Action("ORGANIZATION_CHART","Resource_Facility")">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">ORGANIZATION CHART</span>
+											</a>
+										}
+										else
+										{
+											<a class="menu-link" href="@Url.Action("ORGANIZATION_CHART","Resource_Facility")">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">ORGANIZATION CHART</span>
+											</a>
+										}
+									</div>
+									<div class="menu-item">
+										@if (ViewData["Title"] == "AWARDS" || ViewData["Title"] == "AWARDS_Add" || ViewData["Title"] == "AWARDS_Edit")
+										{
+											<a class="menu-link active" href="@Url.Action("AWARDS","Resource_Facility")">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">AWARDS</span>
+											</a>
+										}
+										else
+										{
+											<a class="menu-link" href="@Url.Action("AWARDS","Resource_Facility")">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">AWARDS</span>
+											</a>
+										}
 									</div>
 								</div>
 							</div>
@@ -483,7 +587,7 @@
 									</div>
 								</div>
 							</div>
-							<div data-kt-menu-trigger="click" class="menu-item @Show_IR_Index @Here_IR_Index menu-accordion">
+							<div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_investerRelation @here_investerRelation">
 								<span class="menu-link">
 									<span class="menu-icon">
 										<i class="bi bi-motherboard-fill fs-3"></i>
@@ -491,8 +595,8 @@
 									<span class="menu-title">นักลงทุนสัมพันธ์</span>
 									<span class="menu-arrow"></span>
 								</span>
-								<div class="menu-sub menu-sub-accordion">
-									<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+								<div class="menu-sub menu-sub-accordion menu-active-bg">
+									<div data-kt-menu-trigger="click" class="menu-item menu-accordion @Show_IR_Index @Here_IR_Index">
 										<span class="menu-link">
 											<span class="menu-bullet">
 												<span class="bullet bullet-dot"></span>
@@ -508,7 +612,7 @@
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
-														<span class="menu-title">Banner</span>
+														<span class="menu-title">แบนเนอร์</span>
 													</a>
 												}
 												else
@@ -517,27 +621,107 @@
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
-														<span class="menu-title">Banner</span>
+														<span class="menu-title">แบนเนอร์</span>
 													</a>
 												}
 											</div>
 											<div class="menu-item">
-												@if (ViewData["Title"] == "Banner" || ViewData["Title"] == "Banner_Add" || ViewData["Title"] == "Banner_Edit")
+												@if (ViewData["Title"] == "Button_Below_Banner" || ViewData["Title"] == "Button_Below_Banner_Add" || ViewData["Title"] == "Button_Below_Banner_Edit")
 												{
-													<a class="menu-link active" href="@Url.Action("Banner","IR_Index")">
+													<a class="menu-link active" href="@Url.Action("Button_Below_Banner","IR_Index")">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
-														<span class="menu-title">Banner</span>
+														<span class="menu-title">ปุ่มด้านล่างแบนเนอร์</span>
 													</a>
 												}
 												else
 												{
-													<a class="menu-link" href="@Url.Action("Banner","IR_Index")">
+													<a class="menu-link" href="@Url.Action("Button_Below_Banner","IR_Index")">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
-														<span class="menu-title">Banner</span>
+														<span class="menu-title">ปุ่มด้านล่างแบนเนอร์</span>
+													</a>
+												}
+											</div>
+											<div class="menu-item">
+												@if (ViewData["Title"] == "LIGHTING_EQUIPMENT" || ViewData["Title"] == "LIGHTING_EQUIPMENT_Aadd" || ViewData["Title"] == "LIGHTING_EQUIPMENT_Edit")
+												{
+													<a class="menu-link active" href="@Url.Action("LIGHTING_EQUIPMENT","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">LIGHTING EQUIPMENT</span>
+													</a>
+												}
+												else
+												{
+													<a class="menu-link" href="@Url.Action("LIGHTING_EQUIPMENT","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">LIGHTING EQUIPMENT</span>
+													</a>
+												}
+											</div>
+											<div class="menu-item">
+												@if (ViewData["Title"] == "Summary_Financial_Highlights" || ViewData["Title"] == "Summary_Financial_Highlights_Add" || ViewData["Title"] == "Summary_Financial_Highlights_Edit")
+												{
+													<a class="menu-link active" href="@Url.Action("Summary_Financial_Highlights","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">Summary Financial Highlights</span>
+													</a>
+												}
+												else
+												{
+													<a class="menu-link" href="@Url.Action("Summary_Financial_Highlights","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">Summary Financial Highlights</span>
+													</a>
+												}
+											</div>
+											<div class="menu-item">
+												@if (ViewData["Title"] == "Report" || ViewData["Title"] == "Report_Add" || ViewData["Title"] == "Report_Edit")
+												{
+													<a class="menu-link active" href="@Url.Action("Report","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">Report</span>
+													</a>
+												}
+												else
+												{
+													<a class="menu-link" href="@Url.Action("Report","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">Report</span>
+													</a>
+												}
+											</div>
+											<div class="menu-item">
+												@if (ViewData["Title"] == "HIGHLIGHT" || ViewData["Title"] == "HIGHLIGHT_Add" || ViewData["Title"] == "HIGHLIGHT_Edit")
+												{
+													<a class="menu-link active" href="@Url.Action("HIGHLIGHT","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">HIGHLIGHT</span>
+													</a>
+												}
+												else
+												{
+													<a class="menu-link" href="@Url.Action("HIGHLIGHT","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">HIGHLIGHT</span>
 													</a>
 												}
 											</div>

@@ -1,5 +1,5 @@
 ﻿using Lighting.Areas.Identity.Data;
-using Lighting.Migrations;
+
 using Lighting.Models.InputFilterModels.SmartSolution;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
