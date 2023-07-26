@@ -1,7 +1,10 @@
 ﻿@{
     ViewData["Title"] = "SmartSolution";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var lang = Context.Request.Cookies["lang"];
 }
+@model IEnumerable<Lighting.Areas.Identity.Data.Smart_Solution>
+
 <div class="top-page">
     <div class="container">
         <div class="row">
@@ -15,182 +18,30 @@
         <div class="wrap-pad solution-page">
             <div class="three-colPad">
                 <div class="row">
+                    @foreach(var solution in Model){
                     <div class="col-lg-3 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("SmartSolutionDetail","SmartSolution")">
+                        <a class="contentBox" href="@Url.Action("SmartSolutionDetail","SmartSolution",new {id = solution.Id})">
                             <div class="row">
                                 <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/smart-solution/solution01.jpg"></div>
+                                    <div class="img-width"><img src="~/@solution.PreviewImg"></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <div class="contentBox-topic">
-                                        <p>ICON LINK (APP)</p>
-                                    </div>
+                                            @if (lang == "EN")
+                                            {
+                                                <p>@solution.TitleName_EN</p>
+                                            }else
+                                            {
+                                                <p>@solution.TitleName_TH</p>
+                                            }
+                                        </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("SmartSolutionDetail","SmartSolution")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/smart-solution/solution02.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contentBox-topic">
-                                        <p>WISE PLUS (APP)</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("SmartSolutionDetail","SmartSolution")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/smart-solution/solution03.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contentBox-topic">
-                                        <p>WISE PLAY (APP)</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("SmartSolutionDetail","SmartSolution")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/smart-solution/solution04.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contentBox-topic">
-                                        <p>WISE PRO (BROWSER)</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("SmartSolutionDetail","SmartSolution")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/smart-solution/solution05.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contentBox-topic">
-                                        <p>WISE NB (BROWSER)</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("SmartSolutionDetail","SmartSolution")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/smart-solution/solution06.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contentBox-topic">
-                                        <p>LIGHTING MANAGEMENT SYSTEM (APP/BROWSER)</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("SmartSolutionDetail","SmartSolution")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/smart-solution/solution07.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contentBox-topic">
-                                        <p>SMART BUILDING</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("SmartSolutionDetail","SmartSolution")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/smart-solution/solution08.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contentBox-topic">
-                                        <p>SMART STREET POLE (BROWSER)</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("SmartSolutionDetail","SmartSolution")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/smart-solution/solution09.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contentBox-topic">
-                                        <p>SMART URBAN POLE (BROWSER)</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("SmartSolutionDetail","SmartSolution")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/smart-solution/solution10.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contentBox-topic">
-                                        <p>SMART SOLAR STREET POLE (BROWSER)</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("SmartSolutionDetail","SmartSolution")">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/Frontend_assets/images/smart-solution/solution11.jpg"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contentBox-topic">
-                                        <p>SMART FARMING (BROWSER)</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                    }
                 </div>
             </div>
         </div>

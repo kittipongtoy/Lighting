@@ -15,7 +15,11 @@ namespace Lighting.Areas.Identity.Data
         public LightingContext()
         {
         }
-
+        #region smart solution
+        //public DbSet<Smart_Solution_Category> Smart_Solution_Categorys { get; set; }
+        public DbSet<Smart_Solution_Link> Smart_Solution_Links { get; set; }
+        public DbSet<Smart_Solution> Smart_Solutions { get; set; }
+        #endregion
         #region product
         public DbSet<Product> Products { get; set; }
         public DbSet<Product_Model> Product_Models { get; set; }

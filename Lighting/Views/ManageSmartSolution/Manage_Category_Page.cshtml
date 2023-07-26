@@ -2,7 +2,8 @@
     ViewData["Title"] = "Manage Category";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
-@*model IEnumerable<Lighting.Models.InputFilterModels.Product.Output_ProductCategoryVM>*@
+@using Lighting.Areas.Identity.Data
+@model IEnumerable<Smart_Solution_Category>
 
 <div class="container" style="width:100%;">
 
@@ -11,7 +12,7 @@
             <div>
                 <button class="btn btn-primary" id="btn_add_category">เพิ่มหมวดหมู่/add category</button>
             </div>
-            <a href="@Url.Action("Manage_Product_Page","ManageProduct")" class="btn btn-primary rounded-2">
+            <a href="@Url.Action("Manage_Page","ManageSmartSolution")" class="btn btn-primary rounded-2">
                 กลับ/back
             </a>
         </div>
@@ -48,6 +49,7 @@
                 </tr>
             </thead>
             <tbody>
+                
                 @{
                     int i = 1;
                 }
@@ -55,10 +57,10 @@
                 {
                     <tr id="@cat.Id">
                         <th scope="row">@i</th>
-                        <td><img src="@cat.Image" style="width:100px;height:100px;" /></td>
-                        <td>@cat.Name_TH / @cat.Name_EN</td>
+                        <td><img src="@cat.PreviewImg" style="width:100px;height:100px;" /></td>
+                        <td>@cat.CategoryName_TH / @cat.CategoryName_EN</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-warning" onclick="edit(@cat.Id,'@cat.Name_TH','@cat.Name_EN','@cat.Image.Replace("\\","//")')">
+                            <button type="button" class="btn btn-warning" onclick="edit(@cat.Id,'@cat.CategoryName_TH','@cat.CategoryName_EN','@cat.PreviewImg.Replace("\\","//")')">
                                 <i class="bi bi-pencil-square"></i>แก้ไข/edit
                             </button>
                             <button type="button" class="btn btn-danger" onclick="deleteRowById(@cat.Id)">
@@ -70,12 +72,13 @@
                         }
                     </tr>
                 }
+                
             </tbody>
         </table>
     </div>
 </div>
 
-<div style="position:fixed;inset:0;background-color:rgba(0,0,0,0.5);display:none;justify-content:center;flex-direction:column;align-items:center;z-index:10" id="edit_page">
+<div style="position:fixed;inset:0;background-color:rgba(0,0,0,0.5);display:none;justify-content:center;flex-direction:column;align-items:center;z-index:1000" id="edit_page">
     <div style="width:50%;height:auto;background-color:white;display:grid;grid-template-rows:auto 3rem 3rem 3rem auto;gap:3rem;border-radius:10px;padding:3rem;">
         <div>
             <img style="width:100%;height:100%;" id="edit_img"/>
@@ -134,20 +137,19 @@
         });
 
         function addCategory() {
-            let category_name_th = $("#category_name_th").val();
-            let category_name_en = $("#category_name_en").val();
 
             let form = new FormData();
-            form.append("Name_TH", category_name_th);
-            form.append("Name_EN", category_name_en);
+
+            form.append("CategoryName_EN", $("#category_name_en").val());
+            form.append("CategoryName_TH", $("#category_name_th").val());
+
             if (img_preview != undefined) {
-                form.append("Image", img_preview);
+                form.append("PreviewImg", img_preview);
             }
 
-            //ajax
             $.ajax({
                 type: 'POST',
-                url: '/ManageProduct/Add_Category',
+                url: '/ManageSmartSolution/Add_Category',
                 data: form,
                 processData: false,
                 contentType: false,
@@ -164,7 +166,7 @@
                             showConfirmButton: false,
                             timer: 2000
                         }).then(() => {
-                            window.location.href = "/ManageProduct/Manage_Category_Page";
+                            window.location.href = "/ManageSmartSolution/Manage_Category_Page";
                         });
                     }
                     else {
@@ -172,6 +174,7 @@
                             icon: 'warning',
                             text: data.message,
                         });
+
                     }
                 }, error: function (e) {
                     Swal.fire({
@@ -210,17 +213,17 @@
 
 
             let form = new FormData();
-            form.append("Name_TH", category_name_th);
-            form.append("Name_EN", category_name_en);
+            form.append("CategoryName_TH", category_name_th);
+            form.append("CategoryName_EN", category_name_en);
 
             if (edit_img != undefined) {
-                form.append("Image", edit_img);
+                form.append("PreviewImg", edit_img);
             }
 
             //ajax
             $.ajax({
                 type: 'POST',
-                url: '/ManageProduct/Edit_CategoryById?id=' + edit_id,
+                url: '/ManageSmartSolution/Edit_Category?id=' + edit_id,
                 data: form,
                 processData: false,
                 contentType: false,
@@ -239,7 +242,7 @@
                         }).then(() => {
                             //append file
                             edit_id = null;
-                            window.location.href = "/ManageProduct/Manage_Category_Page";
+                            window.location.href = "/ManageSmartSolution/Manage_Category_Page";
                         });
                     }
                     else {
@@ -272,7 +275,7 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: '/ManageProduct/Delete_CategoryById?id=' + id,
+                        url: '/ManageSmartSolution/Delete_Category?id=' + id,
                         processData: false,
                         contentType: false,
                         cache: false,
