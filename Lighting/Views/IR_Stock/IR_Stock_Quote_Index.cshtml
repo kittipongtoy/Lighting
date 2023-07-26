@@ -81,7 +81,7 @@
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                            <a type="button" class="btn btn-primary" href="@Url.Action("IR_Stock_Quote_Add","IR_Stock")">เพิ่ม</a>
+                            <a type="button" class="btn btn-primary" href="@Url.Action("IR_Stock_QuoteDetail_Add","IR_Stock")">เพิ่ม</a>
                         </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th>#</th>
-                                <th class="min-w-125px">link_IR_Stock_Quote</th>
+                                <th class="min-w-125px">STOCK PRICE TH</th>
                                 <th class="min-w-125px">สถานะการใช้งาน</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
@@ -160,18 +160,18 @@
                 },
                 columns: [
                     { 'data': 'index', name: 'index', className: 'text-center' },
-                    { 'data': 'link_IR_Stock_Quote', name: 'link_IR_Stock_Quote', className: 'text-center' },
+                    { 'data': 'stocK_PRICE_TH', name: 'stocK_PRICE_TH', className: 'text-center' },
                     {
                         "name": "status", "data": "status", "render": function (data, type, row) {
                             if (row.status == 1) {
                                 var text = '<div class="form-check form-switch">' +
-                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus2(' + row.id + ',this)"> ' +
                                     '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
                                     '</div>';
                                 return text;
                             } else {
                                 var text = '<div class="form-check form-switch">' +
-                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus2(' + row.id + ',this)"> ' +
                                     '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
                                     '</div>';
                                 return text;

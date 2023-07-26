@@ -283,7 +283,6 @@
     <None Include="Views\Investor_Relations\Companyprofile_create.cshtml" />
     <None Include="Views\Investor_Relations\Companyprofile_edit.cshtml" />
     <None Include="Views\Investor_Relations\Companyprofile_index.cshtml" />
-    <None Include="Views\Investor_Relations\InvestorRelations_index.cshtml" />
     <None Include="Views\Investor_Relations\Message_Chairman_create.cshtml" />
     <None Include="Views\Investor_Relations\Message_Chairman_edit.cshtml" />
     <None Include="Views\Investor_Relations\Message_Chairman_index.cshtml" />

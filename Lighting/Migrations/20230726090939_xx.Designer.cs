@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lighting.Migrations
 {
     [DbContext(typeof(LightingContext))]
-    [Migration("20230725103730_xx")]
+    [Migration("20230726090939_xx")]
     partial class xx
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -627,6 +627,31 @@ namespace Lighting.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("IR_Analyst_Chapter");
+                });
+
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Banner", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ImageBanner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("updated_at")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IR_Banner");
                 });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Cancel_Email", b =>
@@ -1484,40 +1509,6 @@ namespace Lighting.Migrations
                     b.ToTable("IR_Stock_ChartDetails");
                 });
 
-            modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Stock_Link", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SubTitle_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubTitle_TH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title_TH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("created_at")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("updated_at")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IR_Stock_Link");
-                });
-
             modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Stock_LinkDetail", b =>
                 {
                     b.Property<int>("Id")
@@ -1619,7 +1610,25 @@ namespace Lighting.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Link_IR_Stock_Quote")
+                    b.Property<string>("Link_SET_INDEX_EN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Link_SET_INDEX_TH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Link_STOCK_PRICE")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SET_INDEX_EN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SET_INDEX_TH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("STOCK_PRICE_EN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("STOCK_PRICE_TH")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Status")
@@ -1740,9 +1749,9 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d7cd70f8-0535-4c91-a2f4-d373130a3310",
+                            Id = "bb313144-a800-4529-a50d-18e6abf92d2c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3e8e9c79-64ea-4599-be9c-d1e703d607f8",
+                            ConcurrencyStamp = "e7588107-7e05-4f5d-95e8-2cca13f48a5d",
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -1752,9 +1761,9 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAECou9h3xeW0JuAl7CWOZ4w1N6/fl703eDTNR0GDjqw/gFtyAPdk8yLrmuP4DxyH+vw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJY0VtIfDln6UyiVyH3XEwCw4WWx+lT9aXgS8gOG7m2QRKAg7YdqWhNpZ37wflxElw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "65694cfa-f5ef-49a3-8fc0-f0119cbed890",
+                            SecurityStamp = "5f0330e4-89f7-4177-a81a-bbeb29052735",
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -3343,13 +3352,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b4152ea5-0d47-428c-bc16-22c33669b9a9",
-                            ConcurrencyStamp = "43e825a0-930f-425c-a948-eca9c873d28c",
+                            Id = "8298bcbb-760f-4fb9-ae56-8598f2a66e35",
+                            ConcurrencyStamp = "be67bf4e-c427-4020-a56c-99e7f2b1d9f9",
                             Name = "Admin",
                             NameThai = "Admin",
                             NormalizedName = "Admin",
-                            created_at = new DateTime(2023, 7, 25, 10, 37, 29, 764, DateTimeKind.Utc).AddTicks(5354),
-                            updated_at = new DateTime(2023, 7, 25, 10, 37, 29, 764, DateTimeKind.Utc).AddTicks(5358)
+                            created_at = new DateTime(2023, 7, 26, 9, 9, 39, 455, DateTimeKind.Utc).AddTicks(8462),
+                            updated_at = new DateTime(2023, 7, 26, 9, 9, 39, 455, DateTimeKind.Utc).AddTicks(8468)
                         });
                 });
 
@@ -5054,8 +5063,8 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "d7cd70f8-0535-4c91-a2f4-d373130a3310",
-                            RoleId = "b4152ea5-0d47-428c-bc16-22c33669b9a9"
+                            UserId = "bb313144-a800-4529-a50d-18e6abf92d2c",
+                            RoleId = "8298bcbb-760f-4fb9-ae56-8598f2a66e35"
                         });
                 });
 

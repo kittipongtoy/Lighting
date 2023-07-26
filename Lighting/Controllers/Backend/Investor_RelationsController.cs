@@ -20,10 +20,7 @@ namespace Lighting.Controllers.Backend
             db = context;
             _hostingEnvironment = environment;
         }
-        public IActionResult InvestorRelations_index()
-        {
-            return View();
-        }        
+    
         public IActionResult Message_Chairman_index()
         {
             var checkrow = db.M_message_chairman.FirstOrDefault();

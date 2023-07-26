@@ -52,7 +52,6 @@
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th>#</th>
                                 <th class="min-w-125px">หัวข้อ TH</th>
-                                <th class="min-w-125px">หัวข้อ EN</th>
                                 <th class="min-w-125px">สถานะการใช้งาน</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
@@ -80,7 +79,7 @@
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                            <a type="button" class="btn btn-primary" href="@Url.Action("IR_Stock_Chart_Add","IR_Stock")">เพิ่ม</a>
+                            <a type="button" class="btn btn-primary" href="@Url.Action("IR_Stock_ChartDetail_Add","IR_Stock")">เพิ่ม</a>
                         </div>
                     </div>
                 </div>
@@ -89,8 +88,7 @@
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th>#</th>
-                                <th class="min-w-125px">หัวข้อ TH</th>
-                                <th class="min-w-125px">หัวข้อ EN</th>
+                                <th class="min-w-125px">Link</th>
                                 <th class="min-w-125px">สถานะการใช้งาน</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
@@ -118,7 +116,7 @@
                 },
                 columns: [
                     { 'data': 'index', name: 'index', className: 'text-center' },
-                    { 'data': 'fileName_TH', name: 'fileName_TH', className: 'text-center' },
+                    { 'data': 'title_TH', name: 'title_TH', className: 'text-center' },
                     {
                         "name": "status", "data": "status", "render": function (data, type, row) {
                             if (row.status == 1) {
@@ -160,7 +158,7 @@
                 },
                 columns: [
                     { 'data': 'index', name: 'index', className: 'text-center' },
-                    { 'data': 'fileName_TH', name: 'fileName_TH', className: 'text-center' },
+                    { 'data': 'link_IR_Stock_Chart', name: 'link_IR_Stock_Chart', className: 'text-center' },
                     {
                         "name": "status", "data": "status", "render": function (data, type, row) {
                             if (row.status == 1) {
