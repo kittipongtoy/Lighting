@@ -46,14 +46,17 @@
                     <th scope="col">#</th>
                     <th scope="col">รูปปก/image preview</th>
                     <th scope="col">หัวข้อ/Title</th>
-                    <th scope="col">จัดการ/Manage</th>
+                    <th scope="col" class="text-center">จัดการ/Manage</th>
                 </tr>
             </thead>
             <tbody>
+                @{
+                    int i = 1;
+                }
                 @foreach (var project in Model)
                 {
                     <tr id="@project.Id">
-                        <th scope="row">@project.Id</th>
+                        <th scope="row">@i</th>
                         <td><img src="@project.Image_Path" style="width:100px;height:100px;" /> </td>
                         <td>@project.Name_TH / @project.Name_EN</td>
                         <td class="text-center">
@@ -64,6 +67,9 @@
                                 <i class="bi bi-trash-fill"></i>ลบ/delete
                             </button>
                         </td>
+                        @{
+                            i++;
+                        }
                     </tr>
                 }
             </tbody>

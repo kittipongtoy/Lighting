@@ -208,6 +208,30 @@
     } 
 
 
+///
+	var show_contactus = "";
+	var here_contactus = "";
+	if (ViewData["Title"] == "Manage_Contact_Page")
+	{
+		show_contactus = "show";
+		here_contactus = "here";
+	}
+
+	var show_applyjob = "";
+	var here_applyjob  = "";
+	if (ViewData["Title"] == "Manage_Job_Page")
+	{
+		show_applyjob  = "show";
+		here_applyjob = "here";
+	}
+
+	var show_news = "";
+	var here_news  = "";
+	if (ViewData["Title"] == "Manage_News_Page")
+	{
+		show_news  = "show";
+		here_news = "here";
+	}
 
 }
 
@@ -400,14 +424,26 @@
 									<span class="menu-title">ข่าวสาร</span>
 									<span class="menu-arrow"></span>
 								</span>
-								<div class="menu-sub menu-sub-accordion">
+								<div class="menu-sub menu-sub-accordion @show_news @here_news">
 									<div class="menu-item">
-										<a class="menu-link" href="">
+										@if (ViewData["Title"] == "Manage_News_Page")
+										{
+											<a class="menu-link active" href="@Url.Action("Manage_News_Page","News")">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">หน้าแรก</span>
+												<span class="menu-title">ข่าวสาร</span>
 											</a>
+										}
+										else
+										{
+											<a class="menu-link" href="@Url.Action("Manage_News_Page","News")">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">ข่าวสาร</span>
+											</a>
+										}
 									</div>
 								</div>
 							</div>
@@ -1560,7 +1596,7 @@
 									</div>
 								</div>
 							</div>
-							<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_applyjob @here_applyjob">
 								<span class="menu-link">
 									<span class="menu-icon">
 										<i class="bi bi-briefcase-fill fs-3"></i>
@@ -1569,17 +1605,30 @@
 									<span class="menu-arrow"></span>
 								</span>
 								<div class="menu-sub menu-sub-accordion">
+									
 									<div class="menu-item">
-										<a class="menu-link" href="#">
+										@if (ViewData["Title"] == "Manage_Job_Page")
+										{
+											<a class="menu-link active" href="@Url.Action("Manage_Job_Page","ManageJob")">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">หน้าแรก</span>
+												<span class="menu-title">สมัครงาน</span>
 											</a>
+										}
+										else
+										{
+											<a class="menu-link" href="@Url.Action("Manage_Job_Page","ManageJob")">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">สมัครงาน</span>
+											</a>
+										}
 									</div>
 								</div>
 							</div>
-							<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_contactus @here_contactus">
 								<span class="menu-link">
 									<span class="menu-icon">
 										<i class="bi bi-person-vcard fs-3"></i>
@@ -1589,12 +1638,23 @@
 								</span>
 								<div class="menu-sub menu-sub-accordion">
 									<div class="menu-item">
-										<a class="menu-link" href="#">
+										@if (ViewData["Title"] == "Manage_Contact_Page"){
+											<a class="menu-link active" href="@Url.Action("Manage_Contact_Page","ManageContact")">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">หน้าแรก</span>
+												<span class="menu-title">ติดต่อเรา</span>
 											</a>
+										}
+										else
+										{
+											<a class="menu-link" href="@Url.Action("Manage_Contact_Page","ManageContact")">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">ติดต่อเรา</span>
+											</a>
+										}
 									</div>
 								</div>
 							</div>

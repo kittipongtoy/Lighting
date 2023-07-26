@@ -164,20 +164,23 @@ namespace Lighting.Controllers.Frontend
                         ViewBag.SubCategoryId = products.First().Product_ModelId;
 
                         ViewData["products"] = products;
-                        ViewData["categorys"] = await _db.ProjectRefs
-                            .AsNoTracking()
-                            .Where(proj => proj.ProjectRef_CategoryId == proj_output.CategoryId)
-                            .OrderByDescending(proj => proj.Id)
-                            .Select(pro => 
-                            new ProjectRef {
-                                Profile_Image = Path.Combine( pro.Folder_Path, pro.Profile_Image),
-                                Location_EN = pro.Location_EN,
-                                Location_TH = pro.Location_TH,
-                                Id = pro.Id
-                            })
-                            //.Take(10)
-                            .ToListAsync(); 
+
                     }
+
+                    ViewData["categorys"] = await _db.ProjectRefs
+                    .AsNoTracking()
+                    .Where(proj => proj.ProjectRef_CategoryId == proj_output.CategoryId)
+                    .OrderByDescending(proj => proj.Id)
+                    .Select(pro =>
+                    new ProjectRef
+                    {
+                        Profile_Image = Path.Combine(pro.Folder_Path, pro.Profile_Image),
+                        Location_EN = pro.Location_EN,
+                        Location_TH = pro.Location_TH,
+                        Id = pro.Id
+                    })
+                    //.Take(10)
+                    .ToListAsync();
 
                 }
                
