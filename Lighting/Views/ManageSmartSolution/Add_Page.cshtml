@@ -118,7 +118,10 @@
                 <label class="h4">Content (English)</label>
                 <textarea id="content_en"></textarea>
             </div>
-            <center style="margin:1rem;"><button class="btn bg-success" onclick="addSolution()">บันทึกข้อมูล/save</button></center>
+            <div style="margin:1rem;display:flex;justify-content:space-between;">
+                <button class="btn bg-success" onclick="addSolution()">บันทึกข้อมูล/save</button>
+                <a href="@Url.Action("Manage_Page","ManageSmartSolution")" class="btn bg-info">กลับ/back</a>
+            </div>
         </div>
     </div>
 </div>

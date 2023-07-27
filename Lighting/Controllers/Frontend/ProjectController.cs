@@ -15,6 +15,39 @@ namespace Lighting.Controllers.Frontend
             _db = db;
             _env = env;
         }
+
+        public async Task<IActionResult> JsonNavBar()
+        {
+           var lang = Request.Cookies["lang"];
+            if (lang == "EN") {
+                var project = await _db.Category_Projects
+                .AsNoTracking()
+                .Select(project => new 
+                {
+                    Id = project.Id,
+                    Image_Path = project.Image_Path,
+                    Name = project.Name_EN,
+                })
+                .ToListAsync();
+
+                return Json(project);
+            }
+            else
+            {
+                var project = await _db.Category_Projects
+                .AsNoTracking()
+                .Select(project => new
+                {
+                    Id = project.Id,
+                    Image_Path = project.Image_Path,
+                    Name = project.Name_TH,
+                })
+                .ToListAsync();
+
+                return Json(project);
+            }
+        }
+
         public async Task<IActionResult> Project(int start)
         {
             var project = await _db.Category_Projects
@@ -60,7 +93,6 @@ namespace Lighting.Controllers.Frontend
 
             return View(project);
         }
-
 
         public async Task<IActionResult> Project_Category(int categoryId, int start)
         {

@@ -11,6 +11,39 @@ namespace Lighting.Controllers.Frontend
         {
             _db = db;
         }
+
+        public async Task<IActionResult> JsonNavBar()
+        {
+            var lang = Request.Cookies["lang"];
+            if (lang == "EN")
+            {
+                var solutions = await _db.Smart_Solutions
+                    .AsNoTracking()
+                    .Select(x => new
+                    {
+                        id= x.Id,
+                        Name = x.TitleName_EN,
+                        Image = x.PreviewImg
+
+                    })
+                    .ToListAsync();
+                return Json(solutions);
+            }
+            else
+            {
+                var solutions = await _db.Smart_Solutions
+                .AsNoTracking()
+                .Select(x => new
+                {
+                    id = x.Id,
+                    Name = x.TitleName_TH,
+                    Image = x.PreviewImg
+
+                })
+                .ToListAsync();
+                return Json(solutions);
+            }
+        }
         public async Task<IActionResult> SmartSolution()
         {
             var solutions = await _db.Smart_Solutions.AsNoTracking().ToListAsync();
