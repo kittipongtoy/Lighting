@@ -15,6 +15,42 @@ namespace Lighting.Controllers.Frontend
             _env = env;
 
         }
+
+        public async Task<IActionResult> JsonNavBar()
+        {
+            var lang = Request.Cookies["lang"];
+            if (lang == "EN"){
+                var category = await _db.Product_Categorys
+                .AsNoTracking()
+                .OrderByDescending(x => x.Id)
+                .Select(cat =>
+                new 
+                {
+                    Id = cat.Id,
+                    Name = cat.Name_EN,
+                    Image = cat.Image
+                })
+                .ToListAsync();
+
+                return Json(category);
+;            }
+            else
+            {
+                var category = await _db.Product_Categorys
+                    .AsNoTracking()
+                    .OrderByDescending(x => x.Id)
+                    .Select(cat =>
+                    new
+                    {
+                        Id = cat.Id,
+                        Name = cat.Name_TH,
+                        Image = cat.Image
+                    })
+                    .ToListAsync();
+
+                return Json(category);
+            }
+        }
         public async Task<IActionResult> Product()
         {
             var category = await _db.Product_Categorys

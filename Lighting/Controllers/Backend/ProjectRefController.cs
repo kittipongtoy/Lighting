@@ -1,5 +1,6 @@
 ﻿using Lighting.Areas.Identity.Data;
 using Lighting.Models.InputFilterModels.ProjectRef;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
@@ -321,7 +322,7 @@ namespace Lighting.Controllers.Backend
             }
             return NotFound("ไม่พบโปรเจค");
         }
-
+        [AllowAnonymous]
         public IActionResult DownloadFile(string path)
         {
             var path_file = Path.Combine(_env.WebRootPath, path);

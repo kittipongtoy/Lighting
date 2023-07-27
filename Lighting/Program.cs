@@ -187,7 +187,7 @@ app.MapControllerRoute(
 
 //pattern: "{controller=ManageDownload}/{action=manage_download_page}");
 //pattern: "{controller=news}/{action=manage_news_page}");
-pattern: "{controller=ManageJob}/{action=manage_job_page}");
+//pattern: "{controller=ManageJob}/{action=manage_job_page}");
 //pattern: "{controller=ManageContact}/{action=manage_Contact_page}");
 //pattern: "{controller=ProjectRef}/{action=manage_page}");
 //product
@@ -196,7 +196,7 @@ pattern: "{controller=ManageJob}/{action=manage_job_page}");
 //pattern: "{controller=ManageProduct}/{action=Manage_Product_Page}");
 //pattern: "{controller=Product}/{action=Product}");
 
-//pattern: "{controller=ManageSmartSolution}/{action=Manage_Page}");
+pattern: "{controller=ManageSmartSolution}/{action=Manage_Page}");
 //pattern: "{controller=ManageSmartSolution}/{action=Manage_Category_Page}");
 
 app.MapRazorPages();
