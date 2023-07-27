@@ -222,10 +222,10 @@
                                                                                     <div class="menu-item"><a href="@Url.Action("Contact","Contact")">ติดต่อเรา</a></div>
                                                                                 </li>
                                                                                 <li data-page="privacy">
-                                                                                    <div class="menu-item"><a href="@Url.Action("PrivacyPolicy","PrivacyPolicy")">PRIVACY POLICY</a></div>
+                                                                                    <div class="menu-item"><a href="privacy_policy.php">PRIVACY POLICY</a></div>
                                                                                 </li>
                                                                                 <li data-page="cookie">
-                                                                                    <div class="menu-item"><a href="@Url.Action("CookiesPolicy","CookiesPolicy")">COOKIES POLICY</a></div>
+                                                                                    <div class="menu-item"><a href="cookies_policy.php">COOKIES POLICY</a></div>
                                                                                 </li>
 
                                                                                 <li>
@@ -315,7 +315,7 @@
                                                                                     <div class="menu-item"><a href="@Url.Action("SmartSolution","SmartSolution")">All</a></div>
                                                                                 </li>
                                                                                 <li>
-                                                                                    <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")"> )</a></div>
+                                                                                    <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">ICON LINK (APP)</a></div>
                                                                                 </li>
                                                                                 <li>
                                                                                     <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">WISE PLUS (APP)</a></div>
@@ -489,27 +489,27 @@
                                 <!-- LANG :: PC & IPAD PRO -->
                                 <div class="d-none d-lg-block">
                                     <ul class="lang">
-                                        @{
-                                        var get_cookies = Context.Request.Cookies["lang"];
-                                        if (get_cookies == "EN")
-                                        {
-                                            <li id="butt_th">
-                                                <button onclick="setLang('TH')">TH</button>
-                                            </li>
-                                            <li id="butt_en" class="active">
-                                                <button onclick="setLang('EN')">EN</button>
-                                            </li>
-                                        }
-                                        else
-                                        {
-                                            <li id="butt_th" class="active">
-                                                <button onclick="setLang('TH')">TH</button>
-                                            </li>
-                                            <li id="butt_en" class="">
-                                                <button onclick="setLang('EN')">EN</button>
-                                            </li>
-                                        }
-                                        }
+                                                @{
+                                                    var get_cookies = Context.Request.Cookies["lang"];
+                                                    if (get_cookies == "EN")
+                                                    {
+                                                <li id="butt_th">
+                                                    <button onclick="setLang('TH')">TH</button>
+                                                </li>
+                                                <li id="butt_en" class="active">
+                                                    <button onclick="setLang('EN')">EN</button>
+                                                </li>
+                                                    }
+                                                    else
+                                                    {
+                                                <li id="butt_th" class="active">
+                                                    <button onclick="setLang('TH')">TH</button>
+                                                </li>
+                                                <li id="butt_en" class="">
+                                                    <button onclick="setLang('EN')">EN</button>
+                                                </li>
+                                                    }
+                                                }
                                     </ul>
                                 </div>
 
@@ -640,68 +640,36 @@
                                                                                 <p>L&E Lighting Innovation Center</p>
                                                                             </a>
                                                                         </li>
-                                                                                        @* <li>
-                                                                        <a href="https://www.mydevdemosites.com/resource-facility/le-solid-state-coltd">
-                                                                        <p>L&E Solid State Co.,Ltd</p>
-                                                                        </a>
-                                                                        </li>
                                                                         <li>
-                                                                        <a href="https://www.mydevdemosites.com/resource-facility/le-manufacturing-coltd">
-                                                                        <p>L&E Manufacturing Co.,Ltd</p>
-                                                                        </a>
-                                                                        </li>
-                                                                        <li>
-                                                                        <a href="https://www.mydevdemosites.com/resource-facility/assembly-service">
-                                                                        <p>L&E Assembly / Service</p>
-                                                                        </a>
-                                                                        </li>
-                                                                        <li>
-                                                                        <a href="https://www.mydevdemosites.com/resource-facility/warehouse-logistics">
-                                                                        <p>L&E Warehouse & Logistics</p>
-                                                                        </a>
-                                                                        </li>
-                                                                        <li>
-                                                                        <a href="https://www.mydevdemosites.com/resource-facility/lighting-solution-center-ratchadapisek-%C2%A0rachapruek">
-                                                                        <p>L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</p>
-                                                                        </a>
-                                                                        </li>
-                                                                        <li>
-                                                                        <a href="https://www.mydevdemosites.com/resource-facility/overseas-offices">
-                                                                        <p>L&E Overseas Offices</p>
-                                                                        </a>
-                                                                        </li>*@
-
-                                                                        <li>
-                                                                            <a href="@Url.Action("Subsidiaries_SolidState","Resource_Facility")">
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/le-solid-state-coltd">
                                                                                 <p>L&E Solid State Co.,Ltd</p>
                                                                             </a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Subsidiaries_Manufacturing","Resource_Facility")">
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/le-manufacturing-coltd">
                                                                                 <p>L&E Manufacturing Co.,Ltd</p>
                                                                             </a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">
-                                                                                <p>L&E Assembly / Service </p>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/assembly-service">
+                                                                                <p>L&E Assembly / Service</p>
                                                                             </a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Subsidiaries_Warehouse_Logistics","Resource_Facility")">
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/warehouse-logistics">
                                                                                 <p>L&E Warehouse & Logistics</p>
                                                                             </a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Subsidiaries_Lighting_Solution_Center","Resource_Facility")">
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/lighting-solution-center-ratchadapisek-%C2%A0rachapruek">
                                                                                 <p>L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</p>
                                                                             </a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Subsidiaries_Overseas_Offices","Resource_Facility")">
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/overseas-offices">
                                                                                 <p>L&E Overseas Offices</p>
                                                                             </a>
                                                                         </li>
-
                                                                     </ul>
                                                                 </div>
                                                             </div>

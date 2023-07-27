@@ -267,6 +267,24 @@ namespace Lighting.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "cookies_policy",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    headTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    headTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_cookies_policy", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CorporateGovernance",
                 columns: table => new
                 {
@@ -1765,6 +1783,48 @@ namespace Lighting.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "privacy_Policys",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    year = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    typeOfPolicy_id = table.Column<int>(type: "int", nullable: true),
+                    typeOfPolicy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    active_status = table.Column<int>(type: "int", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_privacy_Policys", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "privacy_PolicyTitles",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    headTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    headTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    privacy_TitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    privacy_TitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    privacy_NoticeTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    privacy_NoticeTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    cctv_privacyTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    cctv_privacyTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_privacy_PolicyTitles", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Product_Categorys",
                 columns: table => new
                 {
@@ -1887,6 +1947,222 @@ namespace Lighting.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_receive_mail_propose_agendas", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RF_Assembly_Services",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    titleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    link = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RF_Assembly_Services", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RF_Assembly_Services_Images",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    upload_image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    upload_image_ENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    active_status = table.Column<int>(type: "int", nullable: false),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RF_Assembly_Services_Images", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RF_Manufacturing",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    titleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    link = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RF_Manufacturing", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RF_Manufacturing_Images",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    upload_image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    upload_image_ENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    active_status = table.Column<int>(type: "int", nullable: false),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RF_Manufacturing_Images", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RF_Oversea_Offices",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    titleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    link = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RF_Oversea_Offices", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RF_Oversea_Offices_Images",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    upload_image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    upload_image_ENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    active_status = table.Column<int>(type: "int", nullable: false),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RF_Oversea_Offices_Images", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RF_Solid_States",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    titleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    link = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RF_Solid_States", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RF_Solid_States_Images",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    upload_image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    upload_image_ENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    active_status = table.Column<int>(type: "int", nullable: false),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RF_Solid_States_Images", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RF_Solution_Centers",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    titleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    link = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RF_Solution_Centers", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RF_Solution_Centers_Images",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    upload_image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    upload_image_ENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    active_status = table.Column<int>(type: "int", nullable: false),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RF_Solution_Centers_Images", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RF_Warehouse_Logistics",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    titleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailsTitleENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    link = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RF_Warehouse_Logistics", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RF_Warehouse_Logistics_Images",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    upload_image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    upload_image_ENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    active_status = table.Column<int>(type: "int", nullable: false),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RF_Warehouse_Logistics_Images", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -2913,17 +3189,17 @@ namespace Lighting.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NameThai", "NormalizedName", "created_at", "updated_at" },
-                values: new object[] { "d64710f8-e510-42c9-9581-fe94c0de43d7", "772ee645-d108-4a13-9bbc-af29628ae5c5", "Admin", "Admin", "Admin", new DateTime(2023, 7, 27, 3, 43, 6, 387, DateTimeKind.Utc).AddTicks(1893), new DateTime(2023, 7, 27, 3, 43, 6, 387, DateTimeKind.Utc).AddTicks(1896) });
+                values: new object[] { "67725bb4-45f4-410d-b1dc-6a3fd60a9fbc", "c004ec28-b537-4240-a83e-6350e5bf59a6", "Admin", "Admin", "Admin", new DateTime(2023, 7, 27, 7, 37, 43, 36, DateTimeKind.Utc).AddTicks(3172), new DateTime(2023, 7, 27, 7, 37, 43, 36, DateTimeKind.Utc).AddTicks(3176) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ApplicationFile", "ConcurrencyStamp", "Email", "EmailConfirmed", "EmployeeCode", "EmployeeCodeInt", "Firstname", "GuarantorIdentificationCardFile", "Isactive", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePath", "ReceptionistFile", "SecurityStamp", "TwoFactorEnabled", "UserName", "created_at", "updated_at" },
-                values: new object[] { "59c29222-f96c-450f-86dc-6e22129afbab", 0, null, null, "12ee6784-261d-45e5-9a8a-761ae9d9c46f", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAECn68Txe38mVHiVwE8e+c0197ek4mEqW2BdxXKS7RaV+CLR8+XmOI0Huq2RtfKA88w==", null, false, null, null, "ff26344a-efd4-4755-a603-b4e2fd6ed628", false, "Admin@Lighting.com", null, null });
+                values: new object[] { "49e0e3f8-31b8-4913-8c0e-7758fd2fef82", 0, null, null, "6f981ba0-e2f4-4a64-8ee6-641a006fccfd", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEPS1A2lQw45iTuTWzBeD48cUTKZA9ekJgYKqd1PZ5xsUM8KakxsMhDsoM/mCTxLEgQ==", null, false, null, null, "a836a07d-eb3f-48a4-b7a9-71d1a5de39cf", false, "Admin@Lighting.com", null, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "d64710f8-e510-42c9-9581-fe94c0de43d7", "59c29222-f96c-450f-86dc-6e22129afbab" });
+                values: new object[] { "67725bb4-45f4-410d-b1dc-6a3fd60a9fbc", "49e0e3f8-31b8-4913-8c0e-7758fd2fef82" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -3015,6 +3291,9 @@ namespace Lighting.Migrations
 
             migrationBuilder.DropTable(
                 name: "Contacts");
+
+            migrationBuilder.DropTable(
+                name: "cookies_policy");
 
             migrationBuilder.DropTable(
                 name: "CorporateGovernance");
@@ -3230,6 +3509,12 @@ namespace Lighting.Migrations
                 name: "P_philosophy");
 
             migrationBuilder.DropTable(
+                name: "privacy_Policys");
+
+            migrationBuilder.DropTable(
+                name: "privacy_PolicyTitles");
+
+            migrationBuilder.DropTable(
                 name: "Product_Categorys");
 
             migrationBuilder.DropTable(
@@ -3249,6 +3534,42 @@ namespace Lighting.Migrations
 
             migrationBuilder.DropTable(
                 name: "receive_mail_propose_agendas");
+
+            migrationBuilder.DropTable(
+                name: "RF_Assembly_Services");
+
+            migrationBuilder.DropTable(
+                name: "RF_Assembly_Services_Images");
+
+            migrationBuilder.DropTable(
+                name: "RF_Manufacturing");
+
+            migrationBuilder.DropTable(
+                name: "RF_Manufacturing_Images");
+
+            migrationBuilder.DropTable(
+                name: "RF_Oversea_Offices");
+
+            migrationBuilder.DropTable(
+                name: "RF_Oversea_Offices_Images");
+
+            migrationBuilder.DropTable(
+                name: "RF_Solid_States");
+
+            migrationBuilder.DropTable(
+                name: "RF_Solid_States_Images");
+
+            migrationBuilder.DropTable(
+                name: "RF_Solution_Centers");
+
+            migrationBuilder.DropTable(
+                name: "RF_Solution_Centers_Images");
+
+            migrationBuilder.DropTable(
+                name: "RF_Warehouse_Logistics");
+
+            migrationBuilder.DropTable(
+                name: "RF_Warehouse_Logistics_Images");
 
             migrationBuilder.DropTable(
                 name: "SH_annual_Report");
