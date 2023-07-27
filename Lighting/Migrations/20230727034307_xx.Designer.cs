@@ -12,8 +12,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lighting.Migrations
 {
     [DbContext(typeof(LightingContext))]
+<<<<<<<< HEAD:Lighting/Migrations/20230727034307_xx.Designer.cs
     [Migration("20230727034307_xx")]
     partial class xx
+========
+    [Migration("20230724184428_hewt")]
+    partial class hewt
+>>>>>>>> origin/saimon:Lighting/Migrations/20230724184428_hewt.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -232,10 +237,7 @@ namespace Lighting.Migrations
                     b.Property<string>("holding_position_th")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("image_nameEN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("image_nameTH")
+                    b.Property<string>("image_name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name_en")
@@ -301,31 +303,6 @@ namespace Lighting.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Board_of_Directors");
-                });
-
-            modelBuilder.Entity("Lighting.Areas.Identity.Data.Category_Project", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Image_Path")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name_EN")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name_TH")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category_Projects");
                 });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.Company_Overview", b =>
@@ -439,6 +416,37 @@ namespace Lighting.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Contacts");
+                });
+
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.cookies_policy", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<DateTime?>("created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("detailsENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("detailsTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("headTitleENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("headTitleTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("updated_at")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("id");
+
+                    b.ToTable("cookies_policy");
                 });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.CorporateGovernance", b =>
@@ -764,6 +772,7 @@ namespace Lighting.Migrations
                     b.ToTable("ImportInfo_ShareHolderData");
                 });
 
+<<<<<<<< HEAD:Lighting/Migrations/20230727034307_xx.Designer.cs
             modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Analyst", b =>
                 {
                     b.Property<int>("Id")
@@ -876,6 +885,8 @@ namespace Lighting.Migrations
                     b.ToTable("IR_Button_Below_Banner");
                 });
 
+========
+>>>>>>>> origin/saimon:Lighting/Migrations/20230724184428_hewt.Designer.cs
             modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Cancel_Email", b =>
                 {
                     b.Property<int>("Id")
@@ -1826,6 +1837,7 @@ namespace Lighting.Migrations
                     b.ToTable("IR_Request_Inquiry");
                 });
 
+<<<<<<<< HEAD:Lighting/Migrations/20230727034307_xx.Designer.cs
             modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Stock_Chart", b =>
                 {
                     b.Property<int>("Id")
@@ -1910,6 +1922,8 @@ namespace Lighting.Migrations
                     b.ToTable("IR_Stock_LinkDetail");
                 });
 
+========
+>>>>>>>> origin/saimon:Lighting/Migrations/20230724184428_hewt.Designer.cs
             modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Stock_Market", b =>
                 {
                     b.Property<int>("Id")
@@ -1944,6 +1958,7 @@ namespace Lighting.Migrations
                     b.ToTable("IR_Stock_Market");
                 });
 
+<<<<<<<< HEAD:Lighting/Migrations/20230727034307_xx.Designer.cs
             modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Stock_Quote", b =>
                 {
                     b.Property<int>("Id")
@@ -2021,6 +2036,8 @@ namespace Lighting.Migrations
                     b.ToTable("IR_Stock_QuoteDetail");
                 });
 
+========
+>>>>>>>> origin/saimon:Lighting/Migrations/20230724184428_hewt.Designer.cs
             modelBuilder.Entity("Lighting.Areas.Identity.Data.LightingUser", b =>
                 {
                     b.Property<string>("Id")
@@ -2125,9 +2142,15 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:Lighting/Migrations/20230727034307_xx.Designer.cs
                             Id = "59c29222-f96c-450f-86dc-6e22129afbab",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "12ee6784-261d-45e5-9a8a-761ae9d9c46f",
+========
+                            Id = "f87771ff-d887-423c-b0cf-4c28a957a6b8",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a8312460-1918-4f43-b4d9-8621fa30d632",
+>>>>>>>> origin/saimon:Lighting/Migrations/20230724184428_hewt.Designer.cs
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -2137,9 +2160,15 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
+<<<<<<<< HEAD:Lighting/Migrations/20230727034307_xx.Designer.cs
                             PasswordHash = "AQAAAAEAACcQAAAAECn68Txe38mVHiVwE8e+c0197ek4mEqW2BdxXKS7RaV+CLR8+XmOI0Huq2RtfKA88w==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "ff26344a-efd4-4755-a603-b4e2fd6ed628",
+========
+                            PasswordHash = "AQAAAAEAACcQAAAAELrTkVTur9XLdA4xMFqQjTjrUyglGy14joiSNyepJ1rKbYQ7PLLYNLplyI8BYsR4lA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6224fbb4-19e0-4cc5-be8f-40e0bf1bed6b",
+>>>>>>>> origin/saimon:Lighting/Migrations/20230724184428_hewt.Designer.cs
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -2156,10 +2185,7 @@ namespace Lighting.Migrations
                     b.Property<DateTime?>("created_at")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("image_name_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("image_name_TH")
+                    b.Property<string>("image_name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name_en")
@@ -3393,10 +3419,7 @@ namespace Lighting.Migrations
                     b.Property<DateTime?>("created_at")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("image_nameEN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("image_nameTH")
+                    b.Property<string>("image_name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("num_order")
@@ -3441,193 +3464,92 @@ namespace Lighting.Migrations
                     b.ToTable("P_philosophy");
                 });
 
-            modelBuilder.Entity("Lighting.Areas.Identity.Data.Product", b =>
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.privacy_Policys", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
-                    b.Property<string>("Application")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Beam_Angle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CATALOGUE")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CUTSHEET")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Control_Gear")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Dimension")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Equivalent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Finishing")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Folder_Path")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gasket")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Housing")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IESFILE")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IP_Rating")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LIGHT_DISTRIBUTION")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lamp_Colour")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lens")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Luminaire_Lifetime")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Luminaire_Output")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MORE_INFORMATION")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Model")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Mounting")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Power")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Power_Supply")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Preview_Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Product_CategoryId")
+                    b.Property<int?>("active_status")
                         .HasColumnType("int");
 
-                    b.Property<int>("Product_ModelId")
+                    b.Property<DateTime?>("created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("detailsENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("detailsTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("typeOfPolicy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("typeOfPolicy_id")
                         .HasColumnType("int");
 
-                    b.Property<string>("RFA")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("updated_at")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("SUB_IMG")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("year")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Source")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("id");
 
-                    b.Property<string>("Technical_Drawing")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Technical_Drawing_Img")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type_TH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Products");
+                    b.ToTable("privacy_Policys");
                 });
 
-            modelBuilder.Entity("Lighting.Areas.Identity.Data.Product_Category", b =>
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.privacy_PolicyTitles", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
-                    b.Property<string>("Image")
-                        .IsRequired()
+                    b.Property<string>("cctv_privacyTitleENG")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name_EN")
-                        .IsRequired()
+                    b.Property<string>("cctv_privacyTitleTH")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name_TH")
-                        .IsRequired()
+                    b.Property<DateTime?>("created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("headTitleENG")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Product_Categorys");
-                });
-
-            modelBuilder.Entity("Lighting.Areas.Identity.Data.Product_Model", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Image")
-                        .IsRequired()
+                    b.Property<string>("headTitleTH")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name_EN")
-                        .IsRequired()
+                    b.Property<string>("privacy_NoticeTitleENG")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name_TH")
-                        .IsRequired()
+                    b.Property<string>("privacy_NoticeTitleTH")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Product_CategoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Product_Models");
-                });
-
-            modelBuilder.Entity("Lighting.Areas.Identity.Data.ProjectRef", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Client")
+                    b.Property<string>("privacy_TitleENG")
                         .HasColumnType("nvarchar(max)");
 
+<<<<<<<< HEAD:Lighting/Migrations/20230727034307_xx.Designer.cs
                     b.Property<string>("Content_EN")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content_TH")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Design_Solution")
+========
+                    b.Property<string>("privacy_TitleTH")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("updated_at")
+                        .HasColumnType("datetime2");
+>>>>>>>> origin/saimon:Lighting/Migrations/20230724184428_hewt.Designer.cs
+
+                    b.HasKey("id");
+
+<<<<<<<< HEAD:Lighting/Migrations/20230727034307_xx.Designer.cs
                     b.Property<string>("File_Download")
                         .HasColumnType("nvarchar(max)");
 
@@ -3682,6 +3604,9 @@ namespace Lighting.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProjectRef_Products");
+========
+                    b.ToTable("privacy_PolicyTitles");
+>>>>>>>> origin/saimon:Lighting/Migrations/20230724184428_hewt.Designer.cs
                 });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.receive_agenda_mail_accounts", b =>
@@ -3781,6 +3706,7 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:Lighting/Migrations/20230727034307_xx.Designer.cs
                             Id = "d64710f8-e510-42c9-9581-fe94c0de43d7",
                             ConcurrencyStamp = "772ee645-d108-4a13-9bbc-af29628ae5c5",
                             Name = "Admin",
@@ -3788,6 +3714,15 @@ namespace Lighting.Migrations
                             NormalizedName = "Admin",
                             created_at = new DateTime(2023, 7, 27, 3, 43, 6, 387, DateTimeKind.Utc).AddTicks(1893),
                             updated_at = new DateTime(2023, 7, 27, 3, 43, 6, 387, DateTimeKind.Utc).AddTicks(1896)
+========
+                            Id = "f98560db-e891-4dbd-b332-57e41ffe1a39",
+                            ConcurrencyStamp = "a9b4ef0d-6567-44c7-94f6-d9b46d6cfc63",
+                            Name = "Admin",
+                            NameThai = "Admin",
+                            NormalizedName = "Admin",
+                            created_at = new DateTime(2023, 7, 24, 18, 44, 27, 508, DateTimeKind.Utc).AddTicks(6739),
+                            updated_at = new DateTime(2023, 7, 24, 18, 44, 27, 508, DateTimeKind.Utc).AddTicks(6742)
+>>>>>>>> origin/saimon:Lighting/Migrations/20230724184428_hewt.Designer.cs
                         });
                 });
 
@@ -5553,8 +5488,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:Lighting/Migrations/20230727034307_xx.Designer.cs
                             UserId = "59c29222-f96c-450f-86dc-6e22129afbab",
                             RoleId = "d64710f8-e510-42c9-9581-fe94c0de43d7"
+========
+                            UserId = "f87771ff-d887-423c-b0cf-4c28a957a6b8",
+                            RoleId = "f98560db-e891-4dbd-b332-57e41ffe1a39"
+>>>>>>>> origin/saimon:Lighting/Migrations/20230724184428_hewt.Designer.cs
                         });
                 });
 
@@ -5577,6 +5517,7 @@ namespace Lighting.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+<<<<<<<< HEAD:Lighting/Migrations/20230727034307_xx.Designer.cs
             modelBuilder.Entity("Lighting.Areas.Identity.Data.ProjectRef", b =>
                 {
                     b.HasOne("Lighting.Areas.Identity.Data.Category_Project", "ProjectRef_Category")
@@ -5597,6 +5538,8 @@ namespace Lighting.Migrations
                     b.Navigation("Smart_Solution");
                 });
 
+========
+>>>>>>>> origin/saimon:Lighting/Migrations/20230724184428_hewt.Designer.cs
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Lighting.Areas.Identity.Data.Role", null)

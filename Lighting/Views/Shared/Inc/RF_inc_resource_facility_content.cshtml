@@ -1,0 +1,86 @@
+﻿ @model Lighting.Models.model_input
+
+@{
+    ViewData["Title"] = "RF_inc_resource_facility_content";
+}
+
+<div class="subsidiary-page">
+    <div class="row">
+        @{
+            if (Model.count_list_page_resource_facility_content > 0)
+            {
+                if (Context.Request.Cookies["lang"] == "EN")
+                {
+                    foreach (var items in Model.list_page_resource_facility_content)
+                    {
+                        <div class="col-lg-6 col-md-6 col-12 mb-3">
+                            <a class="img-width imgBD hover-img" data-fancybox="gallery" href="@Model.path_image@items.upload_image_ENG">
+                                <img src="@Model.path_image@items.upload_image_ENG">
+                            </a>
+                        </div>
+                    } 
+                }
+                else
+                {
+                    foreach (var items in Model.list_page_resource_facility_content)
+                    {
+                        <div class="col-lg-6 col-md-6 col-12 mb-3">
+                            <a class="img-width imgBD hover-img" data-fancybox="gallery" href="@Model.path_image@items.upload_image">
+                                <img src="@Model.path_image@items.upload_image">
+                            </a>
+                        </div>
+                    }
+                }
+            }
+            else
+            {
+                <div class="col-lg-6 col-md-6 col-12 mb-3">
+                    <a class="img-width imgBD hover-img" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/subsidiaries01.jpg">
+                        <img src="~/Frontend_assets/images/resource-facility/subsidiaries01.jpg">
+                    </a>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <a class="img-width imgBD hover-img" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/subsidiaries02.jpg">
+                        <img src="~/Frontend_assets/images/resource-facility/subsidiaries02.jpg">
+                    </a>
+                </div>
+
+            }
+        }
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="content-center">
+                <div class="topicBD-Box">
+                    <div>VDO</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-xl-8 col-lg-10 col-md-10 col-12">
+            <div class="container-vdo">
+                @{
+                    if (Model.count_fod_page_resource_facility_title > 0)
+                    {
+                        string youtubeUrl = Model.fod_page_resource_facility_title.link;
+
+                        // Split the URL using the "?" character as the separator
+                        string[] delimiters = { "youtu.be/", "watch?v=", "embed/" };
+                        string videoId = delimiters.Select(delimiter => youtubeUrl.Split(delimiter).LastOrDefault())
+                                            .FirstOrDefault(id => !string.IsNullOrEmpty(id)); 
+
+                        string embeddedUrl = "https://www.youtube.com/embed/" + videoId;
+
+                        <iframe class="responsive-vdo" src="@embeddedUrl"></iframe> 
+                    }
+                    else
+                    {
+                        <iframe class="responsive-vdo" src="https://www.youtube.com/embed/VecvjOBceCs"></iframe>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
