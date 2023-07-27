@@ -287,6 +287,8 @@
 	if (ViewData["Title"] == "History"
 	|| ViewData["Title"] == "History_Add"
 	|| ViewData["Title"] == "History_Edit"
+	|| ViewData["Title"] == "HistoryDetail_Add"
+	|| ViewData["Title"] == "HistoryDetail_Edit"
 	|| ViewData["Title"] == "OUR_PHILOSOPHY_VISION_MISSION"
 	|| ViewData["Title"] == "OUR_PHILOSOPHY_VISION_MISSION_Add"
 	|| ViewData["Title"] == "OUR_PHILOSOPHY_VISION_MISSION_Edit"
@@ -399,7 +401,7 @@
 								</span>
 								<div class="menu-sub menu-sub-accordion">
 									<div class="menu-item">
-										@if (ViewData["Title"] == "History" || ViewData["Title"] == "History_Add" || ViewData["Title"] == "History_Edit")
+										@if (ViewData["Title"] == "History" || ViewData["Title"] == "History_Add" || ViewData["Title"] == "History_Edit" || ViewData["Title"] == "HistoryDetail_Add" || ViewData["Title"] == "HistoryDetail_Edit")
 										{
 											<a class="menu-link active" href="@Url.Action("History","Resource_Facility")">
 												<span class="menu-bullet">

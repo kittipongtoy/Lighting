@@ -2,6 +2,34 @@
 {
     public class RequestDTO
     {
+        public class HistoryDetailRequest
+        {
+			public int? Id { get; set; }
+			public string? Title_TH { get; set; }
+			public string? Title_EN { get; set; }
+			public string? ImageTH { get; set; }
+			public string? ImageEN { get; set; }
+			public string? Detail_TH { get; set; }
+			public string? Detail_EN { get; set; }
+			public string? FileCompany_TH { get; set; }
+			public string? FileCompany_EN { get; set; }
+			public int? Status { get; set; }
+			public List<IFormFile> uploaded_fileTH { get; set; }
+			public List<IFormFile> uploaded_fileEN { get; set; }
+			public List<IFormFile> uploaded_ImageTH { get; set; }
+			public List<IFormFile> uploaded_ImageEN { get; set; }
+		}
+
+		public class HistoryRequest
+        {
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
         public class IR_Stock_ChartRequest
         {
             public int? Id { get; set; }

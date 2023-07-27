@@ -24,5 +24,120 @@
             </div>
         </div>
     </div>
-
+    <div class="post d-flex flex-column-fluid">
+        <div id="kt_content_container" class="container-xxl">
+            <div class="card">
+                <div class="card-body pt-0">
+                    <div class="row mb-3" style="padding-top: 1.5rem!important;">
+                        <div class="col-6">
+                            <h2>
+                                เพิ่มรายการ
+                            </h2>
+                        </div>
+                        <div class="col-6" style="text-align:right;">
+                            <a type="button" class="btn btn-secondary" href="@Url.Action("IR_Stock_Chart_Index","IR_Stock")">ย้อนกลับ</a>
+                        </div>
+                    </div>
+                    <form id="form_create" enctype="multipart/form-data">
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    ชื่อ TH
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Title_TH" />
+                            </div>
+                            <div class="col-2">
+                                <span>
+                                    ชื่อ EN
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Title_EN" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    รายละเอียด TH
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="SubTitle_TH" />
+                            </div>
+                            <div class="col-2">
+                                <span>
+                                    รายละเอียด EN
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="SubTitle_EN" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    สถานะการใช้งาน
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="Status" value="1" checked id="use_status" onclick="checkSwitch()">
+                                    <label class="form-check-label" for="use_status">ใช้งาน</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+@section Scripts{
+    <script>
+        var check = 0;
+        function checkSwitch() {
+            if (document.getElementById("use_status").checked == true) {
+                check = 1;
+            }
+            else {
+                check = 0;
+            }
+            $("#use_status").val(check);
+        }
+
+        function submit_form() {
+            var forms = $('#form_create')[0];
+            var data = new FormData(forms);
+            $.ajax({
+                type: 'POST',
+                url: '/Resource_Facility/History_Add_Submit',
+                data: data,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'บันทึกข้อมูลเรียบร้อยแล้ว',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    window.location.href = "/Resource_Facility/History";
+                },
+                error: (e) => {
+                    displayError(e);
+                }
+            });
+        }
+    </script>
+}

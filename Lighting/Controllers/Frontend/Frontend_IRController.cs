@@ -586,14 +586,14 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> IR_calendar()
         {
             ViewBag.IR_InvestorCalendar = await db.IR_InvestorCalendar.Where(x => x.Status == 1).ToListAsync();
-            ViewBag.IR_InvestorCalendarDetail = await db.IR_InvestorCalendarDetail.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.IR_InvestorCalendarDetail = await db.IR_InvestorCalendarDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> GetIR_calendar(int? Year)
         {
-            var DB = await db.IR_InvestorCalendarDetail.Where(x => x.Status == 1).ToListAsync();
+            var DB = await db.IR_InvestorCalendarDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
             if (Year != null && Year != 0)
             {
 
@@ -609,7 +609,7 @@ namespace Lighting.Controllers.Frontend
             var DB = await db.IR_InvestorCalendarDetail.Where(x => x.Status == 1).Select(x => new
             {
                 Year = x.NewDate.Value.Year
-            }).ToListAsync();
+            }).OrderByDescending(o => o.Year).ToListAsync();
             return Ok(DB);
         }
 
@@ -1137,28 +1137,28 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> IR_news()
         {
             ViewBag.IR_Latest_News = await db.IR_Latest_News.Where(x => x.Status == 1).ToListAsync();
-            ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).OrderByDescending(o=>o.NewDate).ToListAsync();
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> GetIR_news()
         {
-            var DB = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).ToListAsync();
+            var DB = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
             return Json(new { obj = DB });
         }
 
         public async Task<IActionResult> IR_news_clipping()
         {
             ViewBag.IR_Print_Media = await db.IR_Print_Media.Where(x => x.Status == 1).ToListAsync();
-            ViewBag.IR_Print_MediaDetail = await db.IR_Print_MediaDetail.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.IR_Print_MediaDetail = await db.IR_Print_MediaDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> Get_IR_news_clipping(string? Start, string? End)
         {
-            var DB = await db.IR_Print_MediaDetail.Where(x => x.Status == 1).ToListAsync();
+            var DB = await db.IR_Print_MediaDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
             if (Start != null)
             {
                 DateTime CStart = Convert.ToDateTime(Start);
@@ -1352,14 +1352,14 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> IR_public_relation()
         {
             ViewBag.IR_MassMedia = await db.IR_MassMedia.Where(x => x.Status == 1).ToListAsync();
-            ViewBag.IR_MassMediaDetail = await db.IR_MassMediaDetail.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.IR_MassMediaDetail = await db.IR_MassMediaDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> Get_IR_public_relation()
         {
-            var DB = await db.IR_MassMediaDetail.Where(x => x.Status == 1).ToListAsync();
+            var DB = await db.IR_MassMediaDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
             return Json(new { obj = DB });
         }
 
@@ -1400,14 +1400,14 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> IR_set_announcement()
         {
             ViewBag.GetIR_Stock_Market = await db.IR_Stock_Market.Where(x => x.Status == 1).ToListAsync();
-            ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o=>o.NewDate).ToListAsync();
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> Get_IR_NewDetail()
         {
-            var DB = await db.IR_NewDetail.Where(x => x.Status == 1).ToListAsync();
+            var DB = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
             return Json(new { obj = DB });
         }
 
