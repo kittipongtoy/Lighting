@@ -1,9 +1,10 @@
 ﻿using Lighting.Areas.Identity.Data;
 using Lighting.Models;
+using MailKit.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
 using System.Globalization;
-using System.Net.Mail;
 
 namespace Lighting.Controllers.Frontend
 {
@@ -42,7 +43,7 @@ namespace Lighting.Controllers.Frontend
 
         public async Task<IActionResult> IR_index()
         {
-            ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x=>x.Status == 1).OrderByDescending(o=>o.NewDate).Take(5).ToListAsync();
+            ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).Take(5).ToListAsync();
             ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).Take(5).ToListAsync();
             return View();
         }
@@ -585,14 +586,14 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> IR_calendar()
         {
             ViewBag.IR_InvestorCalendar = await db.IR_InvestorCalendar.Where(x => x.Status == 1).ToListAsync();
-            ViewBag.IR_InvestorCalendarDetail = await db.IR_InvestorCalendarDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
+            ViewBag.IR_InvestorCalendarDetail = await db.IR_InvestorCalendarDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> GetIR_calendar(int? Year)
         {
-            var DB = await db.IR_InvestorCalendarDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
+            var DB = await db.IR_InvestorCalendarDetail.Where(x => x.Status == 1).ToListAsync();
             if (Year != null && Year != 0)
             {
 
@@ -608,7 +609,7 @@ namespace Lighting.Controllers.Frontend
             var DB = await db.IR_InvestorCalendarDetail.Where(x => x.Status == 1).Select(x => new
             {
                 Year = x.NewDate.Value.Year
-            }).OrderByDescending(o => o.Year).ToListAsync();
+            }).ToListAsync();
             return Ok(DB);
         }
 
@@ -717,6 +718,8 @@ namespace Lighting.Controllers.Frontend
                         created_at = items.created_at,
                         file_name = items.file_name,
                         file_type = items.file_type,
+                        file_name_ENG = items.file_name_ENG,
+                        image_name_ENG = items.image_name_ENG,
                         id = items.id,
                         image_name = items.image_name,
                         title_file_en = items.title_file_en,
@@ -874,13 +877,13 @@ namespace Lighting.Controllers.Frontend
         }
         public async Task<IActionResult> IR_dividend()
         {
-            var data = db.SH_dividen.ToList();
+            var data = db.SH_dividen.OrderByDescending(x => x.created_at).ToList();
             if (data.Count != 0)
             {
                 ViewBag.Header = data;
             }
 
-            var details = db.SH_dividen_Data.Where(x => x.use_status == 1).ToList();
+            var details = db.SH_dividen_Data.Where(x => x.use_status == 1).OrderByDescending(x => x.created_at).ToList();
             if (details.Count != 0)
             {
                 ViewBag.Body = details;
@@ -1136,28 +1139,28 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> IR_news()
         {
             ViewBag.IR_Latest_News = await db.IR_Latest_News.Where(x => x.Status == 1).ToListAsync();
-            ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).OrderByDescending(o=>o.NewDate).ToListAsync();
+            ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> GetIR_news()
         {
-            var DB = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
+            var DB = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).ToListAsync();
             return Json(new { obj = DB });
         }
 
         public async Task<IActionResult> IR_news_clipping()
         {
             ViewBag.IR_Print_Media = await db.IR_Print_Media.Where(x => x.Status == 1).ToListAsync();
-            ViewBag.IR_Print_MediaDetail = await db.IR_Print_MediaDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
+            ViewBag.IR_Print_MediaDetail = await db.IR_Print_MediaDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> Get_IR_news_clipping(string? Start, string? End)
         {
-            var DB = await db.IR_Print_MediaDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
+            var DB = await db.IR_Print_MediaDetail.Where(x => x.Status == 1).ToListAsync();
             if (Start != null)
             {
                 DateTime CStart = Convert.ToDateTime(Start);
@@ -1168,14 +1171,14 @@ namespace Lighting.Controllers.Frontend
                 DateTime CEnd = Convert.ToDateTime(End);
                 DB = DB.Where(x => x.NewDate.Value.Date <= CEnd).ToList();
             }
-            
+
             return Json(new { obj = DB });
         }
 
         public async Task<IActionResult> IR_news_detail(int? Id)
         {
             ViewBag.IR_Latest_News = await db.IR_Latest_News.Where(x => x.Status == 1).ToListAsync();
-            ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1 && x.Id == Id).OrderByDescending(o=>o.NewDate).ToListAsync();
+            ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1 && x.Id == Id).OrderByDescending(o => o.NewDate).ToListAsync();
             return View();
         }
         public IActionResult IR_organization()
@@ -1279,8 +1282,6 @@ namespace Lighting.Controllers.Frontend
         {
             try
             {
-                // Replace with your email and SMTP server details
-
                 if (mailReceive.typeOfPropose == "0" || mailReceive.name == null || mailReceive.name == ""
                     || mailReceive.phone == null || mailReceive.phone == "" || mailReceive.wantProposeTitle == null || mailReceive.wantProposeTitle == ""
                     || mailReceive.details == null || mailReceive.details == "")
@@ -1290,14 +1291,12 @@ namespace Lighting.Controllers.Frontend
                 {
                     await SendEmailAsyncCareer(mailReceive);
 
-                    //save record mail sent
-                    var getdata2 = db.type_of_agenda_Propose.Where(x => x.id == Convert.ToInt32(mailReceive.typeOfPropose)).FirstOrDefault();
-                    mailReceive.typeOfPropose = getdata2.titleTH + "(" + getdata2.titleENG + ")";
+                    var getdata = db.type_of_agenda_Propose.Where(x => x.id == Convert.ToInt32(mailReceive.typeOfPropose)).FirstOrDefault();
+                    mailReceive.typeOfPropose = getdata.titleTH + "(" + getdata.titleENG + ")";
                     mailReceive.created_at = DateTime.Now;
                     mailReceive.updated_at = DateTime.Now;
                     db.receive_mail_propose_agendas.Add(mailReceive);
                     db.SaveChanges();
-
                     return Json(new { status = "success", message = "งเมลล์สำเร็จ" });
                 }
             }
@@ -1306,115 +1305,63 @@ namespace Lighting.Controllers.Frontend
                 return Json(new { status = "error", message = "ส่งเมลล์ไม่สำเร็จ", inner = e.InnerException });
             }
         }
-        private async Task SendEmailAsyncCareer(receive_mail_propose_agendas mailRequest)
-        {  
-            try
+        public async Task SendEmailAsyncCareer(receive_mail_propose_agendas mailRequest)
+        {
+
+            //string Email = System.Configuration.ConfigurationManager.AppSettings["EmailSender"];
+            //string Password = System.Configuration.ConfigurationManager.AppSettings["EmailPassswordSender"];
+            //string Smtp = System.Configuration.ConfigurationManager.AppSettings["EmailSmtpSender"];
+            //string SmtpPort = System.Configuration.ConfigurationManager.AppSettings["EmailSmtpPort"];
+
+            string Email = "saimonnlaing1500@gmail.com";
+            string Password = "ffrpojpekljhdqnb";
+            string Smtp = "smtp.gmail.com";
+            string SmtpPort = "587";
+
+            var to_mail = db.receive_agenda_mail_accounts.FirstOrDefault().account;
+            var tomails = to_mail.Split(',', ' ');
+            var email = new MimeMessage();
+            email.Sender = MailboxAddress.Parse(Email);
+            foreach (var tomail in tomails)
             {
-                string senderEmail = "AIS-MCT1@mail.csloxinfo.com";
-                var to_mail = db.receive_agenda_mail_accounts.FirstOrDefault().account;
-                var tomails = to_mail.Split(',', ' ');
-                var getdata = db.type_of_agenda_Propose.Where(x => x.id == Convert.ToInt32(mailRequest.typeOfPropose)).FirstOrDefault();
-
-                using (SmtpClient smtpClient = new SmtpClient("mail.csloxinfo.com"))
-                {
-                    // Set the port if different from the default (25)
-
-                    smtpClient.Port = 25;
-                    smtpClient.EnableSsl = true;
-                    smtpClient.UseDefaultCredentials = true;
-
-                    // Set UseDefaultCredentials to true to use the current user's Windows credentials.
-                    //smtpClient.UseDefaultCredentials = true;
-
-                    // Create a new email message
-                    using (MailMessage mailMessage = new MailMessage())
-                    {
-                        mailMessage.From = new MailAddress(senderEmail);
-                        foreach (var tomail in tomails)
-                        {
-                            mailMessage.To.Add(tomail);
-                        }
-
-                        mailMessage.Subject = "ข้อมูลสำหรับผู้ถือหุ้น";
-                        var body = "เสนอวาระ/กรรมการ/คำถามล่วงหน้า" +
-                                  "ชื่อผู้ติดต่อ      : " + mailRequest.name + "<br/>" +
-                                  "เบอร์โทรศัพท์   : " + mailRequest.phone + "<br/>" +
-                                  "อีเมล         : " + mailRequest.email + "<br/>" +
-                                  "หัวข้อที่ต้องการเสนอ    : " + getdata.titleTH + "(" + getdata.titleENG + ")" + "<br/>" +
-                                  "ชื่อหัวข้อที่ต้องการเสนอ : " + mailRequest.wantProposeTitle + "<br/>" +
-                                  "รายละเอียด        : " + mailRequest.details;
-                        mailMessage.Body = body;
-                        mailMessage.IsBodyHtml = true;
-
-                        // Send the email
-                        await smtpClient.SendMailAsync(mailMessage);
-
-                    }
-                } 
-            }
-            catch (SmtpException e)
-            {
-                // Log the exception or handle it as per your requirement
-                // Return an error message to the user
-                throw new Exception("Failed to send email: " + e.Message);
-            }
-            catch (Exception e)
-            {
-                // Log the exception or handle it as per your requirement
-                // Return an error message to the user
-                throw new Exception("An unexpected error occurred while sending the email: " + e.Message);
+                email.To.Add(MailboxAddress.Parse(tomail));
             }
 
-            //string Email = "saimonnlaing1500@gmail.com";
-            //string Password = "ffrpojpekljhdqnb";
-            //string Smtp = "smtp.gmail.com";
-            //string SmtpPort = "587";
-             
-            //var to_mail = db.receive_agenda_mail_accounts.FirstOrDefault().account;
-            //var tomails = to_mail.Split(',', ' ');
-            //var email = new MimeMessage();
-            //email.Sender = MailboxAddress.Parse(Email);
-            //foreach (var tomail in tomails)
-            //{
-            //    email.To.Add(MailboxAddress.Parse(tomail));
-            //}
+            var getdata = db.type_of_agenda_Propose.Where(x => x.id == Convert.ToInt32(mailRequest.typeOfPropose)).FirstOrDefault();
+            var builder = new BodyBuilder();
+            string Data_head = "ข้อมูลสำหรับผู้ถือหุ้น";
+            string DataBody = "เสนอวาระ/กรรมการ/คำถามล่วงหน้า" +
+                              "ชื่อผู้ติดต่อ      : " + mailRequest.name + "<br/>" +
+                              "เบอร์โทรศัพท์   : " + mailRequest.phone + "<br/>" +
+                              "อีเมล         : " + mailRequest.email + "<br/>" +
+                              "หัวข้อที่ต้องการเสนอ    : " + getdata.titleTH + "(" + getdata.titleENG + ")" + "<br/>" +
+                              "ชื่อหัวข้อที่ต้องการเสนอ : " + mailRequest.wantProposeTitle + "<br/>" +
+                              "รายละเอียด        : " + mailRequest.details;
 
-            //var getdata = db.type_of_agenda_Propose.Where(x => x.id == Convert.ToInt32(mailRequest.typeOfPropose)).FirstOrDefault();
-            //var builder = new BodyBuilder();
-            //string Data_head = "ข้อมูลสำหรับผู้ถือหุ้น";
-            //string DataBody = "เสนอวาระ/กรรมการ/คำถามล่วงหน้า" +
-            //                  "ชื่อผู้ติดต่อ      : " + mailRequest.name + "<br/>" +
-            //                  "เบอร์โทรศัพท์   : " + mailRequest.phone + "<br/>" +
-            //                  "อีเมล         : " + mailRequest.email + "<br/>" +
-            //                  "หัวข้อที่ต้องการเสนอ    : " + getdata.titleTH + "(" + getdata.titleENG + ")" + "<br/>" +
-            //                  "ชื่อหัวข้อที่ต้องการเสนอ : "+mailRequest.wantProposeTitle + "<br/>" +
-            //                  "รายละเอียด        : " + mailRequest.details;
+            builder.HtmlBody = DataBody;
 
-            //builder.HtmlBody = DataBody;
-
-            //email.Body = builder.ToMessageBody();
-            //email.Subject = Data_head;
-            //using (var smtp = new MailKit.Net.Smtp.SmtpClient())
-            //{
-            //    await smtp.ConnectAsync(Smtp, int.Parse(SmtpPort), SecureSocketOptions.Auto);
-            //    await smtp.AuthenticateAsync(Email, Password);
-            //    await smtp.SendAsync(email);
-            //    await smtp.DisconnectAsync(true);
-            //}
-
+            email.Body = builder.ToMessageBody();
+            email.Subject = Data_head;
+            using (var smtp = new MailKit.Net.Smtp.SmtpClient())
+            {
+                await smtp.ConnectAsync(Smtp, int.Parse(SmtpPort), SecureSocketOptions.Auto);
+                await smtp.AuthenticateAsync(Email, Password);
+                await smtp.SendAsync(email);
+                await smtp.DisconnectAsync(true);
+            }
         }
 
         public async Task<IActionResult> IR_public_relation()
         {
             ViewBag.IR_MassMedia = await db.IR_MassMedia.Where(x => x.Status == 1).ToListAsync();
-            ViewBag.IR_MassMediaDetail = await db.IR_MassMediaDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
+            ViewBag.IR_MassMediaDetail = await db.IR_MassMediaDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> Get_IR_public_relation()
         {
-            var DB = await db.IR_MassMediaDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
+            var DB = await db.IR_MassMediaDetail.Where(x => x.Status == 1).ToListAsync();
             return Json(new { obj = DB });
         }
 
@@ -1455,21 +1402,21 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> IR_set_announcement()
         {
             ViewBag.GetIR_Stock_Market = await db.IR_Stock_Market.Where(x => x.Status == 1).ToListAsync();
-            ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o=>o.NewDate).ToListAsync();
+            ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> Get_IR_NewDetail()
         {
-            var DB = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
+            var DB = await db.IR_NewDetail.Where(x => x.Status == 1).ToListAsync();
             return Json(new { obj = DB });
         }
 
         public async Task<IActionResult> IR_set_announcement_detail(int? Id)
         {
             ViewBag.GetIR_Stock_Market = await db.IR_Stock_Market.Where(x => x.Status == 1).ToListAsync();
-            ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1 && x.Id == Id).OrderByDescending(o=>o.NewDate).ToListAsync();
+            ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1 && x.Id == Id).OrderByDescending(o => o.NewDate).ToListAsync();
             return View();
         }
         public IActionResult IR_shareholding()

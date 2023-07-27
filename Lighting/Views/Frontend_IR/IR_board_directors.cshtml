@@ -265,9 +265,10 @@
             },    // multiple data sent using ajax
             success: function (data) {
                 if (data.status == "success") {
-                    $("#image_name").removeAttr("src");
-                    $("#image_name").attr("src", "/upload_image/BoardOfDirectors/" + data.data.image_name);
+                    
                     if ($("#lang").val() == 'EN') {
+                        $("#image_name").removeAttr("src");
+                        $("#image_name").attr("src", "/upload_image/BoardOfDirectors/" + data.data.image_nameEN);
                         $("#position_company").html(data.data.position_company_en);
                         $("#nationality").html(data.data.nationality_en);
                         $("#study").html(data.data.study_en.replace(/\n/g, "<br>"));
@@ -296,6 +297,8 @@
                         }
 
                     } else {
+                        $("#image_name").removeAttr("src");
+                        $("#image_name").attr("src", "/upload_image/BoardOfDirectors/" + data.data.image_nameTH);
                         $("#position_company").html(data.data.position_company_th);
                         $("#nationality").html(data.data.nationality_th);
                         $("#study").html(data.data.study_th.replace(/\n/g, "<br>"));
