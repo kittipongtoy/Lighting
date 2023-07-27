@@ -1,1 +1,127 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Manage_SmartSolution";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+@model IEnumerable<Lighting.Models.InputFilterModels.SmartSolution.Output_Smart_SolutionVM>
+
+<div class="container" style="width:100%;">
+    <div style="display:flex;justify-content:space-between">
+        <div>
+            @*
+            <a href="@Url.Action("Manage_Category_Page","ManageSmartSolution")" class="btn btn-primary">
+               เพิ่มหมวดหมู่/Add category
+            </a>
+            *@
+        </div>
+        <div>
+            <a href="@Url.Action("Add_Page","ManageSmartSolution")" class="btn btn-primary">
+                เพิ่มสมาทโซลูชั่น/Add samrt solution
+            </a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <table class="table">
+            <thead>
+                <tr style="border-top:1px solid black;border-bottom:1px solid black">
+                    <th scope="col">#</th>
+                    <th scope="col">รูป/image</th>
+                    <th scope="col">หัวข้อ/title</th>
+                    <th scope="col" class="text-center">จัดการ/Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                @{
+                    int i = 1;
+                }
+                @foreach (var solution in Model)
+                {
+                    <tr id="@solution.Id">
+                        <th scope="row">@i</th>
+                        <td><img src="@solution.PreviewImg" style="width:200px;height:200px;" /> </td>
+                        <td>@solution.TitleName_TH/@solution.TitleName_EN</td>
+                        <td class="text-center" style="">
+                            <button type="button" class="btn btn-warning" onclick="editById(@solution.Id)">
+                                <i class="bi bi-pencil-square"></i>แก้ไข/edit
+                            </button>
+                            <button type="button" class="btn btn-danger" onclick="deleteRowById(@solution.Id)">
+                                <i class="bi bi-trash-fill"></i>ลบ/delete
+                            </button>
+                        </td>
+                        @{
+                            i++;
+                        }
+                    </tr>
+                }
+                
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+@section Scripts{
+    <script>
+
+
+
+        function editById(id) {
+            window.location.href = "/ManageSmartSolution/Edit_Page?id=" + id;
+        }
+
+        function deleteRowById(id) {
+
+            Swal.fire({
+                icon: 'warning',
+                title: "คุณแน่ใจว่าต้องการลบ?",
+                text: "",
+                showConfirmButton: true,
+            }).then((confirm) => {
+                if (confirm.isConfirmed) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/ManageSmartSolution/DeleteById?id=' + id,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        beforeSend: function () {
+                            Swal.fire('Please wait')
+                            Swal.showLoading()
+                        },
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then(() => {
+
+                                    $("#" + id).remove();
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+                } else {
+
+                }
+            });
+        }
+
+    </script>
+}

@@ -15,7 +15,11 @@ namespace Lighting.Areas.Identity.Data
         public LightingContext()
         {
         }
-
+        #region smart solution
+        //public DbSet<Smart_Solution_Category> Smart_Solution_Categorys { get; set; }
+        public DbSet<Smart_Solution_Link> Smart_Solution_Links { get; set; }
+        public DbSet<Smart_Solution> Smart_Solutions { get; set; }
+        #endregion
         #region product
         public DbSet<Product> Products { get; set; }
         public DbSet<Product_Model> Product_Models { get; set; }
@@ -150,8 +154,26 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<IR_InvestorCalendarDetail> IR_InvestorCalendarDetail { get; set; }
         public DbSet<IR_Cancel_Email> IR_Cancel_Email { get; set; }
         public DbSet<IR_Stock_Chart> IR_Stock_Chart { get; set; }
-        public DbSet<IR_Stock_Link> IR_Stock_Link { get; set; }
+        public DbSet<IR_Stock_ChartDetail> IR_Stock_ChartDetails { get; set; }
+        public DbSet<IR_Stock_LinkDetail> IR_Stock_LinkDetail { get; set; }
         public DbSet<IR_Stock_Quote> IR_Stock_Quote { get; set; }
+        public DbSet<IR_Stock_QuoteDetail> IR_Stock_QuoteDetail { get; set; }
+
+
+        public DbSet<IR_Banner> IR_Banner { get; set; }
+        public DbSet<Awards> Awards { get; set; }
+        public DbSet<AwardsDetail> AwardsDetail { get; set; }
+        public DbSet<History> History { get; set; }
+        public DbSet<HistoryDataDetail> HistoryDataDetail { get; set; }
+        public DbSet<HistoryDetail> HistoryDetail { get; set; }
+        public DbSet<IR_Button_Below_Banner> IR_Button_Below_Banner { get; set; }
+        public DbSet<IR_Investor_Relations> IR_Investor_Relations { get; set; }
+        public DbSet<IR_Investor_RelationsDetail> IR_Investor_RelationsDetail { get; set; }
+        public DbSet<IR_LIGHTING_EQUIPMENT> IR_LIGHTING_EQUIPMENT { get; set; }
+        public DbSet<IR_Report> IR_Report { get; set; }
+        public DbSet<Organization_Chart> Organization_Chart { get; set; }
+        public DbSet<Organization_ChartDetail> Organization_ChartDetail { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

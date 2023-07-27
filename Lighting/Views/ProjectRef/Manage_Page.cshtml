@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Manage Project";
+    ViewData["Title"] = "Manage_Project_Page";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
 @model IEnumerable<Lighting.Models.InputFilterModels.ProjectRef.Output_ProjectRef_PreviewVM>
@@ -28,10 +28,13 @@
                 </tr>
             </thead>
             <tbody>
+                @{
+                    int i = 1;
+                }
                 @foreach (var project in Model)
                 {
                     <tr id="@project.Id">
-                        <th scope="row">@project.Id</th>
+                        <th scope="row">@i</th>
                         <td><img src="@project.PreView_Image" style="width:100px;height:100px;"/> </td>
                         <td>@project.Title_TH / @project.Title_EN</td>
                         <td class="text-center">
@@ -42,6 +45,9 @@
                                 <i class="bi bi-trash-fill"></i>ลบ/delete
                             </button>
                         </td>
+                        @{
+                            i++;
+                        }
                     </tr>
                 }
             </tbody>

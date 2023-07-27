@@ -87,12 +87,13 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPost]
-        public async Task<IActionResult> Analyst_Add_Submit(RequestDTO.IR_AnalystRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public async Task<IActionResult> Analyst_Add_Submit(RequestDTO.IR_AnalystRequest model)
         {
             try
             {
                 IR_Analyst iR_Analyst = new IR_Analyst();
-                foreach (var formFile in uploaded_fileTH)
+                foreach (var formFile in model.uploaded_fileTH)
                 {
                     if (formFile.Length > 0)
                     {
@@ -107,7 +108,7 @@ namespace Lighting.Controllers.Backend
                     }
                 }
 
-                foreach (var formFile in uploaded_fileEN)
+                foreach (var formFile in model.uploaded_fileEN)
                 {
                     if (formFile.Length > 0)
                     {
@@ -161,62 +162,70 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPut]
-        public async Task<IActionResult> Analyst_Edit_Submit(RequestDTO.IR_AnalystRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public async Task<IActionResult> Analyst_Edit_Submit(RequestDTO.IR_AnalystRequest model)
         {
             try
             {
                 var iR_Analyst = await _context.IR_Analysts.FirstOrDefaultAsync(x => x.Id == model.Id);
-                foreach (var formFile in uploaded_fileTH)
+                if (iR_Analyst != null)
                 {
-                    if (formFile.Length > 0)
+                    foreach (var formFile in model.uploaded_fileTH)
                     {
-                        if (iR_Analyst.FileName_TH is not null)
+                        if (formFile.Length > 0)
                         {
-                            var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + iR_Analyst.FileName_TH);
-                            if (System.IO.File.Exists(old_filePath) == true)
+                            if (iR_Analyst?.FileName_TH is not null)
                             {
-                                System.IO.File.Delete(old_filePath);
+                                var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + iR_Analyst.FileName_TH);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
+                            }
+
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            iR_Analyst.FileName_TH = datestr + extension;
+                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
                             }
                         }
-
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        iR_Analyst.FileName_TH = datestr + extension;
-                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
-                        {
-                            formFile.CopyTo(stream);
-                        }
                     }
-                }
 
-                foreach (var formFile in uploaded_fileEN)
-                {
-                    if (formFile.Length > 0)
+                    foreach (var formFile in model.uploaded_fileEN)
                     {
-                        if (iR_Analyst.FileName_EN is not null)
+                        if (formFile.Length > 0)
                         {
-                            var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + iR_Analyst.FileName_EN);
-                            if (System.IO.File.Exists(old_filePath) == true)
+                            if (iR_Analyst?.FileName_EN is not null)
                             {
-                                System.IO.File.Delete(old_filePath);
+                                var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + iR_Analyst.FileName_EN);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
+                            }
+
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            iR_Analyst.FileName_EN = datestr + extension;
+                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
                             }
                         }
-
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        iR_Analyst.FileName_EN = datestr + extension;
-                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
-                        {
-                            formFile.CopyTo(stream);
-                        }
                     }
+                    iR_Analyst.Status = model.Status;
+                    iR_Analyst.updated_at = DateTime.Now;
+                    _context.Entry(iR_Analyst).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
                 }
-                iR_Analyst.Status = model.Status;
-                iR_Analyst.updated_at = DateTime.Now;
-                _context.Entry(iR_Analyst).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
+                else
+                {
+                    return new JsonResult(new { status = "error", messageArray = "error" });
+                }
                 return new JsonResult(new { status = "success", messageArray = "success" });
             }
             catch (Exception error)
@@ -260,6 +269,33 @@ namespace Lighting.Controllers.Backend
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Analyst_Change(int? Id)
+        {
+            try
+            {
+                var DB = _context.IR_Analysts.FirstOrDefault(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    if (DB.Status == 1)
+                    {
+                        DB.Status = 0;
+                    }
+                    else
+                    {
+                        DB.Status = 1;
+                    }
+                    _context.Entry(DB).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
         public IActionResult Analyst_Chapter()
 		{
 			return View();
@@ -289,7 +325,8 @@ namespace Lighting.Controllers.Backend
                         Index = runitem,
                         Id = item.Id,
                         FileName_TH = item.FileName_TH,
-                        FileName_EN = item.FileName_EN
+                        FileName_EN = item.FileName_EN,
+                        Status = item.Status,
                     });
                     runitem++;
                 }
@@ -324,12 +361,13 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPost]
-        public async Task<IActionResult> Analyst_Chapter_Add_Submit(RequestDTO.IR_Analyst_Chapter model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public async Task<IActionResult> Analyst_Chapter_Add_Submit(RequestDTO.IR_Analyst_ChapterRequest model)
         {
             try
             {
                 IR_Analyst_Chapter iR_Analyst_Chapter = new IR_Analyst_Chapter();
-                foreach (var formFile in uploaded_fileTH)
+                foreach (var formFile in model.uploaded_fileTH)
                 {
                     if (formFile.Length > 0)
                     {
@@ -344,7 +382,7 @@ namespace Lighting.Controllers.Backend
                     }
                 }
 
-                foreach (var formFile in uploaded_fileEN)
+                foreach (var formFile in model.uploaded_fileEN)
                 {
                     if (formFile.Length > 0)
                     {
@@ -398,12 +436,13 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPut]
-        public async Task<IActionResult> Analyst_ChapterEdit_Submit(RequestDTO.IR_Analyst_Chapter model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public async Task<IActionResult> Analyst_ChapterEdit_Submit(RequestDTO.IR_Analyst_ChapterRequest model)
         {
             try
             {
                 var iR_Analyst_Chapter = _context.IR_Analyst_Chapter.FirstOrDefault(x => x.Id == model.Id);
-                foreach (var formFile in uploaded_fileTH)
+                foreach (var formFile in model.uploaded_fileTH)
                 {
                     if (formFile.Length > 0)
                     {
@@ -424,7 +463,7 @@ namespace Lighting.Controllers.Backend
                     }
                 }
 
-                foreach (var formFile in uploaded_fileEN)
+                foreach (var formFile in model.uploaded_fileEN)
                 {
                     if (formFile.Length > 0)
                     {
@@ -447,7 +486,7 @@ namespace Lighting.Controllers.Backend
                 iR_Analyst_Chapter.Status = model.Status;
                 iR_Analyst_Chapter.created_at = DateTime.Now;
                 iR_Analyst_Chapter.updated_at = DateTime.Now;
-                _context.IR_Analyst_Chapter.Add(iR_Analyst_Chapter);
+                _context.Entry(iR_Analyst_Chapter).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
                 return new JsonResult(new { status = "success", messageArray = "success" });
             }
@@ -491,5 +530,33 @@ namespace Lighting.Controllers.Backend
                 throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Analyst_ChapterChange(int? Id)
+        {
+            try
+            {
+                var DB = _context.IR_Analyst_Chapter.FirstOrDefault(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    if (DB.Status == 1)
+                    {
+                        DB.Status = 0;
+                    }
+                    else
+                    {
+                        DB.Status = 1;
+                    }
+                    _context.Entry(DB).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
     }
 }

@@ -1,1 +1,415 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Manage News";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+@model Lighting.Areas.Identity.Data.Smart_Solution
+
+<style>
+    .img-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .link-container {
+        margin: 2rem 0;
+        background-color: rgba(0,0,0,0.2);
+        padding: 0.3rem;
+        min-height: 0px;
+    }
+
+    .input-link {
+        height: 5rem;
+        margin: 1rem;
+        padding: inherit.5rem;
+        display: grid;
+        grid-template-columns: 7rem auto 10rem;
+        gap: 1rem;
+        border-bottom: 1px solid black;
+        box-sizing: border-box;
+        & > span
+
+    {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        word-wrap: break-word;
+    }
+
+    }
+
+    .input-popup {
+        z-index: 10000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        width: 100dvw;
+        height: 100vh;
+        height: 100dvh;
+        background: rgba(0,0,0,0.4);
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input-box {
+        width: 80%;
+        height: auto;
+        padding: 3rem;
+        display: grid;
+        grid-template-rows: 3rem auto auto 3rem 3rem;
+        gap: 3rem;
+        background-color: white;
+        border-radius: 10px;
+        & > h1
+
+    {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    }
+</style>
+<div class="container" style="margin-bottom:3rem;">
+    <div class="row">
+        <div class="col-12">
+            @*preview file img*@
+            <div class="img-container">
+                <img src="~/@Model.DetailImg" id="content_preiew_img" style="width:30vh;height:30vh;" />
+            </div>
+            <div class="form-group mt-2 p-1">
+                <label class="h4">เลือกไฟล์ภาพพรีวิวคอนเทนต์</label>
+                <input type="file" class="form-control" id="content_file_img">
+            </div>
+            @*title*@
+            <div class="form-group mt-2 p-1">
+                <label class="h4">ชื่อหัวข้อ (ภาษาไทย)</label>
+                <input type="text" class="form-control" id="title_th" placeholder="ชื่อหัวข้อ  (ภาษาไทย)" value="@Model.TitleName_TH">
+            </div>
+            <div class="form-group mt-2 p-1">
+                <label class="h4">Title (English)</label>
+                <input type="text" class="form-control" id="title_en" placeholder="ชื่อหัวข้อ (English)" value="@Model.TitleName_EN">
+            </div>
+            @*file img*@
+            <div class="img-container">
+                <img src="~/@Model.PreviewImg" id="preiew_img" style="width:30vh;height:30vh;"  />
+            </div>
+            <div class="form-group mt-2 p-1">
+                <label class="h4">เลือกไฟล์ภาพหน้าคอนเทนต์</label>
+                <input type="file" class="form-control" id="file_img">
+            </div>
+            @*explan*@
+            <div class="form-group mt-3 p-1">
+                <label class="h4">คำอธิบายใต้ภาพ (ภาษาไทย)</label>
+                <textarea id="expanation_th">@Model.Explanation_TH</textarea>
+            </div>
+            <div class="form-group mt-3 p-1">
+                <label class="h4">Explanation (English)</label>
+                <textarea id="expanation_en">@Model.Explanation_EN</textarea>
+            </div>
+            @*link for old*@
+            <div  class="link-container">
+                @if(Model.Links != null)
+                {
+                    foreach (var link in Model.Links)
+                    {
+                        <div id='input_list_@link.Id' class='input-link'>
+                            <div class='img-container'>
+                                <img src="~/@link.Path" style='width:100%;height:100%;' />
+                            </div>
+                            <span>@link.Link</span>
+                            <button class="btn btn-danger" onClick="deleteLinkById(@link.Id)">ลบ/delete</button>
+                        </div>
+                    }
+                }
+            </div>
+            @*for add new*@
+            <div id="link_list" class="link-container" >
+            </div>
+            <center><button class="btn bg-success" onclick="openPopup()">เพิ่มลิ้ง/add link</button></center>
+            @*content1*@
+            <div class="form-group mt-3 p-1">
+                <label class="h4">คอนเทนต์ (ภาษาไทย)</label>
+                <textarea id="content_th">@Model.Content_TH</textarea>
+            </div>
+            <div class="form-group mt-3 p-1">
+                <label class="h4">Content (English)</label>
+                <textarea id="content_en">@Model.Content_EN</textarea>
+            </div>
+            <div style="margin:1rem;display:flex;justify-content:space-between;">
+                <button class="btn bg-success" onclick="editSolution(@Model.Id)">บันทึกข้อมูล/save</button>
+                <a href="@Url.Action("Manage_Page","ManageSmartSolution")" class="btn bg-info">กลับ/back</a>
+                </div>
+        </div>
+    </div>
+</div>
+
+<div class="input-popup" style="display:none;" id="sub_img_popup">
+    <div class="input-box">
+        <h1>เลือกรูปและไฟล์</h1>
+        <div style="display:flex;justify-content:center;align-items:center;flex-direction:column;">
+            <img id="preview_subImg" style="height:40vh;width:40vh;" />
+        </div>
+        <input type="file" id="file_img_preview" />
+        <input type="text" id="txt_link" />
+        <div style="display:flex;justify-content:space-between;">
+            <button class="btn bg-success" onclick="addImageLink()">ตกลง</button>
+            <button class="btn btn-danger" onclick="openPopup()">ยกเลิก</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        var explan_en;
+        var explan_th;
+        var content_en;
+        var content_th;
+
+        ClassicEditor
+            .create(document.querySelector('#expanation_th'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                explan_th = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#expanation_en'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                explan_en = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        ClassicEditor
+            .create(document.querySelector('#content_th'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                content_th = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#content_en'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                content_en = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        var preview_image_file, preview_subimg_file, content_preview_file;
+        var link_img = [], add_link_number = 0; //[{file,link,id}]
+
+        async function addInputFile(img, link, id) {
+            let img_b64 = await blobToBase64DataURL(img);
+            return (`
+                    <div id='input_list' class='input-link'>
+                        <div class= 'img-container' >
+                            <img  src="${img_b64}"  style='width:100%;height:100%;' />
+                        </div>
+                        <span>${link}</span>
+                        <button class="btn btn-danger"  onClick="deleteLink(${id})">ลบ/delete</button>
+                    </div>`);
+        }
+
+        $(document).ready(function () {
+
+            $("#content_file_img").change(async function (e) {
+                if (e.target.files.length === 1) {
+                    content_preview_file = e.target.files[0];
+                    $('#content_preiew_img').attr('src', await blobToBase64DataURL(content_preview_file)).css("display", "block");
+                }
+            });
+
+            $("#file_img_preview").change(async function (e) {
+                if (e.target.files.length === 1) {
+                    preview_subimg_file = e.target.files[0];
+                    $('#preview_subImg').attr('src', await blobToBase64DataURL(preview_subimg_file)).css("display", "block");
+                }
+            });
+
+            $('#file_img').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    preview_image_file = e.target.files[0];
+                    $('#preiew_img').attr('src', await blobToBase64DataURL(preview_image_file)).css("display", "block");
+                }
+            });
+        });
+
+        function openPopup() {
+            if ($("#sub_img_popup").css("display") == "flex") {
+                $("#sub_img_popup").css("display", "none");
+            } else {
+                $("#sub_img_popup").css("display", "flex");
+            }
+        }
+
+        function deleteLinkById(id){
+
+            Swal.fire({
+                title: 'คุณแน่ใจแล้วหรือ',
+                text: "ว่าต้องการจะลบลิ้ง",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ใช่ลบ'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/ManageSmartSolution/DeleteLinkById?id=' + id,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        beforeSend: function () {
+                            Swal.fire('Please wait')
+                            Swal.showLoading()
+                        },
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then(() => {
+                                    $(`#input_list_${id}`).remove();
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+                }
+                
+            });
+
+
+        }
+
+        async function deleteLink(id) {
+            link_img = link_img.filter(x => x.id !== id);
+            let html_link = "";
+            for (let i = 0; i < link_img.length; i++) {
+                html_link += await addInputFile(link_img[i].file, link_img[i].link, link_img[i].id)
+            }
+            $("#link_list").html(html_link);
+        }
+
+        async function addImageLink() {
+            let link = $("#txt_link").val();
+            if (preview_subimg_file != undefined && link != "") {
+                link_img.push({ file: preview_subimg_file, link: link, id: add_link_number });
+
+                let html_link = "";
+                for (let i = 0; i < link_img.length; i++) {
+                    html_link += await addInputFile(link_img[i].file, link_img[i].link, link_img[i].id)
+                }
+                add_link_number++;
+                $("#link_list").html(html_link);
+
+                $("#txt_link").val('');
+                preview_subimg_file = undefined;
+                openPopup();
+            }
+        }
+
+        function editSolution(id) {
+
+            let form = new FormData();
+
+            if (preview_image_file != undefined) {
+                form.append("PreviewImg", preview_image_file);
+            }
+
+            if (content_preview_file != undefined) {
+                form.append("DetailImg", content_preview_file);
+            }
+
+            form.append("TitleName_TH", $("#title_th").val());
+            form.append("TitleName_EN", $("#title_en").val());
+            form.append("Explanation_TH", explan_th.getData());
+            form.append("Explanation_EN", explan_en.getData());
+            form.append("Content_TH", content_th.getData());
+            form.append("Content_EN", content_en.getData());
+
+            for (let i = 0; i < link_img.length; i++) {
+                form.append("Links", link_img[i].link);
+                form.append("LinkFiles", link_img[i].file);
+            }
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/ManageSmartSolution/Edit?id='+id,
+                data: form,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = "/ManageSmartSolution/Manage_Page";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        const blobToBase64DataURL = blob => new Promise(
+            resolvePromise => {
+                const reader = new FileReader();
+                reader.onload = () => resolvePromise(reader.result);
+                reader.readAsDataURL(blob);
+            }
+        );
+    </script>
+}

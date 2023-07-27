@@ -2,7 +2,22 @@
 {
     public class ResponseDTO
     {
-        public class InvestorCalendarDetailRequest
+		public class HistoryDetailResponse
+		{
+			public int? Index { get; set; }
+			public int? Id { get; set; }
+			public string? Title_TH { get; set; }
+			public string? Title_EN { get; set; }
+			public string? ImageTH { get; set; }
+			public string? ImageEN { get; set; }
+			public string? Detail_TH { get; set; }
+			public string? Detail_EN { get; set; }
+			public string? FileCompany_TH { get; set; }
+			public string? FileCompany_EN { get; set; }
+			public int? Status { get; set; }
+		}
+
+		public class HistoryResponse
         {
             public int? Index { get; set; }
             public int? Id { get; set; }
@@ -10,6 +25,69 @@
             public string? Title_EN { get; set; }
             public string? SubTitle_TH { get; set; }
             public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_QuoteResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_QuoteDetailResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? STOCK_PRICE_TH { get; set; }
+            public string? STOCK_PRICE_EN { get; set; }
+            public string? Link_STOCK_PRICE { get; set; }
+            public string? SET_INDEX_TH { get; set; }
+            public string? SET_INDEX_EN { get; set; }
+            public string? Link_SET_INDEX_TH { get; set; }
+            public string? Link_SET_INDEX_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_ChartResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_ChartDetailResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Link_IR_Stock_Chart { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_LinkResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_LinkDetailResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Link_IR_Stock_Link { get; set; }
             public int? Status { get; set; }
         }
 
@@ -123,6 +201,7 @@
             public int? Id { get; set; }
             public string? FileName_TH { get; set; }
             public string? FileName_EN { get; set; }
+            public int? Status { get; set; }
         }
 
         public class IR_AnalystResponse
@@ -137,8 +216,8 @@
         public class AuthorizationResponse
 		{
             public int? Index { get; set; }
-            public string Id { get; set; }
-			public string EmployeeCode { get; set; } = string.Empty;
+            public string? Id { get; set; }
+			public string? EmployeeCode { get; set; }
 			public int EmployeeCodeInt { get; set; } = 0;
 			public string? Firstname { get; set; }
 			public string? Lastname { get; set; }

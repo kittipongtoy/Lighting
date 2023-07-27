@@ -2,6 +2,91 @@
 {
     public class RequestDTO
     {
+        public class HistoryDetailRequest
+        {
+			public int? Id { get; set; }
+			public string? Title_TH { get; set; }
+			public string? Title_EN { get; set; }
+			public string? ImageTH { get; set; }
+			public string? ImageEN { get; set; }
+			public string? Detail_TH { get; set; }
+			public string? Detail_EN { get; set; }
+			public string? FileCompany_TH { get; set; }
+			public string? FileCompany_EN { get; set; }
+			public int? Status { get; set; }
+			public List<IFormFile> uploaded_fileTH { get; set; }
+			public List<IFormFile> uploaded_fileEN { get; set; }
+			public List<IFormFile> uploaded_ImageTH { get; set; }
+			public List<IFormFile> uploaded_ImageEN { get; set; }
+		}
+
+		public class HistoryRequest
+        {
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_ChartRequest
+        {
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_ChartDetailRequest
+        {
+            public int? Id { get; set; }
+            public string? Link_IR_Stock_Chart { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_LinkRequest
+        {
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_LinkDetailRequest
+        {
+            public int? Id { get; set; }
+            public string? Link_IR_Stock_Link { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_QuoteRequest
+        {
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Stock_QuoteDetailRequest
+        {
+            public int? Id { get; set; }
+            public string? STOCK_PRICE_TH { get; set; }
+            public string? STOCK_PRICE_EN { get; set; }
+            public string? Link_STOCK_PRICE { get; set; }
+            public string? SET_INDEX_TH { get; set; }
+            public string? SET_INDEX_EN { get; set; }
+            public string? Link_SET_INDEX_TH { get; set; }
+            public string? Link_SET_INDEX_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
         public class AuthorizationRequest
         { 
             public string? Id { get; set; }
@@ -12,12 +97,14 @@
             public string? Email { get; set; }
         }
 
-        public class IR_Analyst_Chapter
+        public class IR_Analyst_ChapterRequest
         {
             public int Id { get; set; }
             public string? FileName_TH { get; set; }
             public string? FileName_EN { get; set; }
             public int? Status { get; set; }
+            public List<IFormFile> uploaded_fileTH { get; set; }
+            public List<IFormFile> uploaded_fileEN { get; set; }
         }
 
         public class IR_AnalystRequest
@@ -26,6 +113,8 @@
             public string? FileName_TH { get; set; }
             public string? FileName_EN { get; set; }
             public int? Status { get; set; }
+            public List<IFormFile> uploaded_fileTH { get; set; }
+            public List<IFormFile> uploaded_fileEN { get; set; }
         }
 
         public class IR_ComplaintsRequest

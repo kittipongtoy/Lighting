@@ -9,12 +9,16 @@
   <ItemGroup>
     <Compile Remove="bin\**" />
     <Compile Remove="wwwroot\assets\summernote0818\**" />
+    <Compile Remove="wwwroot\upload_image\Philosophy\**" />
     <Content Remove="bin\**" />
     <Content Remove="wwwroot\assets\summernote0818\**" />
+    <Content Remove="wwwroot\upload_image\Philosophy\**" />
     <EmbeddedResource Remove="bin\**" />
     <EmbeddedResource Remove="wwwroot\assets\summernote0818\**" />
+    <EmbeddedResource Remove="wwwroot\upload_image\Philosophy\**" />
     <None Remove="bin\**" />
     <None Remove="wwwroot\assets\summernote0818\**" />
+    <None Remove="wwwroot\upload_image\Philosophy\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -283,7 +287,6 @@
     <None Include="Views\Investor_Relations\Companyprofile_create.cshtml" />
     <None Include="Views\Investor_Relations\Companyprofile_edit.cshtml" />
     <None Include="Views\Investor_Relations\Companyprofile_index.cshtml" />
-    <None Include="Views\Investor_Relations\InvestorRelations_index.cshtml" />
     <None Include="Views\Investor_Relations\Message_Chairman_create.cshtml" />
     <None Include="Views\Investor_Relations\Message_Chairman_edit.cshtml" />
     <None Include="Views\Investor_Relations\Message_Chairman_index.cshtml" />
@@ -436,10 +439,12 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\upload_file\Author_board_director\" />
     <Folder Include="wwwroot\upload_file\CorporateGovernanceFile\" />
     <Folder Include="wwwroot\upload_file\BusinessEthics\" />
     <Folder Include="wwwroot\upload_file\CRSpolicy\" />
     <Folder Include="wwwroot\upload_file\AntiFraud\" />
+    <Folder Include="wwwroot\upload_file\Download\" />
     <Folder Include="wwwroot\upload_file\Gift_entertainment\" />
     <Folder Include="wwwroot\upload_file\Channel_clue\" />
     <Folder Include="wwwroot\upload_file\Author_chairman\" />
@@ -450,10 +455,17 @@
     <Folder Include="wwwroot\upload_file\Author_secretary\" />
     <Folder Include="wwwroot\upload_file\IR_NewRoom\" />
     <Folder Include="wwwroot\upload_file\IR_Analyst\" />
+    <Folder Include="wwwroot\upload_file\Resource_Facility\" />
     <Folder Include="wwwroot\upload_file\SH_importantFinancial\" />
     <Folder Include="wwwroot\upload_file\SH_IR_download_financialStatements\" />
     <Folder Include="wwwroot\upload_file\SH_annualReport\" />
+    <Folder Include="wwwroot\upload_file\SH_IR_Form\" />
+    <Folder Include="wwwroot\upload_file\SH_IR_PresentationWebcast\" />
+    <Folder Include="wwwroot\upload_file\SH_IR_Presentation\" />
+    <Folder Include="wwwroot\upload_file\SH_IR_propose_agenda\" />
+    <Folder Include="wwwroot\upload_file\SH_IR_ReportMeeting\" />
     <Folder Include="wwwroot\upload_file\SustainabilityReport\" />
+    <Folder Include="wwwroot\upload_image\Author_board_director\" />
     <Folder Include="wwwroot\upload_image\Chairman\" />
     <Folder Include="wwwroot\upload_image\CompanyOverview\" />
     <Folder Include="wwwroot\upload_image\BoardOfDirectors\" />
@@ -477,6 +489,16 @@
     <Folder Include="wwwroot\upload_image\Image_Category\" />
     <Folder Include="wwwroot\upload_image\IR_Analyst\" />
     <Folder Include="wwwroot\upload_image\RF_Solution_Centers\" />
+    <Folder Include="wwwroot\upload_image\RF_Solid_States\" />
+    <Folder Include="wwwroot\upload_image\RF_Oversea_Offices\" />
+    <Folder Include="wwwroot\upload_image\RF_Warehouse_Logistics\" />
+    <Folder Include="wwwroot\upload_image\RF_Manufacturing\" />
+    <Folder Include="wwwroot\upload_image\RF_Assembly_Services\" />
+    <Folder Include="wwwroot\upload_image\Resource_Facility\" />
+    <Folder Include="wwwroot\upload_image\SH_importantFinancial\" />
+    <Folder Include="wwwroot\upload_image\Smart_Solution_Link\" />
+    <Folder Include="wwwroot\upload_image\Smart_Solution\" />
+    <Folder Include="wwwroot\upload_image\RF_Solution_Centers\" />
     <Folder Include="wwwroot\upload_image\RF_Assembly_Services\" />
     <Folder Include="wwwroot\upload_image\RF_Solid_States\" />
     <Folder Include="wwwroot\upload_image\RF_Oversea_Offices\" />
@@ -491,7 +513,6 @@
     <Folder Include="wwwroot\upload_image\SH_annualReport\" />
     <Folder Include="wwwroot\upload_image\SH_GeneralMeeting\" />
     <Folder Include="wwwroot\upload_image\OrganizationalStructure\" />
-    <Folder Include="wwwroot\upload_image\Philosophy\" />
   </ItemGroup>
 
   <ItemGroup>

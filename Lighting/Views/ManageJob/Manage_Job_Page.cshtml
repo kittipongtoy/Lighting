@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Manage News";
+    ViewData["Title"] = "Manage_Job_Page";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
 @model IEnumerable<Lighting.Models.InputFilterModels.ApplyJob.Output_ApplyJobVM>
@@ -31,10 +31,13 @@
                 </tr>
             </thead>
             <tbody>
+                @{
+                    int i = 1;
+                }
                 @foreach (var job in Model)
                 {
                     <tr id="@job.Id">
-                        <th scope="row">@job.Id</th>
+                        <th scope="row">@i</th>
                         <td>@job.PositionName_TH/@job.PositionName_EN</td>
                         <td>@job.WorkPlace_TH/@job.WorkPlace_EN</td>
                         <td>@job.Date_TH &nbsp;/&nbsp;&nbsp; @job.Date_EN</td>
@@ -46,6 +49,9 @@
                                 <i class="bi bi-trash-fill"></i>ลบ/delete
                             </button>
                         </td>
+                        @{
+                            i++;
+                        }
                     </tr>
                 }
             </tbody>

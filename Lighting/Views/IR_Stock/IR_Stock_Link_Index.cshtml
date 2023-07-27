@@ -2,7 +2,7 @@
     ViewData["Title"] = "IR_Stock_Link_Index";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+<div class="content d-flex flex-column flex-column-fluid">
     <div class="toolbar" id="kt_toolbar">
         <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
             <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center me-3 flex-wrap mb-5 mb-lg-0 lh-1">
@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <div class="post d-flex flex-column-fluid" id="kt_post">
+    <div class="post d-flex flex-column-fluid">
         <div id="kt_content_container" class="container-xxl">
             <div class="card">
                 <div class="card-header border-0 pt-6">
@@ -41,28 +41,276 @@
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                            <a type="button" class="btn btn-primary" href="@Url.Action("Author_audit_committee_create","Corporate_Governance")">เพิ่ม</a>
+                            <a type="button" class="btn btn-primary" href="@Url.Action("IR_Stock_LinkDetail_Add","IR_Stock")">เพิ่ม</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="IR_Stock_LinkDetail">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th>#</th>
-                                <th class="min-w-125px">หัวข้อ TH</th>
-                                <th class="min-w-125px">หัวข้อ EN</th>
+                                <th class="min-w-125px">Link ราคาย้อนหลัง</th>
                                 <th class="min-w-125px">สถานะการใช้งาน</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
                         </thead>
-                        <tbody class="fw-semibold text-gray-600">
-                        </tbody>
                     </table>
-                    <div class="mb-10">
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@section Scripts{
+    <script>
+        $(() => {
+            var oTable = $("#IR_Stock_Link").DataTable({
+                processing: true,
+                serverSide: true,
+                searching: false,
+                responsive: true,
+                oLanguage: {
+                    "sEmptyTable": "ไม่มีข้อมูล",
+                },
+                ajax: {
+                    type: "POST",
+                    url: '/IR_Stock/Table_IR_Stock_Link',
+                },
+                columns: [
+                    { 'data': 'index', name: 'index', className: 'text-center' },
+                    { 'data': 'title_TH', name: 'title_TH', className: 'text-center' },
+                    {
+                        "name": "status", "data": "status", "render": function (data, type, row) {
+                            if (row.status == 1) {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            } else {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            }
+                        }
+                    },
+                    {
+                        "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
+                            var text = '<button type="button" class="btn btn-warning" onclick="edit_item(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
+                            text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_item(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
+                            return text;
+                        }
+                    }
+                ]
+            });
+
+            var oTable = $("#IR_Stock_LinkDetail").DataTable({
+                processing: true,
+                serverSide: true,
+                searching: false,
+                responsive: true,
+                oLanguage: {
+                    "sEmptyTable": "ไม่มีข้อมูล",
+                },
+                ajax: {
+                    type: "POST",
+                    url: '/IR_Stock/Table_IR_Stock_LinkDetail',
+                },
+                columns: [
+                    { 'data': 'index', name: 'index', className: 'text-center' },
+                    { 'data': 'link_IR_Stock_Link', name: 'link_IR_Stock_Link', className: 'text-center' },
+                    {
+                        "name": "status", "data": "status", "render": function (data, type, row) {
+                            if (row.status == 1) {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus2(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            } else {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus2(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            }
+                        }
+                    },
+                    {
+                        "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
+                            var text = '<button type="button" class="btn btn-warning" onclick="edit_item2(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
+                            text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_item2(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
+                            return text;
+                        }
+                    }
+                ]
+            });
+        });
+
+        function edit_item(id) {
+            location.href = '/IR_Stock/IR_Stock_Link_Edit/?Id=' + id;
+        }
+
+        function changeStatus(id, checked_obj) {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/IR_Stock/IR_Stock_Link_Change",
+                data: {
+                    Id: id
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        function delete_item(id) {
+            Swal.fire({
+                title: 'คุณต้องการจะลบหรือไม่?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'ใช่',
+                denyButtonText: `ไม่ใช่`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "delete",
+                        cache: false,
+                        url: "/IR_Stock/IR_Stock_Link_Delete",
+                        data: {
+                            Id: id
+                        },
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then((result) => {
+                                    var oTable = $('#IR_Stock_Link').DataTable();
+                                    oTable.ajax.reload(null, false);
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+                } else if (result.isDenied) {
+
+                }
+            })
+        }
+
+        function edit_item2(id) {
+            location.href = '/IR_Stock/IR_Stock_LinkDetail_Edit/?Id=' + id;
+        }
+
+        function changeStatus2(id, checked_obj) {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/IR_Stock/IR_Stock_LinkDetail_Change",
+                data: {
+                    Id: id
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        function delete_item2(id) {
+            Swal.fire({
+                title: 'คุณต้องการจะลบหรือไม่?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'ใช่',
+                denyButtonText: `ไม่ใช่`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "delete",
+                        cache: false,
+                        url: "/IR_Stock/IR_Stock_LinkDetail_Delete",
+                        data: {
+                            Id: id
+                        },
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then((result) => {
+                                    var oTable = $('#IR_Stock_LinkDetail').DataTable();
+                                    oTable.ajax.reload(null, false);
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+                } else if (result.isDenied) {
+
+                }
+            })
+        }
+    </script>
+}

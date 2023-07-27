@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Manage Project";
+    ViewData["Title"] = "Manage_Product_Page";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
 @using Lighting.Areas.Identity.Data
@@ -27,7 +27,7 @@
         <a href="@Url.Action("Manage_Category_Page","ManageProduct")" class="btn btn-primary">เพิ่มหมวดหมู่/Add Category</a>
         <a href="@Url.Action("Manage_Model_Page","ManageProduct")" class="btn btn-primary">เพิ่มโมเดล/Add Model</a>
         <a href="@Url.Action("Add_Product_Page","ManageProduct")" class="btn btn-primary">เพิ่มโปรดัก/Add Product </a>
-        <button class="btn btn-primary" onclick="opendSearch()">ค้นหา/search </button>
+        <button class="btn btn-primary" onclick="opendSearch()" id="btn_search">ค้นหา/search </button>
     </div>
 
     <div id="search-bar" style="display:none;">
@@ -136,11 +136,13 @@
                 $("#search_table").css("display", "block");
                 $("#table").css("display", "none");
                 $("#search-bar").css("display", "grid");
+                $("#btn_search").html("ซ่อน/hide");
            }else
            {
                 $("#search_table").css("display", "none");
                 $("#table").css("display", "block");
                 $("#search-bar").css("display", "none");
+                $("#btn_search").html("ค้นหา/search");
            }
         }
 

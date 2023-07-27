@@ -304,7 +304,6 @@
                     callback: function (data, pagination) {
                         var dataHtml = `<div class="three-colPad">
                                                                         <div class="row justify-content-center">`;
-                        console.log(data)
                         $.each(data, function (index, item) {
 
                             var date = new Date(item.year);
@@ -367,9 +366,7 @@
                         } else {
                             console.log('Invalid response or missing "obj" property');
                         }
-
                         done(pp);
-                        console.log(pp);
                     },
                     error: function (error) {
                         console.log('AJAX request failed:', error);

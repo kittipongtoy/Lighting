@@ -733,7 +733,6 @@
         $(document).ready(function () {
             $(".display-tab > li").click(function () {
                 var rel = $(this).attr("rel");
-                console.log(rel);
                 $('.display-info').hide();
                 $('.display-info[rel=' + rel + ']').fadeIn();
                 $(".display-tab > li").removeClass("active");
@@ -859,7 +858,6 @@
                         }
 
                         done(pp);
-                        console.log(pp);
                     },
                     error: function (error) {
                         console.log('AJAX request failed:', error);

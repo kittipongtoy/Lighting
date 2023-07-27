@@ -223,8 +223,6 @@
                 },
                 success: function (data) {
                     if (data.status == "success") {
-                        console.log("data=>", data.data);
-
                         var convert_date = toDateENGFormat(data.data.inputDate)
 
                         $("#InputDate_Str").val(convert_date);
@@ -240,13 +238,9 @@
                         icon: 'error',
                         text: e.message,
                     });
-                    console.log(e.message);
-                    console.log(e.inner);
                 }
             });
-
         }
-
 
         function submit_form() {
             var raw_form = document.getElementById('form_create');
@@ -285,13 +279,9 @@
                         icon: 'error',
                         text: e.message,
                     });
-                    console.log(e.message);
-                    console.log(e.inner);
                 }
             });
         }
-
     </script>
-
 }
 

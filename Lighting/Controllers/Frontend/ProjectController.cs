@@ -15,6 +15,39 @@ namespace Lighting.Controllers.Frontend
             _db = db;
             _env = env;
         }
+
+        public async Task<IActionResult> JsonNavBar()
+        {
+           var lang = Request.Cookies["lang"];
+            if (lang == "EN") {
+                var project = await _db.Category_Projects
+                .AsNoTracking()
+                .Select(project => new 
+                {
+                    Id = project.Id,
+                    Image_Path = project.Image_Path,
+                    Name = project.Name_EN,
+                })
+                .ToListAsync();
+
+                return Json(project);
+            }
+            else
+            {
+                var project = await _db.Category_Projects
+                .AsNoTracking()
+                .Select(project => new
+                {
+                    Id = project.Id,
+                    Image_Path = project.Image_Path,
+                    Name = project.Name_TH,
+                })
+                .ToListAsync();
+
+                return Json(project);
+            }
+        }
+
         public async Task<IActionResult> Project(int start)
         {
             var project = await _db.Category_Projects
@@ -60,7 +93,6 @@ namespace Lighting.Controllers.Frontend
 
             return View(project);
         }
-
 
         public async Task<IActionResult> Project_Category(int categoryId, int start)
         {
@@ -164,20 +196,23 @@ namespace Lighting.Controllers.Frontend
                         ViewBag.SubCategoryId = products.First().Product_ModelId;
 
                         ViewData["products"] = products;
-                        ViewData["categorys"] = await _db.ProjectRefs
-                            .AsNoTracking()
-                            .Where(proj => proj.ProjectRef_CategoryId == proj_output.CategoryId)
-                            .OrderByDescending(proj => proj.Id)
-                            .Select(pro => 
-                            new ProjectRef {
-                                Profile_Image = Path.Combine( pro.Folder_Path, pro.Profile_Image),
-                                Location_EN = pro.Location_EN,
-                                Location_TH = pro.Location_TH,
-                                Id = pro.Id
-                            })
-                            //.Take(10)
-                            .ToListAsync(); 
+
                     }
+
+                    ViewData["categorys"] = await _db.ProjectRefs
+                    .AsNoTracking()
+                    .Where(proj => proj.ProjectRef_CategoryId == proj_output.CategoryId)
+                    .OrderByDescending(proj => proj.Id)
+                    .Select(pro =>
+                    new ProjectRef
+                    {
+                        Profile_Image = Path.Combine(pro.Folder_Path, pro.Profile_Image),
+                        Location_EN = pro.Location_EN,
+                        Location_TH = pro.Location_TH,
+                        Id = pro.Id
+                    })
+                    //.Take(10)
+                    .ToListAsync();
 
                 }
                
