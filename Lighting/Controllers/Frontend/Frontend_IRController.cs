@@ -1,15 +1,9 @@
 ﻿using Lighting.Areas.Identity.Data;
 using Lighting.Models;
-using MailKit.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MimeKit;
-using System.Net.Mime;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Newtonsoft.Json.Linq;
-using System.Text; 
+using System.Globalization;
 using System.Net.Mail;
-using System.Net;
 
 namespace Lighting.Controllers.Frontend
 {

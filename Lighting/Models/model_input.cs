@@ -4,6 +4,31 @@ namespace Lighting.Models
 {
     public class model_input
     {
+        public class page_resource_facility_content
+        {
+            public int id { get; set; }
+            public string? upload_image { get; set; }
+            public string? upload_image_ENG { get; set; }
+            public int active_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        }
+        public class page_resource_facility_title
+        {
+            public int id { get; set; }
+            public string? titleTH { get; set; }
+            public string? titleENG { get; set; }
+            public string? detailsTitleTH { get; set; }
+            public string? detailsTitleENG { get; set; }
+            public string? link { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        }
+        public List<page_resource_facility_content>? list_page_resource_facility_content { get; set; }
+        public page_resource_facility_title? fod_page_resource_facility_title { get; set; }
+        public int? count_list_page_resource_facility_content { get; set; }
+        public int? count_fod_page_resource_facility_title { get; set; }
+
         public int? count_cookies_policy { get; set; }
         public cookies_policy? fod_cookies_policy { get; set; }
         public privacy_PolicyTitles? fod_privacy_PolicyTitles { get; set; }
