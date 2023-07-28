@@ -5,6 +5,20 @@ namespace Lighting.Models
     public class Resource_FacilityModels
     {
 
+        public int? count_RF_Innovation_Centers { get; set; }
+        public RF_Innovation_Centers? fod_RF_Innovation_Centers { get; set; }
+        public RF_Innovation_Center_Images? RF_Innovation_Center_Images { get; set; }
+        public class RF_Innovation_Center_Images_table
+        {
+            public int count_row { get; set; }
+            public int id { get; set; }
+            public string? upload_image { get; set; }
+            public string? upload_image_ENG { get; set; }
+            public int active_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        }
+
         public int? count_RF_Manufacturing { get; set; }
         public RF_Manufacturing? fod_RF_Manufacturing { get; set; }
         public RF_Manufacturing_Images? RF_Manufacturing_Images { get; set; }
