@@ -489,27 +489,27 @@
                                 <!-- LANG :: PC & IPAD PRO -->
                                 <div class="d-none d-lg-block">
                                     <ul class="lang">
-                                                @{
-                                                    var get_cookies = Context.Request.Cookies["lang"];
-                                                    if (get_cookies == "EN")
-                                                    {
-                                                <li id="butt_th">
-                                                    <button onclick="setLang('TH')">TH</button>
-                                                </li>
-                                                <li id="butt_en" class="active">
-                                                    <button onclick="setLang('EN')">EN</button>
-                                                </li>
-                                                    }
-                                                    else
-                                                    {
-                                                <li id="butt_th" class="active">
-                                                    <button onclick="setLang('TH')">TH</button>
-                                                </li>
-                                                <li id="butt_en" class="">
-                                                    <button onclick="setLang('EN')">EN</button>
-                                                </li>
-                                                    }
-                                                }
+                                        @{
+                                        var get_cookies = Context.Request.Cookies["lang"];
+                                        if (get_cookies == "EN")
+                                        {
+                                            <li id="butt_th">
+                                                <button onclick="setLang('TH')">TH</button>
+                                            </li>
+                                            <li id="butt_en" class="active">
+                                                <button onclick="setLang('EN')">EN</button>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li id="butt_th" class="active">
+                                                <button onclick="setLang('TH')">TH</button>
+                                            </li>
+                                            <li id="butt_en" class="">
+                                                <button onclick="setLang('EN')">EN</button>
+                                            </li>
+                                        }
+                                        }
                                     </ul>
                                 </div>
 
@@ -635,6 +635,7 @@
                                                                         </a>
                                                                         </li>
                                                                         *@
+
                                                                         <li>
                                                                             <a href="https://www.mydevdemosites.com/resource-facility/lighting-innovation-center">
                                                                                 <p>L&E Lighting Innovation Center</p>

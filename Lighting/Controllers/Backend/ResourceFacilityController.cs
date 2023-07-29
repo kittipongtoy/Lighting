@@ -2356,5 +2356,290 @@ namespace Lighting.Controllers.Backend
             }
         }
 
+
+        //
+        public IActionResult RF_InnovationCenters()
+        {
+            var checkrow = db.RF_Innovation_Centers.FirstOrDefault();
+            var count_row = 0;
+            if (checkrow != null)
+            {
+                count_row = 1;
+            }
+            var model = new Resource_FacilityModels { count_RF_Innovation_Centers= count_row, fod_RF_Innovation_Centers = checkrow };
+            return View(model);
+        }
+        public async Task<IActionResult> RF_InnovationCenters_Image_getTable()
+        {
+            try
+            {
+                var Data_list = await db.RF_Innovation_Center_Images.ToListAsync();
+                var add_count = new List<Resource_FacilityModels.RF_Solution_Centers_Images_table>();
+                var count = 1;
+                foreach (var items in Data_list)
+                {
+                    add_count.Add(new Resource_FacilityModels.RF_Solution_Centers_Images_table
+                    {
+                        count_row = count,
+                        id = items.id,
+                        created_at = items.created_at,
+                        upload_image = items.upload_image,
+                        upload_image_ENG = items.upload_image_ENG,
+                        updated_at = items.updated_at,
+                        active_status = items.active_status,
+                    });
+                    count++;
+                }
+                return Json(new { data = add_count });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult RF_InnovationCenters_submit(RF_Innovation_Centers rf_InnovationCenters)
+        {
+            try
+            {
+                var checkrow = db.RF_Innovation_Centers.FirstOrDefault();
+                if (checkrow == null)
+                {
+                    rf_InnovationCenters.created_at = DateTime.Now;
+                    rf_InnovationCenters.updated_at = DateTime.Now;
+                    db.RF_Innovation_Centers.Add(rf_InnovationCenters);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    checkrow.titleTH = rf_InnovationCenters.titleTH;
+                    checkrow.titleENG = rf_InnovationCenters.titleENG;
+                    checkrow.detailsTitleTH = rf_InnovationCenters.detailsTitleTH;
+                    checkrow.detailsTitleENG = rf_InnovationCenters.detailsTitleENG;
+                    checkrow.link = rf_InnovationCenters.link;
+                    checkrow.updated_at = DateTime.Now;
+                    db.SaveChanges();
+                }
+
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult RF_InnovationCentersImages_create()
+        {
+            return View();
+        }
+        public IActionResult RF_InnovationCentersImages_edit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("RF_InnovationCenters", "ResourceFacility");
+            }
+            var get_detail = db.RF_Innovation_Center_Images.Where(x => x.id == id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("RF_InnovationCenters", "ResourceFacility");
+            }
+            var model = new Resource_FacilityModels { RF_Innovation_Center_Images = get_detail };
+            return View(model);
+        }
+        public IActionResult RF_InnovationCentersImages_changesStatus(int? id, string? status)
+        {
+            var get_data = db.RF_Solution_Centers_Images.Where(x => x.id == id).FirstOrDefault();
+            if (status == "true")
+            {
+                get_data.active_status = 1;
+            }
+            else
+            {
+                get_data.active_status = 0;
+            }
+            db.SaveChanges();
+
+            return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
+        }
+        public IActionResult RF_InnovationCentersImages_delete(int? id)
+        {
+            try
+            {
+                var checkrow = db.RF_Innovation_Center_Images.Where(x => x.id == id).FirstOrDefault();
+
+                if (checkrow != null)
+                {
+                    var old_filePathTH = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/RF_InnovationCenters/" + checkrow.upload_image);
+                    if (System.IO.File.Exists(old_filePathTH) == true)
+                    {
+                        System.IO.File.Delete(old_filePathTH);
+                    }
+
+                    var old_filePathENG = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/RF_InnovationCenters/" + checkrow.upload_image_ENG);
+                    if (System.IO.File.Exists(old_filePathENG) == true)
+                    {
+                        System.IO.File.Delete(old_filePathENG);
+                    }
+
+                    db.RF_Innovation_Center_Images.Remove(checkrow);
+                    db.SaveChanges();
+                }
+
+                return Json(new { status = "success", message = "ลบข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult RF_InnovationCentersImages_submit(RF_Innovation_Center_Images rf_InnovationCenterImages,
+           List<IFormFile> upload_image, List<IFormFile> upload_image_ENG)
+        {
+            try
+            {
+                if (upload_image.Count == 0 || upload_image_ENG.Count == 0)
+                {
+                    return Json(new { status = "warning", message = "กรุณากรอกข้อมูลให้ครบ!" });
+                }
+
+                foreach (var imgFile in upload_image)
+                {
+                    if (imgFile.Length > 0)
+                    {
+                        var datestr = DateTime.Now.Ticks.ToString();
+                        var extension = Path.GetExtension(imgFile.FileName);
+                        extension = extension.Replace(" ", "");
+                        rf_InnovationCenterImages.upload_image = datestr + imgFile.FileName;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/RF_InnovationCenters/" + datestr + imgFile.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            imgFile.CopyTo(stream);
+                        }
+                    }
+                }
+
+                foreach (var imgFile_ENG in upload_image_ENG)
+                {
+                    if (imgFile_ENG.Length > 0)
+                    {
+                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                        var extension = Path.GetExtension(imgFile_ENG.FileName);
+                        extension = extension.Replace(" ", "");
+
+                        rf_InnovationCenterImages.upload_image_ENG = datestr + imgFile_ENG.FileName;
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/RF_InnovationCenters/" + datestr + imgFile_ENG.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            imgFile_ENG.CopyTo(stream);
+                        }
+                    }
+                }
+
+                if (rf_InnovationCenterImages.active_status != 1)
+                {
+                    rf_InnovationCenterImages.active_status = 0;
+                }
+                else
+                {
+                    rf_InnovationCenterImages.active_status = 1;
+                }
+
+                rf_InnovationCenterImages.created_at = DateTime.Now;
+                rf_InnovationCenterImages.updated_at = DateTime.Now;
+                db.RF_Innovation_Center_Images.Add(rf_InnovationCenterImages);
+                db.SaveChanges();
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        public IActionResult RF_InnovationCentersImages_edit_Submit(RF_Innovation_Center_Images rf_InnovationCenterImages,
+             List<IFormFile> upload_image, List<IFormFile> upload_image_ENG)
+        {
+            try
+            {
+                var old_data = db.RF_Innovation_Center_Images.Where(x => x.id == rf_InnovationCenterImages.id).FirstOrDefault();
+
+                old_data.updated_at = DateTime.Now;
+
+                if (upload_image.Count > 0)
+                {
+                    foreach (var formFile in upload_image)
+                    {
+                        if (formFile.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/RF_InnovationCenters/" + old_data.upload_image);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            old_data.upload_image = datestr + formFile.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/RF_InnovationCenters/" + datestr + formFile.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+
+                if (upload_image_ENG.Count > 0)
+                {
+                    foreach (var formFile_ENG in upload_image_ENG)
+                    {
+                        if (formFile_ENG.Length > 0)
+                        {
+                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/RF_InnovationCenters/" + old_data.upload_image_ENG);
+                            if (System.IO.File.Exists(old_filePath) == true)
+                            {
+                                System.IO.File.Delete(old_filePath);
+                            }
+
+                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
+                            var extension = Path.GetExtension(formFile_ENG.FileName);
+                            extension = extension.Replace(" ", "");
+
+                            old_data.upload_image_ENG = datestr + formFile_ENG.FileName;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/RF_InnovationCenters/" + datestr + formFile_ENG.FileName);
+
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile_ENG.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+
+                if (rf_InnovationCenterImages.active_status != 1)
+                {
+                    old_data.active_status = 0;
+                }
+                else
+                {
+                    old_data.active_status = 1;
+                }
+
+                db.SaveChanges();
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+
+        //
+        public IActionResult Index()
+        {
+            return View();
+        }
     }
 }
