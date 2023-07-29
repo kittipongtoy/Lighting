@@ -172,6 +172,8 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<IR_Investor_Relations> IR_Investor_Relations { get; set; }
         public DbSet<IR_Investor_RelationsDetail> IR_Investor_RelationsDetail { get; set; }
         public DbSet<IR_LIGHTING_EQUIPMENT> IR_LIGHTING_EQUIPMENT { get; set; }
+        public DbSet<IR_Summary_Financial_Highlights> IR_Summary_Financial_Highlight { get; set; }
+        public DbSet<IR_Summary_Financial_HighlightsDetail> IR_Summary_Financial_HighlightsDetail { get; set; }
         public DbSet<IR_Report> IR_Report { get; set; }
         public DbSet<Organization_Chart> Organization_Chart { get; set; }
         public DbSet<Organization_ChartDetail> Organization_ChartDetail { get; set; }

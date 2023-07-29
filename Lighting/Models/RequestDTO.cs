@@ -2,6 +2,31 @@
 {
     public class RequestDTO
     {
+        public class HistoryDataDetailRequest
+        {
+            public int? Id { get; set; }
+            public int? TypeData { get; set; }
+            public string? ImageTH { get; set; }
+            public string? ImageEN { get; set; }
+            public string? FileVideoTH { get; set; }
+            public string? FileVideoEN { get; set; }
+            public int? Status { get; set; }
+            public List<IFormFile> uploaded_ImageTH { get; set; }
+            public List<IFormFile> uploaded_ImageEN { get; set; }
+            public List<IFormFile> uploaded_fileTH { get; set; }
+            public List<IFormFile> uploaded_fileEN { get; set; }
+        }
+
+        public class IR_Summary_Financial_HighlightsRequest
+        {
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? Detail_TH { get; set; }
+            public string? Detail_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
         public class IR_LIGHTING_EQUIPMENTRequest
         {
             public int? Id { get; set; }
@@ -50,7 +75,18 @@
 			public List<IFormFile> uploaded_ImageEN { get; set; }
 		}
 
-		public class HistoryRequest
+        public class ORGANIZATION_CHARTRequest
+        {
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+
+        public class HistoryRequest
         {
             public int? Id { get; set; }
             public string? Title_TH { get; set; }

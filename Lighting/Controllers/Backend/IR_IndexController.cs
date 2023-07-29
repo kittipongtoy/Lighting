@@ -3,9 +3,6 @@ using Lighting.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
-using System.Globalization;
-using static Lighting.Models.RequestDTO;
 
 namespace Lighting.Controllers.Backend
 {
@@ -605,9 +602,24 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpGet]
-        public IActionResult GetLIGHTING_EQUIPMENT_Edit(int? Id)
+        public async Task<IActionResult> GetLIGHTING_EQUIPMENT_Edit(int? Id)
         {
-            return View();
+            try
+            {
+                var DB = await _context.IR_LIGHTING_EQUIPMENT.FirstOrDefaultAsync(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    return Ok(DB);
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
 
         [HttpPut]
@@ -724,25 +736,397 @@ namespace Lighting.Controllers.Backend
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Table_Summary_Financial_Highlights()
+        {
+            try
+            {
+                string? draw = Request.Form["draw"];
+                string? start = Request.Form["start"];
+                string? length = Request.Form["length"];
+                string? sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+                string? sortColumnDirection = Request.Form["order[0][dir]"];
+                string? searchValue = Request.Form["search[value]"];
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int? recordsTotal = 0;
+                var list = new List<ResponseDTO.IR_Summary_Financial_HighlightsResponse>();
+                var History = await _context.IR_Summary_Financial_Highlight.ToListAsync();
+                int? runitem = 1;
+                foreach (var item in History)
+                {
+                    list.Add(new ResponseDTO.IR_Summary_Financial_HighlightsResponse
+                    {
+                        Index = runitem,
+                        Id = item.Id,
+                        Status = item.Status,
+                        Title_EN = item.Title_EN,
+                        Title_TH = item.Title_TH,
+                        Detail_TH = item.Detail_TH,
+                        Detail_EN = item.Detail_EN,
+                    });
+                    runitem++;
+                }
+
+                if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+                {
+                    var dd = list.AsQueryable();
+                }
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    list = list.Where(x => x.Title_TH.Contains(searchValue)
+                    || x.Title_EN.Contains(searchValue)
+                    || x.Detail_TH.Contains(searchValue)
+                    || x.Detail_EN.Contains(searchValue)).ToList();
+                }
+
+                recordsTotal = list.Count;
+                list = list.Skip(skip).Take(pageSize).ToList();
+
+                var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data = list };
+                return Ok(jsonData);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
         public IActionResult Summary_Financial_Highlights_Add()
         {
             return View();
         }
 
-        public IActionResult Summary_Financial_Highlights_Edit()
+        [HttpPost]
+        public async Task<IActionResult> Summary_Financial_Highlights_Add_Submit(RequestDTO.IR_Summary_Financial_HighlightsRequest model)
+        {
+            try
+            {
+                IR_Summary_Financial_Highlights iR_Summary_Financial_Highlights = new IR_Summary_Financial_Highlights();
+                iR_Summary_Financial_Highlights.Title_EN = model.Title_EN;
+                iR_Summary_Financial_Highlights.Title_TH = model.Title_TH;
+                iR_Summary_Financial_Highlights.Detail_TH = model.Detail_TH;
+                iR_Summary_Financial_Highlights.Detail_EN = model.Detail_EN;
+                iR_Summary_Financial_Highlights.Status = model.Status;
+                iR_Summary_Financial_Highlights.updated_at = DateTime.Now;
+                iR_Summary_Financial_Highlights.created_at = DateTime.Now;
+                _context.IR_Summary_Financial_Highlight.Add(iR_Summary_Financial_Highlights);
+                await _context.SaveChangesAsync();
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        public IActionResult Summary_Financial_Highlights_Edit(int? Id)
         {
             return View();
         }
 
-        public IActionResult Summary_Financial_Highlights_Delete()
+        [HttpGet]
+        public async Task<IActionResult> GetSummary_Financial_Highlights_Edit(int? Id)
+        {
+            try
+            {
+                var DB = await _context.IR_Summary_Financial_Highlight.FirstOrDefaultAsync(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    return Ok(DB);
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Summary_Financial_Highlights_Edit_Submit(RequestDTO.IR_Summary_Financial_HighlightsRequest model)
+        {
+            try
+            {
+                var iR_Summary_Financial_Highlight = _context.IR_Summary_Financial_Highlight.FirstOrDefault(x => x.Id == model.Id);
+                if (iR_Summary_Financial_Highlight is not null)
+                {
+                    iR_Summary_Financial_Highlight.Title_EN = model.Title_EN;
+                    iR_Summary_Financial_Highlight.Title_TH = model.Title_TH;
+                    iR_Summary_Financial_Highlight.Detail_EN = model.Detail_EN;
+                    iR_Summary_Financial_Highlight.Detail_TH = model.Detail_TH;
+                    iR_Summary_Financial_Highlight.Status = model.Status;
+                    iR_Summary_Financial_Highlight.updated_at = DateTime.Now;
+                    _context.Entry(iR_Summary_Financial_Highlight).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Summary_Financial_Highlights_Delete(int? Id)
+        {
+            try
+            {
+                var DB = _context.IR_Summary_Financial_Highlight.FirstOrDefault(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    _context.IR_Summary_Financial_Highlight.Remove(DB);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Summary๘Financial_Highlights_Change(int? Id)
+        {
+            try
+            {
+                var DB = _context.IR_Summary_Financial_Highlight.FirstOrDefault(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    if (DB.Status == 1)
+                    {
+                        DB.Status = 0;
+                    }
+                    else
+                    {
+                        DB.Status = 1;
+                    }
+                    _context.Entry(DB).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Table_Summary_Financial_HighlightsDetail()
+        {
+            try
+            {
+                string? draw = Request.Form["draw"];
+                string? start = Request.Form["start"];
+                string? length = Request.Form["length"];
+                string? sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+                string? sortColumnDirection = Request.Form["order[0][dir]"];
+                string? searchValue = Request.Form["search[value]"];
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int? recordsTotal = 0;
+                var list = new List<ResponseDTO.IR_Summary_Financial_HighlightsDetailResponse>();
+                var History = await _context.IR_Summary_Financial_HighlightsDetail.ToListAsync();
+                int? runitem = 1;
+                foreach (var item in History)
+                {
+                    list.Add(new ResponseDTO.IR_Summary_Financial_HighlightsDetailResponse
+                    {
+                        Index = runitem,
+                        Id = item.Id,
+                        Status = item.Status,
+                        Title_EN = item.Title_EN,
+                        Title_TH = item.Title_TH,
+                        Detail_TH = item.Detail_TH,
+                        Detail_EN = item.Detail_EN,
+                        Icon = item.Icon,
+                        Total = item.Total
+                    });
+                    runitem++;
+                }
+
+                if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+                {
+                    var dd = list.AsQueryable();
+                }
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    list = list.Where(x => x.Title_TH.Contains(searchValue)
+                    || x.Title_EN.Contains(searchValue)
+                    || x.Detail_TH.Contains(searchValue)
+                    || x.Detail_EN.Contains(searchValue)).ToList();
+                }
+
+                recordsTotal = list.Count;
+                list = list.Skip(skip).Take(pageSize).ToList();
+
+                var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data = list };
+                return Ok(jsonData);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        public IActionResult Summary_Financial_HighlightsDetail_Add()
         {
             return View();
         }
 
-        public IActionResult Summary๘Financial_Highlights_Change()
+        [HttpPost]
+        public async Task<IActionResult> Summary_Financial_HighlightsDetail_Add_Submit(RequestDTO.IR_Summary_Financial_HighlightsRequest model)
+        {
+            try
+            {
+                IR_Summary_Financial_Highlights iR_Summary_Financial_Highlights = new IR_Summary_Financial_Highlights();
+                iR_Summary_Financial_Highlights.Title_EN = model.Title_EN;
+                iR_Summary_Financial_Highlights.Title_TH = model.Title_TH;
+                iR_Summary_Financial_Highlights.Detail_TH = model.Detail_TH;
+                iR_Summary_Financial_Highlights.Detail_EN = model.Detail_EN;
+                iR_Summary_Financial_Highlights.Status = model.Status;
+                iR_Summary_Financial_Highlights.updated_at = DateTime.Now;
+                iR_Summary_Financial_Highlights.created_at = DateTime.Now;
+                _context.IR_Summary_Financial_Highlight.Add(iR_Summary_Financial_Highlights);
+                await _context.SaveChangesAsync();
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        public IActionResult Summary_Financial_HighlightsDetail_Edit(int? Id)
         {
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetSummary_Financial_HighlightsDetail_Edit(int? Id)
+        {
+            try
+            {
+                var DB = await _context.IR_Summary_Financial_Highlight.FirstOrDefaultAsync(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    return Ok(DB);
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Summary_Financial_HighlightsDetail_Edit_Submit(RequestDTO.IR_Summary_Financial_HighlightsRequest model)
+        {
+            try
+            {
+                var iR_Summary_Financial_Highlight = _context.IR_Summary_Financial_Highlight.FirstOrDefault(x => x.Id == model.Id);
+                if (iR_Summary_Financial_Highlight is not null)
+                {
+                    iR_Summary_Financial_Highlight.Title_EN = model.Title_EN;
+                    iR_Summary_Financial_Highlight.Title_TH = model.Title_TH;
+                    iR_Summary_Financial_Highlight.Detail_EN = model.Detail_EN;
+                    iR_Summary_Financial_Highlight.Detail_TH = model.Detail_TH;
+                    iR_Summary_Financial_Highlight.Status = model.Status;
+                    iR_Summary_Financial_Highlight.updated_at = DateTime.Now;
+                    _context.Entry(iR_Summary_Financial_Highlight).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Summary_Financial_HighlightsDetail_Delete(int? Id)
+        {
+            try
+            {
+                var DB = _context.IR_Summary_Financial_HighlightsDetail.FirstOrDefault(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    _context.IR_Summary_Financial_HighlightsDetail.Remove(DB);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Summary๘Financial_HighlightsDetail_Change(int? Id)
+        {
+            try
+            {
+                var DB = _context.IR_Summary_Financial_HighlightsDetail.FirstOrDefault(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    if (DB.Status == 1)
+                    {
+                        DB.Status = 0;
+                    }
+                    else
+                    {
+                        DB.Status = 1;
+                    }
+                    _context.Entry(DB).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
         public IActionResult Report()
         {

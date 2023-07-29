@@ -166,24 +166,17 @@ namespace Lighting.Controllers.Backend
         {
             try
             {
-                try
+                var DB = db.History.FirstOrDefault(x => x.Id == Id);
+                if (DB is not null)
                 {
-                    var DB = db.History.FirstOrDefault(x => x.Id == Id);
-                    if (DB is not null)
-                    {
-                        db.History.Remove(DB);
-                        await db.SaveChangesAsync();
-                    }
-                    else
-                    {
-                        throw new Exception("ไม่มีข้อมูล");
-                    }
-                    return new JsonResult(new { status = "success", messageArray = "success" });
+                    db.History.Remove(DB);
+                    await db.SaveChangesAsync();
                 }
-                catch (Exception error)
+                else
                 {
-                    throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+                    throw new Exception("ไม่มีข้อมูล");
                 }
+                return new JsonResult(new { status = "success", messageArray = "success" });
             }
             catch (Exception error)
             {
@@ -284,6 +277,7 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPost]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
         public async Task<IActionResult> HistoryDetail_Add_Submit(RequestDTO.HistoryDetailRequest model)
         {
             try
@@ -387,6 +381,7 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPut]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
         public async Task<IActionResult> HistoryDetail_Edit_Submit(RequestDTO.HistoryDetailRequest model)
         {
             try
@@ -512,6 +507,27 @@ namespace Lighting.Controllers.Backend
                     var DB = db.HistoryDetail.FirstOrDefault(x => x.Id == Id);
                     if (DB is not null)
                     {
+                        var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.FileCompany_TH);
+                        if (System.IO.File.Exists(old_filePath) == true)
+                        {
+                            System.IO.File.Delete(old_filePath);
+                        }
+                        var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.FileCompany_EN);
+                        if (System.IO.File.Exists(old_filePath2) == true)
+                        {
+                            System.IO.File.Delete(old_filePath2);
+                        }
+                        var old_filePath3 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.ImageTH);
+                        if (System.IO.File.Exists(old_filePath3) == true)
+                        {
+                            System.IO.File.Delete(old_filePath3);
+                        }
+                        var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.ImageEN);
+                        if (System.IO.File.Exists(old_filePath4) == true)
+                        {
+                            System.IO.File.Delete(old_filePath4);
+                        }
+
                         db.HistoryDetail.Remove(DB);
                         await db.SaveChangesAsync();
                     }
@@ -559,49 +575,678 @@ namespace Lighting.Controllers.Backend
             }
         }
 
-        public IActionResult OUR_PHILOSOPHY_VISION_MISSION()
+        public IActionResult HistoryVideo()
         {
             return View();
         }
 
-        public IActionResult OUR_PHILOSOPHY_VISION_MISSION_Add()
+        [HttpPost]
+        public async Task<IActionResult> TableHistoryVideo()
+        {
+            try
+            {
+                string? draw = Request.Form["draw"];
+                string? start = Request.Form["start"];
+                string? length = Request.Form["length"];
+                string? sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+                string? sortColumnDirection = Request.Form["order[0][dir]"];
+                string? searchValue = Request.Form["search[value]"];
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int? recordsTotal = 0;
+                var list = new List<ResponseDTO.HistoryDataDetailResponse>();
+                var History = await db.HistoryDataDetail.Where(x => x.TypeData == 1).ToListAsync();
+                int? runitem = 1;
+                foreach (var item in History)
+                {
+                    list.Add(new ResponseDTO.HistoryDataDetailResponse
+                    {
+                        Index = runitem,
+                        Id = item.Id,
+                        TypeData = item.TypeData,
+                        Status = item.Status,
+                        ImageEN = item.ImageEN,
+                        ImageTH = item.ImageTH,
+                        FileVideoEN = item.FileVideoEN,
+                        FileVideoTH = item.FileVideoTH
+                    });
+                    runitem++;
+                }
+
+                if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+                {
+                    var dd = list.AsQueryable();
+                }
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    list = list.ToList();
+                }
+
+                recordsTotal = list.Count;
+                list = list.Skip(skip).Take(pageSize).ToList();
+
+                var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data = list };
+                return Ok(jsonData);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        public IActionResult HistoryVideo_Add()
         {
             return View();
         }
 
-        public IActionResult OUR_PHILOSOPHY_VISION_MISSION_Add_Submit()
+        [HttpPost]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public async Task<IActionResult> HistoryVideo_Add_Submit(RequestDTO.HistoryDataDetailRequest model)
+        {
+            try
+            {
+                HistoryDataDetail historyDataDetail = new HistoryDataDetail();
+
+                if (model.FileVideoEN == null && model.uploaded_fileEN != null)
+                {
+                    return new JsonResult(new { status = "error", messageArray = "error" });
+                }
+                else
+                {
+                    if (model.FileVideoEN != null)
+                    {
+                        historyDataDetail.FileVideoEN = model.FileVideoEN;
+                    }
+
+                    if (model.uploaded_fileEN != null)
+                    {
+                        foreach (var formFile in model.uploaded_fileEN)
+                        {
+                            if (formFile.Length > 0)
+                            {
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                historyDataDetail.FileVideoEN = datestr + extension;
+                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (model.FileVideoTH == null && model.uploaded_fileTH != null)
+                {
+                    return new JsonResult(new { status = "error", messageArray = "error" });
+                }
+                else
+                {
+                    if (model.FileVideoTH != null)
+                    {
+                        historyDataDetail.FileVideoTH = model.FileVideoTH;
+                    }
+
+                    if (model.uploaded_fileTH != null)
+                    {
+                        foreach (var formFile in model.uploaded_fileTH)
+                        {
+                            if (formFile.Length > 0)
+                            {
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                historyDataDetail.FileVideoTH = datestr + extension;
+                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
+                            }
+                        }
+                    }
+                }
+                historyDataDetail.TypeData = 1;
+                historyDataDetail.Status = model.Status;
+                historyDataDetail.created_at = DateTime.Now;
+                historyDataDetail.updated_at = DateTime.Now;
+                db.HistoryDataDetail.Add(historyDataDetail);
+                await db.SaveChangesAsync();
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        public IActionResult HistoryVideo_Edit(int? Id)
         {
             return View();
         }
 
-        public IActionResult OUR_PHILOSOPHY_VISION_MISSION_Edit()
+        [HttpGet]
+        public async Task<IActionResult> GetHistoryVideo_Edit(int? Id)
+        {
+            try
+            {
+                var DB = await db.HistoryDataDetail.FirstOrDefaultAsync(x => x.Id == Id);
+                return Ok(DB);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        [HttpPut]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public async Task<IActionResult> HistoryVideo_Edit_Submit(RequestDTO.HistoryDataDetailRequest model)
+        {
+            try
+            {
+                var DB = await db.HistoryDataDetail.FirstOrDefaultAsync(x => x.Id == model.Id);
+                if (DB is not null)
+                {
+                    if (model.FileVideoEN != null)
+                    {
+                        DB.FileVideoEN = model.FileVideoEN;
+                    }
+
+                    if (model.uploaded_fileEN != null)
+                    {
+                        foreach (var formFile in model.uploaded_fileEN)
+                        {
+                            if (formFile.Length > 0)
+                            {
+                                var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + DB.FileVideoEN);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
+
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                DB.FileVideoEN = datestr + extension;
+                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
+                            }
+                        }
+                    }
+                    if (model.FileVideoTH == null && model.uploaded_fileTH != null)
+                    {
+                        return new JsonResult(new { status = "error", messageArray = "error" });
+                    }
+                    else
+                    {
+                        if (model.FileVideoTH != null)
+                        {
+                            DB.FileVideoTH = model.FileVideoTH;
+                        }
+
+                        if (model.uploaded_fileTH != null)
+                        {
+                            foreach (var formFile in model.uploaded_fileTH)
+                            {
+                                if (formFile.Length > 0)
+                                {
+                                    var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + DB.FileVideoTH);
+                                    if (System.IO.File.Exists(old_filePath) == true)
+                                    {
+                                        System.IO.File.Delete(old_filePath);
+                                    }
+
+                                    var datestr = DateTime.Now.Ticks.ToString();
+                                    var extension = Path.GetExtension(formFile.FileName);
+                                    DB.FileVideoTH = datestr + extension;
+                                    var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                                    using (var stream = System.IO.File.Create(filePath))
+                                    {
+                                        formFile.CopyTo(stream);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    DB.Status = model.Status;
+                    DB.created_at = DateTime.Now;
+                    DB.updated_at = DateTime.Now;
+                    db.Entry(DB).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> HistoryVideo_Delete(int? Id)
+        {
+            try
+            {
+                try
+                {
+                    var DB = db.HistoryDataDetail.FirstOrDefault(x => x.Id == Id);
+                    if (DB is not null)
+                    {
+                        var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.FileVideoTH);
+                        if (System.IO.File.Exists(old_filePath) == true)
+                        {
+                            System.IO.File.Delete(old_filePath);
+                        }
+                        var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.FileVideoEN);
+                        if (System.IO.File.Exists(old_filePath2) == true)
+                        {
+                            System.IO.File.Delete(old_filePath2);
+                        }
+                        var old_filePath3 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.ImageTH);
+                        if (System.IO.File.Exists(old_filePath3) == true)
+                        {
+                            System.IO.File.Delete(old_filePath3);
+                        }
+                        var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.ImageEN);
+                        if (System.IO.File.Exists(old_filePath4) == true)
+                        {
+                            System.IO.File.Delete(old_filePath4);
+                        }
+
+                        db.HistoryDataDetail.Remove(DB);
+                        await db.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        throw new Exception("ไม่มีข้อมูล");
+                    }
+                    return new JsonResult(new { status = "success", messageArray = "success" });
+                }
+                catch (Exception error)
+                {
+                    throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+                }
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> HistoryVideo_Change(int? Id)
+        {
+            try
+            {
+                var DB = db.HistoryDataDetail.FirstOrDefault(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    if (DB.Status == 1)
+                    {
+                        DB.Status = 0;
+                    }
+                    else
+                    {
+                        DB.Status = 1;
+                    }
+                    db.Entry(DB).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        public IActionResult HistoryTimeline()
         {
             return View();
         }
 
-        public IActionResult GetOUR_PHILOSOPHY_VISION_MISSION_Edit()
+        [HttpPost]
+        public async Task<IActionResult> TableHistoryTimeline()
+        {
+            try
+            {
+                string? draw = Request.Form["draw"];
+                string? start = Request.Form["start"];
+                string? length = Request.Form["length"];
+                string? sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+                string? sortColumnDirection = Request.Form["order[0][dir]"];
+                string? searchValue = Request.Form["search[value]"];
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int? recordsTotal = 0;
+                var list = new List<ResponseDTO.HistoryDataDetailResponse>();
+                var History = await db.HistoryDataDetail.Where(x => x.TypeData == 2).ToListAsync();
+                int? runitem = 1;
+                foreach (var item in History)
+                {
+                    list.Add(new ResponseDTO.HistoryDataDetailResponse
+                    {
+                        Index = runitem,
+                        Id = item.Id,
+                        TypeData = item.TypeData,
+                        Status = item.Status,
+                        ImageEN = item.ImageEN,
+                        ImageTH = item.ImageTH,
+                        FileVideoEN = item.FileVideoEN,
+                        FileVideoTH = item.FileVideoTH
+                    });
+                    runitem++;
+                }
+
+                if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+                {
+                    var dd = list.AsQueryable();
+                }
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    list = list.ToList();
+                }
+
+                recordsTotal = list.Count;
+                list = list.Skip(skip).Take(pageSize).ToList();
+
+                var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data = list };
+                return Ok(jsonData);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        public IActionResult HistoryTimeline_Add()
         {
             return View();
         }
 
-        public IActionResult OUR_PHILOSOPHY_VISION_MISSION_Edit_Submit()
+        [HttpPost]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public async Task<IActionResult> HistoryTimeline_Add_Submit(RequestDTO.HistoryDataDetailRequest model)
+        {
+            try
+            {
+                HistoryDataDetail historyDataDetail = new HistoryDataDetail();
+
+                if (model.uploaded_fileEN != null)
+                {
+                    foreach (var formFile in model.uploaded_fileEN)
+                    {
+                        if (formFile.Length > 0)
+                        {
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            historyDataDetail.ImageEN = datestr + extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+
+                if (model.uploaded_fileTH != null)
+                {
+                    foreach (var formFile in model.uploaded_fileTH)
+                    {
+                        if (formFile.Length > 0)
+                        {
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            historyDataDetail.ImageTH = datestr + extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+                historyDataDetail.TypeData = 2;
+                historyDataDetail.Status = model.Status;
+                historyDataDetail.created_at = DateTime.Now;
+                historyDataDetail.updated_at = DateTime.Now;
+                db.HistoryDataDetail.Add(historyDataDetail);
+                await db.SaveChangesAsync();
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        public IActionResult HistoryTimeline_Edit(int? Id)
         {
             return View();
         }
 
-        public IActionResult OUR_PHILOSOPHY_VISION_MISSION_Delete()
+        [HttpPut]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public async Task<IActionResult> HistoryTimeline_Edit_Submit(RequestDTO.HistoryDetailRequest model)
         {
-            return View();
+            try
+            {
+                var DB = await db.HistoryDataDetail.FirstOrDefaultAsync(x => x.Id == model.Id);
+                if (DB is not null)
+                {
+                    if (model.uploaded_fileEN != null)
+                    { 
+                        foreach (var formFile in model.uploaded_fileEN)
+                        {
+                            if (formFile.Length > 0)
+                            {
+                                var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + DB.ImageEN);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
+
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                DB.ImageEN = datestr + extension;
+                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
+                            }
+                        }
+                    }
+                    if (model.uploaded_fileTH != null)
+                    { 
+                        foreach (var formFile in model.uploaded_fileTH)
+                        {
+                            if (formFile.Length > 0)
+                            {
+                                var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + DB.ImageTH);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
+
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                DB.ImageTH = datestr + extension;
+                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
+                            }
+                        }
+                    }
+                    DB.Status = model.Status;
+                    DB.created_at = DateTime.Now;
+                    DB.updated_at = DateTime.Now;
+                    db.Entry(DB).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
 
-        public IActionResult OUR_PHILOSOPHY_VISION_MISSION_Change()
+        [HttpDelete]
+        public async Task<IActionResult> HistoryTimeline_Delete(int? Id)
         {
-            return View();
+            try
+            {
+                try
+                {
+                    var DB = db.HistoryDataDetail.FirstOrDefault(x => x.Id == Id);
+                    if (DB is not null)
+                    {
+                        var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.FileVideoTH);
+                        if (System.IO.File.Exists(old_filePath) == true)
+                        {
+                            System.IO.File.Delete(old_filePath);
+                        }
+                        var old_filePath2 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.FileVideoEN);
+                        if (System.IO.File.Exists(old_filePath2) == true)
+                        {
+                            System.IO.File.Delete(old_filePath2);
+                        }
+                        var old_filePath3 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.ImageTH);
+                        if (System.IO.File.Exists(old_filePath3) == true)
+                        {
+                            System.IO.File.Delete(old_filePath3);
+                        }
+                        var old_filePath4 = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.ImageEN);
+                        if (System.IO.File.Exists(old_filePath4) == true)
+                        {
+                            System.IO.File.Delete(old_filePath4);
+                        }
+
+                        db.HistoryDataDetail.Remove(DB);
+                        await db.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        throw new Exception("ไม่มีข้อมูล");
+                    }
+                    return new JsonResult(new { status = "success", messageArray = "success" });
+                }
+                catch (Exception error)
+                {
+                    throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+                }
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> HistoryTimeline_Change(int? Id)
+        {
+            try
+            {
+                var DB = db.HistoryDataDetail.FirstOrDefault(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    if (DB.Status == 1)
+                    {
+                        DB.Status = 0;
+                    }
+                    else
+                    {
+                        DB.Status = 1;
+                    }
+                    db.Entry(DB).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+     
         public IActionResult ORGANIZATION_CHART()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TableORGANIZATION_CHART()
+        {
+            try
+            {
+                string? draw = Request.Form["draw"];
+                string? start = Request.Form["start"];
+                string? length = Request.Form["length"];
+                string? sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+                string? sortColumnDirection = Request.Form["order[0][dir]"];
+                string? searchValue = Request.Form["search[value]"];
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int? recordsTotal = 0;
+                var list = new List<ResponseDTO.Organization_ChartResponse>();
+                var History = await db.Organization_Chart.ToListAsync();
+                int? runitem = 1;
+                foreach (var item in History)
+                {
+                    list.Add(new ResponseDTO.Organization_ChartResponse
+                    {
+                        Index = runitem,
+                        Id = item.Id,
+                        Title_EN = item.Title_EN,
+                        Title_TH = item.Title_TH,
+                        Status = item.Status,
+                        SubTitle_EN = item.SubTitle_EN,
+                        SubTitle_TH = item.SubTitle_TH
+                    });
+                    runitem++;
+                }
+
+                if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+                {
+                    var dd = list.AsQueryable();
+                }
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    list = list.Where(x => x.Title_EN.Contains(searchValue)
+                    || x.Title_EN.Contains(searchValue)
+                    || x.Title_TH.Contains(searchValue)
+                    || x.SubTitle_EN.Contains(searchValue)
+                    || x.SubTitle_TH.Contains(searchValue)
+                           ).ToList();
+                }
+
+                recordsTotal = list.Count;
+                list = list.Skip(skip).Take(pageSize).ToList();
+
+                var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data = list };
+                return Ok(jsonData);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
 
         public IActionResult ORGANIZATION_CHART_Add()
@@ -609,35 +1254,129 @@ namespace Lighting.Controllers.Backend
             return View();
         }
 
-        public IActionResult ORGANIZATION_CHART_Add_Submit()
+        [HttpPost]
+        public async Task<IActionResult> ORGANIZATION_CHART_Add_Submit(RequestDTO.ORGANIZATION_CHARTRequest model)
+        {
+            try
+            {
+                Organization_Chart organization_Chart = new Organization_Chart();
+                organization_Chart.Title_TH = model.Title_TH;
+                organization_Chart.Title_EN = model.Title_EN;
+                organization_Chart.SubTitle_EN = model.SubTitle_EN;
+                organization_Chart.SubTitle_TH = model.SubTitle_TH;
+                organization_Chart.Status = model.Status;
+                organization_Chart.created_at = DateTime.Now;
+                organization_Chart.updated_at = DateTime.Now;
+                db.Organization_Chart.Add(organization_Chart);
+                await db.SaveChangesAsync();
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        public IActionResult ORGANIZATION_CHART_Edit(int? ID)
         {
             return View();
         }
 
-        public IActionResult ORGANIZATION_CHART_Edit()
+        [HttpGet]
+        public async Task<IActionResult> GetORGANIZATION_CHART_Edit(int? Id)
         {
-            return View();
+            try
+            {
+                var DB = await db.Organization_Chart.FirstOrDefaultAsync(x => x.Id == Id);
+                return Ok(DB);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
 
-        public IActionResult GetORGANIZATION_CHART_Edit()
+        [HttpPut]
+        public async Task<IActionResult> ORGANIZATION_CHART_Edit_Submit(RequestDTO.ORGANIZATION_CHARTRequest model)
         {
-            return View();
+            try
+            {
+                var organization_Chart = db.Organization_Chart.FirstOrDefault(x => x.Id == model.Id);
+                if (organization_Chart is not null)
+                {
+                    organization_Chart.Title_TH = model.Title_TH;
+                    organization_Chart.Title_EN = model.Title_EN;
+                    organization_Chart.SubTitle_EN = model.SubTitle_EN;
+                    organization_Chart.SubTitle_TH = model.SubTitle_TH;
+                    organization_Chart.Status = model.Status;
+                    organization_Chart.updated_at = DateTime.Now;
+                    db.Entry(organization_Chart).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    return new JsonResult(new { status = "success", messageArray = "success" });
+                }
+                else {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
 
-        public IActionResult ORGANIZATION_CHART_Edit_Submit()
+        [HttpDelete]
+        public async Task<IActionResult> ORGANIZATION_CHART_Delete(int? Id)
         {
-            return View();
+            try
+            {
+                var DB = db.Organization_Chart.FirstOrDefault(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    db.Organization_Chart.Remove(DB);
+                    await db.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
 
-        public IActionResult ORGANIZATION_CHART_Delete()
+        [HttpPost]
+        public async Task<IActionResult> ORGANIZATION_CHART_Change(int? Id)
         {
-            return View();
+            try
+            {
+                var DB = db.Organization_Chart.FirstOrDefault(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    if (DB.Status == 1)
+                    {
+                        DB.Status = 0;
+                    }
+                    else
+                    {
+                        DB.Status = 1;
+                    }
+                    db.Entry(DB).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
 
-        public IActionResult ORGANIZATION_CHART_Change()
-        {
-            return View();
-        }
+
+
+
 
         public IActionResult AWARDS()
         {
@@ -678,6 +1417,54 @@ namespace Lighting.Controllers.Backend
         {
             return View();
         }
+
+        public IActionResult OUR_PHILOSOPHY_VISION_MISSION()
+        {
+            return View();
+        }
+
+        public IActionResult OUR_PHILOSOPHY_VISION_MISSION_Add()
+        {
+            return View();
+        }
+
+        public IActionResult OUR_PHILOSOPHY_VISION_MISSION_Add_Submit()
+        {
+            return View();
+        }
+
+        public IActionResult OUR_PHILOSOPHY_VISION_MISSION_Edit()
+        {
+            return View();
+        }
+
+        public IActionResult GetOUR_PHILOSOPHY_VISION_MISSION_Edit()
+        {
+            return View();
+        }
+
+        public IActionResult OUR_PHILOSOPHY_VISION_MISSION_Edit_Submit()
+        {
+            return View();
+        }
+
+        public IActionResult OUR_PHILOSOPHY_VISION_MISSION_Delete()
+        {
+            return View();
+        }
+
+        public IActionResult OUR_PHILOSOPHY_VISION_MISSION_Change()
+        {
+            return View();
+        }
+
+
+
+
+
+
+
+
 
         public IActionResult RF_Manufacturing()
         {
@@ -812,12 +1599,12 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
-        public IActionResult RF_ManufactufingImages_submit(RF_Manufacturing_Images r_ManufacturingImages, 
+        public IActionResult RF_ManufactufingImages_submit(RF_Manufacturing_Images r_ManufacturingImages,
            List<IFormFile> upload_image, List<IFormFile> upload_image_ENG)
         {
             try
-            { 
-                if (upload_image.Count == 0 || upload_image_ENG.Count == 0 )
+            {
+                if (upload_image.Count == 0 || upload_image_ENG.Count == 0)
                 {
                     return Json(new { status = "warning", message = "กรุณากรอกข้อมูลให้ครบ!" });
                 }
@@ -856,7 +1643,7 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
-                 
+
                 if (r_ManufacturingImages.active_status != 1)
                 {
                     r_ManufacturingImages.active_status = 0;
@@ -2057,7 +2844,7 @@ namespace Lighting.Controllers.Backend
                             }
                         }
                     }
-                } 
+                }
 
                 if (rf_AssemblyServicesImages.active_status != 1)
                 {
@@ -2366,7 +3153,7 @@ namespace Lighting.Controllers.Backend
             {
                 count_row = 1;
             }
-            var model = new Resource_FacilityModels { count_RF_Innovation_Centers= count_row, fod_RF_Innovation_Centers = checkrow };
+            var model = new Resource_FacilityModels { count_RF_Innovation_Centers = count_row, fod_RF_Innovation_Centers = checkrow };
             return View(model);
         }
         public async Task<IActionResult> RF_InnovationCenters_Image_getTable()

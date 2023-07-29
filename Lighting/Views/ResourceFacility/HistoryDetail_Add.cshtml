@@ -83,7 +83,7 @@
                                 </span>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" name="Detail_TH" />
+                                <textarea id="Detail_TH"></textarea>
                             </div>
                             <div class="col-2">
                                 <span>
@@ -91,7 +91,7 @@
                                 </span>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" name="Detail_EN" />
+                                <textarea id="Detail_EN"></textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -136,3 +136,68 @@
         </div>
     </div>
 </div>
+@section Scripts{
+    <script>
+        var check = 0;
+        function checkSwitch() {
+            if (document.getElementById("use_status").checked == true) {
+                check = 1;
+            }
+            else {
+                check = 0;
+            }
+            $("#use_status").val(check);
+        }
+
+        var editorTH;
+        var editorEN;
+        ClassicEditor
+            .create(document.querySelector('#Detail_TH'))
+            .then(editor => {
+                editorTH = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#Detail_EN'))
+            .then(editor => {
+                editorEN = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        function submit_form() {
+            var forms = $('#form_create')[0];
+            var data = new FormData(forms);
+            var get_th = editorTH.getData();
+            var get_en = editorEN.getData();
+            data.append("Detail_TH", get_th);
+            data.append("Detail_EN", get_en);
+            $.ajax({
+                type: 'POST',
+                url: '/ResourceFacility/HistoryDetail_Add_Submit',
+                data: data,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'บันทึกข้อมูลเรียบร้อยแล้ว',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    window.location.href = "/ResourceFacility/History";
+                },
+                error: (e) => {
+                    displayError(e);
+                }
+            });
+        }
+    </script>
+}

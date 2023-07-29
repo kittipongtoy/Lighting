@@ -299,6 +299,12 @@
     || ViewData["Title"] == "History_Edit"
     || ViewData["Title"] == "HistoryDetail_Add"
     || ViewData["Title"] == "HistoryDetail_Edit"
+    || ViewData["Title"] == "HistoryVideo"
+    || ViewData["Title"] == "HistoryVideo_Add"
+    || ViewData["Title"] == "HistoryVideo_Edit"
+    || ViewData["Title"] == "HistoryTimeline"
+    || ViewData["Title"] == "HistoryTimeline_Add"
+    || ViewData["Title"] == "HistoryTimeline_Edit"
     || ViewData["Title"] == "OUR_PHILOSOPHY_VISION_MISSION"
     || ViewData["Title"] == "OUR_PHILOSOPHY_VISION_MISSION_Add"
     || ViewData["Title"] == "OUR_PHILOSOPHY_VISION_MISSION_Edit"
@@ -460,7 +466,7 @@
                                 </span>
                                 <div class="menu-sub menu-sub-accordion">
                                     <div class="menu-item">
-                                        @if (ViewData["Title"] == "History" || ViewData["Title"] == "History_Add" || ViewData["Title"] == "History_Edit" || ViewData["Title"] == "HistoryDetail_Add" || ViewData["Title"] == "HistoryDetail_Edit")
+                                        @if (ViewData["Title"] == "History" || ViewData["Title"] == "History_Add" || ViewData["Title"] == "History_Edit" || ViewData["Title"] == "HistoryDetail_Add" || ViewData["Title"] == "HistoryVideo" || ViewData["Title"] == "HistoryVideo_Add" || ViewData["Title"] == "HistoryVideo_Edit" || ViewData["Title"] == "HistoryTimeline" || ViewData["Title"] == "HistoryTimeline_Add" || ViewData["Title"] == "HistoryTimeline_Edit" || ViewData["Title"] == "HistoryDetail_Edit")
                                         {
                                             <a class="menu-link active" href="@Url.Action("History","ResourceFacility")">
                                                 <span class="menu-bullet">
@@ -550,7 +556,28 @@
                                     <span class="menu-arrow"></span>
                                 </span>
                                 <div class="menu-sub menu-sub-accordion">
-
+                                    <div class="menu-item">
+                                        @if (ViewData["Title"] == "RF_InnovationCenters"
+                                        || ViewData["Title"] == "RF_InnovationCentersImages_create"
+                                        || ViewData["Title"] == "RF_InnovationCentersImages_edit")
+                                        {
+                                            <a class="menu-link active" href="@Url.Action("RF_InnovationCenters","ResourceFacility")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">L&E Lighting Innovation Centers</span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="menu-link" href="@Url.Action("RF_InnovationCenters","ResourceFacility")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">L&E Lighting Innovation Centers</span>
+                                            </a>
+                                        }
+                                    </div>
                                     <div class="menu-item">
                                         @if (ViewData["Title"] == "RF_Manufacturing"
                                         || ViewData["Title"] == "RF_ManufacturingImages_create"
