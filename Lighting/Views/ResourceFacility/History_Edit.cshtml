@@ -10,7 +10,7 @@
                 <span class="h-20px border-gray-200 border-start mx-4"></span>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
                     <li class="breadcrumb-item text-muted">
-                        <a href="@Url.Action("History","Resource_Facility")" class="text-muted text-hover-primary">Resource Facility</a>
+                        <a href="@Url.Action("History","ResourceFacility")" class="text-muted text-hover-primary">Resource Facility</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-200 w-5px h-2px"></span>
@@ -35,7 +35,7 @@
                             </h2>
                         </div>
                         <div class="col-6" style="text-align:right;">
-                            <a type="button" class="btn btn-secondary" href="@Url.Action("IR_Stock_Chart_Index","IR_Stock")">ย้อนกลับ</a>
+                            <a type="button" class="btn btn-secondary" href="@Url.Action("History","ResourceFacility")">ย้อนกลับ</a>
                         </div>
                     </div>
                     <form id="form_create" enctype="multipart/form-data">
@@ -128,7 +128,7 @@
         $(() => {
             $.ajax({
                 type: 'get',
-                url: '/Resource_Facility/GetHistory_Edit',
+                url: '/ResourceFacility/GetHistory_Edit',
                 data: { Id: Parmeter_id },
                 success: function (data) {
                     console.log(data)
@@ -164,7 +164,7 @@
             var data = new FormData(forms);
             $.ajax({
                 type: 'put',
-                url: '/Resource_Facility/History_Edit_Submit',
+                url: '/ResourceFacility/History_Edit_Submit',
                 data: data,
                 processData: false,
                 contentType: false,
@@ -179,7 +179,7 @@
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    window.location.href = "/Resource_Facility/History";
+                    window.location.href = "/ResourceFacility/History";
                 },
                 error: (e) => {
                     displayError(e);

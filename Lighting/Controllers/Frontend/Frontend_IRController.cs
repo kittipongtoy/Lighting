@@ -43,6 +43,7 @@ namespace Lighting.Controllers.Frontend
 
         public async Task<IActionResult> IR_index()
         {
+            ViewBag.IR_Banner = await db.IR_Banner.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();
             ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).Take(5).ToListAsync();
             ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).Take(5).ToListAsync();
             return View();

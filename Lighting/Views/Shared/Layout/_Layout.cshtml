@@ -256,7 +256,7 @@
     || ViewData["Title"] == "Button_Below_Banner_Add"
     || ViewData["Title"] == "Button_Below_Banner_Edit"
     || ViewData["Title"] == "LIGHTING_EQUIPMENT"
-    || ViewData["Title"] == "LIGHTING_EQUIPMENT_Aadd"
+    || ViewData["Title"] == "LIGHTING_EQUIPMENT_Add"
     || ViewData["Title"] == "LIGHTING_EQUIPMENT_Edit"
     || ViewData["Title"] == "HIGHLIGHT"
     || ViewData["Title"] == "HIGHLIGHT_Add"
@@ -462,7 +462,7 @@
                                     <div class="menu-item">
                                         @if (ViewData["Title"] == "History" || ViewData["Title"] == "History_Add" || ViewData["Title"] == "History_Edit" || ViewData["Title"] == "HistoryDetail_Add" || ViewData["Title"] == "HistoryDetail_Edit")
                                         {
-                                            <a class="menu-link active" href="@Url.Action("History","Resource_Facility")">
+                                            <a class="menu-link active" href="@Url.Action("History","ResourceFacility")">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
@@ -471,7 +471,7 @@
                                         }
                                         else
                                         {
-                                            <a class="menu-link" href="@Url.Action("History","Resource_Facility")">
+                                            <a class="menu-link" href="@Url.Action("History","ResourceFacility")">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
@@ -482,7 +482,7 @@
                                     <div class="menu-item">
                                         @if (ViewData["Title"] == "OUR_PHILOSOPHY_VISION_MISSION" || ViewData["Title"] == "OUR_PHILOSOPHY_VISION_MISSION_Add" || ViewData["Title"] == "OUR_PHILOSOPHY_VISION_MISSION_Edit")
                                         {
-                                            <a class="menu-link active" href="@Url.Action("OUR_PHILOSOPHY_VISION_MISSION","Resource_Facility")">
+                                            <a class="menu-link active" href="@Url.Action("OUR_PHILOSOPHY_VISION_MISSION","ResourceFacility")">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
@@ -491,7 +491,7 @@
                                         }
                                         else
                                         {
-                                            <a class="menu-link" href="@Url.Action("OUR_PHILOSOPHY_VISION_MISSION","Resource_Facility")">
+                                            <a class="menu-link" href="@Url.Action("OUR_PHILOSOPHY_VISION_MISSION","ResourceFacility")">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
@@ -502,7 +502,7 @@
                                     <div class="menu-item">
                                         @if (ViewData["Title"] == "ORGANIZATION_CHART" || ViewData["Title"] == "ORGANIZATION_CHART" || ViewData["Title"] == "ORGANIZATION_CHART")
                                         {
-                                            <a class="menu-link active" href="@Url.Action("ORGANIZATION_CHART","Resource_Facility")">
+                                            <a class="menu-link active" href="@Url.Action("ORGANIZATION_CHART","ResourceFacility")">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
@@ -511,7 +511,7 @@
                                         }
                                         else
                                         {
-                                            <a class="menu-link" href="@Url.Action("ORGANIZATION_CHART","Resource_Facility")">
+                                            <a class="menu-link" href="@Url.Action("ORGANIZATION_CHART","ResourceFacility")">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
@@ -522,7 +522,7 @@
                                     <div class="menu-item">
                                         @if (ViewData["Title"] == "AWARDS" || ViewData["Title"] == "AWARDS_Add" || ViewData["Title"] == "AWARDS_Edit")
                                         {
-                                            <a class="menu-link active" href="@Url.Action("AWARDS","Resource_Facility")">
+                                            <a class="menu-link active" href="@Url.Action("AWARDS","ResourceFacility")">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
@@ -531,7 +531,7 @@
                                         }
                                         else
                                         {
-                                            <a class="menu-link" href="@Url.Action("AWARDS","Resource_Facility")">
+                                            <a class="menu-link" href="@Url.Action("AWARDS","ResourceFacility")">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
@@ -826,7 +826,7 @@
 												}
 											</div>
 											<div class="menu-item">
-												@if (ViewData["Title"] == "LIGHTING_EQUIPMENT" || ViewData["Title"] == "LIGHTING_EQUIPMENT_Aadd" || ViewData["Title"] == "LIGHTING_EQUIPMENT_Edit")
+                                                @if (ViewData["Title"] == "LIGHTING_EQUIPMENT" || ViewData["Title"] == "LIGHTING_EQUIPMENT_Add" || ViewData["Title"] == "LIGHTING_EQUIPMENT_Edit")
 												{
 													<a class="menu-link active" href="@Url.Action("LIGHTING_EQUIPMENT","IR_Index")">
 														<span class="menu-bullet">

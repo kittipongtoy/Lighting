@@ -278,12 +278,12 @@ namespace Lighting.Controllers.Backend
 
         [HttpPost]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> IR_NewDetail_Add_Submit(RequestDTO.IR_NewDetailRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        public async Task<IActionResult> IR_NewDetail_Add_Submit(RequestDTO.IR_NewDetailRequest model)
         {
             IR_NewDetail iR_NewDetail = new IR_NewDetail();
             try
             {
-                foreach (var formFile in uploaded_fileTH)
+                foreach (var formFile in model.uploaded_fileTH)
                 {
                     if (formFile.Length > 0)
                     {
@@ -298,7 +298,7 @@ namespace Lighting.Controllers.Backend
                     }
                 }
 
-                foreach (var formFile in uploaded_fileEN)
+                foreach (var formFile in model.uploaded_fileEN)
                 {
                     if (formFile.Length > 0)
                     {
@@ -380,14 +380,14 @@ namespace Lighting.Controllers.Backend
 
         [HttpPut]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> IR_NewDetail_Edit_Submit(RequestDTO.IR_NewDetailRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        public async Task<IActionResult> IR_NewDetail_Edit_Submit(RequestDTO.IR_NewDetailRequest model)
         {
             try
             {
                 var iR_NewDetail = await _context.IR_NewDetail.FirstOrDefaultAsync(x => x.Id == model.Id);
                 if (iR_NewDetail is not null)
                 {
-                    foreach (var formFile in uploaded_fileTH)
+                    foreach (var formFile in model.uploaded_fileTH)
                     {
                         if (formFile.Length > 0)
                         {
@@ -408,7 +408,7 @@ namespace Lighting.Controllers.Backend
                         }
                     }
 
-                    foreach (var formFile in uploaded_fileEN)
+                    foreach (var formFile in model.uploaded_fileEN)
                     {
                         if (formFile.Length > 0)
                         {
@@ -1167,12 +1167,12 @@ namespace Lighting.Controllers.Backend
 
         [HttpPost]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> Mass_MediaDetail_Add_Submit(RequestDTO.IR_Mass_MediaRequest model, List<IFormFile> uploaded_Image)
+        public async Task<IActionResult> Mass_MediaDetail_Add_Submit(RequestDTO.IR_Mass_MediaRequest model)
         {
             IR_MassMediaDetail IR_MassMediaDetail = new IR_MassMediaDetail();
             try
             {
-                foreach (var formFile in uploaded_Image)
+                foreach (var formFile in model.uploaded_Image)
                 {
                     if (formFile.Length > 0)
                     {
@@ -1186,7 +1186,6 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
-
                 IR_MassMediaDetail.Title_TH = model.Title_TH;
                 IR_MassMediaDetail.Title_EN = model.Title_EN;
                 if (model.NewDate is not null)
@@ -1255,14 +1254,14 @@ namespace Lighting.Controllers.Backend
 
         [HttpPut]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> Mass_MediaDetail_EditSubmit(RequestDTO.IR_Mass_MediaRequest model, List<IFormFile> uploaded_Image)
+        public async Task<IActionResult> Mass_MediaDetail_EditSubmit(RequestDTO.IR_Mass_MediaRequest model)
         {
             try
             {
                 var IR_MassMediaDetail = await _context.IR_MassMediaDetail.FirstOrDefaultAsync(x => x.Id == model.Id);
                 if (IR_MassMediaDetail is not null)
                 {
-                    foreach (var formFile in uploaded_Image)
+                    foreach (var formFile in model.uploaded_Image)
                     {
                         if (formFile.Length > 0)
                         {
@@ -1282,7 +1281,6 @@ namespace Lighting.Controllers.Backend
                             }
                         }
                     }
-
                     IR_MassMediaDetail.Title_TH = model.Title_TH;
                     IR_MassMediaDetail.Title_EN = model.Title_EN;
                     if (model.NewDate is not null)
@@ -1631,12 +1629,12 @@ namespace Lighting.Controllers.Backend
 
         [HttpPost]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> Print_MediaDetail_Add_Submit(RequestDTO.IR_Print_MedialDetailRequest model, List<IFormFile> uploaded_Image, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        public async Task<IActionResult> Print_MediaDetail_Add_Submit(RequestDTO.IR_Print_MedialDetailRequest model)
         {
             IR_Print_MediaDetail IR_Print_MediaDetail = new IR_Print_MediaDetail();
             try
             {
-                foreach (var formFile in uploaded_Image)
+                foreach (var formFile in model.uploaded_Image)
                 {
                     if (formFile.Length > 0)
                     {
@@ -1651,7 +1649,7 @@ namespace Lighting.Controllers.Backend
                     }
                 }
 
-                foreach (var formFile in uploaded_fileTH)
+                foreach (var formFile in model.uploaded_fileTH)
                 {
                     if (formFile.Length > 0)
                     {
@@ -1666,7 +1664,7 @@ namespace Lighting.Controllers.Backend
                     }
                 }
 
-                foreach (var formFile in uploaded_fileEN)
+                foreach (var formFile in model.uploaded_fileEN)
                 {
                     if (formFile.Length > 0)
                     {
@@ -1756,14 +1754,14 @@ namespace Lighting.Controllers.Backend
 
         [HttpPut]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> Print_MediaDetail_EditSubmit(RequestDTO.IR_Print_MedialDetailRequest model, List<IFormFile> uploaded_Image, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        public async Task<IActionResult> Print_MediaDetail_EditSubmit(RequestDTO.IR_Print_MedialDetailRequest model)
         {
             try
             {
                 var IR_Print_MediaDetail = await _context.IR_Print_MediaDetail.FirstOrDefaultAsync(x => x.Id == model.Id);
                 if (IR_Print_MediaDetail is not null)
                 {
-                    foreach (var formFile in uploaded_Image)
+                    foreach (var formFile in model.uploaded_Image)
                     {
                         if (formFile.Length > 0)
                         {
@@ -1784,7 +1782,7 @@ namespace Lighting.Controllers.Backend
                         }
                     }
 
-                    foreach (var formFile in uploaded_fileTH)
+                    foreach (var formFile in model.uploaded_fileTH)
                     {
                         if (formFile.Length > 0)
                         {
@@ -1805,7 +1803,7 @@ namespace Lighting.Controllers.Backend
                         }
                     }
 
-                    foreach (var formFile in uploaded_fileEN)
+                    foreach (var formFile in model.uploaded_fileEN)
                     {
                         if (formFile.Length > 0)
                         {
@@ -1825,7 +1823,6 @@ namespace Lighting.Controllers.Backend
                             }
                         }
                     }
-
                     IR_Print_MediaDetail.Title_TH = model.Title_TH;
                     IR_Print_MediaDetail.Title_EN = model.Title_EN;
                     if (model.NewDate is not null)
@@ -2174,12 +2171,12 @@ namespace Lighting.Controllers.Backend
 
         [HttpPost]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> InvestorCalendarDetail_Add_Submit(RequestDTO.InvestorCalendarDetailRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        public async Task<IActionResult> InvestorCalendarDetail_Add_Submit(RequestDTO.InvestorCalendarDetailRequest model)
         {
             IR_InvestorCalendarDetail IR_InvestorCalendarDetail = new IR_InvestorCalendarDetail();
             try
             {
-                foreach (var formFile in uploaded_fileTH)
+                foreach (var formFile in model.uploaded_fileTH)
                 {
                     if (formFile.Length > 0)
                     {
@@ -2194,7 +2191,7 @@ namespace Lighting.Controllers.Backend
                     }
                 }
 
-                foreach (var formFile in uploaded_fileEN)
+                foreach (var formFile in model.uploaded_fileEN)
                 {
                     if (formFile.Length > 0)
                     {
@@ -2208,7 +2205,6 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
-
                 IR_InvestorCalendarDetail.Activity_TH = model.Activity_TH;
                 IR_InvestorCalendarDetail.Activity_EN = model.Activity_EN;
                 IR_InvestorCalendarDetail.Position_EN = model.Position_EN;
@@ -2277,14 +2273,14 @@ namespace Lighting.Controllers.Backend
 
         [HttpPut]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> InvestorCalendarDetail_EditSubmit(RequestDTO.InvestorCalendarDetailRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        public async Task<IActionResult> InvestorCalendarDetail_EditSubmit(RequestDTO.InvestorCalendarDetailRequest model)
         {
             try
             {
                 var IR_InvestorCalendarDetail = await _context.IR_InvestorCalendarDetail.FirstOrDefaultAsync(x => x.Id == model.Id);
                 if (IR_InvestorCalendarDetail is not null)
                 {
-                    foreach (var formFile in uploaded_fileTH)
+                    foreach (var formFile in model.uploaded_fileTH)
                     {
                         if (formFile.Length > 0)
                         {
@@ -2305,7 +2301,7 @@ namespace Lighting.Controllers.Backend
                         }
                     }
 
-                    foreach (var formFile in uploaded_fileEN)
+                    foreach (var formFile in model.uploaded_fileEN)
                     {
                         if (formFile.Length > 0)
                         {
@@ -2325,7 +2321,6 @@ namespace Lighting.Controllers.Backend
                             }
                         }
                     }
-
                     IR_InvestorCalendarDetail.Activity_TH = model.Activity_TH;
                     IR_InvestorCalendarDetail.Activity_EN = model.Activity_EN;
                     IR_InvestorCalendarDetail.Position_TH = model.Position_TH;

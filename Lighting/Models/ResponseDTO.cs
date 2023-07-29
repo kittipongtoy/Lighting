@@ -2,6 +2,38 @@
 {
     public class ResponseDTO
     {
+        public class IR_LIGHTING_EQUIPMENTResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Image { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public string? RegisterTH { get; set; }
+            public string? RegisterEN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Button_Below_BannerResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Icon { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_IndexBannerResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? ImageBanner { get; set; }
+            public int? Status { get; set; }
+        }
+
 		public class HistoryDetailResponse
 		{
 			public int? Index { get; set; }

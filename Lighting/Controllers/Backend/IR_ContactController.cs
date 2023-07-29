@@ -109,12 +109,12 @@ namespace Lighting.Controllers.Backend
 
         [HttpPost]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> IR_Contact_Add_Submit(RequestDTO.IR_ContactRequest model, List<IFormFile> uploaded_image) 
+        public async Task<IActionResult> IR_Contact_Add_Submit(RequestDTO.IR_ContactRequest model) 
         {
             IR_Contact iR_Contact = new IR_Contact();
             try
             {
-                foreach (var formFile in uploaded_image)
+                foreach (var formFile in model.uploaded_image)
                 {
                     if (formFile.Length > 0)
                     {
@@ -192,14 +192,14 @@ namespace Lighting.Controllers.Backend
 
         [HttpPut]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> IR_Contact_Edit_Submit(RequestDTO.IR_ContactRequest model, List<IFormFile> uploaded_image)
+        public async Task<IActionResult> IR_Contact_Edit_Submit(RequestDTO.IR_ContactRequest model)
         {
             try
             {
                 var DB = await _context.IR_Contact.FirstOrDefaultAsync(x => x.Id == model.Id);
                 if (DB is not null)
                 {
-                    foreach (var formFile in uploaded_image)
+                    foreach (var formFile in model.uploaded_image)
                     {
                         if (formFile.Length > 0)
                         {
@@ -219,7 +219,6 @@ namespace Lighting.Controllers.Backend
                             }
                         }
                     }
-
                     DB.Title_TH = model.Title_TH;
                     DB.Title_EN = model.Title_EN;
                     DB.SubTitle_TH = model.SubTitle_TH;
