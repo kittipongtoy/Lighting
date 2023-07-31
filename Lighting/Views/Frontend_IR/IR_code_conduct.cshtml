@@ -31,8 +31,18 @@
                         } 
                         else
                         {
-                            <h5>นโยบายการกำกับดูแลกิจการ</h5>
-                            <h1>จรรยาบรรณธุรกิจ</h1>
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+
+                                <h5>Corporate Governance Policy</h5>
+                                <h1>Business Ethics</h1>
+                            }
+                            else
+                            {
+
+                                <h5>นโยบายการกำกับดูแลกิจการ</h5>
+                                <h1>จรรยาบรรณธุรกิจ</h1>
+                            }
                         }
                     </div>
                 </div>

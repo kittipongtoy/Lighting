@@ -1410,7 +1410,7 @@ namespace Lighting.Controllers.Backend
         {
             try
             {
-                if (uploaded_image.Count == 0 || uploaded_file_ENG.Count == 0)
+                if (uploaded_image.Count == 0 || uploaded_image_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
                 }
@@ -3802,7 +3802,7 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
-                 
+
                 foreach (var formFile in uploaded_file)
                 {
                     if (formFile.Length > 0)
@@ -3932,7 +3932,7 @@ namespace Lighting.Controllers.Backend
                             }
                         }
                     }
-                }                 
+                }
 
                 if (uploaded_file.Count > 0)
                 {
@@ -4143,7 +4143,7 @@ namespace Lighting.Controllers.Backend
            List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
-            { 
+            {
                 if (uploaded_image.Count == 0 || uploaded_image_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
@@ -4191,7 +4191,7 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
-                 
+
                 foreach (var formFile in uploaded_file)
                 {
                     if (formFile.Length > 0)
@@ -4322,7 +4322,7 @@ namespace Lighting.Controllers.Backend
                             }
                         }
                     }
-                } 
+                }
 
                 if (uploaded_file.Count > 0)
                 {
@@ -4433,7 +4433,7 @@ namespace Lighting.Controllers.Backend
             {
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
-        } 
+        }
 
         //
         public IActionResult Author_cg_index()
@@ -4531,7 +4531,7 @@ namespace Lighting.Controllers.Backend
             List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
-            { 
+            {
                 if (uploaded_image.Count == 0 || uploaded_image_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
@@ -4580,7 +4580,7 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
-                 
+
                 foreach (var formFile in uploaded_file)
                 {
                     if (formFile.Length > 0)
@@ -4710,7 +4710,7 @@ namespace Lighting.Controllers.Backend
                             }
                         }
                     }
-                } 
+                }
 
                 if (uploaded_file.Count > 0)
                 {
@@ -4967,7 +4967,7 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
-                 
+
                 foreach (var formFile in uploaded_file)
                 {
                     if (formFile.Length > 0)
@@ -5073,7 +5073,7 @@ namespace Lighting.Controllers.Backend
                             }
                         }
                     }
-                } 
+                }
 
                 if (uploaded_image_ENG.Count > 0)
                 {
@@ -5098,8 +5098,8 @@ namespace Lighting.Controllers.Backend
                             }
                         }
                     }
-                } 
-                
+                }
+
                 if (uploaded_file.Count > 0)
                 {
                     foreach (var formFile in uploaded_file)
@@ -5306,7 +5306,7 @@ namespace Lighting.Controllers.Backend
             List<IFormFile> uploaded_image, List<IFormFile> uploaded_image_ENG, List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
         {
             try
-            { 
+            {
                 if (uploaded_image.Count == 0 || uploaded_image_ENG.Count == 0)
                 {
                     return Json(new { status = "error", message = "กรุณา Upload รูป" });
@@ -5354,7 +5354,7 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
-                 
+
 
                 foreach (var formFile in uploaded_file)
                 {
@@ -5487,7 +5487,7 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
-                 
+
 
                 if (uploaded_file.Count > 0)
                 {

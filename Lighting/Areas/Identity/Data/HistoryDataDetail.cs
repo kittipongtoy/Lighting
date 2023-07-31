@@ -7,7 +7,7 @@ namespace Lighting.Areas.Identity.Data
     {
         [Key]
         public int Id { get; set; }
-        public int TypeData { get; set; }
+        public int? TypeData { get; set; }
         public string? ImageTH { get; set; }
         public string? ImageEN { get; set; }
         public string? FileVideoTH { get; set; }

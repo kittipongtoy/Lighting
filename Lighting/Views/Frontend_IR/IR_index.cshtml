@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "IR_index";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var Count_IR_Banner = (List<Lighting.Areas.Identity.Data.IR_Banner>)ViewBag.IR_Banner;
     var Count_IR_Latest_NewDetail = (List<Lighting.Areas.Identity.Data.IR_Latest_NewDetail>)ViewBag.IR_Latest_NewDetail;
     var Count_IR_NewDetail = (List<Lighting.Areas.Identity.Data.IR_NewDetail>)ViewBag.IR_NewDetail;
 }
@@ -13,9 +14,19 @@
         <div class="col px-0">
             <div class="slide-navButton">
                 <div class="main-banner owl-carousel owl-theme">
-                    <div class="items"><img src="~/Frontend_assets/images/ir/ir-banner01.jpg"></div>
-                    <div class="items"><img src="~/Frontend_assets/images/ir/ir-banner02.jpg"></div>
-                    <div class="items"><img src="~/Frontend_assets/images/ir/ir-banner03.jpg"></div>
+                    @if (Count_IR_Banner.Count() != 0)
+                    {
+                        foreach (var item in Count_IR_Banner)
+                        {
+                            <div class="items"><img src="~/upload_image/IR_Index/@item.ImageBanner"></div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="items"><img src="~/Frontend_assets/images/ir/ir-banner01.jpg"></div>
+                        <div class="items"><img src="~/Frontend_assets/images/ir/ir-banner02.jpg"></div>
+                        <div class="items"><img src="~/Frontend_assets/images/ir/ir-banner03.jpg"></div>
+                    }
                 </div>
             </div>
         </div>
