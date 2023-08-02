@@ -40,25 +40,24 @@
             <!--file-->
 
             <div class="custom-file mt-3 p-1" style="border:1px solid black;">
-                <img id="preview_show_img" class="mt-3" style="width:200px;height:200px;display:none;" /> <!--img preview-->
+                <img id="preview_show_img" class="mt-3" style="width:100%;height:50vh;display:none;" /> <!--img preview-->
                 <br />
                 <br />
-                <input type="file" class="custom-file-input" id="file_title" accept="image/png, image/gif, image/jpeg">
-                <label class="custom-file-label h4">เลือกไฟล์รูป หัวข้อ/title image</label>
+                <label class="form-label">เลือกไฟล์รูป หัวข้อ/title image</label>
+                <input class="form-control" type="file" class="custom-file-input" id="file_title" accept="image/png, image/gif, image/jpeg">
             </div>
 
             <!--img preview-->
             <div class="custom-file mt-3 p-1" style="border:1px solid black;">
                 <div class="d-flex justify-content-start flex-wrap mt-3" id="preview_sub_img">
                 </div>
-
-                <input type="file" class="custom-file-input" id="file_sub_img" accept="image/png, image/gif, image/jpeg" multiple>
-                <label class="custom-file-label h4">เลือกไฟล์ รูปประกอบ/sub image</label>
+                <label class="form-label">เลือกไฟล์ รูปประกอบ/sub image</label>
+                <input class="form-control" type="file" class="custom-file-input" id="file_sub_img" accept="image/png, image/gif, image/jpeg" multiple>
             </div>
             <!--end file-->
             <center style="display:flex;justify-content:space-between;margin:3rem;">
-                <button onclick="submit_form()" class="btn btn-primary">บันทึก/save</button>
-                <a href="@Url.Action("Manage_News_page","news")" class="btn bg-info">กลับ/back</a>
+                <button onclick="submit_form()" class="btn btn-success">บันทึก/save</button>
+                <a href="@Url.Action("Manage_News_page","news")" class="btn btn-primary">กลับ/back</a>
             </center>
         </div>
     </div>

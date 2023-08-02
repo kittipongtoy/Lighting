@@ -20,6 +20,7 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<Smart_Solution_Link> Smart_Solution_Links { get; set; }
         public DbSet<Smart_Solution> Smart_Solutions { get; set; }
         #endregion
+
         #region product
         public DbSet<Product> Products { get; set; }
         public DbSet<Product_Model> Product_Models { get; set; }
@@ -31,6 +32,7 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<Category_Project> Category_Projects { get; set; }
         public DbSet<ProjectRef> ProjectRefs { get; set; }
         #endregion
+
         public DbSet<RF_Manufacturing_Images> RF_Manufacturing_Images { get; set; }
         public DbSet<RF_Warehouse_Logistics_Images> RF_Warehouse_Logistics_Images { get; set; }
         public DbSet<RF_Oversea_Offices_Images> RF_Oversea_Offices_Images { get; set; }
@@ -47,7 +49,10 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<privacy_PolicyTitles> privacy_PolicyTitles { get; set; }
         public DbSet<privacy_Policys> privacy_Policys { get; set; }
         public DbSet<Download> Downloads { get; set; }
+        #region applyjob
         public DbSet<ApplyJob> ApplyJobs { get; set; }
+        public DbSet<ApplyImgContent> ApplyJobImgContents { get; set; }  //new 28/07/56
+        #endregion
         #region contact
         public DbSet<Contact> Contacts { get; set; }
         #endregion

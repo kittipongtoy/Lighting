@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lighting.Migrations
 {
     [DbContext(typeof(LightingContext))]
-    [Migration("20230727073743_xx")]
-    partial class xx
+    [Migration("20230728143145_init1")]
+    partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,31 @@ namespace Lighting.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.ApplyImgContent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Benefit_img")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Benefit_pdf")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Position_img")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Position_pdf")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplyJobImgContents");
+                });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.ApplyJob", b =>
                 {
@@ -1267,77 +1292,6 @@ namespace Lighting.Migrations
                     b.ToTable("IR_faq_Detail");
                 });
 
-            modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Investor_Relations", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SubTitle_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubTitle_TH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title_TH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("created_at")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("updated_at")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IR_Investor_Relations");
-                });
-
-            modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Investor_RelationsDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SubTitle_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubTitle_TH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title_TH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("created_at")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("updated_at")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IR_Investor_RelationsDetail");
-                });
-
             modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_InvestorCalendar", b =>
                 {
                     b.Property<int>("Id")
@@ -1413,6 +1367,77 @@ namespace Lighting.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("IR_InvestorCalendarDetail");
+                });
+
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Investor_Relations", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubTitle_EN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubTitle_TH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title_EN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title_TH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("updated_at")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IR_Investor_Relations");
+                });
+
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Investor_RelationsDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubTitle_EN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubTitle_TH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title_EN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title_TH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("updated_at")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IR_Investor_RelationsDetail");
                 });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.IR_Latest_New", b =>
@@ -2156,9 +2181,9 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "49e0e3f8-31b8-4913-8c0e-7758fd2fef82",
+                            Id = "641469a6-df8c-44d0-8b8a-1cdeb4f8abe2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6f981ba0-e2f4-4a64-8ee6-641a006fccfd",
+                            ConcurrencyStamp = "74acc846-380c-4b32-9f87-c759229433e2",
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -2168,9 +2193,9 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPS1A2lQw45iTuTWzBeD48cUTKZA9ekJgYKqd1PZ5xsUM8KakxsMhDsoM/mCTxLEgQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ+YxgQDskzlc6kpJivFR7MCk/FAsOnNd8D+JrU7K/zleZ4dLHbvJQVopsvS3cBzhQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a836a07d-eb3f-48a4-b7a9-71d1a5de39cf",
+                            SecurityStamp = "da006e1c-f1dd-4a2f-aa22-7897fcfff8ee",
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -3354,6 +3379,37 @@ namespace Lighting.Migrations
                     b.ToTable("O_Gift_entertainment_File");
                 });
 
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.OrganizationalStructure", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<DateTime?>("created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("image_nameEN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("image_nameTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("num_order")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("updated_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("use_status")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("OrganizationalStructure");
+                });
+
             modelBuilder.Entity("Lighting.Areas.Identity.Data.Organization_Chart", b =>
                 {
                     b.Property<int>("Id")
@@ -3411,37 +3467,6 @@ namespace Lighting.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Organization_ChartDetail");
-                });
-
-            modelBuilder.Entity("Lighting.Areas.Identity.Data.OrganizationalStructure", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
-
-                    b.Property<DateTime?>("created_at")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("image_nameEN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("image_nameTH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("num_order")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("updated_at")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("use_status")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.ToTable("OrganizationalStructure");
                 });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.P_philosophy", b =>
@@ -4264,13 +4289,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "67725bb4-45f4-410d-b1dc-6a3fd60a9fbc",
-                            ConcurrencyStamp = "c004ec28-b537-4240-a83e-6350e5bf59a6",
+                            Id = "35c7485c-1762-400f-b5f8-0de8321925ea",
+                            ConcurrencyStamp = "193d2181-cedf-4710-9179-1c3446f41e73",
                             Name = "Admin",
                             NameThai = "Admin",
                             NormalizedName = "Admin",
-                            created_at = new DateTime(2023, 7, 27, 7, 37, 43, 36, DateTimeKind.Utc).AddTicks(3172),
-                            updated_at = new DateTime(2023, 7, 27, 7, 37, 43, 36, DateTimeKind.Utc).AddTicks(3176)
+                            created_at = new DateTime(2023, 7, 28, 14, 31, 45, 138, DateTimeKind.Utc).AddTicks(7021),
+                            updated_at = new DateTime(2023, 7, 28, 14, 31, 45, 138, DateTimeKind.Utc).AddTicks(7024)
                         });
                 });
 
@@ -4346,6 +4371,92 @@ namespace Lighting.Migrations
                     b.HasKey("id");
 
                     b.ToTable("SH_annual_ReportData");
+                });
+
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.ShareHolder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("TitleENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("amountTitleENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("amountTitleTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("detailsENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("detailsTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("detailsTitleENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("detailsTitleTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("nameTitleENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("nameTitleTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("percentTitleENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("percentTitleTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("updated_at")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShareHolder");
+                });
+
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.ShareHolder_DataDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("amount")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("nameENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("nameTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("percentPerAmount")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("updated_at")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShareHolder_DataDetails");
                 });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.SH_dividen", b =>
@@ -5676,6 +5787,37 @@ namespace Lighting.Migrations
                     b.ToTable("SH_IR_Report_Meeting");
                 });
 
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.SH_IR_Report_MeetingData", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<int?>("active_status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("titleENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("titleTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("updated_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("year")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("id");
+
+                    b.ToTable("SH_IR_Report_MeetingData");
+                });
+
             modelBuilder.Entity("Lighting.Areas.Identity.Data.SH_IR_Report_Meeting_DataDetails", b =>
                 {
                     b.Property<int>("id")
@@ -5714,123 +5856,6 @@ namespace Lighting.Migrations
                     b.HasKey("id");
 
                     b.ToTable("SH_IR_Report_Meeting_DataDetails");
-                });
-
-            modelBuilder.Entity("Lighting.Areas.Identity.Data.SH_IR_Report_MeetingData", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
-
-                    b.Property<int?>("active_status")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("created_at")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("titleENG")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("titleTH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("updated_at")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("year")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("id");
-
-                    b.ToTable("SH_IR_Report_MeetingData");
-                });
-
-            modelBuilder.Entity("Lighting.Areas.Identity.Data.ShareHolder", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("TitleENG")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TitleTH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("amountTitleENG")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("amountTitleTH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("created_at")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("detailsENG")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("detailsTH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("detailsTitleENG")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("detailsTitleTH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("nameTitleENG")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("nameTitleTH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("percentTitleENG")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("percentTitleTH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("updated_at")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ShareHolder");
-                });
-
-            modelBuilder.Entity("Lighting.Areas.Identity.Data.ShareHolder_DataDetails", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("amount")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("created_at")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("nameENG")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("nameTH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("percentPerAmount")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("updated_at")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ShareHolder_DataDetails");
                 });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.Smart_Solution", b =>
@@ -6036,8 +6061,8 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "49e0e3f8-31b8-4913-8c0e-7758fd2fef82",
-                            RoleId = "67725bb4-45f4-410d-b1dc-6a3fd60a9fbc"
+                            UserId = "641469a6-df8c-44d0-8b8a-1cdeb4f8abe2",
+                            RoleId = "35c7485c-1762-400f-b5f8-0de8321925ea"
                         });
                 });
 

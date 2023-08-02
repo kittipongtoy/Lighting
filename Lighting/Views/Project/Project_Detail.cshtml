@@ -15,11 +15,11 @@
                 <div class="col">
                     @if(lang == "EN")
                     {
-                        <h2>@category_name.Name_EN</h2>
+                        <h2>@category_name?.Name_EN</h2>
                     }
                     else
                     {
-                        <h2>@category_name.Name_TH</h2>
+                        <h2>@category_name?.Name_TH</h2>
                     }
                 </div>
             </div>
@@ -85,7 +85,7 @@
                     <div class="col">
                         <div class="content-center">
                             <a class="downloadBD-button" href="@Url.Action("DownloadFile","project",new {path = Model.File_Download})" target="_blank">
-                                <div><i class="fas fa-arrow-alt-circle-down"></i>@Model.File_Download.Split("\\").Reverse().First()</div>
+                                <div><i class="fas fa-arrow-alt-circle-down"></i>@Model?.File_Download?.Split("\\").Reverse().First()</div>
                             </a>
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                     <div class="col">
                         <div class="content-center">
                             <a class="downloadBD-button" href="@Url.Action("DownloadFile","project",new {path = Model.File_Download})" target="_blank">
-                                <div><i class="fas fa-arrow-alt-circle-down"></i>@Model.File_Download.Split("\\").Reverse().First()</div>
+                                <div><i class="fas fa-arrow-alt-circle-down"></i>@Model?.File_Download?.Split("\\").Reverse().First()</div>
                             </a>
                         </div>
                     </div>
@@ -264,7 +264,7 @@
             <div class="row">
                 <div class="col">
                     <div class="content-center">
-                        <a class="buttonB" href="@Url.Action("Project_Category","Project")"><i class="fas fa-long-arrow-alt-left"></i>Back</a>
+                        <a class="buttonB" href="@Url.Action("Project_Category","Project",new {categoryId=category_name?.Id})"><i class="fas fa-long-arrow-alt-left"></i>Back</a>
                     </div>
                 </div>
             </div>

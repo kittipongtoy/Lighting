@@ -26,7 +26,10 @@
 
     .add-product-grid-item {
         display: grid;
-        grid-template-rows: 1fr 2fr;
+        grid-template-rows: auto auto;
+        & > input[type="text"]{
+            height:4rem;
+        }
     }
 
     .add-product-grid-spec {
@@ -64,12 +67,12 @@
 
         <div class="add-product-grid-item">
             <label class="h4">เปลี่ยนรูปโชว์/Change Preview Image</label>
-            <input type="file" id="file_img_preview" />
+            <input class="form-control" type="file" id="file_img_preview" />
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4">Spact image  <a href="ManageProduct/DwonloadFile?path=@Model.SUB_IMG" target="_blank">download click  @Model?.SUB_IMG?.Split("\\").Reverse().Take(1).FirstOrDefault()</a></label>
-            <input type="file" id="sub_img_file" />
+            <input class="form-control" type="file" id="sub_img_file" />
         </div>
 
         <div class="add-product-grid-item">
@@ -124,22 +127,22 @@
 
         <div class="add-product-grid-item">
             <label class="h4">CUTSHEET <a href="ManageProduct/DwonloadFile?path=@Model?.CUTSHEET" target="_blank">download click @Model?.CUTSHEET?.Split("\\").Reverse().Take(1).FirstOrDefault()</a></label>
-            <input type="file" id="cut_sheet_file" />
+            <input class="form-control" type="file" id="cut_sheet_file" />
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4">IES FILE  <a href="ManageProduct/DwonloadFile?path=@Model?.IESFILE" target="_blank">download click  @Model?.IESFILE?.Split("\\").Reverse().Take(1).FirstOrDefault()</a></label>
-            <input type="file" id="ies_file" />
+            <input class="form-control" type="file" id="ies_file" />
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4">CATALOGUE  <a href="ManageProduct/DwonloadFile?path=@Model?.CATALOGUE" target="_blank">download click  @Model?.CATALOGUE?.Split("\\").Reverse().Take(1).FirstOrDefault()</a></label>
-            <input type="file" id="catalogue_file" />
+            <input class="form-control" type="file" id="catalogue_file" />
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4">RFA FILE  <a href="ManageProduct/DwonloadFile?path=@Model?.RFA" target="_blank">download click  @Model?.RFA?.Split("\\").Reverse().Take(1).FirstOrDefault()</a></label>
-            <input type="file" id="rfa_file" />
+            <input class="form-control" type="file" id="rfa_file" />
         </div>
 
         <div class="add-product-grid-item">
@@ -162,7 +165,7 @@
                     }
                 }
             </label>
-            <input type="file" multiple id="technical_img_file" accept="image/*" />
+            <input class="form-control" type="file" multiple id="technical_img_file" accept="image/*" />
         </div>
 
         <div class="add-product-grid-item">
@@ -175,7 +178,7 @@
                     }
                 }
             </label>
-            <input type="file" multiple id="light_distribute_file" accept="image/*" />
+            <input class="form-control"  type="file" multiple id="light_distribute_file" accept="image/*" />
         </div>
 
         <div class="add-product-grid-spec">
@@ -266,7 +269,7 @@
     </div>
     <br />
     <br />
-    <centter style="margin-bottom:3rem;"><button onclick="editProduct(@Model?.Id)" class="btn btn-primary">บันทึก/save</button></centter>
+    <centter style="margin-bottom:3rem;"><button onclick="editProduct(@Model?.Id)" class="btn btn-success">บันทึก/save</button></centter>
 </div>
 
 @section Scripts{

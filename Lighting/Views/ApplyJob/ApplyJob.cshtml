@@ -17,12 +17,18 @@
     <div class="container-fluid">
         <div class="wrap-pad">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-12">
-                    <a class="img-width imgBD hover-img mb-3" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><img src="~/Frontend_assets/images/job/job01.jpg"></a>
-                </div>
-                <div class="col-lg-6 col-md-6 col-12">
-                    <a class="img-width imgBD hover-img" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><img src="~/Frontend_assets/images/job/job02.jpg"></a>
-                </div>
+                @{
+                    var imgContent = (Lighting.Areas.Identity.Data.ApplyImgContent)ViewData["JobImage"];
+                }
+                @if (imgContent  != null)
+                {
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <a class="img-width imgBD hover-img mb-3" href="~/@imgContent.Position_pdf" target="_blank"><img src="~/@imgContent.Position_img"></a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <a class="img-width imgBD hover-img" href="~/@imgContent.Benefit_pdf" target="_blank"><img src="~/@imgContent.Benefit_img"></a>
+                    </div>
+                }
             </div>
             <div class="row">
                 <div class="col">

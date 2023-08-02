@@ -25,7 +25,7 @@ namespace Lighting.Controllers.Frontend
                 .Select(project => new 
                 {
                     Id = project.Id,
-                    Image_Path = project.Image_Path,
+                    Image = project.Image_Path,
                     Name = project.Name_EN,
                 })
                 .ToListAsync();
@@ -39,7 +39,7 @@ namespace Lighting.Controllers.Frontend
                 .Select(project => new
                 {
                     Id = project.Id,
-                    Image_Path = project.Image_Path,
+                    Image = project.Image_Path,
                     Name = project.Name_TH,
                 })
                 .ToListAsync();

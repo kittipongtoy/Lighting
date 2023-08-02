@@ -5,58 +5,67 @@
 @using Lighting.Areas.Identity.Data
 
 <style>
-    .add-product-container{
-        width:100%;
-        height:auto;
-        padding:3rem;
-
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
+    .add-product-container {
+        width: 100%;
+        height: auto;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
-    .add-product{
-        width:80%;
-        height:auto;
 
-        display:grid;
+    .add-product {
+        width: 80%;
+        height: auto;
+        display: grid;
         grid-template-rows: 30vw auto auto auto auto auto auto auto auto auto auto auto auto;
-        gap:2rem;
+        gap: 2rem;
     }
 
     .add-product-grid-item {
-        display:grid;
-        grid-template-rows:1fr 2fr;
+        display: grid;
+        grid-template-rows: auto auto;
+        & > input[type="text"]{
+             height: 4rem;
+        }
+
     }
 
     .add-product-grid-link {
-        height:8rem;
-        margin:10px;
+        height: 8rem;
+        margin: 10px;
         display: grid;
         grid-template-rows: 1fr 1fr;
-        & > *{
-            height:4rem;
-        }
-    }
-    .add-product-grid-spec {
-        height:auto;
-        width:100%;
-        display: grid;
-        grid-template-rows: 4rem repeat(16,auto);
-        gap:2rem;
-        background-color:rgba(0,0,0,0.2);
-        padding:2rem;
-        border-radius:10px;
-        & > h2{
-            background-color:gray;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            text-align:center;
-            border-radius: 5px;
-        }
+        & > *
+
+    {
+        height: 4rem;
     }
 
+    }
+
+    .add-product-grid-spec {
+        height: auto;
+        width: 100%;
+        display: grid;
+        grid-template-rows: 4rem repeat(16,auto);
+        gap: 2rem;
+        background-color: rgba(0,0,0,0.2);
+        padding: 2rem;
+        border-radius: 10px;
+        & > h2
+
+    {
+        background-color: gray;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        border-radius: 5px;
+    }
+
+    }
 </style>
 <div style="display:flex;justify-content:space-between;margin:1rem 10%;">
     <div></div>
@@ -66,18 +75,18 @@
 
     <div class="add-product">
 
-        <div >
-            <img src="" style="width:100%;height:100%;display:none;" id="img_preview"/>
+        <div>
+            <img src="" style="width:100%;height:100%;display:none;" id="img_preview" />
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4">รูปโชว์/Preview Image</label>
-            <input type="file" id="file_img_preview"/>
+            <input class="form-control" type="file" id="file_img_preview" accept="image/*" />
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4">รูปสเปค/Spact Image</label>
-            <input type="file" id="spact_img_file" />
+            <input class="form-control" type="file" id="spact_img_file" accept="image/*" />
         </div>
 
         <div class="add-product-grid-item">
@@ -86,7 +95,7 @@
                 <option class="h5" selected>กรุณาเลือก</option>
                 @foreach (var cat in (IEnumerable<Product_Category>)ViewData["category"])
                 {
-                    <option class="h5" value="@cat.Id" >@cat.Name_TH/@cat.Name_EN</option>
+                    <option class="h5" value="@cat.Id">@cat.Name_TH/@cat.Name_EN</option>
                 }
             </select>
         </div>
@@ -104,7 +113,7 @@
 
         <div class="add-product-grid-item">
             <label class="h4">ชื่อรุ่น/model name</label>
-            <input type="text" placeholder="ชื่อรุ่น" id="model_name"/>
+            <input type="text" placeholder="ชื่อรุ่น" id="model_name" />
         </div>
 
         <div>
@@ -116,32 +125,32 @@
                 <input type="text" class="form-control" id="category_name_en" placeholder="English">
             </div>
         </div>
-        
+
         <div class="add-product-grid-item">
             <label class="h4">CUTSHEET</label>
-            <input type="file" id="cut_sheet_file"/>
+            <input class="form-control" type="file" id="cut_sheet_file" />
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4">IES FILE</label>
-            <input type="file" id="ies_file"/>
+            <input class="form-control" type="file" id="ies_file" />
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4">CATALOGUE</label>
-            <input type="file" id="catalogue_file" />
+            <input class="form-control" type="file" id="catalogue_file" />
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4">RFA FILE</label>
-            <input type="file" id="rfa_file" />
+            <input class="form-control" type="file" id="rfa_file" />
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4">More Information</label>
             <input type="text" placeholder="https://More.Information" id="more_info" />
         </div>
-        
+
         <div class="add-product-grid-item">
             <label class="h4">การใช้งาน/Application</label>
             <textarea id="application"></textarea>
@@ -149,16 +158,16 @@
 
         <div class="add-product-grid-item">
             <label class="h4">Technical Drawing Image</label>
-            <input type="file" multiple id="technical_img_file" accept="image/*" />
+            <input class="form-control" type="file" multiple id="technical_img_file" accept="image/*" />
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4"> Light Distribution Image</label>
-            <input type="file" multiple id="light_distribute_file" accept="image/*" />
+            <input class="form-control" type="file" multiple id="light_distribute_file" accept="image/*" />
         </div>
 
         <div class="add-product-grid-spec">
-            <h2 >สเปค / Spacification</h2>
+            <h2>สเปค / Spacification</h2>
 
             <div class="add-product-grid-item">
                 <label class="h4">Housing</label>
@@ -241,16 +250,16 @@
 
         </div>
 
-       
+
     </div>
-    <br/>
     <br />
-    <centter style="margin-bottom:3rem;"><button onclick="addProduct()" class="btn btn-primary">บันทึก/save</button></centter>
+    <br />
+    <centter style="margin-bottom:3rem;"><button onclick="addProduct()" class="btn btn-success">บันทึก/save</button></centter>
 </div>
 
 @section Scripts{
     <script>
-        var preview_img,spact_img_file,CutSheet_file,IesFile_file,Catalogue_file,rfa_file,technical_file,light_distribute_file;
+        var preview_img, spact_img_file, CutSheet_file, IesFile_file, Catalogue_file, rfa_file, technical_file, light_distribute_file;
 
         $(document).ready(function () {
             $('#file_img_preview').change(async function (e) {
@@ -304,7 +313,7 @@
 
         //        }
 
-        function addProduct(){
+        function addProduct() {
 
             let form = new FormData();
 
@@ -342,8 +351,8 @@
             form.append("Luminaire_Lifetime", $("#Luminaire_Lifetime").val());
             form.append("Equivalent", $("#Equivalent").val());
 
-            if(light_distribute_file != undefined){
-                for (const file of light_distribute_file){
+            if (light_distribute_file != undefined) {
+                for (const file of light_distribute_file) {
                     form.append("LIGHT_DISTRIBUTION", file);
                 }
             }
@@ -353,7 +362,7 @@
                     form.append("Technical_Drawing_Img", file);
                 }
             }
-           
+
 
 
             $.ajax({

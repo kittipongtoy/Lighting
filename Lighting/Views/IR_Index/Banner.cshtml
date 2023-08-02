@@ -2,6 +2,7 @@
     ViewData["Title"] = "Banner";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
+
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <div class="toolbar" id="kt_toolbar">
         <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
@@ -25,4 +26,179 @@
         </div>
     </div>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <img src="@ViewBag.img_src" style="width:100%" id="preview_img">
+                <form  enctype="multipart/form-data" id="form">
+                    <div class="mb-3 mt-5">
+                        <label for="formFile" class="form-label">เลือกรูป</label>
+                        <input class="form-control" name="file" type="file" id="img_file">
+                    </div>
+                </form>
+            </div>
+        </div>
+        @{
+            var isSave = "save()";
+            if (ViewBag?.img_src != null)
+            {
+                isSave = "edit()";
+            }
+        }
+        <center> <button class="btn btn-success" onclick="@isSave">บันทึก/save</button> </center>
+    </div>
+    @*
+    <div class="post d-flex flex-column-fluid">
+        <div id="kt_content_container" class="container-xxl">
+            <div class="card">
+                <div class="card-header border-0 pt-6">
+                    <div class="card-title">
+                        <div class="d-flex align-items-center position-relative my-1">
+                            <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                    <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <input type="text" data-kt-customer-table-filter="search" id="search_table_1" class="form-control form-control-solid w-250px ps-15" placeholder="ค้นหา" />
+                        </div>
+                    </div>
+                    <div class="card-toolbar">
+                        <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+                            <a type="button" class="btn btn-primary" href="@Url.Action("History_Add","Resource_Facility")">เพิ่ม</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pt-0">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="History">
+                        <thead>
+                            <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                                <th>#</th>
+                                <th class="min-w-125px">หัวข้อ TH</th>
+                                <th class="min-w-125px">สถานะการใช้งาน</th>
+                                <th class="text-end min-w-70px">Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    *@
 </div>
+
+@section Scripts{
+    <script>
+        var preview_img;
+        $(document).ready(function () {
+            $('#img_file').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    preview_img = e.target.files[0];
+                    $('#preview_img').attr('src', await blobToBase64DataURL(preview_img));
+                }
+            });
+        });
+
+        const blobToBase64DataURL = blob => new Promise(
+            resolvePromise => {
+                const reader = new FileReader();
+                reader.onload = () => resolvePromise(reader.result);
+                reader.readAsDataURL(blob);
+            }
+        );
+
+        function save() {
+
+            let form = $('#form')[0]
+            console.log(form);
+            let formData = new FormData(form);
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/IR_index/Banner_Add_Submit',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = "/IR_index/Banner";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        function edit() {
+
+            let form = $('#form')[0]
+            console.log(form);
+            let formData = new FormData(form);
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/IR_index/Banner_Edit_Submit',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = "/IR_index/Banner";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+    </script>
+}

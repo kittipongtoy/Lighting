@@ -47,11 +47,100 @@
     <!--end load moment.js-->
     <script src="~/Frontend_assets/OwlCarousel/owl.carousel.min.js"></script>
     <script type="text/javascript">
+
+        window.onload = function () {
+
+            $.ajax({
+                type: 'GET',
+                url: "/Project/JsonNavBar",
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (data) {
+                    //console.log(data);
+                    const nav_link = (res, url)=>{
+                        return res.reduce((prev, curr) => prev += `
+                     <li>
+                         <a href="/${url}${curr.id}">
+                            <p>${curr.name}</p>
+                                    <div class="menu-img"><img src="/${curr.image}"></div>
+                         </a>
+                     </li>`, "");
+                    }
+                    $("#nav_projectref").html(nav_link(data, "project/Project_Category?categoryId="));
+
+                }, error: function (e) {
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                url: "/Product/JsonNavBar",
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (data) {
+                    //console.log(data);
+                    const nav_link = (res, url)=>{
+                        return res.reduce((prev, curr) => prev += `
+                        <li>
+                            <a href="${url}${curr.id}">
+                                <img src="/${curr.image}">
+                                <div class="product-cate">
+                                    <p>${curr.name}</p>
+                                </div>
+                            </a>
+                        </li>`, "");
+                    }
+
+                    $("#nav_product").html(nav_link(data, "/Product/Product_Category?categoryId="));
+
+                }, error: function (e) {
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                url: "/SmartSolution/JsonNavBar",
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (data) {
+                    //console.log(data);
+                    const nav_link = (res, url)=>{
+                        return res.reduce((prev, curr) => prev += `
+                        <li>
+                        <a href="${url}${curr.id}">
+                         <p>${curr.name}</p>
+                         <div class="menu-img"><img src="/${curr.image}"></div>
+                        </a>
+                        </li>`, "");
+                    }
+
+                    $("#nav_smartsolution").append(nav_link(data, "/SmartSolution/SmartSolutionDetail?id="));
+
+                }, error: function (e) {
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+
+        };
+
         var menu_width;
         jQuery(document).ready(
             function () {
                 initMenu();
             });
+
+
+
+
+
         function initMenu() {
             menu_width = $("#menu .menu").width();
             $("#menu .menu-back").click(function () {
@@ -694,7 +783,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col">
-                                                            <ul class="dropdown-submenu w-half">
+                                                            <ul class="dropdown-submenu w-half" id="nav_smartsolution">
                                                                                 @*
                                                                 <li>
                                                                 <a href="@Url.Action("SmartSolutionDetail","SmartSolution")">
@@ -836,13 +925,13 @@
                                             </div>
                                         </li>
                                         <li data-page="product">
-                                                            @* <a href="@Url.Action("Product","Product")">PRODUCTS</a>*@
-                                            <a href="https://www.mydevdemosites.com/category/indoor">PRODUCTS</a>
+                                           <a href="@Url.Action("Product","Product")">PRODUCTS</a>
+                                                            @*<a href="https://www.mydevdemosites.com/category/indoor">PRODUCTS</a>*@
                                             <div class="dropdown-container min-pad">
                                                 <div class="menu-container">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <ul class="product-dropdownmenu">
+                                                            <ul class="product-dropdownmenu" id="nav_product">
                                                                                 @*
                                                                 <li>
                                                                 <a href="@Url.Action("Product_Category","Product")">
@@ -1012,8 +1101,8 @@
                                             </div>
                                         </li>
                                         <li data-page="project">
-                                                            @*<a href="@Url.Action("Project","Project")">PROJECT REF</a>*@
-                                            <a href="https://www.mydevdemosites.com/projects">PROJECT REF</a>
+                                                            <a href="@Url.Action("Project","Project")">PROJECT REF</a>
+                                                            @*<a href="https://www.mydevdemosites.com/projects">PROJECT REF</a>*@
                                             <div class="dropdown-container">
                                                 <div class="imgHover-container">
                                                     <div class="imgHover-containerBG"></div>
@@ -1026,7 +1115,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col">
-                                                            <ul class="dropdown-submenu w-half">
+                                                            <ul class="dropdown-submenu w-half" id="nav_projectref">
                                                                                 @*
                                                                 <li>
                                                                 <a href="@Url.Action("Project_Category","Project")">
@@ -1198,10 +1287,12 @@
                                         <li data-page="job"><a href="@Url.Action("ApplyJob","ApplyJob")">APPLY JOB</a></li>
                                         <li data-page="contact"><a href="@Url.Action("Contact","Contact")">CONTACT</a></li>
                                         *@
-                                        <li data-page="download"><a href="https://www.mydevdemosites.com/catalogues">DOWNLOAD</a></li>
-                                        <li data-page="news"><a href="#">NEWS</a></li>
+                                         @*<li data-page="download"><a href="https://www.mydevdemosites.com/catalogues">DOWNLOAD</a></li>*@
+                                        <li data-page="download"><a href="@Url.Action("CATALOGUE_Page","Download")">DOWNLOAD</a></li>
+                                        <li data-page="news"><a href="@Url.Action("new","new")">NEWS</a></li>
                                         <li data-page="ir"><a href="@Url.Action("IR_index","Frontend_IR")">INVESTOR</a></li>
-                                        <li data-page="job"><a href="https://www.mydevdemosites.com/apply_job">APPLY JOB</a></li>
+                                        @*<li data-page="job"><a href="https://www.mydevdemosites.com/apply_job">APPLY JOB</a></li>*@
+                                        <li data-page="job"><a href="@Url.Action("Applyjob","Applyjob")">APPLY JOB</a></li>
                                         <li data-page="contact"><a href="@Url.Action("Contact","Contact")">CONTACT</a></li>
                                     </ul>
                                 </div>
