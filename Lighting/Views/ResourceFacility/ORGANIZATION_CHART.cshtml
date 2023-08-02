@@ -28,6 +28,108 @@
     <div class="post d-flex flex-column-fluid">
         <div id="kt_content_container" class="container-xxl">
             <div class="card">
+
+                <div class="card-body pt-0">
+
+                    <div class="mb-10">
+                    </div>
+                    <form id="form_create" enctype="multipart/form-data">
+                        @{
+                            if (Model.count_Organization_chart == 0)
+                            {
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="Title_TH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="Title_EN" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="SubTitle_TH" autocomplete="off"> </textarea>
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียดENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="SubTitle_EN" autocomplete="off"></textarea>
+                                    </div>
+                                </div>
+
+
+                            }
+                            else
+                            {
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="Title_TH" value="@Model.fod_Organization_chart.Title_TH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="Title_EN" value="@Model.fod_Organization_chart.Title_EN" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="SubTitle_TH">@Model.fod_Organization_chart.SubTitle_TH</textarea>
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียดENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="SubTitle_EN">@Model.fod_Organization_chart.SubTitle_EN</textarea>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                    </form>
+
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
+                    </div>
+
+                </div> 
+
                 <div class="card-header border-0 pt-6">
                     <div class="card-title">
                         <div class="d-flex align-items-center position-relative my-1">
@@ -42,16 +144,16 @@
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                            <a type="button" class="btn btn-primary" href="@Url.Action("History_Add","ResourceFacility")">เพิ่ม</a>
+                            <a type="button" class="btn btn-primary" href="@Url.Action("ORGANIZATION_CHART_Add","ResourceFacility")">เพิ่ม</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="History">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="organization_table">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th>#</th>
-                                <th class="min-w-125px">หัวข้อ TH</th>
+                                <th class="min-w-125px">รูป</th>
                                 <th class="min-w-125px">สถานะการใช้งาน</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
@@ -61,4 +163,196 @@
             </div>
         </div>
     </div>
-</div>
+</div> 
+                            
+@section Scripts{
+
+    <script>
+
+        function submit_form() {
+            var raw_form = document.getElementById('form_create');
+            var formData = new FormData(raw_form);
+
+            $.ajax({
+                type: 'POST',
+                url: '/ResourceFacility/ORGANIZATION_CHART_submit',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        function edit_details(Id) {
+            location.href = '/ResourceFacility/ORGANIZATION_CHART_Edit/?Id=' + Id; 
+        }
+
+        function changeStatus(Id, checked_obj) {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/ResourceFacility/ORGANIZATION_CHART_Change",
+                data: {
+                    Id: Id,
+                    status: checked_obj.checked
+                },    // multiple data sent using ajax
+                success: function (data) {
+                    if (data.status == "success") {
+                        window.location.href = "@Url.Action("ORGANIZATION_CHART","ResourceFacility")";
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        function delete_details(Id) {
+            Swal.fire({
+                title: 'คุณต้องการจะลบหรือไม่?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'ใช่',
+                denyButtonText: `ไม่ใช่`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "Delete",
+                        cache: false,
+                        url: "/ResourceFacility/ORGANIZATION_CHART_Delete",
+                        data: {
+                            Id: Id
+                        },    // multiple data sent using ajax
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then((result) => {
+                                    var oTable = $('#organization_table').DataTable();
+                                    oTable.ajax.reload(null, false);
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+                } else if (result.isDenied) {
+
+                }
+            })
+        }
+
+        //load data details to table
+        $(document).ready(function () {
+
+            var table_2 = $("#organization_table").DataTable({
+                responsive: true,
+                order: [[0, "asc"]],
+                "ajax": {
+                    "url": "/ResourceFacility/TableORGANIZATION_CHART",
+                    "type": "POST",
+                    "datatype": "json", 
+                },
+                "columns": [
+                    {
+                        "name": "count_row", "data": "count_row"
+                    },
+                    {
+                        "name": "image", "data": "image", "class": "text-center", "render": function (data, type, row) {
+                            var text = '<div class="mb-10" style="text-align:center;">' +
+                                '<img src="/upload_image/RF_Organization_Chart/' + row.image + '" style="height: 250px;width: 250px;" alt="image">' +
+                                '</div>';
+                            return text;
+
+                        }
+                    }, 
+                    {
+                        "name": "status", "data": "status", "render": function (data, type, row) {
+                            if (row.status == 1) {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" checked type="checkbox" name="Status" value="1" id="Status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="Status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            } else {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" type="checkbox" name="Status" value="1" id="Status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="Status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            }
+                        }
+                    },
+                    {
+                        "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
+                            var text = '<button type="button" class="btn btn-warning" onclick="edit_details(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
+                            text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_details(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
+                            return text;
+
+                        }
+                    }
+                ],
+            });
+
+
+            $('#search_table_2').keyup(function () {
+                table_2.search($(this).val()).draw();
+            })
+        });
+
+    </script>
+
+}
+

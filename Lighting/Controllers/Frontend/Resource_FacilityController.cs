@@ -1,6 +1,7 @@
 ﻿using Lighting.Areas.Identity.Data;
 using Lighting.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 
 namespace Lighting.Controllers.Frontend
@@ -23,18 +24,27 @@ namespace Lighting.Controllers.Frontend
             return View();
         }
 
-        public IActionResult Profile_Our_Philosophy_Vision_Misson() 
+        public async Task<IActionResult> Profile_Our_Philosophy_Vision_Misson()
         {
+            ViewBag.Header = await db.RF_Philosophy_Vision_Mission.ToListAsync();
+
+            ViewBag.Body = await db.RF_Philosophy_Vision_Mission_Details.Where(x => x.active_status == 1).ToListAsync();
             return View();
         }
 
-        public IActionResult Profile_Organization_Chart()
+        public async Task<IActionResult> Profile_Organization_Chart()
         {
+            ViewBag.Header = await db.Organization_Chart.ToListAsync();
+
+            ViewBag.Body = await db.Organization_ChartDetail.Where(x => x.Status == 1).ToListAsync(); 
             return View();
         }
 
-        public IActionResult Profile_Awards()
+        public async Task<IActionResult> Profile_Awards()
         {
+            ViewBag.Header = await db.Awards.ToListAsync();
+
+            ViewBag.Body = await db.AwardsDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
 

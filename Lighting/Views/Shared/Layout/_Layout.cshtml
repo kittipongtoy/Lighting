@@ -272,17 +272,7 @@
         Here_IR_Index = "here";
         show_investerRelation = "show";
         here_investerRelation = "here";
-    }
-
-    var show_privacy = "";
-    var here_privacy = "";
-    if (ViewData["Title"] == "privacy_index"
-    || ViewData["Title"] == "privacy_create"
-    || ViewData["Title"] == "privacy_edit")
-    {
-        show_privacy = "show";
-        here_privacy = "here";
-    }
+    } 
 
     var show_news = "";
     var here_news = "";
@@ -313,7 +303,25 @@
     || ViewData["Title"] == "ORGANIZATION_CHART_Edit"
     || ViewData["Title"] == "AWARDS"
     || ViewData["Title"] == "AWARDS_Add"
-    || ViewData["Title"] == "AWARDS_Edit")
+    || ViewData["Title"] == "AWARDS_Edit"
+    || ViewData["Title"] == "RF_Manufacturing"
+    || ViewData["Title"] == "RF_ManufacturingImages_create"
+    || ViewData["Title"] == "RF_ManufacturingImages_edit"
+    || ViewData["Title"] == "RF_WarehouseLogistics"
+    || ViewData["Title"] == "RF_WarehouseLogisticsImages_create"
+    || ViewData["Title"] == "RF_WarehouseLogisticsImages_edit"
+    || ViewData["Title"] == "RF_OverseaOffices"
+    || ViewData["Title"] == "RF_OverseaOfficesImages_create"
+    || ViewData["Title"] == "RF_OverseaOfficesImages_edit"
+    || ViewData["Title"] == "RF_SolidState"
+    || ViewData["Title"] == "RF_SolidStateImages_create"
+    || ViewData["Title"] == "RF_SolidStateImages_edit"
+    || ViewData["Title"] == "RF_AssemblyService"
+    || ViewData["Title"] == "RF_AssemblyServiceImages_create"
+    || ViewData["Title"] == "RF_AssemblyServiceImages_edit"
+    || ViewData["Title"] == "RF_SolutionCenters"
+    || ViewData["Title"] == "RF_SolutionCentersImages_create"
+    || ViewData["Title"] == "RF_SolutionCentersImages_edit")
     {
         show_Resource_Facility = "show";
         here_Resource_Facility = "here";
@@ -341,32 +349,27 @@
     {
         show_product = "show";
         here_product = "here";
+    } 
+    
+    var show_privacy = "";
+    var here_privacy = "";
+    if (ViewData["Title"] == "privacy_index"
+    || ViewData["Title"] == "privacy_create"
+    || ViewData["Title"] == "privacy_edit")
+    {
+        show_privacy = "show";
+        here_privacy = "here";
     }
 
-    var show_RF = "";
-    var here_RF = "";
-    if (ViewData["Title"] == "RF_Manufacturing"
-    || ViewData["Title"] == "RF_ManufacturingImages_create"
-    || ViewData["Title"] == "RF_ManufacturingImages_edit"
-    || ViewData["Title"] == "RF_WarehouseLogistics"
-    || ViewData["Title"] == "RF_WarehouseLogisticsImages_create"
-    || ViewData["Title"] == "RF_WarehouseLogisticsImages_edit"
-    || ViewData["Title"] == "RF_OverseaOffices"
-    || ViewData["Title"] == "RF_OverseaOfficesImages_create"
-    || ViewData["Title"] == "RF_OverseaOfficesImages_edit"
-    || ViewData["Title"] == "RF_SolidState"
-    || ViewData["Title"] == "RF_SolidStateImages_create"
-    || ViewData["Title"] == "RF_SolidStateImages_edit"
-    || ViewData["Title"] == "RF_AssemblyService"
-    || ViewData["Title"] == "RF_AssemblyServiceImages_create"
-    || ViewData["Title"] == "RF_AssemblyServiceImages_edit"
-    || ViewData["Title"] == "RF_SolutionCenters"
-    || ViewData["Title"] == "RF_SolutionCentersImages_create"
-    || ViewData["Title"] == "RF_SolutionCentersImages_edit")
+    var show_cookies = "";
+    var here_cookies = "";
+    if (ViewData["Title"] == "cookies_index")
     {
-        show_RF = "show";
-        here_RF = "here";
+        show_cookies = "show";
+        here_cookies = "here";
     }
+
+   
 }
 
 <!DOCTYPE html>
@@ -544,19 +547,8 @@
                                                 <span class="menu-title">AWARDS</span>
                                             </a>
                                         }
-                                    </div>
-                                </div>
-                            </div>
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_RF @here_RF">
-                                <span class="menu-link">
-                                    <span class="menu-icon">
-                                        <i class="bi bi-columns-gap fs-3"></i>
-                                    </span>
-                                    <span class="menu-title">สมาร์ท โซลูชั่น</span>
-                                    <span class="menu-arrow"></span>
-                                </span>
-                                <div class="menu-sub menu-sub-accordion">
-
+                                    </div> 
+                                    
                                     <div class="menu-item">
                                         @if (ViewData["Title"] == "RF_InnovationCenters"
                                         || ViewData["Title"] == "RF_InnovationCentersImages_create"
@@ -717,6 +709,25 @@
                                         }
                                     </div>
 
+                                </div>
+                            </div>
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                <span class="menu-link">
+                                    <span class="menu-icon">
+                                        <i class="bi bi-columns-gap fs-3"></i>
+                                    </span>
+                                    <span class="menu-title">สมาร์ท โซลูชั่น</span>
+                                    <span class="menu-arrow"></span>
+                                </span>
+                                <div class="menu-sub menu-sub-accordion">
+                                     <div class="menu-item">
+                                        <a class="menu-link" href="#">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">หน้าแรก</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
@@ -2114,6 +2125,70 @@
                                 </div>
                             </div>
                         </div>
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_privacy @here_privacy">
+                                <span class="menu-link">
+                                    <span class="menu-icon">
+                                        <i class="bi bi-briefcase-fill fs-3"></i>
+                                    </span>
+                                    <span class="menu-title">นโยบายความเป็นส่วนตัว</span>
+                                    <span class="menu-arrow"></span>
+                                </span>
+                                <div class="menu-sub menu-sub-accordion">
+                                    <div class="menu-item">
+                                        @if (ViewData["Title"] == "privacy_index"
+                                        || ViewData["Title"] == "privacy_create"
+                                        || ViewData["Title"] == "privacy_edit")
+                                        {
+                                            <a class="menu-link active" href="@Url.Action("privacy_index","Privacy")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">นโยบายความเป็นส่วนตัว</span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="menu-link" href="@Url.Action("privacy_index","Privacy")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">นโยบายความเป็นส่วนตัว</span>
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_cookies @here_cookies">
+                                <span class="menu-link">
+                                    <span class="menu-icon">
+                                        <i class="bi bi-briefcase-fill fs-3"></i>
+                                    </span>
+                                    <span class="menu-title">นโยบายคุกกี้</span>
+                                    <span class="menu-arrow"></span>
+                                </span>
+                                <div class="menu-sub menu-sub-accordion">
+                                    <div class="menu-item">
+                                        @if (ViewData["Title"] == "cookies_index")
+                                        {
+                                            <a class="menu-link active" href="@Url.Action("cookies_index","Privacy")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">นโยบายคุกกี้</span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="menu-link" href="@Url.Action("cookies_index","Privacy")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">นโยบายคุกกี้</span>
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion @Show_Authorization @Here_Authorization">
                             <span class="menu-link">
                                 <span class="menu-icon">

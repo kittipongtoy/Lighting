@@ -27,7 +27,109 @@
 
     <div class="post d-flex flex-column-fluid">
         <div id="kt_content_container" class="container-xxl">
-            <div class="card">
+            <div class="card"> 
+
+                <div class="card-body pt-0">
+
+                    <div class="mb-10">
+                    </div>
+                    <form id="form_create" enctype="multipart/form-data">
+                        @{
+                            if (Model.count_RF_Philosophy_Vision_Mission == 0)
+                            {
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="Title_TH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="Title_EN" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="SubTitle_TH" autocomplete="off"> </textarea>
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียดENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="SubTitle_EN" autocomplete="off"></textarea>
+                                    </div>
+                                </div>
+
+
+                            }
+                            else
+                            {
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="Title_TH" value="@Model.fod_RF_Philosophy_Vision_Mission.Title_TH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="Title_EN" value="@Model.fod_RF_Philosophy_Vision_Mission.Title_EN" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="SubTitle_TH">@Model.fod_RF_Philosophy_Vision_Mission.SubTitle_TH</textarea>
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียดENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <textarea type="text" class="form-control" name="SubTitle_EN">@Model.fod_RF_Philosophy_Vision_Mission.SubTitle_EN</textarea>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                    </form>
+
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div class="card-header border-0 pt-6">
                     <div class="card-title">
                         <div class="d-flex align-items-center position-relative my-1">
@@ -47,11 +149,12 @@
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="History">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="philosophy_tbl">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th>#</th>
-                                <th class="min-w-125px">หัวข้อ TH</th>
+                                <th class="min-w-125px">รูป TH</th>
+                                <th class="min-w-125px">รูป ENG</th>
                                 <th class="min-w-125px">สถานะการใช้งาน</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
@@ -62,109 +165,34 @@
         </div>
     </div>
 </div>
+
 @section Scripts{
+
     <script>
-        $(() => {
-            var oTable = $("#History").DataTable({
-                processing: true,
-                serverSide: true,
-                searching: false,
-                responsive: true,
-                oLanguage: {
-                    "sEmptyTable": "ไม่มีข้อมูล",
-                },
-                ajax: {
-                    type: "POST",
-                    url: '/ResourceFacility/TableHistory',
-                },
-                columns: [
-                    { 'data': 'index', name: 'index', className: 'text-center' },
-                    { 'data': 'title_TH', name: 'title_TH', className: 'text-center' },
-                    {
-                        "name": "status", "data": "status", "render": function (data, type, row) {
-                            if (row.status == 1) {
-                                var text = '<div class="form-check form-switch">' +
-                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
-                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
-                                    '</div>';
-                                return text;
-                            } else {
-                                var text = '<div class="form-check form-switch">' +
-                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
-                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
-                                    '</div>';
-                                return text;
-                            }
-                        }
-                    },
-                    {
-                        "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
-                            var text = '<button type="button" class="btn btn-warning" onclick="edit_item(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
-                            text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_item(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
-                            return text;
-                        }
-                    }
-                ]
-            });
 
-            var oTable = $("#HistoryDetail").DataTable({
-                processing: true,
-                serverSide: true,
-                searching: false,
-                responsive: true,
-                oLanguage: {
-                    "sEmptyTable": "ไม่มีข้อมูล",
-                },
-                ajax: {
-                    type: "POST",
-                    url: '/ResourceFacility/TableHistory',
-                },
-                columns: [
-                    { 'data': 'index', name: 'index', className: 'text-center' },
-                    { 'data': 'title_TH', name: 'title_TH', className: 'text-center' },
-                    {
-                        "name": "status", "data": "status", "render": function (data, type, row) {
-                            if (row.status == 1) {
-                                var text = '<div class="form-check form-switch">' +
-                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
-                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
-                                    '</div>';
-                                return text;
-                            } else {
-                                var text = '<div class="form-check form-switch">' +
-                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
-                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
-                                    '</div>';
-                                return text;
-                            }
-                        }
-                    },
-                    {
-                        "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
-                            var text = '<button type="button" class="btn btn-warning" onclick="edit_item(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
-                            text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_item(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
-                            return text;
-                        }
-                    }
-                ]
-            });
-        });
+        function submit_form() {
+            var raw_form = document.getElementById('form_create');
+            var formData = new FormData(raw_form);
 
-        function edit_item(id) {
-            location.href = '/ResourceFacility/History_Edit/?Id=' + id;
-        }
-
-        function changeStatus(id, checked_obj) {
             $.ajax({
-                type: "POST",
+                type: 'POST',
+                url: '/ResourceFacility/RF_Philosophy_Vision_Mission_submit',
+                data: formData,
+                processData: false,
+                contentType: false,
                 cache: false,
-                url: "/ResourceFacility/History_Change",
-                data: {
-                    id: id
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
                 },
                 success: function (data) {
                     if (data.status == "success") {
-
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
                     }
                     else {
                         Swal.fire({
@@ -177,21 +205,29 @@
                         icon: 'error',
                         text: e.message,
                     });
+                    console.log(e.message);
+                    console.log(e.inner);
                 }
             });
         }
 
-        function changeStatus(id, checked_obj) {
+        function edit_details(Id) {
+            location.href = '/ResourceFacility/AWARDS_Edit/?Id=' + Id;
+
+        }
+
+        function changeStatus(Id, checked_obj) {
             $.ajax({
                 type: "POST",
                 cache: false,
-                url: "/ResourceFacility/History_Change",
+                url: "/ResourceFacility/AWARDS_Change",
                 data: {
-                    Id: id
-                },
+                    Id: Id,
+                    status: checked_obj.checked
+                },    // multiple data sent using ajax
                 success: function (data) {
                     if (data.status == "success") {
-
+                        window.location.href = "@Url.Action("OUR_PHILOSOPHY_VISION_MISSION","ResourceFacility")";
                     }
                     else {
                         Swal.fire({
@@ -204,11 +240,13 @@
                         icon: 'error',
                         text: e.message,
                     });
+                    console.log(e.message);
+                    console.log(e.inner);
                 }
             });
         }
 
-        function delete_item(id) {
+        function delete_details(Id) {
             Swal.fire({
                 title: 'คุณต้องการจะลบหรือไม่?',
                 showDenyButton: true,
@@ -216,14 +254,15 @@
                 confirmButtonText: 'ใช่',
                 denyButtonText: `ไม่ใช่`,
             }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     $.ajax({
-                        type: "delete",
+                        type: "POST",
                         cache: false,
-                        url: "/ResourceFacility/History_Delete",
+                        url: "/ResourceFacility/AWARDS_Delete",
                         data: {
-                            Id: id
-                        },
+                            Id: Id
+                        },    // multiple data sent using ajax
                         success: function (data) {
                             if (data.status == "success") {
                                 Swal.fire({
@@ -232,7 +271,7 @@
                                     showConfirmButton: false,
                                     timer: 2000
                                 }).then((result) => {
-                                    var oTable = $('#History').DataTable();
+                                    var oTable = $('#philosophy_tbl').DataTable();
                                     oTable.ajax.reload(null, false);
                                 });
                             }
@@ -247,6 +286,8 @@
                                 icon: 'error',
                                 text: e.message,
                             });
+                            console.log(e.message);
+                            console.log(e.inner);
                         }
                     });
                 } else if (result.isDenied) {
@@ -254,5 +295,74 @@
                 }
             })
         }
+
+        //load data details to table
+        $(document).ready(function () {
+
+            var table_2 = $("#philosophy_tbl").DataTable({
+                responsive: true,
+                order: [[0, "asc"]],
+                "ajax": {
+                    "url": "/ResourceFacility/RF_Philosophy_Vision_Mission_Details_getTable",
+                    "type": "POST",
+                    "datatype": "json",
+                },
+                "columns": [
+                    {
+                        "name": "count_row", "data": "count_row"
+                    },
+                    {
+                        "name": "image_name", "data": "image_name", "class": "text-center", "render": function (data, type, row) {
+                            var text = '<div class="mb-10" style="text-align:center;">' +
+                                '<img src="/upload_image/RF_Philosophy_VM/' + row.image_name + '" style="height: 250px;width: 250px;" alt="image">' +
+                                '</div>';
+                            return text;
+
+                        }
+                    },
+                    {
+                        "name": "image_name_ENG", "data": "image_name_ENG", "class": "text-center", "render": function (data, type, row) {
+                            var text = '<div class="mb-10" style="text-align:center;">' +
+                                '<img src="/upload_image/RF_Philosophy_VM/' + row.image_name_ENG + '" style="height: 250px;width: 250px;" alt="image">' +
+                                '</div>';
+                            return text;
+
+                        }
+                    },
+                    {
+                        "name": "active_status", "data": "active_status", "render": function (data, type, row) {
+                            if (row.active_status == 1) {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" checked type="checkbox" name="active_status" value="1" id="active_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="active_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            } else {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" type="checkbox" name="active_status" value="1" id="active_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="active_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            }
+                        }
+                    },
+                    {
+                        "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
+                            var text = '<button type="button" class="btn btn-warning" onclick="edit_details(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
+                            text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_details(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
+                            return text;
+
+                        }
+                    }
+                ],
+            });
+
+
+            $('#search_table_2').keyup(function () {
+                table_2.search($(this).val()).draw();
+            })
+        });
+
     </script>
+
 }

@@ -1,0 +1,91 @@
+﻿ 
+@{
+    ViewData["Title"] = "Profile_Organization_Chart";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+
+    var Title = (List<Lighting.Areas.Identity.Data.Organization_Chart>)ViewBag.Header;
+    var Contact = (List<Lighting.Areas.Identity.Data.Organization_ChartDetail>)ViewBag.Body; 
+
+
+}
+<div class="top-page">
+    <div class="container">
+        <div class="row">
+            <div class="col">RESOURCE & FACILITY</div>
+        </div>
+    </div>
+</div>
+
+<!---------- RESOURCE & FACILITY :: ORGANIZATION CHART ---------->
+<div class="content-padding foot-pad">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="header-twoline">
+                    @if (Title.Count() != 0)
+                    {
+                        foreach (var item in ViewBag.Header)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                <h5>@item.Title_EN</h5>
+                                <h1>@item.SubTitle_EN</h1>
+                            }
+                            else
+                            {
+                                <h5>@item.Title_TH</h5>
+                                <h1>@item.SubTitle_TH</h1>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <h5>PROFILE</h5>
+                        <h1>ORGANIZATION CHART</h1>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            @if (Contact.Count() != 0)
+            {
+                foreach (var item in ViewBag.Body)
+                {
+                    <div class="col-lg-10 col-md-11 col-12">
+                        <a class="img-width hover-img" data-fancybox href="~/upload_image/RF_Organization_Chart/@item.Image">
+                            <img src="~/upload_image/RF_Organization_Chart/@item.Image">
+                        </a>
+                    </div> 
+                }
+            }
+            else
+            {
+                <div class="col-lg-10 col-md-11 col-12">
+                    <a class="img-width hover-img" data-fancybox href="~/Frontend_assets/images/resource-facility/organization_2018.jpg">
+                        <img src="~/Frontend_assets/images/resource-facility/organization_2018.jpg">
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        Fancybox.bind('[data-fancybox="gallery"]', {
+            Toolbar: {
+                display: [
+                    { id: "prev", position: "center" },
+                    { id: "counter", position: "center" },
+                    { id: "next", position: "center" },
+                    "zoom",
+                    "fullscreen",
+                    "download",
+                    "thumbs",
+                    "close",
+                ],
+            },
+        });
+    </script>
+}

@@ -25,4 +25,117 @@
         </div>
     </div>
 
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
+            <!--begin::Card-->
+            <div class="card">
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <div class="row mb-3" style="padding-top: 1.5rem!important;">
+                        <div class="col-6">
+                            <h2>
+                                เพิ่มรายการ
+                            </h2>
+                        </div>
+                        <div class="col-6" style="text-align:right;">
+                            <a type="button" class="btn btn-secondary" href="@Url.Action("ORGANIZATION_CHART","ResourceFacility")">ย้อนกลับ</a>
+                        </div>
+                    </div>
+                    <form id="form_create" enctype="multipart/form-data">
+
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    รูปภาพ 
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <input type="file" class="form-control" name="upload_image" accept="image/*" required />
+                            </div>
+                        </div>
+                         
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    สถานะการใช้งาน
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" checked type="checkbox" name="Status" value="1" id="Status">
+                                    <label class="form-check-label" for="Status">ใช้งาน</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+
+        </div>
+        <!--end::Container-->
+    </div> 
+
 </div>
+
+                        
+@section Scripts{
+
+    <script>
+
+        function submit_form() {
+            var raw_form = document.getElementById('form_create');
+            var formData = new FormData(raw_form);
+
+            $.ajax({
+                type: 'POST',
+                url: '/ResourceFacility/ORGANIZATION_CHART_Details_Submit',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = "@Url.Action("ORGANIZATION_CHART","ResourceFacility")";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+    </script>
+}
+
+

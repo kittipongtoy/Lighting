@@ -4,6 +4,50 @@ namespace Lighting.Models
 {
     public class Resource_FacilityModels
     {
+        public int? count_RF_Philosophy_Vision_Mission { get; set; }
+        public RF_Philosophy_Vision_Mission? fod_RF_Philosophy_Vision_Mission { get; set; }
+        public RF_Philosophy_Vision_Mission_Details? RF_Philosophy_Vision_Mission_Details { get; set; }
+        public class RF_Philosophy_Vision_Mission_Details_table
+        {
+            public int count_row { get; set; }
+            public int id { get; set; }
+            public string? image_name { get; set; }
+            public string? image_name_ENG { get; set; }
+            public int? active_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        }
+
+        public int? count_Organization_chart { get; set; }
+        public Organization_Chart? fod_Organization_chart { get; set; }
+        public Organization_ChartDetail? Organization_ChartDetail { get; set; }
+        public class Organization_ChartDetail_table
+        {
+            public int count_row { get; set; }
+            public int Id { get; set; }
+            public string? Image { get; set; }
+            public int? Status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        }
+        public int? count_Awards { get; set; }
+        public Awards? fod_Awards { get; set; }
+        public AwardsDetail? AwardsDetail { get; set; }
+        public class AwardsDetail_table
+        {
+            public int count_row { get; set; }
+            public int Id { get; set; }
+            public string? ImageTH { get; set; }
+            public string? ImageEN { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+        }
+
 
         public int? count_RF_Innovation_Centers { get; set; }
         public RF_Innovation_Centers? fod_RF_Innovation_Centers { get; set; }

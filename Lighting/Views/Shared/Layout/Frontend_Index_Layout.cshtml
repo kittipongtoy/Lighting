@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="~/Frontend_assets/fancybox/fancybox.css">
     <script src="~/Frontend_assets/fancybox/fancybox.umd.js"></script>
     <script src="~/Frontend_assets/OwlCarousel/owl.carousel.min.js"></script>
+
     <script>
         $(function () {
             var getPage = $("#page_name").val();
@@ -192,8 +193,8 @@
                         items: 1,
                         slideBy: 1,
                         dots: true,
-                                        / nav: true
-                                },
+                                                                                / nav: true
+                                                                        },
                 640: {
                     items: 3,
                     slideBy: 1
@@ -203,8 +204,8 @@
                     slideBy: 1
                 }
             }
-                        })
-                    });
+                                                                })
+                                                            });
     </script>
 </head>
 <body>
@@ -289,10 +290,10 @@
                                                                                         <div class="menu-item"><a href="@Url.Action("Contact","Contact")">ติดต่อเรา</a></div>
                                                                                     </li>
                                                                                     <li data-page="privacy">
-                                                                                        <div class="menu-item"><a href="#">PRIVACY POLICY</a></div>
+                                                                                        <div class="menu-item"><a href="@Url.Action("PrivacyPolicy","PrivacyPolicy")">PRIVACY POLICY</a></div>
                                                                                     </li>
                                                                                     <li data-page="cookie">
-                                                                                        <div class="menu-item"><a href="#">COOKIES POLICY</a></div>
+                                                                                        <div class="menu-item"><a href="@Url.Action("CookiesPolicy","CookiesPolicy")>COOKIES POLICY</a></div>
                                                                                     </li>
 
                                                                                     <li>
@@ -311,28 +312,28 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <ul class="lang-menu">
-                                                                                    @{
-                                                                                    var get_cookies = Context.Request.Cookies["lang"];
-                                                                                    if (get_cookies == "EN")
-                                                                                    {
-                                                                                        <li id="butt_th">
-                                                                                            <button onclick="setLang('TH')">TH</button>
-                                                                                        </li>
-                                                                                        <li id="butt_en" class="active">
-                                                                                            <button onclick="setLang('EN')">EN</button>
-                                                                                        </li>
-                                                                                    }
-                                                                                    else
-                                                                                    {
-                                                                                        <li id="butt_th" class="active">
-                                                                                            <button onclick="setLang('TH')">TH</button>
-                                                                                        </li>
-                                                                                        <li id="butt_en" class="">
-                                                                                            <button onclick="setLang('EN')">EN</button>
-                                                                                        </li>
-                                                                                    }
-                                                                                    }
-                                                                                    @* <li>
+                                                    @{
+                                                        var get_cookies = Context.Request.Cookies["lang"];
+                                                        if (get_cookies == "EN")
+                                                        {
+                                                                                            <li id="butt_th">
+                                                                                                <button onclick="setLang('TH')">TH</button>
+                                                                                            </li>
+                                                                                            <li id="butt_en" class="active">
+                                                                                                <button onclick="setLang('EN')">EN</button>
+                                                                                            </li>
+                                                        }
+                                                        else
+                                                        {
+                                                                                            <li id="butt_th" class="active">
+                                                                                                <button onclick="setLang('TH')">TH</button>
+                                                                                            </li>
+                                                                                            <li id="butt_en" class="">
+                                                                                                <button onclick="setLang('EN')">EN</button>
+                                                                                            </li>
+                                                        }
+                                                    }
+                                                    @* <li>
                                                                                     <div class="menu-item">
                                                                                     <a href="">TH</a>
                                                                                     </div>
@@ -577,27 +578,27 @@
                                     <!-- LANG :: PC & IPAD PRO -->
                                     <div class="d-none d-lg-block">
                                         <ul class="lang">
-                                            @{
-                                                var get_cookies1 = Context.Request.Cookies["lang"];
-                                                if (get_cookies1 == "EN")
-                                                {
+            @{
+                var get_cookies1 = Context.Request.Cookies["lang"];
+                if (get_cookies1 == "EN")
+                {
                                                     <li id="butt_th">
                                                         <button onclick="setLang('TH')">TH</button>
                                                     </li>
                                                     <li id="butt_en" class="active">
                                                         <button onclick="setLang('EN')">EN</button>
                                                     </li>
-                                                }
-                                                else
-                                                {
+                }
+                else
+                {
                                                     <li id="butt_th" class="active">
                                                         <button onclick="setLang('TH')">TH</button>
                                                     </li>
                                                     <li id="butt_en" class="">
                                                         <button onclick="setLang('EN')">EN</button>
                                                     </li>
-                                                }
-                                            }
+                }
+            }
                                         </ul>
                                     </div>
 
@@ -642,7 +643,7 @@
                                                                     <div class="col">
                                                                         <ul class="dropdown-submenu">
                                                                             <li>
-                                                                                                @*<a href="@Url.Action("Profile_History","Resource_Facility")">
+                                                        @*<a href="@Url.Action("Profile_History","Resource_Facility")">
                                                                                 <p>History</p>
                                                                                 </a>*@
                                                                                 <a href="https://www.mydevdemosites.com/resource-facility/history">
@@ -650,28 +651,28 @@
                                                                                 </a>
                                                                             </li>
                                                                             <li>
-                                                                                                @*<a href="@Url.Action("Profile_Our_Philosophy_Vision_Misson","Resource_Facility")">
-                                                                                <p>Our Philosophy Vision & Mission</p>
-                                                                                </a>*@
-                                                                                <a href="https://www.mydevdemosites.com/resource-facility/our-philosophy-vision-mission">
+                                                                                <a href="@Url.Action("Profile_Our_Philosophy_Vision_Misson","Resource_Facility")">
                                                                                     <p>Our Philosophy Vision & Mission</p>
                                                                                 </a>
+                                                        @*  <a href="https://www.mydevdemosites.com/resource-facility/our-philosophy-vision-mission">
+                                                                                <p>Our Philosophy Vision & Mission</p>
+                                                                                </a>*@
                                                                             </li>
                                                                             <li>
-                                                                                                @* <a href="@Url.Action("Profile_Organization_Chart","Resource_Facility")">
-                                                                                <p>Organization Chart</p>
-                                                                                </a>*@
-                                                                                <a href="https://www.mydevdemosites.com/resource-facility/organization-chart">
+                                                                                <a href="@Url.Action("Profile_Organization_Chart","Resource_Facility")">
                                                                                     <p>Organization Chart</p>
                                                                                 </a>
+                                                        @*<a href="https://www.mydevdemosites.com/resource-facility/organization-chart">
+                                                                                <p>Organization Chart</p>
+                                                                                </a>*@
                                                                             </li>
                                                                             <li>
-                                                                                                @*<a href="@Url.Action("Profile_Awards","Resource_Facility")">
-                                                                                <p>Awards</p>
-                                                                                </a>*@
-                                                                                <a href="https://www.mydevdemosites.com/resource-facility/awards">
+                                                                                <a href="@Url.Action("Profile_Awards","Resource_Facility")">
                                                                                     <p>Awards</p>
                                                                                 </a>
+                                                        @* <a href="https://www.mydevdemosites.com/resource-facility/awards">
+                                                                                <p>Awards</p>
+                                                                                </a>*@
                                                                             </li>
                                                                         </ul>
                                                                     </div>
@@ -723,15 +724,15 @@
                                                                             </li>
 
 
-                                                                                            @*<li>
+                                                    @*<li>
                                                                             <a href="https://www.mydevdemosites.com/resource-facility/lighting-innovation-center">
                                                                             <p>L&E Lighting Innovation Center</p>
                                                                             </a>
                                                                             </li>
-                                                                           @* <li>
-                                                                                <a href="https://www.mydevdemosites.com/resource-facility/le-solid-state-coltd">
-                                                                                    <p>L&E Solid State Co.,Ltd</p>
-                                                                                </a>
+                                                                            @* <li>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/le-solid-state-coltd">
+                                                                            <p>L&E Solid State Co.,Ltd</p>
+                                                                            </a>
                                                                             </li>
                                                                             <li>
                                                                             <a href="https://www.mydevdemosites.com/resource-facility/le-manufacturing-coltd">
@@ -754,41 +755,11 @@
                                                                             </a>
                                                                             </li>
                                                                             <li>
-                                                                                <a href="https://www.mydevdemosites.com/resource-facility/overseas-offices">
-                                                                                    <p>L&E Overseas Offices</p>
-                                                                                </a>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/overseas-offices">
+                                                                            <p>L&E Overseas Offices</p>
+                                                                            </a>
                                                                             </li>*@
 
-                                                                            <li>
-                                                                                <a href="@Url.Action("Subsidiaries_SolidState","Resource_Facility")">
-                                                                                    <p>L&E Solid State Co.,Ltd</p>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="@Url.Action("Subsidiaries_Manufacturing","Resource_Facility")">
-                                                                                    <p>L&E Manufacturing Co.,Ltd</p>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">
-                                                                                    <p>L&E Assembly / Service </p>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="@Url.Action("Subsidiaries_Warehouse_Logistics","Resource_Facility")">
-                                                                                    <p>L&E Warehouse & Logistics</p>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="@Url.Action("Subsidiaries_Lighting_Solution_Center","Resource_Facility")">
-                                                                                    <p>L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</p>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="@Url.Action("Subsidiaries_Overseas_Offices","Resource_Facility")">
-                                                                                    <p>L&E Overseas Offices</p>
-                                                                                </a>
-                                                                            </li>
 
                                                                         </ul>
                                                                     </div>
@@ -800,7 +771,7 @@
                                                 </div>
                                             </li>
                                             <li data-page="solution">
-                                                                @*<a href="@Url.Action("SmartSolution","SmartSolution")">SMART SOLUTION</a>*@
+                        @*<a href="@Url.Action("SmartSolution","SmartSolution")">SMART SOLUTION</a>*@
                                                 <a href="https://www.mydevdemosites.com/smart_solution">SMART SOLUTION</a>
                                                 <div class="dropdown-container">
                                                     <div class="imgHover-container">
@@ -815,7 +786,7 @@
                                                         <div class="row">
                                                             <div class="col">
                                                                 <ul class="dropdown-submenu w-half">
-                                                                                    @*
+                                            @*
                                                                     <li>
                                                                     <a href="@Url.Action("SmartSolutionDetail","SmartSolution")">
                                                                     <p>ICON LINK (APP)</p>
@@ -956,14 +927,14 @@
                                                 </div>
                                             </li>
                                             <li data-page="product">
-                                                                @* <a href="@Url.Action("Product","Product")">PRODUCTS</a>*@
+                        @* <a href="@Url.Action("Product","Product")">PRODUCTS</a>*@
                                                 <a href="https://www.mydevdemosites.com/category/indoor">PRODUCTS</a>
                                                 <div class="dropdown-container min-pad">
                                                     <div class="menu-container">
                                                         <div class="row">
                                                             <div class="col">
                                                                 <ul class="product-dropdownmenu">
-                                                                                    @*
+                                            @*
                                                                     <li>
                                                                     <a href="@Url.Action("Product_Category","Product")">
                                                                     <img src="~/Frontend_assets/images/product/icon-product.svg">
@@ -1132,7 +1103,7 @@
                                                 </div>
                                             </li>
                                             <li data-page="project">
-                                                                @*<a href="@Url.Action("Project","Project")">PROJECT REF</a>*@
+                        @*<a href="@Url.Action("Project","Project")">PROJECT REF</a>*@
                                                 <a href="https://www.mydevdemosites.com/projects">PROJECT REF</a>
                                                 <div class="dropdown-container">
                                                     <div class="imgHover-container">
@@ -1147,7 +1118,7 @@
                                                         <div class="row">
                                                             <div class="col">
                                                                 <ul class="dropdown-submenu w-half">
-                                                                                    @*
+                                            @*
                                                                     <li>
                                                                     <a href="@Url.Action("Project_Category","Project")">
                                                                     <p>RESIDENTIAL</p>
@@ -1311,7 +1282,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                                            @*
+                    @*
                                             <li data-page="download"><a href="@Url.Action("Download","Download")">DOWNLOAD</a></li>
                                             <li data-page="news"><a href="@Url.Action("New","New")">NEWS</a></li>
                                             <li data-page="ir"><a href="@Url.Action("IR_index","Frontend_IR")">INVESTOR</a></li>

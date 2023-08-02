@@ -1235,13 +1235,13 @@ namespace Lighting.Controllers.Frontend
         }
         public async Task<IActionResult> IR_presentation_webcast()
         {
-            var data = db.SH_IR_presentation_webcast.ToList();
+            var data =await db.SH_IR_presentation_webcast.ToListAsync();
             if (data.Count != 0)
             {
                 ViewBag.Header = data;
             }
 
-            var details = db.SH_IR_presentation_webcast_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.activity_date).ToList();
+            var details =await db.SH_IR_presentation_webcast_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.activity_date).ToListAsync();
             if (details.Count != 0)
             {
                 ViewBag.Body = details;
