@@ -495,6 +495,9 @@
     <Folder Include="wwwroot\upload_image\IR_Contact\" />
     <Folder Include="wwwroot\upload_image\IR_NewRoom\" />
     <Folder Include="wwwroot\upload_image\IR_Index\" />
+    <Folder Include="wwwroot\upload_image\RF_Philosophy_VM\" />
+    <Folder Include="wwwroot\upload_image\RF_Organization_Chart\" />
+    <Folder Include="wwwroot\upload_image\RF_Award\" />
     <Folder Include="wwwroot\upload_image\Smart_Solution\" />
     <Folder Include="wwwroot\upload_image\SH_GeneralMeeting\" />
     <Folder Include="wwwroot\upload_image\ProjectRef\" />
