@@ -2,6 +2,43 @@
 {
     public class RequestDTO
     {
+        public class IR_HIGHLIGHTRequest
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? Detail_TH { get; set; }
+            public string? Detail_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_HIGHLIGHTDetailRequest
+        {
+            public int? Id { get; set; }
+            public int SetType { get; set; }
+            public string? Background { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+            public List<IFormFile> uploaded_Image { get; set; }
+        }
+
+        public class IR_ReportRequest
+        {
+            public int? Id { get; set; }
+            public int SetType { get; set; }
+            public string? Background { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+            public List<IFormFile> uploaded_Image { get; set; }
+        }
+
         public class HistoryDataDetailRequest
         {
             public int? Id { get; set; }
@@ -25,6 +62,19 @@
             public string? Detail_TH { get; set; }
             public string? Detail_EN { get; set; }
             public int? Status { get; set; }
+        }
+
+        public class IR_Summary_Financial_HighlightsDetailRequest
+        {
+            public int? Id { get; set; }
+            public string? Icon { get; set; }
+            public decimal? Total { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? Detail_TH { get; set; }
+            public string? Detail_EN { get; set; }
+            public int? Status { get; set; }
+            public List<IFormFile> uploaded_Image { get; set; }
         }
 
         public class IR_LIGHTING_EQUIPMENTRequest

@@ -299,7 +299,7 @@
                             $("#use_status_edit").prop("checked", false);
                         }
                         $("#edit_image").removeAttr("src");
-                        $("#edit_image").attr("src", "/upload_image/OrganizationalStructure/" + data.data.image_name);
+                        $("#edit_image").attr("src", "/upload_image/OrganizationalStructure/" + data.data.image_nameTH);
                     }
                     else {
                         Swal.fire({
@@ -385,7 +385,7 @@
                     {
                         "name": "image_nameTH", "data": "image_nameTH", "class": "text-center", "render": function (data, type, row) {
                             var text = '<div class="mb-10" style="text-align:center;">' +
-                                '<img src="/upload_image/OrganizationalStructure/' + row.image_name + '" style="height: 250px;width: 250px;" alt="image">' +
+                                '<img src="/upload_image/OrganizationalStructure/' + row.image_nameTH + '" style="height: 250px;width: 250px;" alt="image">' +
                                 '</div>';
                             return text;
 

@@ -179,7 +179,8 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<IR_Report> IR_Report { get; set; }
         public DbSet<Organization_Chart> Organization_Chart { get; set; }
         public DbSet<Organization_ChartDetail> Organization_ChartDetail { get; set; }
-
+        public DbSet<IR_Hightlight> IR_Hightlight { get; set; }
+        public DbSet<IR_HightlightDetail> IR_HightlightDetail { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

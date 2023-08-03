@@ -2,6 +2,56 @@
 {
     public class ResponseDTO
     {
+        public class IR_HIGHLIGHTDetailResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public int SetType { get; set; }
+            public string? Background { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_HIGHLIGHTResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? Detail_TH { get; set; }
+            public string? Detail_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_HightlightDetailResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public int SetType { get; set; }
+            public string? Background { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_ReportResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public int SetType { get; set; }
+            public string? Background { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
         public class HistoryDataDetailResponse
         {
             public int? Index { get; set; }
