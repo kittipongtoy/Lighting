@@ -1146,7 +1146,7 @@ namespace Lighting.Controllers.Backend
 
         [HttpPut]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> HistoryTimeline_Edit_Submit(RequestDTO.HistoryDetailRequest model)
+        public async Task<IActionResult> HistoryTimeline_Edit_Submit(RequestDTO.HistoryDetailRequest model) 
         {
             try
             {

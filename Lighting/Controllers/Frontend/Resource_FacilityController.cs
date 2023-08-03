@@ -21,11 +21,11 @@ namespace Lighting.Controllers.Frontend
         }
         public async Task<IActionResult> Profile_History()
         {
-            ViewBag.Header = await db.History.ToListAsync();
+            ViewBag.Header = await db.History.ToListAsync(); 
+            ViewBag.Body = await db.HistoryDetail.Where(x=>x.Status==1).ToListAsync(); 
+            ViewBag.BodyDetailsTimeline = await db.HistoryDataDetail.Where(x=>x.TypeData==2&&x.Status==1).ToListAsync(); 
+            ViewBag.BodyDetailsVDO = await db.HistoryDataDetail.Where(x => x.TypeData == 1&&x.Status==1).ToListAsync();
 
-            ViewBag.Body = await db.HistoryDetail.ToListAsync();
-
-            ViewBag.BodyDetails = await db.HistoryDataDetail.ToListAsync();
             return View();
         }
 
