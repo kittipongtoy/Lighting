@@ -1,6 +1,9 @@
 ﻿using Lighting.Areas.Identity.Data;
 using Lighting.Models.InputFilterModels.Contact;
+using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lighting.Controllers.Frontend
@@ -12,6 +15,34 @@ namespace Lighting.Controllers.Frontend
         public ContactController(LightingContext db)
         {
             _db = db;
+        }
+
+        public async Task<IActionResult> MainContactJson()
+        {
+            var lang = Request.Cookies["lang"];
+            if (lang == "EN")
+            {
+                return Json(await _db.MainContacts.Select(main => new 
+                {
+                    companyName = main.TitleName_EN,
+                     EMail1 = main.EMail1,
+                    location = main.Location_EN,
+                    officePhone = main.OfficePhone,
+                    googleMapLink = main.GoogleMapLink, 
+                }).FirstOrDefaultAsync());
+            }
+            else
+            {
+                return Json(await _db.MainContacts.Select(main => new 
+                {
+                    companyName = main.TitleName_TH,
+                    EMail1 = main.EMail1,
+                    location = main.Location_TH,
+                    officePhone = main.OfficePhone,
+                    googleMapLink = main.GoogleMapLink,
+                }).FirstOrDefaultAsync());
+            }
+
         }
         public async Task<ActionResult> Contact()
         {

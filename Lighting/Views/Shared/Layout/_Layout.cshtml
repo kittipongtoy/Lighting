@@ -225,7 +225,7 @@
     ///
     var show_contactus = "";
     var here_contactus = "";
-    if (ViewData["Title"] == "Manage_Contact_Page")
+    if (ViewData["Title"] == "Manage_Contact_Page" || ViewData["Title"] == "Main_Contact")
     {
         show_contactus = "show";
         here_contactus = "here";
@@ -239,7 +239,8 @@
         Show_Authorization = "show";
         Here_Authorization = "here";
     }
-   
+
+    
     var show_applyjob = "";
     var here_applyjob = "";
     if (ViewData["Title"] == "Manage_Job_Page" || ViewData["Title"] == "Apply_Image_Content")
@@ -2172,6 +2173,26 @@
                                         </a>
                                     }
                                 </div>
+                                    <div class="menu-item">
+                                        @if (ViewData["Title"] == "Main_Contact")
+                                        {
+                                            <a class="menu-link active" href="@Url.Action("Manage_Page","MainContact")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการปก</span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="menu-link" href="@Url.Action("Manage_Page","MainContact")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการปก</span>
+                                            </a>
+                                        }
+                                    </div>
                             </div>
                         </div>
                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion @Show_Authorization @Here_Authorization">

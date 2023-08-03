@@ -1,7 +1,11 @@
 ﻿using Lighting.Areas.Identity.Data;
 using Lighting.Models.InputFilterModels.Product;
+using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.Language.Intermediate;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace Lighting.Controllers.Frontend
 {
@@ -16,6 +20,67 @@ namespace Lighting.Controllers.Frontend
 
         }
 
+        public async Task<IActionResult> SearchJson(string search)
+        
+        {
+
+
+        List<Search> searches = new List<Search>();
+        Regex regex = new Regex(@"^[0-9]");
+
+            if (search != null)
+            {
+                if (regex.Matches(search).Count > 0) //search watt
+                {
+                    var watts = await _db.Products.Where(product => product.Power.ToLower().StartsWith(search.ToLower())).ToListAsync();
+                    foreach (var w in watts)
+                    {
+                        searches.Add(new Search
+                        {
+                            CategoryId = w.Product_CategoryId,
+                            SubcategoryId = w.Product_ModelId,
+                            ProductId = w.Id
+                        });
+                    }
+                }
+                var model = await _db.Products.Where(product => product.Model.ToLower().StartsWith(search.ToLower())).ToListAsync();
+                foreach (var m in model)
+                {
+                    searches.Add(new Search
+                    {
+                        CategoryId = m.Product_CategoryId,
+                        SubcategoryId = m.Product_ModelId,
+                        ProductId = m.Id
+                    });
+                }
+                var category = await _db.Product_Categorys.Where(cat => cat.Name_EN.ToLower().StartsWith(search) || cat.Name_TH.StartsWith(search)).ToListAsync();
+                if (category.Count > 0) //search category
+                {
+                    foreach (var cat in category)
+                    {
+                        searches.Add(new Search
+                        {
+                            CategoryId = cat.Id
+                        });
+                    }
+                }
+
+                var model_or_subcategory = await _db.Product_Models.Where(cat => cat.Name_EN.ToLower().StartsWith(search) || cat.Name_TH.StartsWith(search)).ToListAsync();
+                if (model_or_subcategory.Count > 0) //search category
+                {
+                    foreach (var model_or_subcat in model_or_subcategory)
+                    {
+                        searches.Add(new Search
+                        {
+                            SubcategoryId = model_or_subcat.Id,
+                             CategoryId = model_or_subcat.Product_CategoryId
+                        });
+                    }
+                }
+            }
+            return Json(searches);
+
+        }
         public async Task<IActionResult> JsonNavBar()
         {
             var lang = Request.Cookies["lang"];
@@ -328,5 +393,12 @@ namespace Lighting.Controllers.Frontend
             }
 
         }
+    }
+
+    class Search
+    {
+        public int? ProductId { get; set; }
+        public int? SubcategoryId { get; set; }
+        public int? CategoryId { get; set; }
     }
 }

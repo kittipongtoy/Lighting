@@ -48,96 +48,208 @@
     <script src="~/Frontend_assets/OwlCarousel/owl.carousel.min.js"></script>
     <script type="text/javascript">
 
-        window.onload = function () {
+        //window.onload = function () {
 
-            $.ajax({
-                type: 'GET',
-                url: "/Project/JsonNavBar",
-                processData: false,
-                contentType: false,
-                cache: false,
-                success: function (data) {
-                    //console.log(data);
-                    const nav_link = (res, url)=>{
-                        return res.reduce((prev, curr) => prev += `
-                     <li>
-                         <a href="/${url}${curr.id}">
-                            <p>${curr.name}</p>
-                                    <div class="menu-img"><img src="/${curr.image}"></div>
-                         </a>
-                     </li>`, "");
-                    }
-                    $("#nav_projectref").html(nav_link(data, "project/Project_Category?categoryId="));
+        //    $.ajax({
+        //        type: 'GET',
+        //        url: "/Project/JsonNavBar",
+        //        processData: false,
+        //        contentType: false,
+        //        cache: false,
+        //        success: function (data) {
+        //            //console.log(data);
+        //            const nav_link = (res, url)=>{
+        //                return res.reduce((prev, curr) => prev += `
+        //             <li>
+        //                 <a href="/${url}${curr.id}">
+        //                    <p>${curr.name}</p>
+        //                            <div class="menu-img"><img src="/${curr.image}"></div>
+        //                 </a>
+        //             </li>`, "");
+        //            }
+        //            $("#nav_projectref").html(nav_link(data, "project/Project_Category?categoryId="));
 
-                }, error: function (e) {
-                    console.log(e.message);
-                    console.log(e.inner);
-                }
-            });
+        //        }, error: function (e) {
+        //            console.log(e.message);
+        //            console.log(e.inner);
+        //        }
+        //    });
 
-            $.ajax({
-                type: 'GET',
-                url: "/Product/JsonNavBar",
-                processData: false,
-                contentType: false,
-                cache: false,
-                success: function (data) {
-                    //console.log(data);
-                    const nav_link = (res, url)=>{
-                        return res.reduce((prev, curr) => prev += `
-                        <li>
-                            <a href="${url}${curr.id}">
-                                <img src="/${curr.image}">
-                                <div class="product-cate">
-                                    <p>${curr.name}</p>
-                                </div>
-                            </a>
-                        </li>`, "");
-                    }
+        //    $.ajax({
+        //        type: 'GET',
+        //        url: "/Product/JsonNavBar",
+        //        processData: false,
+        //        contentType: false,
+        //        cache: false,
+        //        success: function (data) {
+        //            //console.log(data);
+        //            const nav_link = (res, url)=>{
+        //                return res.reduce((prev, curr) => prev += `
+        //                <li>
+        //                    <a href="${url}${curr.id}">
+        //                        <img src="/${curr.image}">
+        //                        <div class="product-cate">
+        //                            <p>${curr.name}</p>
+        //                        </div>
+        //                    </a>
+        //                </li>`, "");
+        //            }
 
-                    $("#nav_product").html(nav_link(data, "/Product/Product_Category?categoryId="));
+        //            $("#nav_product").html(nav_link(data, "/Product/Product_Category?categoryId="));
 
-                }, error: function (e) {
-                    console.log(e.message);
-                    console.log(e.inner);
-                }
-            });
+        //        }, error: function (e) {
+        //            console.log(e.message);
+        //            console.log(e.inner);
+        //        }
+        //    });
 
-            $.ajax({
-                type: 'GET',
-                url: "/SmartSolution/JsonNavBar",
-                processData: false,
-                contentType: false,
-                cache: false,
-                success: function (data) {
-                    //console.log(data);
-                    const nav_link = (res, url)=>{
-                        return res.reduce((prev, curr) => prev += `
-                        <li>
-                        <a href="${url}${curr.id}">
-                         <p>${curr.name}</p>
-                         <div class="menu-img"><img src="/${curr.image}"></div>
-                        </a>
-                        </li>`, "");
-                    }
+        //    $.ajax({
+        //        type: 'GET',
+        //        url: "/SmartSolution/JsonNavBar",
+        //        processData: false,
+        //        contentType: false,
+        //        cache: false,
+        //        success: function (data) {
+        //            //console.log(data);
+        //            const nav_link = (res, url)=>{
+        //                return res.reduce((prev, curr) => prev += `
+        //                <li>
+        //                <a href="${url}${curr.id}">
+        //                 <p>${curr.name}</p>
+        //                 <div class="menu-img"><img src="/${curr.image}"></div>
+        //                </a>
+        //                </li>`, "");
+        //            }
 
-                    $("#nav_smartsolution").append(nav_link(data, "/SmartSolution/SmartSolutionDetail?id="));
+        //            $("#nav_smartsolution").append(nav_link(data, "/SmartSolution/SmartSolutionDetail?id="));
 
-                }, error: function (e) {
-                    console.log(e.message);
-                    console.log(e.inner);
-                }
-            });
+        //        }, error: function (e) {
+        //            console.log(e.message);
+        //            console.log(e.inner);
+        //        }
+        //    });
 
-        };
+        //};
 
         var menu_width;
         jQuery(document).ready(
             function () {
                 initMenu();
+                $.ajax({
+                    type: 'GET',
+                    url: "/Project/JsonNavBar",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (data) {
+                        //console.log(data);
+                        const nav_link = (res, url) => {
+                            return res.reduce((prev, curr) => prev += `
+                             <li>
+                                 <a href="/${url}${curr.id}">
+                                    <p>${curr.name}</p>
+                                            <div class="menu-img"><img src="/${curr.image}"></div>
+                                 </a>
+                             </li>`, "");
+                        }
+                        $("#nav_projectref").html(nav_link(data, "project/Project_Category?categoryId="));
+
+                    }, error: function (e) {
+                        console.log(e.message);
+                        console.log(e.inner);
+                    }
+                });
+
+                $.ajax({
+                    type: 'GET',
+                    url: "/Product/JsonNavBar",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (data) {
+                        //console.log(data);
+                        const nav_link = (res, url) => {
+                            return res.reduce((prev, curr) => prev += `
+                                <li>
+                                    <a href="${url}${curr.id}">
+                                        <img src="/${curr.image}">
+                                        <div class="product-cate">
+                                            <p>${curr.name}</p>
+                                        </div>
+                                    </a>
+                                </li>`, "");
+                        }
+
+                        $("#nav_product").html(nav_link(data, "/Product/Product_Category?categoryId="));
+
+                    }, error: function (e) {
+                        console.log(e.message);
+                        console.log(e.inner);
+                    }
+                });
+
+                $.ajax({
+                    type: 'GET',
+                    url: "/SmartSolution/JsonNavBar",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (data) {
+                        //console.log(data);
+                        const nav_link = (res, url) => {
+                            return res.reduce((prev, curr) => prev += `
+                                <li>
+                                <a href="${url}${curr.id}">
+                                 <p>${curr.name}</p>
+                                 <div class="menu-img"><img src="/${curr.image}"></div>
+                                </a>
+                                </li>`, "");
+                        }
+
+                        $("#nav_smartsolution").append(nav_link(data, "/SmartSolution/SmartSolutionDetail?id="));
+
+                    }, error: function (e) {
+                        console.log(e.message);
+                        console.log(e.inner);
+                    }
+                });
             });
 
+        function SearchProduct(e){
 
+            let searchText = $("#search").val();
+            console.log(searchText);
+
+            $.ajax({
+                type: 'GET',
+                url: "/Product/SearchJson?search=" + searchText,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (data) {
+                    console.log(data);
+                    if(data.length > 0){
+                        let { categoryId,productId,subcategoryId } = data[0];
+                        console.log(categoryId, productId, subcategoryId);
+                        if (categoryId && productId && subcategoryId) {
+                            window.location.href = `/product/product_detail?categoryId=${categoryId}&sub_categoryId=${subcategoryId}&id=${productId}`;
+                            return;
+                        }
+                        if (subcategoryId  && categoryId) {
+                            window.location.href = `/product/product_subcategory?categoryId=${categoryId}&sub_categoryId=${subcategoryId}`;
+                            return;
+                        }
+                        if (categoryId) {
+                            window.location.href = `/product/product_category?categoryId=${categoryId}`;
+                            return;
+                        }
+                    }
+                }, error: function (e) {
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
 
 
 
@@ -610,7 +722,7 @@
                                                 <i class="fa fa-search"></i>
                                             </div>
                                             <div class="search-input">
-                                                <input type="search" class="search-bar" placeholder="search">
+                                                <input type="search" class="search-bar" placeholder="search" id="search" onchange="SearchProduct()">
                                             </div>
                                         </div>
                                     </li>
