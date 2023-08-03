@@ -55,7 +55,13 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <h6>Photo Album</h6>
+                                @if (Model.ImgList.Count != null)
+                                {
+                                    if (Model.ImgList.Count > 0)
+                                    {
+                                        <h6>Photo Album</h6>
+                                    }
+                                }
                             </div>
                         </div>
                         <div class="row">

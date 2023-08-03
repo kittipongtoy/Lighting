@@ -346,6 +346,25 @@
 
 
 <script type="text/javascript">
+
+    window.onload= function(){
+        $.ajax({
+            type: 'POST',
+            url: '/Contact/MainContactJson',
+            data: form,
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (data) {
+
+            }, error: function (e) {
+
+                console.log(e.message);
+                console.log(e.inner);
+            }
+        });
+    };
+
     $(window).scroll(function () {
         if ($(this).scrollTop() > 500) {
             $('.scrolltop:hidden').stop(true, true).fadeIn();

@@ -81,6 +81,7 @@
                         </div>
                     </div>
                 </div>
+                @*
                 <div class="row">
                     <div class="col">
                         <div class="content-center">
@@ -90,6 +91,7 @@
                         </div>
                     </div>
                 </div>
+            *@
             }
             else
             {
@@ -158,6 +160,7 @@
                         </div>
                     </div>
                 </div>
+                @*
                 <div class="row">
                     <div class="col">
                         <div class="content-center">
@@ -167,10 +170,9 @@
                         </div>
                     </div>
                 </div>
+                *@
             }
             <!---------- END PROJECT - REF :: DETAIL ---------->
-
-
             <div class="row">
                 <div class="col">
                     <h5>Lighting Solution</h5>
@@ -187,7 +189,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="img-width">
-                                                <img src="~/@product.Preview_Image">
+                                                <img src="~/@product.Preview_Image" style="height:25vh;">
                                                 <ul class="hover-detail">
                                                     <li>Dimension : @product.Dimension</li>
                                                     <li>Power : @product.Power</li>
@@ -236,7 +238,7 @@
                                         <a class="contentBox" href="@Url.Action("Project_Detail","Project",new {id = cat.Id})">
                                             <div class="row">
                                                 <div class="col">
-                                                    <div class="img-width"><img src="~/@cat.Profile_Image"></div>
+                                                    <div class="img-width"><img src="~/@cat.Profile_Image" style="height:30vh;"></div>
                                                 </div>
                                             </div>
                                             <div class="row">

@@ -35,6 +35,9 @@ namespace Lighting.Controllers.Frontend
                 YouTube_Url = contact.YouTube_Url,
             }).ToListAsync();
 
+            var main_contact = await _db.MainContacts.FirstOrDefaultAsync();
+            ViewData["mainContact"] = main_contact;
+
             if (contact != null)
             {
                 return View(contact);

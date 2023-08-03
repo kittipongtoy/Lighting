@@ -22,6 +22,7 @@ namespace Lighting.Areas.Identity.Data
         #endregion
 
         #region product
+        public DbSet<Product_Spect> Product_Spects { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Product_Model> Product_Models { get; set; }
         public DbSet<Product_Category> Product_Categorys { get; set; }
@@ -55,6 +56,7 @@ namespace Lighting.Areas.Identity.Data
         #endregion
         #region contact
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<MainContact> MainContacts { get; set; }
         #endregion
         #region news
         public DbSet<News> News { get; set; }

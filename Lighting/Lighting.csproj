@@ -490,6 +490,7 @@
     <Folder Include="wwwroot\upload_image\Apply_Img_Content\" />
     <Folder Include="wwwroot\upload_image\IR_Banner\" />
     <Folder Include="wwwroot\upload_image\IR_Button_Below_Banner\" />
+    <Folder Include="wwwroot\upload_image\MainContact\" />
     <Folder Include="wwwroot\upload_image\RF_Solution_Centers\" />
     <Folder Include="wwwroot\upload_image\RF_Solid_States\" />
     <Folder Include="wwwroot\upload_image\RF_Oversea_Offices\" />

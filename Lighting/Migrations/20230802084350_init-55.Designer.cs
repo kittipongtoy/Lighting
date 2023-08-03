@@ -4,6 +4,7 @@ using Lighting.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lighting.Migrations
 {
     [DbContext(typeof(LightingContext))]
-    partial class LightingContextModelSnapshot : ModelSnapshot
+    [Migration("20230802084350_init-55")]
+    partial class init55
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2182,9 +2184,9 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2385ad47-682b-4231-84f8-29af296470d8",
+                            Id = "aa781699-706d-43de-86a5-6b54f55c907b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2fc350c7-c8f7-43fd-8d73-08d9a85a064f",
+                            ConcurrencyStamp = "4f73aa4d-8121-4565-a35c-29aef92083e3",
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -2194,70 +2196,12 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEYsdFi6ewDbhgoaM/hkUkUIC09A+jhPCo6tUnwi5xh+NEIIURaYQ2ogdAS4MzioQA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHuyRJcfkrmpSJnAENR/iOVuF7q7vZNQafhwysCZMVquTbopyQH2PXVDY6XRABZIEw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "44c25b0d-8b26-497f-9843-2bc9b426f862",
+                            SecurityStamp = "1bc35976-2c65-499a-88a1-7809d4f88d09",
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
-                });
-
-            modelBuilder.Entity("Lighting.Areas.Identity.Data.MainContact", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("EMail1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EMail2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("GoogleMapLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Img_File")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Location_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Location_TH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MoreInfo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OfficePhone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TitleEMail1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TitleEMail2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TitleName_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TitleName_TH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title_EN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title_TH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MainContacts");
                 });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.M_chairman", b =>
@@ -4330,13 +4274,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f4358ef7-7af7-41c0-9982-d56a1923477d",
-                            ConcurrencyStamp = "de9857bd-fff0-49f4-bea6-9e8afff06151",
+                            Id = "1dc56d8e-e62d-46b7-9f86-9cd2a2396f48",
+                            ConcurrencyStamp = "daa64127-4c15-4c30-a72f-237b4164a15d",
                             Name = "Admin",
                             NameThai = "Admin",
                             NormalizedName = "Admin",
-                            created_at = new DateTime(2023, 8, 3, 3, 10, 30, 943, DateTimeKind.Utc).AddTicks(6311),
-                            updated_at = new DateTime(2023, 8, 3, 3, 10, 30, 943, DateTimeKind.Utc).AddTicks(6316)
+                            created_at = new DateTime(2023, 8, 2, 8, 43, 49, 963, DateTimeKind.Utc).AddTicks(6704),
+                            updated_at = new DateTime(2023, 8, 2, 8, 43, 49, 963, DateTimeKind.Utc).AddTicks(6707)
                         });
                 });
 
@@ -6102,8 +6046,8 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "2385ad47-682b-4231-84f8-29af296470d8",
-                            RoleId = "f4358ef7-7af7-41c0-9982-d56a1923477d"
+                            UserId = "aa781699-706d-43de-86a5-6b54f55c907b",
+                            RoleId = "1dc56d8e-e62d-46b7-9f86-9cd2a2396f48"
                         });
                 });
 

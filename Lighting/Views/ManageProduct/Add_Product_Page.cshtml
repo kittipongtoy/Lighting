@@ -26,9 +26,11 @@
     .add-product-grid-item {
         display: grid;
         grid-template-rows: auto auto;
-        & > input[type="text"]{
-             height: 4rem;
-        }
+        & > input[type="text"]
+
+    {
+        height: 4rem;
+    }
 
     }
 
@@ -49,20 +51,73 @@
         height: auto;
         width: 100%;
         display: grid;
-        grid-template-rows: 4rem repeat(16,auto);
+        grid-template-rows: 2rem auto auto auto auto;
         gap: 2rem;
         background-color: rgba(0,0,0,0.2);
         padding: 2rem;
         border-radius: 10px;
-        & > h2
+        & > h2{
+            margin: -2rem;
+            background-color: gray;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            border-radius: 10px;
+        }
+    }
+
+    .add-spect-container {
+        position: fixed;
+        top: 0;
+        left: auto;
+        inset: 0;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0,0,0,0.2);
+    }
+
+    .spect-grid-container {
+        display: grid;
+        grid-auto-rows: auto;
+    }
+
+    .spect-grid-item {
+        display: grid;
+        grid-template-columns: auto auto 5rem;
+        border-bottom:1px solid black;
+        & > div
+        {
+            max-width: 100%;
+            word-wrap: break-word;
+            font-size: 1.7rem;
+        }
+    }
+
+    .add-spect-box {
+        width: 80%;
+        min-width: 20vh;
+        height: auto;
+        border-radius: 10px;
+        padding: 1rem;
+        display: grid;
+        grid-template-rows: 2rem auto 3rem 3rem auto 3rem;
+        gap: 2rem;
+        background-color: white;
+        & > input[type="text"]
 
     {
-        background-color: gray;
+        font-size: 2rem;
+    }
+
+    & > h3 {
         display: flex;
         flex-direction: column;
         justify-content: center;
         text-align: center;
-        border-radius: 5px;
     }
 
     }
@@ -167,35 +222,11 @@
         </div>
 
         <div class="add-product-grid-spec">
-            <h2>สเปค / Spacification</h2>
-
-            <div class="add-product-grid-item">
-                <label class="h4">Housing</label>
-                <input type="text" placeholder="Housing" id="Housing" />
-            </div>
-
-            <div class="add-product-grid-item">
-                <label class="h4">Finishing</label>
-                <input type="text" placeholder="Finishing" id="Finishing" />
-            </div>
-
-            <div class="add-product-grid-item">
-                <label class="h4">Lens</label>
-                <input type="text" placeholder="Lens" id="Lens" />
-            </div>
-
-            <div class="add-product-grid-item">
-                <label class="h4">Gasket</label>
-                <input type="text" placeholder="Gasket" id="Gasket" />
-            </div>
+            <h2>สเปค / Spacification </h2>
 
             <div class="add-product-grid-item">
                 <label class="h4">Dimension</label>
                 <input type="text" placeholder="Dimension" id="Dimension" />
-            </div>
-            <div class="add-product-grid-item">
-                <label class="h4">Mounting</label>
-                <input type="text" placeholder="Mounting" id="Mounting" />
             </div>
 
             <div class="add-product-grid-item">
@@ -204,52 +235,80 @@
             </div>
 
             <div class="add-product-grid-item">
-                <label class="h4">Source</label>
-                <input type="text" placeholder="Source" id="Source" />
-            </div>
-
-            <div class="add-product-grid-item">
-                <label class="h4">Lamp Colour</label>
-                <input type="text" placeholder="Lamp Colour" id="Lamp_Colour" />
-            </div>
-
-            <div class="add-product-grid-item">
-                <label class="h4">Luminaire Output</label>
-                <input type="text" placeholder="Luminaire Output" id="Luminaire_Output" />
-            </div>
-
-            <div class="add-product-grid-item">
-                <label class="h4">Beam Angle</label>
-                <input type="text" placeholder="Beam Angle" id="Beam_Angle" />
-            </div>
-
-            <div class="add-product-grid-item">
-                <label class="h4">Control Gear</label>
-                <input type="text" placeholder="Control Gear" id="Control_Gear" />
-            </div>
-
-            <div class="add-product-grid-item">
-                <label class="h4">Power Supply</label>
-                <input type="text" placeholder="Power Supply" id="Power_Supply" />
-            </div>
-
-            <div class="add-product-grid-item">
                 <label class="h4">IP Rating</label>
                 <input type="text" placeholder="IP Rating" id="IP_Rating" />
             </div>
-
+            @*
             <div class="add-product-grid-item">
-                <label class="h4">Luminaire Lifetime</label>
-                <input type="text" placeholder="Luminaire Lifetime" id="Luminaire_Lifetime" />
+            <label class="h4">Housing</label>
+            <input type="text" placeholder="Housing" id="Housing" />
             </div>
 
             <div class="add-product-grid-item">
-                <label class="h4">Equivalent</label>
-                <input type="text" placeholder="Equivalent" id="Equivalent" />
+            <label class="h4">Finishing</label>
+            <input type="text" placeholder="Finishing" id="Finishing" />
             </div>
 
+            <div class="add-product-grid-item">
+            <label class="h4">Lens</label>
+            <input type="text" placeholder="Lens" id="Lens" />
+            </div>
+
+            <div class="add-product-grid-item">
+            <label class="h4">Gasket</label>
+            <input type="text" placeholder="Gasket" id="Gasket" />
+            </div>
+
+            <div class="add-product-grid-item">
+            <label class="h4">Mounting</label>
+            <input type="text" placeholder="Mounting" id="Mounting" />
+            </div>
+
+            <div class="add-product-grid-item">
+            <label class="h4">Source</label>
+            <input type="text" placeholder="Source" id="Source" />
+            </div>
+
+            <div class="add-product-grid-item">
+            <label class="h4">Lamp Colour</label>
+            <input type="text" placeholder="Lamp Colour" id="Lamp_Colour" />
+            </div>
+
+            <div class="add-product-grid-item">
+            <label class="h4">Luminaire Output</label>
+            <input type="text" placeholder="Luminaire Output" id="Luminaire_Output" />
+            </div>
+
+            <div class="add-product-grid-item">
+            <label class="h4">Beam Angle</label>
+            <input type="text" placeholder="Beam Angle" id="Beam_Angle" />
+            </div>
+
+            <div class="add-product-grid-item">
+            <label class="h4">Control Gear</label>
+            <input type="text" placeholder="Control Gear" id="Control_Gear" />
+            </div>
+
+            <div class="add-product-grid-item">
+            <label class="h4">Power Supply</label>
+            <input type="text" placeholder="Power Supply" id="Power_Supply" />
+            </div>
+
+            <div class="add-product-grid-item">
+            <label class="h4">Luminaire Lifetime</label>
+            <input type="text" placeholder="Luminaire Lifetime" id="Luminaire_Lifetime" />
+            </div>
+
+            <div class="add-product-grid-item">
+            <label class="h4">Equivalent</label>
+            <input type="text" placeholder="Equivalent" id="Equivalent" />
+            </div>
+            *@
+            <div id="spect_container" class="spect-grid-container">
+            </div>
+            <center><button onclick="showHideSpect()" class="btn btn-success">เพิ่มสเปค/add space</button> </center>
         </div>
-
+       
 
     </div>
     <br />
@@ -257,8 +316,23 @@
     <centter style="margin-bottom:3rem;"><button onclick="addProduct()" class="btn btn-success">บันทึก/save</button></centter>
 </div>
 
+<div class="add-spect-container" style="display:none;" id="add_spect">
+    <div class="add-spect-box">
+        <h3>เพิ่มสเปค</h3>
+        <div></div>
+        <input type="text" placeholder="ชื่อสเปค" id="txt_spect_name" />
+        <input type="text" placeholder="ค่าของสเปค" id="txt_spect_value" />
+        <div></div>
+        <div style="display:flex;justify-content:space-between">
+            <button class="btn btn-success" onclick="addSpect()">เพิ่ม/add</button>
+            <button class="btn btn-warning" onclick="showHideSpect()">ยกเลิก/cancle</button>
+        </div>
+    </div>
+</div>
+
 @section Scripts{
     <script>
+        var specification = [], spect_num = 0;
         var preview_img, spact_img_file, CutSheet_file, IesFile_file, Catalogue_file, rfa_file, technical_file, light_distribute_file;
 
         $(document).ready(function () {
@@ -307,12 +381,43 @@
             });
         });
 
-        //function addLink(){
-        //    let textbox = '<div class="add-product-grid-link" id="link-container"><input type = "text" placeholder="ชื่อลิ้ง/link name" /><input type = "text" placeholder="ลิ้ง/link" /></div>';
-        //    $("#addlink").append(textbox);
+        function showHideSpect() {
+            if ($("#add_spect").css("display") === "none") {
+                $("#add_spect").css("display", "flex");
+            } else {
+                $("#add_spect").css("display", "none");
+            }
+        }
 
-        //        }
+        function addSpect() {
+            let name = $("#txt_spect_name").val();
+            let value = $("#txt_spect_value").val();
+            if (name !== "" && value !== "") {
+                specification.push({ id: spect_num, name: name, value: value });
+                let html_spect = specification.reduce((prev, curr) =>
+                    prev += `<div class="spect-grid-item" id="spect${curr.id}">
+                                    <div> ${curr.name}</div>
+                                    <div> ${curr.value}</div>
+                                            <button class= "btn btn-danger" onclick = "deleteSpect(${curr.id})" > ลบ </button>
+                            </div>`, "");
+                $("#spect_container").html(html_spect);
+                spect_num++;
+                showHideSpect();
+                $("#txt_spect_name").val('');
+                $("#txt_spect_value").val('');
+            }
+        }
+        function deleteSpect(id) {
+            specification = specification.filter(x => x.id != id);
+            let html_spect = specification.reduce((prev, curr) =>
+                prev += `<div class="spect-grid-item" id="spect${curr.id}">
+                           <div> ${curr.name}</div>
+                           <div> ${curr.value}</div>
+                           <button class= "btn btn-danger" onclick = "deleteSpect(${curr.id})" > ลบ </button>
+                         </div>`, "");
 
+            $("#spect_container").html(html_spect);
+        }
         function addProduct() {
 
             let form = new FormData();
@@ -333,21 +438,28 @@
 
             form.append("Application", $("#application").val());
             //form.append("Technical_Drawing", $("#").val());
-
-            form.append("Housing", $("#Housing").val());
-            form.append("Finishing", $("#Finishing").val());
-            form.append("Lens", $("#Lens").val());
-            form.append("Gasket", $("#Gasket").val());
-            form.append("Dimension", $("#Dimension").val());
-            form.append("Mounting", $("#Mounting").val());
-            form.append("Power", $("#Power").val());
-            form.append("Source", $("#Source").val());
-            form.append("Lamp_Colour", $("#Lamp_Colour").val());
-            form.append("Luminaire_Output", $("#Luminaire_Output").val());
-            form.append("Beam_Angle", $("#Beam_Angle").val());
-            form.append("Control_Gear", $("#Control_Gear").val());
-            form.append("Power_Supply", $("#Power_Supply").val());
+            //spect
             form.append("IP_Rating", $("#IP_Rating").val());
+            form.append("Power", $("#Power").val());
+            form.append("Dimension", $("#Dimension").val());
+            if (specification.length > 0){
+                for (const spect of specification) {
+                    form.append("Spect_Name", spect.name);
+                    form.append("Spect_Value", spect.value);
+                }
+            }
+            //form.append("Housing", $("#Housing").val());
+            //form.append("Finishing", $("#Finishing").val());
+            //form.append("Lens", $("#Lens").val());
+            //form.append("Gasket", $("#Gasket").val());      
+            //form.append("Mounting", $("#Mounting").val());
+            //form.append("Source", $("#Source").val());
+            //form.append("Lamp_Colour", $("#Lamp_Colour").val());
+            //form.append("Luminaire_Output", $("#Luminaire_Output").val());
+            //form.append("Beam_Angle", $("#Beam_Angle").val());
+            //form.append("Control_Gear", $("#Control_Gear").val());
+            //form.append("Power_Supply", $("#Power_Supply").val());
+            
             form.append("Luminaire_Lifetime", $("#Luminaire_Lifetime").val());
             form.append("Equivalent", $("#Equivalent").val());
 

@@ -136,6 +136,7 @@ namespace Lighting.Controllers.Frontend
 
             var product = await _db.Products
                 .AsNoTracking()
+                .Include(pro => pro.ProductSpect)
                 .Where(pro => pro.Product_ModelId == sub_categoryId)
                 .OrderByDescending(x => x.Id)
                 .Select(pro =>
@@ -145,28 +146,29 @@ namespace Lighting.Controllers.Frontend
                     Product_CategoryId = pro.Product_CategoryId,
                     Product_ModelId = pro.Product_ModelId,
                     Application = pro.Application,
-                    Beam_Angle = pro.Beam_Angle,
+                    
                     Type_EN = pro.Type_EN,
                     Type_TH = pro.Type_TH,
-
-                    Control_Gear = pro.Control_Gear,
-                    Dimension = pro.Dimension,
-                    Equivalent = pro.Equivalent,
-                    Finishing = pro.Finishing,
-                    Gasket = pro.Gasket,
-                    Housing = pro.Housing,
-
-                    IP_Rating = pro.IP_Rating,
-                    Lamp_Colour = pro.Lamp_Colour,
-                    Lens = pro.Lens,
-                    Luminaire_Lifetime = pro.Luminaire_Lifetime,
-                    Model = pro.Model,
-                    Mounting = pro.Mounting,
                     MORE_INFORMATION = pro.MORE_INFORMATION,
+                    Model = pro.Model,
+                    //spect
+                    IP_Rating = pro.IP_Rating,
+                    Dimension = pro.Dimension,
                     Power = pro.Power,
-                    Power_Supply = pro.Power_Supply,
-                    Source = pro.Source,
-                    Luminaire_Output = pro.Luminaire_Output,
+                    Product_Spects = pro.ProductSpect.ToList(),
+                    //Beam_Angle = pro.Beam_Angle,
+                    //Control_Gear = pro.Control_Gear,
+                    //Equivalent = pro.Equivalent,
+                    //Finishing = pro.Finishing,
+                    //Gasket = pro.Gasket,
+                    //Housing = pro.Housing,
+                    //Lamp_Colour = pro.Lamp_Colour,
+                    //Lens = pro.Lens,
+                    //Luminaire_Lifetime = pro.Luminaire_Lifetime,
+                    //Mounting = pro.Mounting,
+                    //Power_Supply = pro.Power_Supply,
+                    //Source = pro.Source,
+                    //Luminaire_Output = pro.Luminaire_Output,
 
                     Folder_Path = pro.Folder_Path,
                     CUTSHEET = pro.CUTSHEET == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CUTSHEET),
@@ -251,6 +253,7 @@ namespace Lighting.Controllers.Frontend
 
                 var product = await _db.Products
                     .AsNoTracking()
+                    .Include(pro => pro.ProductSpect)
                     .Where(pro => pro.Id == id)
                     .Select(pro =>
                       new Output_ProductVM
@@ -259,28 +262,28 @@ namespace Lighting.Controllers.Frontend
                           Product_CategoryId = pro.Product_CategoryId,
                           Product_ModelId = pro.Product_ModelId,
                           Application = pro.Application,
-                          Beam_Angle = pro.Beam_Angle,
+                          MORE_INFORMATION = pro.MORE_INFORMATION,
                           Type_EN = pro.Type_EN,
                           Type_TH = pro.Type_TH,
-
-                          Control_Gear = pro.Control_Gear,
-                          Dimension = pro.Dimension,
-                          Equivalent = pro.Equivalent,
-                          Finishing = pro.Finishing,
-                          Gasket = pro.Gasket,
-                          Housing = pro.Housing,
-
-                          IP_Rating = pro.IP_Rating,
-                          Lamp_Colour = pro.Lamp_Colour,
-                          Lens = pro.Lens,
-                          Luminaire_Lifetime = pro.Luminaire_Lifetime,
                           Model = pro.Model,
-                          Mounting = pro.Mounting,
-                          MORE_INFORMATION = pro.MORE_INFORMATION,
+                          //spect
                           Power = pro.Power,
-                          Power_Supply = pro.Power_Supply,
-                          Source = pro.Source,
-                          Luminaire_Output = pro.Luminaire_Output,
+                          Dimension = pro.Dimension,
+                          IP_Rating = pro.IP_Rating,
+                           Product_Spects = pro.ProductSpect.ToList(),
+                          //Beam_Angle = pro.Beam_Angle,
+                          //Control_Gear = pro.Control_Gear,
+                          //Equivalent = pro.Equivalent,
+                          //Finishing = pro.Finishing,
+                          //Gasket = pro.Gasket,
+                          //Housing = pro.Housing,
+                          //Lamp_Colour = pro.Lamp_Colour,
+                          //Lens = pro.Lens,
+                          //Luminaire_Lifetime = pro.Luminaire_Lifetime,
+                          //Mounting = pro.Mounting,
+                          //Power_Supply = pro.Power_Supply,
+                          //Source = pro.Source,
+                          //Luminaire_Output = pro.Luminaire_Output,
 
                           Folder_Path = pro.Folder_Path,
                           CUTSHEET = pro.CUTSHEET == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CUTSHEET),
@@ -307,7 +310,6 @@ namespace Lighting.Controllers.Frontend
                 return NotFound();
             }
         }
-
 
         private List<string> GET_FILE(string path)
         {

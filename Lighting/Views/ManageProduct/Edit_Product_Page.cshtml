@@ -32,26 +32,75 @@
         }
     }
 
+    .add-spect-container {
+        position: fixed;
+        top: 0;
+        left: auto;
+        inset: 0;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0,0,0,0.2);
+    }
+
+    .spect-grid-container {
+        display: grid;
+        grid-auto-rows: auto;
+    }
+
+    .spect-grid-item {
+        display: grid;
+        grid-template-columns: auto auto 5rem;
+        border-bottom: 1px solid black;
+        & > div{
+            max-width: 100%;
+            word-wrap: break-word;
+            font-size: 1.7rem;
+        }
+    }
+
+    .add-spect-box {
+        width: 80%;
+        min-width: 20vh;
+        height: auto;
+        border-radius: 10px;
+        padding: 1rem;
+        display: grid;
+        grid-template-rows: 2rem auto 3rem 3rem auto 3rem;
+        gap: 2rem;
+        background-color: white;
+        & > input[type="text"]{
+            font-size: 2rem;
+        }
+
+        & > h3 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+    }
+
     .add-product-grid-spec {
         height: auto;
         width: 100%;
         display: grid;
-        grid-template-rows: 4rem repeat(16,auto);
+        grid-template-rows: 2rem auto auto auto auto;
         gap: 2rem;
         background-color: rgba(0,0,0,0.2);
         padding: 2rem;
         border-radius: 10px;
-        & > h2
-
-    {
-        background-color: gray;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        border-radius: 5px;
-    }
-
+        & > h2{
+            margin: -2rem;
+            background-color: gray;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            border-radius: 5px;
+        }
     }
 </style>
 <div style="display:flex;justify-content:space-between;margin:1rem 10%;">
@@ -185,6 +234,21 @@
             <h2>สเปค / Spacification</h2>
 
             <div class="add-product-grid-item">
+                <label class="h4">IP Rating</label>
+                <input type="text" placeholder="IP Rating" id="IP_Rating" value="@Model?.IP_Rating" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Dimension</label>
+                <input type="text" placeholder="Dimension" id="Dimension" value="@Model?.Dimension" />
+            </div>
+
+            <div class="add-product-grid-item">
+                <label class="h4">Power</label>
+                <input type="text" placeholder="Power" id="Power" value="@Model?.Power" />
+            </div>
+            @*
+            <div class="add-product-grid-item">
                 <label class="h4">Housing</label>
                 <input type="text" placeholder="Housing" id="Housing" value="@Model?.Housing"/>
             </div>
@@ -205,17 +269,8 @@
             </div>
 
             <div class="add-product-grid-item">
-                <label class="h4">Dimension</label>
-                <input type="text" placeholder="Dimension" id="Dimension" value="@Model?.Dimension" />
-            </div>
-            <div class="add-product-grid-item">
                 <label class="h4">Mounting</label>
                 <input type="text" placeholder="Mounting" id="Mounting" value="@Model?.Mounting" />
-            </div>
-
-            <div class="add-product-grid-item">
-                <label class="h4">Power</label>
-                <input type="text" placeholder="Power" id="Power" value="@Model?.Power" />
             </div>
 
             <div class="add-product-grid-item">
@@ -248,10 +303,7 @@
                 <input type="text" placeholder="Power Supply" id="Power_Supply" value="@Model?.Power_Supply" />
             </div>
 
-            <div class="add-product-grid-item">
-                <label class="h4">IP Rating</label>
-                <input type="text" placeholder="IP Rating" id="IP_Rating" value="@Model?.IP_Rating" />
-            </div>
+
 
             <div class="add-product-grid-item">
                 <label class="h4">Luminaire Lifetime</label>
@@ -262,7 +314,22 @@
                 <label class="h4">Equivalent</label>
                 <input type="text" placeholder="Equivalent" id="Equivalent" value="@Model?.Equivalent" />
             </div>
-
+            *@
+            <div  class="spect-grid-container">
+                @if(Model?.Product_Spects != null){
+                    foreach (var spect in Model.Product_Spects)
+                    {
+                        <div class="spect-grid-item" id="@spect.Id">
+                            <div>@spect.Name/</div>
+                            <div>@spect.Value</div>
+                            <button class="btn btn-danger" onclick="deleteSpectById(@spect.Id)"> ลบ </button>
+                        </div>
+                    }
+                }
+            </div>
+            <div id="spect_container" class="spect-grid-container">
+            </div>
+            <center><button onclick="showHideSpect()" class="btn btn-success">เพิ่มสเปค/add space</button> </center>
         </div>
 
 
@@ -272,8 +339,23 @@
     <centter style="margin-bottom:3rem;"><button onclick="editProduct(@Model?.Id)" class="btn btn-success">บันทึก/save</button></centter>
 </div>
 
+<div class="add-spect-container" style="display:none;" id="add_spect">
+    <div class="add-spect-box">
+        <h3>เพิ่มสเปค</h3>
+        <div></div>
+        <input type="text" placeholder="ชื่อสเปค" id="txt_spect_name" />
+        <input type="text" placeholder="ค่าของสเปค" id="txt_spect_value" />
+        <div></div>
+        <div style="display:flex;justify-content:space-between">
+            <button class="btn btn-success" onclick="addSpect()">เพิ่ม/add</button>
+            <button class="btn btn-warning" onclick="showHideSpect()">ยกเลิก/cancle</button>
+        </div>
+    </div>
+</div>
+
 @section Scripts{
     <script>
+        var specification = [], spect_num = 0;
         var preview_img, sub_img_file, CutSheet_file, IesFile_file, Catalogue_file, rfa_file, technical_file, light_distribute_file;
 
         $(document).ready(function () {
@@ -320,6 +402,98 @@
             });
         });
 
+        function showHideSpect() {
+            if ($("#add_spect").css("display") === "none") {
+                $("#add_spect").css("display", "flex");
+            } else {
+                $("#add_spect").css("display", "none");
+            }
+        }
+
+        function addSpect() {
+            let name = $("#txt_spect_name").val();
+            let value = $("#txt_spect_value").val();
+            if (name !== "" && value !== "") {
+                specification.push({ id: spect_num, name: name, value: value });
+                let html_spect = specification.reduce((prev, curr) =>
+                    prev += `<div class="spect-grid-item" id="spect${curr.id}">
+                                            <div> ${curr.name}</div>
+                                            <div> ${curr.value}</div>
+                                                    <button class= "btn btn-danger" onclick = "deleteSpect(${curr.id})" > ลบ </button>
+                                    </div>`, "");
+                $("#spect_container").html(html_spect);
+                spect_num++;
+                showHideSpect();
+                $("#txt_spect_name").val('');
+                $("#txt_spect_value").val('');
+            }
+        }
+
+        function deleteSpectById(id){
+
+            Swal.fire({
+                icon: 'warning',
+                title: "คุณแน่ใจว่าต้องการลบ?",
+                text: "",
+                showConfirmButton: true,
+            }).then((confirm) => {
+                if (confirm.isConfirmed) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/ManageProduct/DeleteSpectById?id=' + id,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        beforeSend: function () {
+                            Swal.fire('Please wait')
+                            Swal.showLoading()
+                        },
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then(() => {
+                                    $("#" + id).remove();//remove search
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+
+                } else {
+
+                }
+            });
+        }
+
+        function deleteSpect(id) {
+            specification = specification.filter(x => x.id != id);
+            let html_spect = specification.reduce((prev, curr) =>
+                prev += `<div class="spect-grid-item" id="spect${curr.id}">
+                                   <div> ${curr.name}</div>
+                                   <div> ${curr.value}</div>
+                                   <button class= "btn btn-danger" onclick = "deleteSpect(${curr.id})" > ลบ </button>
+                                 </div>`, "");
+
+            $("#spect_container").html(html_spect);
+        }
+
         function editProduct(id) {
 
             let form = new FormData();
@@ -338,23 +512,28 @@
             form.append("MORE_INFORMATION", $("#more_info").val());
             form.append("Application", $("#application").val());
             //form.append("Technical_Drawing", $("#").val());
-
-            form.append("Housing", $("#Housing").val());
-            form.append("Finishing", $("#Finishing").val());
-            form.append("Lens", $("#Lens").val());
-            form.append("Gasket", $("#Gasket").val());
-            form.append("Dimension", $("#Dimension").val());
-            form.append("Mounting", $("#Mounting").val());
             form.append("Power", $("#Power").val());
-            form.append("Source", $("#Source").val());
-            form.append("Lamp_Colour", $("#Lamp_Colour").val());
-            form.append("Luminaire_Output", $("#Luminaire_Output").val());
-            form.append("Beam_Angle", $("#Beam_Angle").val());
-            form.append("Control_Gear", $("#Control_Gear").val());
-            form.append("Power_Supply", $("#Power_Supply").val());
+            form.append("Dimension", $("#Dimension").val());
             form.append("IP_Rating", $("#IP_Rating").val());
-            form.append("Luminaire_Lifetime", $("#Luminaire_Lifetime").val());
-            form.append("Equivalent", $("#Equivalent").val());
+            if (specification.length > 0) {
+                for (const spect of specification) {
+                    form.append("Spect_Name", spect.name);
+                    form.append("Spect_Value", spect.value);
+                }
+            }
+            //form.append("Housing", $("#Housing").val());
+            //form.append("Finishing", $("#Finishing").val());
+            //form.append("Lens", $("#Lens").val());
+            //form.append("Gasket", $("#Gasket").val());
+            //form.append("Mounting", $("#Mounting").val());
+            //form.append("Source", $("#Source").val());
+            //form.append("Lamp_Colour", $("#Lamp_Colour").val());
+            //form.append("Luminaire_Output", $("#Luminaire_Output").val());
+            //form.append("Beam_Angle", $("#Beam_Angle").val());
+            //form.append("Control_Gear", $("#Control_Gear").val());
+            //form.append("Power_Supply", $("#Power_Supply").val());
+            //form.append("Luminaire_Lifetime", $("#Luminaire_Lifetime").val());
+            //form.append("Equivalent", $("#Equivalent").val());
 
             if (light_distribute_file != undefined) {
                 for (const file of light_distribute_file) {
