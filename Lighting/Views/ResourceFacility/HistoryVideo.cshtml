@@ -50,7 +50,7 @@
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th>#</th>
-                                <th class="min-w-125px">หัวข้อ TH</th>
+                                <th class="min-w-125px">Link</th>
                                 <th class="min-w-125px">สถานะการใช้งาน</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
@@ -61,7 +61,9 @@
         </div>
     </div>
 </div>
+
 @section Scripts{
+
     <script>
         $(() => {
             var oTable = $("#History").DataTable({
@@ -83,14 +85,14 @@
                         "name": "status", "data": "status", "render": function (data, type, row) {
                             if (row.status == 1) {
                                 var text = '<div class="form-check form-switch">' +
-                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
-                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '<input class="form-check-input" checked type="checkbox" name="Status" value="1" id="Status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="Status">ใช้งาน</label>' +
                                     '</div>';
                                 return text;
                             } else {
                                 var text = '<div class="form-check form-switch">' +
-                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
-                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '<input class="form-check-input" type="checkbox" name="Status" value="1" id="Status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="Status">ใช้งาน</label>' +
                                     '</div>';
                                 return text;
                             }
@@ -120,8 +122,9 @@
                     id: id
                 },
                 success: function (data) {
-                    if (data.status == "success") {
-
+                    if (data.status == "success") { 
+                        var oTable = $('#History').DataTable();
+                        oTable.ajax.reload(null, false);
                     }
                     else {
                         Swal.fire({

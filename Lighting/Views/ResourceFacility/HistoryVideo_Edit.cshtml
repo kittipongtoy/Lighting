@@ -39,7 +39,19 @@
                         </div>
                     </div>
                     <form id="form_create" enctype="multipart/form-data">
+
                         <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    Link Video TH
+                                </span>
+                            </div>
+                            <div class="col-10">
+                                <textarea type="text" class="form-control" name="FileVideoTH" id="FileVideoTH"></textarea>
+                            </div> 
+                        </div>
+
+                        @*<div class="row mb-3">
                             <div class="col-2">
                                 <span>
                                     Link Video TH
@@ -74,7 +86,8 @@
                             <div class="col-4">
                                 <input type="file" class="form-control" name="uploaded_fileEN" />
                             </div>
-                        </div>
+                        </div>*@
+
                         <div class="row mb-3">
                             <div class="col-2">
                                 <span>
@@ -132,6 +145,8 @@
                 data: { Id: Parmeter_id },
                 success: function (data) {
                     $("#Id").val(data.id);
+                    $("#FileVideoTH").val(data.fileVideoTH);
+                    
                     var status = '';
                     if (data.status == 1) {
                         status += '<div class="form-check form-switch">';

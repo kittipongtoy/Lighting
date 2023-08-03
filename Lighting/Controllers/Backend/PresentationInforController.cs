@@ -36,13 +36,21 @@ namespace Lighting.Controllers.Backend
         {
             try
             {
-                var Raw_list = db.SH_IR_presentation_doc_Data.ToList();
+                var Raw_list = db.SH_IR_presentation_doc_Data.OrderByDescending(x=>x.id).ToList();
                 var add_count = new List<IR_Presentation_Infor_model.SH_IR_Presentation_DocDataDetails_table>();
                 var count = 1;
                 foreach (var items in Raw_list)
                 {
                     var dateDatas = Convert.ToDateTime(items.document_date);
-                    var InsertDates = dateDatas.ToString("MM/yyyy", new CultureInfo("en-US")); 
+                    var InsertDates = dateDatas.ToString("MM/yyyy", new CultureInfo("en-US"));
+                    if (items.document_date != null)
+                    {
+                        InsertDates = InsertDates;
+                    }
+                    else
+                    {
+                        InsertDates = "";
+                    }
 
                     add_count.Add(new IR_Presentation_Infor_model.SH_IR_Presentation_DocDataDetails_table
                     {
@@ -136,16 +144,17 @@ namespace Lighting.Controllers.Backend
         {
             try
             { 
-                if (Date_Str == null)
-                {
-                    return Json(new { status = "error", message = "กรุณาระบุ  วันที่!" });
-                }
-                DateTime InsertDate = DateTime.ParseExact(Date_Str, "MM/yyyy", new CultureInfo("en-US"));
+                //if (Date_Str == null)
+                //{
+                //    return Json(new { status = "error", message = "กรุณาระบุ  วันที่!" });
+                //}
+                //DateTime InsertDate = DateTime.ParseExact(Date_Str, "MM/yyyy", new CultureInfo("en-US"));
 
-                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
-                {
-                    return Json(new { status = "warning", message = "กรุณากรอกข้อมูลให้ครบ!" });
-                }
+                //if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
+                //{
+                //    return Json(new { status = "warning", message = "กรุณากรอกข้อมูลให้ครบ!" });
+                //}
+
                 foreach (var formFile in uploaded_file)
                 {
                     if (formFile.Length > 0)
@@ -191,7 +200,13 @@ namespace Lighting.Controllers.Backend
                     SH_IR_presentation_doc_Data.active_status = 1;
                 }
 
-                SH_IR_presentation_doc_Data.document_date = InsertDate;
+                DateTime InsertDate = DateTime.Now;
+                if (Date_Str != null)
+                {
+                    InsertDate = DateTime.ParseExact(Date_Str, "MM/yyyy", new CultureInfo("en-US"));
+                    SH_IR_presentation_doc_Data.document_date = InsertDate;
+                } 
+
                 SH_IR_presentation_doc_Data.created_at = DateTime.Now;
                 SH_IR_presentation_doc_Data.updated_at = DateTime.Now;
                 db.SH_IR_presentation_doc_Data.Add(SH_IR_presentation_doc_Data);
@@ -250,17 +265,16 @@ namespace Lighting.Controllers.Backend
             try
             {
 
-                if (SH_IR_presentation_doc_Data.titleTH == null || SH_IR_presentation_doc_Data.titleENG == "")
-                {
-                    return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ TH / ENG" });
-                }
+                //if (SH_IR_presentation_doc_Data.titleTH == null || SH_IR_presentation_doc_Data.titleENG == "")
+                //{
+                //    return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ TH / ENG" });
+                //} 
 
-
-                if (Date_Str == null)
-                {
-                    return Json(new { status = "error", message = "กรุณาระบุ  วันที่!" });
-                }
-                DateTime InsertDate = DateTime.ParseExact(Date_Str, "MM/yyyy", new CultureInfo("en-US"));
+                //if (Date_Str == null)
+                //{
+                //    return Json(new { status = "error", message = "กรุณาระบุ  วันที่!" });
+                //}
+                //DateTime InsertDate = DateTime.ParseExact(Date_Str, "MM/yyyy", new CultureInfo("en-US"));
 
                 var old_data = db.SH_IR_presentation_doc_Data.Where(x => x.id == SH_IR_presentation_doc_Data.id).FirstOrDefault();
 
@@ -327,7 +341,12 @@ namespace Lighting.Controllers.Backend
                 old_data.titleTH = SH_IR_presentation_doc_Data.titleTH;
                 old_data.titleENG = SH_IR_presentation_doc_Data.titleENG;
 
-                old_data.document_date = InsertDate; 
+                DateTime InsertDate = DateTime.Now;
+                if (Date_Str != null)
+                {
+                    InsertDate = DateTime.ParseExact(Date_Str, "MM/yyyy", new CultureInfo("en-US"));
+                    old_data.document_date = InsertDate;
+                }
 
                 old_data.updated_at = DateTime.Now;
                 db.SaveChanges();
@@ -356,13 +375,21 @@ namespace Lighting.Controllers.Backend
         {
             try
             {
-                var Raw_list = db.SH_IR_presentation_webcast_Data.ToList();
+                var Raw_list = db.SH_IR_presentation_webcast_Data.OrderByDescending(x=>x.id).ToList();
                 var add_count = new List<IR_Presentation_Infor_model.SH_IR_presentation_webcastDetails_table>();
                 var count = 1;
                 foreach (var items in Raw_list)
                 {
                     var dateDatas = Convert.ToDateTime(items.activity_date);
                     var InsertDates = dateDatas.ToString("MM/yyyy", new CultureInfo("en-US"));
+                    if (items.activity_date != null)
+                    {
+                        InsertDates = InsertDates;
+                    }
+                    else
+                    {
+                        InsertDates = "";
+                    }
 
                     add_count.Add(new IR_Presentation_Infor_model.SH_IR_presentation_webcastDetails_table
                     {
@@ -370,7 +397,7 @@ namespace Lighting.Controllers.Backend
                         id = items.id,
                         titleTH = items.titleTH,
                         titleENG = items.titleENG,
-                        active_status = items.active_status,
+                        active_status = items.active_status, 
                         activity_date = InsertDates,
                         created_at = items.created_at,
                         updated_at = items.updated_at,
@@ -489,11 +516,11 @@ namespace Lighting.Controllers.Backend
         {
             try
             {
-                if (Date_Str == null)
-                {
-                    return Json(new { status = "error", message = "กรุณาระบุ  วันที่!" });
-                }
-                DateTime InsertDate = DateTime.ParseExact(Date_Str, "MM/yyyy", new CultureInfo("en-US"));
+                //if (Date_Str == null)
+                //{
+                //    return Json(new { status = "error", message = "กรุณาระบุ  วันที่!" });
+                //}
+                //DateTime InsertDate = DateTime.ParseExact(Date_Str, "MM/yyyy", new CultureInfo("en-US"));
 
                 //if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
                 //{
@@ -543,8 +570,13 @@ namespace Lighting.Controllers.Backend
                 {
                     SH_IR_presentation_webcast_Data.active_status = 1;
                 }
+                DateTime InsertDate=DateTime.Now;
+                if (Date_Str != null)
+                {
+                     InsertDate = DateTime.ParseExact(Date_Str, "MM/yyyy", new CultureInfo("en-US")); 
+                    SH_IR_presentation_webcast_Data.activity_date = InsertDate;
+                }
 
-                SH_IR_presentation_webcast_Data.activity_date = InsertDate;
                 SH_IR_presentation_webcast_Data.created_at = DateTime.Now;
                 SH_IR_presentation_webcast_Data.updated_at = DateTime.Now;
                 db.SH_IR_presentation_webcast_Data.Add(SH_IR_presentation_webcast_Data);
@@ -578,11 +610,11 @@ namespace Lighting.Controllers.Backend
                 }
 
 
-                if (Date_Str == null)
-                {
-                    return Json(new { status = "error", message = "กรุณาระบุ  วันที่!" });
-                }
-                DateTime InsertDate = DateTime.ParseExact(Date_Str, "MM/yyyy", new CultureInfo("en-US"));
+                //if (Date_Str == null)
+                //{
+                //    return Json(new { status = "error", message = "กรุณาระบุ  วันที่!" });
+                //}
+                //DateTime InsertDate = DateTime.ParseExact(Date_Str, "MM/yyyy", new CultureInfo("en-US"));
 
                 var old_data = db.SH_IR_presentation_webcast_Data.Where(x => x.id == SH_IR_presentation_webcast_Data.id).FirstOrDefault();
 
@@ -650,7 +682,13 @@ namespace Lighting.Controllers.Backend
                 old_data.titleENG = SH_IR_presentation_webcast_Data.titleENG;
                 old_data.linkVideo = SH_IR_presentation_webcast_Data.linkVideo;
 
-                old_data.activity_date = InsertDate;
+                DateTime InsertDate=DateTime.Now;
+                if (Date_Str != null)
+                {
+                    InsertDate = DateTime.ParseExact(Date_Str, "MM/yyyy", new CultureInfo("en-US"));
+
+                    old_data.activity_date = InsertDate;
+                }
 
                 old_data.updated_at = DateTime.Now;
                 db.SaveChanges();

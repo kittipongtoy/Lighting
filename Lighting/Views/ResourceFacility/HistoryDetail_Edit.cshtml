@@ -1,7 +1,10 @@
-﻿@{
-    ViewData["Title"] = "HistoryDetail_Add";
+﻿@model Lighting.Models.Resource_FacilityModels
+
+@{
+    ViewData["Title"] = "HistoryDetail_Edit";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
+
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <div class="toolbar" id="kt_toolbar">
         <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
@@ -24,6 +27,7 @@
             </div>
         </div>
     </div>
+
     <div class="post d-flex flex-column-fluid">
         <div id="kt_content_container" class="container-xxl">
             <div class="card">
@@ -46,7 +50,7 @@
                                 </span>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" name="Title_TH" id="Title_TH" />
+                                <input type="text" class="form-control" name="Title_TH" id="Title_TH" value="@Model.HistoryDetail.Title_TH" />
                             </div>
                             <div class="col-2">
                                 <span>
@@ -54,7 +58,7 @@
                                 </span>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" name="Title_EN" id="Title_EN" />
+                                <input type="text" class="form-control" name="Title_EN" id="Title_EN" value="@Model.HistoryDetail.Title_EN" />
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -62,8 +66,17 @@
                                 <span>
                                     รูป TH
                                 </span>
+                                <br />
+                                <span style="color:red;">
+                                    ขนาดรูปภาพ : 1300 * 650 px
+                                </span>
                             </div>
                             <div class="col-4">
+                                <div class="mb-10" style="text-align:center;">
+                                    <div class="mb-10" style="text-align:center;">
+                                        <img src="~/upload_image/Resource_Facility/@Model.HistoryDetail.ImageTH" style="height: 250px;width: 250px;" alt="image">
+                                    </div>
+                                </div>
                                 <input type="file" class="form-control" name="uploaded_ImageTH" accept="image/*" />
                             </div>
 
@@ -71,8 +84,17 @@
                                 <span>
                                     รูป EN
                                 </span>
+                                <br />
+                                <span style="color:red;">
+                                    ขนาดรูปภาพ : 1300 * 650 px
+                                </span>
                             </div>
                             <div class="col-4">
+                                <div class="mb-10" style="text-align:center;">
+                                    <div class="mb-10" style="text-align:center;">
+                                        <img src="~/upload_image/Resource_Facility/@Model.HistoryDetail.ImageEN" style="height: 250px;width: 250px;" alt="image">
+                                    </div>
+                                </div>
                                 <input type="file" class="form-control" name="uploaded_ImageEN" accept="image/*" />
                             </div>
                         </div>
@@ -82,8 +104,8 @@
                                     รายละเอียด TH
                                 </span>
                             </div>
-                            <div class="col-12">
-                                <textarea id="Detail_TH"></textarea>
+                            <div class="col-12"> 
+                                <textarea id="Detail_TH">@Model.HistoryDetail.Detail_TH</textarea>
                             </div>
                             <div class="col-12">
                                 <span>
@@ -91,7 +113,7 @@
                                 </span>
                             </div>
                             <div class="col-12">
-                                <textarea id="Detail_EN"></textarea>
+                                <textarea id="Detail_EN">@Model.HistoryDetail.Detail_EN</textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -118,9 +140,21 @@
                                     สถานะการใช้งาน
                                 </span>
                             </div>
-                            <div class="col-4" id="CheckStatus"></div>
+                            <div class="col-4">
+                                <div class="form-check form-switch">
+                                    @if (Model.HistoryDetail.Status == 1)
+                                    {
+                                        <input class="form-check-input" checked type="checkbox" name="Status" value="1" id="Status">
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" name="Status" value="1" id="Status">
+                                    }
+                                    <label class="form-check-label" for="Status">ใช้งาน</label>
+                                </div>
+                            </div>
                         </div>
-                        <input type="hidden" name="Id" id="Id" />
+                        <input type="hidden" name="Id" id="Id" value="@Model.HistoryDetail.Title_EN" />
                     </form>
                     <div class="row mb-3" style="justify-content: right;">
                         <div class="col-1">
@@ -132,7 +166,9 @@
         </div>
     </div>
 </div>
+
 @section Scripts{
+
     <script>
         var getUrlParameter = function getUrlParameter(sParam) {
             var sPageURL = window.location.search.substring(1),
@@ -162,7 +198,6 @@
             console.log(check)
         }
 
-
         $(() => {
             $.ajax({
                 type: 'get',
@@ -174,6 +209,9 @@
                     $("#Title_EN").val(data.title_EN);
                     $("#Detail_TH").val(data.detail_TH);
                     $("#Detail_EN").val(data.detail_EN);
+
+                    $("#edit_image").attr("src", "/upload_image/Resource_Facility/" + data.data.ImageTH);
+                    $("#edit_imageEN").attr("src", "/upload_image/Resource_Facility/" + data.data.ImageEN);
 
                     var status = '';
                     if (data.status == 1) {

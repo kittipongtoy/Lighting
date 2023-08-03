@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "IR_presentation_doc";
-    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml"; 
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
 
     var language = "";
     if (Context.Request.Cookies["lang"] == "EN")
@@ -228,14 +228,14 @@
 
                 var file = function ({ file_name, file_name_ENG }, lag) {
                     if (lag === "TH") {
-                        if (file_name.toLowerCase() == "null") {
+                        if (file_name == "null") {
                             return file_name;
                         } else {
                             return file_name;
                         }
                         //return FileDownload_TH;
                     } else if (lag === "EN") {
-                        if (file_name_ENG.toLowerCase() == "null") {
+                        if (file_name_ENG == "null") {
                             return file_name_ENG;
                         } else {
                             return file_name_ENG;
@@ -268,24 +268,34 @@
                             var optionsEN = { year: 'numeric', month: 'numeric' };
                             var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
 
+                            if (item.activity_date == null) {
+                                formattedDateTH = "";
+                                formattedDateEN = "";
+                            }
+
                             dataHtml += `<tr>
-                                                        <td>`+ title(item, local) + ` &nbsp;`;
+                                                                        <td>`+ title(item, local) + ` &nbsp;`;
                             if (local == "TH") {
                                 dataHtml += formattedDateTH
                             } else {
                                 dataHtml += formattedDateEN
                             }
                             dataHtml += `</td>
-                                                <td>
-                                                                    <a class="download-button" href="../upload_file/SH_IR_Presentation/`+ file(item, local) + `" target="_blank">`;
-                            if (local == "TH") {
-                                dataHtml += `<span>ดาวน์โหลด</span>`;
-                            } else {
-                                dataHtml += `<span>Download </span>`;
+                                                                <td>
+                                                                `;
+                             
+                            if (file(item, local) != null ) {
+                                dataHtml += ` <a class="download-button" href="../upload_file/SH_IR_Presentation/` + file(item, local) + `" target="_blank">`;
+                                if (local == "TH") {
+                                    dataHtml += `<span>ดาวน์โหลด</span>`;
+                                } else {
+                                    dataHtml += `<span>Download </span>`;
+                                }
                             }
+
                             dataHtml += `</a>
-                                                </td>
-                                            </tr>`;
+                                                                </td>
+                                                            </tr>`;
 
                         });
 

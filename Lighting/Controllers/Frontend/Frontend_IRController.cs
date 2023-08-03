@@ -1039,13 +1039,13 @@ namespace Lighting.Controllers.Frontend
         }
         public async Task<IActionResult> IR_general_meeting()
         {
-            var data = db.SH_generalMeeting.ToList();
+            var data =await db.SH_generalMeeting.ToListAsync();
             if (data.Count != 0)
             {
                 ViewBag.Header = data;
             }
 
-            var details = db.SH_generalMeeting_Data.Where(x => x.use_status == 1).OrderByDescending(x => x.year).ToList();
+            var details =await db.SH_generalMeeting_Data.Where(x => x.use_status == 1).OrderByDescending(x => x.id).ToListAsync();
             if (details.Count != 0)
             {
                 ViewBag.Body = details;
@@ -1212,7 +1212,7 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Header = data;
             }
 
-            var details = db.SH_IR_presentation_doc_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.document_date).ToList();
+            var details = db.SH_IR_presentation_doc_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.id).ToList();
             if (details.Count != 0)
             {
                 ViewBag.Body = details;
@@ -1221,7 +1221,7 @@ namespace Lighting.Controllers.Frontend
         }
         public async Task<IActionResult> Get_IR_presentation_doc()
         {
-            var IR_PWevcast = db.SH_IR_presentation_doc_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.document_date).AsEnumerable().Select((op, index) => new IR_Presentation_Infor_model.Presentation_doc
+            var IR_PWevcast = db.SH_IR_presentation_doc_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.id).AsEnumerable().Select((op, index) => new IR_Presentation_Infor_model.Presentation_doc
             {
                 id = op.id,
                 titleTH = op.titleTH,
@@ -1241,7 +1241,7 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Header = data;
             }
 
-            var details =await db.SH_IR_presentation_webcast_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.activity_date).ToListAsync();
+            var details =await db.SH_IR_presentation_webcast_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.id).ToListAsync();
             if (details.Count != 0)
             {
                 ViewBag.Body = details;
@@ -1250,7 +1250,7 @@ namespace Lighting.Controllers.Frontend
         }
         public async Task<IActionResult> Get_IR_presentation_webcast()
         {
-            var IR_PWevcast = db.SH_IR_presentation_webcast_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.activity_date).AsEnumerable().Select((op, index) => new IR_Presentation_Infor_model.Presentation_webcast
+            var IR_PWevcast = db.SH_IR_presentation_webcast_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.id).AsEnumerable().Select((op, index) => new IR_Presentation_Infor_model.Presentation_webcast
             {
                 id = op.id,
                 titleTH = op.titleTH,

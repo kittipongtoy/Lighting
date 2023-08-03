@@ -43,9 +43,9 @@
                     </div>
                     <form id="form_create" enctype="multipart/form-data">
                         <input class="form-control" name="id" hidden value="@Model.fod_Board_of_Directors.id" />
-                        <div class="mb-10" style="text-align:center;">
-                            <img src="~/upload_image/BoardOfDirectors/@Model.fod_Board_of_Directors.image_nameTH" style="height: 250px;width: 250px;" alt="image">
-                        </div>
+                        @* <div class="mb-10" style="text-align:center;">
+                        <img src="~/upload_image/BoardOfDirectors/@Model.fod_Board_of_Directors.image_nameTH" style="height: 250px;width: 250px;" alt="image">
+                        </div>*@
                         <div class="row mb-3">
                             <div class="col-2">
                                 <span>
@@ -267,16 +267,31 @@
                                 <span>
                                     รูป TH
                                 </span>
+                                <br />
+                                <span style="color:red;">
+                                    ขนาดรูปภาพ : 700 * 300 px
+                                </span>
                             </div>
                             <div class="col-4">
+                                <div class="mb-10" style="text-align:center;">
+                                    <img src="~/upload_image/BoardOfDirectors/@Model.fod_Board_of_Directors.image_nameTH" style="height: 250px;width: 250px;" alt="image">
+                                </div>
                                 <input type="file" class="form-control" name="uploaded_imageTH" accept="image/*" />
                             </div>
+
                             <div class="col-2">
                                 <span>
                                     รูป EN
                                 </span>
+                                <br />
+                                <span style="color:red;">
+                                    ขนาดรูปภาพ : 700 * 300 px
+                                </span>
                             </div>
                             <div class="col-4">
+                                <div class="mb-10" style="text-align:center;">
+                                    <img src="~/upload_image/BoardOfDirectors/@Model.fod_Board_of_Directors.image_nameEN" style="height: 250px;width: 250px;" alt="image">
+                                </div>
                                 <input type="file" class="form-control" name="uploaded_imageEN" accept="image/*" />
                             </div>
                         </div>
