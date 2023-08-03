@@ -1,0 +1,181 @@
+﻿@{
+    ViewData["Title"] = "Main_Contact";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+@model Lighting.Areas.Identity.Data.MainContact
+
+<form enctype="multipart/form-data" class="container" id="form">
+    <div class="row">
+        <div class="col-6">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">ชื่อหัวข้อออฟฟิศ (ภาษาไทย)</span>
+                </div>
+                <input type="text" value="@Model?.Title_TH" name="Title_EN" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Title head office (English)</span>
+                </div>
+                <input type="text" value="@Model?.Title_EN" name="Title_TH" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">ชื่อบริษัท (ภาษาไทย)</span>
+                </div>
+                <input name="TitleName_EN" value="@Model?.TitleName_TH" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">company name (English)</span>
+                </div>
+                <input name="TitleName_TH" value="@Model?.TitleName_TH" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" >ที่อยู่</span>
+                </div>
+                <input name="Location_TH" value="@Model?.Location_TH" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" >address</span>
+                </div>
+                <input name="Location_EN" value="@Model?.Location_EN" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" >โทรศัพท์มือถือ</span>
+                </div>
+                <input name="PhoneNumber" value="@Model?.PhoneNumber" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" >โทรศัพท์สำนักงาน</span>
+                </div>
+                <input name="OfficePhone" value="@Model?.OfficePhone" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" >หัวข้ออีเมล1</span>
+                </div>
+                <input name="TitleEMail1" value="@Model?.TitleEMail1" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" >อีเมล1</span>
+                </div>
+                <input name="EMail1" value="@Model?.EMail1" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" >หัวข้ออีเมล2</span>
+                </div>
+                <input name="TitleEMail2" value="@Model?.TitleEMail2" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" >อีเมล2</span>
+                </div>
+                <input name="EMail2" value="@Model?.EMail2" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" >Google Map Link</span>
+                </div>
+                <input name="GoogleMapLink" value="@Model?.GoogleMapLink" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" >ข้อมูลเพิ่มเติม</span>
+                </div>
+                <input name="MoreInfo" value="@Model?.MoreInfo" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+
+            <div class="mb-3">
+                <label for="formFile" class="form-label">รูปปก</label>
+                <input name="Img_File" class="form-control" type="file" id="file_img_preview">
+            </div>
+        </div>
+        <div class="col-6">
+            <img src="@Model?.Img_File" style="width:100%;height:100%;" id="img_preview" />
+        </div>
+    </div>
+
+</form>
+<center style="margin:2rem;">
+    <button class="btn btn-success" onclick="save()">บันทึก/save</button>
+</center>
+@section Scripts{
+<script>
+
+    function save(){
+
+            let data = $("#form")[0];
+            let form = new FormData(data);
+
+            $.ajax({
+                type: 'POST',
+                url: '/MainContact/Save',
+                data: form,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = "/MainContact/Manage_Page";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+    }
+
+    var preview_img;
+        $(document).ready(function () {
+            $('#file_img_preview').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    preview_img = e.target.files[0];
+                    $('#img_preview').attr('src', await blobToBase64DataURL(preview_img)).css("display", "block");
+                }
+            });
+        });
+
+        const blobToBase64DataURL = blob => new Promise(
+            resolvePromise => {
+                const reader = new FileReader();
+                reader.onload = () => resolvePromise(reader.result);
+                reader.readAsDataURL(blob);
+            }
+        );
+</script>
+}

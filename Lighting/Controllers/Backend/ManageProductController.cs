@@ -6,6 +6,7 @@ using Microsoft.Build.Evaluation;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace Lighting.Controllers.Backend
 {
@@ -30,6 +31,7 @@ namespace Lighting.Controllers.Backend
         public async Task<ActionResult> Edit_Product_Page(int id)
         {
             var product = await _db.Products
+                .Include(pro=> pro.ProductSpect)
                 .Where(pro => pro.Id == id)
                 .Select(pro =>
                 new Output_ProductVM
@@ -38,28 +40,31 @@ namespace Lighting.Controllers.Backend
                     Product_CategoryId = pro.Product_CategoryId,
                     Product_ModelId = pro.Product_ModelId,
                     Application = pro.Application,
-                    Beam_Angle = pro.Beam_Angle,
+                    
                     Type_EN = pro.Type_EN,
                     Type_TH = pro.Type_TH,
-
-                    Control_Gear = pro.Control_Gear,
-                    Dimension = pro.Dimension,
-                    Equivalent = pro.Equivalent,
-                    Finishing = pro.Finishing,
-                    Gasket = pro.Gasket,
-                    Housing = pro.Housing,
-
-                    IP_Rating = pro.IP_Rating,
-                    Lamp_Colour = pro.Lamp_Colour,
-                    Lens = pro.Lens,
-                    Luminaire_Lifetime = pro.Luminaire_Lifetime,
                     Model = pro.Model,
-                    Mounting = pro.Mounting,
                     MORE_INFORMATION = pro.MORE_INFORMATION,
+                   
+                    Product_Spects = pro.ProductSpect.ToList(),
+                    //spect
+                    IP_Rating = pro.IP_Rating,
+                    Dimension = pro.Dimension,
                     Power = pro.Power,
-                    Power_Supply = pro.Power_Supply,
-                    Source = pro.Source,
-                    Luminaire_Output = pro.Luminaire_Output,
+
+                    //Beam_Angle = pro.Beam_Angle,
+                    //Control_Gear = pro.Control_Gear,
+                    //Equivalent = pro.Equivalent,
+                    //Finishing = pro.Finishing,
+                    //Gasket = pro.Gasket,
+                    //Housing = pro.Housing,
+                    //Lamp_Colour = pro.Lamp_Colour,
+                    //Lens = pro.Lens,
+                    //Luminaire_Lifetime = pro.Luminaire_Lifetime,
+                    //Mounting = pro.Mounting,
+                    //Power_Supply = pro.Power_Supply,
+                    //Source = pro.Source,
+                    //Luminaire_Output = pro.Luminaire_Output,
 
                     Folder_Path = pro.Folder_Path,
                     CUTSHEET = pro.CUTSHEET == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CUTSHEET),
@@ -439,22 +444,36 @@ namespace Lighting.Controllers.Backend
                     product.Technical_Drawing_Img = Path.Combine(path, "technical_img");
                     product.LIGHT_DISTRIBUTION = Path.Combine(path, "light_ditribute_img");
                     //detail
-                    product.Housing = input.Housing;
-                    product.Finishing = input.Finishing;
-                    product.Lens = input.Lens;
-                    product.Gasket = input.Gasket;
-                    product.Dimension = input.Dimension;
-                    product.Mounting = input.Mounting;
-                    product.Power = input.Power;
-                    product.Source = input.Source;
-                    product.Lamp_Colour = input.Lamp_Colour;
-                    product.Luminaire_Output = input.Luminaire_Output;
-                    product.Beam_Angle = input.Beam_Angle;
-                    product.Control_Gear = input.Control_Gear;
-                    product.Power_Supply = input.Power_Supply;
                     product.IP_Rating = input.IP_Rating;
-                    product.Luminaire_Lifetime = input.Luminaire_Lifetime;
-                    product.Equivalent = input.Equivalent;
+                    product.Power = input.Power;
+                    product.Dimension = input.Dimension;
+
+                    var product_spect = new List<Product_Spect>();
+                    if(input.Spect_Name != null && input.Spect_Value != null)
+                    {
+                        for (int i =0; i< input.Spect_Name.Count;i++)
+                        {
+                            product_spect.Add(new Product_Spect 
+                            { 
+                                 Name = input.Spect_Name[i],
+                                 Value = input.Spect_Value[i]
+                            });
+                        }
+                    }
+                    product.ProductSpect = product_spect;
+                    //product.Housing = input.Housing;
+                    //product.Finishing = input.Finishing;
+                    //product.Lens = input.Lens;
+                    //product.Gasket = input.Gasket;
+                    //product.Mounting = input.Mounting;
+                    //product.Source = input.Source;
+                    //product.Lamp_Colour = input.Lamp_Colour;
+                    //product.Luminaire_Output = input.Luminaire_Output;
+                    //product.Beam_Angle = input.Beam_Angle;
+                    //product.Control_Gear = input.Control_Gear;
+                    //product.Power_Supply = input.Power_Supply;
+                    //product.Luminaire_Lifetime = input.Luminaire_Lifetime;
+                    //product.Equivalent = input.Equivalent;
 
                     await _db.Products.AddAsync(product);
                     await _db.SaveChangesAsync();
@@ -474,7 +493,7 @@ namespace Lighting.Controllers.Backend
         {
             try
             {
-                var product = await _db.Products.FirstOrDefaultAsync(pro => pro.Id == id);
+                var product = await _db.Products.Include(pro => pro.ProductSpect).FirstOrDefaultAsync(pro => pro.Id == id);
                 if (product != null)
                 {
                     var path = Path.Combine(_env.WebRootPath, "upload_image", "Product", product.Folder_Path);
@@ -482,6 +501,11 @@ namespace Lighting.Controllers.Backend
                     {
                         Directory.Delete(path, true);
                     }
+                    if (product.ProductSpect != null)
+                    {
+                        _db.Product_Spects.RemoveRange(product.ProductSpect);
+                    }
+                    await _db.SaveChangesAsync();
                     _db.Products.Remove(product);
                     await _db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
@@ -493,12 +517,23 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "fail", message = "เกิดข้อผิดพลาด" });
             }
         }
-
+        [HttpPost]
+        public async Task<IActionResult> DeleteSpectById(int id)
+        {
+            var product_spect = await _db.Product_Spects.Where(pro => pro.Id == id).FirstOrDefaultAsync();
+            if (product_spect != null)
+            {
+                _db.Product_Spects.Remove(product_spect);
+                await _db.SaveChangesAsync();
+                return Json(new { status = "success", message = "ลบมูลเรียบร้อย" });
+            }
+            return Json(new { status = "fail", message = "ไม่พบข้อมูล" });
+        }
         [HttpPost]
         public async Task<IActionResult> Edit_Product([FromForm] Input_ProductVM input, [FromQuery] int id)
         {
 
-            var product = await _db.Products.FirstOrDefaultAsync(pro => pro.Id == id);
+            var product = await _db.Products.Include(pro => pro.ProductSpect).FirstOrDefaultAsync(pro => pro.Id == id);
             if (product != null)
             {
 
@@ -669,22 +704,36 @@ namespace Lighting.Controllers.Backend
                     product.Technical_Drawing_Img = Path.Combine(path, "technical_img");
                     product.LIGHT_DISTRIBUTION = Path.Combine(path, "light_ditribute_img");
                     //detail
-                    product.Housing = input.Housing;
-                    product.Finishing = input.Finishing;
-                    product.Lens = input.Lens;
-                    product.Gasket = input.Gasket;
-                    product.Dimension = input.Dimension;
-                    product.Mounting = input.Mounting;
-                    product.Power = input.Power;
-                    product.Source = input.Source;
-                    product.Lamp_Colour = input.Lamp_Colour;
-                    product.Luminaire_Output = input.Luminaire_Output;
-                    product.Beam_Angle = input.Beam_Angle;
-                    product.Control_Gear = input.Control_Gear;
-                    product.Power_Supply = input.Power_Supply;
                     product.IP_Rating = input.IP_Rating;
-                    product.Luminaire_Lifetime = input.Luminaire_Lifetime;
-                    product.Equivalent = input.Equivalent;
+                    product.Power = input.Power;
+                    product.Dimension = input.Dimension;
+
+                    var product_spect = new List<Product_Spect>();
+                    if (input.Spect_Name != null && input.Spect_Value != null)
+                    {
+                        for (int i = 0; i < input.Spect_Name.Count; i++)
+                        {
+                            product_spect.Add(new Product_Spect
+                            {
+                                Name = input.Spect_Name[i],
+                                Value = input.Spect_Value[i]
+                            });
+                        }
+                    }
+                    product.ProductSpect = product_spect;
+                    //product.Housing = input.Housing;
+                    //product.Finishing = input.Finishing;
+                    //product.Lens = input.Lens;
+                    //product.Gasket = input.Gasket;
+                    //product.Mounting = input.Mounting;
+                    //product.Source = input.Source;
+                    //product.Lamp_Colour = input.Lamp_Colour;
+                    //product.Luminaire_Output = input.Luminaire_Output;
+                    //product.Beam_Angle = input.Beam_Angle;
+                    //product.Control_Gear = input.Control_Gear;
+                    //product.Power_Supply = input.Power_Supply;
+                    //product.Luminaire_Lifetime = input.Luminaire_Lifetime;
+                    //product.Equivalent = input.Equivalent;
 
                     await _db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
@@ -708,28 +757,27 @@ namespace Lighting.Controllers.Backend
                     Product_CategoryId = pro.Product_CategoryId,
                     Product_ModelId = pro.Product_ModelId,
                     Application = pro.Application,
-                    Beam_Angle = pro.Beam_Angle,
                     Type_EN = pro.Type_EN,
                     Type_TH = pro.Type_TH,
-
-                    Control_Gear = pro.Control_Gear,
-                    Dimension = pro.Dimension,
-                    Equivalent = pro.Equivalent,
-                    Finishing = pro.Finishing,
-                    Gasket = pro.Gasket,
-                    Housing = pro.Housing,
-
-                    IP_Rating = pro.IP_Rating,
-                    Lamp_Colour = pro.Lamp_Colour,
-                    Lens = pro.Lens,
-                    Luminaire_Lifetime = pro.Luminaire_Lifetime,
                     Model = pro.Model,
-                    Mounting = pro.Mounting,
                     MORE_INFORMATION = pro.MORE_INFORMATION,
+                    //spect
                     Power = pro.Power,
-                    Power_Supply = pro.Power_Supply,
-                    Source = pro.Source,
-                    Luminaire_Output = pro.Luminaire_Output,
+                    Dimension = pro.Dimension,
+                    IP_Rating = pro.IP_Rating,
+                    //Beam_Angle = pro.Beam_Angle,
+                    //Control_Gear = pro.Control_Gear,
+                    //Equivalent = pro.Equivalent,
+                    //Finishing = pro.Finishing,
+                    //Gasket = pro.Gasket,
+                    //Housing = pro.Housing,
+                    //Lamp_Colour = pro.Lamp_Colour,
+                    //Lens = pro.Lens,
+                    //Luminaire_Lifetime = pro.Luminaire_Lifetime,
+                    //Mounting = pro.Mounting,
+                    //Power_Supply = pro.Power_Supply,
+                    //Source = pro.Source,
+                    //Luminaire_Output = pro.Luminaire_Output,
 
                     Folder_Path = pro.Folder_Path,
                     CUTSHEET = pro.CUTSHEET == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CUTSHEET),

@@ -159,6 +159,30 @@
                                                     <table>
                                                         <tbody>
                                                             <tr>
+                                                                <th>IP Rating</th>
+                                                                <td>@Model.IP_Rating</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Dimension</th>
+                                                                <td>@Model.Dimension</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Power</th>
+                                                                <td>@Model.Power</td>
+                                                            </tr>
+                                                            @if (Model.Product_Spects != null)
+                                                            {
+                                                                foreach (var spect in Model.Product_Spects)
+                                                                {
+                                                                    <tr>
+                                                                        <th>@spect.Name</th>
+                                                                        <td>@spect.Value</td>
+                                                                    </tr>
+                                                                }
+                                                            }
+
+                                                            @*
+                                                            <tr>
                                                                 <th>Housing</th>
                                                                 <td>@Model.Housing</td>
                                                             </tr>
@@ -174,18 +198,12 @@
                                                                 <th>Gasket</th>
                                                                 <td>@Model.Gasket</td>
                                                             </tr>
-                                                            <tr>
-                                                                <th>Dimension</th>
-                                                                <td>@Model.Dimension</td>
-                                                            </tr>
+
                                                             <tr>
                                                                 <th>Mounting</th>
                                                                 <td>@Model.Mounting</td>
                                                             </tr>
-                                                            <tr>
-                                                                <th>Power</th>
-                                                                <td>@Model.Power</td>
-                                                            </tr>
+
                                                             <tr>
                                                                 <th>Source</th>
                                                                 <td>@Model.Source</td>
@@ -210,10 +228,7 @@
                                                                 <th>Power Supply</th>
                                                                 <td>@Model.Power_Supply</td>
                                                             </tr>
-                                                            <tr>
-                                                                <th>IP Rating</th>
-                                                                <td>@Model.IP_Rating</td>
-                                                            </tr>
+
                                                             <tr>
                                                                 <th>Luminaire Lifetime</th>
                                                                 <td>@Model.Luminaire_Lifetime</td>
@@ -222,6 +237,7 @@
                                                                 <th>Equivalent</th>
                                                                 <td>@Model.Equivalent</td>
                                                             </tr>
+                                                            *@
                                                         </tbody>
                                                     </table>
                                                 </div>

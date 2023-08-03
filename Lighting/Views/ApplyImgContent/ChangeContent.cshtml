@@ -1,0 +1,138 @@
+﻿@{
+    ViewData["Title"] = "Apply_Image_Content";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+@model Lighting.Areas.Identity.Data.ApplyImgContent
+
+<div class="container">
+    <form  enctype="multipart/form-data" id="form">
+    <div class="row">
+        <div class="col-6 tex-center h3">
+           ตำแหน่ง
+        </div>
+        <div class="col-6 tex-center h3">
+           สวัสดิการ
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <img src="~/@Model?.Position_img" id="preview_position" style="width:100%;" />
+        </div>
+        <div class="col-6">
+            <img src="~/@Model?.Benefit_img" id="preview_benefit" style="width:100%;" />
+        </div>
+    </div>
+        <div class="row" style="margin-top:3rem;">
+        <div class="col-6 tex-center">
+            <a href="/@Model?.Position_pdf" class="btn btn-primary" target="_blank">ดาวน์โหลด pdf ตำแหน่ง</a>
+        </div>
+        <div class="col-6 tex-center">
+                <a href="/@Model?.Benefit_pdf" class="btn btn-primary" target="_blank">ดาวน์โหลด pdf สวัสดิการ</a>
+        </div>
+    </div>
+        <div class="row mt-3">
+            <div class="col-6 tex-center">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">เปลียนรูป ตำแหน่ง</label>
+                    <input class="form-control" type="file" name="Position_img" id="position_img" accept="image/*">
+                </div>
+            </div>
+            <div class="col-6 tex-center">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">เปลียนรูป สวัสดิการ</label>
+                    <input class="form-control" type="file" name="Benefit_img" id="benefit_img" accept="image/*">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 tex-center">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">เปลียนไฟล์ ตำแหน่ง pdf</label>
+                    <input class="form-control" type="file" name="Position_pdf" accept="application/pdf,application/vnd.ms-excel">
+                </div>
+            </div>
+            <div class="col-6 tex-center">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">เปลียนไฟล์ สวัสดิการ pdf</label>
+                    <input class="form-control" type="file" name="Benefit_pdf" accept="application/pdf,application/vnd.ms-excel">
+                </div>
+            </div>
+        </div>
+    </form>
+    <center><button class="btn bg-success mt-5" onclick="save()">บันทึก</button></center>
+</div>
+
+@section Scripts{
+    <script>
+        var image_position,image_benefit;
+        $(document).ready(function () {
+            $('#position_img').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    image_position = e.target.files[0];
+                    $('#preview_position').attr('src', await blobToBase64DataURL(image_position));
+                }
+            });
+            $('#benefit_img').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    image_benefit = e.target.files[0];
+                    $('#preview_benefit').attr('src', await blobToBase64DataURL(image_benefit));
+                }
+            });
+        });
+
+        const blobToBase64DataURL = blob => new Promise(
+            resolvePromise => {
+                const reader = new FileReader();
+                reader.onload = () => resolvePromise(reader.result);
+                reader.readAsDataURL(blob);
+            }
+        );
+
+        function save(){
+
+            let form = $('#form')[0]
+            console.log(form);
+            let formData = new FormData(form);
+            
+
+            $.ajax({
+                type: 'POST',
+                url: '/ApplyImgContent/Save',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = "/ApplyImgContent/ChangeContent";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+    </script>
+}

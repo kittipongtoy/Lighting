@@ -20,11 +20,12 @@
 
     <div class="row mt-3" style="display:none;" id="add_category">
         <div class="col-12 text-center">
-            <img style="width:30vw;height:30vw;display:none;" id="img_preview" />
+            <img style="width:100%;height:50vh;display:none;" id="img_preview" />
         </div>
         <div class="col-12 " style="margin-top:3rem;">
             @*<img style="width:20vh;height:20vh;display:none;" id="image_preview" />*@
-            <input type="file" accept="image/*" id="img_file" />
+            <label for="formFile" class="form-label">เลือกไฟล์รูปหมวดหมู่</label>
+            <input class="form-control" type="file" accept="image/*" id="img_file" />
             <div class="input-group" style="margin-top:2rem;">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="">ชื่อหมวดหมู่/Category Name</span>
@@ -33,12 +34,12 @@
                 <input type="text" class="form-control" id="category_name_en" placeholder="English">
             </div>
         </div>
-        <center><button class="btn btn-primary" style="margin-top:3rem;" onclick="addCategory()">บันทึก/save</button></center>
+        <center><button class="btn btn-success" style="margin-top:3rem;" onclick="addCategory()">บันทึก/save</button></center>
     </div>
 
     <div class="row mt-5">
-
-        <table class="table mt-3">
+        <div class="col-12">
+            <table class="table mt-3">
             <thead>
                 <tr style="border-top:1px solid black;border-bottom:1px solid black;">
                     <th scope="col">#</th>
@@ -72,6 +73,7 @@
                 }
             </tbody>
         </table>
+        </div>
     </div>
 </div>
 
@@ -81,7 +83,7 @@
             <img style="width:100%;height:100%;" id="edit_img"/>
         </div>
         <div>
-            <input type="file" accept="image/*" id="change_img" />
+            <input class="form-control" type="file" accept="image/*" id="change_img" />
         </div>
         <div>
             <div class="input-group">
@@ -93,7 +95,7 @@
             </div>
         </div>
         <center>
-            <button class="btn btn-primary" style="margin:3rem;" onclick="saveEdit()">บันทึก/save</button>
+            <button class="btn btn-success" style="margin:3rem;" onclick="saveEdit()">บันทึก/save</button>
             <button class="btn btn-primary btn-danger" style="margin:3rem;" onclick="closeEdit()">ปิด/close</button>
         </center>
         <div></div>

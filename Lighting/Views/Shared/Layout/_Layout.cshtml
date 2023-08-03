@@ -257,7 +257,7 @@
     ///
     var show_contactus = "";
     var here_contactus = "";
-    if (ViewData["Title"] == "Manage_Contact_Page")
+    if (ViewData["Title"] == "Manage_Contact_Page" || ViewData["Title"] == "Main_Contact")
     {
         show_contactus = "show";
         here_contactus = "here";
@@ -272,9 +272,10 @@
         Here_Authorization = "here";
     }
 
+    
     var show_applyjob = "";
     var here_applyjob = "";
-    if (ViewData["Title"] == "Manage_Job_Page")
+    if (ViewData["Title"] == "Manage_Job_Page" || ViewData["Title"] == "Apply_Image_Content")
     {
         show_applyjob = "show";
         here_applyjob = "here";
@@ -288,13 +289,11 @@
     || ViewData["Title"] == "Button_Below_Banner_Add"
     || ViewData["Title"] == "Button_Below_Banner_Edit"
     || ViewData["Title"] == "LIGHTING_EQUIPMENT"
-    || ViewData["Title"] == "LIGHTING_EQUIPMENT_Add"
+    || ViewData["Title"] == "LIGHTING_EQUIPMENT_Aadd"
     || ViewData["Title"] == "LIGHTING_EQUIPMENT_Edit"
     || ViewData["Title"] == "HIGHLIGHT"
     || ViewData["Title"] == "HIGHLIGHT_Add"
     || ViewData["Title"] == "HIGHLIGHT_Edit"
-    || ViewData["Title"] == "HIGHLIGHTDetail_Add"
-    || ViewData["Title"] == "HIGHLIGHTDetail_Edit"
     || ViewData["Title"] == "Summary_Financial_Highlights"
     || ViewData["Title"] == "Summary_Financial_Highlights_Add"
     || ViewData["Title"] == "Summary_Financial_Highlights_Edit"
@@ -306,6 +305,16 @@
         Here_IR_Index = "here";
         show_investerRelation = "show";
         here_investerRelation = "here";
+    }
+
+    var show_privacy = "";
+    var here_privacy = "";
+    if (ViewData["Title"] == "privacy_index"
+    || ViewData["Title"] == "privacy_create"
+    || ViewData["Title"] == "privacy_edit")
+    {
+        show_privacy = "show";
+        here_privacy = "here";
     }
 
     var show_news = "";
@@ -388,6 +397,32 @@
         here_product = "here";
     }
 
+    var show_RF = "";
+    var here_RF = "";
+    if (ViewData["Title"] == "RF_Manufacturing"
+    || ViewData["Title"] == "RF_ManufacturingImages_create"
+    || ViewData["Title"] == "RF_ManufacturingImages_edit"
+    || ViewData["Title"] == "RF_WarehouseLogistics"
+    || ViewData["Title"] == "RF_WarehouseLogisticsImages_create"
+    || ViewData["Title"] == "RF_WarehouseLogisticsImages_edit"
+    || ViewData["Title"] == "RF_OverseaOffices"
+    || ViewData["Title"] == "RF_OverseaOfficesImages_create"
+    || ViewData["Title"] == "RF_OverseaOfficesImages_edit"
+    || ViewData["Title"] == "RF_SolidState"
+    || ViewData["Title"] == "RF_SolidStateImages_create"
+    || ViewData["Title"] == "RF_SolidStateImages_edit"
+    || ViewData["Title"] == "RF_AssemblyService"
+    || ViewData["Title"] == "RF_AssemblyServiceImages_create"
+    || ViewData["Title"] == "RF_AssemblyServiceImages_edit"
+    || ViewData["Title"] == "RF_SolutionCenters"
+    || ViewData["Title"] == "RF_SolutionCentersImages_create"
+    || ViewData["Title"] == "RF_SolutionCentersImages_edit"
+    || ViewData["Title"] == "Manage_SmartSolution")
+    {
+        show_RF = "show";
+        here_RF = "here";
+    }
+}
     var show_privacy = "";
     var here_privacy = "";
     if (ViewData["Title"] == "privacy_index"
@@ -814,9 +849,9 @@
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                 <span class="menu-link">
                                     <span class="menu-icon">
-                                        <i class="bi bi-download fs-3"></i>
+                                        <i class="bi bi-house-fill fs-3"></i>
                                     </span>
-                                    <span class="menu-title">ดาวห์โหลด</span>
+                                    <span class="menu-title">หน้าแรก</span>
                                     <span class="menu-arrow"></span>
                                 </span>
                                 <div class="menu-sub menu-sub-accordion">
@@ -1425,26 +1460,26 @@
                                         </span>
                                         <div class="menu-sub menu-sub-accordion menu-active-bg">
 
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "SH_IR_finance_statement")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("SH_IR_finance_statement","importantFinancialInformation")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">งบการเงิน</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("SH_IR_finance_statement","importantFinancialInformation")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">งบการเงิน</span>
-                                                    </a>
-                                                }
-                                            </div>
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "SH_IR_finance_statement")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("SH_IR_finance_statement","importantFinancialInformation")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">งบการเงิน</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("SH_IR_finance_statement","importantFinancialInformation")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">งบการเงิน</span>
+                                                </a>
+                                            }
+                                        </div>
 
                                             <div class="menu-item">
                                                 @if (ViewData["Title"] == "SH_IR_financial_highlight"
@@ -1498,26 +1533,26 @@
                                                 }
                                             </div>
 
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "SH_IR_prospectus")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("SH_IR_prospectus","importantFinancialInformation")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">หนังสือชี้ชวน</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("SH_IR_prospectus","importantFinancialInformation")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">หนังสือชี้ชวน</span>
-                                                    </a>
-                                                }
-                                            </div>
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "SH_IR_prospectus")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("SH_IR_prospectus","importantFinancialInformation")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">หนังสือชี้ชวน</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("SH_IR_prospectus","importantFinancialInformation")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">หนังสือชี้ชวน</span>
+                                                </a>
+                                            }
+                                        </div>
 
                                         </div>
                                     </div>

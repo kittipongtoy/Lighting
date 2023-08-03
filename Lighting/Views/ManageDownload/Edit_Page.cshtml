@@ -69,21 +69,21 @@
             <div class="custom-file mt-3 p-1" style="border:1px solid black">
                 <img style="width:100%;height:100%;" id="preview_show_img" src="@Model.Image"/>
                 <br />
-                <input type="file" class="custom-file-input mt-3" id="file_img" accept="image/png, image/gif, image/jpeg">
-                <label class="custom-file-label h4">เปลี่ยน รูป/chanage title image</label>
+                <label for="formFile" class="form-label mt-3">เปลี่ยน รูป/chanage title image</label>
+                <input type="file" class="form-control" id="file_img" accept="image/png, image/gif, image/jpeg">
             </div>
             <!--end file-->
             <!--file download-->
             <div class="custom-file mt-3 p-1">
-                <input type="file" class="custom-file-input mt-3" id="file_download">
-                <label class="custom-file-label h4">เปลี่ยนไฟล์/chnage file</label>
+                <label for="formFile" class="form-label mt-3">เปลี่ยนไฟล์/chnage file</label>
+                <input type="file" class="form-control" id="file_download">
             </div>
             <a href="ManageDownload/Download?path_and_name=@Model.File" target="_blank" class="btn btn-primary h4 mt-3">ดาวน์โหลดไฟล์/down load file</a>
             <br/>
             <!--file-->
             <center style="display:flex;justify-content:space-between;margin:3rem;">
-                <button type="button" class="btn btn-primary"  onclick="submit(@Model.Id)">บันทึก/save</button>
-                <a href="@Url.Action("manage_Download_page","ManageDownload")" class="btn bg-info" >กลับ/back</a>
+                <button type="button" class="btn btn-success"  onclick="submit(@Model.Id)">บันทึก/save</button>
+                <a href="@Url.Action("manage_Download_page","ManageDownload")" class="btn btn-primary">กลับ/back</a>
             </center>
 
         </div>

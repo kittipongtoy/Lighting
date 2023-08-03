@@ -10,6 +10,7 @@ namespace Lighting.Areas.Identity.Data
         public string? Icon { get; set; }
         public string? Title_TH { get; set; }
         public string? Title_EN { get; set; }
+        public string? Link { get; set; }
         public int? Status { get; set; }
         public DateTime? created_at { get; set; }
         public DateTime? updated_at { get; set; }

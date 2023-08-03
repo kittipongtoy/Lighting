@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -438,7 +438,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\upload_file\Author_board_director\" />
     <Folder Include="wwwroot\upload_file\CorporateGovernanceFile\" />
     <Folder Include="wwwroot\upload_file\BusinessEthics\" />

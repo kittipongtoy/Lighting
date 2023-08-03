@@ -20,7 +20,9 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<Smart_Solution_Link> Smart_Solution_Links { get; set; }
         public DbSet<Smart_Solution> Smart_Solutions { get; set; }
         #endregion
+
         #region product
+        public DbSet<Product_Spect> Product_Spects { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Product_Model> Product_Models { get; set; }
         public DbSet<Product_Category> Product_Categorys { get; set; }
@@ -51,9 +53,13 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<privacy_PolicyTitles> privacy_PolicyTitles { get; set; }
         public DbSet<privacy_Policys> privacy_Policys { get; set; }
         public DbSet<Download> Downloads { get; set; }
+        #region applyjob
         public DbSet<ApplyJob> ApplyJobs { get; set; }
+        public DbSet<ApplyImgContent> ApplyJobImgContents { get; set; }  //new 28/07/56
+        #endregion
         #region contact
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<MainContact> MainContacts { get; set; }
         #endregion
         #region news
         public DbSet<News> News { get; set; }
