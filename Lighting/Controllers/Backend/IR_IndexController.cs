@@ -22,8 +22,6 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult Banner()
         {
-            var banner = _db.IR_Banner.FirstOrDefault();
-            ViewBag.img_src = banner?.ImageBanner;
             return View();
         }
 
@@ -263,10 +261,9 @@ namespace Lighting.Controllers.Backend
             }
         }
 
-        public IActionResult Button_Below_Banner()
+        public async Task<IActionResult> Button_Below_Banner()
         {
-            var btns = await _db.IR_Button_Below_Banner.ToArrayAsync();
-            return View(btns);
+            return View();
         }
 
         [HttpPost]
@@ -368,8 +365,7 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult Button_Below_Banner_Edit(int? Id)
         {
-            var btn = await _db.IR_Button_Below_Banner.FirstOrDefaultAsync(x => x.Id == id);
-            return View(btn);
+            return View();
         }
 
         [HttpGet]

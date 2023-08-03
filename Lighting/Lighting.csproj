@@ -438,6 +438,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\upload_file\Author_board_director\" />
     <Folder Include="wwwroot\upload_file\CorporateGovernanceFile\" />
     <Folder Include="wwwroot\upload_file\BusinessEthics\" />
