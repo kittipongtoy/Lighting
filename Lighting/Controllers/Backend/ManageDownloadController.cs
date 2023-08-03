@@ -9,6 +9,7 @@ using System.Text;
 
 namespace Lighting.Controllers.Backend
 {
+    [Authorize]
     public class ManageDownloadController : Controller
     {
         readonly private LightingContext _db;

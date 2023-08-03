@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace Lighting.Controllers.Backend
 {
+    [Authorize]
     public class ProjectRefController : Controller
     {
         private readonly LightingContext _db;
