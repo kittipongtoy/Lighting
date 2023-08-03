@@ -79,18 +79,19 @@
                 },
                 columns: [
                     { 'data': 'index', name: 'index', className: 'text-center' },
-                    { 'data': 'imageTH', name: 'imageTH', className: 'text-center', "render": function (data, type, row) {
+                    { 
+                        "name": "imageTH", "data": "imageTH", "class": "text-center", "render": function (data, type, row) {
                             var text = '<div class="mb-10" style="text-align:center;">' +
-                                '<img src="~/upload_image/Resource_Facility/' + row.imageTH + '" style="height: 250px;width: 250px;" alt="image">' +
+                                '<img src="/upload_image/Resource_Facility/' + row.imageTH + '" style="height: 250px;width: 250px;" alt="image">' +
                                 '</div>';
                             return text;
-
                         }
+ 
                     }, 
                     {
                         'data': 'imageEN', name: 'imageEN', className: 'text-center', "render": function (data, type, row) {
                             var text = '<div class="mb-10" style="text-align:center;">' +
-                                '<img src="~/upload_image/Resource_Facility/' + row.imageEN + '" style="height: 250px;width: 250px;" alt="image">' +
+                                '<img src="/upload_image/Resource_Facility/' + row.imageEN + '" style="height: 250px;width: 250px;" alt="image">' +
                                 '</div>';
                             return text;
 

@@ -50,8 +50,8 @@
                                 </span>
                             </div>
                             <div class="col-4">
-                                <div class="mb-10" style="text-align:center;">
-                                    @*<img src="~/upload_image/Resource_Facility/@Model.fod_Board_of_Directors.image_nameEN" style="height: 250px;width: 250px;" alt="image">*@
+                                <div class="mb-10" style="text-align:center;"> 
+                                    <img id="edit_image" src="" style="height: 250px;width: 250px;" alt="image">
                                 </div>
                                 <input type="file" class="form-control" name="uploaded_fileTH" />
                             </div>
@@ -65,8 +65,8 @@
                                 </span>
                             </div>
                             <div class="col-4">
-                                <div class="mb-10" style="text-align:center;">
-                                    @*<img src="~/upload_image/Resource_Facility/@Model.fod_Board_of_Directors.image_nameEN" style="height: 250px;width: 250px;" alt="image">*@
+                                <div class="mb-10" style="text-align:center;"> 
+                                    <img id="edit_imageENG" src="" style="height: 250px;width: 250px;" alt="image">
                                 </div>
                                 <input type="file" class="form-control" name="uploaded_fileEN" />
                             </div>
@@ -128,6 +128,10 @@
                 data: { Id: Parmeter_id },
                 success: function (data) {
                     $("#Id").val(data.id);
+                    $("#edit_image").removeAttr("src");
+                    $("#edit_image").attr("src", "/upload_image/Resource_Facility/" + data.imageTH);
+                    $("#edit_imageENG").removeAttr("src");
+                    $("#edit_imageENG").attr("src", "/upload_image/Resource_Facility/" + data.imageEN);
                     var status = '';
                     if (data.status == 1) {
                         status += '<div class="form-check form-switch">';
