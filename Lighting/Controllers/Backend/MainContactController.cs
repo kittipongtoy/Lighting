@@ -1,11 +1,13 @@
 ﻿using Lighting.Areas.Identity.Data;
 using Lighting.Models.InputFilterModels.MainContact;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MainContact = Lighting.Models.InputFilterModels.MainContact.MainContact;
 
 namespace Lighting.Controllers.Backend
 {
+    [Authorize]
     public class MainContactController : Controller
     {
         private readonly LightingContext _db;
@@ -91,15 +93,16 @@ namespace Lighting.Controllers.Backend
                         Img_File = input.Img_File == null ? null : Path.Combine(path, input.Img_File.FileName),
                         TitleEMail1 = input.TitleEMail1,
                         TitleEMail2 = input.TitleEMail2,
-                         Title_EN = input.Title_EN,
-                          Title_TH = input.Title_TH,
+                        Title_EN = input.Title_EN,
+                        Title_TH = input.Title_TH,
                     });
                     await _db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
-                return Json(new { status = "error", message = "ไม่พบข้อมูล" ,inner=ex.Message});
+                return Json(new { status = "error", message = "ไม่พบข้อมูล", inner = ex.Message });
             }
 
         }

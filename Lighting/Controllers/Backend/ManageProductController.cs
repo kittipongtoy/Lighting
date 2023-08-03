@@ -10,6 +10,7 @@ using System.Xml.Linq;
 
 namespace Lighting.Controllers.Backend
 {
+    [Authorize]
     public class ManageProductController : Controller
     {
 
