@@ -165,14 +165,14 @@
                         "name": "status", "data": "status", "render": function (data, type, row) {
                             if (row.status == 1) {
                                 var text = '<div class="form-check form-switch">' +
-                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus2(' + row.id + ',this)"> ' +
-                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '<input class="form-check-input" checked type="checkbox" name="Status" value="1" id="Status" onchange="changeStatus2(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="Status">ใช้งาน</label>' +
                                     '</div>';
                                 return text;
                             } else {
                                 var text = '<div class="form-check form-switch">' +
-                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus2(' + row.id + ',this)"> ' +
-                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '<input class="form-check-input" type="checkbox" name="Status" value="1" id="Status" onchange="changeStatus2(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="Status">ใช้งาน</label>' +
                                     '</div>';
                                 return text;
                             }
@@ -206,7 +206,8 @@
                 },
                 success: function (data) {
                     if (data.status == "success") {
-
+                        var oTable = $('#History').DataTable();
+                        oTable.ajax.reload(null, false);
                     }
                     else {
                         Swal.fire({
@@ -233,7 +234,8 @@
                 },
                 success: function (data) {
                     if (data.status == "success") {
-
+                          var oTable = $('#HistoryDetail').DataTable();
+                        oTable.ajax.reload(null, false);
                     }
                     else {
                         Swal.fire({

@@ -4,6 +4,9 @@ namespace Lighting.Models
 {
     public class Resource_FacilityModels
     {
+        public HistoryDetail? HistoryDetail { get;set; }
+
+
         public int? count_RF_Philosophy_Vision_Mission { get; set; }
         public RF_Philosophy_Vision_Mission? fod_RF_Philosophy_Vision_Mission { get; set; }
         public RF_Philosophy_Vision_Mission_Details? RF_Philosophy_Vision_Mission_Details { get; set; }

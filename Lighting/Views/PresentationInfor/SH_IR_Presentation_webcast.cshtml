@@ -58,11 +58,13 @@
             <div class="card">
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
-                </div>
-                <form id="form_create" enctype="multipart/form-data">
-                    @{
-                        if (Model.count_row_SH_IR_presentation_webcast == 0)
-                        {
+
+                    <div class="mb-10">
+                    </div>
+                    <form id="form_create" enctype="multipart/form-data">
+                        @{
+                            if (Model.count_row_SH_IR_presentation_webcast == 0)
+                            {
                                 <div class="row mb-3">
                                     <div class="col-2">
                                         <span>
@@ -158,9 +160,9 @@
                                     </div>
                                 </div>
 
-                        }
-                        else
-                        {
+                            }
+                            else
+                            {
 
                                 <div class="row mb-3">
                                     <div class="col-2">
@@ -259,17 +261,19 @@
                                     </div>
                                 </div>
 
+                            }
                         }
-                    }
 
-                </form>
+                    </form>
 
-                <div class="row mb-3" style="justify-content: right;">
-                    <div class="col-1">
-                        <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
                     </div>
-                </div>
+                </div> 
             </div>
+
             <!--end::Card body-->
             @*end*@
 
@@ -486,7 +490,6 @@
                     "url": "/PresentationInfor/SH_IR_Presentation_webcast_getTable",
                     "type": "POST",
                     "datatype": "json",
-
                 },
                 "columns": [
                     {

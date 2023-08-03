@@ -19,8 +19,13 @@ namespace Lighting.Controllers.Frontend
             db = context;
             _hostingEnvironment = environment;
         }
-        public IActionResult Profile_History()
+        public async Task<IActionResult> Profile_History()
         {
+            ViewBag.Header = await db.History.ToListAsync();
+
+            ViewBag.Body = await db.HistoryDetail.ToListAsync();
+
+            ViewBag.BodyDetails = await db.HistoryDataDetail.ToListAsync();
             return View();
         }
 

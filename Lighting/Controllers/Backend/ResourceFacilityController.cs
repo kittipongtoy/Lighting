@@ -282,68 +282,93 @@ namespace Lighting.Controllers.Backend
         {
             try
             {
+
+                if (model.Status == 1)
+                {
+                    var check_other = from up2 in db.HistoryDetail
+                                      where up2.Status == 1
+                                      select up2;
+                    foreach (HistoryDetail up2 in check_other)
+                    {
+                        up2.Status = 0;
+                    }
+                    db.SaveChanges();
+                }
+
                 HistoryDetail historyDetail = new HistoryDetail();
                 historyDetail.Title_TH = model.Title_TH;
                 historyDetail.Title_EN = model.Title_EN;
                 historyDetail.Detail_TH = model.Detail_TH;
                 historyDetail.Detail_EN = model.Detail_EN;
 
-                foreach (var formFile in model.uploaded_ImageTH)
+                if (model.uploaded_ImageTH != null)
                 {
-                    if (formFile.Length > 0)
+                    foreach (var formFile in model.uploaded_ImageTH)
                     {
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        historyDetail.ImageTH = datestr + extension;
-                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
+                        if (formFile.Length > 0)
                         {
-                            formFile.CopyTo(stream);
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            historyDetail.ImageTH = datestr + extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
                         }
                     }
                 }
 
-                foreach (var formFile in model.uploaded_ImageEN)
+                if (model.uploaded_ImageEN != null)
                 {
-                    if (formFile.Length > 0)
+                    foreach (var formFile in model.uploaded_ImageEN)
                     {
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        historyDetail.ImageEN = datestr + extension;
-                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
+                        if (formFile.Length > 0)
                         {
-                            formFile.CopyTo(stream);
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            historyDetail.ImageEN = datestr + extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
                         }
                     }
                 }
 
-                foreach (var formFile in model.uploaded_fileEN)
+                if (model.uploaded_fileEN != null)
                 {
-                    if (formFile.Length > 0)
+                    foreach (var formFile in model.uploaded_fileEN)
                     {
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        historyDetail.FileCompany_EN = datestr + extension;
-                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
+                        if (formFile.Length > 0)
                         {
-                            formFile.CopyTo(stream);
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            historyDetail.FileCompany_EN = datestr + extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
                         }
                     }
                 }
 
-                foreach (var formFile in model.uploaded_fileTH)
+                if (model.uploaded_fileTH != null)
                 {
-                    if (formFile.Length > 0)
+                    foreach (var formFile in model.uploaded_fileTH)
                     {
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        historyDetail.FileCompany_TH = datestr + extension;
-                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
+                        if (formFile.Length > 0)
                         {
-                            formFile.CopyTo(stream);
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            historyDetail.FileCompany_TH = datestr + extension;
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
                         }
                     }
                 }
@@ -363,7 +388,17 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult HistoryDetail_Edit(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return RedirectToAction("History", "ResourceFacility");
+            }
+            var get_detail = db.HistoryDetail.Where(x => x.Id == Id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("History", "ResourceFacility");
+            }
+            var model = new Resource_FacilityModels { HistoryDetail = get_detail };
+            return View(model);
         }
 
         [HttpGet]
@@ -388,91 +423,114 @@ namespace Lighting.Controllers.Backend
             {
                 var DB = await db.HistoryDetail.FirstOrDefaultAsync(x => x.Id == model.Id);
                 if (DB is not null)
-                {
-                    foreach (var formFile in model.uploaded_ImageTH)
+                { 
+                    if (model.Status == 1)
                     {
-                        if (formFile.Length > 0)
+                        var check_other = from up2 in db.HistoryDetail
+                                          where up2.Id != model.Id && up2.Status == 1
+                                          select up2;
+                        foreach (HistoryDetail up2 in check_other)
                         {
-                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + DB.ImageTH);
-                            if (System.IO.File.Exists(old_filePath) == true)
-                            {
-                                System.IO.File.Delete(old_filePath);
-                            }
+                            up2.Status = 0;
+                        }
+                        db.SaveChanges();
+                    }
 
-                            var datestr = DateTime.Now.Ticks.ToString();
-                            var extension = Path.GetExtension(formFile.FileName);
-                            DB.ImageTH = datestr + extension;
-                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + datestr + extension);
-                            using (var stream = System.IO.File.Create(filePath))
+                    if (model.uploaded_ImageTH != null)
+                    {
+                        foreach (var formFile in model.uploaded_ImageTH)
+                        {
+                            if (formFile.Length > 0)
                             {
-                                formFile.CopyTo(stream);
+                                var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + DB.ImageTH);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
+
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                DB.ImageTH = datestr + extension;
+                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
                             }
                         }
                     }
 
-                    foreach (var formFile in model.uploaded_ImageEN)
+                    if (model.uploaded_ImageEN != null)
                     {
-                        if (formFile.Length > 0)
+                        foreach (var formFile in model.uploaded_ImageEN)
                         {
-                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + DB.ImageEN);
-                            if (System.IO.File.Exists(old_filePath) == true)
+                            if (formFile.Length > 0)
                             {
-                                System.IO.File.Delete(old_filePath);
-                            }
+                                var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + DB.ImageEN);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
 
-                            var datestr = DateTime.Now.Ticks.ToString();
-                            var extension = Path.GetExtension(formFile.FileName);
-                            DB.ImageEN = datestr + extension;
-                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + datestr + extension);
-                            using (var stream = System.IO.File.Create(filePath))
-                            {
-                                formFile.CopyTo(stream);
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                DB.ImageEN = datestr + extension;
+                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
                             }
                         }
                     }
 
-                    foreach (var formFile in model.uploaded_fileEN)
+                    if (model.uploaded_fileEN != null)
                     {
-                        if (formFile.Length > 0)
+                        foreach (var formFile in model.uploaded_fileEN)
                         {
-                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.FileCompany_EN);
-                            if (System.IO.File.Exists(old_filePath) == true)
+                            if (formFile.Length > 0)
                             {
-                                System.IO.File.Delete(old_filePath);
-                            }
+                                var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.FileCompany_EN);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
 
-                            var datestr = DateTime.Now.Ticks.ToString();
-                            var extension = Path.GetExtension(formFile.FileName);
-                            DB.FileCompany_EN = datestr + extension;
-                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
-                            using (var stream = System.IO.File.Create(filePath))
-                            {
-                                formFile.CopyTo(stream);
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                DB.FileCompany_EN = datestr + extension;
+                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
                             }
                         }
                     }
 
-                    foreach (var formFile in model.uploaded_fileTH)
+                    if (model.uploaded_fileTH != null)
                     {
-                        if (formFile.Length > 0)
+                        foreach (var formFile in model.uploaded_fileTH)
                         {
-                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.FileCompany_TH);
-                            if (System.IO.File.Exists(old_filePath) == true)
+                            if (formFile.Length > 0)
                             {
-                                System.IO.File.Delete(old_filePath);
-                            }
+                                var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + DB.FileCompany_TH);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
 
-                            var datestr = DateTime.Now.Ticks.ToString();
-                            var extension = Path.GetExtension(formFile.FileName);
-                            DB.FileCompany_TH = datestr + extension;
-                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
-                            using (var stream = System.IO.File.Create(filePath))
-                            {
-                                formFile.CopyTo(stream);
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                DB.FileCompany_TH = datestr + extension;
+                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
                             }
                         }
                     }
-
 
                     DB.Title_TH = model.Title_TH;
                     DB.Title_EN = model.Title_EN;
@@ -552,20 +610,32 @@ namespace Lighting.Controllers.Backend
         public async Task<IActionResult> HistoryDetail_Change(int? Id)
         {
             try
-            {
+            { 
                 var DB = db.HistoryDetail.FirstOrDefault(x => x.Id == Id);
-                if (DB is not null)
+                if (DB != null)
                 {
-                    if (DB.Status == 1)
+                    if (DB.Status != 1)
                     {
-                        DB.Status = 0;
-                    }
-                    else
-                    {
-                        DB.Status = 1;
-                    }
-                    db.Entry(DB).State = EntityState.Modified;
-                    await db.SaveChangesAsync();
+                        var Change = db.HistoryDetail.ToList();
+                        foreach (var item in Change)
+                        {
+                            item.Status = 0;
+                            db.Entry(item).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        if (DB.Status == 1)
+                        {
+                            DB.Status = 0;
+                            db.Entry(DB).State = EntityState.Modified;
+                            db.SaveChanges(); 
+                        }
+                        else
+                        {
+                            DB.Status = 1;
+                            db.Entry(DB).State = EntityState.Modified;
+                            db.SaveChanges(); 
+                        }
+                    } 
                 }
                 return new JsonResult(new { status = "success", messageArray = "success" });
             }
@@ -647,65 +717,79 @@ namespace Lighting.Controllers.Backend
             {
                 HistoryDataDetail historyDataDetail = new HistoryDataDetail();
 
-                if (model.FileVideoEN == null && model.uploaded_fileEN != null)
-                {
-                    return new JsonResult(new { status = "error", messageArray = "error" });
-                }
-                else
-                {
-                    if (model.FileVideoEN != null)
-                    {
-                        historyDataDetail.FileVideoEN = model.FileVideoEN;
-                    }
+                //if (model.FileVideoEN == null && model.uploaded_fileEN != null)
+                //{
+                //    return new JsonResult(new { status = "error", messageArray = "error" });
+                //}
+                //else
+                //{
+                //    if (model.FileVideoEN != null)
+                //    {
+                //        historyDataDetail.FileVideoEN = model.FileVideoEN;
+                //    }
 
-                    if (model.uploaded_fileEN != null)
+                //    if (model.uploaded_fileEN != null)
+                //    {
+                //        foreach (var formFile in model.uploaded_fileEN)
+                //        {
+                //            if (formFile.Length > 0)
+                //            {
+                //                var datestr = DateTime.Now.Ticks.ToString();
+                //                var extension = Path.GetExtension(formFile.FileName);
+                //                historyDataDetail.FileVideoEN = datestr + extension;
+                //                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                //                using (var stream = System.IO.File.Create(filePath))
+                //                {
+                //                    formFile.CopyTo(stream);
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
+
+                //if (model.FileVideoTH == null && model.uploaded_fileTH != null)
+                //{
+                //    return new JsonResult(new { status = "error", messageArray = "error" });
+                //}
+                //else
+                //{
+                //    if (model.FileVideoTH != null)
+                //    {
+                //        historyDataDetail.FileVideoTH = model.FileVideoTH;
+                //    }
+
+                //    if (model.uploaded_fileTH != null)
+                //    {
+                //        foreach (var formFile in model.uploaded_fileTH)
+                //        {
+                //            if (formFile.Length > 0)
+                //            {
+                //                var datestr = DateTime.Now.Ticks.ToString();
+                //                var extension = Path.GetExtension(formFile.FileName);
+                //                historyDataDetail.FileVideoTH = datestr + extension;
+                //                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                //                using (var stream = System.IO.File.Create(filePath))
+                //                {
+                //                    formFile.CopyTo(stream);
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
+
+                if (model.Status == 1)
+                {
+                    var check_other = from up2 in db.HistoryDataDetail
+                                      where up2.Status == 1 && up2.TypeData==1
+                                      select up2;
+                    foreach (HistoryDataDetail up2 in check_other)
                     {
-                        foreach (var formFile in model.uploaded_fileEN)
-                        {
-                            if (formFile.Length > 0)
-                            {
-                                var datestr = DateTime.Now.Ticks.ToString();
-                                var extension = Path.GetExtension(formFile.FileName);
-                                historyDataDetail.FileVideoEN = datestr + extension;
-                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
-                                using (var stream = System.IO.File.Create(filePath))
-                                {
-                                    formFile.CopyTo(stream);
-                                }
-                            }
-                        }
+                        up2.Status = 0;
                     }
+                    db.SaveChanges();
                 }
 
-                if (model.FileVideoTH == null && model.uploaded_fileTH != null)
-                {
-                    return new JsonResult(new { status = "error", messageArray = "error" });
-                }
-                else
-                {
-                    if (model.FileVideoTH != null)
-                    {
-                        historyDataDetail.FileVideoTH = model.FileVideoTH;
-                    }
-
-                    if (model.uploaded_fileTH != null)
-                    {
-                        foreach (var formFile in model.uploaded_fileTH)
-                        {
-                            if (formFile.Length > 0)
-                            {
-                                var datestr = DateTime.Now.Ticks.ToString();
-                                var extension = Path.GetExtension(formFile.FileName);
-                                historyDataDetail.FileVideoTH = datestr + extension;
-                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
-                                using (var stream = System.IO.File.Create(filePath))
-                                {
-                                    formFile.CopyTo(stream);
-                                }
-                            }
-                        }
-                    }
-                }
+                historyDataDetail.FileVideoTH = model.FileVideoTH;
                 historyDataDetail.TypeData = 1;
                 historyDataDetail.Status = model.Status;
                 historyDataDetail.created_at = DateTime.Now;
@@ -748,69 +832,83 @@ namespace Lighting.Controllers.Backend
                 var DB = await db.HistoryDataDetail.FirstOrDefaultAsync(x => x.Id == model.Id);
                 if (DB is not null)
                 {
-                    if (model.FileVideoEN != null)
-                    {
-                        DB.FileVideoEN = model.FileVideoEN;
-                    }
+                    //if (model.FileVideoEN != null)
+                    //{
+                    //    DB.FileVideoEN = model.FileVideoEN;
+                    //}
 
-                    if (model.uploaded_fileEN != null)
+                    //if (model.uploaded_fileEN != null)
+                    //{
+                    //    foreach (var formFile in model.uploaded_fileEN)
+                    //    {
+                    //        if (formFile.Length > 0)
+                    //        {
+                    //            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + DB.FileVideoEN);
+                    //            if (System.IO.File.Exists(old_filePath) == true)
+                    //            {
+                    //                System.IO.File.Delete(old_filePath);
+                    //            }
+
+                    //            var datestr = DateTime.Now.Ticks.ToString();
+                    //            var extension = Path.GetExtension(formFile.FileName);
+                    //            DB.FileVideoEN = datestr + extension;
+                    //            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                    //            using (var stream = System.IO.File.Create(filePath))
+                    //            {
+                    //                formFile.CopyTo(stream);
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    //if (model.FileVideoTH == null && model.uploaded_fileTH != null)
+                    //{
+                    //    return new JsonResult(new { status = "error", messageArray = "error" });
+                    //}
+                    //else
+                    //{
+                    //    if (model.FileVideoTH != null)
+                    //    {
+                    //        DB.FileVideoTH = model.FileVideoTH;
+                    //    }
+
+                    //    if (model.uploaded_fileTH != null)
+                    //    {
+                    //        foreach (var formFile in model.uploaded_fileTH)
+                    //        {
+                    //            if (formFile.Length > 0)
+                    //            {
+                    //                var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + DB.FileVideoTH);
+                    //                if (System.IO.File.Exists(old_filePath) == true)
+                    //                {
+                    //                    System.IO.File.Delete(old_filePath);
+                    //                }
+
+                    //                var datestr = DateTime.Now.Ticks.ToString();
+                    //                var extension = Path.GetExtension(formFile.FileName);
+                    //                DB.FileVideoTH = datestr + extension;
+                    //                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                    //                using (var stream = System.IO.File.Create(filePath))
+                    //                {
+                    //                    formFile.CopyTo(stream);
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+                    //}
+
+                    if (model.Status == 1)
                     {
-                        foreach (var formFile in model.uploaded_fileEN)
+                        var check_other = from up2 in db.HistoryDataDetail
+                                          where up2.Id != model.Id && up2.Status == 1 && up2.TypeData == 1
+                                          select up2;
+                        foreach (HistoryDataDetail up2 in check_other)
                         {
-                            if (formFile.Length > 0)
-                            {
-                                var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + DB.FileVideoEN);
-                                if (System.IO.File.Exists(old_filePath) == true)
-                                {
-                                    System.IO.File.Delete(old_filePath);
-                                }
-
-                                var datestr = DateTime.Now.Ticks.ToString();
-                                var extension = Path.GetExtension(formFile.FileName);
-                                DB.FileVideoEN = datestr + extension;
-                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
-                                using (var stream = System.IO.File.Create(filePath))
-                                {
-                                    formFile.CopyTo(stream);
-                                }
-                            }
+                            up2.Status = 0;
                         }
+                        db.SaveChanges();
                     }
-                    if (model.FileVideoTH == null && model.uploaded_fileTH != null)
-                    {
-                        return new JsonResult(new { status = "error", messageArray = "error" });
-                    }
-                    else
-                    {
-                        if (model.FileVideoTH != null)
-                        {
-                            DB.FileVideoTH = model.FileVideoTH;
-                        }
 
-                        if (model.uploaded_fileTH != null)
-                        {
-                            foreach (var formFile in model.uploaded_fileTH)
-                            {
-                                if (formFile.Length > 0)
-                                {
-                                    var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + DB.FileVideoTH);
-                                    if (System.IO.File.Exists(old_filePath) == true)
-                                    {
-                                        System.IO.File.Delete(old_filePath);
-                                    }
-
-                                    var datestr = DateTime.Now.Ticks.ToString();
-                                    var extension = Path.GetExtension(formFile.FileName);
-                                    DB.FileVideoTH = datestr + extension;
-                                    var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
-                                    using (var stream = System.IO.File.Create(filePath))
-                                    {
-                                        formFile.CopyTo(stream);
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    DB.FileVideoTH = model.FileVideoTH;
                     DB.Status = model.Status;
                     DB.created_at = DateTime.Now;
                     DB.updated_at = DateTime.Now;
@@ -887,18 +985,30 @@ namespace Lighting.Controllers.Backend
             try
             {
                 var DB = db.HistoryDataDetail.FirstOrDefault(x => x.Id == Id);
-                if (DB is not null)
+                if (DB != null)
                 {
-                    if (DB.Status == 1)
+                    if (DB.Status != 1)
                     {
-                        DB.Status = 0;
+                        var Change = db.HistoryDataDetail.Where(x=>x.TypeData==1).ToList();
+                        foreach (var item in Change)
+                        {
+                            item.Status = 0;
+                            db.Entry(item).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        if (DB.Status == 1)
+                        {
+                            DB.Status = 0;
+                            db.Entry(DB).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            DB.Status = 1;
+                            db.Entry(DB).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
                     }
-                    else
-                    {
-                        DB.Status = 1;
-                    }
-                    db.Entry(DB).State = EntityState.Modified;
-                    await db.SaveChangesAsync();
                 }
                 return new JsonResult(new { status = "success", messageArray = "success" });
             }
@@ -989,7 +1099,7 @@ namespace Lighting.Controllers.Backend
                             var datestr = DateTime.Now.Ticks.ToString();
                             var extension = Path.GetExtension(formFile.FileName);
                             historyDataDetail.ImageEN = datestr + extension;
-                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + datestr + extension);
                             using (var stream = System.IO.File.Create(filePath))
                             {
                                 formFile.CopyTo(stream);
@@ -1007,7 +1117,7 @@ namespace Lighting.Controllers.Backend
                             var datestr = DateTime.Now.Ticks.ToString();
                             var extension = Path.GetExtension(formFile.FileName);
                             historyDataDetail.ImageTH = datestr + extension;
-                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + datestr + extension);
                             using (var stream = System.IO.File.Create(filePath))
                             {
                                 formFile.CopyTo(stream);
@@ -1058,7 +1168,7 @@ namespace Lighting.Controllers.Backend
                                 var datestr = DateTime.Now.Ticks.ToString();
                                 var extension = Path.GetExtension(formFile.FileName);
                                 DB.ImageEN = datestr + extension;
-                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + datestr + extension);
                                 using (var stream = System.IO.File.Create(filePath))
                                 {
                                     formFile.CopyTo(stream);
@@ -1081,7 +1191,7 @@ namespace Lighting.Controllers.Backend
                                 var datestr = DateTime.Now.Ticks.ToString();
                                 var extension = Path.GetExtension(formFile.FileName);
                                 DB.ImageTH = datestr + extension;
-                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Resource_Facility/" + datestr + extension);
+                                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Resource_Facility/" + datestr + extension);
                                 using (var stream = System.IO.File.Create(filePath))
                                 {
                                     formFile.CopyTo(stream);
@@ -1299,7 +1409,7 @@ namespace Lighting.Controllers.Backend
                             imgFile.CopyTo(stream);
                         }
                     }
-                } 
+                }
 
                 if (organization_ChartDetail.Status != 1)
                 {
@@ -1335,13 +1445,13 @@ namespace Lighting.Controllers.Backend
             }
             var model = new Resource_FacilityModels { Organization_ChartDetail = get_detail };
             return View(model);
-        } 
+        }
         public async Task<IActionResult> ORGANIZATION_CHART_Edit_Submit(Organization_ChartDetail organization_ChartDetail
             , List<IFormFile> upload_image)
         {
             try
             {
-                var old_data = db.Organization_ChartDetail.Where(x => x.Id == organization_ChartDetail.Id).FirstOrDefault(); 
+                var old_data = db.Organization_ChartDetail.Where(x => x.Id == organization_ChartDetail.Id).FirstOrDefault();
 
                 if (organization_ChartDetail.Status == 1)
                 {
@@ -1382,7 +1492,7 @@ namespace Lighting.Controllers.Backend
                         }
                     }
                 }
-                 
+
                 if (organization_ChartDetail.Status != 1)
                 {
                     old_data.Status = 0;
@@ -1390,7 +1500,7 @@ namespace Lighting.Controllers.Backend
                 else
                 {
                     old_data.Status = 1;
-                } 
+                }
                 db.SaveChanges();
                 return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
             }
@@ -1414,7 +1524,7 @@ namespace Lighting.Controllers.Backend
                     {
                         System.IO.File.Delete(old_filePathTH);
                     }
-                     
+
 
                     db.Organization_ChartDetail.Remove(checkrow);
                     db.SaveChanges();
@@ -1819,7 +1929,7 @@ namespace Lighting.Controllers.Backend
                     checkrow.Title_TH = rf_Philosophy_VM.Title_TH;
                     checkrow.Title_EN = rf_Philosophy_VM.Title_EN;
                     checkrow.SubTitle_TH = rf_Philosophy_VM.SubTitle_TH;
-                    checkrow.SubTitle_EN = rf_Philosophy_VM.SubTitle_EN; 
+                    checkrow.SubTitle_EN = rf_Philosophy_VM.SubTitle_EN;
                     checkrow.updated_at = DateTime.Now;
                     db.SaveChanges();
                 }
@@ -1913,7 +2023,7 @@ namespace Lighting.Controllers.Backend
             }
             var model = new Resource_FacilityModels { RF_Philosophy_Vision_Mission_Details = get_detail };
             return View(model);
-        } 
+        }
         public IActionResult OUR_PHILOSOPHY_VISION_MISSION_Edit_Submit(RF_Philosophy_Vision_Mission_Details rf_Philosophy_VM_Details,
              List<IFormFile> upload_image, List<IFormFile> upload_image_ENG)
         {

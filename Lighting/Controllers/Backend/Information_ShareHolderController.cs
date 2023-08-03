@@ -701,16 +701,16 @@ namespace Lighting.Controllers.Backend
         {
             try
             {
-                if (Year_Str == null)
-                {
-                    return Json(new { status = "warning", message = "กรุณาระบุ ปี!" });
-                }
-                DateTime InsertDate_year = DateTime.ParseExact(Year_Str, "yyyy", new CultureInfo("en-US"));
+                //if (Year_Str == null)
+                //{
+                //    return Json(new { status = "warning", message = "กรุณาระบุ ปี!" });
+                //}
+                //DateTime InsertDate_year = DateTime.ParseExact(Year_Str, "yyyy", new CultureInfo("en-US"));
 
-                if (SH_generalMeetingData.titleTH == null || SH_generalMeetingData.titleENG == "")
-                {
-                    return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ" });
-                }
+                //if (SH_generalMeetingData.titleTH == null || SH_generalMeetingData.titleENG == "")
+                //{
+                //    return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ" });
+                //}
 
                 foreach (var formFile in uploaded_file)
                 {
@@ -756,7 +756,14 @@ namespace Lighting.Controllers.Backend
                 {
                     SH_generalMeetingData.use_status = 1;
                 }
-                SH_generalMeetingData.year = InsertDate_year;
+
+                DateTime InsertDate_year = DateTime.Now;
+                if (Year_Str != null)
+                {
+                    InsertDate_year = DateTime.ParseExact(Year_Str, "yyyy", new CultureInfo("en-US"));
+                    SH_generalMeetingData.year = InsertDate_year;
+                }
+
                 SH_generalMeetingData.created_at = DateTime.Now;
                 db.SH_generalMeeting_Data.Add(SH_generalMeetingData);
                 db.SaveChanges();
@@ -774,16 +781,16 @@ namespace Lighting.Controllers.Backend
         {
             try
             {
-                if (SH_generalMeetingData.titleTH == null || SH_generalMeetingData.titleENG == "")
-                {
-                    return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ TH" });
-                }
+                //if (SH_generalMeetingData.titleTH == null || SH_generalMeetingData.titleENG == "")
+                //{
+                //    return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ TH" });
+                //}
 
-                if (Year_Str == null)
-                {
-                    return Json(new { status = "error", message = "กรุณาระบุ ปี!" });
-                }
-                DateTime InsertDate_year = DateTime.ParseExact(Year_Str, "yyyy", new CultureInfo("en-US"));
+                //if (Year_Str == null)
+                //{
+                //    return Json(new { status = "error", message = "กรุณาระบุ ปี!" });
+                //}
+                //DateTime InsertDate_year = DateTime.ParseExact(Year_Str, "yyyy", new CultureInfo("en-US"));
 
                 var old_data = db.SH_generalMeeting_Data.Where(x => x.id == SH_generalMeetingData.id).FirstOrDefault();
 
@@ -847,7 +854,14 @@ namespace Lighting.Controllers.Backend
                 {
                     old_data.use_status = 1;
                 }
-                old_data.year = InsertDate_year;
+
+                DateTime InsertDate_year = DateTime.Now;
+                if (Year_Str != null)
+                {
+                    InsertDate_year = DateTime.ParseExact(Year_Str, "yyyy", new CultureInfo("en-US"));
+                    old_data.year = InsertDate_year;
+                }
+
                 old_data.updated_at = DateTime.Now;
                 db.SaveChanges();
                 return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
@@ -2168,10 +2182,10 @@ namespace Lighting.Controllers.Backend
                 }
                 DateTime InsertDate_year = DateTime.ParseExact(Year_Str, "yyyy", new CultureInfo("en-US"));
 
-                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
-                {
-                    return Json(new { status = "warning", message = "กรุณากรอกข้อมูลให้ครบ!" });
-                }
+                //if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
+                //{
+                //    return Json(new { status = "warning", message = "กรุณากรอกข้อมูลให้ครบ!" });
+                //}
 
                 foreach (var formFile in uploaded_file)
                 {

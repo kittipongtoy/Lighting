@@ -50,7 +50,8 @@
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th>#</th>
-                                <th class="min-w-125px">หัวข้อ TH</th>
+                                <th class="min-w-125px">Image TH</th>
+                                <th class="min-w-125px">Image ENG</th>
                                 <th class="min-w-125px">สถานะการใช้งาน</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
@@ -78,18 +79,34 @@
                 },
                 columns: [
                     { 'data': 'index', name: 'index', className: 'text-center' },
-                    { 'data': 'imageTH', name: 'imageTH', className: 'text-center' },
+                    { 'data': 'imageTH', name: 'imageTH', className: 'text-center', "render": function (data, type, row) {
+                            var text = '<div class="mb-10" style="text-align:center;">' +
+                                '<img src="~/upload_image/Resource_Facility/' + row.imageTH + '" style="height: 250px;width: 250px;" alt="image">' +
+                                '</div>';
+                            return text;
+
+                        }
+                    }, 
+                    {
+                        'data': 'imageEN', name: 'imageEN', className: 'text-center', "render": function (data, type, row) {
+                            var text = '<div class="mb-10" style="text-align:center;">' +
+                                '<img src="~/upload_image/Resource_Facility/' + row.imageEN + '" style="height: 250px;width: 250px;" alt="image">' +
+                                '</div>';
+                            return text;
+
+                        }
+                    },
                     {
                         "name": "status", "data": "status", "render": function (data, type, row) {
                             if (row.status == 1) {
                                 var text = '<div class="form-check form-switch">' +
-                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<input class="form-check-input" checked type="checkbox" name="Status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
                                     '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
                                     '</div>';
                                 return text;
                             } else {
                                 var text = '<div class="form-check form-switch">' +
-                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<input class="form-check-input" type="checkbox" name="Status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
                                     '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
                                     '</div>';
                                 return text;
