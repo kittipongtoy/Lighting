@@ -257,7 +257,7 @@
     ///
     var show_contactus = "";
     var here_contactus = "";
-    if (ViewData["Title"] == "Manage_Contact_Page")
+    if (ViewData["Title"] == "Manage_Contact_Page" || ViewData["Title"] == "Main_Contact")
     {
         show_contactus = "show";
         here_contactus = "here";
@@ -272,9 +272,10 @@
         Here_Authorization = "here";
     }
 
+    
     var show_applyjob = "";
     var here_applyjob = "";
-    if (ViewData["Title"] == "Manage_Job_Page")
+    if (ViewData["Title"] == "Manage_Job_Page" || ViewData["Title"] == "Apply_Image_Content")
     {
         show_applyjob = "show";
         here_applyjob = "here";
@@ -288,7 +289,7 @@
     || ViewData["Title"] == "Button_Below_Banner_Add"
     || ViewData["Title"] == "Button_Below_Banner_Edit"
     || ViewData["Title"] == "LIGHTING_EQUIPMENT"
-    || ViewData["Title"] == "LIGHTING_EQUIPMENT_Add"
+    || ViewData["Title"] == "LIGHTING_EQUIPMENT_Aadd"
     || ViewData["Title"] == "LIGHTING_EQUIPMENT_Edit"
     || ViewData["Title"] == "HIGHLIGHT"
     || ViewData["Title"] == "HIGHLIGHT_Add"
@@ -304,6 +305,16 @@
         Here_IR_Index = "here";
         show_investerRelation = "show";
         here_investerRelation = "here";
+    }
+
+    var show_privacy = "";
+    var here_privacy = "";
+    if (ViewData["Title"] == "privacy_index"
+    || ViewData["Title"] == "privacy_create"
+    || ViewData["Title"] == "privacy_edit")
+    {
+        show_privacy = "show";
+        here_privacy = "here";
     }
 
     var show_news = "";
@@ -386,14 +397,30 @@
         here_product = "here";
     }
 
-    var show_privacy = "";
-    var here_privacy = "";
-    if (ViewData["Title"] == "privacy_index"
-    || ViewData["Title"] == "privacy_create"
-    || ViewData["Title"] == "privacy_edit")
+    var show_RF = "";
+    var here_RF = "";
+    if (ViewData["Title"] == "RF_Manufacturing"
+    || ViewData["Title"] == "RF_ManufacturingImages_create"
+    || ViewData["Title"] == "RF_ManufacturingImages_edit"
+    || ViewData["Title"] == "RF_WarehouseLogistics"
+    || ViewData["Title"] == "RF_WarehouseLogisticsImages_create"
+    || ViewData["Title"] == "RF_WarehouseLogisticsImages_edit"
+    || ViewData["Title"] == "RF_OverseaOffices"
+    || ViewData["Title"] == "RF_OverseaOfficesImages_create"
+    || ViewData["Title"] == "RF_OverseaOfficesImages_edit"
+    || ViewData["Title"] == "RF_SolidState"
+    || ViewData["Title"] == "RF_SolidStateImages_create"
+    || ViewData["Title"] == "RF_SolidStateImages_edit"
+    || ViewData["Title"] == "RF_AssemblyService"
+    || ViewData["Title"] == "RF_AssemblyServiceImages_create"
+    || ViewData["Title"] == "RF_AssemblyServiceImages_edit"
+    || ViewData["Title"] == "RF_SolutionCenters"
+    || ViewData["Title"] == "RF_SolutionCentersImages_create"
+    || ViewData["Title"] == "RF_SolutionCentersImages_edit"
+    || ViewData["Title"] == "Manage_SmartSolution")
     {
-        show_privacy = "show";
-        here_privacy = "here";
+        show_RF = "show";
+        here_RF = "here";
     }
 
     var show_cookies = "";
@@ -403,8 +430,6 @@
         show_cookies = "show";
         here_cookies = "here";
     }
-
-
 }
 
 <!DOCTYPE html>
@@ -812,9 +837,9 @@
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                 <span class="menu-link">
                                     <span class="menu-icon">
-                                        <i class="bi bi-download fs-3"></i>
+                                        <i class="bi bi-house-fill fs-3"></i>
                                     </span>
-                                    <span class="menu-title">ดาวห์โหลด</span>
+                                    <span class="menu-title">หน้าแรก</span>
                                     <span class="menu-arrow"></span>
                                 </span>
                                 <div class="menu-sub menu-sub-accordion">
@@ -907,367 +932,367 @@
                                             </div>
                                             <div class="menu-item">
                                                 @if (ViewData["Title"] == "LIGHTING_EQUIPMENT" || ViewData["Title"] == "LIGHTING_EQUIPMENT_Add" || ViewData["Title"] == "LIGHTING_EQUIPMENT_Edit")
+												{
+													<a class="menu-link active" href="@Url.Action("LIGHTING_EQUIPMENT","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">LIGHTING EQUIPMENT</span>
+													</a>
+												}
+												else
+												{
+													<a class="menu-link" href="@Url.Action("LIGHTING_EQUIPMENT","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">LIGHTING EQUIPMENT</span>
+													</a>
+												}
+											</div>
+											<div class="menu-item">
+												@if (ViewData["Title"] == "Summary_Financial_Highlights" || ViewData["Title"] == "Summary_Financial_Highlights_Add" || ViewData["Title"] == "Summary_Financial_Highlights_Edit")
+												{
+													<a class="menu-link active" href="@Url.Action("Summary_Financial_Highlights","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">Summary Financial Highlights</span>
+													</a>
+												}
+												else
+												{
+													<a class="menu-link" href="@Url.Action("Summary_Financial_Highlights","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">Summary Financial Highlights</span>
+													</a>
+												}
+											</div>
+											<div class="menu-item">
+												@if (ViewData["Title"] == "Report" || ViewData["Title"] == "Report_Add" || ViewData["Title"] == "Report_Edit")
+												{
+													<a class="menu-link active" href="@Url.Action("Report","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">Report</span>
+													</a>
+												}
+												else
+												{
+													<a class="menu-link" href="@Url.Action("Report","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">Report</span>
+													</a>
+												}
+											</div>
+											<div class="menu-item">
+                                                @if (ViewData["Title"] == "HIGHLIGHT" || ViewData["Title"] == "HIGHLIGHT_Add" || ViewData["Title"] == "HIGHLIGHT_Edit" || ViewData["Title"] == "HIGHLIGHTDetail_Add" || ViewData["Title"] == "HIGHLIGHTDetail_Edit")
                                                 {
-                                                    <a class="menu-link active" href="@Url.Action("LIGHTING_EQUIPMENT","IR_Index")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">LIGHTING EQUIPMENT</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("LIGHTING_EQUIPMENT","IR_Index")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">LIGHTING EQUIPMENT</span>
-                                                    </a>
-                                                }
-                                            </div>
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "Summary_Financial_Highlights" || ViewData["Title"] == "Summary_Financial_Highlights_Add" || ViewData["Title"] == "Summary_Financial_Highlights_Edit")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("Summary_Financial_Highlights","IR_Index")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">Summary Financial Highlights</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("Summary_Financial_Highlights","IR_Index")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">Summary Financial Highlights</span>
-                                                    </a>
-                                                }
-                                            </div>
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "Report" || ViewData["Title"] == "Report_Add" || ViewData["Title"] == "Report_Edit")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("Report","IR_Index")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">Report</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("Report","IR_Index")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">Report</span>
-                                                    </a>
-                                                }
-                                            </div>
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "HIGHLIGHT" || ViewData["Title"] == "HIGHLIGHT_Add" || ViewData["Title"] == "HIGHLIGHT_Edit")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("HIGHLIGHT","IR_Index")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">HIGHLIGHT</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("HIGHLIGHT","IR_Index")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">HIGHLIGHT</span>
-                                                    </a>
-                                                }
-                                            </div>
+													<a class="menu-link active" href="@Url.Action("HIGHLIGHT","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">HIGHLIGHT</span>
+													</a>
+												}
+												else
+												{
+													<a class="menu-link" href="@Url.Action("HIGHLIGHT","IR_Index")">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">HIGHLIGHT</span>
+													</a>
+												}
+											</div>
+										</div>
+									</div>
+                                <div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_company_information @here_company_information">
+                                    <span class="menu-link">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">ข้อมูลบริษัท</span>
+                                        <span class="menu-arrow"></span>
+                                    </span>
+                                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "Message_Chairman_index" || ViewData["Title"] == "Message_Chairman_create" || ViewData["Title"] == "Message_Chairman_edit")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("Message_Chairman_index","Investor_Relations")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">สารจากประธานกรรมการ</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("Message_Chairman_index","Investor_Relations")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">สารจากประธานกรรมการ</span>
+                                                </a>
+                                            }
+                                        </div>
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "Philosophy_index")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("Philosophy_index","Investor_Relations")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">ปรัชญาองค์กร</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("Philosophy_index","Investor_Relations")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">ปรัชญาองค์กร</span>
+                                                </a>
+                                            }
+                                        </div>
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "Companyprofile_index" || ViewData["Title"] == "Companyprofile_create" || ViewData["Title"] == "Companyprofile_edit")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("Companyprofile_index","Investor_Relations")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">ข้อมูลทั่วไปบริษัท</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("Companyprofile_index","Investor_Relations")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">ข้อมูลทั่วไปบริษัท</span>
+                                                </a>
+                                            }
+                                        </div>
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "CompanyOverview_index")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("CompanyOverview_index","Investor_Relations")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">สรุปภาพรวมบริษัท</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("CompanyOverview_index","Investor_Relations")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">สรุปภาพรวมบริษัท</span>
+                                                </a>
+                                            }
+                                        </div>
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "Board_of_Directors_index" || ViewData["Title"] == "Board_of_Directors_create" || ViewData["Title"] == "Board_of_Directors_edit")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("Board_of_Directors_index","Investor_Relations")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">คณะกรรมการบริษัท</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("Board_of_Directors_index","Investor_Relations")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">คณะกรรมการบริษัท</span>
+                                                </a>
+                                            }
+                                        </div>
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "Organizational_Structure_index"
+                                            )
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("Organizational_Structure_index","Investor_Relations")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">โครงสร้างองค์กร</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("Organizational_Structure_index","Investor_Relations")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">โครงสร้างองค์กร</span>
+                                                </a>
+                                            }
                                         </div>
                                     </div>
-                                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_company_information @here_company_information">
-                                        <span class="menu-link">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">ข้อมูลบริษัท</span>
-                                            <span class="menu-arrow"></span>
+                                </div>
+                                <div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_corporate_governance @here_corporate_governance">
+                                    <span class="menu-link">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
                                         </span>
-                                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "Message_Chairman_index" || ViewData["Title"] == "Message_Chairman_create" || ViewData["Title"] == "Message_Chairman_edit")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("Message_Chairman_index","Investor_Relations")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">สารจากประธานกรรมการ</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("Message_Chairman_index","Investor_Relations")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">สารจากประธานกรรมการ</span>
-                                                    </a>
-                                                }
-                                            </div>
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "Philosophy_index")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("Philosophy_index","Investor_Relations")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">ปรัชญาองค์กร</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("Philosophy_index","Investor_Relations")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">ปรัชญาองค์กร</span>
-                                                    </a>
-                                                }
-                                            </div>
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "Companyprofile_index" || ViewData["Title"] == "Companyprofile_create" || ViewData["Title"] == "Companyprofile_edit")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("Companyprofile_index","Investor_Relations")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">ข้อมูลทั่วไปบริษัท</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("Companyprofile_index","Investor_Relations")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">ข้อมูลทั่วไปบริษัท</span>
-                                                    </a>
-                                                }
-                                            </div>
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "CompanyOverview_index")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("CompanyOverview_index","Investor_Relations")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">สรุปภาพรวมบริษัท</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("CompanyOverview_index","Investor_Relations")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">สรุปภาพรวมบริษัท</span>
-                                                    </a>
-                                                }
-                                            </div>
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "Board_of_Directors_index" || ViewData["Title"] == "Board_of_Directors_create" || ViewData["Title"] == "Board_of_Directors_edit")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("Board_of_Directors_index","Investor_Relations")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">คณะกรรมการบริษัท</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("Board_of_Directors_index","Investor_Relations")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">คณะกรรมการบริษัท</span>
-                                                    </a>
-                                                }
-                                            </div>
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "Organizational_Structure_index"
-                                                )
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("Organizational_Structure_index","Investor_Relations")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">โครงสร้างองค์กร</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("Organizational_Structure_index","Investor_Relations")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">โครงสร้างองค์กร</span>
-                                                    </a>
-                                                }
-                                            </div>
+                                        <span class="menu-title">นโยบายการกำกับดูแลกิจการ</span>
+                                        <span class="menu-arrow"></span>
+                                    </span>
+                                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "Corporate_governance_index" || ViewData["Title"] == "Corporate_governance_create_file" || ViewData["Title"] == "Corporate_governance_edit_file" || ViewData["Title"] == "Corporate_governance_create_cate" || ViewData["Title"] == "Corporate_governance_edit_cate")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("Corporate_governance_index","Corporate_Governance")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">นโยบายการกำกับดูแลกิจการ</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("Corporate_governance_index","Corporate_Governance")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">นโยบายการกำกับดูแลกิจการ</span>
+                                                </a>
+                                            }
                                         </div>
-                                    </div>
-                                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_corporate_governance @here_corporate_governance">
-                                        <span class="menu-link">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">นโยบายการกำกับดูแลกิจการ</span>
-                                            <span class="menu-arrow"></span>
-                                        </span>
-                                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "Corporate_governance_index" || ViewData["Title"] == "Corporate_governance_create_file" || ViewData["Title"] == "Corporate_governance_edit_file" || ViewData["Title"] == "Corporate_governance_create_cate" || ViewData["Title"] == "Corporate_governance_edit_cate")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("Corporate_governance_index","Corporate_Governance")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">นโยบายการกำกับดูแลกิจการ</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("Corporate_governance_index","Corporate_Governance")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">นโยบายการกำกับดูแลกิจการ</span>
-                                                    </a>
-                                                }
-                                            </div>
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "Business_ethics_index" || ViewData["Title"] == "Business_ethics_create" || ViewData["Title"] == "Business_ethics_edit")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("Business_ethics_index","Corporate_Governance")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">จรรยาบรรณธุรกิจ</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("Business_ethics_index","Corporate_Governance")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">จรรยาบรรณธุรกิจ</span>
-                                                    </a>
-                                                }
-                                            </div>
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "SustainabilityReport_index")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("SustainabilityReport_index","Corporate_Governance")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">รายงานความยั่งยืน</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("SustainabilityReport_index","Corporate_Governance")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">รายงานความยั่งยืน</span>
-                                                    </a>
-                                                }
-                                            </div>
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "CRS_policy_index" || ViewData["Title"] == "CRS_policy_create" || ViewData["Title"] == "CRS_policy_edit")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("CRS_policy_index","Corporate_Governance")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">นโยบายและความรับผิดชอบต่อสังคมและสิ่งแวดล้อม</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("CRS_policy_index","Corporate_Governance")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">นโยบายและความรับผิดชอบต่อสังคมและสิ่งแวดล้อม</span>
-                                                    </a>
-                                                }
-                                            </div>
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "Anti_fraud_index" || ViewData["Title"] == "Anti_fraud_create" || ViewData["Title"] == "Anti_fraud_edit")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("Anti_fraud_index","Corporate_Governance")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">นโยบายการต่อต้านการทุจริตและคอร์รัปชั่น</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("Anti_fraud_index","Corporate_Governance")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">นโยบายการต่อต้านการทุจริตและคอร์รัปชั่น</span>
-                                                    </a>
-                                                }
-                                            </div>
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "Gift_entertainment_index" || ViewData["Title"] == "Gift_entertainment_create" || ViewData["Title"] == "Gift_entertainment_edit")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("Gift_entertainment_index","Corporate_Governance")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">นโยบายการให้หรือรับของขวัญ และการเลี้ยงรับรอง</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("Gift_entertainment_index","Corporate_Governance")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">นโยบายการให้หรือรับของขวัญ และการเลี้ยงรับรอง</span>
-                                                    </a>
-                                                }
-                                            </div>
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "Channel_clue_index" || ViewData["Title"] == "Channel_clue_create" || ViewData["Title"] == "Channel_clue_edit")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("Channel_clue_index","Corporate_Governance")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">ช่องทางแจ้งเบาะแส</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("Channel_clue_index","Corporate_Governance")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">ช่องทางแจ้งเบาะแส</span>
-                                                    </a>
-                                                }
-                                            </div>
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "Business_ethics_index" || ViewData["Title"] == "Business_ethics_create" || ViewData["Title"] == "Business_ethics_edit")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("Business_ethics_index","Corporate_Governance")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">จรรยาบรรณธุรกิจ</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("Business_ethics_index","Corporate_Governance")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">จรรยาบรรณธุรกิจ</span>
+                                                </a>
+                                            }
+                                        </div>
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "SustainabilityReport_index")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("SustainabilityReport_index","Corporate_Governance")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">รายงานความยั่งยืน</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("SustainabilityReport_index","Corporate_Governance")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">รายงานความยั่งยืน</span>
+                                                </a>
+                                            }
+                                        </div>
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "CRS_policy_index" || ViewData["Title"] == "CRS_policy_create" || ViewData["Title"] == "CRS_policy_edit")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("CRS_policy_index","Corporate_Governance")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">นโยบายและความรับผิดชอบต่อสังคมและสิ่งแวดล้อม</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("CRS_policy_index","Corporate_Governance")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">นโยบายและความรับผิดชอบต่อสังคมและสิ่งแวดล้อม</span>
+                                                </a>
+                                            }
+                                        </div>
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "Anti_fraud_index" || ViewData["Title"] == "Anti_fraud_create" || ViewData["Title"] == "Anti_fraud_edit")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("Anti_fraud_index","Corporate_Governance")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">นโยบายการต่อต้านการทุจริตและคอร์รัปชั่น</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("Anti_fraud_index","Corporate_Governance")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">นโยบายการต่อต้านการทุจริตและคอร์รัปชั่น</span>
+                                                </a>
+                                            }
+                                        </div>
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "Gift_entertainment_index" || ViewData["Title"] == "Gift_entertainment_create" || ViewData["Title"] == "Gift_entertainment_edit")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("Gift_entertainment_index","Corporate_Governance")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">นโยบายการให้หรือรับของขวัญ และการเลี้ยงรับรอง</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("Gift_entertainment_index","Corporate_Governance")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">นโยบายการให้หรือรับของขวัญ และการเลี้ยงรับรอง</span>
+                                                </a>
+                                            }
+                                        </div>
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "Channel_clue_index" || ViewData["Title"] == "Channel_clue_create" || ViewData["Title"] == "Channel_clue_edit")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("Channel_clue_index","Corporate_Governance")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">ช่องทางแจ้งเบาะแส</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("Channel_clue_index","Corporate_Governance")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">ช่องทางแจ้งเบาะแส</span>
+                                                </a>
+                                            }
+                                        </div>
 
                                             <div class="menu-item">
                                                 @if (ViewData["Title"] == "Author_chairman_index" || ViewData["Title"] == "Author_chairman_create" || ViewData["Title"] == "Author_chairman_edit")
@@ -1423,26 +1448,26 @@
                                         </span>
                                         <div class="menu-sub menu-sub-accordion menu-active-bg">
 
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "SH_IR_finance_statement")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("SH_IR_finance_statement","importantFinancialInformation")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">งบการเงิน</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("SH_IR_finance_statement","importantFinancialInformation")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">งบการเงิน</span>
-                                                    </a>
-                                                }
-                                            </div>
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "SH_IR_finance_statement")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("SH_IR_finance_statement","importantFinancialInformation")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">งบการเงิน</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("SH_IR_finance_statement","importantFinancialInformation")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">งบการเงิน</span>
+                                                </a>
+                                            }
+                                        </div>
 
                                             <div class="menu-item">
                                                 @if (ViewData["Title"] == "SH_IR_financial_highlight"
@@ -1496,26 +1521,26 @@
                                                 }
                                             </div>
 
-                                            <div class="menu-item">
-                                                @if (ViewData["Title"] == "SH_IR_prospectus")
-                                                {
-                                                    <a class="menu-link active" href="@Url.Action("SH_IR_prospectus","importantFinancialInformation")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">หนังสือชี้ชวน</span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="menu-link" href="@Url.Action("SH_IR_prospectus","importantFinancialInformation")">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                                                        <span class="menu-title">หนังสือชี้ชวน</span>
-                                                    </a>
-                                                }
-                                            </div>
+                                        <div class="menu-item">
+                                            @if (ViewData["Title"] == "SH_IR_prospectus")
+                                            {
+                                                <a class="menu-link active" href="@Url.Action("SH_IR_prospectus","importantFinancialInformation")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">หนังสือชี้ชวน</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="menu-link" href="@Url.Action("SH_IR_prospectus","importantFinancialInformation")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">หนังสือชี้ชวน</span>
+                                                </a>
+                                            }
+                                        </div>
 
                                         </div>
                                     </div>

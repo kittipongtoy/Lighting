@@ -1,10 +1,12 @@
 ﻿using Lighting.Areas.Identity.Data;
 using Lighting.Models.InputFilterModels.Contact;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lighting.Controllers.Backend
 {
+    [Authorize]
     public class ManageContactController : Controller
     {
         private readonly LightingContext _db;

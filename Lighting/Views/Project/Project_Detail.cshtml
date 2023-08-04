@@ -15,11 +15,11 @@
                 <div class="col">
                     @if(lang == "EN")
                     {
-                        <h2>@category_name.Name_EN</h2>
+                        <h2>@category_name?.Name_EN</h2>
                     }
                     else
                     {
-                        <h2>@category_name.Name_TH</h2>
+                        <h2>@category_name?.Name_TH</h2>
                     }
                 </div>
             </div>
@@ -33,8 +33,8 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col">
+                        <div class="row justify-content-center">
+                            <div class="col col-xl-9 col-lg-10 col-md-12 col-12">
                                 <div class="projectGal-slide detail_slide">
                                     <div id="big" class="owl-carousel owl-theme big-img slider">
                                         @foreach(var img in Model.Image_List){
@@ -81,15 +81,17 @@
                         </div>
                     </div>
                 </div>
+                @*
                 <div class="row">
                     <div class="col">
                         <div class="content-center">
                             <a class="downloadBD-button" href="@Url.Action("DownloadFile","project",new {path = Model.File_Download})" target="_blank">
-                                <div><i class="fas fa-arrow-alt-circle-down"></i>@Model.File_Download.Split("\\").Reverse().First()</div>
+                                <div><i class="fas fa-arrow-alt-circle-down"></i>@Model?.File_Download?.Split("\\").Reverse().First()</div>
                             </a>
                         </div>
                     </div>
                 </div>
+            *@
             }
             else
             {
@@ -158,19 +160,19 @@
                         </div>
                     </div>
                 </div>
+                @*
                 <div class="row">
                     <div class="col">
                         <div class="content-center">
                             <a class="downloadBD-button" href="@Url.Action("DownloadFile","project",new {path = Model.File_Download})" target="_blank">
-                                <div><i class="fas fa-arrow-alt-circle-down"></i>@Model.File_Download.Split("\\").Reverse().First()</div>
+                                <div><i class="fas fa-arrow-alt-circle-down"></i>@Model?.File_Download?.Split("\\").Reverse().First()</div>
                             </a>
                         </div>
                     </div>
                 </div>
+                *@
             }
             <!---------- END PROJECT - REF :: DETAIL ---------->
-
-
             <div class="row">
                 <div class="col">
                     <h5>Lighting Solution</h5>
@@ -183,15 +185,15 @@
                         foreach (var product in (IEnumerable<Product>)ViewData["products"])
                         {
                             <div class="col-lg-3 col-md-4 col-6">
-                                <a class="productBox" href="@Url.Action("Product_Detail","Product",new {categoryId=product.Product_CategoryId, sub_categoryId=product.Product_ModelId,id=product.Id})">
+                                <a class="productBox" href="@Url.Action("Product_Detail","Product",new {categoryId=product?.Product_CategoryId, sub_categoryId=product?.Product_ModelId,id=product?.Id})">
                                     <div class="row">
                                         <div class="col">
                                             <div class="img-width">
-                                                <img src="~/@product.Preview_Image">
+                                                <img src="~/@product?.Preview_Image"> @*style="height:25vh;"*@
                                                 <ul class="hover-detail">
-                                                    <li>Dimension : @product.Dimension</li>
-                                                    <li>Power : @product.Power</li>
-                                                    <li>IP Rating : @product.IP_Rating</li>
+                                                    <li>Dimension : @product?.Dimension</li>
+                                                    <li>Power : @product?.Power</li>
+                                                    <li>IP Rating : @product?.IP_Rating</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -199,7 +201,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="productBox-topic">
-                                                <p>@product.Model</p>
+                                                <p>@product?.Model</p>
                                             </div>
                                         </div>
                                     </div>
@@ -236,7 +238,7 @@
                                         <a class="contentBox" href="@Url.Action("Project_Detail","Project",new {id = cat.Id})">
                                             <div class="row">
                                                 <div class="col">
-                                                    <div class="img-width"><img src="~/@cat.Profile_Image"></div>
+                                                    <div class="img-width"><img src="~/@cat.Profile_Image"></div> @*style="height:30vh;"*@
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -264,7 +266,7 @@
             <div class="row">
                 <div class="col">
                     <div class="content-center">
-                        <a class="buttonB" href="@Url.Action("Project_Category","Project")"><i class="fas fa-long-arrow-alt-left"></i>Back</a>
+                        <a class="buttonB" href="@Url.Action("Project_Category","Project",new {categoryId=category_name?.Id})"><i class="fas fa-long-arrow-alt-left"></i>Back</a>
                     </div>
                 </div>
             </div>

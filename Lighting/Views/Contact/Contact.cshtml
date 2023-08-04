@@ -2,6 +2,7 @@
     ViewData["Title"] = "Contact";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var lang = Context.Request.Cookies["lang"];
+    var mainContact = (Lighting.Areas.Identity.Data.MainContact)ViewData["mainContact"];
 }
 @model IEnumerable<Lighting.Models.InputFilterModels.Contact.Output_ContactVM>
 
@@ -23,7 +24,14 @@
                     <div class="blueBox">
                         <div class="row">
                             <div class="col">
-                                <h3>Head Office</h3>
+                                @if(lang == "EN")
+                                {
+                                     <h3>@mainContact?.Title_EN</h3>
+                                }else
+                                {
+                                    <h3>@mainContact?.Title_TH</h3>
+                                }
+                               
                             </div>
                         </div>
                         <div class="row">
@@ -31,41 +39,52 @@
                                 <ul class="contact-info mb-0">
                                     <li class="address">
                                         <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                        <p>
-                                            <strong>Lighting and Equipment Public Company Limited</strong>
-                                            539/2 ,16-17 Floor, Gypsum Metropolitan Tower.Sri-Ayudhya Rd., Rajthevee, Bangkok 10400, Thailand.
-                                        </p>
+                                        @if(lang == "EN")
+                                        {
+                                            <p>
+                                                <strong> @mainContact?.TitleName_EN</strong>
+                                                @mainContact?.Location_EN
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <p>
+                                                <strong> @mainContact?.TitleName_TH</strong>
+                                                @mainContact?.Location_TH
+                                            </p>
+                                        }
+
                                     </li>
                                     <li>
                                         <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                        <p>(+66)2248-8133, (+66)2642-5092</p>
+                                        <p>@mainContact?.PhoneNumber</p>
                                     </li>
                                     <li>
                                         <div class="icon-contact"><i class="fas fa-fax"></i></div>
-                                        <p>(+66)2248-8144, (+66)2642-5091</p>
+                                        <p>@mainContact?.OfficePhone</p>
                                     </li>
                                     <li>
                                         <div class="icon-contact"><i class="fas fa-envelope"></i></div>
                                         <ul>
                                             <li>
                                                 <p>
-                                                    <strong>Corporate Communication :</strong>
-                                                    <a href="mailto:cco01@lighting.co.th">cco01@lighting.co.th</a>
+                                                    <strong>@mainContact?.TitleEMail1 :</strong>
+                                                    <a href="@mainContact?.EMail1">@mainContact?.EMail1</a>
                                                 </p>
                                             </li>
                                             <li>
                                                 <p>
-                                                    <strong>Oversea Business :</strong>
-                                                    <a href="mailto:eklukb@lighting.co.th">eklukb@lighting.co.th</a>
+                                                    <strong>@mainContact?.TitleEMail2 :</strong>
+                                                    <a href="@mainContact?.EMail2">@mainContact?.EMail2</a>
                                                 </p>
                                             </li>
                                         </ul>
                                     </li>
                                     <li class="contactBT">
-                                        <a class="buttonB" href="https://goo.gl/maps/YC8Gav9d6HQ7jGvWA" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                        <a class="buttonB" href="@mainContact?.GoogleMapLink" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
                                     </li>
                                     <li class="contactBT">
-                                        <a class="buttonBD" href="" target="_blank">More Information</a>
+                                        <a class="buttonBD" href="@mainContact?.MoreInfo" target="_blank">More Information</a>
                                     </li>
                                 </ul>
                             </div>
@@ -73,8 +92,8 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-5 col-12">
-                    <a class="img-width hover-img" data-fancybox="" href="/Frontend_assets/images/contact/map-headoffice.jpg">
-                        <img src="/Frontend_assets/images/contact/map-headoffice.jpg">
+                    <a class="img-width hover-img" data-fancybox="" href="~/@mainContact?.Img_File">
+                        <img src="~/@mainContact?.Img_File">
                     </a>
                 </div>
             </div>
@@ -122,7 +141,7 @@
                                     <div class="col-lg-6 col-md-6 col-12 mt-3">
                                         <div class="row">
                                             <div class="col">
-                                                <h5>@contact.PlaceName_EN</h5>
+                                                <h5 style="word-wrap:break-word;">@contact.PlaceName_EN </h5>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -130,7 +149,7 @@
                                                 <ul class="contact-info">
                                                     <li class="address">
                                                         <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                        <p>@contact.Location_EN</p>
+                                                        <p style="word-wrap:break-word;">@contact.Location_EN </p>
                                                     </li>
 
                                                     @if (contact.CellPhone != null)
@@ -159,7 +178,7 @@
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                            <p><a href="mailto:@contact.Email">@contact.Email</a></p>
+                                                            <p><a style="word-wrap:break-word;" href="@contact.Email">@contact.Email</a></p>
                                                         </li>
                                                     }
                                                     @if (contact.GoogleMaps_Url != null)
@@ -207,7 +226,7 @@
                                     <div class="col-lg-6 col-md-6 col-12 mt-3">
                                         <div class="row">
                                             <div class="col">
-                                                <h5>@contact.PlaceName_TH</h5>
+                                                <h5 style="word-wrap:break-word;">@contact.PlaceName_TH</h5>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -215,7 +234,7 @@
                                                 <ul class="contact-info">
                                                     <li class="address">
                                                         <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                        <p>@contact.Location_TH</p>
+                                                        <p style="word-wrap:break-word;">@contact.Location_TH</p>
                                                     </li>
 
                                                     @if (contact.CellPhone != null)
@@ -244,7 +263,7 @@
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                            <p><a href="mailto:@contact.Email">@contact.Email</a></p>
+                                                            <p><a style="word-wrap:break-word;" href="@contact.Email">@contact.Email</a></p>
                                                         </li>
                                                     }
                                                     @if (contact.GoogleMaps_Url != null)
@@ -297,7 +316,7 @@
                                     <div class="col-lg-6 col-md-6 col-12 mt-3">
                                         <div class="row">
                                             <div class="col">
-                                                <h5>@contact.PlaceName_EN</h5>
+                                                <h5 style="word-wrap:break-word;">@contact.PlaceName_EN</h5>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -305,7 +324,7 @@
                                                 <ul class="contact-info">
                                                     <li class="address">
                                                         <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                        <p>@contact.Location_EN</p>
+                                                        <p style="word-wrap:break-word;">@contact.Location_EN</p>
                                                     </li>
 
                                                     @if (contact.CellPhone != null)
@@ -334,7 +353,7 @@
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                            <p><a href="mailto:@contact.Email">@contact.Email</a></p>
+                                                            <p><a style="word-wrap:break-word;" href="@contact.Email">@contact.Email</a></p>
                                                         </li>
                                                     }
                                                     @if (contact.GoogleMaps_Url != null)
@@ -382,7 +401,7 @@
                                     <div class="col-lg-6 col-md-6 col-12 mt-3">
                                         <div class="row">
                                             <div class="col">
-                                                <h5>@contact.PlaceName_TH</h5>
+                                                <h5 style="word-wrap:break-word;">@contact.PlaceName_TH</h5>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -390,14 +409,14 @@
                                                 <ul class="contact-info">
                                                     <li class="address">
                                                         <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                        <p>@contact.Location_TH</p>
+                                                        <p style="word-wrap:break-word;">@contact.Location_TH</p>
                                                     </li>
 
                                                     @if (contact.CellPhone != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                            <p>@contact.CellPhone</p>
+                                                            <p style="word-wrap:break-word;">@contact.CellPhone</p>
                                                         </li>
                                                     }
                                                     @if (contact.TelePhone != null)
@@ -419,7 +438,7 @@
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                            <p><a href="mailto:@contact.Email">@contact.Email</a></p>
+                                                            <p><a style="word-wrap:break-word;" href="@contact.Email">@contact.Email</a></p>
                                                         </li>
                                                     }
                                                     @if (contact.GoogleMaps_Url != null)
@@ -472,7 +491,7 @@
                                     <div class="col-lg-6 col-md-6 col-12 mt-3">
                                         <div class="row">
                                             <div class="col">
-                                                <h5>@contact.PlaceName_EN</h5>
+                                                <h5 style="word-wrap:break-word;">@contact.PlaceName_EN</h5>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -480,7 +499,7 @@
                                                 <ul class="contact-info">
                                                     <li class="address">
                                                         <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                        <p>@contact.Location_EN</p>
+                                                        <p style="word-wrap:break-word;">@contact.Location_EN</p>
                                                     </li>
 
                                                     @if (contact.CellPhone != null)
@@ -509,7 +528,7 @@
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                            <p><a href="mailto:@contact.Email">@contact.Email</a></p>
+                                                            <p><a style="word-wrap:break-word;" href="@contact.Email">@contact.Email</a></p>
                                                         </li>
                                                     }
                                                     @if (contact.GoogleMaps_Url != null)
@@ -557,7 +576,7 @@
                                     <div class="col-lg-6 col-md-6 col-12 mt-3">
                                         <div class="row">
                                             <div class="col">
-                                                <h5>@contact.PlaceName_TH</h5>
+                                                <h5 style="word-wrap:break-word;">@contact.PlaceName_TH</h5>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -565,7 +584,7 @@
                                                 <ul class="contact-info">
                                                     <li class="address">
                                                         <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                        <p>@contact.Location_TH</p>
+                                                        <p style="word-wrap:break-word;">@contact.Location_TH</p>
                                                     </li>
 
                                                     @if (contact.CellPhone != null)
@@ -594,7 +613,7 @@
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                            <p><a href="mailto:@contact.Email">@contact.Email</a></p>
+                                                            <p><a style="word-wrap:break-word;" href="@contact.Email">@contact.Email</a></p>
                                                         </li>
                                                     }
                                                     @if (contact.GoogleMaps_Url != null)

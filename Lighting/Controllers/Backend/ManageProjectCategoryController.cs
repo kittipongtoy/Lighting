@@ -1,10 +1,12 @@
 ﻿using Lighting.Areas.Identity.Data;
 using Lighting.Models.InputFilterModels.ProjectRef;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lighting.Controllers.Backend
 {
+    [Authorize]
     public class ManageProjectCategoryController : Controller
     {
         private readonly LightingContext _db;

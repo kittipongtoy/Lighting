@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace Lighting.Controllers.Backend
 {
+    [Authorize]
     public class ProjectRefController : Controller
     {
         private readonly LightingContext _db;
@@ -36,10 +37,10 @@ namespace Lighting.Controllers.Backend
                         await input.Profile_Image.CopyToAsync(stream);
                     }
 
-                    using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, input.File_Download.FileName), FileMode.Create))
-                    {
-                        await input.File_Download.CopyToAsync(stream);
-                    }
+                    //using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, input.File_Download.FileName), FileMode.Create))
+                    //{
+                    //    await input.File_Download.CopyToAsync(stream);
+                    //}
 
                     foreach (var file in input.Image_List)
                     {
@@ -64,7 +65,7 @@ namespace Lighting.Controllers.Backend
                         Photo_Credit = input.Photo_Credit,
                         //CategoryId = input.CategoryId,
                         ProjectRef_Category = category,
-                        File_Download = input.File_Download.FileName,
+                        //File_Download = input.File_Download.FileName,
                         Profile_Image = profile_img_name,
                     };
 
@@ -202,19 +203,19 @@ namespace Lighting.Controllers.Backend
                         project.Profile_Image = new_file_name;
                     }
 
-                    if (input.File_Download != null)
-                    {
-                        var old_file = Path.Combine(_env.WebRootPath, path, project.File_Download);
-                        if (System.IO.File.Exists(old_file))
-                        {
-                            System.IO.File.Delete(old_file);
-                        }
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, input.File_Download.FileName), FileMode.CreateNew))
-                        {
-                            await input.File_Download.CopyToAsync(stream);
-                        }
-                        project.File_Download = input.File_Download.FileName;
-                    }
+                    //if (input.File_Download != null)
+                    //{
+                    //    var old_file = Path.Combine(_env.WebRootPath, path, project.File_Download);
+                    //    if (System.IO.File.Exists(old_file))
+                    //    {
+                    //        System.IO.File.Delete(old_file);
+                    //    }
+                    //    using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, input.File_Download.FileName), FileMode.CreateNew))
+                    //    {
+                    //        await input.File_Download.CopyToAsync(stream);
+                    //    }
+                    //    project.File_Download = input.File_Download.FileName;
+                    //}
 
                     if (input.Image_List != null)
                     {
@@ -279,8 +280,8 @@ namespace Lighting.Controllers.Backend
                                     Content_EN = proj.Content_EN,
                                     Content_TH = proj.Content_TH,
                                     Design_Solution = proj.Design_Solution,
-                                    File_Download = Path.Combine(proj.Folder_Path, proj.File_Download),
-                                    Image_List = GetFileName(new List<string> { proj.File_Download, proj.Profile_Image }, proj.Folder_Path),
+                                    //File_Download = Path.Combine(proj.Folder_Path, proj.File_Download),
+                                    Image_List = GetFileName(new List<string> {/* proj.File_Download,*/ proj.Profile_Image }, proj.Folder_Path),
                                     Location_EN = proj.Location_EN,
                                     Location_TH = proj.Location_TH,
                                     Photo_Credit = proj.Photo_Credit,

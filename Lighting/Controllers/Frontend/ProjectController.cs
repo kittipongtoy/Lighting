@@ -25,7 +25,7 @@ namespace Lighting.Controllers.Frontend
                 .Select(project => new 
                 {
                     Id = project.Id,
-                    Image_Path = project.Image_Path,
+                    Image = project.Image_Path,
                     Name = project.Name_EN,
                 })
                 .ToListAsync();
@@ -39,7 +39,7 @@ namespace Lighting.Controllers.Frontend
                 .Select(project => new
                 {
                     Id = project.Id,
-                    Image_Path = project.Image_Path,
+                    Image = project.Image_Path,
                     Name = project.Name_TH,
                 })
                 .ToListAsync();
@@ -163,8 +163,8 @@ namespace Lighting.Controllers.Frontend
                                     Content_EN = proj.Content_EN,
                                     Content_TH = proj.Content_TH,
                                     Design_Solution = proj.Design_Solution,
-                                    File_Download = Path.Combine(proj.Folder_Path, proj.File_Download),
-                                    Image_List = GetFileName(new List<string> { proj.File_Download, proj.Profile_Image }, proj.Folder_Path),
+                                    //File_Download = Path.Combine(proj.Folder_Path, proj.File_Download),
+                                    Image_List = GetFileName(new List<string> {/* proj.File_Download,*/ proj.Profile_Image }, proj.Folder_Path),
                                     Location_EN = proj.Location_EN,
                                     Location_TH = proj.Location_TH,
                                     Photo_Credit = proj.Photo_Credit,

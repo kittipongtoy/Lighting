@@ -2,6 +2,13 @@
     ViewData["Title"] = "IR_index";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var Count_IR_Banner = (List<Lighting.Areas.Identity.Data.IR_Banner>)ViewBag.IR_Banner;
+    var Count_IR_Button_Below_Banner = (List<Lighting.Areas.Identity.Data.IR_Button_Below_Banner>)ViewBag.IR_Button_Below_Banner;
+    var Count_IR_Lighting_Equipment = (List<Lighting.Areas.Identity.Data.IR_LIGHTING_EQUIPMENT>)ViewBag.IR_Lighting_Equipment;
+    var Count_IR_Summary_Financial_Highlights = (List<Lighting.Areas.Identity.Data.IR_Summary_Financial_Highlights>)ViewBag.IR_Summary_Financial_Highlights;
+    var Count_IR_Summary_Financial_HighlightsDetail = (List<Lighting.Areas.Identity.Data.IR_Summary_Financial_HighlightsDetail>)ViewBag.IR_Summary_Financial_HighlightsDetail;
+    var Count_IR_Report = (List<Lighting.Areas.Identity.Data.IR_Report>)ViewBag.IR_Report;
+    var Count_IR_Highlight = (List<Lighting.Areas.Identity.Data.IR_Hightlight>)ViewBag.IR_Highlight;
+    var Count_IR_HighlightDetail = (List<Lighting.Areas.Identity.Data.IR_HightlightDetail>)ViewBag.IR_HighlightDetail;
     var Count_IR_Latest_NewDetail = (List<Lighting.Areas.Identity.Data.IR_Latest_NewDetail>)ViewBag.IR_Latest_NewDetail;
     var Count_IR_NewDetail = (List<Lighting.Areas.Identity.Data.IR_NewDetail>)ViewBag.IR_NewDetail;
 }
@@ -31,44 +38,74 @@
             </div>
         </div>
     </div>
-
     <!---------- IR INDEX :: DOWNLOAD ---------->
     <div class="wrap-pad">
         <div class="row justify-content-center">
             <div class="col-xl-10 col-lg-11 col-md-11 col-10">
                 <ul class="mainbanner-download">
-                    <li>
-                        <a href="@Url.Action("IR_financial_highlight","Frontend_IR")">
-                            <div class="img-width"><img src="~/Frontend_assets/images/ir/icon-important-financial.svg"></div>
-                            <div class="download-topic">
-                                <p>ข้อมูลสำคัญทางการเงิน</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("IR_presentation_doc","Frontend_IR")">
-                            <div class="img-width"><img src="~/Frontend_assets/images/ir/icon-presentation-doc.svg"></div>
-                            <div class="download-topic">
-                                <p>เอกสารนำเสนอ</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("IR_annual_report","Frontend_IR")">
-                            <div class="img-width"><img src="~/Frontend_assets/images/ir/icon-annual-report.svg"></div>
-                            <div class="download-topic">
-                                <p>รายงานประจำปี</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("IR_propose_agenda","Frontend_IR")">
-                            <div class="img-width"><img src="~/Frontend_assets/images/ir/icon-proposing-agenda.svg"></div>
-                            <div class="download-topic">
-                                <p>เสนอวาระ/กรรมการ/<br>คำถามล่วงหน้า</p>
-                            </div>
-                        </a>
-                    </li>
+                    @if (Count_IR_Button_Below_Banner.Count() != 0)
+                    {
+                        foreach (var item in Count_IR_Button_Below_Banner)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                <li>
+                                    <a href="@Url.Action("IR_financial_highlight","Frontend_IR")">
+                                        <div class="img-width"><img src="/upload_image/IR_Index/@item.Icon"></div>
+                                        <div class="download-topic">
+                                            <p>@item.Title_EN</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="@Url.Action("IR_financial_highlight","Frontend_IR")">
+                                        <div class="img-width"><img src="/upload_image/IR_Index/@item.Icon"></div>
+                                        <div class="download-topic">
+                                            <p>@item.Title_TH</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="@Url.Action("IR_financial_highlight","Frontend_IR")">
+                                <div class="img-width"><img src="~/Frontend_assets/images/ir/icon-important-financial.svg"></div>
+                                <div class="download-topic">
+                                    <p>ข้อมูลสำคัญทางการเงิน</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("IR_presentation_doc","Frontend_IR")">
+                                <div class="img-width"><img src="~/Frontend_assets/images/ir/icon-presentation-doc.svg"></div>
+                                <div class="download-topic">
+                                    <p>เอกสารนำเสนอ</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("IR_annual_report","Frontend_IR")">
+                                <div class="img-width"><img src="~/Frontend_assets/images/ir/icon-annual-report.svg"></div>
+                                <div class="download-topic">
+                                    <p>รายงานประจำปี</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("IR_propose_agenda","Frontend_IR")">
+                                <div class="img-width"><img src="~/Frontend_assets/images/ir/icon-proposing-agenda.svg"></div>
+                                <div class="download-topic">
+                                    <p>เสนอวาระ/กรรมการ/<br>คำถามล่วงหน้า</p>
+                                </div>
+                            </a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -77,31 +114,96 @@
     <!---------- IR INDEX :: IR COMPANY PROFILE ---------->
     <div class="IR-index-info">
         <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-10 col-12">
-                <div class="img-width"><img src="~/Frontend_assets/images/ir/office.jpg"></div>
-            </div>
-            <div class="col-lg-6 col-md-9 col-12">
-                <div class="BGrayBox">
-                    <div class="row">
-                        <div class="col">
-                            <h3>LIGHTING & EQUIPMENT <br>PUBLIC COMPANY LIMITED</h3>
+            @if (Count_IR_Lighting_Equipment.Count() != 0)
+            {
+                foreach (var item in Count_IR_Lighting_Equipment)
+                {
+                    if (Context.Request.Cookies["lang"] == "EN")
+                    {
+                        <div class="col-lg-6 col-md-10 col-12">
+                            <div class="img-width"><img src="~/Frontend_assets/images/ir/office.jpg"></div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="txt-content f-17 WH-txt">
-                                <p>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน) หรือ L&E (Lighting & Equipment Public Company Limited) ผู้ผลิต ผู้นำเข้าและผู้จัดจำหน่ายผลิตภัณฑ์ไฟฟ้าแสงสว่างต่างๆ ตลอดจนเป็นผู้ให้บริการด้านไฟฟาแสงสว่างอย่างครบวงจร</p>
-                                <p class="f-15">จดทะเบียนเป็นบริษัทมหาชน : วันที่ 8 เมษายน 2547</p>
+                        <div class="col-lg-6 col-md-9 col-12">
+                            <div class="BGrayBox">
+                                <div class="row">
+                                    <div class="col">
+                                        <h3>@item.Title_EN</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="txt-content f-17 WH-txt">
+                                            <p>@item.SubTitle_EN</p>
+                                            <p class="f-15">@item.RegisterEN</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <a class="buttonBD" href="">More<i class="fa fa-long-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-lg-6 col-md-10 col-12">
+                            <div class="img-width"><img src="~/Frontend_assets/images/ir/office.jpg"></div>
+                        </div>
+                        <div class="col-lg-6 col-md-9 col-12">
+                            <div class="BGrayBox">
+                                <div class="row">
+                                    <div class="col">
+                                        <h3>@item.Title_TH</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="txt-content f-17 WH-txt">
+                                            <p>@item.SubTitle_TH</p>
+                                            <p class="f-15">@item.RegisterTH</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <a class="buttonBD" href="">อ่านต่อ<i class="fa fa-long-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+            else
+            {
+                <div class="col-lg-6 col-md-10 col-12">
+                    <div class="img-width"><img src="~/Frontend_assets/images/ir/office.jpg"></div>
+                </div>
+                <div class="col-lg-6 col-md-9 col-12">
+                    <div class="BGrayBox">
+                        <div class="row">
+                            <div class="col">
+                                <h3>LIGHTING & EQUIPMENT <br>PUBLIC COMPANY LIMITED</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="txt-content f-17 WH-txt">
+                                    <p>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน) หรือ L&E (Lighting & Equipment Public Company Limited) ผู้ผลิต ผู้นำเข้าและผู้จัดจำหน่ายผลิตภัณฑ์ไฟฟ้าแสงสว่างต่างๆ ตลอดจนเป็นผู้ให้บริการด้านไฟฟาแสงสว่างอย่างครบวงจร</p>
+                                    <p class="f-15">จดทะเบียนเป็นบริษัทมหาชน : วันที่ 8 เมษายน 2547</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <a class="buttonBD" href="">อ่านต่อ<i class="fa fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <a class="buttonBD" href="">อ่านต่อ<i class="fa fa-long-arrow-right"></i></a>
-                        </div>
-                    </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 
@@ -195,107 +297,202 @@
 <div class="financial-section" style="background-image: url(/Frontend_assets/images/ir/financial-highlightBG.jpg);">
     <div class="container-fluid">
         <div class="wrap-pad">
-            <div class="row">
-                <div class="col">
-                    <h1>ข้อมูลสำคัญทางการเงิน</h1>
+            @if (Count_IR_Summary_Financial_Highlights.Count() != 0)
+            {
+                foreach (var item in Count_IR_Summary_Financial_Highlights)
+                {
+                    if (Context.Request.Cookies["lang"] == "EN")
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <h1>@item.Title_EN</h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h5>@item.Detail_EN</h5>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <h1>@item.Title_TH</h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h5>@item.Detail_TH</h5>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col">
+                        <h1>ข้อมูลสำคัญทางการเงิน</h1>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <h5>ข้อมูลสำคัญทางการเงิน ประจำปี 2565</h5>
+                <div class="row">
+                    <div class="col">
+                        <h5>ข้อมูลสำคัญทางการเงิน ประจำปี 2565</h5>
+                    </div>
                 </div>
-            </div>
+            }
+
             <div class="row justify-content-center">
                 <div class="col-xl-11 col-lg-12 col-12">
                     <ul class="financial-info">
-                        <li>
-                            <div class="icon-wCaption">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="iconGD-BoxBD">
-                                            <div class="iconGD-Box"><img src="~/Frontend_assets/images/ir/icon-total-income.svg"></div>
+                        @if (Count_IR_Summary_Financial_HighlightsDetail.Count() != 0)
+                        {
+                            foreach (var item in Count_IR_Summary_Financial_HighlightsDetail)
+                            {
+                                if (Context.Request.Cookies["lang"] == "EN")
+                                {
+                                    <li>
+                                        <div class="icon-wCaption">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="iconGD-BoxBD">
+                                                        <div class="iconGD-Box"><img src="/upload_image/IR_Index/@item.Icon"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="finance-num">@item.Total</div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h6>@item.Title_EN</h6>
+                                                    <p>@item.Detail_EN</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <div class="icon-wCaption">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="iconGD-BoxBD">
+                                                        <div class="iconGD-Box"><img src="/upload_image/IR_Index/@item.Icon"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="finance-num">@item.Total</div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h6>@item.Title_TH</h6>
+                                                    <p>@item.Detail_TH</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <div class="icon-wCaption">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="iconGD-BoxBD">
+                                                <div class="iconGD-Box"><img src="~/Frontend_assets/images/ir/icon-total-income.svg"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="finance-num">31.42</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6>กำไรสำหรับปี</h6>
+                                            <p>(ล้านบาท)</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="finance-num">31.42</div>
+                            </li>
+                            <li>
+                                <div class="icon-wCaption">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="iconGD-BoxBD">
+                                                <div class="iconGD-Box"><img src="~/Frontend_assets/images/ir/icon-par-value.svg"></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <h6>กำไรสำหรับปี</h6>
-                                        <p>(ล้านบาท)</p>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="finance-num">1.00</div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon-wCaption">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="iconGD-BoxBD">
-                                            <div class="iconGD-Box"><img src="~/Frontend_assets/images/ir/icon-par-value.svg"></div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6>มูลค่าที่ตราไว้</h6>
+                                            <p>(บาท)</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="finance-num">1.00</div>
+                            </li>
+                            <li>
+                                <div class="icon-wCaption">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="iconGD-BoxBD">
+                                                <div class="iconGD-Box"><img src="~/Frontend_assets/images/ir/icon-assets.svg"></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <h6>มูลค่าที่ตราไว้</h6>
-                                        <p>(บาท)</p>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="finance-num">3,383.11</div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon-wCaption">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="iconGD-BoxBD">
-                                            <div class="iconGD-Box"><img src="~/Frontend_assets/images/ir/icon-assets.svg"></div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6>สินทรัพย์รวม</h6>
+                                            <p>(ล้านบาท)</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="finance-num">3,383.11</div>
+                            </li>
+                            <li>
+                                <div class="icon-wCaption">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="iconGD-BoxBD">
+                                                <div class="iconGD-Box"><img src="~/Frontend_assets/images/ir/icon-equity.svg"></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <h6>สินทรัพย์รวม</h6>
-                                        <p>(ล้านบาท)</p>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="finance-num">1,160.21</div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon-wCaption">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="iconGD-BoxBD">
-                                            <div class="iconGD-Box"><img src="~/Frontend_assets/images/ir/icon-equity.svg"></div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6>ส่วนของผู้ถือหุ้น</h6>
+                                            <p>(ล้านบาท)</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="finance-num">1,160.21</div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <h6>ส่วนของผู้ถือหุ้น</h6>
-                                        <p>(ล้านบาท)</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -426,121 +623,410 @@
     <div class="container-fluid">
         <div class="wrap-pad more-w">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-12">
-                    <a class="img-zoom" href="@Url.Action("IR_annual_report","Frontend_IR")">
-                        <div class="img-width"><img src="~/Frontend_assets/images/ir/index-annual-report.jpg"></div>
-                        <div class="img-zoom-info">
-                            <div class="row">
-                                <div class="col">
-                                    <h2>รายงานประจำปี</h2>
+                @if (Count_IR_Report.Count() != 0)
+                {
+                    foreach (var item in Count_IR_Report)
+                    {
+                        if (Context.Request.Cookies["lang"] == "EN")
+                        {
+                            if (item.SetType == 1)
+                            {
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <a class="img-zoom" href="@Url.Action("IR_annual_report","Frontend_IR")">
+                                        <div class="img-width"><img src="/upload_image/IR_Index/@item.Background"></div>
+                                        <div class="img-zoom-info">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h2>@item.Title_EN</h2>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="txt-content f-17 WH-txt text-center">
+                                                        @item.SubTitle_EN
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="content-center">
+                                                        <div class="buttonBD">More<i class="fa fa-long-arrow-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="txt-content f-17 WH-txt text-center">
-                                        <p>รายงานประจำปีนี้เป็นการนำเสนอความสำเร็จของแผนปฏิบัติการของ <br>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</p>
+                            }
+                            else
+                            {
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <a class="img-zoom" href="@Url.Action("IR_mda","Frontend_IR")">
+                                        <div class="img-width"><img src="~/Frontend_assets/images/ir/index-description-analysis.jpg"></div>
+                                        <div class="img-zoom-info">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h2>@item.Title_EN</h2>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="txt-content f-17 WH-txt text-center">
+                                                        <p>@item.SubTitle_EN</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="content-center">
+                                                        <div class="buttonBD">More<i class="fa fa-long-arrow-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            if (item.SetType == 1)
+                            {
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <a class="img-zoom" href="@Url.Action("IR_annual_report","Frontend_IR")">
+                                        <div class="img-width"><img src="/upload_image/IR_Index/@item.Background"></div>
+                                        <div class="img-zoom-info">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h2>@item.Title_TH</h2>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="txt-content f-17 WH-txt text-center">
+                                                        @item.SubTitle_TH
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="content-center">
+                                                        <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <a class="img-zoom" href="@Url.Action("IR_mda","Frontend_IR")">
+                                        <div class="img-width"><img src="~/Frontend_assets/images/ir/index-description-analysis.jpg"></div>
+                                        <div class="img-zoom-info">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h2>@item.Title_TH</h2>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="txt-content f-17 WH-txt text-center">
+                                                        <p>@item.SubTitle_TH</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="content-center">
+                                                        <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <a class="img-zoom" href="@Url.Action("IR_annual_report","Frontend_IR")">
+                            <div class="img-width"><img src="~/Frontend_assets/images/ir/index-annual-report.jpg"></div>
+                            <div class="img-zoom-info">
+                                <div class="row">
+                                    <div class="col">
+                                        <h2>รายงานประจำปี</h2>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="txt-content f-17 WH-txt text-center">
+                                            <p>รายงานประจำปีนี้เป็นการนำเสนอความสำเร็จของแผนปฏิบัติการของ <br>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="content-center">
+                                            <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="content-center">
-                                        <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
+                        </a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <a class="img-zoom" href="@Url.Action("IR_mda","Frontend_IR")">
+                            <div class="img-width"><img src="~/Frontend_assets/images/ir/index-description-analysis.jpg"></div>
+                            <div class="img-zoom-info">
+                                <div class="row">
+                                    <div class="col">
+                                        <h2>คำอธิบายและการวิเคราะห์</h2>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="txt-content f-17 WH-txt text-center">
+                                            <p>แสดงข้อมูลคำอธิบายและการวิเคราะห์ ของ <br>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน) มีผลการดำเนินงานดังนี้</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="content-center">
+                                            <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-6 col-md-6 col-12">
-                    <a class="img-zoom" href="@Url.Action("IR_mda","Frontend_IR")">
-                        <div class="img-width"><img src="~/Frontend_assets/images/ir/index-description-analysis.jpg"></div>
-                        <div class="img-zoom-info">
-                            <div class="row">
-                                <div class="col">
-                                    <h2>คำอธิบายและการวิเคราะห์</h2>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="txt-content f-17 WH-txt text-center">
-                                        <p>แสดงข้อมูลคำอธิบายและการวิเคราะห์ ของ <br>บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน) มีผลการดำเนินงานดังนี้</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="content-center">
-                                        <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
+                }
             </div>
         </div>
 
         <div class="wrap-pad">
-            <div class="row">
-                <div class="col">
-                    <h1 class="bold">INVESTOR RELATIONS <span>HIGHLIGHT</span></h1>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-xl-8 col-lg-10 col-md-11">
-                    <div class="txt-content text-center f-17">
-                        <p>นักลงทุนสัมพันธ์ (IR) เป็นความรับผิดชอบในการบริหารเชิงกลยุทธ์ที่สามารถรวมการสื่อสารด้านการ เงิน, การสื่อสาร, การตลาดและการปฏิบัติตามกฎหมายหลักทรัพย์เพื่อให้เกิดการสื่อสารของสองฝ่าย มีประสิทธิภาพมากที่สุดระหว่างบริษัท, นักลงทุนและหน่วยงานอื่นๆ ซึ่งก่อให้เกิดความเป็นธรรมต่อหลักทรัพย์, นักลงทุนและหน่วยงานอื่นๆ</p>
+            @if (Count_IR_Highlight.Count() != 0)
+            {
+                foreach (var item in Count_IR_Highlight)
+                {
+                    if (Context.Request.Cookies["lang"] == "EN")
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <h1 class="bold">@item.Title_EN</h1>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-xl-8 col-lg-10 col-md-11">
+                                <div class="txt-content text-center f-17">
+                                    <p>@item.Detail_EN</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <h1 class="bold">@item.Title_TH</h1>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-xl-8 col-lg-10 col-md-11">
+                                <div class="txt-content text-center f-17">
+                                    <p>@item.Detail_TH</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col">
+                        <h1 class="bold">INVESTOR RELATIONS <span>HIGHLIGHT</span></h1>
                     </div>
                 </div>
-            </div>
+                <div class="row justify-content-center">
+                    <div class="col-xl-8 col-lg-10 col-md-11">
+                        <div class="txt-content text-center f-17">
+                            <p>นักลงทุนสัมพันธ์ (IR) เป็นความรับผิดชอบในการบริหารเชิงกลยุทธ์ที่สามารถรวมการสื่อสารด้านการ เงิน, การสื่อสาร, การตลาดและการปฏิบัติตามกฎหมายหลักทรัพย์เพื่อให้เกิดการสื่อสารของสองฝ่าย มีประสิทธิภาพมากที่สุดระหว่างบริษัท, นักลงทุนและหน่วยงานอื่นๆ ซึ่งก่อให้เกิดความเป็นธรรมต่อหลักทรัพย์, นักลงทุนและหน่วยงานอื่นๆ</p>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
 
         <div class="row">
             <div class="col">
                 <ul class="IR-highlight">
-                    <li>
-                        <a class="highlightBox" href="@Url.Action("IR_general_meeting","Frontend_IR")">
-                            <figure><span></span><img src="~/Frontend_assets/images/ir/highlight01.jpg" alt=""></figure>
-                            <div class="highlight-info">
-                                <h5 class="decor">SHAREHOLDER INFORMATION<i class="fas fa-arrow-circle-up"></i></h5>
-                                <div class="highlight-caption">
-                                    <div class="twolines">
-                                        <p>หลักเกณฑ์และรูปแบบที่จะต้องแจ้งให้ผู้ถือหุ้นทราบล่วงหน้า รวมถึงวาระการประชุม การประชุมจะจัดขึ้นในที่ประชุมผู้ถือหุ้น</p>
+                    @if (Count_IR_HighlightDetail.Count() != 0)
+                    {
+                        foreach (var item in Count_IR_HighlightDetail)
+                        {
+                            if (item.SetType == 1)
+                            {
+                                if (Context.Request.Cookies["lang"] == "EN")
+                                {
+                                    <li>
+                                        <a class="highlightBox" href="@Url.Action("IR_general_meeting","Frontend_IR")">
+                                            <figure><span></span><img src="~/upload_image/IR_Index/ @item.Background" alt=""></figure>
+                                            <div class="highlight-info">
+                                                <h5 class="decor">@item.Title_EN<i class="fas fa-arrow-circle-up"></i></h5>
+                                                <div class="highlight-caption">
+                                                    <div class="twolines">
+                                                        <p>@item.SubTitle_EN </p>
+                                                    </div>
+                                                    <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a class="highlightBox" href="@Url.Action("IR_general_meeting","Frontend_IR")">
+                                            <figure><span></span><img src="~/upload_image/IR_Index/ @item.Background" alt=""></figure>
+                                            <div class="highlight-info">
+                                                <h5 class="decor">@item.Title_TH<i class="fas fa-arrow-circle-up"></i></h5>
+                                                <div class="highlight-caption">
+                                                    <div class="twolines">
+                                                        <p>@item.SubTitle_TH </p>
+                                                    </div>
+                                                    <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                            else if (item.SetType == 2)
+                            {
+                                if (Context.Request.Cookies["lang"] == "EN")
+                                {
+                                    <li>
+                                        <a class="highlightBox" href="@Url.Action("IR_corporate_governance","Frontend_IR")">
+                                            <figure><span></span><img src="~/upload_image/IR_Index/ @item.Background" alt=""></figure>
+                                            <div class="highlight-info">
+                                                <h5 class="decor">@item.Title_EN<i class="fas fa-arrow-circle-up"></i></h5>
+                                                <div class="highlight-caption">
+                                                    <div class="twolines">
+                                                        <p>@item.SubTitle_EN</p>
+                                                    </div>
+                                                    <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a class="highlightBox" href="@Url.Action("IR_corporate_governance","Frontend_IR")">
+                                            <figure><span></span><img src="~/upload_image/IR_Index/ @item.Background" alt=""></figure>
+                                            <div class="highlight-info">
+                                                <h5 class="decor">@item.Title_TH<i class="fas fa-arrow-circle-up"></i></h5>
+                                                <div class="highlight-caption">
+                                                    <div class="twolines">
+                                                        <p>@item.SubTitle_TH </p>
+                                                    </div>
+                                                    <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                if (Context.Request.Cookies["lang"] == "EN")
+                                {
+                                    <li>
+                                        <a class="highlightBox" href="@Url.Action("IR_csr_policy","Frontend_IR")">
+                                            <div class="highlight-info">
+                                                <h5 class="decor">@item.Title_EN<i class="fas fa-arrow-circle-up"></i></h5>
+                                                <div class="highlight-caption">
+                                                    <div class="twolines">
+                                                        <p>@item.SubTitle_EN</p>
+                                                    </div>
+                                                    <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a class="highlightBox" href="@Url.Action("IR_csr_policy","Frontend_IR")">
+                                            <figure><span></span><img src="~/upload_image/IR_Index/ @item.Background" alt=""></figure>
+                                            <div class="highlight-info">
+                                                <h5 class="decor">@item.Title_TH<i class="fas fa-arrow-circle-up"></i></h5>
+                                                <div class="highlight-caption">
+                                                    <div class="twolines">
+                                                        <p>@item.SubTitle_TH </p>
+                                                    </div>
+                                                    <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <li>
+                            <a class="highlightBox" href="@Url.Action("IR_general_meeting","Frontend_IR")">
+                                <figure><span></span><img src="~/Frontend_assets/images/ir/highlight01.jpg" alt=""></figure>
+                                <div class="highlight-info">
+                                    <h5 class="decor">SHAREHOLDER INFORMATION<i class="fas fa-arrow-circle-up"></i></h5>
+                                    <div class="highlight-caption">
+                                        <div class="twolines">
+                                            <p>หลักเกณฑ์และรูปแบบที่จะต้องแจ้งให้ผู้ถือหุ้นทราบล่วงหน้า รวมถึงวาระการประชุม การประชุมจะจัดขึ้นในที่ประชุมผู้ถือหุ้น</p>
+                                        </div>
+                                        <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
                                     </div>
-                                    <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="highlightBox" href="@Url.Action("IR_corporate_governance","Frontend_IR")">
-                            <figure><span></span><img src="~/Frontend_assets/images/ir/highlight02.jpg" alt=""></figure>
-                            <div class="highlight-info">
-                                <h5 class="decor">CORPORATE GOVERNANCE<i class="fas fa-arrow-circle-up"></i></h5>
-                                <div class="highlight-caption">
-                                    <div class="twolines">
-                                        <p>คณะกรรมการบริษัทมีความเชื่อมั่นว่า การมีระบบกำกับดูแลกิจการที่ดี เป็นส่วนสำคัญที่จะช่วยให้บริษัทประสบความสำเร็จ ในการดำเนินธุรกิจ และจะช่วยให้บริษัทเติบโตได้อย่างมั่นคง และยั่งยืน</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="highlightBox" href="@Url.Action("IR_corporate_governance","Frontend_IR")">
+                                <figure><span></span><img src="~/Frontend_assets/images/ir/highlight02.jpg" alt=""></figure>
+                                <div class="highlight-info">
+                                    <h5 class="decor">CORPORATE GOVERNANCE<i class="fas fa-arrow-circle-up"></i></h5>
+                                    <div class="highlight-caption">
+                                        <div class="twolines">
+                                            <p>คณะกรรมการบริษัทมีความเชื่อมั่นว่า การมีระบบกำกับดูแลกิจการที่ดี เป็นส่วนสำคัญที่จะช่วยให้บริษัทประสบความสำเร็จ ในการดำเนินธุรกิจ และจะช่วยให้บริษัทเติบโตได้อย่างมั่นคง และยั่งยืน</p>
+                                        </div>
+                                        <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
                                     </div>
-                                    <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="highlightBox" href="@Url.Action("IR_csr_policy","Frontend_IR")">
-                            <figure><span></span><img src="~/Frontend_assets/images/ir/highlight03.jpg" alt=""></figure>
-                            <div class="highlight-info">
-                                <h5 class="decor">CORPORATE SOCIAL RESPONSIBILITY<i class="fas fa-arrow-circle-up"></i></h5>
-                                <div class="highlight-caption">
-                                    <div class="twolines">
-                                        <p>บริษัทใส่ใจในชุมชนและสังคมรอบข้าง อีกทั้งตระหนักในการร่วมดูแลรักษาสิ่งแวดล้อม เพราะเราเชื่อว่าการดำเนินธุรกิจภายใต้สังคมและสิ่งแวดล้อมที่เอื้อต่อการดำเนินงานจะส่งเสริมให้บริษัทสามารถเติบโตได้อย่างมีเสถียรภาพ และยั่งยืน</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="highlightBox" href="@Url.Action("IR_csr_policy","Frontend_IR")">
+                                <figure><span></span><img src="~/Frontend_assets/images/ir/highlight03.jpg" alt=""></figure>
+                                <div class="highlight-info">
+                                    <h5 class="decor">CORPORATE SOCIAL RESPONSIBILITY<i class="fas fa-arrow-circle-up"></i></h5>
+                                    <div class="highlight-caption">
+                                        <div class="twolines">
+                                            <p>บริษัทใส่ใจในชุมชนและสังคมรอบข้าง อีกทั้งตระหนักในการร่วมดูแลรักษาสิ่งแวดล้อม เพราะเราเชื่อว่าการดำเนินธุรกิจภายใต้สังคมและสิ่งแวดล้อมที่เอื้อต่อการดำเนินงานจะส่งเสริมให้บริษัทสามารถเติบโตได้อย่างมีเสถียรภาพ และยั่งยืน</p>
+                                        </div>
+                                        <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
                                     </div>
-                                    <div class="buttonBD">อ่านต่อ<i class="fa fa-long-arrow-right"></i></div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
+                            </a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

@@ -1,7 +1,6 @@
 ﻿@{
     ViewData["Title"] = "News";
-    //Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
-    Layout = "~/Views/Shared/Layout/Frontend_index_layout.cshtml";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var lang = Context.Request.Cookies["lang"];
 }
 @model IEnumerable< Lighting.Models.InputFilterModels.News.Output_NewsVm>
@@ -19,8 +18,8 @@
                                 <a class="news-publicBox" href="/New/NewDetail?id=@news.Id">
                                     <div class="row">
                                         <div class="col">
-                                            <div class="img-width">
-                                                <img src="~/@news.TitleImage" />
+                                            <div class="img-width" style="height:35vh;">
+                                                <img src="~/@news.TitleImage" style="width:100%;height:100%;" />
                                             </div>
                                         </div>
                                     </div>
@@ -50,8 +49,8 @@
                                 <a class="news-publicBox" href="/New/NewDetail?id=@news.Id">
                                     <div class="row">
                                         <div class="col">
-                                            <div class="img-width">
-                                                <img src="~/@news.TitleImage" />
+                                            <div class="img-width" style="height:35vh;">
+                                                <img src="~/@news.TitleImage" style="width:100%;height:100%;"  />
                                             </div>
                                         </div>
                                     </div>

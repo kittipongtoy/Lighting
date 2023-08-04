@@ -9,7 +9,7 @@ using System.IO;
 
 namespace Lighting.Controllers.Backend
 {
-    //[Authorize]
+    [Authorize]
     public class NewsController : Controller
     {
         private readonly LightingContext _db;

@@ -44,6 +44,13 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> IR_index()
         {
             ViewBag.IR_Banner = await db.IR_Banner.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();
+            ViewBag.IR_Button_Below_Banner = await db.IR_Button_Below_Banner.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();
+            ViewBag.IR_Lighting_Equipment = await db.IR_LIGHTING_EQUIPMENT.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();
+            ViewBag.IR_Summary_Financial_Highlights = await db.IR_Summary_Financial_Highlight.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();
+            ViewBag.IR_Summary_Financial_HighlightsDetail = await db.IR_Summary_Financial_HighlightsDetail.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();
+            ViewBag.IR_Report = await db.IR_Report.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();
+            ViewBag.IR_Highlight = await db.IR_Hightlight.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();
+            ViewBag.IR_HighlightDetail = await db.IR_HightlightDetail.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();                
             ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).Take(5).ToListAsync();
             ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).Take(5).ToListAsync();
             return View();

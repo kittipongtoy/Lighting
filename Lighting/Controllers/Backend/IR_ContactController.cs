@@ -114,21 +114,23 @@ namespace Lighting.Controllers.Backend
             IR_Contact iR_Contact = new IR_Contact();
             try
             {
-                foreach (var formFile in model.uploaded_image)
+                if (model.uploaded_image != null)
                 {
-                    if (formFile.Length > 0)
+                    foreach (var formFile in model.uploaded_image)
                     {
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        iR_Contact.Image = datestr + extension;
-                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_Contact/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
+                        if (formFile.Length > 0)
                         {
-                            formFile.CopyTo(stream);
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            iR_Contact.Image = datestr + extension;
+                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_Contact/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
                         }
                     }
                 }
-
                 iR_Contact.Title_TH = model.Title_TH;
                 iR_Contact.Title_EN = model.Title_EN;
                 iR_Contact.SubTitle_TH = model.SubTitle_TH;
@@ -199,23 +201,26 @@ namespace Lighting.Controllers.Backend
                 var DB = await _context.IR_Contact.FirstOrDefaultAsync(x => x.Id == model.Id);
                 if (DB is not null)
                 {
-                    foreach (var formFile in model.uploaded_image)
+                    if (model.uploaded_image != null)
                     {
-                        if (formFile.Length > 0)
+                        foreach (var formFile in model.uploaded_image)
                         {
-                            var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_Contact/" + DB.Image);
-                            if (System.IO.File.Exists(old_filePath) == true)
+                            if (formFile.Length > 0)
                             {
-                                System.IO.File.Delete(old_filePath);
-                            }
+                                var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_Contact/" + DB.Image);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
 
-                            var datestr = DateTime.Now.Ticks.ToString();
-                            var extension = Path.GetExtension(formFile.FileName);
-                            DB.Image = datestr + extension;
-                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_Contact/" + datestr + extension);
-                            using (var stream = System.IO.File.Create(filePath))
-                            {
-                                formFile.CopyTo(stream);
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                DB.Image = datestr + extension;
+                                var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_Contact/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
                             }
                         }
                     }
