@@ -3392,17 +3392,17 @@ namespace Lighting.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NameThai", "NormalizedName", "created_at", "updated_at" },
-                values: new object[] { "e1bb3959-244f-4e70-b28e-e1d983206360", "ef9c1652-88bf-4c49-b7e4-eb1cd942a184", "Admin", "Admin", "Admin", new DateTime(2023, 8, 3, 10, 54, 36, 235, DateTimeKind.Utc).AddTicks(4169), new DateTime(2023, 8, 3, 10, 54, 36, 235, DateTimeKind.Utc).AddTicks(4173) });
+                values: new object[] { "ee86757c-4c23-4d5f-8afa-d7e411e51c5f", "4a151628-edc8-4cc5-b24b-95d3ba8f3d8b", "Admin", "Admin", "Admin", new DateTime(2023, 8, 3, 12, 54, 47, 241, DateTimeKind.Utc).AddTicks(3616), new DateTime(2023, 8, 3, 12, 54, 47, 241, DateTimeKind.Utc).AddTicks(3619) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ApplicationFile", "ConcurrencyStamp", "Email", "EmailConfirmed", "EmployeeCode", "EmployeeCodeInt", "Firstname", "GuarantorIdentificationCardFile", "Isactive", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePath", "ReceptionistFile", "SecurityStamp", "TwoFactorEnabled", "UserName", "created_at", "updated_at" },
-                values: new object[] { "3592cfc5-ecfe-4b4c-b007-bf99fa474699", 0, null, null, "bae63a95-96bc-4123-b142-80db6dfaa255", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEO/VYcdJd1ag0XdfPUVGwQ5lAqY250aURbs75Yf202jcSGKFiclDvO+bP4k480ucJw==", null, false, null, null, "72089b33-a9a8-4c93-931c-6d9a767e7e16", false, "Admin@Lighting.com", null, null });
+                values: new object[] { "5624ec29-64ef-434b-806d-ae5a5d6d1a68", 0, null, null, "86784613-1d07-4aa1-a3ce-0b34a768b5a5", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEGs3A+9VLLKGrrPPnYbZFnKOsvni8G5dbqnQ7peShMaPe0LficoqXIi1U4eHQLddUQ==", null, false, null, null, "3e26fc4f-5ff7-4347-b4f2-ec57f5f7d408", false, "Admin@Lighting.com", null, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "e1bb3959-244f-4e70-b28e-e1d983206360", "3592cfc5-ecfe-4b4c-b007-bf99fa474699" });
+                values: new object[] { "ee86757c-4c23-4d5f-8afa-d7e411e51c5f", "5624ec29-64ef-434b-806d-ae5a5d6d1a68" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
