@@ -32,7 +32,7 @@ namespace Lighting.Controllers.Frontend
             {
                 if (regex.Matches(search).Count > 0) //search watt
                 {
-                    var watts = await _db.Products.Where(product => product.Power.ToLower().StartsWith(search.ToLower())).ToListAsync();
+                    var watts = await _db.Products.AsNoTracking().Where(product => product.Power.ToLower().StartsWith(search.ToLower())).ToListAsync();
                     foreach (var w in watts)
                     {
                         searches.Add(new Search
@@ -43,7 +43,7 @@ namespace Lighting.Controllers.Frontend
                         });
                     }
                 }
-                var model = await _db.Products.Where(product => product.Model.ToLower().StartsWith(search.ToLower())).ToListAsync();
+                var model = await _db.Products.AsNoTracking().Where(product => product.Model.ToLower().Contains(search.ToLower())).ToListAsync();
                 foreach (var m in model)
                 {
                     searches.Add(new Search
@@ -53,7 +53,7 @@ namespace Lighting.Controllers.Frontend
                         ProductId = m.Id
                     });
                 }
-                var category = await _db.Product_Categorys.Where(cat => cat.Name_EN.ToLower().StartsWith(search) || cat.Name_TH.StartsWith(search)).ToListAsync();
+                var category = await _db.Product_Categorys.AsNoTracking().Where(cat => cat.Name_EN.ToLower().Contains(search) || cat.Name_TH.Contains(search)).ToListAsync();
                 if (category.Count > 0) //search category
                 {
                     foreach (var cat in category)
@@ -65,7 +65,7 @@ namespace Lighting.Controllers.Frontend
                     }
                 }
 
-                var model_or_subcategory = await _db.Product_Models.Where(cat => cat.Name_EN.ToLower().StartsWith(search) || cat.Name_TH.StartsWith(search)).ToListAsync();
+                var model_or_subcategory = await _db.Product_Models.AsNoTracking().Where(cat => cat.Name_EN.ToLower().Contains(search) || cat.Name_TH.ToLower().Contains(search)).ToListAsync();
                 if (model_or_subcategory.Count > 0) //search category
                 {
                     foreach (var model_or_subcat in model_or_subcategory)
