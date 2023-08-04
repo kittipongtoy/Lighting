@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="~/Frontend_assets/fancybox/fancybox.css">
     <script src="~/Frontend_assets/fancybox/fancybox.umd.js"></script>
     <script src="~/Frontend_assets/OwlCarousel/owl.carousel.min.js"></script>
-
     <script>
         $(function () {
             var getPage = $("#page_name").val();
@@ -43,43 +42,6 @@
                 $('.side-menu').fadeOut();
             }
         });
-
-        function setLang(lang) {
-            if (lang == 'TH') {
-                $("#butt_th").addClass("active");
-                $("#butt_en").removeClass("active");
-            } else {
-                $("#butt_en").addClass("active");
-                $("#butt_th").removeClass("active");
-            }
-
-            $.ajax({
-                type: "POST",
-                cache: false,
-                url: "/Frontend_IR/change_lang",
-                data: {
-                    lang: lang
-                },    // multiple data sent using ajax
-                success: function (data) {
-                    if (data.status == "success") {
-                        window.location.reload();
-                    }
-                    else {
-                        Swal.fire({
-                            icon: 'warning',
-                            text: data.message,
-                        });
-                    }
-                }, error: function (e) {
-                    Swal.fire({
-                        icon: 'error',
-                        text: e.message,
-                    });
-                    console.log(e.message);
-                    console.log(e.inner);
-                }
-            });
-        }
 
         var menu_width;
         $(() => {
@@ -193,8 +155,8 @@
                         items: 1,
                         slideBy: 1,
                         dots: true,
-                                                                                                        / nav: true
-                                                                                                },
+                                                                    / nav: true
+                                                                },
                 640: {
                     items: 3,
                     slideBy: 1
@@ -204,8 +166,9 @@
                     slideBy: 1
                 }
             }
-                                                                                        })
-                                                                                    });
+                                                        })
+                                                    });
+
     </script>
 </head>
 <body>
@@ -312,37 +275,39 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <ul class="lang-menu">
-                                                    @{
-                                                        var get_cookies = Context.Request.Cookies["lang"];
-                                                        if (get_cookies == "EN")
-                                                        {
+                                                                                @{
+                                                                                    var get_cookies = Context.Request.Cookies["lang"];
+                                                                                    if (get_cookies == "EN")
+                                                                                    {
                                                                                             <li id="butt_th">
                                                                                                 <button onclick="setLang('TH')">TH</button>
                                                                                             </li>
                                                                                             <li id="butt_en" class="active">
                                                                                                 <button onclick="setLang('EN')">EN</button>
                                                                                             </li>
-                                                        }
-                                                        else
-                                                        {
+                                                                                        //<li id="butt_th">
+                                                                                        //    <button onclick="setLang('TH')">TH</button>
+                                                                                        //</li>
+                                                                                        //<li id="butt_en" class="active">
+                                                                                        //    <button onclick="setLang('EN')">EN</button>
+                                                                                        //</li>
+                                                                                    }
+                                                                                    else
+                                                                                    {
                                                                                             <li id="butt_th" class="active">
                                                                                                 <button onclick="setLang('TH')">TH</button>
                                                                                             </li>
                                                                                             <li id="butt_en" class="">
                                                                                                 <button onclick="setLang('EN')">EN</button>
                                                                                             </li>
-                                                        }
-                                                    }
-                                                    @* <li>
-                                                                                    <div class="menu-item">
-                                                                                    <a href="">TH</a>
-                                                                                    </div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                    <div class="menu-item">
-                                                                                    <a href="">EN</a>
-                                                                                    </div>
-                                                                                    </li>*@
+                                                                                        //<li id="butt_th" class="active">
+                                                                                        //    <button onclick="setLang('TH')">TH</button>
+                                                                                        //</li>
+                                                                                        //<li id="butt_en" class="">
+                                                                                        //    <button onclick="setLang('EN')">EN</button>
+                                                                                        //</li>
+                                                                                    }
+                                                                                }
                                                                                 </ul>
                                                                             </div>
 
@@ -700,7 +665,7 @@
                                                                     <div class="col">
                                                                         <ul class="dropdown-submenu w-half">
 
-                                                                            @* <li>
+                                                    @* <li>
                                                                             <a href="@Url.Action("Subsidiaries_Lighting_Innovation_Center","Resource_Facility")">
                                                                             <p>L&E Lighting Innovation Center</p>
                                                                             </a>
@@ -1323,7 +1288,7 @@
                         <div class="index-main-banner owl-carousel owl-theme">
                             <div class="items"><img src="~/Frontend_assets/images/web construc-01.jpg"></div>
                             <div class="items"><img src="~/Frontend_assets/images/index/banner01.jpg"></div>
-                            @*<div class="items"><img src="~/Frontend_assets/images/index/banner02.jpg"></div>*@
+                        @*<div class="items"><img src="~/Frontend_assets/images/index/banner02.jpg"></div>*@
                         </div>
                     </div>
                 </div>
@@ -1366,5 +1331,44 @@
 
     @Html.Partial("~/Views/Shared/Inc/IR_inc_footer.cshtml")
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+
+        function setLang(lang) {
+            if (lang == 'TH') {
+                $("#butt_th").addClass("active");
+                $("#butt_en").removeClass("active");
+            } else {
+                $("#butt_en").addClass("active");
+                $("#butt_th").removeClass("active");
+            }
+
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Frontend_IR/change_lang",
+                data: {
+                    lang: lang
+                },    // multiple data sent using ajax
+                success: function (data) {
+                    if (data.status == "success") {
+                        window.location.reload();
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+    </script>
 </body>
 </html>

@@ -2239,6 +2239,7 @@
                                 </span>
                                 <div class="menu-sub menu-sub-accordion">
 
+
                                     <div class="menu-item">
                                         @if (ViewData["Title"] == "Manage_Job_Page")
                                         {
@@ -2256,6 +2257,26 @@
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
                                                 <span class="menu-title">สมัครงาน</span>
+                                            </a>
+                                        }
+                                    </div>
+                                    <div class="menu-item">
+                                        @if (ViewData["Title"] == "Apply_Image_Content")
+                                        {
+                                            <a class="menu-link active" href="@Url.Action("ChangeContent","ApplyImgContent")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการรูปปก</span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="menu-link" href="@Url.Action("ChangeContent","ApplyImgContent")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการรูปปก</span>
                                             </a>
                                         }
                                     </div>
@@ -2287,6 +2308,26 @@
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
                                                 <span class="menu-title">ติดต่อเรา</span>
+                                            </a>
+                                        }
+                                    </div>
+                                    <div class="menu-item">
+                                        @if (ViewData["Title"] == "Main_Contact")
+                                        {
+                                            <a class="menu-link active" href="@Url.Action("Manage_Page","MainContact")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการปก</span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="menu-link" href="@Url.Action("Manage_Page","MainContact")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการปก</span>
                                             </a>
                                         }
                                     </div>
