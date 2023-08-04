@@ -4,7 +4,6 @@ using Lighting.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -12,10 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lighting.Migrations
 {
     [DbContext(typeof(LightingContext))]
-    [Migration("20230803125447_xx")]
-    partial class xx
+    partial class LightingContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2332,9 +2330,9 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5624ec29-64ef-434b-806d-ae5a5d6d1a68",
+                            Id = "abb87e46-5121-4ccf-9d8d-2173cb825084",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "86784613-1d07-4aa1-a3ce-0b34a768b5a5",
+                            ConcurrencyStamp = "ef8144a8-f7ae-4a71-9d80-48443f98e68b",
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -2344,9 +2342,9 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGs3A+9VLLKGrrPPnYbZFnKOsvni8G5dbqnQ7peShMaPe0LficoqXIi1U4eHQLddUQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB2U+7serpcA+lG03DSpsICWjLlT99UWNWb9guZYaYHDSa+reFG8rfswVCbSkc0PZg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3e26fc4f-5ff7-4347-b4f2-ec57f5f7d408",
+                            SecurityStamp = "679b99ef-1a2c-4192-9561-04611882f377",
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -4090,6 +4088,9 @@ namespace Lighting.Migrations
                     b.Property<string>("link")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("linkENG")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("titleENG")
                         .HasColumnType("nvarchar(max)");
 
@@ -4180,6 +4181,9 @@ namespace Lighting.Migrations
                     b.Property<string>("link")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("linkENG")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("titleENG")
                         .HasColumnType("nvarchar(max)");
 
@@ -4212,6 +4216,9 @@ namespace Lighting.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("linkENG")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("titleENG")
@@ -4274,6 +4281,9 @@ namespace Lighting.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("linkENG")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("titleENG")
@@ -4400,6 +4410,9 @@ namespace Lighting.Migrations
                     b.Property<string>("link")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("linkENG")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("titleENG")
                         .HasColumnType("nvarchar(max)");
 
@@ -4462,6 +4475,9 @@ namespace Lighting.Migrations
                     b.Property<string>("link")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("linkENG")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("titleENG")
                         .HasColumnType("nvarchar(max)");
 
@@ -4522,6 +4538,9 @@ namespace Lighting.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("linkENG")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("titleENG")
@@ -4604,13 +4623,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ee86757c-4c23-4d5f-8afa-d7e411e51c5f",
-                            ConcurrencyStamp = "4a151628-edc8-4cc5-b24b-95d3ba8f3d8b",
+                            Id = "e6fc4c70-05b8-4fc1-a22a-baecbac6806d",
+                            ConcurrencyStamp = "1038300d-21b8-42de-8d5d-98c88a371313",
                             Name = "Admin",
                             NameThai = "Admin",
                             NormalizedName = "Admin",
-                            created_at = new DateTime(2023, 8, 3, 12, 54, 47, 241, DateTimeKind.Utc).AddTicks(3616),
-                            updated_at = new DateTime(2023, 8, 3, 12, 54, 47, 241, DateTimeKind.Utc).AddTicks(3619)
+                            created_at = new DateTime(2023, 8, 4, 4, 49, 12, 537, DateTimeKind.Utc).AddTicks(567),
+                            updated_at = new DateTime(2023, 8, 4, 4, 49, 12, 537, DateTimeKind.Utc).AddTicks(571)
                         });
                 });
 
@@ -6376,8 +6395,8 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "5624ec29-64ef-434b-806d-ae5a5d6d1a68",
-                            RoleId = "ee86757c-4c23-4d5f-8afa-d7e411e51c5f"
+                            UserId = "abb87e46-5121-4ccf-9d8d-2173cb825084",
+                            RoleId = "e6fc4c70-05b8-4fc1-a22a-baecbac6806d"
                         });
                 });
 
