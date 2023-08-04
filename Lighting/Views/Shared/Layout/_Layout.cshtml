@@ -8,7 +8,7 @@
     var show_corporate_governance = "";
     var here_corporate_governance = "";
     if (
-       ViewData["Title"] == "Message_Chairman_index"
+    ViewData["Title"] == "Message_Chairman_index"
     || ViewData["Title"] == "Message_Chairman_create"
     || ViewData["Title"] == "Message_Chairman_edit"
     || ViewData["Title"] == "Philosophy_index"
@@ -68,8 +68,7 @@
     || ViewData["Title"] == "Author_executive_board_edit"
     || ViewData["Title"] == "Author_secretary_index"
     || ViewData["Title"] == "Author_secretary_create"
-    || ViewData["Title"] == "Author_secretary_edit"
-        )
+    || ViewData["Title"] == "Author_secretary_edit")
     {
         show_corporate_governance = "show";
         here_corporate_governance = "here";
@@ -253,33 +252,6 @@
         here_investerRelation = "here";
     }
 
-
-    ///
-    var show_contactus = "";
-    var here_contactus = "";
-    if (ViewData["Title"] == "Manage_Contact_Page" || ViewData["Title"] == "Main_Contact")
-    {
-        show_contactus = "show";
-        here_contactus = "here";
-    }
-    var Show_Authorization = "";
-    var Here_Authorization = "";
-    if (ViewData["Title"] == "Authorization_Index"
-    || ViewData["Title"] == "Authorization_Add"
-    || ViewData["Title"] == "Authorization_Edit")
-    {
-        Show_Authorization = "show";
-        Here_Authorization = "here";
-    }
-
-    
-    var show_applyjob = "";
-    var here_applyjob = "";
-    if (ViewData["Title"] == "Manage_Job_Page" || ViewData["Title"] == "Apply_Image_Content")
-    {
-        show_applyjob = "show";
-        here_applyjob = "here";
-    }
     var Show_IR_Index = "";
     var Here_IR_Index = "";
     if (ViewData["Title"] == "Banner"
@@ -305,24 +277,6 @@
         Here_IR_Index = "here";
         show_investerRelation = "show";
         here_investerRelation = "here";
-    }
-
-    var show_privacy = "";
-    var here_privacy = "";
-    if (ViewData["Title"] == "privacy_index"
-    || ViewData["Title"] == "privacy_create"
-    || ViewData["Title"] == "privacy_edit")
-    {
-        show_privacy = "show";
-        here_privacy = "here";
-    }
-
-    var show_news = "";
-    var here_news = "";
-    if (ViewData["Title"] == "Manage_News_Page")
-    {
-        show_news = "show";
-        here_news = "here";
     }
 
     var show_Resource_Facility = "";
@@ -371,6 +325,51 @@
     {
         show_Resource_Facility = "show";
         here_Resource_Facility = "here";
+    }
+
+    var show_privacy = "";
+    var here_privacy = "";
+    if (ViewData["Title"] == "privacy_index"
+    || ViewData["Title"] == "privacy_create"
+    || ViewData["Title"] == "privacy_edit")
+    {
+        show_privacy = "show";
+        here_privacy = "here";
+    }
+
+    ///
+    var show_contactus = "";
+    var here_contactus = "";
+    if (ViewData["Title"] == "Manage_Contact_Page" || ViewData["Title"] == "Main_Contact")
+    {
+        show_contactus = "show";
+        here_contactus = "here";
+    }
+
+    var Show_Authorization = "";
+    var Here_Authorization = "";
+    if (ViewData["Title"] == "Authorization_Index"
+    || ViewData["Title"] == "Authorization_Add"
+    || ViewData["Title"] == "Authorization_Edit")
+    {
+        Show_Authorization = "show";
+        Here_Authorization = "here";
+    }
+   
+    var show_applyjob = "";
+    var here_applyjob = "";
+    if (ViewData["Title"] == "Manage_Job_Page" || ViewData["Title"] == "Apply_Image_Content")
+    {
+        show_applyjob = "show";
+        here_applyjob = "here";
+    }
+
+    var show_news = "";
+    var here_news = "";
+    if (ViewData["Title"] == "Manage_News_Page")
+    {
+        show_news = "show";
+        here_news = "here";
     }
 
     var show_download = "";
@@ -777,7 +776,7 @@
 
                                 </div>
                             </div>
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_RF @here_RF">
                                 <span class="menu-link">
                                     <span class="menu-icon">
                                         <i class="bi bi-columns-gap fs-3"></i>
@@ -785,17 +784,31 @@
                                     <span class="menu-title">สมาร์ท โซลูชั่น</span>
                                     <span class="menu-arrow"></span>
                                 </span>
-                                <div class="menu-sub menu-sub-accordion">
+                                <div class="menu-sub menu-sub-accordion">                             
                                     <div class="menu-item">
-                                        <a class="menu-link" href="#">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">หน้าแรก</span>
-                                        </a>
+                                        @if (ViewData["Title"] == "Manage_SmartSolution")
+                                        {
+                                            <a class="menu-link active" href="@Url.Action("Manage_Page","ManageSmartSolution")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการโซลูชั่น</span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="menu-link" href="@Url.Action("Manage_Page","ManageSmartSolution")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการโซลูชั่น</span>
+                                            </a>
+                                        }
                                     </div>
                                 </div>
                             </div>
+
+
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                 <span class="menu-link">
                                     <span class="menu-icon">
@@ -804,17 +817,30 @@
                                     <span class="menu-title">สินค้า</span>
                                     <span class="menu-arrow"></span>
                                 </span>
-                                <div class="menu-sub menu-sub-accordion">
+                                <div class="menu-sub menu-sub-accordion @show_product @here_product">
                                     <div class="menu-item">
-                                        <a class="menu-link" href="#">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">หน้าแรก</span>
-                                        </a>
+                                        @if (ViewData["Title"] == "Manage_Product_Page")
+                                        {
+                                            <a class="menu-link active" href="@Url.Action("Manage_Product_Page","ManageProduct")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการโปรดัก</span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="menu-link" href="@Url.Action("Manage_Product_Page","ManageProduct")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการโปรดัก</span>
+                                            </a>
+                                        }
                                     </div>
                                 </div>
                             </div>
+
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                 <span class="menu-link">
                                     <span class="menu-icon">
@@ -823,36 +849,62 @@
                                     <span class="menu-title">ผลงาน</span>
                                     <span class="menu-arrow"></span>
                                 </span>
-                                <div class="menu-sub menu-sub-accordion">
+                                <div class="menu-sub menu-sub-accordion @show_projectRef @here_projectRef">
                                     <div class="menu-item">
-                                        <a class="menu-link" href="#">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">หน้าแรก</span>
-                                        </a>
+                                        @if (ViewData["Title"] == "Manage_Project_Page")
+                                        {
+                                            <a class="menu-link active" href="@Url.Action("Manage_Page","ProjectRef")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการโปรเจค</span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="menu-link" href="@Url.Action("Manage_Page","ProjectRef")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการโปรเจค</span>
+                                            </a>
+                                        }
                                     </div>
                                 </div>
                             </div>
+
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                 <span class="menu-link">
                                     <span class="menu-icon">
-                                        <i class="bi bi-house-fill fs-3"></i>
+                                        <i class="bi bi-download fs-3"></i>
                                     </span>
-                                    <span class="menu-title">หน้าแรก</span>
+                                    <span class="menu-title">ดาวห์โหลด</span>
                                     <span class="menu-arrow"></span>
                                 </span>
-                                <div class="menu-sub menu-sub-accordion">
+                                <div class="menu-sub menu-sub-accordion @show_download @here_download">
                                     <div class="menu-item">
-                                        <a class="menu-link" href="#">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">หน้าแรก</span>
-                                        </a>
+                                        @if (ViewData["Title"] == "Manage_Download_Page")
+                                        {
+                                            <a class="menu-link active" href="@Url.Action("Manage_Download_Page","ManageDownload")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการดาวห์โหลด</span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="menu-link" href="@Url.Action("Manage_Download_Page","ManageDownload")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการดาวห์โหลด</span>
+                                            </a>
+                                        }
                                     </div>
                                 </div>
                             </div>
+
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                 <span class="menu-link">
                                     <span class="menu-icon">
@@ -861,17 +913,32 @@
                                     <span class="menu-title">ข่าวสาร</span>
                                     <span class="menu-arrow"></span>
                                 </span>
-                                <div class="menu-sub menu-sub-accordion">
+                                <div class="menu-sub menu-sub-accordion @show_news @here_news">
                                     <div class="menu-item">
-                                        <a class="menu-link" href="">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">หน้าแรก</span>
-                                        </a>
+                                        @if (ViewData["Title"] == "Manage_News_Page")
+                                        {
+                                            <a class="menu-link active" href="@Url.Action("Manage_news_Page","news")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการข่าว</span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="menu-link" href="@Url.Action("Manage_news_Page","news")">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">จัดการข่าว</span>
+                                            </a>
+                                        }
                                     </div>
                                 </div>
                             </div>
+
+
+
                             <div data-kt-menu-trigger="click" class="menu-item @show_investerRelation @here_investerRelation menu-accordion">
                                 <span class="menu-link">
                                     <span class="menu-icon">
@@ -2162,7 +2229,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion @show_applyjob @here_applyjob">
                                 <span class="menu-link">
                                     <span class="menu-icon">
