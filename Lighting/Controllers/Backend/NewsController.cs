@@ -251,14 +251,20 @@ namespace Lighting.Controllers.Backend
 
         private List<string> Get_FileName(string path)
         {
-            return Directory.GetFiles(Path.Combine(_env.WebRootPath, path))
-                    .Where(path => !path.EndsWith("0.jpg"))
-                    .Select(path =>
-                    {
-                        var new_path = path.Split('\\').Reverse().Take(4).Reverse();
-                        return string.Join("/", new_path);
-                    })
-                    .ToList();
+            try
+            {
+                return Directory.GetFiles(Path.Combine(_env.WebRootPath, path))
+                        .Where(path => !path.EndsWith("0.jpg"))
+                        .Select(path =>
+                        {
+                            var new_path = path.Split('\\').Reverse().Take(4).Reverse();
+                            return string.Join("/", new_path);
+                        })
+                        .ToList();
+            }catch(Exception ex)
+            {
+                return new List<string>();
+            }
         }
     }
 }
