@@ -61,12 +61,12 @@
                         //console.log(data);
                         const nav_link = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                             <li>
-                                 <a href="/${url}${curr.id}">
-                                    <p>${curr.name}</p>
-                                            <div class="menu-img"><img src="/${curr.image}"></div>
-                                 </a>
-                             </li>`, "");
+                                                     <li>
+                                                         <a href="/${url}${curr.id}">
+                                                            <p>${curr.name}</p>
+                                                                    <div class="menu-img"><img src="/${curr.image}"></div>
+                                                         </a>
+                                                     </li>`, "");
                         }
                         $("#nav_projectref").html(nav_link(data, "project/Project_Category?categoryId="));
 
@@ -86,14 +86,14 @@
                         //console.log(data);
                         const nav_link = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                <li>
-                                    <a href="${url}${curr.id}">
-                                        <img src="/${curr.image}">
-                                        <div class="product-cate">
-                                            <p>${curr.name}</p>
-                                        </div>
-                                    </a>
-                                </li>`, "");
+                                                        <li>
+                                                            <a href="${url}${curr.id}">
+                                                                <img src="/${curr.image}">
+                                                                <div class="product-cate">
+                                                                    <p>${curr.name}</p>
+                                                                </div>
+                                                            </a>
+                                                        </li>`, "");
                         }
 
                         $("#nav_product").html(nav_link(data, "/Product/Product_Category?categoryId="));
@@ -114,12 +114,12 @@
                         //console.log(data);
                         const nav_link = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                <li>
-                                <a href="${url}${curr.id}">
-                                 <p>${curr.name}</p>
-                                 <div class="menu-img"><img src="/${curr.image}"></div>
-                                </a>
-                                </li>`, "");
+                                                        <li>
+                                                        <a href="${url}${curr.id}">
+                                                         <p>${curr.name}</p>
+                                                         <div class="menu-img"><img src="/${curr.image}"></div>
+                                                        </a>
+                                                        </li>`, "");
                         }
 
                         $("#nav_smartsolution").append(nav_link(data, "/SmartSolution/SmartSolutionDetail?id="));
@@ -131,7 +131,7 @@
                 });
             });
 
-        function SearchProduct(e){
+        function SearchProduct(e) {
 
             let searchText = $("#search").val();
             console.log(searchText);
@@ -144,14 +144,14 @@
                 cache: false,
                 success: function (data) {
                     console.log(data);
-                    if(data.length > 0){
-                        let { categoryId,productId,subcategoryId } = data[0];
+                    if (data.length > 0) {
+                        let { categoryId, productId, subcategoryId } = data[0];
                         console.log(categoryId, productId, subcategoryId);
                         if (categoryId && productId && subcategoryId) {
                             window.location.href = `/product/product_detail?categoryId=${categoryId}&sub_categoryId=${subcategoryId}&id=${productId}`;
                             return;
                         }
-                        if (subcategoryId  && categoryId) {
+                        if (subcategoryId && categoryId) {
                             window.location.href = `/product/product_subcategory?categoryId=${categoryId}&sub_categoryId=${subcategoryId}`;
                             return;
                         }
@@ -670,38 +670,49 @@
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <ul class="dropdown-submenu">
+
                                                                         <li>
-                                                                            <a href="@Url.Action("Profile_History","Resource_Facility")">
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/history">
                                                                                 <p>History</p>
                                                                             </a>
-                                                                                            @*<a href="https://www.mydevdemosites.com/resource-facility/history">
-                                                                            <p>History</p>
-                                                                            </a>*@
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Profile_Our_Philosophy_Vision_Misson","Resource_Facility")">
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/our-philosophy-vision-mission">
                                                                                 <p>Our Philosophy Vision & Mission</p>
                                                                             </a>
-                                                                                            @*  <a href="https://www.mydevdemosites.com/resource-facility/our-philosophy-vision-mission">
-                                                                            <p>Our Philosophy Vision & Mission</p>
-                                                                            </a>*@
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Profile_Organization_Chart","Resource_Facility")">
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/organization-chart">
                                                                                 <p>Organization Chart</p>
                                                                             </a>
-                                                                                            @*<a href="https://www.mydevdemosites.com/resource-facility/organization-chart">
-                                                                            <p>Organization Chart</p>
-                                                                            </a>*@
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Profile_Awards","Resource_Facility")">
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/awards">
                                                                                 <p>Awards</p>
                                                                             </a>
-                                                                                            @*<a href="https://www.mydevdemosites.com/resource-facility/awards">
-                                                                            <p>Awards</p>
-                                                                            </a>*@
                                                                         </li>
+
+                                                                                        @* <li>
+                                                                        <a href="@Url.Action("Profile_History","Resource_Facility")">
+                                                                        <p>History</p>
+                                                                        </a>
+                                                                        </li>
+                                                                        <li>
+                                                                        <a href="@Url.Action("Profile_Our_Philosophy_Vision_Misson","Resource_Facility")">
+                                                                        <p>Our Philosophy Vision & Mission</p>
+                                                                        </a>
+                                                                        </li>
+                                                                        <li>
+                                                                        <a href="@Url.Action("Profile_Organization_Chart","Resource_Facility")">
+                                                                        <p>Organization Chart</p>
+                                                                        </a>
+                                                                        </li>
+                                                                        <li>
+                                                                        <a href="@Url.Action("Profile_Awards","Resource_Facility")">
+                                                                        <p>Awards</p>
+                                                                        </a>
+                                                                        </li>*@
+
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -716,78 +727,78 @@
                                                                 <div class="col">
                                                                     <ul class="dropdown-submenu w-half">
 
-                                                                        <li>
-                                                                            <a href="@Url.Action("Subsidiaries_Lighting_Innovation_Center","Resource_Facility")">
-                                                                                <p>L&E Lighting Innovation Center</p>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="@Url.Action("Subsidiaries_SolidState","Resource_Facility")">
-                                                                                <p>L&E Solid State Co.,Ltd</p>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="@Url.Action("Subsidiaries_Manufacturing","Resource_Facility")">
-                                                                                <p>L&E Manufacturing Co.,Ltd</p>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">
-                                                                                <p>L&E Assembly / Service</p>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="@Url.Action("Subsidiaries_Warehouse_Logistics","Resource_Facility")">
-                                                                                <p>L&E Warehouse & Logistics</p>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="@Url.Action("Subsidiaries_Lighting_Solution_Center","Resource_Facility")">
-                                                                                <p>L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</p>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="@Url.Action("Subsidiaries_Overseas_Offices","Resource_Facility")">
-                                                                                <p>L&E Overseas Offices</p>
-                                                                            </a>
-                                                                        </li>
-
-
                                                                                         @*  <li>
-                                                                        <a href="https://www.mydevdemosites.com/resource-facility/lighting-innovation-center">
+                                                                        <a href="@Url.Action("Subsidiaries_Lighting_Innovation_Center","Resource_Facility")">
                                                                         <p>L&E Lighting Innovation Center</p>
                                                                         </a>
                                                                         </li>
                                                                         <li>
-                                                                        <a href="https://www.mydevdemosites.com/resource-facility/le-solid-state-coltd">
+                                                                        <a href="@Url.Action("Subsidiaries_SolidState","Resource_Facility")">
                                                                         <p>L&E Solid State Co.,Ltd</p>
                                                                         </a>
                                                                         </li>
                                                                         <li>
-                                                                        <a href="https://www.mydevdemosites.com/resource-facility/le-manufacturing-coltd">
+                                                                        <a href="@Url.Action("Subsidiaries_Manufacturing","Resource_Facility")">
                                                                         <p>L&E Manufacturing Co.,Ltd</p>
                                                                         </a>
                                                                         </li>
                                                                         <li>
-                                                                        <a href="https://www.mydevdemosites.com/resource-facility/assembly-service">
+                                                                        <a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">
                                                                         <p>L&E Assembly / Service</p>
                                                                         </a>
                                                                         </li>
                                                                         <li>
-                                                                        <a href="https://www.mydevdemosites.com/resource-facility/warehouse-logistics">
+                                                                        <a href="@Url.Action("Subsidiaries_Warehouse_Logistics","Resource_Facility")">
                                                                         <p>L&E Warehouse & Logistics</p>
                                                                         </a>
                                                                         </li>
                                                                         <li>
-                                                                        <a href="https://www.mydevdemosites.com/resource-facility/lighting-solution-center-ratchadapisek-%C2%A0rachapruek">
+                                                                        <a href="@Url.Action("Subsidiaries_Lighting_Solution_Center","Resource_Facility")">
                                                                         <p>L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</p>
                                                                         </a>
                                                                         </li>
                                                                         <li>
-                                                                        <a href="https://www.mydevdemosites.com/resource-facility/overseas-offices">
+                                                                        <a href="@Url.Action("Subsidiaries_Overseas_Offices","Resource_Facility")">
                                                                         <p>L&E Overseas Offices</p>
                                                                         </a>
                                                                         </li>*@
+
+
+                                                                        <li>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/lighting-innovation-center">
+                                                                                <p>L&E Lighting Innovation Center</p>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/le-solid-state-coltd">
+                                                                                <p>L&E Solid State Co.,Ltd</p>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/le-manufacturing-coltd">
+                                                                                <p>L&E Manufacturing Co.,Ltd</p>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/assembly-service">
+                                                                                <p>L&E Assembly / Service</p>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/warehouse-logistics">
+                                                                                <p>L&E Warehouse & Logistics</p>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/lighting-solution-center-ratchadapisek-%C2%A0rachapruek">
+                                                                                <p>L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</p>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="https://www.mydevdemosites.com/resource-facility/overseas-offices">
+                                                                                <p>L&E Overseas Offices</p>
+                                                                            </a>
+                                                                        </li>
 
                                                                     </ul>
                                                                 </div>
@@ -799,8 +810,8 @@
                                             </div>
                                         </li>
                                         <li data-page="solution">
-                                                           <a href="@Url.Action("SmartSolution","SmartSolution")">SMART SOLUTION</a>
-                                            @*<a href="https://www.mydevdemosites.com/smart_solution">SMART SOLUTION</a>*@
+                                            <a href="@Url.Action("SmartSolution","SmartSolution")">SMART SOLUTION</a>
+                                                            @*<a href="https://www.mydevdemosites.com/smart_solution">SMART SOLUTION</a>*@
                                             <div class="dropdown-container">
                                                 <div class="imgHover-container">
                                                     <div class="imgHover-containerBG"></div>
@@ -955,7 +966,7 @@
                                             </div>
                                         </li>
                                         <li data-page="product">
-                                           <a href="@Url.Action("Product","Product")">PRODUCTS</a>
+                                            <a href="@Url.Action("Product","Product")">PRODUCTS</a>
                                                             @*<a href="https://www.mydevdemosites.com/category/indoor">PRODUCTS</a>*@
                                             <div class="dropdown-container min-pad">
                                                 <div class="menu-container">
@@ -1131,7 +1142,7 @@
                                             </div>
                                         </li>
                                         <li data-page="project">
-                                                            <a href="@Url.Action("Project","Project")">PROJECT REF</a>
+                                            <a href="@Url.Action("Project","Project")">PROJECT REF</a>
                                                             @*<a href="https://www.mydevdemosites.com/projects">PROJECT REF</a>*@
                                             <div class="dropdown-container">
                                                 <div class="imgHover-container">
@@ -1317,11 +1328,11 @@
                                         <li data-page="job"><a href="@Url.Action("ApplyJob","ApplyJob")">APPLY JOB</a></li>
                                         <li data-page="contact"><a href="@Url.Action("Contact","Contact")">CONTACT</a></li>
                                         *@
-                                         @*<li data-page="download"><a href="https://www.mydevdemosites.com/catalogues">DOWNLOAD</a></li>*@
+                                                        @*<li data-page="download"><a href="https://www.mydevdemosites.com/catalogues">DOWNLOAD</a></li>*@
                                         <li data-page="download"><a href="@Url.Action("CATALOGUE_Page","Download")">DOWNLOAD</a></li>
                                         <li data-page="news"><a href="@Url.Action("new","new")">NEWS</a></li>
                                         <li data-page="ir"><a href="@Url.Action("IR_index","Frontend_IR")">INVESTOR</a></li>
-                                        @*<li data-page="job"><a href="https://www.mydevdemosites.com/apply_job">APPLY JOB</a></li>*@
+                                                        @*<li data-page="job"><a href="https://www.mydevdemosites.com/apply_job">APPLY JOB</a></li>*@
                                         <li data-page="job"><a href="@Url.Action("Applyjob","Applyjob")">APPLY JOB</a></li>
                                         <li data-page="contact"><a href="@Url.Action("Contact","Contact")">CONTACT</a></li>
                                     </ul>

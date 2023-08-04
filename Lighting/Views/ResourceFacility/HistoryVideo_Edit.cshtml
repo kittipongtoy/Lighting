@@ -50,7 +50,17 @@
                                 <textarea type="text" class="form-control" name="FileVideoTH" id="FileVideoTH"></textarea>
                             </div> 
                         </div>
-
+                        
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    Link Video ENG
+                                </span>
+                            </div>
+                            <div class="col-10">
+                                <textarea type="text" class="form-control" name="FileVideoEN" id="FileVideoEN"></textarea>
+                            </div> 
+                        </div>
                         @*<div class="row mb-3">
                             <div class="col-2">
                                 <span>
@@ -146,6 +156,7 @@
                 success: function (data) {
                     $("#Id").val(data.id);
                     $("#FileVideoTH").val(data.fileVideoTH);
+                    $("#FileVideoEN").val(data.fileVideoEN);
                     
                     var status = '';
                     if (data.status == 1) {

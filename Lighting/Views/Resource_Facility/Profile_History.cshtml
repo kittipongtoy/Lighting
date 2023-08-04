@@ -127,7 +127,7 @@
                         </div>
                     </div>
                 </div>
-            } 
+            }
 
             @if (Contact.Count() != 0)
             {
@@ -348,19 +348,33 @@
                                     @if (VDO.Count() != 0)
                                     {
                                         foreach (var item in ViewBag.BodyDetailsVDO)
-                                        { 
-                                            string youtubeUrl = item.FileVideoTH;
+                                        {
+                                            string youtubeUrlTH = item.FileVideoTH;
+                                            string youtubeUrlEN = item.FileVideoEN;
 
                                             // Split the URL using the "?" character as the separator
                                             string[] delimiters = { "youtu.be/", "watch?v=", "embed/" };
-                                            string videoId = delimiters.Select(delimiter => youtubeUrl.Split(delimiter).LastOrDefault())
+                                            string videoIdTH = delimiters.Select(delimiter => youtubeUrlTH.Split(delimiter).LastOrDefault())
                                             .FirstOrDefault(id => !string.IsNullOrEmpty(id));
+                                            string embeddedUrlTH = "https://www.youtube.com/embed/" + videoIdTH;
 
-                                            string embeddedUrl = "https://www.youtube.com/embed/" + videoId;
+                                            string videoIdEN = delimiters.Select(delimiter => youtubeUrlEN.Split(delimiter).LastOrDefault())
+                                            .FirstOrDefault(id => !string.IsNullOrEmpty(id));
+                                            string embeddedUrlEN = "https://www.youtube.com/embed/" + videoIdEN;
 
-                                            <div class="container-vdo">
-                                                <iframe class="responsive-vdo" src="@embeddedUrl"></iframe>
-                                            </div> 
+                                            if (Context.Request.Cookies["lang"] == "EN")
+                                            {
+                                                <div class="container-vdo">
+                                                    <iframe class="responsive-vdo" src="@embeddedUrlEN"></iframe>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="container-vdo">
+                                                    <iframe class="responsive-vdo" src="@embeddedUrlTH"></iframe>
+                                                </div>
+                                            }
+
                                         }
                                     }
                                     else

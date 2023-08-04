@@ -21,6 +21,7 @@ namespace Lighting.Models
             public string? detailsTitleTH { get; set; }
             public string? detailsTitleENG { get; set; }
             public string? link { get; set; }
+            public string? linkENG { get; set; }
             public DateTime? created_at { get; set; }
             public DateTime? updated_at { get; set; }
         }

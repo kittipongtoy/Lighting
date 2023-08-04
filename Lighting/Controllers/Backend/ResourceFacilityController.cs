@@ -423,7 +423,7 @@ namespace Lighting.Controllers.Backend
             {
                 var DB = await db.HistoryDetail.FirstOrDefaultAsync(x => x.Id == model.Id);
                 if (DB is not null)
-                { 
+                {
                     if (model.Status == 1)
                     {
                         var check_other = from up2 in db.HistoryDetail
@@ -610,7 +610,7 @@ namespace Lighting.Controllers.Backend
         public async Task<IActionResult> HistoryDetail_Change(int? Id)
         {
             try
-            { 
+            {
                 var DB = db.HistoryDetail.FirstOrDefault(x => x.Id == Id);
                 if (DB != null)
                 {
@@ -627,15 +627,15 @@ namespace Lighting.Controllers.Backend
                         {
                             DB.Status = 0;
                             db.Entry(DB).State = EntityState.Modified;
-                            db.SaveChanges(); 
+                            db.SaveChanges();
                         }
                         else
                         {
                             DB.Status = 1;
                             db.Entry(DB).State = EntityState.Modified;
-                            db.SaveChanges(); 
+                            db.SaveChanges();
                         }
-                    } 
+                    }
                 }
                 return new JsonResult(new { status = "success", messageArray = "success" });
             }
@@ -780,7 +780,7 @@ namespace Lighting.Controllers.Backend
                 if (model.Status == 1)
                 {
                     var check_other = from up2 in db.HistoryDataDetail
-                                      where up2.Status == 1 && up2.TypeData==1
+                                      where up2.Status == 1 && up2.TypeData == 1
                                       select up2;
                     foreach (HistoryDataDetail up2 in check_other)
                     {
@@ -790,6 +790,7 @@ namespace Lighting.Controllers.Backend
                 }
 
                 historyDataDetail.FileVideoTH = model.FileVideoTH;
+                historyDataDetail.FileVideoEN = model.FileVideoEN;
                 historyDataDetail.TypeData = 1;
                 historyDataDetail.Status = model.Status;
                 historyDataDetail.created_at = DateTime.Now;
@@ -909,6 +910,7 @@ namespace Lighting.Controllers.Backend
                     }
 
                     DB.FileVideoTH = model.FileVideoTH;
+                    DB.FileVideoEN = model.FileVideoEN;
                     DB.Status = model.Status;
                     DB.created_at = DateTime.Now;
                     DB.updated_at = DateTime.Now;
@@ -989,7 +991,7 @@ namespace Lighting.Controllers.Backend
                 {
                     if (DB.Status != 1)
                     {
-                        var Change = db.HistoryDataDetail.Where(x=>x.TypeData==1).ToList();
+                        var Change = db.HistoryDataDetail.Where(x => x.TypeData == 1).ToList();
                         foreach (var item in Change)
                         {
                             item.Status = 0;
@@ -1146,7 +1148,7 @@ namespace Lighting.Controllers.Backend
 
         [HttpPut]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> HistoryTimeline_Edit_Submit(RequestDTO.HistoryDetailRequest model) 
+        public async Task<IActionResult> HistoryTimeline_Edit_Submit(RequestDTO.HistoryDetailRequest model)
         {
             try
             {
@@ -2240,6 +2242,7 @@ namespace Lighting.Controllers.Backend
                     checkrow.detailsTitleTH = rf_manufacturing.detailsTitleTH;
                     checkrow.detailsTitleENG = rf_manufacturing.detailsTitleENG;
                     checkrow.link = rf_manufacturing.link;
+                    checkrow.linkENG = rf_manufacturing.linkENG;
                     checkrow.updated_at = DateTime.Now;
                     db.SaveChanges();
                 }
@@ -2520,6 +2523,7 @@ namespace Lighting.Controllers.Backend
                     checkrow.detailsTitleTH = rf_WarehouseLogistics.detailsTitleTH;
                     checkrow.detailsTitleENG = rf_WarehouseLogistics.detailsTitleENG;
                     checkrow.link = rf_WarehouseLogistics.link;
+                    checkrow.linkENG = rf_WarehouseLogistics.linkENG;
                     checkrow.updated_at = DateTime.Now;
                     db.SaveChanges();
                 }
@@ -2800,6 +2804,7 @@ namespace Lighting.Controllers.Backend
                     checkrow.detailsTitleTH = rf_Oversea_Offices.detailsTitleTH;
                     checkrow.detailsTitleENG = rf_Oversea_Offices.detailsTitleENG;
                     checkrow.link = rf_Oversea_Offices.link;
+                    checkrow.linkENG = rf_Oversea_Offices.linkENG;
                     checkrow.updated_at = DateTime.Now;
                     db.SaveChanges();
                 }
@@ -3080,6 +3085,7 @@ namespace Lighting.Controllers.Backend
                     checkrow.detailsTitleTH = rf_Solid_States.detailsTitleTH;
                     checkrow.detailsTitleENG = rf_Solid_States.detailsTitleENG;
                     checkrow.link = rf_Solid_States.link;
+                    checkrow.linkENG = rf_Solid_States.linkENG;
                     checkrow.updated_at = DateTime.Now;
                     db.SaveChanges();
                 }
@@ -3360,6 +3366,7 @@ namespace Lighting.Controllers.Backend
                     checkrow.detailsTitleTH = rf_Assembly_Services.detailsTitleTH;
                     checkrow.detailsTitleENG = rf_Assembly_Services.detailsTitleENG;
                     checkrow.link = rf_Assembly_Services.link;
+                    checkrow.linkENG = rf_Assembly_Services.linkENG;
                     checkrow.updated_at = DateTime.Now;
                     db.SaveChanges();
                 }
@@ -3639,6 +3646,7 @@ namespace Lighting.Controllers.Backend
                     checkrow.detailsTitleTH = rf_SolutionCenters.detailsTitleTH;
                     checkrow.detailsTitleENG = rf_SolutionCenters.detailsTitleENG;
                     checkrow.link = rf_SolutionCenters.link;
+                    checkrow.linkENG = rf_SolutionCenters.linkENG;
                     checkrow.updated_at = DateTime.Now;
                     db.SaveChanges();
                 }
@@ -3919,6 +3927,7 @@ namespace Lighting.Controllers.Backend
                     checkrow.detailsTitleTH = rf_InnovationCenters.detailsTitleTH;
                     checkrow.detailsTitleENG = rf_InnovationCenters.detailsTitleENG;
                     checkrow.link = rf_InnovationCenters.link;
+                    checkrow.linkENG = rf_InnovationCenters.linkENG;
                     checkrow.updated_at = DateTime.Now;
                     db.SaveChanges();
                 }
