@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Lighting.Models.model_input
+
+@{
     ViewData["Title"] = "IR_NewDetail_Edit";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
@@ -90,6 +92,14 @@
                                 </span>
                             </div>
                             <div class="col-4">
+                                @if (Model.IR_NewDetail.FileName_TH != null)
+                                {
+                                    <div>
+                                        <div style="text-align:center;">
+                                            <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/IR_NewRoom/@Model.IR_NewDetail.FileName_TH">ไฟล์เอกสาร TH</a>
+                                        </div><br />
+                                    </div>
+                                }
                                 <input type="file" class="form-control" name="uploaded_fileTH" />
                             </div>
                         </div>
@@ -108,6 +118,15 @@
                                 </span>
                             </div>
                             <div class="col-4" style="margin-top:10px">
+                                @if (Model.IR_NewDetail.FileName_EN != null)
+                                {
+                                    <div>
+                                        <div style="text-align:center;">
+                                            <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/IR_NewRoom/@Model.IR_NewDetail.FileName_EN">ไฟล์เอกสาร ENG</a>
+                                        </div>
+                                        <br />
+                                    </div>
+                                }
                                 <input type="file" class="form-control" name="uploaded_fileEN" />
                             </div>
                         </div>

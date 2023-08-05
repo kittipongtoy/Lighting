@@ -168,7 +168,17 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult IR_Contact_Edit(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return RedirectToAction("IR_Contact_Index", "IR_Contact");
+            }
+            var get_detail = _context.IR_Contact.Where(x => x.Id == Id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("IR_Contact_Index", "IR_Contact");
+            }
+            var model = new model_input { IR_Contact = get_detail };
+            return View(model);
         }
 
         [HttpGet]

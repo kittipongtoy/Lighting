@@ -38,7 +38,11 @@
                 <input type="text" class="form-control" id="category_name_th" placeholder="ภาษาไทย">
                 <input type="text" class="form-control" id="category_name_en" placeholder="English">
             </div>
-            <label class="form-label mt-3">เลือกรูปโมเดล/Image Model</label>
+            <label class="form-label mt-3">เลือกรูปโมเดล/Image Model
+                <br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 500 * 500 px
+                </span></label>
             <input class="form-control mt-3" type="file" id="file_img_preview">
         </div>
         <center><button class="btn btn-success" style="margin-top:3rem;" onclick="addCategory()">บันทึก/save</button></center>
@@ -107,6 +111,10 @@
             </div>
 
             <div>
+                <br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 500 * 500 px
+                </span>
                 <input class="form-control mt-3" style="margin:0" type="file" id="edit_file_img_preview">
             </div>
 

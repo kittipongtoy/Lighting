@@ -359,7 +359,17 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult IR_NewDetail_Edit(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return RedirectToAction("stock_market_index", "NewRoom");
+            }
+            var get_detail = _context.IR_NewDetail.Where(x => x.Id == Id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("stock_market_index", "NewRoom");
+            }
+            var model = new model_input { IR_NewDetail = get_detail };
+            return View(model);
         }
 
         [HttpGet]
@@ -1240,7 +1250,17 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult Mass_MediaDetail_Edit(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return RedirectToAction("Mass_Media_Index", "NewRoom");
+            }
+            var get_detail = _context.IR_MassMediaDetail.Where(x => x.Id == Id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("Mass_Media_Index", "NewRoom");
+            }
+            var model = new model_input { IR_MassMediaDetail = get_detail };
+            return View(model);
         }
 
         [HttpGet]
@@ -1751,7 +1771,17 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult Print_MediaDetail_Edit(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return RedirectToAction("Print_Media_Index", "NewRoom");
+            }
+            var get_detail = _context.IR_Print_MediaDetail.Where(x => x.Id == Id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("Print_Media_Index", "NewRoom");
+            }
+            var model = new model_input { IR_Print_MediaDetail = get_detail };
+            return View(model);
         }
 
         [HttpGet]
@@ -2283,7 +2313,17 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult InvestorCalendarDetail_Edit(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return RedirectToAction("InvestorCalendar_Index", "NewRoom");
+            }
+            var get_detail = _context.IR_InvestorCalendarDetail.Where(x => x.Id == Id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("InvestorCalendar_Index", "NewRoom");
+            }
+            var model = new model_input { IR_InvestorCalendarDetail = get_detail };
+            return View(model);
         }
 
         [HttpGet]

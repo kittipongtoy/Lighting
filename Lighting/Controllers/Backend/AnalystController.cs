@@ -137,7 +137,17 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult Analyst_Edit(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return RedirectToAction("Analyst", "Analyst");
+            }
+            var get_detail = _context.IR_Analysts.Where(x => x.Id == Id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("Analyst", "Analyst");
+            }
+            var model = new model_input { IR_Analyst = get_detail };
+            return View(model);
         }
 
         [HttpGet]
@@ -411,7 +421,17 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult Analyst_Chapter_Edit(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return RedirectToAction("Analyst", "Analyst");
+            }
+            var get_detail = _context.IR_Analyst_Chapter.Where(x => x.Id == Id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("Analyst", "Analyst");
+            }
+            var model = new model_input { IR_Analyst_Chapter = get_detail };
+            return View(model);
         }
 
         [HttpGet]
@@ -446,7 +466,7 @@ namespace Lighting.Controllers.Backend
                 {
                     if (formFile.Length > 0)
                     {
-                        var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + iR_Analyst_Chapter.FileName_TH);
+                        var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + iR_Analyst_Chapter.FileName_TH);
                         if (System.IO.File.Exists(old_filePath) == true)
                         {
                             System.IO.File.Delete(old_filePath);
@@ -467,7 +487,7 @@ namespace Lighting.Controllers.Backend
                 {
                     if (formFile.Length > 0)
                     {
-                        var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + iR_Analyst_Chapter.FileName_EN);
+                        var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + iR_Analyst_Chapter.FileName_EN);
                         if (System.IO.File.Exists(old_filePath) == true)
                         {
                             System.IO.File.Delete(old_filePath);
@@ -504,13 +524,13 @@ namespace Lighting.Controllers.Backend
                 var DB = _context.IR_Analyst_Chapter.FirstOrDefault(x => x.Id == Id);
                 if (DB is not null)
                 {
-                    var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + DB.FileName_EN);
+                    var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + DB.FileName_EN);
                     if (System.IO.File.Exists(old_filePath) == true)
                     {
                         System.IO.File.Delete(old_filePath);
                     }
 
-                    var old_filePatho = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + DB.FileName_TH);
+                    var old_filePatho = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_Analyst/" + DB.FileName_TH);
                     if (System.IO.File.Exists(old_filePatho) == true)
                     {
                         System.IO.File.Delete(old_filePatho);

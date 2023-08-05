@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Lighting.Models.model_input
+
+@{
     ViewData["Title"] = "Print_MediaDetail_Edit";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
@@ -70,8 +72,18 @@
                                 <span>
                                     รูป แหล่งข่าว
                                 </span>
+                                <br />
+                                <span style="color:red;">
+                                    ขนาดรูปภาพ : 60 * 20 px
+                                </span>
                             </div>
                             <div class="col-4">
+                                @if (Model.IR_Print_MediaDetail.Image_Newssource != null)
+                                {
+                                    <div class="mb-10" style="text-align:center;">
+                                        <img src="~/upload_image/IR_NewRoom/@Model.IR_Print_MediaDetail.Image_Newssource" style="height: 250px;width: 250px;" alt="image">
+                                    </div>
+                                }
                                 <input type="file" class="form-control" name="uploaded_Image" accept="image/*" />
                             </div>
                         </div>
@@ -90,6 +102,14 @@
                                 </span>
                             </div>
                             <div class="col-4">
+                                @if (Model.IR_Print_MediaDetail.FileNameTH != null)
+                                {
+                                    <div>
+                                        <div style="text-align:center;">
+                                            <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/IR_NewRoom/@Model.IR_Print_MediaDetail.FileNameTH">ไฟล์เอกสาร TH</a>
+                                        </div><br />
+                                    </div>
+                                }
                                 <input type="file" class="form-control" name="uploaded_fileTH" />
                             </div>
                         </div>
@@ -108,6 +128,15 @@
                                 </span>
                             </div>
                             <div class="col-4">
+                                @if (Model.IR_Print_MediaDetail.FileNameEN != null)
+                                {
+                                    <div>
+                                        <div style="text-align:center;">
+                                            <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/IR_NewRoom/@Model.IR_Print_MediaDetail.FileNameEN">ไฟล์เอกสาร ENG</a>
+                                        </div>
+                                        <br />
+                                    </div>
+                                }
                                 <input type="file" class="form-control" name="uploaded_fileEN" />
                             </div>
                         </div>

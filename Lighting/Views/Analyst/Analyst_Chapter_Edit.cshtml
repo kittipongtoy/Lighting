@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Lighting.Models.model_input
+
+@{
     ViewData["Title"] = "Analyst_Chapter_Edit";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
@@ -46,6 +48,14 @@
                                 </span>
                             </div>
                             <div class="col-4">
+                                @if (Model.IR_Analyst_Chapter.FileName_TH != null)
+                                {
+                                    <div>
+                                        <div style="text-align:center;">
+                                            <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/IR_Analyst/@Model.IR_Analyst_Chapter.FileName_TH">ไฟล์เอกสาร TH</a>
+                                        </div><br />
+                                    </div>
+                                }
                                 <input type="file" class="form-control" name="uploaded_fileTH" />
                             </div>
                             <div class="col-2">
@@ -54,6 +64,15 @@
                                 </span>
                             </div>
                             <div class="col-4">
+                                @if (Model.IR_Analyst_Chapter.FileName_EN != null)
+                                {
+                                    <div>
+                                        <div style="text-align:center;">
+                                            <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/IR_Analyst/@Model.IR_Analyst_Chapter.FileName_EN">ไฟล์เอกสาร ENG</a>
+                                        </div>
+                                        <br />
+                                    </div>
+                                }
                                 <input type="file" class="form-control" name="uploaded_fileEN" />
                             </div>
                         </div>

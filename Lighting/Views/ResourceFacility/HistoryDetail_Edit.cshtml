@@ -74,7 +74,8 @@
                             <div class="col-4">
                                 <div class="mb-10" style="text-align:center;">
                                     <div class="mb-10" style="text-align:center;">
-                                        <img src="~/upload_image/Resource_Facility/@Model.HistoryDetail.ImageTH" style="height: 250px;width: 250px;" alt="image">
+                                        <img src="~/upload_image/Resource_Facility/@Model.HistoryDetail.ImageTH" style="height: 250px;width: 250px;cursor:pointer;"
+                                             onclick="location.href='/upload_file/Resource_Facility/@Model.HistoryDetail.FileCompany_TH'" alt="image">
                                     </div>
                                 </div>
                                 <input type="file" class="form-control" name="uploaded_ImageTH" accept="image/*" />
@@ -92,7 +93,8 @@
                             <div class="col-4">
                                 <div class="mb-10" style="text-align:center;">
                                     <div class="mb-10" style="text-align:center;">
-                                        <img src="~/upload_image/Resource_Facility/@Model.HistoryDetail.ImageEN" style="height: 250px;width: 250px;" alt="image">
+                                        <img src="~/upload_image/Resource_Facility/@Model.HistoryDetail.ImageEN" style="height: 250px;width: 250px;cursor:pointer;"
+                                             onclick="window.location.href='/upload_file/Resource_Facility/@Model.HistoryDetail.FileCompany_EN'" c alt="image">
                                     </div>
                                 </div>
                                 <input type="file" class="form-control" name="uploaded_ImageEN" accept="image/*" />
@@ -104,7 +106,7 @@
                                     รายละเอียด TH
                                 </span>
                             </div>
-                            <div class="col-12"> 
+                            <div class="col-12">
                                 <textarea id="Detail_TH">@Model.HistoryDetail.Detail_TH</textarea>
                             </div>
                             <div class="col-12">

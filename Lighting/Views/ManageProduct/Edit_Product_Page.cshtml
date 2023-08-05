@@ -115,12 +115,20 @@
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">เปลี่ยนรูปโชว์/Change Preview Image</label>
+            <label class="h4">เปลี่ยนรูปโชว์/Change Preview Image
+                <br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 500 * 500 px
+                </span></label>
             <input class="form-control" type="file" id="file_img_preview" />
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">Spact image  <a href="ManageProduct/DwonloadFile?path=@Model.SUB_IMG" target="_blank">download click  @Model?.SUB_IMG?.Split("\\").Reverse().Take(1).FirstOrDefault()</a></label>
+            <label class="h4">Spact image  
+                <br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 260 * 40 px
+                </span><a href="ManageProduct/DwonloadFile?path=@Model.SUB_IMG" target="_blank">download click  @Model?.SUB_IMG?.Split("\\").Reverse().Take(1).FirstOrDefault()</a></label>
             <input class="form-control" type="file" id="sub_img_file" />
         </div>
 
@@ -205,7 +213,13 @@
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">Technical Drawing Image 
+            <label class="h4">
+                Technical Drawing Image
+
+                <br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 500 * 500 px
+                </span>
                 @if(Model?.Technical_Drawing_Img != null)
                 {
                     foreach (var img in Model.Technical_Drawing_Img)
@@ -218,7 +232,12 @@
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4"> Light Distribution Image 
+            <label class="h4">
+                Light Distribution Image
+                <br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 500 * 500 px
+                </span>
                 @if(Model?.LIGHT_DISTRIBUTION != null)
                 {
                     foreach (var img in Model.LIGHT_DISTRIBUTION)

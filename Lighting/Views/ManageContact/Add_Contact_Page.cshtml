@@ -58,14 +58,20 @@
 
                 <img style="width:100%;height:100%;display:none;" id="preview_show_img" />
                 <br />
-                <label for="formFile" class="form-label">เลือกไฟล์ รูป</label>
+                <label for="formFile" class="form-label">
+                    เลือกไฟล์ รูป
+                    <br />
+                    <span style="color:red;">
+                        ขนาดรูปภาพ : 1860 * 1300 px
+                    </span>
+                </label>
                 <input type="file" class="form-control mt-3" id="file_img" accept="image/png, image/gif, image/jpeg" multiple>
             </div>
             <!--file-->
-            <center style="margin:3rem;display:flex;justify-content:space-between;"> 
+            <center style="margin:3rem;display:flex;justify-content:space-between;">
                 <button type="button" class="btn btn-success" onclick="submit()">บันทึก/save</button>
                 <a href="@Url.Action("manage_contact_page","ManageContact")" class="btn btn-primary">กลับ/back</a>
-                </center>
+            </center>
         </div>
     </div>
 </div>
@@ -118,10 +124,10 @@
             formData.append("CellPhone", cell_phone);
             formData.append("TelePhone", tele_phone);
             formData.append("OfficePhone", office_phone);
-            if (image_file != undefined){
+            if (image_file != undefined) {
                 formData.append("Image", image_file);
             }
-               
+
             formData.append("Email", email);
             formData.append("GoogleMaps_Url", google_map);
             formData.append("YouTube_Url", youtube);

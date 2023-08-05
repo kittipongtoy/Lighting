@@ -94,8 +94,17 @@
                                 <span>
                                     ไฟล์เอกสาร TH
                                 </span>
+
                             </div>
                             <div class="col-4">
+                                @if (Model.SH_IR_MDA_DataDetails.file_name != null)
+                                {
+                                    <div>
+                                        <div style="text-align:center;">
+                                            <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/SH_importantFinancial/@Model.SH_IR_MDA_DataDetails.file_name">ไฟล์เอกสาร TH</a>
+                                        </div><br />
+                                    </div>
+                                }
                                 <input type="file" class="form-control" name="uploaded_file" accept="application/pdf,application/vnd.ms-excel" />
                             </div>
                             <div class="col-2">
@@ -104,6 +113,15 @@
                                 </span>
                             </div>
                             <div class="col-4">
+                                @if (Model.SH_IR_MDA_DataDetails.file_name_ENG != null)
+                                {
+                                    <div>
+                                        <div style="text-align:center;">
+                                            <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/SH_importantFinancial/@Model.SH_IR_MDA_DataDetails.file_name_ENG">ไฟล์เอกสาร ENG</a>
+                                        </div>
+                                        <br />
+                                    </div>
+                                }
                                 <input type="file" class="form-control" name="uploaded_file_ENG" accept="application/pdf,application/vnd.ms-excel" />
                             </div>
                         </div>

@@ -78,7 +78,7 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         @if (job.Respondsibility_EN != null){
-                                                            Html.Raw(job.Respondsibility_EN.Replace("<ul>", "<ul class='list-decor'>"));
+                                                            @Html.Raw(job.Respondsibility_EN)
                                                         }
                                                     </div>
                                                 </div>
@@ -90,7 +90,7 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         @if (job.Qualification_EN != null){
-                                                            Html.Raw(job.Qualification_EN.Replace("<ul>", "<ul class='list-decor'>"));
+                                                            @Html.Raw(job.Qualification_EN)
                                                         }
                                                     </div>
                                                 </div>
@@ -183,7 +183,7 @@
                                                     <div class="col">
                                                         @if (job.Respondsibility_TH != null)
                                                         {
-                                                            Html.Raw(job.Respondsibility_TH.Replace("<ul>", "<ul class='list-decor'>"));
+                                                            @Html.Raw(job.Respondsibility_TH)
                                                         }
                                                     </div>
                                                 </div>
@@ -196,7 +196,7 @@
                                                     <div class="col">
                                                         @if (job.Qualification_TH != null)
                                                         {
-                                                            Html.Raw(job.Qualification_TH.Replace("<ul>", "<ul class='list-decor'>"));
+                                                            @Html.Raw(job.Qualification_TH)
                                                         }
                                                     </div>
                                                 </div>

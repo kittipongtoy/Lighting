@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Lighting.Models.model_input
+
+@{
     ViewData["Title"] = "InvestorCalendarDetail_Edit";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
@@ -91,6 +93,14 @@
                                 </span>
                             </div>
                             <div class="col-4">
+                                @if (Model.IR_InvestorCalendarDetail.FileNameTH != null)
+                                {
+                                    <div>
+                                        <div style="text-align:center;">
+                                            <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/IR_NewRoom/@Model.IR_InvestorCalendarDetail.FileNameTH">ไฟล์เอกสาร TH</a>
+                                        </div><br />
+                                    </div>
+                                }
                                 <input type="file" class="form-control" name="uploaded_fileTH" />
                             </div>
                         </div>
@@ -109,6 +119,15 @@
                                 </span>
                             </div>
                             <div class="col-4">
+                                @if (Model.IR_InvestorCalendarDetail.FileNameEN != null)
+                                {
+                                    <div>
+                                        <div style="text-align:center;">
+                                            <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/IR_NewRoom/@Model.IR_InvestorCalendarDetail.FileNameEN">ไฟล์เอกสาร ENG</a>
+                                        </div>
+                                        <br />
+                                    </div>
+                                }
                                 <input type="file" class="form-control" name="uploaded_fileEN" />
                             </div>
                         </div>

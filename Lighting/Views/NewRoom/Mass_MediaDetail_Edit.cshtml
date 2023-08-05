@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Lighting.Models.model_input
+
+@{
     ViewData["Title"] = "Mass_MediaDetail_Edit";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
@@ -88,8 +90,18 @@
                                 <span>
                                     รูป
                                 </span>
+                                <br />
+                                <span style="color:red;">
+                                    ขนาดรูปภาพ : 1280 * 850 px
+                                </span>
                             </div>
                             <div class="col-4">
+                                @if (Model.IR_MassMediaDetail.Image != null)
+                                {
+                                    <div class="mb-10" style="text-align:center;">
+                                        <img src="~/upload_image/IR_NewRoom/@Model.IR_MassMediaDetail.Image" style="height: 250px;width: 250px;" alt="image">
+                                    </div>
+                                }
                                 <input type="file" class="form-control" name="uploaded_Image" accept="image/*" />
                             </div>
                         </div>

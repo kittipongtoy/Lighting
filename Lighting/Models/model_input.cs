@@ -4,6 +4,15 @@ namespace Lighting.Models
 {
     public class model_input
     {
+        
+        public IR_Contact? IR_Contact { get; set; }
+        public IR_InvestorCalendarDetail? IR_InvestorCalendarDetail { get; set; }
+        public IR_MassMediaDetail? IR_MassMediaDetail { get; set; }
+        public IR_Print_MediaDetail? IR_Print_MediaDetail { get; set; }
+        public IR_NewDetail? IR_NewDetail { get; set; }
+        public IR_Analyst? IR_Analyst { get; set; }
+        public IR_Analyst_Chapter? IR_Analyst_Chapter { get; set; }
+
         public class page_resource_facility_content
         {
             public int id { get; set; }
@@ -35,7 +44,7 @@ namespace Lighting.Models
         public privacy_PolicyTitles? fod_privacy_PolicyTitles { get; set; }
         public int? count_privacy_PolicyTitles { get; set; }
         public privacy_Policys? fod_privacy_Policys { get; set; }
-        public int? count_receive_agenda_mail_accounts { get; set; }    
+        public int? count_receive_agenda_mail_accounts { get; set; }
         public receive_agenda_mail_accounts? receive_agenda_mail_accounts { get; set; }
         public class IR_csr_policy_file
         {
@@ -66,7 +75,7 @@ namespace Lighting.Models
             public DateTime? created_at { get; set; }
             public DateTime? updated_at { get; set; }
 
-        } 
+        }
         public List<IR_csr_policy_file>? list_IR_csr_policy_file_file { get; set; }
         public IR_csr_policy_content? fod_IR_csr_policy_content { get; set; }
         public int? count_list_IR_csr_policy_file_file { get; set; }
@@ -228,7 +237,7 @@ namespace Lighting.Models
         public SH_IR_Report_MeetingData? SH_IR_Report_MeetingData { get; set; }
         public int? count_row_SH_IR_Report_MeetingData { get; set; }
         public SH_IR_Report_Meeting_DataDetails? SH_IR_Report_Meeting_DataDetails { get; set; }
-        public SH_IR_propose_agenda? fod_SH_IR_propose_agenda { get; set; } 
+        public SH_IR_propose_agenda? fod_SH_IR_propose_agenda { get; set; }
         public int? count_row_SH_IR_propose_agenda { get; set; }
         public SH_IR_propose_agenda_DataDetails? SH_IR_propose_agenda_DataDetails { get; set; }
         public type_of_agenda_Propose? type_of_agenda_Propose { get; set; }
@@ -249,14 +258,14 @@ namespace Lighting.Models
         public SH_IR_financial_position_DataDetails? SH_IR_financial_position_DataDetails { get; set; }
         public SH_IR_Profit_Lose? SH_IR_Profit_Lose { get; set; }
         public SH_IR_Profit_Lose_others? SH_IR_Profit_Lose_others { get; set; }
-        public SH_IR_cashFlow_statements? SH_IR_cashFlow_statements { get; set; }   
-        public SH_IR_download_financial_statements? SH_IR_Download_Financial_Statements { get; set; } 
+        public SH_IR_cashFlow_statements? SH_IR_cashFlow_statements { get; set; }
+        public SH_IR_download_financial_statements? SH_IR_Download_Financial_Statements { get; set; }
         public SH_IR_prospectus? SH_IR_prospectus { get; set; }
         public SH_IR_prospectus? fod_SH_IR_prospectus { get; set; }
         public int? count_row_SH_IR_prospectus { get; set; }
         public SH_IR_financial_highlight? SH_IR_financial_highlight { get; set; }
         public SH_IR_financial_highlight? fod_SH_IR_financial_highlight { get; set; }
-        public int? count_row_SH_IR_financial_highlight { get; set; } 
+        public int? count_row_SH_IR_financial_highlight { get; set; }
         public SH_IR_financial_highlight_Data? SH_IR_financial_highlight_Data { get; set; }
         public SH_IR_financial_highlight_Data? fod_SH_IR_financial_highlight_Data { get; set; }
         public int? count_row_SH_IR_financial_highlight_Data { get; set; }
@@ -273,4 +282,3 @@ namespace Lighting.Models
 
     }
 }
- 
