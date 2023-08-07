@@ -22,18 +22,18 @@ namespace Lighting.Controllers.Frontend
             var lang = Request.Cookies["lang"];
             if (lang == "EN")
             {
-                return Json(await _db.MainContacts.Select(main => new 
+                return Json(await _db.MainContacts.Select(main => new
                 {
                     companyName = main.TitleName_EN,
-                     EMail1 = main.EMail1,
+                    EMail1 = main.EMail1,
                     location = main.Location_EN,
                     officePhone = main.OfficePhone,
-                    googleMapLink = main.GoogleMapLink, 
+                    googleMapLink = main.GoogleMapLink,
                 }).FirstOrDefaultAsync());
             }
             else
             {
-                return Json(await _db.MainContacts.Select(main => new 
+                return Json(await _db.MainContacts.Select(main => new
                 {
                     companyName = main.TitleName_TH,
                     EMail1 = main.EMail1,
@@ -50,21 +50,23 @@ namespace Lighting.Controllers.Frontend
                 .AsNoTracking()
                 .OrderByDescending(contact => contact.Id)
                 .Select(contact => new Output_ContactVM
-            {
-                Id = contact.Id,
-                CellPhone = contact.CellPhone,
-                ContactType = contact.ContactType,
-                Email = contact.Email,
-                GoogleMaps_Url = contact.GoogleMaps_Url,
-                ImagePath = contact.ImagePath,
-                Location_EN = contact.Location_EN,
-                Location_TH = contact.Location_TH,
-                OfficePhone = contact.OfficePhone,
-                PlaceName_EN = contact.PlaceName_EN,
-                PlaceName_TH = contact.PlaceName_TH,
-                TelePhone = contact.TelePhone,
-                YouTube_Url = contact.YouTube_Url,
-            }).ToListAsync();
+                {
+                    Id = contact.Id,
+                    CellPhone = contact.CellPhone,
+                    ContactType = contact.ContactType,
+                    Email = contact.Email,
+                    GoogleMaps_Url = contact.GoogleMaps_Url,
+                    ImagePath = contact.ImagePath,
+                    Location_EN = contact.Location_EN,
+                    Location_TH = contact.Location_TH,
+                    OfficePhone = contact.OfficePhone,
+                    PlaceName_EN = contact.PlaceName_EN,
+                    PlaceName_TH = contact.PlaceName_TH,
+                    TelePhone = contact.TelePhone,
+                    YouTube_Url = contact.YouTube_Url,
+                    Sub_Factory_Name_EN = contact.Sub_Factory_Name_EN,
+                    Sub_Factory_Name_TH = contact.Sub_Factory_Name_TH
+                }).ToListAsync();
 
             var main_contact = await _db.MainContacts.FirstOrDefaultAsync();
             ViewData["mainContact"] = main_contact;

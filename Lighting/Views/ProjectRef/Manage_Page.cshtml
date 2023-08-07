@@ -36,7 +36,7 @@
                     <tr id="@project.Id">
                         <th scope="row">@i</th>
                         <td><img src="@project.PreView_Image" style="width:100px;height:100px;"/> </td>
-                        <td>@project.Title_TH / @project.Title_EN</td>
+                        <td style="word-wrap:break-word;max-width:500px;">@project.Title_TH / @project.Title_EN</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-warning" onclick="editById(@project.Id)">
                                 <i class="bi bi-pencil-square"></i>แก้ไข/edit

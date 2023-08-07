@@ -28,34 +28,34 @@
                                 <li><a href="@Url.Action("Product","Product")">PRODUCTS</a></li>
                                 @foreach (var cate_name in (IEnumerable<Output_ProductCategoryVM>)ViewData["All_Category"])
                                 {
-                                    if (cate_name.Id == ViewBag.CategoryId)
+                                    if (cate_name.Name_EN.ToLower().StartsWith(ViewBag.Category.ToLower()) || cate_name.Name_TH.StartsWith(ViewBag.Category.ToLower()))
                                     {
                                         if (lang == "EN")
                                         {
-                                            <li><a href="@Url.Action("Product_Category","Product",new {categoryId = ViewBag.CategoryId})">@cate_name.Name_EN</a></li>
+                                            <li><a href="@Url.Action("Product_Category","Product",new {category = ViewBag.Category})">@cate_name.Name_EN</a></li>
                                         }
                                         else
                                         {
-                                            <li><a href="@Url.Action("Product_Category","Product",new {categoryId = ViewBag.CategoryId})">@cate_name.Name_TH</a></li>
+                                            <li><a href="@Url.Action("Product_Category","Product",new {category = ViewBag.Category})">@cate_name.Name_TH</a></li>
                                         }
                                     }
                                 }
-                                
+
                                 @foreach (var sub_cat in (IEnumerable<Output_ProductModelVM>)ViewData["Sub_Category"])
                                 {
-                                    if (sub_cat.Id == ViewBag.SubCategoryId )
+                                    if (sub_cat.Name_EN.ToLower().StartsWith(ViewBag.SubCategory.ToLower()) || sub_cat.Name_TH.ToLower().StartsWith(ViewBag.SubCategory))
                                     {
                                         if (lang == "EN")
                                         {
-                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {sub_categoryId=ViewBag.SubCategoryId,categoryId = ViewBag.CategoryId})">@sub_cat.Name_EN</a></li>
+                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {sub_category=ViewBag.SubCategory,category = ViewBag.Category})">@sub_cat.Name_EN</a></li>
                                         }
                                         else
                                         {
-                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {sub_categoryId=ViewBag.SubCategoryId,categoryId = ViewBag.CategoryId})">@sub_cat.Name_TH</a></li>
+                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {sub_category=ViewBag.SubCategory,category = ViewBag.Category})">@sub_cat.Name_TH</a></li>
                                         }
-                                    }                 
+                                    }
                                 }
-                               
+
                             </ul>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                         <div class="col">
                             @foreach (var sub_cat in (IEnumerable<Output_ProductModelVM>)ViewData["Sub_Category"])
                             {
-                                if (sub_cat.Id == ViewBag.SubCategoryId)
+                                if (sub_cat.Name_EN.ToLower().StartsWith(ViewBag.SubCategory.ToLower()))
                                 {
                                     if (lang == "EN")
                                     {
@@ -75,36 +75,37 @@
                                     }
                                 }
                             }
-                            
+
                         </div>
                     </div>
                     <div class="three-colPad">
                         <div class="row">
-                            @foreach(var product in Model){
-                            <div class="col-lg-4 col-md-4 col-6">
-                                    <a class="productBox" href="@Url.Action("Product_Detail","Product",new { categoryId = ViewBag.CategoryId, sub_categoryId=ViewBag.SubCategoryId,id=product.Id})">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width">
-                                                <img src="~/@product.Preview_Imamge">
-                                                <ul class="hover-detail">
-                                                    <li>Dimension : @product.Dimension</li>
-                                                    <li>Power : @product.Power</li>
-                                                    <li>IP Rating : @product.IP_Rating</li>
-                                                </ul>
+                            @foreach (var product in Model)
+                            {
+                                <div class="col-lg-4 col-md-4 col-6">
+                                    <a class="productBox" href="@Url.Action("Product_Detail","Product",new { category = ViewBag.Category, sub_category=ViewBag.SubCategory,model=product.Model})">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="img-width">
+                                                    <img src="~/@product.Preview_Imamge">
+                                                    <ul class="hover-detail">
+                                                        <li>Dimension : @product.Dimension</li>
+                                                        <li>Power : @product.Power</li>
+                                                        <li>IP Rating : @product.IP_Rating</li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="productBox-topic">
-                                                <p>@product.Model</p>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="productBox-topic">
+                                                    <p>@product.Model</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
-               }
+                                    </a>
+                                </div>
+                            }
 
                         </div>
                     </div>

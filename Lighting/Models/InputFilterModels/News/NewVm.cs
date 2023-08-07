@@ -9,15 +9,13 @@ namespace Lighting.Models.InputFilterModels.News
         public string Title_EN { get; set; }
         [Required]
         public string Title_TH { get; set; }
-        public IFormFile TitleImage { get; set; }
+        public IFormFile? TitleImage { get; set; }
         [Required]
-        public string Content_TH { get; set; }
+        public string? Content_TH { get; set; }
         [Required]
-        public string Content_EN { get; set; }
-        [Required]
-        public string CreateDate_TH { get; set; }
-        [Required]
-        public string CreateDate_EN { get; set; }
+        public string? Content_EN { get; set; }
+        public string? CreateDate_TH { get; set; }
+        public string? CreateDate_EN { get; set; }
         public List<IFormFile>? ImgList { get; set; } = new List<IFormFile>();
     }
     public class Output_NewsVm

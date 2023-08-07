@@ -63,7 +63,7 @@
                     <tr id="@cat.Id">
                         <th scope="row">@i</th>
                         <td><img src="@cat.Image" style="width:100px;height:100px;" /></td>
-                        <td>@cat.Name_TH / @cat.Name_EN</td>
+                            <td style="word-wrap:break-word;max-width:500px;">@cat.Name_TH / @cat.Name_EN</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-warning" onclick="edit(@cat.Id,'@cat.Name_TH','@cat.Name_EN','@cat.Image.Replace("\\","//")')">
                                 <i class="bi bi-pencil-square"></i>แก้ไข/edit

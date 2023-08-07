@@ -68,7 +68,7 @@
                     <tr id="@model_data.Id">
                         <th scope="row">@i</th>
                         <td><img src="~/@model_data.Image" style="width:100px;height:100px;" /> </td>
-                        <td>@model_data.Name_TH / @model_data.Name_EN</td>
+                        <td style="word-wrap:break-word;max-width:500px;">@model_data.Name_TH / @model_data.Name_EN</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-warning" onclick="edit(@model_data.Id,'@model_data.Image.Replace('\\','/')','@model_data.Name_TH','@model_data.Name_EN',@model_data.Product_CategoryId)">
                                 <i class="bi bi-pencil-square"></i>แก้ไข/edit

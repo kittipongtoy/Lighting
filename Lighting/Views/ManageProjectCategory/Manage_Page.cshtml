@@ -63,7 +63,7 @@
                     <tr id="@project.Id">
                         <td scope="row">@i</td>
                         <td><img src="@project.Image_Path" style="width:100px;height:100px;" /> </td>
-                        <td>@project.Name_TH / @project.Name_EN</td>
+                            <td style="word-wrap:break-word;max-width:500px;">@project.Name_TH / @project.Name_EN</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-warning" onclick="edit(@project.Id,'@project.Image_Path.Replace('\\','/')','@project.Name_TH','@project.Name_EN')">
                                 <i class="bi bi-pencil-square"></i>แก้ไข/edit
@@ -83,11 +83,11 @@
     </div>
 </div>
 
-<div style="position:fixed;inset:0;background-color:rgba(0,0,0,0.5);display:none;justify-content:center;flex-direction:column;align-items:center;z-index:10" id="edit_page">
+<div style="position:fixed;inset:0;background-color:rgba(0,0,0,0.5);display:none;justify-content:center;flex-direction:column;align-items:center;z-index:10;overflow:auto;" id="edit_page">
     <div style="width:50%;height:auto;background-color:white;padding:3rem;border-radius:10px;">
         <div style="display:grid;grid-template-rows:auto 3rem 3rem 3rem;gap:3rem;">
             <div>
-                <img style="width:100%;" id="edit_img_preview" />
+                <img style="width:100%;height:50vh;" id="edit_img_preview" />
             </div>
 
             <div>

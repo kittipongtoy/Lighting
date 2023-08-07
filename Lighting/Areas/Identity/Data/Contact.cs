@@ -7,7 +7,8 @@ namespace Lighting.Areas.Identity.Data
         [Key]
         public int Id { get; set; }
         public string ContactType { get; set; }
-
+        public string? Sub_Factory_Name_TH { get; set; }
+        public string? Sub_Factory_Name_EN { get; set; }
         public string PlaceName_TH { get; set; }
 
         public string PlaceName_EN { get; set; }

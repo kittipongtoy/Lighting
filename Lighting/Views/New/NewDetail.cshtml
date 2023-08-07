@@ -1,10 +1,16 @@
-﻿@{
+﻿@using System.Text;
+@{
     ViewData["Title"] = "News Detail";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var lang = Context.Request.Cookies["lang"];
 }
 @model Lighting.Models.InputFilterModels.News.Output_NewsVm
-
+<style>
+/*    .media {
+        height: auto;
+        width: auto;
+    }*/
+</style>
 <div class="top-page">
     <div class="container">
         <div class="row">
@@ -40,22 +46,23 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div class="txt-content indent">
-                                    @if (lang == "EN")
-                                    {
+                                @if (lang == "EN")
+                                {
+                                    <div class="txt-content indent" id="content">
                                         @Html.Raw(Model.Content_EN)
-                                    }
-                                    else
-                                    {
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="txt-content indent" id="content">
                                         @Html.Raw(Model.Content_TH)
-                                    }
-
-                                </div>
+                                    </div>
+                                }
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                @if (Model.ImgList.Count != null)
+                                @if (Model.ImgList != null)
                                 {
                                     if (Model.ImgList.Count > 0)
                                     {
@@ -67,9 +74,12 @@
                         <div class="row">
                             <div class="col">
                                 <ul class="news-gallery">
-                                    @foreach (var path_img in Model.ImgList)
+                                    @if (Model.ImgList != null)
                                     {
-                                        <li><a data-fancybox="gallery" href="~/@path_img"><div class="img-width"><img src="~/@path_img"></div></a></li>
+                                        @foreach (var path_img in Model.ImgList)
+                                        {
+                                            <li><a data-fancybox="gallery" href="~/@path_img"><div class="img-width"><img src="~/@path_img"></div></a></li>
+                                        }
                                     }
                                 </ul>
                             </div>
@@ -121,6 +131,26 @@
                 .on('hide.bs.collapse', function (a) {
                     $(a.target).prev('.panel-heading').removeClass('active');
                 });
+
+            //video
+            let content = document.querySelectorAll("figure");
+            let indexHtml =0;
+            document.querySelectorAll("oembed").forEach(x => {
+                //console.log(x.getAttribute("url"));
+                let url = x.getAttribute("url");
+                let w = window.innerWidth, h = 500;
+                if (w >= 1080) {
+                    h = 750;
+                }
+                if (w < 1080) {
+                    h = Math.floor(window.innerHeight * 0.55)
+                }
+                if (w < 500) {
+                    h = Math.floor(window.innerHeight * 0.4)
+                }
+                content[indexHtml].innerHTML = `<iframe width="100%" height="${h}px" src="${url}"></iframe>`;
+                indexHtml++;
+            });
         });
 
     </script>

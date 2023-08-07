@@ -2,6 +2,7 @@
 using Lighting.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Lighting.Models.InputFilterModels.News;
+using Lighting.Extension;
 
 namespace Lighting.Controllers.Frontend
 {
@@ -76,7 +77,7 @@ namespace Lighting.Controllers.Frontend
                 var newsVM = new Output_NewsVm
                 {
                     Id = news.Id,
-                    Content_TH = news.Content_TH,
+                    Content_TH =news.Content_TH,
                     Content_EN = news.Content_EN,
                     TitleImage = Path.Combine(news.ImagePath, "0.jpg"),
                     Title_TH = news.Title_TH,
@@ -85,7 +86,6 @@ namespace Lighting.Controllers.Frontend
                     CreateDate_EN = news.CreateDate_EN,
                     ImgList = Get_FileName(news.ImagePath)
                 };
-
                 return View(newsVM);
 
             }

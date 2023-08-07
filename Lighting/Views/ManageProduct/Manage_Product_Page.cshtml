@@ -84,9 +84,9 @@
                     <tr id="@product.Id">
                         <th scope="row">@i</th>
                         <td><img src="@product.Preview_Imamge" style="width:100px;height:100px;" /> </td>
-                        <td>@product.Model</td>
-                        <td>@product.Type_TH / @product.Type_TH</td>
-                        <td>@product.Power</td>
+                        <td style="word-wrap:break-word;max-width:500px;">@product.Model</td>
+                        <td style="word-wrap:break-word;max-width:500px;">@product.Type_TH / @product.Type_TH</td>
+                        <td style="word-wrap:break-word;max-width:500px;">@product.Power</td>
                         <td class="text-center">
                             <a href="@Url.Action("Edit_Product_Page","ManageProduct",new {id= product.Id})" type="button" class="btn btn-warning">
                                 <i class="bi bi-pencil-square"></i>แก้ไข/edit
@@ -163,9 +163,9 @@
                     prev += `<tr id="${curr.id}">
                                 <th scope="row"></th>
                                         <td><img src="${curr.preview_Imamge}" style="width:100px;height:100px;" /> </td>
-                                        <td>${curr.model}</td>
-                                        <td>${ curr.type_EN} /${curr.type_TH}</td>
-                                        <td>${curr.power}</td>
+                                                <td style="word-wrap:break-word;max-width:500px;">${curr.model}</td>
+                                                <td style="word-wrap:break-word;max-width:500px;">${curr.type_EN} /${curr.type_TH}</td>
+                                                <td style="word-wrap:break-word;max-width:500px;">${curr.power}</td>
                                         <td class="text-center">
                                         <a href="/ManageProduct/Edit_Product_Page?id=${curr.id}" type="button" class="btn btn-warning">
                                             <i class="bi bi-pencil-square"></i>แก้ไข/edit

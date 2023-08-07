@@ -20,8 +20,8 @@
         </div>
     </div>
     <div class="row mt-4">
-        <div class="col-12">
-            <table class="table">
+        <div class="col-12 ">
+            <table class="table" >
             <thead>
                 <tr style="border-top:1px solid black;border-bottom:1px solid black">
                     <th scope="col">#</th>
@@ -38,10 +38,10 @@
                 @foreach (var job in Model)
                 {
                     <tr id="@job.Id">
-                        <th scope="row">@i</th>
-                        <td>@job.PositionName_TH/@job.PositionName_EN</td>
-                        <td>@job.WorkPlace_TH/@job.WorkPlace_EN</td>
-                        <td>@job.Date_TH &nbsp;/&nbsp;&nbsp; @job.Date_EN</td>
+                        <td scope="row">@i</td>
+                            <td style="word-wrap:break-word;max-width:500px;">@job.PositionName_TH/@job.PositionName_EN</td>
+                            <td style="word-wrap:break-word;max-width:500px;">@job.WorkPlace_TH/@job.WorkPlace_EN</td>
+                            <td style="word-wrap:break-word;max-width:500px;">@job.Date_TH &nbsp;/&nbsp;&nbsp; @job.Date_EN</td>
                         <td class="text-center" style="">
                             <button type="button" class="btn btn-warning" onclick="editById(@job.Id)">
                                 <i class="bi bi-pencil-square"></i>แก้ไข/edit

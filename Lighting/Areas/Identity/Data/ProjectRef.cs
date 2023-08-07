@@ -7,8 +7,8 @@ namespace Lighting.Areas.Identity.Data
         [Key]
         public int Id { get; set; }
         //public int CategoryId { get; set; }
-        public string Title_TH { get; set; }
-        public string Title_EN { get; set; }
+        public string? Title_TH { get; set; }
+        public string? Title_EN { get; set; }
         public string Profile_Image { get; set; }
         public string? Folder_Path { get; set; }
         public string? Location_TH { get; set; }

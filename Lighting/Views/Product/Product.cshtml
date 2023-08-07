@@ -19,7 +19,8 @@
                 <div class="row">
                     @foreach(var category in Model){
                     <div class="col-lg-3 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("Product_Category","Product",new {categoryId= category.Id})">
+                            <a class="contentBox" href="@Url.Action("Product_Category","Product",new {category = category.Name_EN})">
+                                @*new {categoryId= category.Id})*@
                             <div class="row">
                                 <div class="col">
                                     <div class="img-width"><img src="~/@category.Image"></div>

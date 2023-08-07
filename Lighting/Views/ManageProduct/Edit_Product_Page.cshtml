@@ -115,20 +115,12 @@
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">เปลี่ยนรูปโชว์/Change Preview Image
-                <br />
-                <span style="color:red;">
-                    ขนาดรูปภาพ : 500 * 500 px
-                </span></label>
+            <label class="h4">เปลี่ยนรูปโชว์/Change Preview Image</label>
             <input class="form-control" type="file" id="file_img_preview" />
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">Spact image  
-                <br />
-                <span style="color:red;">
-                    ขนาดรูปภาพ : 260 * 40 px
-                </span><a href="ManageProduct/DwonloadFile?path=@Model.SUB_IMG" target="_blank">download click  @Model?.SUB_IMG?.Split("\\").Reverse().Take(1).FirstOrDefault()</a></label>
+            <label class="h4">Spact image  <a href="ManageProduct/DwonloadFile?path=@Model.SUB_IMG" target="_blank">download click  @Model?.SUB_IMG?.Split("\\").Reverse().Take(1).FirstOrDefault()</a></label>
             <input class="form-control" type="file" id="sub_img_file" />
         </div>
 
@@ -212,41 +204,35 @@
             <textarea id="application">@Model?.Application</textarea>
         </div>
 
+        
         <div class="add-product-grid-item">
             <label class="h4">
-                Technical Drawing Image
-
-                <br />
-                <span style="color:red;">
-                    ขนาดรูปภาพ : 500 * 500 px
-                </span>
-                @if(Model?.Technical_Drawing_Img != null)
-                {
-                    foreach (var img in Model.Technical_Drawing_Img)
-                    {
-                        <img src="@img" style="width:3rem;height:3rem;" />
-                    }
-                }
-            </label>
-            <input class="form-control" type="file" multiple id="technical_img_file" accept="image/*" />
-        </div>
-
-        <div class="add-product-grid-item">
-            <label class="h4">
-                Light Distribution Image
-                <br />
-                <span style="color:red;">
-                    ขนาดรูปภาพ : 500 * 500 px
-                </span>
+                Photometric Data Image (แทนที่รูปเดิม)
                 @if(Model?.LIGHT_DISTRIBUTION != null)
                 {
                     foreach (var img in Model.LIGHT_DISTRIBUTION)
                     {
-                        <img src="@img" style="width:3rem;height:3rem;" />
+                        <img src="@img" style="width:100px;height:100px;" />
                     }
                 }
             </label>
+            <br />
             <input class="form-control"  type="file" multiple id="light_distribute_file" accept="image/*" />
+        </div>
+
+        <div class="add-product-grid-item">
+            <label class="h4">
+                Technical Drawing Image (แทนที่รูปเดิม)
+                @if(Model?.Technical_Drawing_Img != null)
+                {
+                    foreach (var img in Model.Technical_Drawing_Img)
+                    {
+                        <img src="@img" style="width:100px;height:100px;" />
+                    }
+                }
+            </label>
+            <br />
+            <input class="form-control" type="file" multiple id="technical_img_file" accept="image/*" />
         </div>
 
         <div class="add-product-grid-spec">

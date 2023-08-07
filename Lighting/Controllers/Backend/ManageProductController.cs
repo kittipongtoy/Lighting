@@ -721,7 +721,7 @@ namespace Lighting.Controllers.Backend
                             });
                         }
                     }
-                    product.ProductSpect = product_spect;
+                    product.ProductSpect.AddRange( product_spect);
                     //product.Housing = input.Housing;
                     //product.Finishing = input.Finishing;
                     //product.Lens = input.Lens;

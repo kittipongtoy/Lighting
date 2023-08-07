@@ -51,9 +51,9 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <ul class="job-position">
-                                                        <li><i class="fas fa-calendar-alt"></i>@job.Date_EN</li>
-                                                        <li><i class="fas fa-user"></i>@job.Quantity position</li>
-                                                        <li><i class="fas fa-building"></i>@job.WorkPlace_EN</li>
+                                                        <li><i class="fas fa-calendar-alt"></i>@job?.Date_EN</li>
+                                                        <li><i class="fas fa-user"></i>@job?.Quantity position</li>
+                                                        <li><i class="fas fa-building"></i>@job?.WorkPlace_EN</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -77,8 +77,8 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        @if (job.Respondsibility_EN != null){
-                                                            @Html.Raw(job.Respondsibility_EN)
+                                                        @if (job?.Respondsibility_EN != null){
+                                                            @Html.Raw(job?.Respondsibility_EN.Replace("<ul>", "<ul class='list-decor'>"));
                                                         }
                                                     </div>
                                                 </div>
@@ -89,9 +89,10 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        @if (job.Qualification_EN != null){
-                                                            @Html.Raw(job.Qualification_EN)
+                                                        @if (job?.Qualification_EN != null){
+                                                            @Html.Raw(job?.Qualification_EN.Replace("<ul>", "<ul class='list-decor'>"));
                                                         }
+
                                                     </div>
                                                 </div>
                                                 <div class="job-contact">
@@ -113,8 +114,8 @@
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <ul class="contact-list">
-                                                                        <li><a href="mailto:@job.Email1">@job.Email1</a></li>
-                                                                        <li><a href="mailto:@job.Email2">@job.Email2</a></li>
+                                                                        <li><a href="mailto:@job?.Email1">@job?.Email1</a></li>
+                                                                        <li><a href="mailto:@job.Email2">@job?.Email2</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -131,7 +132,7 @@
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <ul class="contact-list">
-                                                                        <li>@job.PhoneNumber</li>
+                                                                        <li>@job?.PhoneNumber</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -155,9 +156,9 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <ul class="job-position">
-                                                        <li><i class="fas fa-calendar-alt"></i>@job.Date_TH</li>
-                                                        <li><i class="fas fa-user"></i>@job.Quantity อัตรา</li>
-                                                        <li><i class="fas fa-building"></i>@job.WorkPlace_TH</li>
+                                                        <li><i class="fas fa-calendar-alt"></i>@job?.Date_TH</li>
+                                                        <li><i class="fas fa-user"></i>@job?.Quantity อัตรา</li>
+                                                        <li><i class="fas fa-building"></i>@job?.WorkPlace_TH</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -183,7 +184,7 @@
                                                     <div class="col">
                                                         @if (job.Respondsibility_TH != null)
                                                         {
-                                                            @Html.Raw(job.Respondsibility_TH)
+                                                            @Html.Raw(job?.Respondsibility_TH.Replace("<ul>", "<ul class='list-decor'>"));
                                                         }
                                                     </div>
                                                 </div>
@@ -196,7 +197,7 @@
                                                     <div class="col">
                                                         @if (job.Qualification_TH != null)
                                                         {
-                                                            @Html.Raw(job.Qualification_TH)
+                                                            @Html.Raw(job?.Qualification_TH.Replace("<ul>", "<ul class='list-decor'>"));
                                                         }
                                                     </div>
                                                 </div>
@@ -219,8 +220,8 @@
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <ul class="contact-list">
-                                                                        <li><a href="mailto:@job.Email1">@job.Email1</a></li>
-                                                                        <li><a href="mailto:@job.Email2">@job.Email2</a></li>
+                                                                        <li><a href="mailto:@job?.Email1">@job?.Email1</a></li>
+                                                                        <li><a href="mailto:@job?.Email2">@job?.Email2</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -237,7 +238,7 @@
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <ul class="contact-list">
-                                                                        <li>@job.PhoneNumber</li>
+                                                                        <li>@job?.PhoneNumber</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>

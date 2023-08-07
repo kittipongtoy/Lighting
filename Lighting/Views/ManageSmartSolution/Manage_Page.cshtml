@@ -39,7 +39,7 @@
                     <tr id="@solution.Id">
                         <th scope="row">@i</th>
                         <td><img src="@solution.PreviewImg" style="width:200px;height:200px;" /> </td>
-                        <td>@solution.TitleName_TH/@solution.TitleName_EN</td>
+                        <td style="word-wrap:break-word;max-width:500px;">@solution.TitleName_TH/@solution.TitleName_EN</td>
                         <td class="text-center" style="">
                             <button type="button" class="btn btn-warning" onclick="editById(@solution.Id)">
                                 <i class="bi bi-pencil-square"></i>แก้ไข/edit

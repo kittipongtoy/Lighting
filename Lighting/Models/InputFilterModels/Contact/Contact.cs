@@ -6,7 +6,9 @@ namespace Lighting.Models.InputFilterModels.Contact
     public class Input_ContactVM
     {
         [Required]
-        public string ContactType { get; set; } 
+        public string ContactType { get; set; }
+        public string? Sub_Factory_Name_TH { get; set; }
+        public string? Sub_Factory_Name_EN { get; set; }
         [Required]
         public string PlaceName_TH { get; set; }
         [Required]
@@ -16,6 +18,7 @@ namespace Lighting.Models.InputFilterModels.Contact
         [Required]
         public string Location_EN { get; set;}
 
+        
         public string? CellPhone { get; set; }
         public string? TelePhone { get; set; }
         public string? OfficePhone { get; set; }
@@ -29,7 +32,8 @@ namespace Lighting.Models.InputFilterModels.Contact
     {
         public int Id { get; set; }
         public string ContactType { get; set; }
- 
+        public string? Sub_Factory_Name_TH { get; set; }
+        public string? Sub_Factory_Name_EN { get; set; }
         public string PlaceName_TH { get; set; }
 
         public string PlaceName_EN { get; set; }

@@ -69,13 +69,13 @@
                                             <li>
                                                 <p>
                                                     <strong>@mainContact?.TitleEMail1 :</strong>
-                                                    <a href="@mainContact?.EMail1">@mainContact?.EMail1</a>
+                                                    <a href="mailto:@mainContact?.EMail1">@mainContact?.EMail1</a>
                                                 </p>
                                             </li>
                                             <li>
                                                 <p>
                                                     <strong>@mainContact?.TitleEMail2 :</strong>
-                                                    <a href="@mainContact?.EMail2">@mainContact?.EMail2</a>
+                                                    <a href="mailto:@mainContact?.EMail2">@mainContact?.EMail2</a>
                                                 </p>
                                             </li>
                                         </ul>
@@ -141,64 +141,72 @@
                                     <div class="col-lg-6 col-md-6 col-12 mt-3">
                                         <div class="row">
                                             <div class="col">
-                                                <h5 style="word-wrap:break-word;">@contact.PlaceName_EN </h5>
+                                                <h5 style="word-wrap:break-word;">@contact?.PlaceName_EN </h5>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
                                                 <ul class="contact-info">
-                                                    <li class="address">
-                                                        <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                        <p style="word-wrap:break-word;">@contact.Location_EN </p>
-                                                    </li>
-
-                                                    @if (contact.CellPhone != null)
+                                                    @if (contact?.Sub_Factory_Name_EN != null)
+                                                    {
+                                                        <li>
+                                                            @Html.Raw(contact?.Sub_Factory_Name_EN)
+                                                        </li>
+                                                    }
+                                                    @if (contact?.Location_EN != null)
+                                                    {
+                                                        <li class="address">
+                                                            <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                            <p style="word-wrap:break-word;">@contact?.Location_EN </p>
+                                                        </li>
+                                                    }
+                                                    @if (contact?.CellPhone != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                            <p>@contact.CellPhone</p>
+                                                            <p>@contact?.CellPhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.TelePhone != null)
+                                                    @if (contact?.TelePhone != null)
                                                     {
 
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
-                                                            <p>@contact.TelePhone</p>
+                                                            <p>@contact?.TelePhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.OfficePhone != null)
+                                                    @if (contact?.OfficePhone != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-fax"></i></div>
-                                                            <p>@contact.OfficePhone</p>
+                                                            <p>@contact?.OfficePhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.Email != null)
+                                                    @if (contact?.Email != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                            <p><a style="word-wrap:break-word;" href="@contact.Email">@contact.Email</a></p>
+                                                            <p><a style="word-wrap:break-word;" href="mailto:@contact?.Email">@Html.Raw(contact?.Email)</a></p>
                                                         </li>
                                                     }
-                                                    @if (contact.GoogleMaps_Url != null)
+                                                    @if (contact?.GoogleMaps_Url != null)
                                                     {
                                                         <li class="map">
-                                                            <a class="buttonB" href="@contact.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                                            @if (contact.YouTube_Url != null)
+                                                            <a class="buttonB" href="@contact?.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                                            @if (contact?.YouTube_Url != null)
                                                             {
-                                                                <a class="buttonBD" href="@contact.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                                <a class="buttonBD" href="@contact?.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
                                                             }
                                                         </li>
                                                     }
 
                                                 </ul>
-                                                @if (contact.ImagePath != null)
+                                                @if (contact?.ImagePath != null)
                                                 {
                                                     <div class="row d-none d-md-block mt-3">
                                                         <div class="col">
-                                                            <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
-                                                                <img src="~/@contact.ImagePath">
+                                                            <a class="img-width" data-fancybox="" href="~/@contact?.ImagePath">
+                                                                <img src="~/@contact?.ImagePath">
                                                             </a>
                                                         </div>
                                                     </div>
@@ -206,12 +214,12 @@
                                             </div>
                                         </div>
                                         <!-- MAP :: FOR MOBILE -->
-                                        @if (contact.ImagePath != null)
+                                        @if (contact?.ImagePath != null)
                                         {
                                             <div class="row d-block d-md-none">
                                                 <div class="col">
-                                                    <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
-                                                        <img src="~/@contact.ImagePath">
+                                                    <a class="img-width" data-fancybox="" href="~/@contact?.ImagePath">
+                                                        <img src="~/@contact?.ImagePath">
                                                     </a>
                                                 </div>
                                             </div>
@@ -226,64 +234,73 @@
                                     <div class="col-lg-6 col-md-6 col-12 mt-3">
                                         <div class="row">
                                             <div class="col">
-                                                <h5 style="word-wrap:break-word;">@contact.PlaceName_TH</h5>
+                                                <h5 style="word-wrap:break-word;">@contact?.PlaceName_TH</h5>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
                                                 <ul class="contact-info">
-                                                    <li class="address">
-                                                        <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                        <p style="word-wrap:break-word;">@contact.Location_TH</p>
+                                                    @if (contact?.Sub_Factory_Name_TH != null)
+                                                    {
+                                                        <li>
+                                                            @Html.Raw(contact?.Sub_Factory_Name_TH)
                                                     </li>
+                                                    }
+                                                    @if (contact?.Location_TH != null)
+                                                    {
+                                                        <li class="address">
+                                                            <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                            <p style="word-wrap:break-word;">@contact?.Location_TH</p>
+                                                        </li>
+                                                    }
 
-                                                    @if (contact.CellPhone != null)
+                                                    @if (contact?.CellPhone != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                            <p>@contact.CellPhone</p>
+                                                            <p>@contact?.CellPhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.TelePhone != null)
+                                                    @if (contact?.TelePhone != null)
                                                     {
 
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
-                                                            <p>@contact.TelePhone</p>
+                                                            <p>@contact?.TelePhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.OfficePhone != null)
+                                                    @if (contact?.OfficePhone != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-fax"></i></div>
-                                                            <p>@contact.OfficePhone</p>
+                                                            <p>@contact?.OfficePhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.Email != null)
+                                                    @if (contact?.Email != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                            <p><a style="word-wrap:break-word;" href="@contact.Email">@contact.Email</a></p>
+                                                            <p><a style="word-wrap:break-word;" href="mailto:@contact?.Email">@Html.Raw(contact?.Email)</a></p>
                                                         </li>
                                                     }
-                                                    @if (contact.GoogleMaps_Url != null)
+                                                    @if (contact?.GoogleMaps_Url != null)
                                                     {
                                                         <li class="map">
-                                                            <a class="buttonB" href="@contact.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                                            @if (contact.YouTube_Url != null)
+                                                            <a class="buttonB" href="@contact?.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                                            @if (contact?.YouTube_Url != null)
                                                             {
-                                                                <a class="buttonBD" href="@contact.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                                <a class="buttonBD" href="@contact?.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
                                                             }
                                                         </li>
                                                     }
 
                                                 </ul>
-                                                @if (contact.ImagePath != null)
+                                                @if (contact?.ImagePath != null)
                                                 {
                                                     <div class="row d-none d-md-block mt-3">
                                                         <div class="col">
-                                                            <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
-                                                                <img src="~/@contact.ImagePath">
+                                                            <a class="img-width" data-fancybox="" href="~/@contact?.ImagePath">
+                                                                <img src="~/@contact?.ImagePath">
                                                             </a>
                                                         </div>
                                                     </div>
@@ -291,12 +308,12 @@
                                             </div>
                                         </div>
                                         <!-- MAP :: FOR MOBILE -->
-                                        @if (contact.ImagePath != null)
+                                        @if (contact?.ImagePath != null)
                                         {
                                             <div class="row d-block d-md-none">
                                                 <div class="col">
-                                                    <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
-                                                        <img src="~/@contact.ImagePath">
+                                                    <a class="img-width" data-fancybox="" href="~/@contact?.ImagePath">
+                                                        <img src="~/@contact?.ImagePath">
                                                     </a>
                                                 </div>
                                             </div>
@@ -322,58 +339,66 @@
                                         <div class="row">
                                             <div class="col">
                                                 <ul class="contact-info">
-                                                    <li class="address">
-                                                        <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                        <p style="word-wrap:break-word;">@contact.Location_EN</p>
-                                                    </li>
-
-                                                    @if (contact.CellPhone != null)
+                                                    @if (contact?.Sub_Factory_Name_EN != null)
+                                                    {
+                                                        <li>
+                                                            @Html.Raw(contact?.Sub_Factory_Name_EN)
+                                                        </li>
+                                                    }
+                                                    @if (@contact?.Location_EN != null)
+                                                    {
+                                                        <li class="address">
+                                                            <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                            <p style="word-wrap:break-word;">@contact?.Location_EN</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact?.CellPhone != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                            <p>@contact.CellPhone</p>
+                                                            <p>@contact?.CellPhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.TelePhone != null)
+                                                    @if (contact?.TelePhone != null)
                                                     {
 
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
-                                                            <p>@contact.TelePhone</p>
+                                                            <p>@contact?.TelePhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.OfficePhone != null)
+                                                    @if (contact?.OfficePhone != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-fax"></i></div>
-                                                            <p>@contact.OfficePhone</p>
+                                                            <p>@contact?.OfficePhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.Email != null)
+                                                    @if (contact?.Email != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                            <p><a style="word-wrap:break-word;" href="@contact.Email">@contact.Email</a></p>
+                                                            <p><a style="word-wrap:break-word;" href="mailto:@contact?.Email">@Html.Raw(contact?.Email)</a></p>
                                                         </li>
                                                     }
-                                                    @if (contact.GoogleMaps_Url != null)
+                                                    @if (contact?.GoogleMaps_Url != null)
                                                     {
                                                         <li class="map">
-                                                            <a class="buttonB" href="@contact.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                                            @if (contact.YouTube_Url != null)
+                                                            <a class="buttonB" href="@contact?.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                                            @if (contact?.YouTube_Url != null)
                                                             {
-                                                                <a class="buttonBD" href="@contact.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                                <a class="buttonBD" href="@contact?.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
                                                             }
                                                         </li>
                                                     }
 
                                                 </ul>
-                                                @if (contact.ImagePath != null)
+                                                @if (contact?.ImagePath != null)
                                                 {
                                                     <div class="row d-none d-md-block mt-3">
                                                         <div class="col">
-                                                            <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
-                                                                <img src="~/@contact.ImagePath">
+                                                            <a class="img-width" data-fancybox="" href="~/@contact?.ImagePath">
+                                                                <img src="~/@contact?.ImagePath">
                                                             </a>
                                                         </div>
                                                     </div>
@@ -381,12 +406,12 @@
                                             </div>
                                         </div>
                                         <!-- MAP :: FOR MOBILE -->
-                                        @if (contact.ImagePath != null)
+                                        @if (contact?.ImagePath != null)
                                         {
                                             <div class="row d-block d-md-none">
                                                 <div class="col">
-                                                    <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
-                                                        <img src="~/@contact.ImagePath">
+                                                    <a class="img-width" data-fancybox="" href="~/@contact?.ImagePath">
+                                                        <img src="~/@contact?.ImagePath">
                                                     </a>
                                                 </div>
                                             </div>
@@ -401,64 +426,70 @@
                                     <div class="col-lg-6 col-md-6 col-12 mt-3">
                                         <div class="row">
                                             <div class="col">
-                                                <h5 style="word-wrap:break-word;">@contact.PlaceName_TH</h5>
+                                                <h5 style="word-wrap:break-word;">@contact?.PlaceName_TH</h5>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
                                                 <ul class="contact-info">
+                                                    @if (contact?.Sub_Factory_Name_TH != null)
+                                                    {
+                                                        <li>
+                                                            @Html.Raw(contact?.Sub_Factory_Name_TH)
+                                                        </li>
+                                                    }
                                                     <li class="address">
                                                         <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                        <p style="word-wrap:break-word;">@contact.Location_TH</p>
+                                                        <p style="word-wrap:break-word;">@contact?.Location_TH</p>
                                                     </li>
 
-                                                    @if (contact.CellPhone != null)
+                                                    @if (contact?.CellPhone != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                            <p style="word-wrap:break-word;">@contact.CellPhone</p>
+                                                            <p style="word-wrap:break-word;">@contact?.CellPhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.TelePhone != null)
+                                                    @if (contact?.TelePhone != null)
                                                     {
 
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
-                                                            <p>@contact.TelePhone</p>
+                                                            <p>@contact?.TelePhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.OfficePhone != null)
+                                                    @if (contact?.OfficePhone != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-fax"></i></div>
-                                                            <p>@contact.OfficePhone</p>
+                                                            <p>@contact?.OfficePhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.Email != null)
+                                                    @if (contact?.Email != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                            <p><a style="word-wrap:break-word;" href="@contact.Email">@contact.Email</a></p>
+                                                            <p><a style="word-wrap:break-word;" href="mailto:@contact?.Email">@Html.Raw(contact?.Email)</a></p>
                                                         </li>
                                                     }
-                                                    @if (contact.GoogleMaps_Url != null)
+                                                    @if (contact?.GoogleMaps_Url != null)
                                                     {
                                                         <li class="map">
-                                                            <a class="buttonB" href="@contact.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                                            @if (contact.YouTube_Url != null)
+                                                            <a class="buttonB" href="@contact?.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                                            @if (contact?.YouTube_Url != null)
                                                             {
-                                                                <a class="buttonBD" href="@contact.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                                <a class="buttonBD" href="@contact?.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
                                                             }
                                                         </li>
                                                     }
 
                                                 </ul>
-                                                @if (contact.ImagePath != null)
+                                                @if (contact?.ImagePath != null)
                                                 {
                                                     <div class="row d-none d-md-block mt-3">
                                                         <div class="col">
-                                                            <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
-                                                                <img src="~/@contact.ImagePath">
+                                                            <a class="img-width" data-fancybox="" href="~/@contact?.ImagePath">
+                                                                <img src="~/@contact?.ImagePath">
                                                             </a>
                                                         </div>
                                                     </div>
@@ -466,12 +497,12 @@
                                             </div>
                                         </div>
                                         <!-- MAP :: FOR MOBILE -->
-                                        @if (contact.ImagePath != null)
+                                        @if (contact?.ImagePath != null)
                                         {
                                             <div class="row d-block d-md-none">
                                                 <div class="col">
-                                                    <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
-                                                        <img src="~/@contact.ImagePath">
+                                                    <a class="img-width" data-fancybox="" href="~/@contact?.ImagePath">
+                                                        <img src="~/@contact?.ImagePath">
                                                     </a>
                                                 </div>
                                             </div>
@@ -491,64 +522,70 @@
                                     <div class="col-lg-6 col-md-6 col-12 mt-3">
                                         <div class="row">
                                             <div class="col">
-                                                <h5 style="word-wrap:break-word;">@contact.PlaceName_EN</h5>
+                                                <h5 style="word-wrap:break-word;">@contact?.PlaceName_EN</h5>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
                                                 <ul class="contact-info">
-                                                    <li class="address">
-                                                        <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                        <p style="word-wrap:break-word;">@contact.Location_EN</p>
-                                                    </li>
-
-                                                    @if (contact.CellPhone != null)
+                                                    @if(contact?.Sub_Factory_Name_EN != null)
+                                                    {
+                                                        <li>@Html.Raw(contact?.Sub_Factory_Name_EN)</li>
+                                                    }
+                                                    @if (contact?.Location_EN != null)
+                                                    {
+                                                        <li class="address">
+                                                            <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                            <p style="word-wrap:break-word;">@contact?.Location_EN</p>
+                                                        </li>
+                                                    }
+                                                    @if (contact?.CellPhone != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                            <p>@contact.CellPhone</p>
+                                                            <p>@contact?.CellPhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.TelePhone != null)
+                                                    @if (contact?.TelePhone != null)
                                                     {
 
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
-                                                            <p>@contact.TelePhone</p>
+                                                            <p>@contact?.TelePhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.OfficePhone != null)
+                                                    @if (contact?.OfficePhone != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-fax"></i></div>
-                                                            <p>@contact.OfficePhone</p>
+                                                            <p>@contact?.OfficePhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.Email != null)
+                                                    @if (contact?.Email != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                            <p><a style="word-wrap:break-word;" href="@contact.Email">@contact.Email</a></p>
+                                                            <p><a style="word-wrap:break-word;" href="mailto:@contact?.Email">@Html.Raw(contact?.Email)</a></p>
                                                         </li>
                                                     }
-                                                    @if (contact.GoogleMaps_Url != null)
+                                                    @if (contact?.GoogleMaps_Url != null)
                                                     {
                                                         <li class="map">
-                                                            <a class="buttonB" href="@contact.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                                            @if (contact.YouTube_Url != null)
+                                                            <a class="buttonB" href="@contact?.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                                            @if (contact?.YouTube_Url != null)
                                                             {
-                                                                <a class="buttonBD" href="@contact.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                                <a class="buttonBD" href="@contact?.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
                                                             }
                                                         </li>
                                                     }
 
                                                 </ul>
-                                                @if (contact.ImagePath != null)
+                                                @if (contact?.ImagePath != null)
                                                 {
                                                     <div class="row d-none d-md-block mt-3">
                                                         <div class="col">
-                                                            <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
-                                                                <img src="~/@contact.ImagePath">
+                                                            <a class="img-width" data-fancybox="" href="~/@contact?.ImagePath">
+                                                                <img src="~/@contact?.ImagePath">
                                                             </a>
                                                         </div>
                                                     </div>
@@ -556,12 +593,12 @@
                                             </div>
                                         </div>
                                         <!-- MAP :: FOR MOBILE -->
-                                        @if (contact.ImagePath != null)
+                                        @if (contact?.ImagePath != null)
                                         {
                                             <div class="row d-block d-md-none">
                                                 <div class="col">
-                                                    <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
-                                                        <img src="~/@contact.ImagePath">
+                                                    <a class="img-width" data-fancybox="" href="~/@contact?.ImagePath">
+                                                        <img src="~/@contact?.ImagePath">
                                                     </a>
                                                 </div>
                                             </div>
@@ -576,64 +613,71 @@
                                     <div class="col-lg-6 col-md-6 col-12 mt-3">
                                         <div class="row">
                                             <div class="col">
-                                                <h5 style="word-wrap:break-word;">@contact.PlaceName_TH</h5>
+                                                <h5 style="word-wrap:break-word;">@contact?.PlaceName_TH</h5>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
                                                 <ul class="contact-info">
-                                                    <li class="address">
-                                                        <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                        <p style="word-wrap:break-word;">@contact.Location_TH</p>
-                                                    </li>
+                                                    @if (contact?.Sub_Factory_Name_TH != null)
+                                                    {
+                                                        <li>@Html.Raw(contact?.Sub_Factory_Name_TH)</li>
+                                                    }
+                                                    @if (contact?.Location_TH != null)
+                                                    {
+                                                        <li class="address">
+                                                            <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                            <p style="word-wrap:break-word;">@contact?.Location_TH</p>
+                                                        </li>
+                                                    }
 
-                                                    @if (contact.CellPhone != null)
+                                                    @if (contact?.CellPhone != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                            <p>@contact.CellPhone</p>
+                                                            <p>@contact?.CellPhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.TelePhone != null)
+                                                    @if (contact?.TelePhone != null)
                                                     {
 
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
-                                                            <p>@contact.TelePhone</p>
+                                                            <p>@contact?.TelePhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.OfficePhone != null)
+                                                    @if (contact?.OfficePhone != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-fax"></i></div>
-                                                            <p>@contact.OfficePhone</p>
+                                                            <p>@contact?.OfficePhone</p>
                                                         </li>
                                                     }
-                                                    @if (contact.Email != null)
+                                                    @if (contact?.Email != null)
                                                     {
                                                         <li>
                                                             <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                            <p><a style="word-wrap:break-word;" href="@contact.Email">@contact.Email</a></p>
+                                                            <p><a style="word-wrap:break-word;" href="mailto:@contact?.Email">@Html.Raw(contact?.Email)</a></p>
                                                         </li>
                                                     }
-                                                    @if (contact.GoogleMaps_Url != null)
+                                                    @if (contact?.GoogleMaps_Url != null)
                                                     {
                                                         <li class="map">
-                                                            <a class="buttonB" href="@contact.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                                            @if (contact.YouTube_Url != null)
+                                                            <a class="buttonB" href="@contact?.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                                            @if (contact?.YouTube_Url != null)
                                                             {
-                                                                <a class="buttonBD" href="@contact.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                                <a class="buttonBD" href="@contact?.YouTube_Url" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
                                                             }
                                                         </li>
                                                     }
 
                                                 </ul>
-                                                @if (contact.ImagePath != null)
+                                                @if (contact?.ImagePath != null)
                                                 {
                                                     <div class="row d-none d-md-block mt-3">
                                                         <div class="col">
-                                                            <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
-                                                                <img src="~/@contact.ImagePath">
+                                                            <a class="img-width" data-fancybox="" href="~/@contact?.ImagePath">
+                                                                <img src="~/@contact?.ImagePath">
                                                             </a>
                                                         </div>
                                                     </div>
@@ -641,12 +685,12 @@
                                             </div>
                                         </div>
                                         <!-- MAP :: FOR MOBILE -->
-                                        @if (contact.ImagePath != null)
+                                        @if (contact?.ImagePath != null)
                                         {
                                             <div class="row d-block d-md-none">
                                                 <div class="col">
-                                                    <a class="img-width" data-fancybox="" href="~/@contact.ImagePath">
-                                                        <img src="~/@contact.ImagePath">
+                                                    <a class="img-width" data-fancybox="" href="~/@contact?.ImagePath">
+                                                        <img src="~/@contact?.ImagePath">
                                                     </a>
                                                 </div>
                                             </div>
