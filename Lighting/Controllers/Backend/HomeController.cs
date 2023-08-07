@@ -9,6 +9,7 @@ namespace Lighting.Controllers.Backend
     [Authorize]
     public class HomeController : Controller
 	{
+        //
         private readonly LightingContext _db;
         private readonly IWebHostEnvironment _env;
         private readonly string _rootPath;
