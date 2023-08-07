@@ -372,7 +372,8 @@ namespace Lighting.Migrations
                     DownloadType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name_EN = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name_TH = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    File_Path = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    File_Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    L_AND_BIM_Link = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1167,16 +1168,11 @@ namespace Lighting.Migrations
                 });
 
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:Lighting/Migrations/20230807032024_xxx.cs
                 name: "IR_Summary_Financial_Highlight",
-========
-                name: "MainContacts",
->>>>>>>> add-contactus-news-applyjob-(download-inprogress):Lighting/Migrations/20230806100254_init.cs
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-<<<<<<<< HEAD:Lighting/Migrations/20230807032024_xxx.cs
                     Title_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Detail_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -1209,27 +1205,6 @@ namespace Lighting.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_IR_Summary_Financial_HighlightsDetail", x => x.Id);
-========
-                    Title_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TitleName_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Location_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Title_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TitleName_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Location_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OfficePhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TitleEMail1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EMail1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TitleEMail2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EMail2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GoogleMapLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MoreInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Img_File = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MainContacts", x => x.Id);
->>>>>>>> add-contactus-news-applyjob-(download-inprogress):Lighting/Migrations/20230806100254_init.cs
                 });
 
             migrationBuilder.CreateTable(
@@ -3407,8 +3382,8 @@ namespace Lighting.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title_TH = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Title_EN = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Profile_Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Folder_Path = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Location_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -3475,29 +3450,17 @@ namespace Lighting.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NameThai", "NormalizedName", "created_at", "updated_at" },
-<<<<<<<< HEAD:Lighting/Migrations/20230807032024_xxx.cs
-                values: new object[] { "de28898f-1751-4433-86c5-187be7c280cc", "84f73df9-1ba2-4b82-b550-60634a48619a", "Admin", "Admin", "Admin", new DateTime(2023, 8, 7, 3, 20, 24, 47, DateTimeKind.Utc).AddTicks(2034), new DateTime(2023, 8, 7, 3, 20, 24, 47, DateTimeKind.Utc).AddTicks(2038) });
-========
-                values: new object[] { "d2f4112f-5575-47bf-aa2b-8ff76f4be5d8", "54d675c4-e707-4e46-b259-503f8692eb91", "Admin", "Admin", "Admin", new DateTime(2023, 8, 6, 10, 2, 53, 746, DateTimeKind.Utc).AddTicks(8632), new DateTime(2023, 8, 6, 10, 2, 53, 746, DateTimeKind.Utc).AddTicks(8637) });
->>>>>>>> add-contactus-news-applyjob-(download-inprogress):Lighting/Migrations/20230806100254_init.cs
+                values: new object[] { "caebf7bd-194f-4ac5-955a-21c6e53b7e74", "5b46b38d-96f9-4e51-9256-2e50b57de4fc", "Admin", "Admin", "Admin", new DateTime(2023, 8, 7, 3, 37, 28, 731, DateTimeKind.Utc).AddTicks(9214), new DateTime(2023, 8, 7, 3, 37, 28, 731, DateTimeKind.Utc).AddTicks(9218) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ApplicationFile", "ConcurrencyStamp", "Email", "EmailConfirmed", "EmployeeCode", "EmployeeCodeInt", "Firstname", "GuarantorIdentificationCardFile", "Isactive", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePath", "ReceptionistFile", "SecurityStamp", "TwoFactorEnabled", "UserName", "created_at", "updated_at" },
-<<<<<<<< HEAD:Lighting/Migrations/20230807032024_xxx.cs
-                values: new object[] { "09f9c222-d433-4f0b-8337-7d12bf3bacc9", 0, null, null, "3a333845-cf10-49f7-bb3c-8ec2554158b9", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEACvmzzOQkjaTHv+HxYWMt3mNBJj1zMKL2uQCmGAU5h7XLIW1rRYl+IzEREBMIncow==", null, false, null, null, "ef0538dd-5898-45cd-a61d-56dd1ad258de", false, "Admin@Lighting.com", null, null });
-========
-                values: new object[] { "3e9d701d-e276-4284-bdf4-a0380b962c9e", 0, null, null, "f686a5c9-b9f2-4c69-b825-0b7f199a829f", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEKptn4PcAFfU7q/hO6Q/9qj4JKMxGe+qOx2n08E1qDZnuRcUQDG7hqc52swF7gTTrg==", null, false, null, null, "a1ab945b-6cb4-46f4-bc0e-938d1ab8be02", false, "Admin@Lighting.com", null, null });
->>>>>>>> add-contactus-news-applyjob-(download-inprogress):Lighting/Migrations/20230806100254_init.cs
+                values: new object[] { "19554b60-1d67-483f-9a4a-77cefed40a7e", 0, null, null, "79cf57ce-3c61-40d0-95bb-83d700c4a80a", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEJo2gtd/yL27ychd4zA89WmXqTMD6tUkrLeen8nZZhUgV4tPrTLFcs98O6WnfedBdQ==", null, false, null, null, "d64df205-ee21-4f42-8a5d-97a68fe1bdd3", false, "Admin@Lighting.com", null, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-<<<<<<<< HEAD:Lighting/Migrations/20230807032024_xxx.cs
-                values: new object[] { "de28898f-1751-4433-86c5-187be7c280cc", "09f9c222-d433-4f0b-8337-7d12bf3bacc9" });
-========
-                values: new object[] { "d2f4112f-5575-47bf-aa2b-8ff76f4be5d8", "3e9d701d-e276-4284-bdf4-a0380b962c9e" });
->>>>>>>> add-contactus-news-applyjob-(download-inprogress):Lighting/Migrations/20230806100254_init.cs
+                values: new object[] { "caebf7bd-194f-4ac5-955a-21c6e53b7e74", "19554b60-1d67-483f-9a4a-77cefed40a7e" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -3725,14 +3688,10 @@ namespace Lighting.Migrations
                 name: "IR_Stock_QuoteDetail");
 
             migrationBuilder.DropTable(
-<<<<<<<< HEAD:Lighting/Migrations/20230807032024_xxx.cs
                 name: "IR_Summary_Financial_Highlight");
 
             migrationBuilder.DropTable(
                 name: "IR_Summary_Financial_HighlightsDetail");
-========
-                name: "MainContacts");
->>>>>>>> add-contactus-news-applyjob-(download-inprogress):Lighting/Migrations/20230806100254_init.cs
 
             migrationBuilder.DropTable(
                 name: "M_chairman");
@@ -3744,12 +3703,9 @@ namespace Lighting.Migrations
                 name: "MainContacts");
 
             migrationBuilder.DropTable(
-<<<<<<<< HEAD:Lighting/Migrations/20230807032024_xxx.cs
                 name: "News");
 
             migrationBuilder.DropTable(
-========
->>>>>>>> add-contactus-news-applyjob-(download-inprogress):Lighting/Migrations/20230806100254_init.cs
                 name: "O_Anti_fraud");
 
             migrationBuilder.DropTable(
