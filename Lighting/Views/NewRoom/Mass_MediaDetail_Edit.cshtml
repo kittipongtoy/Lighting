@@ -33,7 +33,7 @@
                     <div class="row mb-3" style="padding-top: 1.5rem!important;">
                         <div class="col-6">
                             <h2>
-                                เพิ่มรายการ
+                                แก้ไขรายการ
                             </h2>
                         </div>
                         <div class="col-6" style="text-align:right;">
@@ -251,24 +251,7 @@
 
         var editorTH;
         var editorEN;
-        ClassicEditor
-            .create(document.querySelector('#Detail_TH'))
-            .then(editor => {
-                console.log('Editor was initialized', editor);
-                editorTH = editor;
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        ClassicEditor
-            .create(document.querySelector('#Detail_EN'))
-            .then(editor => {
-                console.log('Editor was initialized', editor);
-                editorEN = editor;
-            })
-            .catch(error => {
-                console.error(error);
-            });
+       
 
         $(() => {
             $.ajax({
@@ -280,8 +263,8 @@
                     $("#Id").val(data.id);
                     $("#Title_TH").val(data.title_TH);
                     $("#Title_EN").val(data.title_EN);
-                    $("#SubTitle_TH").val(data.subTitle_TH);
-                    $("#SubTitle_EN").val(data.subTitle_EN);
+                    $("#Detail_EN").val(data.detail_EN);
+                    $("#Detail_TH").val(data.detail_TH);
 
                     $("#Question_TH").val(data.question_TH);
                     $("#Question_EN").val(data.question_EN);
@@ -310,6 +293,25 @@
                         status += '</div>';
                     }
                     $("#CheckStatus").html(status);
+
+                    ClassicEditor
+                        .create(document.querySelector('#Detail_TH'))
+                        .then(editor => {
+                            console.log('Editor was initialized', editor);
+                            editorTH = editor;
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                    ClassicEditor
+                        .create(document.querySelector('#Detail_EN'))
+                        .then(editor => {
+                            console.log('Editor was initialized', editor);
+                            editorEN = editor;
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
                 },
                 error: (e) => {
                     displayError(e);

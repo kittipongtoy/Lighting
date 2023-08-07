@@ -137,24 +137,7 @@
 
         var editorTH;
         var editorEN;
-        ClassicEditor
-            .create(document.querySelector('#Detail_TH'))
-            .then(editor => {
-                console.log('Editor was initialized', editor);
-                editorTH = editor;
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        ClassicEditor
-            .create(document.querySelector('#Detail_EN'))
-            .then(editor => {
-                console.log('Editor was initialized', editor);
-                editorEN = editor;
-            })
-            .catch(error => {
-                console.error(error);
-            });
+       
 
         $(() => {
             $.ajax({
@@ -165,8 +148,11 @@
                     $("#Id").val(data.id);
                     $("#Title_TH").val(data.title_TH);
                     $("#Title_EN").val(data.title_EN);
-                    $("#Detail_TH").val(data.detail_TH);
-                    $("#Detail_EN").val(data.detail_EN);
+                    $("#Detail_TH").html(data.detail_TH);
+                    $("#Detail_EN").html(data.detail_EN);
+
+                    //$("#Detail_TH").val(data.detail_TH);
+                    //$("#Detail_EN").val(data.detail_EN);
 
                     var status = '';
                     if (data.status == 1) {
@@ -181,6 +167,26 @@
                         status += '<label class="form-check-label" for="use_status"> ใช้งาน </label>';
                         status += '</div>';
                     }
+
+                    ClassicEditor
+                        .create(document.querySelector('#Detail_TH'))
+                        .then(editor => {
+                            console.log('Editor was initialized', editor);
+                            editorTH = editor;
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                    ClassicEditor
+                        .create(document.querySelector('#Detail_EN'))
+                        .then(editor => {
+                            console.log('Editor was initialized', editor);
+                            editorEN = editor;
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+
                     $("#CheckStatus").html(status);
                 },
                 error: (e) => {

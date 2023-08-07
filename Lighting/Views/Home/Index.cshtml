@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Lighting.Areas.Identity.Data.SettingIndex;
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
@@ -11,8 +12,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
                     <li class="breadcrumb-item text-muted">
                         <a href="@Url.Action("Index","Home")" class="text-muted text-hover-primary">หน้าแรก</a>
-                    </li>
-                    
+                    </li>                    
                 </ul>
             </div>
         </div>
@@ -23,17 +23,23 @@
                 <div class="card-header border-0 pt-6">
                     <div class="card-title">
                         คั้งค่า Text หน้า Main
-                    </div>
-                    
+                    </div>                  
                 </div>
-                <div class="card-body pt-0 row">
+                <div class="card-body pt-0 row">                   
                     <form asp-action="update" asp-controller="Home" method="post" enctype="multipart/form-data">
                         <div class="col-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาไทย</span>
                                 </div>
-                                <input type="text" class="form-control" name="titleTH1" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleTH1">
+                                @if (Model != null)
+                                { 
+                                    <input type="text" class="form-control" name="titleTH1" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleTH1">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="titleTH1" id="basic-url" aria-describedby="basic-addon3" value="">                                   
+                                }
                             </div>
                        </div>
                         <div class="col-6">
@@ -41,7 +47,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาไทย</span>
                                 </div>
-                                <input type="text" class="form-control" name="titleTH3" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleTH3">
+                                @if (Model != null)
+                                { 
+                                    <input type="text" class="form-control" name="titleTH3" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleTH3">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="titleTH3" id="basic-url" aria-describedby="basic-addon3" value="">
+                                }
                             </div>
                         </div>
                         <div class="col-6">
@@ -49,7 +62,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">ภาษาอังกฤษ</span>
                                 </div>
-                                <input type="text" class="form-control" name="titleENG1" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleENG1">
+                                @if (Model != null)
+                                { 
+                                    <input type="text" class="form-control" name="titleENG1" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleENG1">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="titleENG1" id="basic-url" aria-describedby="basic-addon3" value="">
+                                }
                             </div>
                         </div>
                         <div class="col-6">
@@ -57,7 +77,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">ภาษาอังกฤษ</span>
                                 </div>
-                                <input type="text" class="form-control" name="titleENG3" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleENG3">
+                                @if (Model != null)
+                                { 
+                                    <input type="text" class="form-control" name="titleENG3" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleENG3">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="titleENG3" id="basic-url" aria-describedby="basic-addon3" value="">                                 
+                                }
                             </div>
                         </div>
                         <div class="col-4">
@@ -65,7 +92,15 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาไทย</span>
                                 </div>
-                                <input type="text" class="form-control" name="titleTH2" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleTH2">
+                                @if (Model != null)
+                                {
+                                    <input type="text" class="form-control" name="titleTH2" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleTH2">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="titleTH2" id="basic-url" aria-describedby="basic-addon3" value="">
+                                }
+                                
                             </div>
                         </div>
                         <div class="col-4">
@@ -73,7 +108,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาไทย</span>
                                 </div>
-                                <input type="text" class="form-control" name="titlesubTH2" id="basic-url" aria-describedby="basic-addon3" value="@Model.titlesubTH2">
+                                @if (Model != null)
+                                { 
+                                    <input type="text" class="form-control" name="titlesubTH2" id="basic-url" aria-describedby="basic-addon3" value="@Model.titlesubTH2">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="titlesubTH2" id="basic-url" aria-describedby="basic-addon3" value="">
+                                }
                             </div>
                         </div>
                         <div class="col-4">
@@ -81,7 +123,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาไทย</span>
                                 </div>
-                                <input type="text" class="form-control" name="DescriptTH2" id="basic-url" aria-describedby="basic-addon3" value="@Model.DescriptTH2">
+                                @if (Model != null)
+                                { 
+                                    <input type="text" class="form-control" name="DescriptTH2" id="basic-url" aria-describedby="basic-addon3" value="@Model.DescriptTH2">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="DescriptTH2" id="basic-url" aria-describedby="basic-addon3" value="">                             
+                                }
                             </div>
                         </div>
                         <div class="col-4">
@@ -89,7 +138,15 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาอังกฤษ</span>
                                 </div>
-                                <input type="text" class="form-control" name="titleENG2" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleENG2">
+                                @if (Model != null)
+                                { 
+                                    <input type="text" class="form-control" name="titleENG2" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleENG2">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="titleENG2" id="basic-url" aria-describedby="basic-addon3" value="">
+                                    
+                                }
                             </div>
                         </div>
                         <div class="col-4">
@@ -97,7 +154,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาอังกฤษ</span>
                                 </div>
-                                <input type="text" class="form-control" name="titlesubENG2" id="basic-url" aria-describedby="basic-addon3" value="@Model.titlesubENG2">
+                                @if (Model != null)
+                                { 
+                                    <input type="text" class="form-control" name="titlesubENG2" id="basic-url" aria-describedby="basic-addon3" value="@Model.titlesubENG2">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="titlesubENG2" id="basic-url" aria-describedby="basic-addon3" value="">
+                                }
                             </div>
                         </div>
                         <div class="col-4">
@@ -105,7 +169,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาอังกฤษ</span>
                                 </div>
-                                <input type="text" class="form-control" name="DescriptENG2" id="basic-url" aria-describedby="basic-addon3" value="@Model.DescriptENG2">
+                                @if (Model != null)
+                                {
+                                    <input type="text" class="form-control" name="DescriptENG2" id="basic-url" aria-describedby="basic-addon3" value="@Model.DescriptENG2">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="DescriptENG2" id="basic-url" aria-describedby="basic-addon3" value="">                                   
+                                }
                             </div>
                         </div>
                         <div class="col-6">
@@ -113,7 +184,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาไทย</span>
                                 </div>
-                                <input type="text" class="form-control" name="titleTH4" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleTH4">
+                                @if (Model != null)
+                                {
+                                    <input type="text" class="form-control" name="titleTH4" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleTH4">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="titleTH4" id="basic-url" aria-describedby="basic-addon3" value="">                                  
+                                }
                             </div>
                         </div>
                         <div class="col-6">
@@ -121,7 +199,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาไทย</span>
                                 </div>
-                                <input type="text" class="form-control" name="titlesubTH4" id="basic-url" aria-describedby="basic-addon3" value="@Model.titlesubTH4">
+                                @if (Model != null)
+                                { 
+                                     <input type="text" class="form-control" name="titlesubTH4" id="basic-url" aria-describedby="basic-addon3" value="@Model.titlesubTH4">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="titlesubTH4" id="basic-url" aria-describedby="basic-addon3" value="">
+                                }
                             </div>
                         </div>
                         <div class="col-6">
@@ -129,7 +214,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">ภาษาอังกฤษ</span>
                                 </div>
-                                <input type="text" class="form-control" name="titleENG4" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleENG4">
+                                @if (Model != null)
+                                { 
+                                    <input type="text" class="form-control" name="titleENG4" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleENG4">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="titleENG4" id="basic-url" aria-describedby="basic-addon3" value="">
+                                }
                             </div>
                         </div>
                         <div class="col-6">
@@ -137,7 +229,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">ภาษาอังกฤษ</span>
                                 </div>
-                                <input type="text" class="form-control" name="titlesubENG4" id="basic-url" aria-describedby="basic-addon3" value="@Model.titlesubENG4">
+                                @if(Model != null)
+                                {
+                                    <input type="text" class="form-control" name="titlesubENG4" id="basic-url" aria-describedby="basic-addon3" value="@Model.titlesubENG4">
+                                }
+                                else
+                                {                               
+                                    <input type="text" class="form-control" name="titlesubENG4" id="basic-url" aria-describedby="basic-addon3" value="">
+                                }
                             </div>
                         </div>
                         <div class="input-group mb-3">
