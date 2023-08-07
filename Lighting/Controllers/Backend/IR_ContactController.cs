@@ -109,26 +109,28 @@ namespace Lighting.Controllers.Backend
 
         [HttpPost]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> IR_Contact_Add_Submit(RequestDTO.IR_ContactRequest model, List<IFormFile> uploaded_image) 
+        public async Task<IActionResult> IR_Contact_Add_Submit(RequestDTO.IR_ContactRequest model) 
         {
             IR_Contact iR_Contact = new IR_Contact();
             try
             {
-                foreach (var formFile in uploaded_image)
+                if (model.uploaded_image != null)
                 {
-                    if (formFile.Length > 0)
+                    foreach (var formFile in model.uploaded_image)
                     {
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        iR_Contact.Image = datestr + extension;
-                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_Contact/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
+                        if (formFile.Length > 0)
                         {
-                            formFile.CopyTo(stream);
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            iR_Contact.Image = datestr + extension;
+                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_Contact/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
                         }
                     }
                 }
-
                 iR_Contact.Title_TH = model.Title_TH;
                 iR_Contact.Title_EN = model.Title_EN;
                 iR_Contact.SubTitle_TH = model.SubTitle_TH;
@@ -166,7 +168,17 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult IR_Contact_Edit(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return RedirectToAction("IR_Contact_Index", "IR_Contact");
+            }
+            var get_detail = _context.IR_Contact.Where(x => x.Id == Id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("IR_Contact_Index", "IR_Contact");
+            }
+            var model = new model_input { IR_Contact = get_detail };
+            return View(model);
         }
 
         [HttpGet]
@@ -192,34 +204,36 @@ namespace Lighting.Controllers.Backend
 
         [HttpPut]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> IR_Contact_Edit_Submit(RequestDTO.IR_ContactRequest model, List<IFormFile> uploaded_image)
+        public async Task<IActionResult> IR_Contact_Edit_Submit(RequestDTO.IR_ContactRequest model)
         {
             try
             {
                 var DB = await _context.IR_Contact.FirstOrDefaultAsync(x => x.Id == model.Id);
                 if (DB is not null)
                 {
-                    foreach (var formFile in uploaded_image)
+                    if (model.uploaded_image != null)
                     {
-                        if (formFile.Length > 0)
+                        foreach (var formFile in model.uploaded_image)
                         {
-                            var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_Contact/" + DB.Image);
-                            if (System.IO.File.Exists(old_filePath) == true)
+                            if (formFile.Length > 0)
                             {
-                                System.IO.File.Delete(old_filePath);
-                            }
+                                var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_Contact/" + DB.Image);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
 
-                            var datestr = DateTime.Now.Ticks.ToString();
-                            var extension = Path.GetExtension(formFile.FileName);
-                            DB.Image = datestr + extension;
-                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_Contact/" + datestr + extension);
-                            using (var stream = System.IO.File.Create(filePath))
-                            {
-                                formFile.CopyTo(stream);
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                DB.Image = datestr + extension;
+                                var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_Contact/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
                             }
                         }
                     }
-
                     DB.Title_TH = model.Title_TH;
                     DB.Title_EN = model.Title_EN;
                     DB.SubTitle_TH = model.SubTitle_TH;

@@ -1,6 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Profile_History";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+
+    var Header = (List<Lighting.Areas.Identity.Data.History>)ViewBag.Header;
+    var Contact = (List<Lighting.Areas.Identity.Data.HistoryDetail>)ViewBag.Body;
+    var Timeline = (List<Lighting.Areas.Identity.Data.HistoryDataDetail>)ViewBag.BodyDetailsTimeline;
+    var VDO = (List<Lighting.Areas.Identity.Data.HistoryDataDetail>)ViewBag.BodyDetailsVDO;
+
 }
 <div class="top-page">
     <div class="container">
@@ -16,38 +22,161 @@
         <div class="row">
             <div class="col">
                 <div class="header-twoline">
-                    <h5>PROFILE</h5>
-                    <h1>HISTORY</h1>
+                    @if (Header.Count() != 0)
+                    {
+                        foreach (var item in ViewBag.Header)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                <h5>@item.Title_EN</h5>
+                                <h1>@item.SubTitle_EN</h1>
+                            }
+                            else
+                            {
+                                <h5>@item.Title_TH</h5>
+                                <h1>@item.SubTitle_TH</h1>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <h5>PROFILE</h5>
+                        <h1>HISTORY</h1>
+                    }
                 </div>
             </div>
         </div>
         <div class="history-page">
             <div class="row">
                 <div class="col">
-                    <h4>LIGHTING & EQUIPMENT PUBLIC COMPANY LIMITED</h4>
+                    @if (Contact.Count() != 0)
+                    {
+                        foreach (var item in ViewBag.Body)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                <h4>@item.Title_EN</h4>
+                            }
+                            else
+                            {
+                                <h4>@item.Title_TH</h4>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <h4>LIGHTING & EQUIPMENT PUBLIC COMPANY LIMITED</h4>
+                    }
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <div class="img-width img-mb"><img src="~/Frontend_assets/images/resource-facility/history-banner.jpg"></div>
+                    @if (Contact.Count() != 0)
+                    {
+                        foreach (var item in ViewBag.Body)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                <div class="img-width img-mb"><img src="~/upload_image/Resource_Facility/@item.ImageEN"></div>
+                            }
+                            else
+                            {
+                                <div class="img-width img-mb"><img src="~/upload_image/Resource_Facility/@item.ImageTH"></div>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <div class="img-width img-mb"><img src="~/Frontend_assets/images/resource-facility/history-banner.jpg"></div>
+                    }
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="txt-content indent f-17">
-                        <p>Lighting & Equipment Public company limited was established in April 1,1993 by a group of professionals who has long been in lighting industry. The company started with marketing activity by selling fluorescent luminaries to electrical contractors and has gradually expanded it business by increasing product range as well as expanding marketing network. To strengthen its position, the company has acquired manufacturing facility including product-testing facility in 1999. In addition, the company has offered various services relative to lighting business to provide added benefit to customers. Today the company's business covers from product design to manufacturing and marketing of products to customers in both domestic and abroad. The company has a large group of well-trained professionals who are always happy to offer services and provide better value to customers. To reflect the above-mentioned, the company has positioned itself as TOTAL LIGHTING SOLUTION PROVIDER.</p>
+
+            @if (Contact.Count() != 0)
+            {
+                foreach (var item in ViewBag.Body)
+                {
+                    if (Context.Request.Cookies["lang"] == "EN")
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <div class="txt-content indent f-17">
+                                    @Html.Raw(item.Detail_EN)
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <div class="txt-content indent f-17">
+                                    @Html.Raw(item.Detail_TH)
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col">
+                        <div class="txt-content indent f-17">
+                            <p>Lighting & Equipment Public company limited was established in April 1,1993 by a group of professionals who has long been in lighting industry. The company started with marketing activity by selling fluorescent luminaries to electrical contractors and has gradually expanded it business by increasing product range as well as expanding marketing network. To strengthen its position, the company has acquired manufacturing facility including product-testing facility in 1999. In addition, the company has offered various services relative to lighting business to provide added benefit to customers. Today the company's business covers from product design to manufacturing and marketing of products to customers in both domestic and abroad. The company has a large group of well-trained professionals who are always happy to offer services and provide better value to customers. To reflect the above-mentioned, the company has positioned itself as TOTAL LIGHTING SOLUTION PROVIDER.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="content-center">
-                        <a class="downloadBD-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank">
-                            <div><i class="fas fa-arrow-alt-circle-down"></i>Company Profile</div>
-                        </a>
+            }
+
+            @if (Contact.Count() != 0)
+            {
+                foreach (var item in ViewBag.Body)
+                {
+                    if (Context.Request.Cookies["lang"] == "EN")
+                    {
+                        if (item.FileCompany_EN != null)
+                        {
+                            <div class="row">
+                                <div class="col">
+                                    <div class="content-center">
+                                        <a class="downloadBD-button" href="~/upload_file/Resource_Facility/@item.FileCompany_EN" target="_blank">
+                                            <div><i class="fas fa-arrow-alt-circle-down"></i>Company Profile</div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        if (item.FileCompany_TH != null)
+                        {
+                            <div class="row">
+                                <div class="col">
+                                    <div class="content-center">
+                                        <a class="downloadBD-button" href="~/upload_file/Resource_Facility/@item.FileCompany_TH" target="_blank">
+                                            <div><i class="fas fa-arrow-alt-circle-down"></i>Company Profile</div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col">
+                        <div class="content-center">
+                            <a class="downloadBD-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank">
+                                <div><i class="fas fa-arrow-alt-circle-down"></i>Company Profile</div>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
 
             <div class="row">
                 <div class="col">
@@ -77,111 +206,136 @@
                             <div class="row">
                                 <div class="col">
                                     <ul class="history-timeline">
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline01.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline01.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline02.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline02.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline03.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline03.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline04.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline04.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline05.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline05.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline06.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline06.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline7.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline07.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline08.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline08.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline09.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline09.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline10.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline10.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline11.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline11.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline12.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline12.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline13.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline13.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline14.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline14.jpg">
-                                            </a>
-                                        </li>
-                                        <li class="w-100">
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline15.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline15.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline16.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline16.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline17.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline17.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline18.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline18.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline19.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline19.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline20.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline20.jpg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline21.jpg">
-                                                <img src="~/Frontend_assets/images/resource-facility/timeline21.jpg">
-                                            </a>
-                                        </li>
+                                        @if (Timeline.Count() != 0)
+                                        {
+                                            foreach (var item in ViewBag.BodyDetailsTimeline)
+                                            {
+                                                if (Context.Request.Cookies["lang"] == "EN")
+                                                {
+                                                    <li>
+                                                        <a class="img-width" data-fancybox="gallery" href="~/upload_image/Resource_Facility/@item.ImageEN">
+                                                            <img src="~/upload_image/Resource_Facility/@item.ImageEN">
+                                                        </a>
+                                                    </li>
+                                                }
+                                                else
+                                                {
+                                                    <li>
+                                                        <a class="img-width" data-fancybox="gallery" href="~/upload_image/Resource_Facility/@item.ImageTH">
+                                                            <img src="~/upload_image/Resource_Facility/@item.ImageTH">
+                                                        </a>
+                                                    </li>
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline01.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline01.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline02.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline02.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline03.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline03.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline04.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline04.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline05.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline05.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline06.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline06.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline7.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline07.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline08.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline08.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline09.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline09.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline10.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline10.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline11.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline11.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline12.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline12.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline13.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline13.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline14.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline14.jpg">
+                                                </a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline15.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline15.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline16.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline16.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline17.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline17.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline18.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline18.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline19.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline19.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline20.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline20.jpg">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="img-width" data-fancybox="gallery" href="~/Frontend_assets/images/resource-facility/timeline21.jpg">
+                                                    <img src="~/Frontend_assets/images/resource-facility/timeline21.jpg">
+                                                </a>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -191,9 +345,44 @@
                         <div class="display-info" rel="2">
                             <div class="row justify-content-center">
                                 <div class="col-xl-8 col-lg-10 col-md-10 col-12">
-                                    <div class="container-vdo">
-                                        <iframe class="responsive-vdo" src="https://www.youtube.com/embed/--INP8wlSws"></iframe>
-                                    </div>
+                                    @if (VDO.Count() != 0)
+                                    {
+                                        foreach (var item in ViewBag.BodyDetailsVDO)
+                                        {
+                                            string youtubeUrlTH = item.FileVideoTH;
+                                            string youtubeUrlEN = item.FileVideoEN;
+
+                                            // Split the URL using the "?" character as the separator
+                                            string[] delimiters = { "youtu.be/", "watch?v=", "embed/" };
+                                            string videoIdTH = delimiters.Select(delimiter => youtubeUrlTH.Split(delimiter).LastOrDefault())
+                                            .FirstOrDefault(id => !string.IsNullOrEmpty(id));
+                                            string embeddedUrlTH = "https://www.youtube.com/embed/" + videoIdTH;
+
+                                            string videoIdEN = delimiters.Select(delimiter => youtubeUrlEN.Split(delimiter).LastOrDefault())
+                                            .FirstOrDefault(id => !string.IsNullOrEmpty(id));
+                                            string embeddedUrlEN = "https://www.youtube.com/embed/" + videoIdEN;
+
+                                            if (Context.Request.Cookies["lang"] == "EN")
+                                            {
+                                                <div class="container-vdo">
+                                                    <iframe class="responsive-vdo" src="@embeddedUrlEN"></iframe>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="container-vdo">
+                                                    <iframe class="responsive-vdo" src="@embeddedUrlTH"></iframe>
+                                                </div>
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="container-vdo">
+                                            <iframe class="responsive-vdo" src="https://www.youtube.com/embed/--INP8wlSws"></iframe>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -203,7 +392,9 @@
         </div>
     </div>
 </div>
+
 @section Scripts{
+
     <script>
         $(document).ready(function () {
             $(".display-tab > li").click(function () {
@@ -231,4 +422,6 @@
             },
         });
     </script>
+
 }
+

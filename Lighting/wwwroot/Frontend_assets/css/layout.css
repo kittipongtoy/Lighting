@@ -27,7 +27,7 @@
   transition: all 0.5s;
 }
 
-.absoluteCenter, .search-icon-btn i, .icon-contact i, .social li a i, .social li a img, .slide-navButton .owl-carousel .owl-nav i, .projectGal-slide .big-img.owl-theme i, .projectGal-slide .owl-theme.navigation-thumbs .item img, .job-acc .panel-group .panel.panel-default .panel-collapse .panel-body:before, .icon-circle i, .financial-section:before, .iconGD-Box, .iconGD-Box img, .IR-index-news:after, .img-zoom-info, .blueBox:after, .profileBox.modal .modal-header .close i, .icon-email i, .faq-acc .panel-group .panel.panel-default .panel-heading a:before {
+.absoluteCenter, .search-icon-btn i, .icon-contact i, .social li a i, .social li a img, .slide-navButton .owl-carousel .owl-nav i, .projectGal-slide .big-img.owl-theme i, .projectGal-slide .big-img.owl-theme .item img, .projectGal-slide .owl-theme.navigation-thumbs .item img, .job-acc .panel-group .panel.panel-default .panel-collapse .panel-body:before, .icon-circle i, .financial-section:before, .iconGD-Box, .iconGD-Box img, .IR-index-news:after, .img-zoom-info, .blueBox:after, .profileBox.modal .modal-header .close i, .icon-email i, .faq-acc .panel-group .panel.panel-default .panel-heading a:before {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -377,7 +377,7 @@ header .row .col-lg-10 {
 .imgHover-container {
   width: 27%;
   float: left;
-  padding: 0 4% 0 5%;
+  padding: 0 4% 0 4%;
   position: relative;
 }
 
@@ -400,11 +400,11 @@ header .row .col-lg-10 {
 }
 
 .menu-img {
-  width: 18%;
-  height: 18%;
+  width: 19%;
+  height: 19%;
   position: absolute;
   top: 45px;
-  left: 5%;
+  left: 4%;
   opacity: 0;
   visibility: hidden;
 }
@@ -417,12 +417,12 @@ header .row .col-lg-10 {
 .menu-container {
   width: 100%;
   float: left;
-  padding: 0 5%;
+  padding: 0 4%;
 }
 
 .menu-container.w-img {
   width: 73%;
-  padding: 0 5% 0 0;
+  padding: 0 4% 0 0;
 }
 
 .menu-container h6 {
@@ -474,7 +474,7 @@ header .row .col-lg-10 {
 .product-dropdownmenu li {
   width: calc(100% / 6);
   float: left;
-  padding: 15px 10px 25px 10px;
+  padding: 15px 8px 25px 8px;
   margin: 0 !important;
 }
 
@@ -492,14 +492,15 @@ header .row .col-lg-10 {
 
 .product-cate {
   width: 100%;
-  height: 44px;
+  height: 42px;
   display: table;
 }
 
 .product-cate p {
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 15px;
   color: #CED7DA;
-  letter-spacing: 0.015rem;
+  letter-spacing: 0.01rem;
   text-align: center;
   margin-bottom: 0;
   display: table-cell;
@@ -2627,7 +2628,7 @@ footer .social li a i {
   width: 44px;
   height: 44px;
   background: rgba(255, 255, 255, 0);
-  border: 3px solid white;
+  border: 3px solid #8BAFE7;
   border-radius: 50%;
   margin: 0;
   position: absolute;
@@ -2641,17 +2642,35 @@ footer .social li a i {
   background-color: #5A8DDD;
 }
 
-.projectGal-slide .big-img.owl-theme i {
-  font-size: 16px;
+.projectGal-slide .big-img.owl-theme .owl-prev:hover i, .projectGal-slide .big-img.owl-theme .owl-next:hover i {
   color: white;
 }
 
+.projectGal-slide .big-img.owl-theme i {
+  font-size: 16px;
+  color: #8BAFE7;
+}
+
 .projectGal-slide .big-img.owl-theme .owl-prev {
-  left: 20px;
+  left: 15px;
 }
 
 .projectGal-slide .big-img.owl-theme .owl-next {
-  right: 20px;
+  right: 15px;
+}
+
+.projectGal-slide .big-img.owl-theme .item {
+  padding-top: 67%;
+  /*box-sizing: border-box;
+            text-align: center;
+            display: flex;
+            overflow: hidden;*/
+  position: relative;
+}
+
+.projectGal-slide .big-img.owl-theme .item img {
+  width: auto !important;
+  height: 100%;
 }
 
 .projectGal-slide #thumbs .owl-nav {
@@ -5073,7 +5092,7 @@ footer .social li a i {
   }
   .dropdown-container {
     padding: 30px 0;
-    opacity: 0;
+    opacity: 1;
     top: 77px;
   }
   .dropdown-container.min-pad {
@@ -5090,7 +5109,7 @@ footer .social li a i {
     left: 4%;
   }
   .menu-container {
-    padding: 0 3%;
+    padding: 0 2%;
   }
   .menu-container.w-img {
     width: 73%;
@@ -5113,7 +5132,7 @@ footer .social li a i {
     letter-spacing: 0.01rem;
   }
   .product-dropdownmenu li {
-    padding: 8px 8px 18px 8px;
+    padding: 8px 7px 18px 7px;
   }
   .product-dropdownmenu li a img {
     height: 52px;
@@ -5123,6 +5142,7 @@ footer .social li a i {
     height: 36px;
   }
   .product-cate p {
+    font-size: 13px;
     letter-spacing: 0.01rem;
   }
   /*---------- FOOTER ----------*/
@@ -6601,8 +6621,8 @@ footer .social li a i {
     padding: 0;
   }
   .shadow-hover, .scroll, .hover-img:hover, .solution-download li img:hover, .display-tab > li .cate-txtBox:hover, .contentBox-list li a:hover, .contentBox:hover, .productBox:hover .img-width, .mainbanner-download li:hover a, .highlightBox:hover, .img-gallery li .img-width:hover, .board-section .name-position .img-width.imgBD:hover, .coverBox:hover, .news-publicBox:hover {
-    -webkit-box-shadow: 0px 0px 3px 2px rgba(19, 30, 41, 0.3);
-    box-shadow: 0px 0px 3px 2px rgba(19, 30, 41, 0.3);
+    -webkit-box-shadow: 0px 0px 4px 2px rgba(19, 30, 41, 0.1);
+    box-shadow: 0px 0px 4px 2px rgba(19, 30, 41, 0.1);
   }
   .modal-backdrop {
     z-index: 98;

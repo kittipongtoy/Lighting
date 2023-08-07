@@ -33,7 +33,10 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<Category_Project> Category_Projects { get; set; }
         public DbSet<ProjectRef> ProjectRefs { get; set; }
         #endregion
-
+        public DbSet<RF_Philosophy_Vision_Mission> RF_Philosophy_Vision_Mission { get; set; }
+        public DbSet<RF_Philosophy_Vision_Mission_Details> RF_Philosophy_Vision_Mission_Details { get; set; }
+        public DbSet<RF_Innovation_Center_Images> RF_Innovation_Center_Images { get; set; }
+        public DbSet<RF_Innovation_Centers> RF_Innovation_Centers { get; set; }
         public DbSet<RF_Manufacturing_Images> RF_Manufacturing_Images { get; set; }
         public DbSet<RF_Warehouse_Logistics_Images> RF_Warehouse_Logistics_Images { get; set; }
         public DbSet<RF_Oversea_Offices_Images> RF_Oversea_Offices_Images { get; set; }
@@ -177,9 +180,18 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<IR_Investor_Relations> IR_Investor_Relations { get; set; }
         public DbSet<IR_Investor_RelationsDetail> IR_Investor_RelationsDetail { get; set; }
         public DbSet<IR_LIGHTING_EQUIPMENT> IR_LIGHTING_EQUIPMENT { get; set; }
+        public DbSet<IR_Summary_Financial_Highlights> IR_Summary_Financial_Highlight { get; set; }
+        public DbSet<IR_Summary_Financial_HighlightsDetail> IR_Summary_Financial_HighlightsDetail { get; set; }
         public DbSet<IR_Report> IR_Report { get; set; }
         public DbSet<Organization_Chart> Organization_Chart { get; set; }
         public DbSet<Organization_ChartDetail> Organization_ChartDetail { get; set; }
+        public DbSet<IR_Hightlight> IR_Hightlight { get; set; }
+        public DbSet<IR_HightlightDetail> IR_HightlightDetail { get; set; }
+
+        //Arm
+        public DbSet<SettingIndex> Setting_Index { get; set; }
+        public DbSet<SlideImageIndex> Slide_Image_Index { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -268,13 +268,18 @@
                         var dataHtml = ``;
 
                         $.each(data, function (index, item) {
-
+                            
                             var date = new Date(item.activity_date);
                             var optionsTH = { year: 'numeric', month: 'numeric' };
                             var formattedDateTH = date.toLocaleDateString('th-TH', optionsTH);
 
                             var optionsEN = { year: 'numeric', month: 'numeric' };
                             var formattedDateEN = date.toLocaleDateString('en-US', optionsEN);
+
+                            if (item.activity_date==null){
+                                formattedDateTH="";
+                                formattedDateEN="";
+                            }
 
                             dataHtml += `<tr>
                                                              <td>`+ title(item, local) + ` &nbsp;`;
@@ -284,13 +289,16 @@
                                 dataHtml += formattedDateEN
                             }
                             dataHtml += `</td>
-                                                            <td>
-                                                                    <a class="download-button viewBT" href="`+ link(item, local) + `" target="_blank">`;
-                            if (local == "TH") {
-                                dataHtml += `<span>ดูเว็บแคสต์ </span>`;
-                            } else {
-                                dataHtml += `<span>View Video </span>`;
+                                                            <td>`;
+                            if (link(item, local)!=null){
+                                dataHtml += `<a class="download-button viewBT" href="` + link(item, local) + `" target="_blank">`;
+                                if (local == "TH") {
+                                    dataHtml += `<span>ดูเว็บแคสต์ </span>`;
+                                } else {
+                                    dataHtml += `<span>View Video </span>`;
+                                }
                             }
+                                                                    
                             dataHtml += `</a>
                                                                     </td>
                                                                             <td>`;

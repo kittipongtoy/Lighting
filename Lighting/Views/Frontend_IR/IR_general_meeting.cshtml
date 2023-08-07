@@ -64,8 +64,7 @@
                         {
                             foreach (var item in ViewBag.Header)
                             {
-                                <a class="img-width imgBD hover-img more-mb" href="@item.link" target="_blank"><img src="~/upload_image/SH_GeneralMeeting/@item.image_name_ENG"></a>
-
+                                <a class="img-width imgBD hover-img more-mb" href="@item.link" target="_blank"><img src="~/upload_image/SH_GeneralMeeting/@item.image_name_ENG"></a> 
                             }
                         }
                     }
@@ -75,8 +74,7 @@
                         {
                             foreach (var item in ViewBag.Header)
                             {
-                                <a class="img-width imgBD hover-img more-mb" href="@item.link" target="_blank"><img src="~/upload_image/SH_GeneralMeeting/@item.image_name"></a>
-
+                                <a class="img-width imgBD hover-img more-mb" href="@item.link" target="_blank"><img src="~/upload_image/SH_GeneralMeeting/@item.image_name"></a> 
                             }
                         }
                     }
@@ -136,13 +134,21 @@
                                     {
                                         foreach (var item in ViewBag.Body)
                                         {
-                                            var getYear = Convert.ToDateTime(item.year);
-                                            var Year = getYear.ToString("yyyy", new CultureInfo("en-US"));
+                                            var Year = "";
+
+                                            if (item.year != null)
+                                            {
+                                                var getYear = Convert.ToDateTime(item.year);
+                                                Year = getYear.ToString("yyyy", new CultureInfo("en-US"));
+                                            }
 
                                             <tr>
-                                                <td>@item.titleENG @getYear</td>
+                                                <td>@item.titleENG @Year</td>
                                                 <td>
-                                                    <a class="download-button" href="~/upload_file/SH_GeneralMeeting/@item.file_name_ENG" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                    @if (item.file_name_ENG != null)
+                                                    {
+                                                        <a class="download-button" href="~/upload_file/SH_GeneralMeeting/@item.file_name_ENG" target="_blank"><span>ดาวน์โหลด</span></a>
+                                                    }
                                                 </td>
                                             </tr>
                                         }
@@ -154,13 +160,21 @@
                                     {
                                         foreach (var item in ViewBag.Body)
                                         {
-                                            var getYearTH = Convert.ToDateTime(item.year);
-                                            var YearTH = getYearTH.ToString("yyyy", new CultureInfo("th-TH"));
+                                            var YearTH = "";
+
+                                            if (item.year != null)
+                                            {
+                                                var getYearTH = Convert.ToDateTime(item.year);
+                                                YearTH = getYearTH.ToString("yyyy", new CultureInfo("th-TH"));
+                                            }
 
                                             <tr>
                                                 <td>@item.titleTH @YearTH</td>
                                                 <td>
-                                                    <a class="download-button" href="~/upload_file/SH_GeneralMeeting/@item.file_name" target="_blank"><span>Download</span></a>
+                                                    @if (item.file_name != null)
+                                                    {
+                                                        <a class="download-button" href="~/upload_file/SH_GeneralMeeting/@item.file_name" target="_blank"><span>Download</span></a>
+                                                    }
                                                 </td>
                                             </tr>
                                         }

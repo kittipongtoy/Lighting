@@ -1,4 +1,4 @@
-﻿ @model Lighting.Models.model_input
+﻿@model Lighting.Models.model_input
 
 @{
     ViewData["Title"] = "RF_inc_resource_facility_content";
@@ -18,7 +18,7 @@
                                 <img src="@Model.path_image@items.upload_image_ENG">
                             </a>
                         </div>
-                    } 
+                    }
                 }
                 else
                 {
@@ -65,15 +65,26 @@
                     if (Model.count_fod_page_resource_facility_title > 0)
                     {
                         string youtubeUrl = Model.fod_page_resource_facility_title.link;
+                        string youtubeUrlENG = Model.fod_page_resource_facility_title.linkENG;
 
                         // Split the URL using the "?" character as the separator
                         string[] delimiters = { "youtu.be/", "watch?v=", "embed/" };
                         string videoId = delimiters.Select(delimiter => youtubeUrl.Split(delimiter).LastOrDefault())
-                                            .FirstOrDefault(id => !string.IsNullOrEmpty(id)); 
-
+                        .FirstOrDefault(id => !string.IsNullOrEmpty(id));
                         string embeddedUrl = "https://www.youtube.com/embed/" + videoId;
 
-                        <iframe class="responsive-vdo" src="@embeddedUrl"></iframe> 
+                        string videoIdENG = delimiters.Select(delimiter => youtubeUrlENG.Split(delimiter).LastOrDefault())
+                        .FirstOrDefault(id => !string.IsNullOrEmpty(id));
+                        string embeddedUrlENG = "https://www.youtube.com/embed/" + videoIdENG;
+
+                        if (Context.Request.Cookies["lang"] == "EN")
+                        {
+                            <iframe class="responsive-vdo" src="@embeddedUrlENG"></iframe>
+                        }
+                        else
+                        {
+                            <iframe class="responsive-vdo" src="@embeddedUrl"></iframe>
+                        }
                     }
                     else
                     {

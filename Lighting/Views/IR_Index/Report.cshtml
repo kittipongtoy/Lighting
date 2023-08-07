@@ -10,7 +10,7 @@
                 <span class="h-20px border-gray-200 border-start mx-4"></span>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
                     <li class="breadcrumb-item text-muted">
-                        <a href="@Url.Action("InvestorRelations_index","Corporate_Governance")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
+                        <a href="@Url.Action("Banner","IR_Index")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-200 w-5px h-2px"></span>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                            <a type="button" class="btn btn-primary" href="@Url.Action("History_Add","Resource_Facility")">เพิ่ม</a>
+                            <a type="button" class="btn btn-primary" href="@Url.Action("Report_Add","IR_Index")">เพิ่ม</a>
                         </div>
                     </div>
                 </div>
@@ -63,3 +63,130 @@
     </div>
 
 </div>
+@section Scripts{
+    <script>
+        var oTable = $("#History").DataTable({
+            processing: true,
+            serverSide: true,
+            searching: false,
+            responsive: true,
+            oLanguage: {
+                "sEmptyTable": "ไม่มีข้อมูล",
+            },
+            ajax: {
+                type: "POST",
+                url: '/IR_Index/DataTable_Report',
+            },
+            columns: [
+                { 'data': 'index', name: 'index', className: 'text-center' },
+                { 'data': 'title_TH', name: 'title_TH', className: 'text-center' },
+                {
+                    "name": "status", "data": "status", "render": function (data, type, row) {
+                        if (row.status == 1) {
+                            var text = '<div class="form-check form-switch">' +
+                                '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                '</div>';
+                            return text;
+                        } else {
+                            var text = '<div class="form-check form-switch">' +
+                                '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                '</div>';
+                            return text;
+                        }
+                    }
+                },
+                {
+                    "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
+                        var text = '<button type="button" class="btn btn-warning" onclick="edit_item(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
+                        text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_item(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
+                        return text;
+                    }
+                }
+            ]
+        });
+
+        function edit_item(id) {
+            location.href = '/IR_Index/Report_Edit/?Id=' + id;
+        }
+
+        function changeStatus(id, checked_obj) {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/IR_Index/Report_Change",
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        function delete_item(id) {
+            Swal.fire({
+                title: 'คุณต้องการจะลบหรือไม่?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'ใช่',
+                denyButtonText: `ไม่ใช่`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "delete",
+                        cache: false,
+                        url: "/IR_Index/Report_Delete",
+                        data: {
+                            Id: id
+                        },
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then((result) => {
+                                    var oTable = $('#History').DataTable();
+                                    oTable.ajax.reload(null, false);
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+                } else if (result.isDenied) {
+
+                }
+            })
+        }
+    </script>
+}

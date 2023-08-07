@@ -90,7 +90,13 @@
             <div style="margin-top:2rem;border:1px solid black;padding:1rem;">
                 <img style="width:100%;height:50vh;" id="preview_show_img" src="@Model.Profile_Image" />
                 <br />
-                <label class="form-label" style="margin-top:2rem;">รูปหน้าปก/image profile</label>
+                <label class="form-label" style="margin-top:2rem;">
+                    รูปหน้าปก/image profile
+                    <br />
+                    <span style="color:red;">
+                        ขนาดรูปภาพ : 1280 * 960 px
+                    </span>
+                </label>
                 <input class="form-control form-control-lg" id="img_profile" type="file">
             </div>
             <div style="margin-top:2rem;border:1px solid black;padding:1rem;">
@@ -106,7 +112,11 @@
                         </div>
                     }
                 </div>
-                <label class="form-label" style="margin-top:2rem;">รูปประกอบ/sub image</label>
+                <label class="form-label" style="margin-top:2rem;">รูปประกอบ/sub image
+                <br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 1280 * 960 px
+                </span></label>
                 <input class="form-control form-control-lg" id="sub_img" type="file" multiple>
             </div>
             @*

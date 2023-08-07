@@ -2,6 +2,111 @@
 {
     public class RequestDTO
     {
+        public class IR_HIGHLIGHTRequest
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? Detail_TH { get; set; }
+            public string? Detail_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_HIGHLIGHTDetailRequest
+        {
+            public int? Id { get; set; }
+            public int SetType { get; set; }
+            public string? Background { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+            public List<IFormFile> uploaded_Image { get; set; }
+        }
+
+        public class IR_ReportRequest
+        {
+            public int? Id { get; set; }
+            public int SetType { get; set; }
+            public string? Background { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+            public List<IFormFile> uploaded_Image { get; set; }
+        }
+
+        public class HistoryDataDetailRequest
+        {
+            public int? Id { get; set; }
+            public int? TypeData { get; set; }
+            public string? ImageTH { get; set; }
+            public string? ImageEN { get; set; }
+            public string? FileVideoTH { get; set; }
+            public string? FileVideoEN { get; set; }
+            public int? Status { get; set; }
+            public List<IFormFile> uploaded_ImageTH { get; set; }
+            public List<IFormFile> uploaded_ImageEN { get; set; }
+            public List<IFormFile> uploaded_fileTH { get; set; }
+            public List<IFormFile> uploaded_fileEN { get; set; }
+        }
+
+        public class IR_Summary_Financial_HighlightsRequest
+        {
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? Detail_TH { get; set; }
+            public string? Detail_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+        public class IR_Summary_Financial_HighlightsDetailRequest
+        {
+            public int? Id { get; set; }
+            public string? Icon { get; set; }
+            public decimal? Total { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? Detail_TH { get; set; }
+            public string? Detail_EN { get; set; }
+            public int? Status { get; set; }
+            public List<IFormFile> uploaded_Image { get; set; }
+        }
+
+        public class IR_LIGHTING_EQUIPMENTRequest
+        {
+            public int? Id { get; set; }
+            public string? Image { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public string? RegisterTH { get; set; }
+            public string? RegisterEN { get; set; }
+            public int? Status { get; set; }
+            public List<IFormFile> uploaded_Image { get; set; }
+        }
+
+        public class IR_Button_Below_BannerRequest
+        {
+            public int Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public int? Status { get; set; }
+            public List<IFormFile> uploaded_Image { get; set; }
+        }
+
+        public class IR_BannerRequest
+        {
+            public int? Id { get; set; }
+            public int? Status { get; set; }
+            public List<IFormFile> uploaded_Image { get; set; }
+        }
+
         public class HistoryDetailRequest
         {
 			public int? Id { get; set; }
@@ -20,7 +125,18 @@
 			public List<IFormFile> uploaded_ImageEN { get; set; }
 		}
 
-		public class HistoryRequest
+        public class ORGANIZATION_CHARTRequest
+        {
+            public int? Id { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? SubTitle_TH { get; set; }
+            public string? SubTitle_EN { get; set; }
+            public int? Status { get; set; }
+        }
+
+
+        public class HistoryRequest
         {
             public int? Id { get; set; }
             public string? Title_TH { get; set; }
@@ -246,6 +362,7 @@
             public string? Tel2 { get; set; }
             public string? Email { get; set; }
             public int? Status { get; set; }
+            public List<IFormFile> uploaded_image { get; set; }
         }
 
         public class Stock_MarketRequest
@@ -327,6 +444,7 @@
             public string? ContactUs_Mail1 { get; set; }
             public string? ContactUs_Mail2 { get; set; }
             public int? Status { get; set; }
+            public List<IFormFile> uploaded_Image { get; set; }
         }
 
         public class IR_Print_MedialDetailRequest
@@ -338,6 +456,9 @@
             public string? Detail_TH { get; set; }
             public string? Detail_EN { get; set; }
             public int? Status { get; set; }
+            public List<IFormFile> uploaded_Image { get; set; }
+            public List<IFormFile> uploaded_fileTH { get; set; }
+            public List<IFormFile> uploaded_fileEN { get; set; }
         }
 
         public class InvestorCalendarDetailRequest
@@ -350,6 +471,8 @@
             public string? Position_EN { get; set; }
             public string? FileName { get; set; }
             public int? Status { get; set; }
+            public List<IFormFile> uploaded_fileTH { get; set; }
+            public List<IFormFile> uploaded_fileEN { get; set; }
         }
 
         public class IR_NewDetailRequest
@@ -361,6 +484,8 @@
             public string? Detail_TH { get; set; }
             public string? Detail_EN { get; set; }
             public int? Status { get; set; }
+            public List<IFormFile> uploaded_fileTH { get; set; }
+            public List<IFormFile> uploaded_fileEN { get; set; }
         }
     }
 }

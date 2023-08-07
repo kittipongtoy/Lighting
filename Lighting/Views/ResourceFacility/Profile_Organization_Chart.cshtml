@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Profile_Organization_Chart";
+    Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+}
+<div class="top-page">
+    <div class="container">
+        <div class="row">
+            <div class="col">RESOURCE & FACILITY</div>
+        </div>
+    </div>
+</div>
+
+<!---------- RESOURCE & FACILITY :: ORGANIZATION CHART ---------->
+<div class="content-padding foot-pad">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="header-twoline">
+                    <h5>PROFILE</h5>
+                    <h1>ORGANIZATION CHART</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-11 col-12">
+                <a class="img-width hover-img" data-fancybox href="~/Frontend_assets/images/resource-facility/organization_2018.jpg">
+                    <img src="~/Frontend_assets/images/resource-facility/organization_2018.jpg">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        Fancybox.bind('[data-fancybox="gallery"]', {
+            Toolbar: {
+                display: [
+                    { id: "prev", position: "center" },
+                    { id: "counter", position: "center" },
+                    { id: "next", position: "center" },
+                    "zoom",
+                    "fullscreen",
+                    "download",
+                    "thumbs",
+                    "close",
+                ],
+            },
+        });
+    </script>
+}

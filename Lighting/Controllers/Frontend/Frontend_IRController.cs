@@ -43,6 +43,14 @@ namespace Lighting.Controllers.Frontend
 
         public async Task<IActionResult> IR_index()
         {
+            ViewBag.IR_Banner = await db.IR_Banner.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();
+            ViewBag.IR_Button_Below_Banner = await db.IR_Button_Below_Banner.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();
+            ViewBag.IR_Lighting_Equipment = await db.IR_LIGHTING_EQUIPMENT.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();
+            ViewBag.IR_Summary_Financial_Highlights = await db.IR_Summary_Financial_Highlight.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();
+            ViewBag.IR_Summary_Financial_HighlightsDetail = await db.IR_Summary_Financial_HighlightsDetail.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();
+            ViewBag.IR_Report = await db.IR_Report.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();
+            ViewBag.IR_Highlight = await db.IR_Hightlight.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();
+            ViewBag.IR_HighlightDetail = await db.IR_HightlightDetail.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();                
             ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).Take(5).ToListAsync();
             ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).Take(5).ToListAsync();
             return View();
@@ -1038,13 +1046,13 @@ namespace Lighting.Controllers.Frontend
         }
         public async Task<IActionResult> IR_general_meeting()
         {
-            var data = db.SH_generalMeeting.ToList();
+            var data =await db.SH_generalMeeting.ToListAsync();
             if (data.Count != 0)
             {
                 ViewBag.Header = data;
             }
 
-            var details = db.SH_generalMeeting_Data.Where(x => x.use_status == 1).OrderByDescending(x => x.year).ToList();
+            var details =await db.SH_generalMeeting_Data.Where(x => x.use_status == 1).OrderByDescending(x => x.id).ToListAsync();
             if (details.Count != 0)
             {
                 ViewBag.Body = details;
@@ -1211,7 +1219,7 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Header = data;
             }
 
-            var details = db.SH_IR_presentation_doc_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.document_date).ToList();
+            var details = db.SH_IR_presentation_doc_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.id).ToList();
             if (details.Count != 0)
             {
                 ViewBag.Body = details;
@@ -1220,7 +1228,7 @@ namespace Lighting.Controllers.Frontend
         }
         public async Task<IActionResult> Get_IR_presentation_doc()
         {
-            var IR_PWevcast = db.SH_IR_presentation_doc_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.document_date).AsEnumerable().Select((op, index) => new IR_Presentation_Infor_model.Presentation_doc
+            var IR_PWevcast = db.SH_IR_presentation_doc_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.id).AsEnumerable().Select((op, index) => new IR_Presentation_Infor_model.Presentation_doc
             {
                 id = op.id,
                 titleTH = op.titleTH,
@@ -1234,13 +1242,13 @@ namespace Lighting.Controllers.Frontend
         }
         public async Task<IActionResult> IR_presentation_webcast()
         {
-            var data = db.SH_IR_presentation_webcast.ToList();
+            var data =await db.SH_IR_presentation_webcast.ToListAsync();
             if (data.Count != 0)
             {
                 ViewBag.Header = data;
             }
 
-            var details = db.SH_IR_presentation_webcast_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.activity_date).ToList();
+            var details =await db.SH_IR_presentation_webcast_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.id).ToListAsync();
             if (details.Count != 0)
             {
                 ViewBag.Body = details;
@@ -1249,7 +1257,7 @@ namespace Lighting.Controllers.Frontend
         }
         public async Task<IActionResult> Get_IR_presentation_webcast()
         {
-            var IR_PWevcast = db.SH_IR_presentation_webcast_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.activity_date).AsEnumerable().Select((op, index) => new IR_Presentation_Infor_model.Presentation_webcast
+            var IR_PWevcast = db.SH_IR_presentation_webcast_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.id).AsEnumerable().Select((op, index) => new IR_Presentation_Infor_model.Presentation_webcast
             {
                 id = op.id,
                 titleTH = op.titleTH,

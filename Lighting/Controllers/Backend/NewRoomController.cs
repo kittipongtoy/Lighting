@@ -278,41 +278,46 @@ namespace Lighting.Controllers.Backend
 
         [HttpPost]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> IR_NewDetail_Add_Submit(RequestDTO.IR_NewDetailRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        public async Task<IActionResult> IR_NewDetail_Add_Submit(RequestDTO.IR_NewDetailRequest model)
         {
             IR_NewDetail iR_NewDetail = new IR_NewDetail();
             try
             {
-                foreach (var formFile in uploaded_fileTH)
-                {
-                    if (formFile.Length > 0)
+                if (model.uploaded_fileTH != null)
+                { 
+                    foreach (var formFile in model.uploaded_fileTH)
                     {
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        iR_NewDetail.FileName_TH = datestr + extension;
-                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
+                        if (formFile.Length > 0)
                         {
-                            formFile.CopyTo(stream);
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            iR_NewDetail.FileName_TH = datestr + extension;
+                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
                         }
                     }
                 }
 
-                foreach (var formFile in uploaded_fileEN)
-                {
-                    if (formFile.Length > 0)
+                if (model.uploaded_fileEN != null)
+                { 
+                    foreach (var formFile in model.uploaded_fileEN)
                     {
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        iR_NewDetail.FileName_EN = datestr + extension;
-                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
+                        if (formFile.Length > 0)
                         {
-                            formFile.CopyTo(stream);
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            iR_NewDetail.FileName_EN = datestr + extension;
+                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
                         }
                     }
                 }
-
                 iR_NewDetail.Title_TH = model.Title_TH;
                 iR_NewDetail.Title_EN = model.Title_EN;
                 if (model.NewDate is not null)
@@ -354,7 +359,17 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult IR_NewDetail_Edit(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return RedirectToAction("stock_market_index", "NewRoom");
+            }
+            var get_detail = _context.IR_NewDetail.Where(x => x.Id == Id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("stock_market_index", "NewRoom");
+            }
+            var model = new model_input { IR_NewDetail = get_detail };
+            return View(model);
         }
 
         [HttpGet]
@@ -380,55 +395,59 @@ namespace Lighting.Controllers.Backend
 
         [HttpPut]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> IR_NewDetail_Edit_Submit(RequestDTO.IR_NewDetailRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        public async Task<IActionResult> IR_NewDetail_Edit_Submit(RequestDTO.IR_NewDetailRequest model)
         {
             try
             {
                 var iR_NewDetail = await _context.IR_NewDetail.FirstOrDefaultAsync(x => x.Id == model.Id);
                 if (iR_NewDetail is not null)
                 {
-                    foreach (var formFile in uploaded_fileTH)
-                    {
-                        if (formFile.Length > 0)
+                    if (model.uploaded_fileTH != null)
+                    { 
+                        foreach (var formFile in model.uploaded_fileTH)
                         {
-                            var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + iR_NewDetail.FileName_TH);
-                            if (System.IO.File.Exists(old_filePath) == true)
+                            if (formFile.Length > 0)
                             {
-                                System.IO.File.Delete(old_filePath);
-                            }
+                                var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + iR_NewDetail.FileName_TH);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
 
-                            var datestr = DateTime.Now.Ticks.ToString();
-                            var extension = Path.GetExtension(formFile.FileName);
-                            iR_NewDetail.FileName_TH = datestr + extension;
-                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
-                            using (var stream = System.IO.File.Create(filePath))
-                            {
-                                formFile.CopyTo(stream);
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                iR_NewDetail.FileName_TH = datestr + extension;
+                                var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
                             }
                         }
                     }
-
-                    foreach (var formFile in uploaded_fileEN)
-                    {
-                        if (formFile.Length > 0)
+                    if (model.uploaded_fileEN != null)
+                    { 
+                        foreach (var formFile in model.uploaded_fileEN)
                         {
-                            var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + iR_NewDetail.FileName_EN);
-                            if (System.IO.File.Exists(old_filePath) == true)
+                            if (formFile.Length > 0)
                             {
-                                System.IO.File.Delete(old_filePath);
-                            }
+                                var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + iR_NewDetail.FileName_EN);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
 
-                            var datestr = DateTime.Now.Ticks.ToString();
-                            var extension = Path.GetExtension(formFile.FileName);
-                            iR_NewDetail.FileName_EN = datestr + extension;
-                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
-                            using (var stream = System.IO.File.Create(filePath))
-                            {
-                                formFile.CopyTo(stream);
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                iR_NewDetail.FileName_EN = datestr + extension;
+                                var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
                             }
                         }
                     }
-
                     iR_NewDetail.Title_TH = model.Title_TH;
                     iR_NewDetail.Title_EN = model.Title_EN;
                     if (model.NewDate is not null)
@@ -1167,26 +1186,28 @@ namespace Lighting.Controllers.Backend
 
         [HttpPost]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> Mass_MediaDetail_Add_Submit(RequestDTO.IR_Mass_MediaRequest model, List<IFormFile> uploaded_Image)
+        public async Task<IActionResult> Mass_MediaDetail_Add_Submit(RequestDTO.IR_Mass_MediaRequest model)
         {
             IR_MassMediaDetail IR_MassMediaDetail = new IR_MassMediaDetail();
             try
             {
-                foreach (var formFile in uploaded_Image)
+                if (model.uploaded_Image != null)
                 {
-                    if (formFile.Length > 0)
+                    foreach (var formFile in model.uploaded_Image)
                     {
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        IR_MassMediaDetail.Image = datestr + extension;
-                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_NewRoom/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
+                        if (formFile.Length > 0)
                         {
-                            formFile.CopyTo(stream);
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            IR_MassMediaDetail.Image = datestr + extension;
+                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_NewRoom/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
                         }
                     }
                 }
-
                 IR_MassMediaDetail.Title_TH = model.Title_TH;
                 IR_MassMediaDetail.Title_EN = model.Title_EN;
                 if (model.NewDate is not null)
@@ -1229,7 +1250,17 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult Mass_MediaDetail_Edit(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return RedirectToAction("Mass_Media_Index", "NewRoom");
+            }
+            var get_detail = _context.IR_MassMediaDetail.Where(x => x.Id == Id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("Mass_Media_Index", "NewRoom");
+            }
+            var model = new model_input { IR_MassMediaDetail = get_detail };
+            return View(model);
         }
 
         [HttpGet]
@@ -1255,34 +1286,36 @@ namespace Lighting.Controllers.Backend
 
         [HttpPut]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> Mass_MediaDetail_EditSubmit(RequestDTO.IR_Mass_MediaRequest model, List<IFormFile> uploaded_Image)
+        public async Task<IActionResult> Mass_MediaDetail_EditSubmit(RequestDTO.IR_Mass_MediaRequest model)
         {
             try
             {
                 var IR_MassMediaDetail = await _context.IR_MassMediaDetail.FirstOrDefaultAsync(x => x.Id == model.Id);
                 if (IR_MassMediaDetail is not null)
                 {
-                    foreach (var formFile in uploaded_Image)
-                    {
-                        if (formFile.Length > 0)
+                    if (model.uploaded_Image != null)
+                    { 
+                        foreach (var formFile in model.uploaded_Image)
                         {
-                            var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_NewRoom/" + IR_MassMediaDetail.Image);
-                            if (System.IO.File.Exists(old_filePath) == true)
+                            if (formFile.Length > 0)
                             {
-                                System.IO.File.Delete(old_filePath);
-                            }
+                                var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_NewRoom/" + IR_MassMediaDetail.Image);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
 
-                            var datestr = DateTime.Now.Ticks.ToString();
-                            var extension = Path.GetExtension(formFile.FileName);
-                            IR_MassMediaDetail.Image = datestr + extension;
-                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_NewRoom/" + datestr + extension);
-                            using (var stream = System.IO.File.Create(filePath))
-                            {
-                                formFile.CopyTo(stream);
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                IR_MassMediaDetail.Image = datestr + extension;
+                                var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_NewRoom/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
                             }
                         }
                     }
-
                     IR_MassMediaDetail.Title_TH = model.Title_TH;
                     IR_MassMediaDetail.Title_EN = model.Title_EN;
                     if (model.NewDate is not null)
@@ -1631,56 +1664,64 @@ namespace Lighting.Controllers.Backend
 
         [HttpPost]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> Print_MediaDetail_Add_Submit(RequestDTO.IR_Print_MedialDetailRequest model, List<IFormFile> uploaded_Image, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        public async Task<IActionResult> Print_MediaDetail_Add_Submit(RequestDTO.IR_Print_MedialDetailRequest model)
         {
             IR_Print_MediaDetail IR_Print_MediaDetail = new IR_Print_MediaDetail();
             try
             {
-                foreach (var formFile in uploaded_Image)
+                if (model.uploaded_Image != null)
                 {
-                    if (formFile.Length > 0)
+                    foreach (var formFile in model.uploaded_Image)
                     {
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        IR_Print_MediaDetail.Image_Newssource = datestr + extension;
-                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_NewRoom/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
+                        if (formFile.Length > 0)
                         {
-                            formFile.CopyTo(stream);
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            IR_Print_MediaDetail.Image_Newssource = datestr + extension;
+                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_NewRoom/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
                         }
                     }
                 }
 
-                foreach (var formFile in uploaded_fileTH)
-                {
-                    if (formFile.Length > 0)
+                if (model.uploaded_fileTH != null)
+                { 
+                    foreach (var formFile in model.uploaded_fileTH)
                     {
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        IR_Print_MediaDetail.FileNameTH = datestr + extension;
-                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
+                        if (formFile.Length > 0)
                         {
-                            formFile.CopyTo(stream);
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            IR_Print_MediaDetail.FileNameTH = datestr + extension;
+                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
                         }
                     }
                 }
 
-                foreach (var formFile in uploaded_fileEN)
-                {
-                    if (formFile.Length > 0)
+                if (model.uploaded_fileEN != null)
+                { 
+                    foreach (var formFile in model.uploaded_fileEN)
                     {
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        IR_Print_MediaDetail.FileNameEN = datestr + extension;
-                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
+                        if (formFile.Length > 0)
                         {
-                            formFile.CopyTo(stream);
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            IR_Print_MediaDetail.FileNameEN = datestr + extension;
+                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
                         }
                     }
                 }
-
                 IR_Print_MediaDetail.Title_TH = model.Title_TH;
                 IR_Print_MediaDetail.Title_EN = model.Title_EN;
                 if (model.NewDate is not null)
@@ -1730,7 +1771,17 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult Print_MediaDetail_Edit(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return RedirectToAction("Print_Media_Index", "NewRoom");
+            }
+            var get_detail = _context.IR_Print_MediaDetail.Where(x => x.Id == Id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("Print_Media_Index", "NewRoom");
+            }
+            var model = new model_input { IR_Print_MediaDetail = get_detail };
+            return View(model);
         }
 
         [HttpGet]
@@ -1756,76 +1807,82 @@ namespace Lighting.Controllers.Backend
 
         [HttpPut]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> Print_MediaDetail_EditSubmit(RequestDTO.IR_Print_MedialDetailRequest model, List<IFormFile> uploaded_Image, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        public async Task<IActionResult> Print_MediaDetail_EditSubmit(RequestDTO.IR_Print_MedialDetailRequest model)
         {
             try
             {
                 var IR_Print_MediaDetail = await _context.IR_Print_MediaDetail.FirstOrDefaultAsync(x => x.Id == model.Id);
                 if (IR_Print_MediaDetail is not null)
                 {
-                    foreach (var formFile in uploaded_Image)
-                    {
-                        if (formFile.Length > 0)
+                    if (model.uploaded_Image != null)
+                    { 
+                        foreach (var formFile in model.uploaded_Image)
                         {
-                            var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_NewRoom/" + IR_Print_MediaDetail.Image_Newssource);
-                            if (System.IO.File.Exists(old_filePath) == true)
+                            if (formFile.Length > 0)
                             {
-                                System.IO.File.Delete(old_filePath);
-                            }
+                                var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_NewRoom/" + IR_Print_MediaDetail.Image_Newssource);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
 
-                            var datestr = DateTime.Now.Ticks.ToString();
-                            var extension = Path.GetExtension(formFile.FileName);
-                            IR_Print_MediaDetail.Image_Newssource = datestr + extension;
-                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_NewRoom/" + datestr + extension);
-                            using (var stream = System.IO.File.Create(filePath))
-                            {
-                                formFile.CopyTo(stream);
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                IR_Print_MediaDetail.Image_Newssource = datestr + extension;
+                                var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_NewRoom/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
                             }
                         }
                     }
-
-                    foreach (var formFile in uploaded_fileTH)
-                    {
-                        if (formFile.Length > 0)
+                    if (model.uploaded_fileTH != null)
+                    { 
+                        foreach (var formFile in model.uploaded_fileTH)
                         {
-                            var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + IR_Print_MediaDetail.FileNameTH);
-                            if (System.IO.File.Exists(old_filePath) == true)
+                            if (formFile.Length > 0)
                             {
-                                System.IO.File.Delete(old_filePath);
-                            }
+                                var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + IR_Print_MediaDetail.FileNameTH);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
 
-                            var datestr = DateTime.Now.Ticks.ToString();
-                            var extension = Path.GetExtension(formFile.FileName);
-                            IR_Print_MediaDetail.FileNameTH = datestr + extension;
-                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
-                            using (var stream = System.IO.File.Create(filePath))
-                            {
-                                formFile.CopyTo(stream);
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                IR_Print_MediaDetail.FileNameTH = datestr + extension;
+                                var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
                             }
                         }
                     }
-
-                    foreach (var formFile in uploaded_fileEN)
+                    if (model.uploaded_fileEN != null)
                     {
-                        if (formFile.Length > 0)
+                        foreach (var formFile in model.uploaded_fileEN)
                         {
-                            var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + IR_Print_MediaDetail.FileNameEN);
-                            if (System.IO.File.Exists(old_filePath) == true)
+                            if (formFile.Length > 0)
                             {
-                                System.IO.File.Delete(old_filePath);
-                            }
+                                var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + IR_Print_MediaDetail.FileNameEN);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
 
-                            var datestr = DateTime.Now.Ticks.ToString();
-                            var extension = Path.GetExtension(formFile.FileName);
-                            IR_Print_MediaDetail.FileNameEN = datestr + extension;
-                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
-                            using (var stream = System.IO.File.Create(filePath))
-                            {
-                                formFile.CopyTo(stream);
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                IR_Print_MediaDetail.FileNameEN = datestr + extension;
+                                var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
                             }
                         }
                     }
-
                     IR_Print_MediaDetail.Title_TH = model.Title_TH;
                     IR_Print_MediaDetail.Title_EN = model.Title_EN;
                     if (model.NewDate is not null)
@@ -2174,41 +2231,46 @@ namespace Lighting.Controllers.Backend
 
         [HttpPost]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> InvestorCalendarDetail_Add_Submit(RequestDTO.InvestorCalendarDetailRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        public async Task<IActionResult> InvestorCalendarDetail_Add_Submit(RequestDTO.InvestorCalendarDetailRequest model)
         {
             IR_InvestorCalendarDetail IR_InvestorCalendarDetail = new IR_InvestorCalendarDetail();
             try
             {
-                foreach (var formFile in uploaded_fileTH)
-                {
-                    if (formFile.Length > 0)
+                if (model.uploaded_fileTH != null)
+                { 
+                    foreach (var formFile in model.uploaded_fileTH)
                     {
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        IR_InvestorCalendarDetail.FileNameTH = datestr + extension;
-                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
+                        if (formFile.Length > 0)
                         {
-                            formFile.CopyTo(stream);
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            IR_InvestorCalendarDetail.FileNameTH = datestr + extension;
+                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
                         }
                     }
                 }
 
-                foreach (var formFile in uploaded_fileEN)
-                {
-                    if (formFile.Length > 0)
+                if (model.uploaded_fileEN != null)
+                { 
+                    foreach (var formFile in model.uploaded_fileEN)
                     {
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        IR_InvestorCalendarDetail.FileNameEN = datestr + extension;
-                        var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
-                        using (var stream = System.IO.File.Create(filePath))
+                        if (formFile.Length > 0)
                         {
-                            formFile.CopyTo(stream);
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            IR_InvestorCalendarDetail.FileNameEN = datestr + extension;
+                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
                         }
                     }
                 }
-
                 IR_InvestorCalendarDetail.Activity_TH = model.Activity_TH;
                 IR_InvestorCalendarDetail.Activity_EN = model.Activity_EN;
                 IR_InvestorCalendarDetail.Position_EN = model.Position_EN;
@@ -2251,7 +2313,17 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult InvestorCalendarDetail_Edit(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return RedirectToAction("InvestorCalendar_Index", "NewRoom");
+            }
+            var get_detail = _context.IR_InvestorCalendarDetail.Where(x => x.Id == Id).FirstOrDefault();
+            if (get_detail == null)
+            {
+                return RedirectToAction("InvestorCalendar_Index", "NewRoom");
+            }
+            var model = new model_input { IR_InvestorCalendarDetail = get_detail };
+            return View(model);
         }
 
         [HttpGet]
@@ -2277,55 +2349,60 @@ namespace Lighting.Controllers.Backend
 
         [HttpPut]
         [RequestSizeLimit(1024 * 1024 * 1024)]
-        public async Task<IActionResult> InvestorCalendarDetail_EditSubmit(RequestDTO.InvestorCalendarDetailRequest model, List<IFormFile> uploaded_fileTH, List<IFormFile> uploaded_fileEN)
+        public async Task<IActionResult> InvestorCalendarDetail_EditSubmit(RequestDTO.InvestorCalendarDetailRequest model)
         {
             try
             {
                 var IR_InvestorCalendarDetail = await _context.IR_InvestorCalendarDetail.FirstOrDefaultAsync(x => x.Id == model.Id);
                 if (IR_InvestorCalendarDetail is not null)
                 {
-                    foreach (var formFile in uploaded_fileTH)
-                    {
-                        if (formFile.Length > 0)
+                    if (model.uploaded_fileTH != null)
+                    { 
+                        foreach (var formFile in model.uploaded_fileTH)
                         {
-                            var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + IR_InvestorCalendarDetail.FileNameTH);
-                            if (System.IO.File.Exists(old_filePath) == true)
+                            if (formFile.Length > 0)
                             {
-                                System.IO.File.Delete(old_filePath);
-                            }
+                                var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + IR_InvestorCalendarDetail.FileNameTH);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
 
-                            var datestr = DateTime.Now.Ticks.ToString();
-                            var extension = Path.GetExtension(formFile.FileName);
-                            IR_InvestorCalendarDetail.FileNameTH = datestr + extension;
-                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
-                            using (var stream = System.IO.File.Create(filePath))
-                            {
-                                formFile.CopyTo(stream);
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                IR_InvestorCalendarDetail.FileNameTH = datestr + extension;
+                                var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
                             }
                         }
                     }
 
-                    foreach (var formFile in uploaded_fileEN)
-                    {
-                        if (formFile.Length > 0)
+                    if (model.uploaded_fileEN != null)
+                    { 
+                        foreach (var formFile in model.uploaded_fileEN)
                         {
-                            var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + IR_InvestorCalendarDetail.FileNameEN);
-                            if (System.IO.File.Exists(old_filePath) == true)
+                            if (formFile.Length > 0)
                             {
-                                System.IO.File.Delete(old_filePath);
-                            }
+                                var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + IR_InvestorCalendarDetail.FileNameEN);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
 
-                            var datestr = DateTime.Now.Ticks.ToString();
-                            var extension = Path.GetExtension(formFile.FileName);
-                            IR_InvestorCalendarDetail.FileNameEN = datestr + extension;
-                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
-                            using (var stream = System.IO.File.Create(filePath))
-                            {
-                                formFile.CopyTo(stream);
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                IR_InvestorCalendarDetail.FileNameEN = datestr + extension;
+                                var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_file/IR_NewRoom/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
                             }
                         }
                     }
-
                     IR_InvestorCalendarDetail.Activity_TH = model.Activity_TH;
                     IR_InvestorCalendarDetail.Activity_EN = model.Activity_EN;
                     IR_InvestorCalendarDetail.Position_TH = model.Position_TH;

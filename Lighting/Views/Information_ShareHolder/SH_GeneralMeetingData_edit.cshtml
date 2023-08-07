@@ -22,7 +22,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="@Url.Action("InvestorRelations_index","Investor_Relations")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
+                        <a href="@Url.Action("Banner","IR_Index")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -112,6 +112,17 @@
                             <div class="col-6">
                                 <input type="file" class="form-control" name="uploaded_file" value="@Model.SH_generalMeeting_Data.file_name" />
                             </div>
+
+                            @if (Model.SH_generalMeeting_Data.file_name != null)
+                            {
+                                <div class="col-4">
+                                    <div>
+                                        <div style="text-align:center;">
+                                            <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/SH_GeneralMeeting/@Model.SH_generalMeeting_Data.file_name">ไฟล์เอกสาร TH</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         </div>
 
                         <div class="row mb-3">
@@ -123,6 +134,17 @@
                             <div class="col-6">
                                 <input type="file" class="form-control" name="uploaded_file_ENG" value="@Model.SH_generalMeeting_Data.file_name_ENG" />
                             </div>
+
+                            @if (Model.SH_generalMeeting_Data.file_name_ENG != null)
+                            {
+                                <div class="col-4">
+                                    <div>
+                                        <div style="text-align:center;">
+                                            <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/SH_GeneralMeeting/@Model.SH_generalMeeting_Data.file_name_ENG">ไฟล์เอกสาร TH</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         </div>
 
                         <div class="row mb-3">
