@@ -9,16 +9,12 @@
   <ItemGroup>
     <Compile Remove="bin\**" />
     <Compile Remove="wwwroot\assets\summernote0818\**" />
-    <Compile Remove="wwwroot\upload_image\Philosophy\**" />
     <Content Remove="bin\**" />
     <Content Remove="wwwroot\assets\summernote0818\**" />
-    <Content Remove="wwwroot\upload_image\Philosophy\**" />
     <EmbeddedResource Remove="bin\**" />
     <EmbeddedResource Remove="wwwroot\assets\summernote0818\**" />
-    <EmbeddedResource Remove="wwwroot\upload_image\Philosophy\**" />
     <None Remove="bin\**" />
     <None Remove="wwwroot\assets\summernote0818\**" />
-    <None Remove="wwwroot\upload_image\Philosophy\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -510,6 +506,8 @@
     <Folder Include="wwwroot\upload_image\Author_secretary\" />
     <Folder Include="wwwroot\upload_image\ImportInfo_Shareholder\" />
     <Folder Include="wwwroot\upload_file\SH_GeneralMeeting\" />
+    <Folder Include="wwwroot\upload_image\IR_Banner\" />
+    <Folder Include="wwwroot\upload_image\IR_Button_Below_Banner\" />
     <Folder Include="wwwroot\upload_image\IR_Contact\" />
     <Folder Include="wwwroot\upload_image\IR_NewRoom\" />
     <Folder Include="wwwroot\upload_image\contact\" />
@@ -544,6 +542,10 @@
     <Folder Include="wwwroot\upload_image\IR_Index\" />
     <Folder Include="wwwroot\upload_image\IR_NewRoom\" />
     <Folder Include="wwwroot\upload_image\Apply_Img_Content\" />
+    <Folder Include="wwwroot\upload_image\MainContact\" />
+    <Folder Include="wwwroot\upload_image\NewFolder\" />
+    <Folder Include="wwwroot\upload_image\Philosophy\" />
+    <Folder Include="wwwroot\upload_image\SustainabilityReport\" />
     <Folder Include="wwwroot\upload_image\Product_Category\" />
     <Folder Include="wwwroot\upload_image\Product_Model\" />
     <Folder Include="wwwroot\upload_image\news\" />
