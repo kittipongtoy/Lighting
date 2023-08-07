@@ -201,7 +201,7 @@ namespace Lighting.Controllers.Frontend
                          })
                          .ToListAsync();
             //var selected_category = allCategory.Where(cat => cat.Name_EN.ToLower().StartsWith(category.ToLower()) || cat.Name_TH.StartsWith(category)).FirstOrDefault();
-            var selected_subCategory = allSub_category.Where(sub_cat => sub_cat.Name_EN.ToLower().StartsWith(sub_category.ToLower()) || sub_cat.Name_TH.StartsWith(sub_category.ToLower())).FirstOrDefault();
+            var selected_subCategory = allSub_category.Where(sub_cat => sub_cat.Name_EN.ToLower().StartsWith(sub_category.ToLower()) || sub_cat.Name_TH.StartsWith(sub_category)).FirstOrDefault();
             var product = await _db.Products
                 .AsNoTracking()
                 .Include(pro => pro.ProductSpect)
