@@ -21,11 +21,17 @@
     <div class="row d-flex justify-content-center gap-5 d-flex-wraps mt-2" id="card_container">
         @foreach (var news in Model)
         {
+            string getDate = "";
+            var date=news.CreateDate_EN;
+            if(date!=null){
+             getDate= date.Value.Day + "/" + date.Value.Month + "/" + date.Value.Year;
+            }
+
             <div class="card col-12 col-sm-5 col-md-4 col-lg-3 border border-dark rounded-3" id="@news.Id">
                 <img src="@news.TitleImage" class="card-img-top mt-2 rounded-3" style="width:100%;height:60%;">
                 <div class="card-body p-2" style="display:grid;grid-template-rows:auto auto 3rem;box-sizing:border-box;gap:3px;">
                     <h5 class="card-title">@news.Title_TH / @news.Title_EN</h5>
-                    <p class="card-text">@news.CreateDate_TH &nbsp;/&nbsp; @news.CreateDate_EN</p>
+                    <p class="card-text">@getDate</p>
 
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;">
                         <a href="/news/Edit_News_Page?id=@news.Id" class="bg-warning" style="display:flex;justify-content:center;text-align:center;flex-direction:column;">แก้ไข/edit</a>
@@ -37,13 +43,11 @@
         }
 
     </div>
-</div>
-
+</div> 
 
 @section Scripts{
+
     <script>
-
-
 
         function deleteById(id, lang) {
 

@@ -1,4 +1,6 @@
 ﻿@using System.Text;
+@using System.Globalization
+
 @{
     ViewData["Title"] = "News Detail";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
@@ -29,13 +31,27 @@
                             <div class="col">
                                 @if (lang == "EN")
                                 {
+                                    var getDate = "";
+                                    if (Model.CreateDate_EN != null)
+                                    {
+                                        var inputDate = Convert.ToDateTime(Model.CreateDate_EN);
+                                        getDate = inputDate.ToString("dd/MM/yyyy", new CultureInfo("en-US"));
+                                    }
+
                                     <h4>@Model.Title_EN</h4>
-                                    <div class="news-date">@Model.CreateDate_EN</div>
+                                    <div class="news-date">@getDate</div>
                                 }
                                 else
                                 {
+                                    var getDate = "";
+                                    if (Model.CreateDate_EN != null)
+                                    {
+                                        var inputDate = Convert.ToDateTime(Model.CreateDate_EN);
+                                        getDate = inputDate.ToString("dd/MM/yyyy", new CultureInfo("th-TH"));
+                                    }
+
                                     <h4>@Model.Title_TH</h4>
-                                    <div class="news-date">@Model.CreateDate_TH</div>
+                                    <div class="news-date">@getDate</div>
                                 }
                             </div>
                         </div>

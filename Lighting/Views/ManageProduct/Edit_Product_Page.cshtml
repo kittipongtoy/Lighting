@@ -27,9 +27,12 @@
     .add-product-grid-item {
         display: grid;
         grid-template-rows: auto auto;
-        & > input[type="text"]{
-            height:4rem;
-        }
+        & > input[type="text"]
+
+    {
+        height: 4rem;
+    }
+
     }
 
     .add-spect-container {
@@ -54,11 +57,14 @@
         display: grid;
         grid-template-columns: auto auto 5rem;
         border-bottom: 1px solid black;
-        & > div{
-            max-width: 100%;
-            word-wrap: break-word;
-            font-size: 1.7rem;
-        }
+        & > div
+
+    {
+        max-width: 100%;
+        word-wrap: break-word;
+        font-size: 1.7rem;
+    }
+
     }
 
     .add-spect-box {
@@ -71,16 +77,19 @@
         grid-template-rows: 2rem auto 3rem 3rem auto 3rem;
         gap: 2rem;
         background-color: white;
-        & > input[type="text"]{
-            font-size: 2rem;
-        }
+        & > input[type="text"]
 
-        & > h3 {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-        }
+    {
+        font-size: 2rem;
+    }
+
+    & > h3 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
     }
 
     .add-product-grid-spec {
@@ -92,15 +101,18 @@
         background-color: rgba(0,0,0,0.2);
         padding: 2rem;
         border-radius: 10px;
-        & > h2{
-            margin: -2rem;
-            background-color: gray;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-            border-radius: 5px;
-        }
+        & > h2
+
+    {
+        margin: -2rem;
+        background-color: gray;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        border-radius: 5px;
+    }
+
     }
 </style>
 <div style="display:flex;justify-content:space-between;margin:1rem 10%;">
@@ -115,12 +127,25 @@
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">เปลี่ยนรูปโชว์/Change Preview Image</label>
+            <label class="h4">
+                รูปสินค้า/Product Image
+                <br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 500 * 500 px
+                </span>
+            </label>
             <input class="form-control" type="file" id="file_img_preview" />
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">Spact image  <a href="ManageProduct/DwonloadFile?path=@Model.SUB_IMG" target="_blank">download click  @Model?.SUB_IMG?.Split("\\").Reverse().Take(1).FirstOrDefault()</a></label>
+            <label class="h4">
+                รูปสเปค/Spec Image
+                <br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 260 * 40 px
+                </span>
+                <a href="ManageProduct/DwonloadFile?path=@Model.SUB_IMG" target="_blank">download click  @Model?.SUB_IMG?.Split("\\").Reverse().Take(1).FirstOrDefault()</a>
+            </label>
             <input class="form-control" type="file" id="sub_img_file" />
         </div>
 
@@ -160,14 +185,14 @@
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">ชื่อรุ่น/model name</label>
+            <label class="h4">ชื่อสินค้า/Product Name</label>
             <input type="text" placeholder="ชื่อรุ่น" value="@Model?.Model" id="model_name" />
         </div>
 
         <div>
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" i>ชื่อประเภท/Category Name</span>
+                    <span class="input-group-text" i>ประเภทสินค้า/Product Type</span>
                 </div>
                 <input type="text" class="form-control" id="category_name_th" placeholder="ภาษาไทย" value="@Model?.Type_TH">
                 <input type="text" class="form-control" id="category_name_en" placeholder="English" value="@Model?.Type_EN">
@@ -196,7 +221,7 @@
 
         <div class="add-product-grid-item">
             <label class="h4">More Information</label>
-            <input type="text" placeholder="https://MoreInformation.com" id="more_info" value="@Model?.MORE_INFORMATION"/>
+            <input type="text" placeholder="https://MoreInformation.com" id="more_info" value="@Model?.MORE_INFORMATION" />
         </div>
 
         <div class="add-product-grid-item">
@@ -204,11 +229,11 @@
             <textarea id="application">@Model?.Application</textarea>
         </div>
 
-        
+
         <div class="add-product-grid-item">
             <label class="h4">
                 Photometric Data Image (แทนที่รูปเดิม)
-                @if(Model?.LIGHT_DISTRIBUTION != null)
+                @if (Model?.LIGHT_DISTRIBUTION != null)
                 {
                     foreach (var img in Model.LIGHT_DISTRIBUTION)
                     {
@@ -217,13 +242,16 @@
                 }
             </label>
             <br />
-            <input class="form-control"  type="file" multiple id="light_distribute_file" accept="image/*" />
+            <span style="color:red;">
+                ขนาดรูปภาพ : 500 * 500 px
+            </span>
+            <input class="form-control" type="file" multiple id="light_distribute_file" accept="image/*" />
         </div>
 
         <div class="add-product-grid-item">
             <label class="h4">
                 Technical Drawing Image (แทนที่รูปเดิม)
-                @if(Model?.Technical_Drawing_Img != null)
+                @if (Model?.Technical_Drawing_Img != null)
                 {
                     foreach (var img in Model.Technical_Drawing_Img)
                     {
@@ -232,6 +260,9 @@
                 }
             </label>
             <br />
+            <span style="color:red;">
+                ขนาดรูปภาพ : 500 * 500 px
+            </span>
             <input class="form-control" type="file" multiple id="technical_img_file" accept="image/*" />
         </div>
 
@@ -254,74 +285,75 @@
             </div>
             @*
             <div class="add-product-grid-item">
-                <label class="h4">Housing</label>
-                <input type="text" placeholder="Housing" id="Housing" value="@Model?.Housing"/>
+            <label class="h4">Housing</label>
+            <input type="text" placeholder="Housing" id="Housing" value="@Model?.Housing"/>
             </div>
 
             <div class="add-product-grid-item">
-                <label class="h4">Finishing</label>
-                <input type="text" placeholder="Finishing" id="Finishing" value="@Model?.Finishing" />
+            <label class="h4">Finishing</label>
+            <input type="text" placeholder="Finishing" id="Finishing" value="@Model?.Finishing" />
             </div>
 
             <div class="add-product-grid-item">
-                <label class="h4">Lens</label>
-                <input type="text" placeholder="Lens" id="Lens" value="@Model?.Lens" />
+            <label class="h4">Lens</label>
+            <input type="text" placeholder="Lens" id="Lens" value="@Model?.Lens" />
             </div>
 
             <div class="add-product-grid-item">
-                <label class="h4">Gasket</label>
-                <input type="text" placeholder="Gasket" id="Gasket" value="@Model?.Gasket" />
+            <label class="h4">Gasket</label>
+            <input type="text" placeholder="Gasket" id="Gasket" value="@Model?.Gasket" />
             </div>
 
             <div class="add-product-grid-item">
-                <label class="h4">Mounting</label>
-                <input type="text" placeholder="Mounting" id="Mounting" value="@Model?.Mounting" />
+            <label class="h4">Mounting</label>
+            <input type="text" placeholder="Mounting" id="Mounting" value="@Model?.Mounting" />
             </div>
 
             <div class="add-product-grid-item">
-                <label class="h4">Source</label>
-                <input type="text" placeholder="Source" id="Source" value="@Model?.Source" />
+            <label class="h4">Source</label>
+            <input type="text" placeholder="Source" id="Source" value="@Model?.Source" />
             </div>
 
             <div class="add-product-grid-item">
-                <label class="h4">Lamp Colour</label>
-                <input type="text" placeholder="Lamp Colour" id="Lamp_Colour" value="@Model?.Lamp_Colour" />
+            <label class="h4">Lamp Colour</label>
+            <input type="text" placeholder="Lamp Colour" id="Lamp_Colour" value="@Model?.Lamp_Colour" />
             </div>
 
             <div class="add-product-grid-item">
-                <label class="h4">Luminaire Output</label>
-                <input type="text" placeholder="Luminaire Output" id="Luminaire_Output" value="@Model?.Luminaire_Output" />
+            <label class="h4">Luminaire Output</label>
+            <input type="text" placeholder="Luminaire Output" id="Luminaire_Output" value="@Model?.Luminaire_Output" />
             </div>
 
             <div class="add-product-grid-item">
-                <label class="h4">Beam Angle</label>
-                <input type="text" placeholder="Beam Angle" id="Beam_Angle" value="@Model?.Beam_Angle" />
+            <label class="h4">Beam Angle</label>
+            <input type="text" placeholder="Beam Angle" id="Beam_Angle" value="@Model?.Beam_Angle" />
             </div>
 
             <div class="add-product-grid-item">
-                <label class="h4">Control Gear</label>
-                <input type="text" placeholder="Control Gear" id="Control_Gear" value="@Model?.Control_Gear" />
+            <label class="h4">Control Gear</label>
+            <input type="text" placeholder="Control Gear" id="Control_Gear" value="@Model?.Control_Gear" />
             </div>
 
             <div class="add-product-grid-item">
-                <label class="h4">Power Supply</label>
-                <input type="text" placeholder="Power Supply" id="Power_Supply" value="@Model?.Power_Supply" />
+            <label class="h4">Power Supply</label>
+            <input type="text" placeholder="Power Supply" id="Power_Supply" value="@Model?.Power_Supply" />
             </div>
 
 
 
             <div class="add-product-grid-item">
-                <label class="h4">Luminaire Lifetime</label>
-                <input type="text" placeholder="Luminaire Lifetime" id="Luminaire_Lifetime" value="@Model?.Luminaire_Lifetime" />
+            <label class="h4">Luminaire Lifetime</label>
+            <input type="text" placeholder="Luminaire Lifetime" id="Luminaire_Lifetime" value="@Model?.Luminaire_Lifetime" />
             </div>
 
             <div class="add-product-grid-item">
-                <label class="h4">Equivalent</label>
-                <input type="text" placeholder="Equivalent" id="Equivalent" value="@Model?.Equivalent" />
+            <label class="h4">Equivalent</label>
+            <input type="text" placeholder="Equivalent" id="Equivalent" value="@Model?.Equivalent" />
             </div>
             *@
-            <div  class="spect-grid-container">
-                @if(Model?.Product_Spects != null){
+            <div class="spect-grid-container">
+                @if (Model?.Product_Spects != null)
+                {
                     foreach (var spect in Model.Product_Spects)
                     {
                         <div class="spect-grid-item" id="@spect.Id">
@@ -422,10 +454,10 @@
                 specification.push({ id: spect_num, name: name, value: value });
                 let html_spect = specification.reduce((prev, curr) =>
                     prev += `<div class="spect-grid-item" id="spect${curr.id}">
-                                            <div> ${curr.name}</div>
-                                            <div> ${curr.value}</div>
-                                                    <button class= "btn btn-danger" onclick = "deleteSpect(${curr.id})" > ลบ </button>
-                                    </div>`, "");
+                                                            <div> ${curr.name}</div>
+                                                            <div> ${curr.value}</div>
+                                                                    <button class= "btn btn-danger" onclick = "deleteSpect(${curr.id})" > ลบ </button>
+                                                    </div>`, "");
                 $("#spect_container").html(html_spect);
                 spect_num++;
                 showHideSpect();
@@ -434,7 +466,7 @@
             }
         }
 
-        function deleteSpectById(id){
+        function deleteSpectById(id) {
 
             Swal.fire({
                 icon: 'warning',
@@ -491,10 +523,10 @@
             specification = specification.filter(x => x.id != id);
             let html_spect = specification.reduce((prev, curr) =>
                 prev += `<div class="spect-grid-item" id="spect${curr.id}">
-                                   <div> ${curr.name}</div>
-                                   <div> ${curr.value}</div>
-                                   <button class= "btn btn-danger" onclick = "deleteSpect(${curr.id})" > ลบ </button>
-                                 </div>`, "");
+                                                   <div> ${curr.name}</div>
+                                                   <div> ${curr.value}</div>
+                                                   <button class= "btn btn-danger" onclick = "deleteSpect(${curr.id})" > ลบ </button>
+                                                 </div>`, "");
 
             $("#spect_container").html(html_spect);
         }
@@ -554,7 +586,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/ManageProduct/Edit_Product?id='+id,
+                url: '/ManageProduct/Edit_Product?id=' + id,
                 data: form,
                 processData: false,
                 contentType: false,
