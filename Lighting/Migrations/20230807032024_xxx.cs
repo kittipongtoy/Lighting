@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Lighting.Migrations
 {
-    public partial class xx : Migration
+    public partial class xxx : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -2356,6 +2356,37 @@ namespace Lighting.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Setting_Index",
+                columns: table => new
+                {
+                    id_setting = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    titleTH1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleENG1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleTH2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleENG2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titlesubTH2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titlesubENG2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DescriptTH2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DescriptENG2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleTH3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleENG3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DescriptTH3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DescriptENG3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleTH4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titleENG4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titlesubTH4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    titlesubENG4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PathImg = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Setting_Index", x => x.id_setting);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SH_annual_Report",
                 columns: table => new
                 {
@@ -3167,6 +3198,23 @@ namespace Lighting.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Slide_Image_Index",
+                columns: table => new
+                {
+                    id_slideimg_index = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PathImg = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isActive = table.Column<bool>(type: "bit", nullable: false),
+                    sort = table.Column<int>(type: "int", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Slide_Image_Index", x => x.id_slideimg_index);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Smart_Solutions",
                 columns: table => new
                 {
@@ -3399,17 +3447,17 @@ namespace Lighting.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NameThai", "NormalizedName", "created_at", "updated_at" },
-                values: new object[] { "e6fc4c70-05b8-4fc1-a22a-baecbac6806d", "1038300d-21b8-42de-8d5d-98c88a371313", "Admin", "Admin", "Admin", new DateTime(2023, 8, 4, 4, 49, 12, 537, DateTimeKind.Utc).AddTicks(567), new DateTime(2023, 8, 4, 4, 49, 12, 537, DateTimeKind.Utc).AddTicks(571) });
+                values: new object[] { "de28898f-1751-4433-86c5-187be7c280cc", "84f73df9-1ba2-4b82-b550-60634a48619a", "Admin", "Admin", "Admin", new DateTime(2023, 8, 7, 3, 20, 24, 47, DateTimeKind.Utc).AddTicks(2034), new DateTime(2023, 8, 7, 3, 20, 24, 47, DateTimeKind.Utc).AddTicks(2038) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ApplicationFile", "ConcurrencyStamp", "Email", "EmailConfirmed", "EmployeeCode", "EmployeeCodeInt", "Firstname", "GuarantorIdentificationCardFile", "Isactive", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePath", "ReceptionistFile", "SecurityStamp", "TwoFactorEnabled", "UserName", "created_at", "updated_at" },
-                values: new object[] { "abb87e46-5121-4ccf-9d8d-2173cb825084", 0, null, null, "ef8144a8-f7ae-4a71-9d80-48443f98e68b", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEB2U+7serpcA+lG03DSpsICWjLlT99UWNWb9guZYaYHDSa+reFG8rfswVCbSkc0PZg==", null, false, null, null, "679b99ef-1a2c-4192-9561-04611882f377", false, "Admin@Lighting.com", null, null });
+                values: new object[] { "09f9c222-d433-4f0b-8337-7d12bf3bacc9", 0, null, null, "3a333845-cf10-49f7-bb3c-8ec2554158b9", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEACvmzzOQkjaTHv+HxYWMt3mNBJj1zMKL2uQCmGAU5h7XLIW1rRYl+IzEREBMIncow==", null, false, null, null, "ef0538dd-5898-45cd-a61d-56dd1ad258de", false, "Admin@Lighting.com", null, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "e6fc4c70-05b8-4fc1-a22a-baecbac6806d", "abb87e46-5121-4ccf-9d8d-2173cb825084" });
+                values: new object[] { "de28898f-1751-4433-86c5-187be7c280cc", "09f9c222-d433-4f0b-8337-7d12bf3bacc9" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -3817,6 +3865,9 @@ namespace Lighting.Migrations
                 name: "RF_Warehouse_Logistics_Images");
 
             migrationBuilder.DropTable(
+                name: "Setting_Index");
+
+            migrationBuilder.DropTable(
                 name: "SH_annual_Report");
 
             migrationBuilder.DropTable(
@@ -3929,6 +3980,9 @@ namespace Lighting.Migrations
 
             migrationBuilder.DropTable(
                 name: "ShareHolder_DataDetails");
+
+            migrationBuilder.DropTable(
+                name: "Slide_Image_Index");
 
             migrationBuilder.DropTable(
                 name: "Smart_Solution_Links");

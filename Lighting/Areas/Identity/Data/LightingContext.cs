@@ -188,6 +188,12 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<IR_Hightlight> IR_Hightlight { get; set; }
         public DbSet<IR_HightlightDetail> IR_HightlightDetail { get; set; }
 
+        //Arm
+        public DbSet<SettingIndex> Setting_Index { get; set; }
+        public DbSet<SlideImageIndex> Slide_Image_Index { get; set; }
+
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
            optionsBuilder.EnableSensitiveDataLogging();
