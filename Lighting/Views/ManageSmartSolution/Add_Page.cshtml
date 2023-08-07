@@ -132,7 +132,7 @@
         <div style="display:flex;justify-content:center;align-items:center;flex-direction:column;">
             <img id="preview_subImg" style="height:40vh;width:40vh;" />
         </div>
-        <input type="file" id="file_img_preview"/>
+        <input type="file" id="file_img_preview" />
         <input type="text" id="txt_link"/>
         <div style="display:flex;justify-content:space-between;">
             <button class="btn bg-success" onclick="addImageLink()">ตกลง</button>
@@ -229,6 +229,7 @@
         function openPopup() {
             if ($("#sub_img_popup").css("display") == "flex"){
                 $("#sub_img_popup").css("display","none");
+                //$("#preview_subImg").attr("src", "").css("display", "none");
             }else{
                 $("#sub_img_popup").css("display","flex");
             }

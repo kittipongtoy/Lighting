@@ -32,11 +32,18 @@ namespace Lighting.Controllers.Backend
                     {
                         await input.Image_File.CopyToAsync(stream);
                     }
+                    var file_nav = Path.Combine( "upload_image", "Image_Category", Guid.NewGuid().ToString()+".jpg");
+                    using (var stream = new FileStream(Path.Combine(_env.WebRootPath,file_nav), FileMode.CreateNew))
+                    {
+                        await input.Image_File_Nav.CopyToAsync(stream);
+                    }
                     await _db.Category_Projects.AddAsync(new Category_Project
                     {
                         Image_Path = path_file,
                         Name_EN = input.Name_EN,
                         Name_TH = input.Name_TH,
+                         Image_Path_Nav = file_nav
+                         
                     });
                     await _db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
@@ -64,6 +71,7 @@ namespace Lighting.Controllers.Backend
                 {
                     var file_name = Guid.NewGuid().ToString() + ".jpg";
                     var path_file = Path.Combine("upload_image", "Image_Category", file_name);
+                    var img_nav_path = Path.Combine("upload_image", "Image_Category", Guid.NewGuid().ToString() + ".jpg");
                     if (input.Image_File != null)
                     {
                         //delete old file
@@ -77,10 +85,25 @@ namespace Lighting.Controllers.Backend
                             await input.Image_File.CopyToAsync(stream);
                         }
                     }
+                    if (input.Image_File_Nav != null)
+                    {
+
+                        //delete old file
+                        var old_file = Path.Combine(_env.WebRootPath, category.Image_Path_Nav);
+                        if (System.IO.File.Exists(old_file))
+                        {
+                            System.IO.File.Delete(old_file);
+                        }
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, img_nav_path), FileMode.CreateNew))
+                        {
+                            await input.Image_File_Nav.CopyToAsync(stream);
+                        }
+                    }
                     //update
                     category.Name_EN = input.Name_EN;
                     category.Name_TH = input.Name_TH;
-                    category.Image_Path = path_file;
+                    category.Image_Path = input.Image_File != null ?  path_file: category.Image_Path;
+                    category.Image_Path_Nav = input.Image_File_Nav != null ? img_nav_path : category.Image_Path_Nav;
                     await _db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
                 }
@@ -102,6 +125,11 @@ namespace Lighting.Controllers.Backend
                 if (System.IO.File.Exists(delete_file_path))
                 {
                     System.IO.File.Delete(delete_file_path);
+                }
+                var delete_file_path_nav = Path.Combine(_env.WebRootPath, category.Image_Path_Nav);
+                if (System.IO.File.Exists(delete_file_path_nav))
+                {
+                    System.IO.File.Delete(delete_file_path_nav);
                 }
                 _db.Category_Projects.Remove(category);
                 await _db.SaveChangesAsync();

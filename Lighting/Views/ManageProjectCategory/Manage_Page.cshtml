@@ -17,10 +17,10 @@
         </div>
     </div>
 
-
     <div class="row mt-3" style="display:none;" id="add_category">
         <div class="col-12" style="display:flex;justify-content:center;flex-direction:column;align-items:center;">
-            <img style="width:50vh;height:50vh;display:none;" id="img_preview" />
+            <img style="width:45%;display:none;" id="img_preview" />
+            <img style="width:45%;display:none;" id="img_preview_nav" />
         </div>
         <div class="col-12 " style="margin-top:3rem;">
             <div class="input-group">
@@ -32,6 +32,8 @@
             </div>
             <label class="form-label mt-3">เลือกรูปหมวดหมู่/image category</label>
             <input class="form-control mt-3" type="file" id="file_img_preview">
+            <label class="form-label mt-3">เลือกรูปแนบบา/image category navbar</label>
+            <input class="form-control mt-3" type="file" id="file_img_preview_nav" />
         </div>
         <center><button class="btn btn-success" style="margin-top:3rem;" onclick="addCategory()">บันทึก/save</button></center>
     </div>
@@ -60,7 +62,7 @@
                         <td><img src="@project.Image_Path" style="width:100px;height:100px;" /> </td>
                             <td style="word-wrap:break-word;max-width:500px;">@project.Name_TH / @project.Name_EN</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-warning" onclick="edit(@project.Id,'@project.Image_Path.Replace('\\','/')','@project.Name_TH','@project.Name_EN')">
+                                <button type="button" class="btn btn-warning" onclick="edit(@project.Id,'@project.Image_Path?.Replace('\\','/')','@project.Image_Path_Nav?.Replace('\\','/')','@project.Name_TH','@project.Name_EN')">
                                 <i class="bi bi-pencil-square"></i>แก้ไข/edit
                             </button>
                             <button type="button" class="btn btn-danger" onclick="deleteRowById(@project.Id)">
@@ -80,9 +82,10 @@
 
 <div style="position:fixed;inset:0;background-color:rgba(0,0,0,0.5);display:none;justify-content:center;flex-direction:column;align-items:center;z-index:10;overflow:auto;" id="edit_page">
     <div style="width:50%;height:auto;background-color:white;padding:3rem;border-radius:10px;">
-        <div style="display:grid;grid-template-rows:auto 3rem 3rem 3rem;gap:3rem;">
-            <div>
-                <img style="width:100%;height:50vh;" id="edit_img_preview" />
+        <div style="display:grid;grid-template-rows:auto 4rem 4rem 4rem 3rem;gap:3rem;max-height:100vh;overflow:auto;">
+            <div style="display:grid;grid-template-columns:50% 50%;">
+                <img style="width:100%;" id="edit_img_preview" />
+                <img style="width:100%;" id="edit_img_preview_nav" />
             </div>
 
             <div>
@@ -96,14 +99,18 @@
 
             </div>
 
-            <dvi>
+            <dvi style="display:grid;grid-template-columns:auto auto;">
+                <label class="form-label mt-3">เลือกรูปหมวดหมู่/image category</label>
                 <input class="form-control mt-3" type="file" id="edit_file_img_preview">
             </dvi>
-
+            <dvi style="display:grid;grid-template-columns:auto auto;">
+                <label class="form-label mt-3">เลือกรูปแนบบา/image category navbar</label>
+                <input class="form-control mt-3" type="file" id="edit_file_img_preview_nav">
+            </dvi>
             <center>
                 <button class="btn btn-success" onclick="saveEdit()">บันทึก/save</button>
                 <button class="btn btn-primary btn-danger"  onclick="closeEdit()">ปิด/close</button>
-                </center>
+            </center>
 
         </div>
     </div>
@@ -122,7 +129,8 @@
 
         var edit_id;
         var add_img_file;
-        var edit_img_file;
+        var edit_img_file, edit_img_file_nav;
+        var img_preview_nav;
 
         $(document).ready(function () {
 
@@ -133,11 +141,24 @@
                 }
             });
 
+            $('#file_img_preview_nav').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    img_preview_nav = e.target.files[0];
+                    $('#img_preview_nav').attr('src', await blobToBase64DataURL(img_preview_nav)).css("display", "block");
+                }
+            });
 
             $('#edit_file_img_preview').change(async function (e) {
                 if (e.target.files.length === 1) {
                     edit_img_file = e.target.files[0];
                     $('#edit_img_preview').attr('src', await blobToBase64DataURL(edit_img_file));
+                }
+            });
+
+            $('#edit_file_img_preview_nav').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    edit_img_file_nav = e.target.files[0];
+                    $('#edit_img_preview_nav').attr('src', await blobToBase64DataURL(edit_img_file_nav));
                 }
             });
 
@@ -160,6 +181,10 @@
             form.append("Name_EN", category_name_en);
             if (add_img_file != undefined) {
                 form.append("Image_File", add_img_file);
+            }
+
+            if (img_preview_nav != undefined) {
+                form.append("Image_File_Nav", img_preview_nav);
             }
 
             //ajax
@@ -227,6 +252,9 @@
                 form.append("Image_File", edit_img_file);
             }
 
+            if (edit_img_file_nav != undefined) {
+                form.append("Image_File_Nav", edit_img_file_nav);
+            }
             //ajax
             $.ajax({
                 type: 'POST',
@@ -269,12 +297,13 @@
             });
         }
 
-        function edit(id, img_path, name_th, name_en) {
+        function edit(id, img_path,img_nav, name_th, name_en) {
             edit_id = id;
             $("#edit_page").css("display","flex");
             $("#edit_category_name_th").val(name_th);
             $("#edit_category_name_en").val(name_en);
             $('#edit_img_preview').attr('src', img_path);
+            $('#edit_img_preview_nav').attr('src', img_nav);
         }
 
         function deleteRowById(id) {

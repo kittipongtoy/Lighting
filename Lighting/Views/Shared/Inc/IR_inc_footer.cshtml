@@ -360,50 +360,51 @@
             cache: false,
             success: function (data) {
                 //console.log(data);
-                let html_mobile = `
-                <ul class="contact-info WH-txt" >
-                    <li class="address" >
-                        <div class="icon-contact" > <i class="fas fa-map-marker-alt" > </i></div >
-                                <p><strong>${data.companyName}</strong>${data.location}</p>
-                    </li>
-                    <li >
-                    <div class="icon-contact" > <i class="fas fa-phone-alt" > </i></div >
-                        <p>${data.officePhone} </p>
-                    </li>
-                    <li >
-                      <div class="icon-contact" > <i class="fas fa-envelope" > </i></div >
-                               <p><a href="${data.eMail1}" > ${data.eMail1}</a></p >
-                     </li>
-                     <li class="map" >
-                            <a class="buttonBD" href = "${data.googleMapLink}" target = "_blank" > <i class="fas fa-map-marked-alt" > </i>Google map</a >
-                     </li>
-                </ul>`;
+                if(data){
+                    let html_mobile = `
+                    <ul class="contact-info WH-txt" >
+                        <li class="address" >
+                            <div class="icon-contact" > <i class="fas fa-map-marker-alt" > </i></div >
+                                    <p><strong>${data?.companyName}</strong>${data?.location}</p>
+                        </li>
+                        <li >
+                        <div class="icon-contact" > <i class="fas fa-phone-alt" > </i></div >
+                            <p>${data?.officePhone} </p>
+                        </li>
+                        <li >
+                          <div class="icon-contact" > <i class="fas fa-envelope" > </i></div >
+                                   <p><a href="${data?.eMail1}" > ${data?.eMail1}</a></p >
+                         </li>
+                         <li class="map" >
+                                <a class="buttonBD" href = "${data?.googleMapLink}" target = "_blank" > <i class="fas fa-map-marked-alt" > </i>Google map</a >
+                         </li>
+                    </ul>`;
 
-                let html_pc = `
-                               <ul class="contact-info WH-txt">
-                                  <li class="address">
-                                      <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                        <p>
-                                               <strong>${data.companyName} </strong>
-                                                ${data.location}
-                                        </p>
-                                        </li>
-                                        <li>
-                                            <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                <p>${data.officePhone}</p>
-                                        </li>
-                                        <li>
-                                            <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                 <p><a href="${data.eMail1}" > ${data.eMail1}</a></p >
-                                        </li>
-                                        <li class="map">
-                                                <a class="buttonBD" href="${data.googleMapLink}" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                        </li>
-                                  </ul>`;
+                    let html_pc = `
+                                   <ul class="contact-info WH-txt">
+                                      <li class="address">
+                                          <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                            <p>
+                                                   <strong>${data?.companyName} </strong>
+                                                    ${data?.location}
+                                            </p>
+                                            </li>
+                                            <li>
+                                                <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                                    <p>${data?.officePhone}</p>
+                                            </li>
+                                            <li>
+                                                <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                                     <p><a href="${data?.eMail1}" > ${data?.eMail1}</a></p >
+                                            </li>
+                                            <li class="map">
+                                                    <a class="buttonBD" href="${data?.googleMapLink}" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                            </li>
+                                      </ul>`;
 
-                $("#contact_json_mobile").html(html_mobile);
-                $("#contact_json_pc").html(html_pc);
-
+                    $("#contact_json_mobile").html(html_mobile);
+                    $("#contact_json_pc").html(html_pc);
+                }
             }, error: function (e) {
 
                 console.log(e.message);

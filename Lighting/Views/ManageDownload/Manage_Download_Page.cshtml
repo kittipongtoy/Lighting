@@ -36,11 +36,14 @@
                     <th scope="col" class="text-center">จัดการ/Manage</th>
                 </tr>
             </thead>
+            @{
+                int i = 1;
+            }
             <tbody>
                 @foreach (var download in Model)
                 {
                     <tr id="@download.Id">
-                        <th scope="row">@download.Id</th>
+                        <th scope="row">@i</th>
                         <td>@download.DownloadType</td>
                         <td style="word-wrap:break-word;max-width:500px;">@download.Name_TH/@download.Name_EN</td>
                         <td style="word-wrap:break-word;max-width:500px;"><a href="/ManageDownload/Download?path_and_name=@download.File" target="_blank" class="btn btn-primary">โหลด/download</a></td>
@@ -52,6 +55,9 @@
                                 <i class="bi bi-trash-fill"></i>ลบ/delete
                             </button>
                         </td>
+                        @{
+                            i++;
+                        }
                     </tr>
                 }
             </tbody>

@@ -9,6 +9,7 @@ namespace Lighting.Models.InputFilterModels.ProjectRef
         public string Name_EN { get; set; }
         [Required]
         public string Name_TH { get; set; }
+        public IFormFile Image_File_Nav { get; set; }
         public IFormFile Image_File { get; set; }
     }
 
@@ -18,6 +19,7 @@ namespace Lighting.Models.InputFilterModels.ProjectRef
         public string Name_EN { get; set; }
         public string Name_TH { get; set; }
         public string Image_Path { get; set; }
+        public string Image_File_Nav { get; set; }
     }
 
     public class Input_ProjectRefVM

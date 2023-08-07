@@ -37,9 +37,9 @@ namespace Lighting.Controllers.Frontend
                     {
                         searches.Add(new Search
                         {
-                            CategoryId = w.Product_CategoryId,
-                            SubcategoryId = w.Product_ModelId,
-                            ProductId = w.Id
+                            Category = _db.Product_Categorys.AsNoTracking().Where(cat => cat.Id == w.Product_CategoryId).FirstOrDefault()?.Name_EN,
+                            Subcategory = _db.Product_Models.AsNoTracking().Where(product_Model => product_Model.Id == w.Product_ModelId).FirstOrDefault()?.Name_EN,
+                            Product = w.Model
                         });
                     }
                 }
@@ -48,32 +48,32 @@ namespace Lighting.Controllers.Frontend
                 {
                     searches.Add(new Search
                     {
-                        CategoryId = m.Product_CategoryId,
-                        SubcategoryId = m.Product_ModelId,
-                        ProductId = m.Id
+                        Category = _db.Product_Categorys.AsNoTracking().Where(pro_cat => pro_cat.Id == m.Product_CategoryId)?.FirstOrDefault()?.Name_EN,
+                        Subcategory = _db.Product_Models.AsNoTracking().Where(model => model.Id == m.Product_ModelId)?.FirstOrDefault()?.Name_EN,
+                        Product = m.Model
                     });
                 }
-                var category = await _db.Product_Categorys.AsNoTracking().Where(cat => cat.Name_EN.ToLower().Contains(search) || cat.Name_TH.Contains(search)).ToListAsync();
+                var category = await _db.Product_Categorys.AsNoTracking().Where(cat => cat.Name_EN.ToLower().Contains(search.ToLower()) || cat.Name_TH.Contains(search)).ToListAsync();
                 if (category.Count > 0) //search category
                 {
                     foreach (var cat in category)
                     {
                         searches.Add(new Search
                         {
-                            CategoryId = cat.Id
+                            Category = cat.Name_EN
                         });
                     }
                 }
 
-                var model_or_subcategory = await _db.Product_Models.AsNoTracking().Where(cat => cat.Name_EN.ToLower().Contains(search) || cat.Name_TH.ToLower().Contains(search)).ToListAsync();
+                var model_or_subcategory = await _db.Product_Models.AsNoTracking().Where(cat => cat.Name_EN.ToLower().Contains(search.ToLower()) || cat.Name_TH.Contains(search)).ToListAsync();
                 if (model_or_subcategory.Count > 0) //search category
                 {
                     foreach (var model_or_subcat in model_or_subcategory)
                     {
                         searches.Add(new Search
                         {
-                            SubcategoryId = model_or_subcat.Id,
-                            CategoryId = model_or_subcat.Product_CategoryId
+                            Subcategory = model_or_subcat.Name_EN,
+                            Category = _db.Product_Categorys.AsNoTracking().Where(pro_cat => pro_cat.Id == model_or_subcat.Product_CategoryId)?.FirstOrDefault()?.Name_EN,
                         });
                     }
                 }
@@ -400,8 +400,8 @@ namespace Lighting.Controllers.Frontend
 
     class Search
     {
-        public int? ProductId { get; set; }
-        public int? SubcategoryId { get; set; }
-        public int? CategoryId { get; set; }
+        public string? Product { get; set; }
+        public string? Subcategory { get; set; }
+        public string? Category { get; set; }
     }
 }
