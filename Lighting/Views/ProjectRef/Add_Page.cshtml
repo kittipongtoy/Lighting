@@ -45,7 +45,7 @@
             </select>
             <div class="input-group" style="margin-top:2rem;">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="">ชื่อหัวข้อ/ Title Name</span>
+                    <span class="input-group-text" id="">ชื่อโปรเจค</span>
                 </div>
                 <input type="text" class="form-control" id="title_name_th" placeholder="ภาษาไทย">
                 <input type="text" class="form-control" id="title_name_en" placeholder="English">
@@ -81,7 +81,7 @@
             <!--end content-->
             <div style="margin-top:2rem;border:1px solid black;padding:1rem;">
                 <img style="width:100%;height:50vh;display:none;" id="preview_show_img" />
-                <br/>
+                <br />
                 <label class="form-label" style="margin-top:2rem;">รูปหน้าปก/image profile ขนาด 1280*960 px</label>
                 <input class="form-control form-control-lg" id="img_profile" type="file">
             </div>
@@ -93,8 +93,8 @@
             </div>
             @*
             <div style="margin-top:2rem;">
-                <label class="form-label">ไฟล์ดาวน์โหลด/Download</label>
-                <input class="form-control form-control-lg" id="download_file" type="file">
+            <label class="form-label">ไฟล์ดาวน์โหลด/Download</label>
+            <input class="form-control form-control-lg" id="download_file" type="file">
             </div>
             *@
             <center style="margin-top:2rem;"><h3>เพิ่มโปรดัก/add product</h3></center>
@@ -114,40 +114,39 @@
             </table>
 
             <center style="margin:3rem;">
-                <button class="btn btn-success" onclick="addProject()">ตกลง</button>
+                <button class="btn btn-success" onclick="addProject()">บันทึก</button>
             </center>
         </div>
     </div>
 
+    <div id="search-bar">
+        <input type="text" placeholder="ค้นหารุ่น/model name" id="txt_search_input" />
+        <select class="form-control" id="search_product_category_id">
+            <option class="h5" value="-1" selected>กรุณาเลือกหมวดหมู่/select category</option>
+            @foreach (var cat in (IEnumerable<Product_Category>)ViewData["category"])
+            {
+                <option class="h5" value="@cat.Id">@cat.Name_TH/@cat.Name_EN</option>
+            }
+        </select>
+        <button class="btn bg-success" onclick="search()">ค้นหาโปรดัก/search product</button>
+    </div>
 
-        <div id="search-bar" >
-            <input type="text" placeholder="ค้นหารุ่น/model name" id="txt_search_input" />
-            <select class="form-control" id="search_product_category_id">
-                <option class="h5" value="-1" selected>กรุณาเลือกหมวดหมู๋/select category</option>
-                @foreach (var cat in (IEnumerable<Product_Category>)ViewData["category"])
-                {
-                    <option class="h5" value="@cat.Id">@cat.Name_TH/@cat.Name_EN</option>
-                }
-            </select>
-            <button class="btn bg-success" onclick="search()">ค้นหาโปรดัก/search product</button>
-        </div>
-
-        <div class="row mt-5" id="search_table" >
-            <table class="table mt-3" id="show_search_table">
-                <thead>
-                    <tr style="border-top:1px solid black;border-bottom:1px solid black;">
-                        <th scope="col">#</th>
-                        <th scope="col">รูปปก/Image Preview</th>
-                        <th scope="col">ชื่อรุ่น/Model Name</th>
-                        <th scope="col">ชื่อประเภท/Type Name</th>
-                        <th scope="col">กำลัง/power</th>
-                        <th scope="col" class="text-center">จัดการ/Manage</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
+    <div class="row mt-5" id="search_table">
+        <table class="table mt-3" id="show_search_table">
+            <thead>
+                <tr style="border-top:1px solid black;border-bottom:1px solid black;">
+                    <th scope="col">#</th>
+                    <th scope="col">รูปปก/Image Preview</th>
+                    <th scope="col">ชื่อรุ่น/Model Name</th>
+                    <th scope="col">ชื่อประเภท/Type Name</th>
+                    <th scope="col">กำลัง/power</th>
+                    <th scope="col" class="text-center">จัดการ/Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @section Scripts{
@@ -177,7 +176,7 @@
         //const content_th = editorTH.getData();
         //const content_en = editorEN.getData();
 
-        var jsonAllSearch,productList = [];
+        var jsonAllSearch, productList = [];
 
 
         function search() {
@@ -195,40 +194,40 @@
 
                 let concat_str = search.reduce((prev, curr) =>
                     prev += `<tr id="${curr.id}">
-                                        <th scope="row"></th>
-                                                <td><img src="${curr.preview_Imamge}" style="width:100px;height:100px;" /> </td>
-                                                <td>${curr.model}</td>
-                                                <td>${curr.type_EN} /${curr.type_TH}</td>
-                                                <td>${curr.power}</td>
-                                                <td class="text-center">
-                                                <button onClick="addproduct(${curr.id})" type="button" class="btn  bg-success">
-                                                    <i class="bi bi-pencil-square"></i>เพิ่ม/add
-                                                </a>
-                                                </td> 
-                                                </tr>`, "");
-
-                tableBody = $("#show_search_table tbody");
-                tableBody.html(concat_str);
-            }
-        }
-
-        function addproduct(id){
-            let product = jsonAllSearch.filter(x => x.id == id).reduce((prev, curr) => prev += `<tr id="${curr.id}">
                                                 <th scope="row"></th>
                                                         <td><img src="${curr.preview_Imamge}" style="width:100px;height:100px;" /> </td>
                                                         <td>${curr.model}</td>
                                                         <td>${curr.type_EN} /${curr.type_TH}</td>
                                                         <td>${curr.power}</td>
                                                         <td class="text-center">
-                                                                <button onClick="deleteRowById(${curr.id})" type="button" class="btn  btn-danger">
-                                                            <i class="bi bi-pencil-square"></i>ลบ/delete
-                                                        </button>
+                                                        <button onClick="addproduct(${curr.id})" type="button" class="btn  bg-success">
+                                                            <i class="bi bi-pencil-square"></i>เพิ่ม/add
+                                                        </a>
                                                         </td>
                                                         </tr>`, "");
+
+                tableBody = $("#show_search_table tbody");
+                tableBody.html(concat_str);
+            }
+        }
+
+        function addproduct(id) {
+            let product = jsonAllSearch.filter(x => x.id == id).reduce((prev, curr) => prev += `<tr id="${curr.id}">
+                                                        <th scope="row"></th>
+                                                                <td><img src="${curr.preview_Imamge}" style="width:100px;height:100px;" /> </td>
+                                                                <td>${curr.model}</td>
+                                                                <td>${curr.type_EN} /${curr.type_TH}</td>
+                                                                <td>${curr.power}</td>
+                                                                <td class="text-center">
+                                                                        <button onClick="deleteRowById(${curr.id})" type="button" class="btn  btn-danger">
+                                                                    <i class="bi bi-pencil-square"></i>ลบ/delete
+                                                                </button>
+                                                                </td>
+                                                                </tr>`, "");
             if (!productList.includes(id)) {
                 tableBody = $("#added_table tbody");
                 tableBody.append(product);
-                productList = [...productList,id];
+                productList = [...productList, id];
                 //console.log("add",productList);
             }
         }
@@ -275,7 +274,7 @@
                 }
             }
 
-            if (productList.length > 0){
+            if (productList.length > 0) {
                 for (const id of productList) {
                     formData.append("ProductId", id);
                 }

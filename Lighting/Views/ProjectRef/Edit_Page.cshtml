@@ -53,7 +53,7 @@
             </select>
             <div class="input-group" style="margin-top:2rem;">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="">ชื่อหัวข้อ/ Title Name</span>
+                    <span class="input-group-text" id="">ชื่อโปรเจค</span>
                 </div>
                 <input type="text" class="form-control" id="title_name_th" value="@Model.Title_TH" placeholder="ภาษาไทย">
                 <input type="text" class="form-control" id="title_name_en" value="@Model.Title_EN" placeholder="English">
@@ -164,7 +164,7 @@
             </table>
 
             <center style="margin:3rem;">
-                <button class="btn btn-success" onclick="addProject()">ตกลง</button>
+                <button class="btn btn-success" onclick="addProject()">บันทึก</button>
             </center>
         </div>
     </div>
@@ -172,7 +172,7 @@
     <div id="search-bar">
         <input type="text" placeholder="ค้นหารุ่น/model name" id="txt_search_input" />
         <select class="form-control" id="search_product_category_id">
-            <option class="h5" value="-1" selected>กรุณาเลือกหมวดหมู๋/select category</option>
+            <option class="h5" value="-1" selected>กรุณาเลือกหมวดหมู่/select category</option>
             @foreach (var cat in (IEnumerable<Product_Category>)ViewData["category"])
             {
                 <option class="h5" value="@cat.Id">@cat.Name_TH/@cat.Name_EN</option>

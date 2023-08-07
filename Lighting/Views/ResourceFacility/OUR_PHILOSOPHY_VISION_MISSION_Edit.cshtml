@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Lighting.Models.Resource_FacilityModels
+ 
+@{
     ViewData["Title"] = "OUR_PHILOSOPHY_VISION_MISSION_Edit";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
@@ -57,7 +59,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="mb-10" style="text-align:center;">
-                                    <img src="~/upload_image/RF_Manufacturing/@Model.RF_Philosophy_Vision_Mission_Details.upload_image" style="height: 250px;width: 250px;" alt="image">
+                                    <img src="~/upload_image/RF_Philosophy_VM/@Model.RF_Philosophy_Vision_Mission_Details.image_name" style="height: 250px;width: 250px;" alt="image">
                                 </div>
                                 <input type="file" class="form-control" name="upload_image" accept="image/*" required />
                             </div>
@@ -72,7 +74,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="mb-10" style="text-align:center;">
-                                    <img src="~/upload_image/RF_Manufacturing/@Model.RF_Philosophy_Vision_Mission_Details.upload_image_ENG" style="height: 250px;width: 250px;" alt="image">
+                                    <img src="~/upload_image/RF_Philosophy_VM/@Model.RF_Philosophy_Vision_Mission_Details.image_name_ENG" style="height: 250px;width: 250px;" alt="image">
                                 </div>
                                 <input type="file" class="form-control" name="upload_image_ENG" accept="image/*" required />
                             </div>
