@@ -84,12 +84,14 @@
                 <img src="~/@Model.DetailImg" id="content_preiew_img" style="width:100%;height:40vh;" />
             </div>
             <div class="form-group mt-2 p-1">
-                <label class="h4">เลือกไฟล์ภาพพรีวิวคอนเทนต์
+                <label class="h4">
+                    เลือกไฟล์ภาพพรีวิวคอนเทนต์
                     <br />
                     <span style="color:red;">
                         ขนาดรูปภาพ : 1200 * 620 px
-                    </span></label>
-                    <input type="file" class="form-control" id="content_file_img">
+                    </span>
+                </label>
+                <input type="file" class="form-control" id="content_file_img">
             </div>
             @*title*@
             <div class="form-group mt-2 p-1">
@@ -102,7 +104,7 @@
             </div>
             @*file img*@
             <div class="img-container">
-                <img src="~/@Model.PreviewImg" id="preiew_img" style="width:30vh;height:30vh;"  />
+                <img src="~/@Model.PreviewImg" id="preiew_img" style="width:30vh;height:30vh;" />
             </div>
             <div class="form-group mt-2 p-1">
                 <label class="h4">
@@ -124,8 +126,8 @@
                 <textarea id="expanation_en">@Model.Explanation_EN</textarea>
             </div>
             @*link for old*@
-            <div  class="link-container">
-                @if(Model.Links != null)
+            <div class="link-container">
+                @if (Model.Links != null)
                 {
                     foreach (var link in Model.Links)
                     {
@@ -140,7 +142,7 @@
                 }
             </div>
             @*for add new*@
-            <div id="link_list" class="link-container" >
+            <div id="link_list" class="link-container">
             </div>
             <center><button class="btn bg-success" onclick="openPopup()">เพิ่มลิ้ง/add link</button></center>
             @*content1*@
@@ -155,7 +157,7 @@
             <div style="margin:1rem;display:flex;justify-content:space-between;">
                 <button class="btn bg-success" onclick="editSolution(@Model.Id)">บันทึกข้อมูล/save</button>
                 <a href="@Url.Action("Manage_Page","ManageSmartSolution")" class="btn bg-info">กลับ/back</a>
-                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -165,6 +167,11 @@
         <h1>เลือกรูปและไฟล์</h1>
         <div style="display:flex;justify-content:center;align-items:center;flex-direction:column;">
             <img id="preview_subImg" style="height:40vh;width:40vh;" />
+        </div>
+        <div>
+            <span style="color:red;">
+                ขนาดรูปภาพ : 400 * 100 px
+            </span>
         </div>
         <input type="file" id="file_img_preview" />
         <input type="text" id="txt_link" />
@@ -227,13 +234,13 @@
         async function addInputFile(img, link, id) {
             let img_b64 = await blobToBase64DataURL(img);
             return (`
-                    <div id='input_list' class='input-link'>
-                        <div class= 'img-container' >
-                            <img  src="${img_b64}"  style='width:100%;height:100%;' />
-                        </div>
-                        <span>${link}</span>
-                        <button class="btn btn-danger"  onClick="deleteLink(${id})">ลบ/delete</button>
-                    </div>`);
+                            <div id='input_list' class='input-link'>
+                                <div class= 'img-container' >
+                                    <img  src="${img_b64}"  style='width:100%;height:100%;' />
+                                </div>
+                                <span>${link}</span>
+                                <button class="btn btn-danger"  onClick="deleteLink(${id})">ลบ/delete</button>
+                            </div>`);
         }
 
         $(document).ready(function () {
@@ -268,7 +275,7 @@
             }
         }
 
-        function deleteLinkById(id){
+        function deleteLinkById(id) {
 
             Swal.fire({
                 title: 'คุณแน่ใจแล้วหรือ',
@@ -317,7 +324,7 @@
                         }
                     });
                 }
-                
+
             });
 
 
@@ -377,7 +384,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/ManageSmartSolution/Edit?id='+id,
+                url: '/ManageSmartSolution/Edit?id=' + id,
                 data: form,
                 processData: false,
                 contentType: false,
