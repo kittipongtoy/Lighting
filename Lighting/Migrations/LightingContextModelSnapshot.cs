@@ -56,11 +56,9 @@ namespace Lighting.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Date_EN")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Date_TH")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email1")
@@ -87,7 +85,6 @@ namespace Lighting.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Quantity")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Respondsibility_EN")
@@ -97,11 +94,9 @@ namespace Lighting.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WorkPlace_EN")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WorkPlace_TH")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -453,6 +448,12 @@ namespace Lighting.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Sub_Factory_Name_EN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sub_Factory_Name_TH")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TelePhone")
                         .HasColumnType("nvarchar(max)");
 
@@ -623,6 +624,9 @@ namespace Lighting.Migrations
 
                     b.Property<string>("File_Path")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("L_AND_BIM_Link")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name_EN")
@@ -2182,9 +2186,9 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "126ed3f4-54ad-4c86-a791-d7313f488ba0",
+                            Id = "d7e182e9-b59d-48bb-80c4-b048b7593e6a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "19c310a8-537a-4860-9436-ee913543fcde",
+                            ConcurrencyStamp = "606c05e6-aa5c-4f59-93bc-826e2793d73d",
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -2194,9 +2198,9 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGuM8n9chSfpqj6AFr2SL2G3NH8TrT+aqdCoLO83PAsS8LaSxESDbbbC2/BXoOtyXQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELC0rcDuW0PK5PENYOgkXI75JCEOUzD+4xZfqBpSgg0AYnCiHvFc4s6rLOCb4ccnwg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1149b599-bb8b-469c-b6b4-4308ab0b029a",
+                            SecurityStamp = "46694da2-4a43-4f69-a223-a2d6162b86a7",
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -3828,11 +3832,9 @@ namespace Lighting.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title_EN")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title_TH")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -4330,13 +4332,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8972a141-4422-4e47-9fe1-f2f532a1f94e",
-                            ConcurrencyStamp = "bbb340a3-dda7-44ac-b55f-738c69bcf088",
+                            Id = "ea1efcf8-35d2-48c4-8a60-cd415ccc7490",
+                            ConcurrencyStamp = "bd58d2ba-5800-4c5f-abbf-57b20cb2b627",
                             Name = "Admin",
                             NameThai = "Admin",
                             NormalizedName = "Admin",
-                            created_at = new DateTime(2023, 8, 3, 11, 20, 14, 152, DateTimeKind.Utc).AddTicks(9760),
-                            updated_at = new DateTime(2023, 8, 3, 11, 20, 14, 152, DateTimeKind.Utc).AddTicks(9764)
+                            created_at = new DateTime(2023, 8, 6, 14, 48, 29, 996, DateTimeKind.Utc).AddTicks(891),
+                            updated_at = new DateTime(2023, 8, 6, 14, 48, 29, 996, DateTimeKind.Utc).AddTicks(894)
                         });
                 });
 
@@ -6102,8 +6104,8 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "126ed3f4-54ad-4c86-a791-d7313f488ba0",
-                            RoleId = "8972a141-4422-4e47-9fe1-f2f532a1f94e"
+                            UserId = "d7e182e9-b59d-48bb-80c4-b048b7593e6a",
+                            RoleId = "ea1efcf8-35d2-48c4-8a60-cd415ccc7490"
                         });
                 });
 

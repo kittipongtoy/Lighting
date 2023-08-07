@@ -72,7 +72,7 @@
                 @foreach (var download in Model)
                 {
                     <div class="col-lg-6 col-md-6 col-11">
-                        <a class="contentBox" href="@Url.Action("Download","ManageDownload",new {path_and_name = download.File})" target="_blank">
+                        <a class="contentBox" href="@download.L_AND_BIM_Link" target="_blank">
                             <div class="row">
                                 <div class="col">
                                     <div class="img-width"><img src="~/@download.Image"></div>

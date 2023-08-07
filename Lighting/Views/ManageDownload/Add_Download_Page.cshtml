@@ -43,7 +43,14 @@
                 <label for="formFile" class="form-label">เลือกไฟล์สำหรับดาวน์โหลด</label>
                 <input type="file" class="form-control" id="file_download">
             </div>
-            <!--file-->
+            <!--end file download-->
+            <!--link-->
+            <div class="custom-file mt-3 p-1">
+                <label for="formFile" class="form-label">(เฉพาะ)ลิ้งดาวน์โหลด L&BIM OBJECT</label>
+                <input type="text" class="form-control" id="link_l_and_bim">
+            </div>
+            <!--end link-->
+
             <center style="display:flex;justify-content:space-between;margin:3rem;">
                 <button type="button" class="btn btn-success" onclick="submit()">บันทึก/save</button>
                 <a href="@Url.Action("manage_Download_page","ManageDownload")" class="btn btn-primary" >กลับ/back</a>
@@ -86,11 +93,13 @@
 
             let download_name_th = $("#download_name_th").val();
             let download_name_en = $("#download_name_en").val();
+            let link_l_and_bim = $("#link_l_and_bim").val();
 
             let formData = new FormData();
             formData.append("DownloadType", download_type);
             formData.append("Name_EN", download_name_en);
             formData.append("Name_TH", download_name_th);
+            formData.append("L_AND_BIM_Link", link_l_and_bim);
 
             if (image_file != undefined) {
                 formData.append("Image", image_file);

@@ -10,6 +10,22 @@ namespace Lighting.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "ApplyJobImgContents",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Position_img = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Benefit_img = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Position_pdf = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Benefit_pdf = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplyJobImgContents", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ApplyJobs",
                 columns: table => new
                 {
@@ -17,11 +33,11 @@ namespace Lighting.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PositionName_TH = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PositionName_EN = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date_TH = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date_EN = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WorkPlace_TH = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WorkPlace_EN = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WorkPlace_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WorkPlace_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Respondsibility_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Respondsibility_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Qualification_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -249,6 +265,8 @@ namespace Lighting.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ContactType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Sub_Factory_Name_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Sub_Factory_Name_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PlaceName_TH = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PlaceName_EN = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Location_TH = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -517,6 +535,7 @@ namespace Lighting.Migrations
                     Icon = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: true),
                     created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
                     updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -1108,6 +1127,33 @@ namespace Lighting.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MainContacts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TitleName_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Location_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TitleName_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Location_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OfficePhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TitleEMail1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EMail1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TitleEMail2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EMail2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GoogleMapLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MoreInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Img_File = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MainContacts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "M_chairman",
                 columns: table => new
                 {
@@ -1163,22 +1209,6 @@ namespace Lighting.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_News", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "NewsImgContents",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Position_img = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Benefit_img = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Position_pdf = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Benefit_pdf = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_NewsImgContents", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -1893,22 +1923,9 @@ namespace Lighting.Migrations
                     Application = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Technical_Drawing = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Technical_Drawing_Img = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Housing = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Finishing = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Lens = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gasket = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Dimension = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Mounting = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Power = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Source = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Lamp_Colour = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Luminaire_Output = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Beam_Angle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Control_Gear = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Power_Supply = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IP_Rating = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Luminaire_Lifetime = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Equivalent = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Dimension = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Power = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LIGHT_DISTRIBUTION = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -3168,7 +3185,6 @@ namespace Lighting.Migrations
                     Photo_Credit = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    File_Download = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProjectRef_CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -3178,6 +3194,27 @@ namespace Lighting.Migrations
                         name: "FK_ProjectRefs_Category_Projects_ProjectRef_CategoryId",
                         column: x => x.ProjectRef_CategoryId,
                         principalTable: "Category_Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Product_Spects",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Product_Spects", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Product_Spects_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -3205,17 +3242,17 @@ namespace Lighting.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NameThai", "NormalizedName", "created_at", "updated_at" },
-                values: new object[] { "2c75627f-e05b-4ab4-98c3-377132401dd1", "8b9c68f1-a3a1-46c7-8d6a-bce61e32e0f2", "Admin", "Admin", "Admin", new DateTime(2023, 7, 28, 9, 8, 30, 148, DateTimeKind.Utc).AddTicks(6388), new DateTime(2023, 7, 28, 9, 8, 30, 148, DateTimeKind.Utc).AddTicks(6394) });
+                values: new object[] { "d2f4112f-5575-47bf-aa2b-8ff76f4be5d8", "54d675c4-e707-4e46-b259-503f8692eb91", "Admin", "Admin", "Admin", new DateTime(2023, 8, 6, 10, 2, 53, 746, DateTimeKind.Utc).AddTicks(8632), new DateTime(2023, 8, 6, 10, 2, 53, 746, DateTimeKind.Utc).AddTicks(8637) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ApplicationFile", "ConcurrencyStamp", "Email", "EmailConfirmed", "EmployeeCode", "EmployeeCodeInt", "Firstname", "GuarantorIdentificationCardFile", "Isactive", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePath", "ReceptionistFile", "SecurityStamp", "TwoFactorEnabled", "UserName", "created_at", "updated_at" },
-                values: new object[] { "10fb774f-7ed3-4dbb-b57e-0638aaedf16f", 0, null, null, "856eef02-a0ae-498f-85fe-1b2f0f7e7ac0", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEBWngHh5ZOG1GixF9hki/Asi4J8Tg0BGQ98BE2o9UwW+nFwrIIOY5uaJDW1K5D7I9A==", null, false, null, null, "d355b9b6-8a42-4c62-80b4-58b85488136a", false, "Admin@Lighting.com", null, null });
+                values: new object[] { "3e9d701d-e276-4284-bdf4-a0380b962c9e", 0, null, null, "f686a5c9-b9f2-4c69-b825-0b7f199a829f", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEKptn4PcAFfU7q/hO6Q/9qj4JKMxGe+qOx2n08E1qDZnuRcUQDG7hqc52swF7gTTrg==", null, false, null, null, "a1ab945b-6cb4-46f4-bc0e-938d1ab8be02", false, "Admin@Lighting.com", null, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "2c75627f-e05b-4ab4-98c3-377132401dd1", "10fb774f-7ed3-4dbb-b57e-0638aaedf16f" });
+                values: new object[] { "d2f4112f-5575-47bf-aa2b-8ff76f4be5d8", "3e9d701d-e276-4284-bdf4-a0380b962c9e" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -3257,6 +3294,11 @@ namespace Lighting.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Product_Spects_ProductId",
+                table: "Product_Spects",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProjectRefs_ProjectRef_CategoryId",
                 table: "ProjectRefs",
                 column: "ProjectRef_CategoryId");
@@ -3269,6 +3311,9 @@ namespace Lighting.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ApplyJobImgContents");
+
             migrationBuilder.DropTable(
                 name: "ApplyJobs");
 
@@ -3429,6 +3474,9 @@ namespace Lighting.Migrations
                 name: "IR_Stock_QuoteDetail");
 
             migrationBuilder.DropTable(
+                name: "MainContacts");
+
+            migrationBuilder.DropTable(
                 name: "M_chairman");
 
             migrationBuilder.DropTable(
@@ -3436,9 +3484,6 @@ namespace Lighting.Migrations
 
             migrationBuilder.DropTable(
                 name: "News");
-
-            migrationBuilder.DropTable(
-                name: "NewsImgContents");
 
             migrationBuilder.DropTable(
                 name: "O_Anti_fraud");
@@ -3540,7 +3585,7 @@ namespace Lighting.Migrations
                 name: "Product_Models");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Product_Spects");
 
             migrationBuilder.DropTable(
                 name: "ProjectRef_Products");
@@ -3718,6 +3763,9 @@ namespace Lighting.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Category_Projects");

@@ -27,24 +27,24 @@
                 {
                     if(lang == "EN")
                     {
-                        if (ViewBag.CategoryId == cat.Id)
+                        if (cat.Name_EN.ToLower().StartsWith(ViewBag.Category.ToLower()) || cat.Name_TH.StartsWith(ViewBag.Category))
                         {
-                            <li class="active"><a href="@Url.Action("Product_Category","Product",new {categoryId= cat.Id})">@cat.Name_EN</a></li>
+                            <li class="active"><a href="@Url.Action("Product_Category","Product",new {category= cat.Name_EN})">@cat.Name_EN</a></li>
                         }
                         else
                         {
-                            <li><a href="@Url.Action("Product_Category","Product",new {categoryId= cat.Id})">@cat.Name_EN</a></li>
+                            <li><a href="@Url.Action("Product_Category","Product",new {category= cat.Name_EN})">@cat.Name_EN</a></li>
                         }
                     }
                     else
                     {
-                        if (ViewBag.CategoryId == cat.Id)
+                        if (cat.Name_EN.ToLower().StartsWith(ViewBag.Category.ToLower()) || cat.Name_TH.StartsWith(ViewBag.Category))
                         {
-                            <li class="active"><a href="@Url.Action("Product_Category","Product",new {categoryId= cat.Id})">@cat.Name_TH</a></li>
+                            <li class="active"><a href="@Url.Action("Product_Category","Product",new {category= cat.Name_TH})">@cat.Name_TH</a></li>
                         }
                         else
                         {
-                            <li><a href="@Url.Action("Product_Category","Product",new {categoryId= cat.Id})">@cat.Name_TH</a></li>
+                            <li><a href="@Url.Action("Product_Category","Product",new {category= cat.Name_TH})">@cat.Name_TH</a></li>
                         }
                     }
                 }

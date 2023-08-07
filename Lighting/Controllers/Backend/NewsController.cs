@@ -1,4 +1,5 @@
 ﻿using Lighting.Areas.Identity.Data;
+using Lighting.Extension;
 using Lighting.Models.InputFilterModels.News;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Lighting.Controllers.Backend
 {
@@ -126,47 +128,55 @@ namespace Lighting.Controllers.Backend
         [HttpPost]
         public async Task<IActionResult> Edit([FromForm] Input_NewsVm input_News, [FromQuery, Required] int id)
         {
-
-            var edite = await _db.News.Where(news => news.Id.Equals(id)).FirstOrDefaultAsync();
-            if (edite != null)
+            try
             {
-                var root_path = _env.WebRootPath;
-                var abs_path = Path.Combine(root_path, edite.ImagePath);
-                if (input_News.TitleImage != null) //change img
+                var edite = await _db.News.Where(news => news.Id.Equals(id)).FirstOrDefaultAsync();
+                if (edite != null)
                 {
-                    if (System.IO.File.Exists(Path.Combine(abs_path, "0.jpg")))
+                    var root_path = _env.WebRootPath;
+                    var abs_path = Path.Combine(root_path, edite.ImagePath);
+                    if (input_News.TitleImage != null) //change img
                     {
-                        System.IO.File.Delete(Path.Combine(abs_path, "0.jpg"));
-                        using (var stream = new FileStream(Path.Combine(abs_path, "0.jpg"), FileMode.Create))
+                        if (System.IO.File.Exists(Path.Combine(abs_path, "0.jpg")))
                         {
-                            await input_News.TitleImage.CopyToAsync(stream);
+                            System.IO.File.Delete(Path.Combine(abs_path, "0.jpg"));
+                            using (var stream = new FileStream(Path.Combine(abs_path, "0.jpg"), FileMode.Create))
+                            {
+                                await input_News.TitleImage.CopyToAsync(stream);
+                            }
                         }
                     }
-                }
-
-                if (input_News.ImgList.Count > 0)//add image
-                {
-                    for (int index_file = 0; index_file < input_News.ImgList.Count; index_file++)
+                    if (input_News.ImgList != null)
                     {
-                        var new_name = Guid.NewGuid().ToString().Substring(0, 5);
-                        using (var stream = new FileStream(Path.Combine(abs_path, new_name + ".jpg"), FileMode.Create))
+                        if (input_News.ImgList.Count > 0)//add image
                         {
-                            await input_News.ImgList[index_file].CopyToAsync(stream);
+                            for (int index_file = 0; index_file < input_News.ImgList.Count; index_file++)
+                            {
+                                var new_name = Guid.NewGuid().ToString().Substring(0, 5);
+                                using (var stream = new FileStream(Path.Combine(abs_path, new_name + ".jpg"), FileMode.Create))
+                                {
+                                    await input_News.ImgList[index_file].CopyToAsync(stream);
+                                }
+                            }
                         }
                     }
-                }
-                edite.Title_TH = input_News.Title_TH;
-                edite.Title_EN = input_News.Title_EN;
-                edite.Content_TH = input_News.Content_TH;
-                edite.Content_EN = input_News.Content_EN;
-                edite.CreateDate_TH = input_News.CreateDate_TH;
-                edite.CreateDate_EN = input_News.CreateDate_EN;
+                    edite.Title_TH = input_News.Title_TH;
+                    edite.Title_EN = input_News.Title_EN;
+                    edite.Content_TH = input_News.Content_TH;
+                    edite.Content_EN = input_News.Content_EN;
+                    edite.CreateDate_TH = input_News.CreateDate_TH;
+                    edite.CreateDate_EN = input_News.CreateDate_EN;
 
-                await _db.SaveChangesAsync();
-                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+                    await _db.SaveChangesAsync();
+                    return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+                }
+
+                return Json(new { status = "error", message = "ไม่พบข้อมูล" });
             }
-
-            return Json(new { status = "error", message = "ไม่พบข้อมูล" });
+            catch (Exception ex)
+            {
+                return Json(new { status = "error", message = "ไม่พบข้อมูล "+ex.Message });
+            }
         }
 
         [HttpPost]
@@ -212,14 +222,17 @@ namespace Lighting.Controllers.Backend
                             await newsVm.TitleImage.CopyToAsync(stream);
                         }
 
-                        if (newsVm.ImgList.Count > 0)
+                        if (newsVm.ImgList != null)
                         {
-                            for (int index = 0; index < newsVm.ImgList.Count; index++)
+                            if (newsVm.ImgList.Count > 0)
                             {
-                                var new_file_name = Guid.NewGuid().ToString().Substring(0, 5);
-                                using (var file_stream = new FileStream(Path.Combine(root_path, save_path, new_file_name + ".jpg"), FileMode.Create))
+                                for (int index = 0; index < newsVm.ImgList.Count; index++)
                                 {
-                                    await newsVm.ImgList[index].CopyToAsync(file_stream);
+                                    var new_file_name = Guid.NewGuid().ToString().Substring(0, 5);
+                                    using (var file_stream = new FileStream(Path.Combine(root_path, save_path, new_file_name + ".jpg"), FileMode.Create))
+                                    {
+                                        await newsVm.ImgList[index].CopyToAsync(file_stream);
+                                    }
                                 }
                             }
                         }
@@ -266,5 +279,7 @@ namespace Lighting.Controllers.Backend
                 return new List<string>();
             }
         }
+
+
     }
 }

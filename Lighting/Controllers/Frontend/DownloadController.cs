@@ -65,6 +65,7 @@ namespace Lighting.Controllers.Frontend
                 Name_TH = download.Name_TH,
                 File = GetFileName(download.File_Path),
                 Image = download.File_Path + "/0.jpg",
+
             });
 
 
@@ -215,6 +216,7 @@ namespace Lighting.Controllers.Frontend
                 Name_TH = download.Name_TH,
                 File = GetFileName(download.File_Path),
                 Image = download.File_Path + "/0.jpg",
+                 L_AND_BIM_Link = download.L_AND_BIM_Link
             });
 
 

@@ -1,5 +1,4 @@
 ﻿using Lighting.Areas.Identity.Data;
-using Lighting.Migrations;
 using Lighting.Models.InputFilterModels.IR_Index;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

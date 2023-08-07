@@ -21,12 +21,12 @@ namespace Lighting.Controllers.Frontend
         }
 
         public async Task<IActionResult> SearchJson(string search)
-        
+
         {
 
 
-        List<Search> searches = new List<Search>();
-        Regex regex = new Regex(@"^[0-9]");
+            List<Search> searches = new List<Search>();
+            Regex regex = new Regex(@"^[0-9]");
 
             if (search != null)
             {
@@ -73,7 +73,7 @@ namespace Lighting.Controllers.Frontend
                         searches.Add(new Search
                         {
                             SubcategoryId = model_or_subcat.Id,
-                             CategoryId = model_or_subcat.Product_CategoryId
+                            CategoryId = model_or_subcat.Product_CategoryId
                         });
                     }
                 }
@@ -84,12 +84,13 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> JsonNavBar()
         {
             var lang = Request.Cookies["lang"];
-            if (lang == "EN"){
+            if (lang == "EN")
+            {
                 var category = await _db.Product_Categorys
                 .AsNoTracking()
                 .OrderByDescending(x => x.Id)
                 .Select(cat =>
-                new 
+                new
                 {
                     Id = cat.Id,
                     Name = cat.Name_EN,
@@ -98,7 +99,8 @@ namespace Lighting.Controllers.Frontend
                 .ToListAsync();
 
                 return Json(category);
-;            }
+                ;
+            }
             else
             {
                 var category = await _db.Product_Categorys
@@ -133,9 +135,9 @@ namespace Lighting.Controllers.Frontend
             return View(category);
         }
 
-        public async Task<IActionResult> Product_Category(int categoryId)
+        public async Task<IActionResult> Product_Category(string category)
         {
-            var category = await _db.Product_Categorys
+            var allCategory = await _db.Product_Categorys
                          .AsNoTracking()
                          .OrderByDescending(x => x.Id)
                          .Select(cat =>
@@ -150,7 +152,7 @@ namespace Lighting.Controllers.Frontend
 
             var sub_category = await _db.Product_Models
                          .AsNoTracking()
-                         .Where(sub_cat => sub_cat.Product_CategoryId == categoryId)
+                         .Where(sub_cat => sub_cat.Name_EN.ToLower().StartsWith(category.ToLower()) || sub_cat.Name_TH.StartsWith(category.ToLower()))
                          .OrderByDescending(x => x.Id)
                          .Select(cat =>
                          new Output_ProductModelVM
@@ -162,17 +164,17 @@ namespace Lighting.Controllers.Frontend
                          })
                          .ToListAsync();
 
-            ViewData["All_Category"] = category;
+            ViewData["All_Category"] = allCategory;
             ViewData["Sub_Category"] = sub_category;
 
-            ViewBag.CategoryId = categoryId;
+            ViewBag.Category = category;
 
             return View();
         }
 
-        public async Task<IActionResult> Product_Subcategory(int categoryId, int sub_categoryId, int start)
+        public async Task<IActionResult> Product_Subcategory(string category, string sub_category, int start)
         {
-            var category = await _db.Product_Categorys
+            var allCategory = await _db.Product_Categorys
              .AsNoTracking()
              .OrderByDescending(x => x.Id)
              .Select(cat =>
@@ -185,7 +187,7 @@ namespace Lighting.Controllers.Frontend
              })
              .ToListAsync();
 
-            var sub_category = await _db.Product_Models
+            var allSub_category = await _db.Product_Models
                          .AsNoTracking()
                          //.Where(sub_cat => sub_cat.Product_CategoryId == categoryId)
                          .OrderByDescending(x => x.Id)
@@ -198,11 +200,12 @@ namespace Lighting.Controllers.Frontend
                              Image = cat.Image
                          })
                          .ToListAsync();
-
+            //var selected_category = allCategory.Where(cat => cat.Name_EN.ToLower().StartsWith(category.ToLower()) || cat.Name_TH.StartsWith(category)).FirstOrDefault();
+            var selected_subCategory = allSub_category.Where(sub_cat => sub_cat.Name_EN.ToLower().StartsWith(sub_category.ToLower()) || sub_cat.Name_TH.StartsWith(sub_category.ToLower())).FirstOrDefault();
             var product = await _db.Products
                 .AsNoTracking()
                 .Include(pro => pro.ProductSpect)
-                .Where(pro => pro.Product_ModelId == sub_categoryId)
+                .Where(pro => pro.Product_ModelId == selected_subCategory.Id)
                 .OrderByDescending(x => x.Id)
                 .Select(pro =>
                 new Output_ProductVM
@@ -211,7 +214,7 @@ namespace Lighting.Controllers.Frontend
                     Product_CategoryId = pro.Product_CategoryId,
                     Product_ModelId = pro.Product_ModelId,
                     Application = pro.Application,
-                    
+
                     Type_EN = pro.Type_EN,
                     Type_TH = pro.Type_TH,
                     MORE_INFORMATION = pro.MORE_INFORMATION,
@@ -244,11 +247,11 @@ namespace Lighting.Controllers.Frontend
                 })
                 .ToListAsync();
 
-            ViewData["All_Category"] = category;
-            ViewData["Sub_Category"] = sub_category;
+            ViewData["All_Category"] = allCategory;
+            ViewData["Sub_Category"] = allSub_category;
 
-            ViewBag.CategoryId = categoryId;
-            ViewBag.SubCategoryId = sub_categoryId;
+            ViewBag.Category = category;
+            ViewBag.SubCategory = sub_category;
 
             #region pagination
             var maximum_page = 12;
@@ -280,11 +283,11 @@ namespace Lighting.Controllers.Frontend
             return View(product);
         }
 
-        public async Task<IActionResult> Product_Detail(int categoryId, int sub_categoryId, int id)
+        public async Task<IActionResult> Product_Detail(string category, string sub_category, string model)
         {
             try
             {
-                var category = await _db.Product_Categorys
+                var all_category = await _db.Product_Categorys
                  .AsNoTracking()
                  .OrderByDescending(x => x.Id)
                  .Select(cat =>
@@ -297,7 +300,7 @@ namespace Lighting.Controllers.Frontend
                  })
                  .ToListAsync();
 
-                var sub_category = await _db.Product_Models
+                var all_sub_category = await _db.Product_Models
                              .AsNoTracking()
                              .OrderByDescending(x => x.Id)
                              .Select(cat =>
@@ -310,16 +313,16 @@ namespace Lighting.Controllers.Frontend
                              })
                              .ToListAsync();
 
-                ViewData["All_Category"] = category;
-                ViewData["Sub_Category"] = sub_category;
+                ViewData["All_Category"] = all_category;
+                ViewData["Sub_Category"] = all_sub_category;
 
-                ViewBag.CategoryId = categoryId;
-                ViewBag.SubCategoryId = sub_categoryId;
+                ViewBag.Category = category;
+                ViewBag.SubCategory = sub_category;
 
                 var product = await _db.Products
                     .AsNoTracking()
                     .Include(pro => pro.ProductSpect)
-                    .Where(pro => pro.Id == id)
+                    .Where(pro => pro.Model.ToLower().StartsWith(model.ToLower()))
                     .Select(pro =>
                       new Output_ProductVM
                       {
@@ -335,7 +338,7 @@ namespace Lighting.Controllers.Frontend
                           Power = pro.Power,
                           Dimension = pro.Dimension,
                           IP_Rating = pro.IP_Rating,
-                           Product_Spects = pro.ProductSpect.ToList(),
+                          Product_Spects = pro.ProductSpect.ToList(),
                           //Beam_Angle = pro.Beam_Angle,
                           //Control_Gear = pro.Control_Gear,
                           //Equivalent = pro.Equivalent,
@@ -361,7 +364,7 @@ namespace Lighting.Controllers.Frontend
                       })
                     .FirstOrDefaultAsync();
 
-                if(product != null)
+                if (product != null)
                 {
                     product.LIGHT_DISTRIBUTION = GET_FILE(Path.Combine("upload_image", "Product", product.Folder_Path, "technical_img"));
                     product.Technical_Drawing_Img = GET_FILE(Path.Combine("upload_image", "Product", product.Folder_Path, "light_ditribute_img"));

@@ -17,10 +17,18 @@
                 </select>
             </div>
             <!--end contact type-->
+            <!--sub place name-->
+            <div class="form-group mt-3 p-2" style="border:1px solid black" id="place">
+                <label class="h4 mt-3">ชื่อย่อยของโรงงงาน (ภาษาไทย)</label>
+                <textarea type="text" class="form-control" id="sub_place_name_th" placeholder="ชื่อย่อย ภาษาไทย"></textarea>
+                <label class="h4 mt-3">Sub Place Name (English)</label>
+                <textarea type="text" class="form-control" id="sub_place_name_en" placeholder="Sub Place Name English"></textarea>
+            </div>
+            <!--end sub place name-->
             <!--place name-->
             <div class="form-group mt-3 p-2" style="border:1px solid black" id="place">
                 <label class="h4 mt-3">ชื่อสถานที่ (ภาษาไทย)</label>
-                <input type="text " class="form-control" id="place_name_th" placeholder="ชื่อสถานที่ ภาษาไทย">
+                <input type="text" class="form-control" id="place_name_th" placeholder="ชื่อสถานที่ ภาษาไทย">
                 <label class="h4 mt-3">Place Name (English)</label>
                 <input type="text" class="form-control" id="place_name_en" placeholder="Place Name English">
             </div>
@@ -46,7 +54,7 @@
             <!--email and link-->
             <div class="form-group  p-2">
                 <label class="h4 mt-3">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Email@example.com">
+                <textarea id="email" placeholder="Email@example1.com,Email@example2.com"></textarea>
                 <label class="h4 mt-3">Google Map URL</label>
                 <input type="text" class="form-control" id="googlemap" placeholder="https://example.com">
                 <label class="h4 mt-3">Youtube URL</label>
@@ -72,6 +80,39 @@
 
 @section Scripts{
     <script>
+        var sub_place_name_th, sub_place_name_en,email_txt;
+
+        ClassicEditor
+                    .create(document.querySelector('#sub_place_name_th'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                sub_place_name_th = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        ClassicEditor
+            .create(document.querySelector('#sub_place_name_en'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                sub_place_name_en = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+
+        ClassicEditor
+            .create(document.querySelector('#email'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                email_txt = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
         var image_file;
         $(document).ready(function () {
             $('#file_img').change(async function (e) {
@@ -95,6 +136,9 @@
 
             let contact_type = $("#contact_type").val();
 
+            let sub_place_th = sub_place_name_th.getData();
+            let sub_place_en = sub_place_name_en.getData();
+
             let place_name_th = $("#place_name_th").val();
             let place_name_en = $("#place_name_en").val();
 
@@ -105,12 +149,16 @@
             let tele_phone = $("#tele_phone").val();
             let office_phone = $("#office_phone").val();
 
-            let email = $("#email").val();
+            let email = email_txt.getData();
             let google_map = $("#googlemap").val();
             let youtube = $("#youtube").val();
 
             let formData = new FormData();
             formData.append("ContactType", contact_type);
+
+            formData.append("Sub_Factory_Name_TH", sub_place_th);
+            formData.append("Sub_Factory_Name_EN", sub_place_en);
+
             formData.append("PlaceName_TH", place_name_th);
             formData.append("PlaceName_EN", place_name_en);
             formData.append("Location_TH", location_th);

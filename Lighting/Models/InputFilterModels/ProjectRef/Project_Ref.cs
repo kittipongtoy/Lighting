@@ -26,10 +26,8 @@ namespace Lighting.Models.InputFilterModels.ProjectRef
         public int CategoryId { get; set; }
         public IFormFile Profile_Image { get; set; }
         public List<IFormFile> Image_List { get; set; }
-        [Required]
-        public string Title_TH { get; set; }
-        [Required]
-        public string Title_EN { get; set; }
+        public string? Title_TH { get; set; }
+        public string? Title_EN { get; set; }
         public string? Location_TH { get; set; }
         public string? Location_EN { get; set; }
         public string? Client { get; set; }
@@ -45,8 +43,8 @@ namespace Lighting.Models.InputFilterModels.ProjectRef
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }
-        public string Title_TH { get; set; }
-        public string Title_EN { get; set; }
+        public string? Title_TH { get; set; }
+        public string? Title_EN { get; set; }
         public string Profile_Image { get; set; }
         public List<string> Image_List { get; set; }
         public string? Location_TH { get; set; }

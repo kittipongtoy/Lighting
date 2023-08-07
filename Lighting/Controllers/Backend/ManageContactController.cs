@@ -68,6 +68,8 @@ namespace Lighting.Controllers.Backend
                     PlaceName_TH = contact.PlaceName_TH,
                     TelePhone = contact.TelePhone,
                     YouTube_Url = contact.YouTube_Url,
+                     Sub_Factory_Name_EN = contact.Sub_Factory_Name_EN,
+                      Sub_Factory_Name_TH = contact.Sub_Factory_Name_TH
                 };
                 return View(output_model);
             }
@@ -107,6 +109,8 @@ namespace Lighting.Controllers.Backend
                     }
 
                     contact.ContactType = input_Contact.ContactType;
+                    contact.Sub_Factory_Name_EN = input_Contact.Sub_Factory_Name_EN;
+                    contact.Sub_Factory_Name_TH = input_Contact.Sub_Factory_Name_TH;
                     contact.PlaceName_EN = input_Contact.PlaceName_EN;
                     contact.PlaceName_TH = input_Contact.PlaceName_TH;
                     contact.Location_TH = input_Contact.Location_TH;
@@ -155,6 +159,8 @@ namespace Lighting.Controllers.Backend
                     PlaceName_EN = contact.PlaceName_EN,
                     PlaceName_TH = contact.PlaceName_TH,
                     YouTube_Url = contact.YouTube_Url,
+                     Sub_Factory_Name_TH = contact.Sub_Factory_Name_TH,
+                      Sub_Factory_Name_EN = contact.Sub_Factory_Name_EN
                 })
                 .ToListAsync();
 
@@ -216,6 +222,8 @@ namespace Lighting.Controllers.Backend
                     _db.Contacts.Add(new Contact
                     {
                         ContactType = input_Contact.ContactType,
+                         Sub_Factory_Name_EN = input_Contact.Sub_Factory_Name_EN,
+                          Sub_Factory_Name_TH = input_Contact.Sub_Factory_Name_TH,
                         PlaceName_EN = input_Contact.PlaceName_EN,
                         PlaceName_TH = input_Contact.PlaceName_TH,
                         Location_TH = input_Contact.Location_TH,

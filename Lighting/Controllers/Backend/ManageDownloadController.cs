@@ -58,6 +58,7 @@ namespace Lighting.Controllers.Backend
                     Image = download.File_Path+"/0.jpg",
                     Name_EN = download.Name_EN,
                     Name_TH = download.Name_TH,
+                     L_AND_BIM_Link = download.L_AND_BIM_Link
                 };
                 return View(output);
             }
@@ -107,6 +108,7 @@ namespace Lighting.Controllers.Backend
                     download.Name_EN = input.Name_EN;
                     download.Name_TH = input.Name_TH;
                     download.DownloadType = input.DownloadType;
+                    download.L_AND_BIM_Link= input.L_AND_BIM_Link;
 
                     await _db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
@@ -154,6 +156,7 @@ namespace Lighting.Controllers.Backend
                         File_Path = save_folder,
                         Name_EN = input.Name_EN,
                         Name_TH = input.Name_TH,
+                         L_AND_BIM_Link = input.L_AND_BIM_Link,
                     });
                     await _db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
