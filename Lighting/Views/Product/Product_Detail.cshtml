@@ -62,10 +62,10 @@
                     <div class="row">
                         <div class="col">
                             <ul class="bread-crumb">
-                                <li><a href="@Url.Action("Product","Product")">PRODUCTS</a></li>
+                                <li><a href="@Url.Action("Product","Product")">PRODUCTS11</a></li>
                                 @foreach (var cate_name in (IEnumerable<Output_ProductCategoryVM>)ViewData["All_Category"])
                                 {
-                                    if (cate_name.Name_EN.ToLower().StartsWith(ViewBag.Category) || cate_name.Name_TH.StartsWith(ViewBag.Category))
+                                    if (cate_name.Name_EN.ToLower().StartsWith(ViewBag.Category.ToLower()) || cate_name.Name_TH.StartsWith(ViewBag.Category))
                                     {
                                         if (lang == "EN")
                                         {
@@ -79,7 +79,7 @@
                                 }
                                 @foreach (var sub_cat in (IEnumerable<Output_ProductModelVM>)ViewData["Sub_Category"])
                                 {
-                                    if (sub_cat.Name_EN.ToLower().StartsWith(ViewBag.SubCategory) || sub_cat.Name_TH.StartsWith(ViewBag.SubCategory))
+                                    if (sub_cat.Name_EN.ToLower().StartsWith(ViewBag.SubCategory.ToLower()) || sub_cat.Name_TH.StartsWith(ViewBag.SubCategory))
                                     {
                                         if (lang == "EN")
                                         {
@@ -329,7 +329,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="content-center">
-                                <a class="buttonB" href="@Url.Action("Product_Subcategory","Product",new { categoryId= ViewBag.CategoryId,  sub_categoryId= ViewBag.SubCategoryId})"><i class="fas fa-long-arrow-alt-left"></i>Back</a>
+                                <a class="buttonB" href="@Url.Action("Product_Subcategory","Product",new { category= ViewBag.Category,  sub_category= ViewBag.SubCategory})"><i class="fas fa-long-arrow-alt-left"></i>Back</a>
                             </div>
                         </div>
                     </div>
