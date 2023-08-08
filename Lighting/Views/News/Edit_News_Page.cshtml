@@ -3,6 +3,10 @@
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
 @model Lighting.Models.InputFilterModels.News.Output_NewsVm
+@{
+    var date = Model.CreateDate_EN;
+    string getDate = date.Value.Day + "/" + date.Value.Month + "/" + date.Value.Year;
+}
 <div class="container">
     <div class="row p-1">
         <div class="col-12">
@@ -19,13 +23,13 @@
             <!--end title-->
             <!--create date-->
             <div class="form-group mt-2 p-1">
-                <label class="h4">วันที่  (ภาษาไทย)</label>
-                <input type="text" class="form-control" id="date_th" value="@Model.CreateDate_TH" placeholder="01 ม.ค. 2566">
+                <label class="h4">วันที่ </label>
+                <input type="text" class="form-control" id="date_str" placeholder="กรุณาเลือกวันที่" value="@getDate" >
             </div>
-            <div class="form-group mt-3 p-1">
+            @*<div class="form-group mt-3 p-1">
                 <label class="h4">Date (English)</label>
                 <input type="text" class="form-control" id="date_en" value="@Model.CreateDate_EN" placeholder="01 JAN 2023">
-            </div>
+            </div>*@
             <!--create date-->
             <!--content-->
             <div class="form-group mt-3 p-1">
@@ -88,7 +92,12 @@
 </div>
 
 @section Scripts{
-    <script>
+
+    <script> 
+
+        $("#date_str").flatpickr({
+            dateFormat: 'd/m/Y'
+        })
 
         var editorTH;
         var editorEN;
@@ -213,8 +222,8 @@
             const content_th = editorTH.getData();
             const content_en = editorEN.getData();
 
-            const date_th = $("#date_th").val();
-            const date_en = $("#date_en").val();
+            //const date_th = $("#date_th").val();
+            const date_str = $("#date_str").val();
 
             var formData = new FormData();
             formData.append("Title_TH", title_th);
@@ -223,8 +232,8 @@
             formData.append("Content_EN", content_en);
             formData.append("TitleImage", file_title);
 
-            formData.append("CreateDate_TH", date_th);
-            formData.append("CreateDate_EN", date_en);
+            //formData.append("CreateDate_TH", date_th);
+            formData.append("date_str", date_str);
 
             console.log(files_sub_img);
             if (files_sub_img != undefined) {
@@ -277,4 +286,5 @@
 
         }
     </script>
+
 }

@@ -65,6 +65,8 @@ namespace Lighting.Controllers.Frontend
                 Name_TH = download.Name_TH,
                 File = GetFileName(download.File_Path),
                 Image = download.File_Path + "/0.jpg",
+                File_EN = GetFileName_EN(download.File_Path_EN),
+                Image_EN = download.File_Path_EN + "/1.jpg",
 
             });
 
@@ -116,6 +118,8 @@ namespace Lighting.Controllers.Frontend
                 Name_TH = download.Name_TH,
                 File = GetFileName(download.File_Path),
                 Image = download.File_Path + "/0.jpg",
+                File_EN = GetFileName_EN(download.File_Path_EN),
+                Image_EN = download.File_Path_EN + "/1.jpg",
             });
 
 
@@ -166,6 +170,8 @@ namespace Lighting.Controllers.Frontend
                 Name_TH = download.Name_TH,
                 File = GetFileName(download.File_Path),
                 Image = download.File_Path + "/0.jpg",
+                File_EN = GetFileName_EN(download.File_Path_EN),
+                Image_EN = download.File_Path_EN + "/1.jpg",
             });
 
 
@@ -215,10 +221,11 @@ namespace Lighting.Controllers.Frontend
                 Name_EN = download.Name_EN,
                 Name_TH = download.Name_TH,
                 File = GetFileName(download.File_Path),
-                Image = download.File_Path + "/0.jpg",
-                 L_AND_BIM_Link = download.L_AND_BIM_Link
+                Image = download.File_Path + "/0.jpg", 
+                File_EN = GetFileName_EN(download.File_Path_EN),
+                Image_EN = download.File_Path_EN + "/1.jpg",
+                L_AND_BIM_Link = download.L_AND_BIM_Link
             });
-
 
             return View(output);
         }
@@ -267,11 +274,14 @@ namespace Lighting.Controllers.Frontend
                 Name_TH = download.Name_TH,
                 File = GetFileName(download.File_Path),
                 Image = download.File_Path + "/0.jpg",
+                File_EN = GetFileName_EN(download.File_Path_EN),
+                Image_EN = download.File_Path_EN + "/1.jpg",
             });
 
 
             return View(output);
         }
+
         private string? GetFileName(string path)
         {
             try
@@ -280,7 +290,34 @@ namespace Lighting.Controllers.Frontend
                 if (Directory.Exists(path_folder))
                 {
                     return Directory.GetFiles(path_folder)
-                                         .Where(file => !file.EndsWith("0.jpg"))
+                                         .Where(file => Path.GetFileName(file).StartsWith("00"))
+                                         .FirstOrDefault()
+                                         .Split("\\")
+                                         .Reverse()
+                                         .Take(4)
+                                         .Reverse()
+                                         .Aggregate("", (prev, curr) => prev + "/" + curr);
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                return string.Empty;
+            }
+
+        } 
+        private string? GetFileName_EN(string path)
+        {
+            try
+            {
+                var path_folder = Path.Combine(_env.WebRootPath, path);
+                if (Directory.Exists(path_folder))
+                {
+                    return Directory.GetFiles(path_folder)
+                                         .Where(file => Path.GetFileName(file).StartsWith("11"))
                                          .FirstOrDefault()
                                          .Split("\\")
                                          .Reverse()
@@ -299,5 +336,7 @@ namespace Lighting.Controllers.Frontend
             }
 
         }
+
+
     }
 }

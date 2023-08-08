@@ -13,8 +13,8 @@ namespace Lighting.Areas.Identity.Data
         public string? ImagePath { get; set; }
         public string? Content_TH { get; set; }
         public string? Content_EN { get; set; }
-        public string? CreateDate_TH { get; set; }
-        public string? CreateDate_EN { get; set; }
+        public DateTime? CreateDate_TH { get; set; }
+        public DateTime? CreateDate_EN { get; set; }
 
     }
 }

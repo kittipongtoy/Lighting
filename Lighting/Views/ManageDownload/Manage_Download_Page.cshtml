@@ -32,7 +32,7 @@
                     <th scope="col">#</th>
                     <th scope="col">ประเภทการดาวน์โหลด/Dowload Type</th>
                     <th scope="col">ชื่อหัวข้อดาวน์โหลด/Download Title</th>
-                    <th scope="col">ดาวโหลดไฟล์/Dowload File</th>
+                    @*<th scope="col">ดาวโหลดไฟล์/Dowload File</th>*@
                     <th scope="col" class="text-center">จัดการ/Manage</th>
                 </tr>
             </thead>
@@ -46,7 +46,7 @@
                         <th scope="row">@i</th>
                         <td>@download.DownloadType</td>
                         <td style="word-wrap:break-word;max-width:500px;">@download.Name_TH/@download.Name_EN</td>
-                        <td style="word-wrap:break-word;max-width:500px;"><a href="/ManageDownload/Download?path_and_name=@download.File" target="_blank" class="btn btn-primary">โหลด/download</a></td>
+                        @*<td style="word-wrap:break-word;max-width:500px;"><a href="/ManageDownload/Download?path_and_name=@download.File" target="_blank" class="btn btn-primary">โหลด/download</a></td>*@
                         <td class="text-center">
                             <button type="button" class="btn btn-warning" onclick="editById(@download.Id)">
                                 <i class="bi bi-pencil-square"></i>แก้ไข/edit

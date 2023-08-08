@@ -12,7 +12,7 @@
             <!--contact type-->
             <div class="form-group p-2">
                 <label class="h4">ประเภท</label>
-                <select class="form-control" id="download_type">
+                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="download_type">
                     @if (Model.DownloadType == "L&E BIM OBJECTS")
                     {
                         <option value="L&E BIM OBJECTS" class="h5" selected="selected">L&E BIM OBJECTS</option>
@@ -53,7 +53,7 @@
                     {
                         <option value="LEAFLET" class="h5">LEAFLET</option>
                     }
-                   
+
                 </select>
             </div>
             <!--end contact type-->
@@ -67,28 +67,60 @@
             <!--dowload name-->
             <!--fileimage-->
             <div class="custom-file mt-3 p-1" style="border:1px solid black">
-                <img style="width:100%;height:100%;" id="preview_show_img" src="@Model.Image"/>
+                <img style="width:100%;height:100%;" id="preview_show_img" src="@Model.Image" />
                 <br />
-                <label for="formFile" class="form-label mt-3">เปลี่ยน รูป/chanage title image</label>
+                <label for="formFile" class="form-label mt-3">
+                    เปลี่ยน รูป TH
+                    <br />
+                    <span style="color:red;">
+                        ขนาดรูปภาพ : 800 * 430 px
+                    </span>
+                </label>
                 <input type="file" class="form-control" id="file_img" accept="image/png, image/gif, image/jpeg">
             </div>
+
+            <div class="custom-file mt-3 p-1" style="border:1px solid black">
+                <img style="width:100%;height:100%;" id="preview_show_img_EN" src="@Model.Image_EN" />
+                <br />
+                <label for="formFile" class="form-label mt-3">
+                    เปลี่ยน รูป EN
+                    <br />
+                    <span style="color:red;">
+                        ขนาดรูปภาพ : 800 * 430 px
+                    </span>
+                </label>
+                <input type="file" class="form-control" id="file_img_EN" accept="image/png, image/gif, image/jpeg">
+            </div>
+
             <!--end file-->
             <!--file download-->
             <div class="custom-file mt-3 p-1">
                 <label for="formFile" class="form-label mt-3">เปลี่ยนไฟล์/chnage file</label>
                 <input type="file" class="form-control" id="file_download">
             </div>
-            <a href="ManageDownload/Download?path_and_name=@Model.File" target="_blank" class="btn btn-primary h4 mt-3">ดาวน์โหลดไฟล์/down load file</a>
-            <br/>
+            @if (Model.File != null)
+            {
+                <a href="ManageDownload/Download?path_and_name=@Model.File" target="_blank" class="btn btn-primary h4 mt-3">ไฟล์เอกสาร TH</a>
+                <br />
+            }
+            <div class="custom-file mt-3 p-1">
+                <label for="formFile" class="form-label mt-3">เปลี่ยนไฟล์/chnage file</label>
+                <input type="file" class="form-control" id="file_download_EN">
+            </div>
+            @if (Model.File_EN != null)
+            {
+                <a href="ManageDownload/Download?path_and_name=@Model.File_EN" target="_blank" class="btn btn-primary h4 mt-3">ไฟล์เอกสาร EN</a>
+            }
+            <br />
             <!--end file-->
             <!--link-->
             <div class="custom-file mt-3 p-1">
-                <label for="formFile" class="form-label">(เฉพาะ)ลิ้งดาวน์โหลด L&BIM OBJECT</label>
+                <label for="formFile" class="form-label"> ลิงค์ </label>
                 <input type="text" class="form-control" id="link_l_and_bim" value="@Model.L_AND_BIM_Link">
             </div>
             <!--end link-->
             <center style="display:flex;justify-content:space-between;margin:3rem;">
-                <button type="button" class="btn btn-success"  onclick="submit(@Model.Id)">บันทึก/save</button>
+                <button type="button" class="btn btn-success" onclick="submit(@Model.Id)">บันทึก/save</button>
                 <a href="@Url.Action("manage_Download_page","ManageDownload")" class="btn btn-primary">กลับ/back</a>
             </center>
 
@@ -99,7 +131,9 @@
 @section Scripts{
     <script>
         var image_file;
+        var image_file_EN;
         var file_dowload;
+        var file_dowload_EN;
 
         $(document).ready(function () {
             $('#file_img').change(async function (e) {
@@ -108,9 +142,20 @@
                     $('#preview_show_img').attr('src', await blobToBase64DataURL(image_file)).css("display", "block");
                 }
             });
+            $('#file_img_EN').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    image_file_EN = e.target.files[0];
+                    $('#preview_show_img_EN').attr('src', await blobToBase64DataURL(image_file_EN)).css("display", "block");
+                }
+            });
             $('#file_download').change(async function (e) {
                 if (e.target.files.length === 1) {
                     file_dowload = e.target.files[0];
+                }
+            });
+            $('#file_download_EN').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    file_dowload_EN = e.target.files[0];
                 }
             });
         });
@@ -139,15 +184,21 @@
             formData.append("L_AND_BIM_Link", link_l_and_bim);
             if (image_file != undefined) {
                 formData.append("Image", image_file);
-            } 
+            }
+            if (image_file_EN != undefined) {
+                formData.append("Image_EN", image_file_EN);
+            }
 
             if (file_dowload != undefined) {
                 formData.append("File", file_dowload);
-            } 
+            }
+            if (file_dowload_EN != undefined) {
+                formData.append("File_EN", file_dowload_EN);
+            }
 
             $.ajax({
                 type: 'POST',
-                url: '/ManageDownload/Edit?id='+id,
+                url: '/ManageDownload/Edit?id=' + id,
                 data: formData,
                 processData: false,
                 contentType: false,
