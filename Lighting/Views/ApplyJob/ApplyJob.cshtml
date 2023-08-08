@@ -113,9 +113,17 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col">
+                                                                    @{
+                                                                        var emails = job?.Email1?.Split(",");
+                                                                    }
                                                                     <ul class="contact-list">
-                                                                        <li><a href="mailto:@job?.Email1">@job?.Email1</a></li>
-                                                                        <li><a href="mailto:@job.Email2">@job?.Email2</a></li>
+                                                                        @if (emails != null)
+                                                                        {
+                                                                            foreach (var str in emails)
+                                                                            {
+                                                                                <li><a href="mailto:@str">@str</a></li>
+                                                                            }
+                                                                        }
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -220,8 +228,18 @@
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <ul class="contact-list">
-                                                                        <li><a href="mailto:@job?.Email1">@job?.Email1</a></li>
-                                                                        <li><a href="mailto:@job?.Email2">@job?.Email2</a></li>
+                                                                        @{
+                                                                            var emails = job?.Email1?.Split(",");
+                                                                        }
+                                                                        <ul class="contact-list">
+                                                                            @if (emails != null)
+                                                                            {
+                                                                                foreach (var str in emails)
+                                                                                {
+                                                                                    <li><a href="mailto:@str">@str</a></li>
+                                                                                }
+                                                                            }
+                                                                        </ul>
                                                                     </ul>
                                                                 </div>
                                                             </div>

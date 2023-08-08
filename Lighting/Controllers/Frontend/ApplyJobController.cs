@@ -23,7 +23,7 @@ namespace Lighting.Controllers.Frontend
                     Date_EN = job.Date_EN,
                     Date_TH = job.Date_TH,
                     Email1 = job.Email1,
-                    Email2 = job.Email2,
+                    //Email2 = job.Email2,
                     PhoneNumber = job.PhoneNumber,
                     PositionName_EN = job.PositionName_EN,
                     PositionName_TH = job.PositionName_TH,

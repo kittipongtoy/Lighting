@@ -14,8 +14,6 @@ namespace Lighting.Controllers.Frontend
 
             _db = db;
             _env = env;
-
-            //
         }
 
         public async Task<IActionResult> JsonNavBar()

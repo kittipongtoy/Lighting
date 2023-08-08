@@ -54,11 +54,13 @@
             <!--email and link-->
             <div class="form-group  p-2">
                 <label class="h4 mt-3">Email</label>
-                <textarea id="email" placeholder="Email@example1.com,Email@example2.com"></textarea>
+                <textarea id="email" placeholder="Email@example.com"></textarea>
                 <label class="h4 mt-3">Google Map URL</label>
                 <input type="text" class="form-control" id="googlemap" placeholder="https://example.com">
-                <label class="h4 mt-3">Youtube URL</label>
-                <input type="text" class="form-control" id="youtube" placeholder="https://youtube.com/example">
+                <label class="h4 mt-3">Youtube URL (ภาษาไทย)</label>
+                <input type="text" class="form-control" id="youtube_th" placeholder="https://youtube.com/example">
+                <label class="h4 mt-3">Youtube URL (English)</label>
+                <input type="text" class="form-control" id="youtube_en" placeholder="https://youtube.com/example">
             </div>
             <!--email and link--->
             <!--fileimage-->
@@ -157,7 +159,8 @@
 
             let email = email_txt.getData();
             let google_map = $("#googlemap").val();
-            let youtube = $("#youtube").val();
+            let youtube_th = $("#youtube_th").val();
+            let youtube_en = $("#youtube_en").val();
 
             let formData = new FormData();
             formData.append("ContactType", contact_type);
@@ -178,7 +181,8 @@
 
             formData.append("Email", email);
             formData.append("GoogleMaps_Url", google_map);
-            formData.append("YouTube_Url", youtube);
+            formData.append("YouTube_Url_TH", youtube_th);
+            formData.append("YouTube_Url_EN", youtube_en);
 
             $.ajax({
                 type: 'POST',

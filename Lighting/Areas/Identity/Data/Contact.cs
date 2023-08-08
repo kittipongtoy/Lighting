@@ -24,6 +24,7 @@ namespace Lighting.Areas.Identity.Data
         public string? ImagePath { get; set; }
         public string? Email { get; set; }
         public string? GoogleMaps_Url { get; set; }
-        public string? YouTube_Url { get; set; }
+        public string? YouTube_Url_EN { get; set; }
+        public string? YouTube_Url_TH { get; set; }
     }
 }
