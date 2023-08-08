@@ -61,6 +61,7 @@ namespace Lighting.Controllers.Backend
                     Email = contact.Email,
                     GoogleMaps_Url = contact.GoogleMaps_Url,
                     ImagePath = contact.ImagePath,
+                    ImagePathEN = contact.ImagePathEN,
                     Location_EN = contact.Location_EN,
                     Location_TH = contact.Location_TH,
                     OfficePhone = contact.OfficePhone,
@@ -68,8 +69,8 @@ namespace Lighting.Controllers.Backend
                     PlaceName_TH = contact.PlaceName_TH,
                     TelePhone = contact.TelePhone,
                     YouTube_Url = contact.YouTube_Url,
-                     Sub_Factory_Name_EN = contact.Sub_Factory_Name_EN,
-                      Sub_Factory_Name_TH = contact.Sub_Factory_Name_TH
+                    Sub_Factory_Name_EN = contact.Sub_Factory_Name_EN,
+                    Sub_Factory_Name_TH = contact.Sub_Factory_Name_TH
                 };
                 return View(output_model);
             }
@@ -83,9 +84,13 @@ namespace Lighting.Controllers.Backend
             if (ModelState.IsValid)
             {
 
-                var new_file_name = Guid.NewGuid().ToString().Substring(0, 5);
+                var new_file_name = Guid.NewGuid().ToString();
                 var save_path = Path.Combine("upload_image", "contact", new_file_name + ".jpg");
                 var save_file = Path.Combine(_rootPath, save_path);
+
+                var new_file_name2 = Guid.NewGuid().ToString();
+                var save_path2 = Path.Combine("upload_image", "contact", new_file_name2 + ".jpg");
+                var save_file2 = Path.Combine(_rootPath, save_path2);
                 var contact = await _db.Contacts.FirstOrDefaultAsync(contact => contact.Id == id);
                 if (contact == null) { return Json(new { status = "error", message = "ไม่พบข้อมูล" }); }
                 try
@@ -100,11 +105,29 @@ namespace Lighting.Controllers.Backend
                             if (System.IO.File.Exists(path_old_file))
                                 System.IO.File.Delete(path_old_file);
                         }
-                        #endregion 
+                        #endregion
 
                         using (var file_stream = new FileStream(save_file, FileMode.Create))
                         {
                             await input_Contact.Image.CopyToAsync(file_stream);
+                        }             
+                    }
+
+                    if (input_Contact.ImageEN != null)
+                    {
+                        #region delte old file EN
+                        if (contact.ImagePathEN != null)
+                        {
+                            var path_old_file = Path.Combine(_rootPath, contact.ImagePathEN);
+
+                            if (System.IO.File.Exists(path_old_file))
+                                System.IO.File.Delete(path_old_file);
+                        }
+                        #endregion
+
+                        using (var file_stream2 = new FileStream(save_file2, FileMode.Create))
+                        {
+                            await input_Contact.ImageEN.CopyToAsync(file_stream2);
                         }
                     }
 
@@ -122,6 +145,7 @@ namespace Lighting.Controllers.Backend
                     contact.GoogleMaps_Url = input_Contact.GoogleMaps_Url;
                     contact.YouTube_Url = input_Contact.YouTube_Url;
                     contact.ImagePath = input_Contact.Image != null ? save_path.Replace("\\", "/") : contact.ImagePath;
+                    contact.ImagePathEN = input_Contact.ImageEN != null ? save_path2.Replace("\\", "/") : contact.ImagePathEN;
 
                     await _db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
@@ -182,6 +206,16 @@ namespace Lighting.Controllers.Backend
                             System.IO.File.Delete(path);
                         }
                     }
+
+                    if (contact.ImagePathEN != null)
+                    {
+                        var path = Path.Combine(_rootPath, contact.ImagePathEN.Replace("/", "\\"));
+                        if (System.IO.File.Exists(path))
+                        {
+                            System.IO.File.Delete(path);
+                        }
+                    }
+
                     _db.Contacts.Remove(contact);
                     await _db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
@@ -202,55 +236,69 @@ namespace Lighting.Controllers.Backend
         [HttpPost]
         public async Task<IActionResult> Add_Contact([FromForm] Input_ContactVM input_Contact)
         {
+            var new_file_name = Guid.NewGuid().ToString();
+            var save_path = Path.Combine("upload_image", "contact", new_file_name + ".jpg");
+            var save_file = Path.Combine(_rootPath, save_path);
 
-            if (ModelState.IsValid)
+            var new_file_name2 = Guid.NewGuid().ToString();
+            var save_path2 = Path.Combine("upload_image", "contact", new_file_name2 + ".jpg");
+            var save_file2 = Path.Combine(_rootPath, save_path2);
+            try
             {
-
-                var new_file_name = Guid.NewGuid().ToString().Substring(0, 5);
-                var save_path = Path.Combine("upload_image", "contact", new_file_name + ".jpg");
-                var save_file = Path.Combine(_rootPath, save_path);
-                try
+                if (input_Contact.Image != null)
                 {
-                    if (input_Contact.Image != null)
+                    using (var file_stream = new FileStream(save_file, FileMode.Create))
                     {
-                        using (var file_stream = new FileStream(save_file, FileMode.Create))
-                        {
-                            await input_Contact.Image.CopyToAsync(file_stream);
-                        }
+                        await input_Contact.Image.CopyToAsync(file_stream);
                     }
-
-                    _db.Contacts.Add(new Contact
-                    {
-                        ContactType = input_Contact.ContactType,
-                         Sub_Factory_Name_EN = input_Contact.Sub_Factory_Name_EN,
-                          Sub_Factory_Name_TH = input_Contact.Sub_Factory_Name_TH,
-                        PlaceName_EN = input_Contact.PlaceName_EN,
-                        PlaceName_TH = input_Contact.PlaceName_TH,
-                        Location_TH = input_Contact.Location_TH,
-                        Location_EN = input_Contact.Location_EN,
-                        CellPhone = input_Contact.CellPhone,
-                        TelePhone = input_Contact.TelePhone,
-                        OfficePhone = input_Contact.OfficePhone,
-                        Email = input_Contact.Email,
-                        GoogleMaps_Url = input_Contact.GoogleMaps_Url,
-                        YouTube_Url = input_Contact.YouTube_Url,
-                        ImagePath = input_Contact.Image != null ? save_path.Replace("\\", "/") : null,
-
-                    });
-                    await _db.SaveChangesAsync();
-                    return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
                 }
-                catch (Exception ex)
+
+                if (input_Contact.ImageEN != null)
                 {
-                    if (System.IO.File.Exists(save_file))
+                    using (var file_stream2 = new FileStream(save_file2, FileMode.Create))
                     {
-                        System.IO.File.Delete(save_file);
+                        await input_Contact.ImageEN.CopyToAsync(file_stream2);
                     }
-                    return Json(new { status = "error", message = ex.Message, inner = ex.InnerException });
                 }
+
+                _db.Contacts.Add(new Contact
+                {
+                    ContactType = input_Contact.ContactType,
+                    Sub_Factory_Name_EN = input_Contact.Sub_Factory_Name_EN,
+                    Sub_Factory_Name_TH = input_Contact.Sub_Factory_Name_TH,
+                    PlaceName_EN = input_Contact.PlaceName_EN,
+                    PlaceName_TH = input_Contact.PlaceName_TH,
+                    Location_TH = input_Contact.Location_TH,
+                    Location_EN = input_Contact.Location_EN,
+                    CellPhone = input_Contact.CellPhone,
+                    TelePhone = input_Contact.TelePhone,
+                    OfficePhone = input_Contact.OfficePhone,
+                    Email = input_Contact.Email,
+                    GoogleMaps_Url = input_Contact.GoogleMaps_Url,
+                    YouTube_Url = input_Contact.YouTube_Url,
+                    ImagePath = input_Contact.Image != null ? save_path.Replace("\\", "/") : null,
+                    ImagePathEN = input_Contact.ImageEN != null ? save_path2.Replace("\\", "/") : null
+                });
+                await _db.SaveChangesAsync();
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+            }
+            catch (Exception ex)
+            {
+                if (System.IO.File.Exists(save_file))
+                {
+                    System.IO.File.Delete(save_file);
+                }
+                return Json(new { status = "error", message = ex.Message, inner = ex.InnerException });
             }
 
-            return Json(new { status = "error", message = "กรุณากรอกทุกอย่างให้ครบถ้วน" });
+
+            //if (ModelState.IsValid)
+            //{
+
+
+            //}
+
+            //return Json(new { status = "error", message = "กรุณากรอกทุกอย่างให้ครบถ้วน" });
         }
 
     }

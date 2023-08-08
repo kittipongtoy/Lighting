@@ -188,8 +188,8 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    //pattern: "{controller=Lighting}/{action=Index}/{id?}");
-    pattern: "{controller=ManageSmartSolution}/{action=Manage_Page}");
+    pattern: "{controller=Lighting}/{action=Index}/{id?}");
+    //pattern: "{controller=ManageSmartSolution}/{action=Manage_Page}");
     //pattern: "{controller=ApplyImgContent}/{action=ChangeContent}");
 app.MapRazorPages();
 

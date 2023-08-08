@@ -108,6 +108,17 @@
                 </label>
                 <input name="Img_File" class="form-control" type="file" id="file_img_preview">
             </div>
+
+            <div class="mb-3">
+                <label for="formFile" class="form-label">
+                    แผนที่ EN
+                    <br />
+                    <span style="color:red;">
+                        ขนาดรูปภาพ : 1240 * 1755 px
+                    </span>
+                </label>
+                <input name="Img_FileEN" class="form-control" type="file" id="file_img_previewEN">
+            </div>
         </div>
         <div class="col-6">
             <img src="@Model?.Img_File" style="width:100%;height:100%;" id="img_preview" />
@@ -172,6 +183,13 @@
                 if (e.target.files.length === 1) {
                     preview_img = e.target.files[0];
                     $('#img_preview').attr('src', await blobToBase64DataURL(preview_img)).css("display", "block");
+                }
+            });
+
+            $('#file_img_previewEN').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    preview_img = e.target.files[0];
+                    $('#img_previewEN').attr('src', await blobToBase64DataURL(preview_img)).css("display", "block");
                 }
             });
         });

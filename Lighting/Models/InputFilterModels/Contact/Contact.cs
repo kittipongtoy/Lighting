@@ -5,17 +5,17 @@ namespace Lighting.Models.InputFilterModels.Contact
 
     public class Input_ContactVM
     {
-        [Required]
+        ///[Required]
         public string ContactType { get; set; }
         public string? Sub_Factory_Name_TH { get; set; }
         public string? Sub_Factory_Name_EN { get; set; }
-        [Required]
+        //[Required]
         public string PlaceName_TH { get; set; }
-        [Required]
+        //[Required]
         public string PlaceName_EN { get; set; }
-        [Required]
+       // [Required]
         public string Location_TH { get; set; }
-        [Required]
+        //[Required]
         public string Location_EN { get; set;}
 
         
@@ -24,6 +24,8 @@ namespace Lighting.Models.InputFilterModels.Contact
         public string? OfficePhone { get; set; }
 
         public IFormFile? Image { get; set; }
+
+        public IFormFile? ImageEN { get; set; }
         public string? Email { get; set; }
         public string? GoogleMaps_Url { get; set; }
         public string? YouTube_Url { get; set; }
@@ -47,6 +49,7 @@ namespace Lighting.Models.InputFilterModels.Contact
         public string? OfficePhone { get; set; }
 
         public string? ImagePath { get; set; }
+        public string? ImagePathEN { get; set; }
         public string? Email { get; set; }
         public string? GoogleMaps_Url { get; set; }
         public string? YouTube_Url { get; set; }

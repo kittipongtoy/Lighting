@@ -2788,7 +2788,7 @@ footer .social li a i {
 .job-acc {
   width: 100%;
   float: left;
-  margin-top: 75px;
+  margin-top: 45px;
 }
 
 .job-acc .panel-group .panel {
@@ -2804,15 +2804,13 @@ footer .social li a i {
 .job-acc .panel-group .panel.panel-default .panel-heading {
   background-color: white;
   border: none;
-  border-radius: 7px;
   padding: 40px 45px;
-  margin-bottom: 30px;
+  margin-top: 30px;
   position: relative;
   overflow: hidden;
 }
 
 .job-acc .panel-group .panel.panel-default .panel-heading.active {
-  border-radius: 7px 7px 0 0;
   padding-bottom: 35px;
   margin-bottom: 0;
 }
@@ -5900,11 +5898,11 @@ footer .social li a i {
   /*----------- NEWS ------------*/
   /*-------- APPLY JOB ----------*/
   .job-acc {
-    margin-top: 50px;
+    margin-top: 25px;
   }
   .job-acc .panel-group .panel.panel-default .panel-heading {
     padding: 32px 40px 35px 40px;
-    margin-bottom: 25px;
+    margin-top: 25px;
   }
   .job-acc .panel-group .panel.panel-default .panel-heading a {
     min-width: 125px;
@@ -7353,11 +7351,11 @@ footer .social li a i {
   }
   /*-------- APPLY JOB ----------*/
   .job-acc {
-    margin-top: 40px;
+    margin-top: 15px;
   }
   .job-acc .panel-group .panel.panel-default .panel-heading {
     padding: 28px 35px 30px 35px;
-    margin-bottom: 18px;
+    margin-top: 18px;
   }
   .job-acc .panel-group .panel.panel-default .panel-heading.active {
     padding-bottom: 30px;
@@ -8782,11 +8780,11 @@ footer .social li a i {
   }
   /*-------- APPLY JOB ----------*/
   .job-acc {
-    margin-top: 35px;
+    margin-top: 20px;
   }
   .job-acc .panel-group .panel.panel-default .panel-heading {
     padding: 18px 18px 20px 18px;
-    margin-bottom: 15px;
+    margin-top: 15px;
   }
   .job-acc .panel-group .panel.panel-default .panel-heading.active {
     padding-bottom: 30px;

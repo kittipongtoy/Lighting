@@ -63,17 +63,28 @@
             <!--email and link--->
             <!--fileimage-->
             <div class="custom-file mt-3 p-1" style="border:1px solid black">
-
                 <img style="width:100%;height:100%;display:none;" id="preview_show_img" />
                 <br />
                 <label for="formFile" class="form-label">
-                    เลือกไฟล์ รูป
+                    เลือกไฟล์ รูป แผนที่ TH
                     <br />
                     <span style="color:red;">
                         ขนาดรูปภาพ : 1860 * 1300 px
                     </span>
                 </label>
                 <input type="file" class="form-control mt-3" id="file_img" accept="image/png, image/gif, image/jpeg" multiple>
+            </div>
+            <div class="custom-file mt-3 p-1" style="border:1px solid black">
+                <img style="width:100%;height:100%;display:none;" id="preview_show_imgEN" />
+                <br />
+                <label for="formFile" class="form-label">
+                    เลือกไฟล์ รูป แแผนที่ EN
+                    <br />
+                    <span style="color:red;">
+                        ขนาดรูปภาพ : 1860 * 1300 px
+                    </span>
+                </label>
+                <input type="file" class="form-control mt-3" id="file_imgEN" accept="image/png, image/gif, image/jpeg" multiple>
             </div>
             <!--file-->
             <center style="margin:3rem;display:flex;justify-content:space-between;">
@@ -120,11 +131,21 @@
             });
 
         var image_file;
+        var image_fileEN;
         $(document).ready(function () {
+            
+
             $('#file_img').change(async function (e) {
                 if (e.target.files.length === 1) {
                     image_file = e.target.files[0];
                     $('#preview_show_img').attr('src', await blobToBase64DataURL(image_file)).css("display", "block");
+                }
+            });
+
+            $('#file_imgEN').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    image_fileEN = e.target.files[0];
+                    $('#preview_show_imgEN').attr('src', await blobToBase64DataURL(image_fileEN)).css("display", "block");
                 }
             });
         });
@@ -172,8 +193,13 @@
             formData.append("CellPhone", cell_phone);
             formData.append("TelePhone", tele_phone);
             formData.append("OfficePhone", office_phone);
+
             if (image_file != undefined) {
                 formData.append("Image", image_file);
+            }
+
+            if (image_fileEN != undefined) {
+                formData.append("ImageEN", image_fileEN);
             }
 
             formData.append("Email", email);
