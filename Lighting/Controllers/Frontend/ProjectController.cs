@@ -14,6 +14,8 @@ namespace Lighting.Controllers.Frontend
 
             _db = db;
             _env = env;
+
+            //
         }
 
         public async Task<IActionResult> JsonNavBar()
@@ -25,7 +27,7 @@ namespace Lighting.Controllers.Frontend
                 .Select(project => new 
                 {
                     Id = project.Id,
-                    Image = project.Image_Path,
+                    Image = project.Image_Path_Nav,
                     Name = project.Name_EN,
                 })
                 .ToListAsync();
@@ -39,7 +41,7 @@ namespace Lighting.Controllers.Frontend
                 .Select(project => new
                 {
                     Id = project.Id,
-                    Image = project.Image_Path,
+                    Image = project.Image_Path_Nav,
                     Name = project.Name_TH,
                 })
                 .ToListAsync();

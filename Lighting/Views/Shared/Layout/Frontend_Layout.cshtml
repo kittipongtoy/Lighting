@@ -144,19 +144,19 @@
                 cache: false,
                 success: function (data) {
                     console.log(data);
-                    if (data.length > 0) {
-                        let { categoryId, productId, subcategoryId } = data[0];
-                        console.log(categoryId, productId, subcategoryId);
-                        if (categoryId && productId && subcategoryId) {
-                            window.location.href = `/product/product_detail?categoryId=${categoryId}&sub_categoryId=${subcategoryId}&id=${productId}`;
+                    if(data.length > 0){
+                        let { category,product,subcategory } = data[0];
+                        console.log(category, product, subcategory);
+                        if (category && product && subcategory) {
+                            window.location.href = `/product/product_detail?category=${category}&sub_category=${subcategory}&model=${product}`;
                             return;
                         }
-                        if (subcategoryId && categoryId) {
-                            window.location.href = `/product/product_subcategory?categoryId=${categoryId}&sub_categoryId=${subcategoryId}`;
+                        if (subcategory  && category) {
+                            window.location.href = `/product/product_subcategory?category=${category}&sub_category=${subcategory}`;
                             return;
                         }
-                        if (categoryId) {
-                            window.location.href = `/product/product_category?categoryId=${categoryId}`;
+                        if (category) {
+                            window.location.href = `/product/product_category?category=${category}`;
                             return;
                         }
                     }

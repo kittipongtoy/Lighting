@@ -25,6 +25,43 @@
     <script src="~/Frontend_assets/fancybox/fancybox.umd.js"></script>
     <script src="~/Frontend_assets/OwlCarousel/owl.carousel.min.js"></script>
     <script>
+
+        function SearchProduct(e){
+
+            let searchText = $("#search").val();
+            console.log(searchText);
+
+            $.ajax({
+                type: 'GET',
+                url: "/Product/SearchJson?search=" + searchText,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (data) {
+                    console.log(data);
+                    if(data.length > 0){
+                        let { category,product,subcategory } = data[0];
+                        console.log(category, product, subcategory);
+                        if (category && product && subcategory) {
+                            window.location.href = `/product/product_detail?category=${category}&sub_category=${subcategory}&model=${product}`;
+                            return;
+                        }
+                        if (subcategory  && category) {
+                            window.location.href = `/product/product_subcategory?category=${category}&sub_category=${subcategory}`;
+                            return;
+                        }
+                        if (category) {
+                            window.location.href = `/product/product_category?category=${category}`;
+                            return;
+                        }
+                    }
+                }, error: function (e) {
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
         $(function () {
             var getPage = $("#page_name").val();
             $(".mainmenu li").each(function () {
@@ -575,7 +612,7 @@
                                                     <i class="fa fa-search"></i>
                                                 </div>
                                                 <div class="search-input">
-                                                    <input type="search" class="search-bar" placeholder="search">
+                                                    <input type="search" class="search-bar" placeholder="search" id="search" onchange="SearchProduct()">
                                                 </div>
                                             </div>
                                         </li>
@@ -662,39 +699,39 @@
                                                                     <div class="col">
                                                                         <ul class="dropdown-submenu w-half">
                                                                             <li>
-                                                                                <a href="@Url.Action("Subsidiaries_Lighting_Innovation_Center","Resource_Facility")">
-                                                                                    <p>L&E Lighting Innovation Center</p>
-                                                                                </a>
+                                                                            <a href="@Url.Action("Subsidiaries_Lighting_Innovation_Center","Resource_Facility")">
+                                                                            <p>L&E Lighting Innovation Center</p>
+                                                                            </a>
                                                                             </li>
                                                                             <li>
-                                                                                <a href="@Url.Action("Subsidiaries_SolidState","Resource_Facility")">
-                                                                                    <p>L&E Solid State Co.,Ltd</p>
-                                                                                </a>
+                                                                            <a href="@Url.Action("Subsidiaries_SolidState","Resource_Facility")">
+                                                                            <p>L&E Solid State Co.,Ltd</p>
+                                                                            </a>
                                                                             </li>
                                                                             <li>
-                                                                                <a href="@Url.Action("Subsidiaries_Manufacturing","Resource_Facility")">
-                                                                                    <p>L&E Manufacturing Co.,Ltd</p>
-                                                                                </a>
+                                                                            <a href="@Url.Action("Subsidiaries_Manufacturing","Resource_Facility")">
+                                                                            <p>L&E Manufacturing Co.,Ltd</p>
+                                                                            </a>
                                                                             </li>
                                                                             <li>
-                                                                                <a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">
-                                                                                    <p>L&E Assembly / Service</p>
-                                                                                </a>
+                                                                            <a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">
+                                                                            <p>L&E Assembly / Service</p>
+                                                                            </a>
                                                                             </li>
                                                                             <li>
-                                                                                <a href="@Url.Action("Subsidiaries_Warehouse_Logistics","Resource_Facility")">
-                                                                                    <p>L&E Warehouse & Logistics</p>
-                                                                                </a>
+                                                                            <a href="@Url.Action("Subsidiaries_Warehouse_Logistics","Resource_Facility")">
+                                                                            <p>L&E Warehouse & Logistics</p>
+                                                                            </a>
                                                                             </li>
                                                                             <li>
-                                                                                <a href="@Url.Action("Subsidiaries_Lighting_Solution_Center","Resource_Facility")">
-                                                                                    <p>L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</p>
-                                                                                </a>
+                                                                            <a href="@Url.Action("Subsidiaries_Lighting_Solution_Center","Resource_Facility")">
+                                                                            <p>L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</p>
+                                                                            </a>
                                                                             </li>
                                                                             <li>
-                                                                                <a href="@Url.Action("Subsidiaries_Overseas_Offices","Resource_Facility")">
-                                                                                    <p>L&E Overseas Offices</p>
-                                                                                </a>
+                                                                            <a href="@Url.Action("Subsidiaries_Overseas_Offices","Resource_Facility")">
+                                                                            <p>L&E Overseas Offices</p>
+                                                                            </a>
                                                                             </li>
 
                                                     @* <li>
@@ -757,7 +794,8 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <ul class="dropdown-submenu w-half">
+                                                                <ul class="dropdown-submenu w-half"  id="nav_smartsolution" >
+                                                                    @*
                                                                     <li>
                                                                         <a href="@Url.Action("SmartSolutionDetail","SmartSolution")">
                                                                             <p>ICON LINK (APP)</p>
@@ -904,7 +942,8 @@
                                                     <div class="menu-container">
                                                         <div class="row">
                                                             <div class="col">
-                                                                <ul class="product-dropdownmenu">
+                                                                <ul class="product-dropdownmenu" id="nav_product">
+                                                                    @*
                                                                     <li>
                                                                         <a href="@Url.Action("Product_Category","Product")">
                                                                             <img src="~/Frontend_assets/images/product/icon-product.svg">
@@ -1087,7 +1126,8 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <ul class="dropdown-submenu w-half">
+                                                                <ul class="dropdown-submenu w-half" id="nav_projectref">
+                                                                    @*
                                                                     <li>
                                                                         <a href="@Url.Action("Project_Category","Project")">
                                                                             <p>RESIDENTIAL</p>
@@ -1251,7 +1291,6 @@
                                                     </div>
                                                 </div>
                                             </li>
-
                                             <li data-page="download"><a href="@Url.Action("Download","Download")">DOWNLOAD</a></li>
                                             <li data-page="news"><a href="@Url.Action("New","New")">NEWS</a></li>
                                             <li data-page="ir"><a href="@Url.Action("IR_index","Frontend_IR")">INVESTOR</a></li>

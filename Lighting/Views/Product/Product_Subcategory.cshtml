@@ -116,7 +116,7 @@
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination mt-4">
                                         <li class="page-item">
-                                            <a class="page-link" href="@Url.Action("Product_Subcategory","Product",new {categoryId = ViewBag.CategoryId, sub_categoryId=ViewBag.SubCategoryId,start=(ViewBag.CurrentPage > 0 ? ViewBag.CurrentPage - maximum:0)})" aria-label="Previous">
+                                            <a class="page-link" href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category, sub_category=ViewBag.SubCategory,start=(ViewBag.CurrentPage > 0 ? ViewBag.CurrentPage - maximum:0)})" aria-label="Previous">
                                                 <i class="fas fa-arrow-left"></i>
                                             </a>
                                         </li>
@@ -127,17 +127,17 @@
                                             {
                                                 if (ViewBag.CurrentPage == pagination_num)
                                                 {
-                                                    <li class="page-item active"><a class="page-link" href="@Url.Action("Product_Subcategory","Product",new {categoryId = ViewBag.CategoryId, sub_categoryId=ViewBag.SubCategoryId,start=pagination_num})">@page_count</a></li>
+                                                    <li class="page-item active"><a class="page-link" href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category, sub_category=ViewBag.SubCategory,start=pagination_num})">@page_count</a></li>
                                                 }
                                                 else
                                                 {
-                                                    <li class="page-item "><a class="page-link" href="@Url.Action("Product_Subcategory","Product",new {categoryId = ViewBag.CategoryId, sub_categoryId=ViewBag.SubCategoryId,start=pagination_num})">@page_count</a></li>
+                                                    <li class="page-item "><a class="page-link" href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category, sub_category=ViewBag.SubCategory,start=pagination_num})">@page_count</a></li>
                                                 }
                                                 page_count++;
                                             }
                                         }
                                         <li class="page-item">
-                                            <a class="page-link" href="@Url.Action("Product_Subcategory","Product",new {categoryId = ViewBag.CategoryId, sub_categoryId=ViewBag.SubCategoryId,start=((ViewBag.CurrentPage + maximum) > ViewBag.MaximumPage ? ViewBag.MaximumPage :(ViewBag.CurrentPage + maximum)  )})" aria-label="Next">
+                                            <a class="page-link" href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category, sub_category=ViewBag.SubCategory,start=((ViewBag.CurrentPage + maximum) > ViewBag.MaximumPage ? ViewBag.MaximumPage :(ViewBag.CurrentPage + maximum)  )})" aria-label="Next">
                                                 <i class="fas fa-arrow-right"></i>
                                             </a>
                                         </li>
