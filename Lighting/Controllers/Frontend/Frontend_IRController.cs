@@ -1410,7 +1410,7 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> IR_set_announcement()
         {
             ViewBag.GetIR_Stock_Market = await db.IR_Stock_Market.Where(x => x.Status == 1).ToListAsync();
-            ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
             return View();
         }
 
