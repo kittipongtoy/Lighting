@@ -211,6 +211,8 @@ namespace Lighting.Controllers.Frontend
                         Profile_Image = Path.Combine(pro.Folder_Path, pro.Profile_Image),
                         Location_EN = pro.Location_EN,
                         Location_TH = pro.Location_TH,
+                        Title_EN = pro.Title_EN,
+                        Title_TH = pro.Title_TH,
                         Id = pro.Id
                     })
                     //.Take(10)

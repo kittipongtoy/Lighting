@@ -39,6 +39,8 @@ namespace Lighting.Models.InputFilterModels.ProjectRef
         public string? Content_EN { get; set; }
         //public IFormFile File_Download { get; set; }
         public List<int>? ProductId { get; set; }
+        public IFormFile pdf_th { get; set; }
+        public IFormFile pdf_en { get; set; }
     }
 
     public class Output_ProjectRefVM

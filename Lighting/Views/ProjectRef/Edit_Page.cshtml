@@ -162,7 +162,18 @@
                     }
                 </tbody>
             </table>
-
+            <div style="margin-top:2rem;border:1px solid black;padding:1rem;">
+                <img style="width:100%;height:50vh;display:none;" id="preview_show_img" />
+                <br />
+                <label class="form-label" style="margin-top:2rem;">ไฟล์ PDF ไทย</label>
+                <input class="form-control form-control-lg" id="pdf_th" type="file">
+            </div>
+            <div style="margin-top:2rem;border:1px solid black;padding:1rem;">
+                <img style="width:100%;height:50vh;display:none;" id="preview_show_img" />
+                <br />
+                <label class="form-label" style="margin-top:2rem;">ไฟล์ PDF อังกฤษ</label>
+                <input class="form-control form-control-lg" id="pdf_en" type="file">
+            </div>
             <center style="margin:3rem;">
                 <button class="btn btn-success" onclick="addProject()">บันทึก</button>
             </center>
@@ -365,6 +376,14 @@
                 }
             }
 
+            if (pdf_th != undefined) {
+                formData.append("pdf_th", pdf_th);
+            }
+
+            if (pdf_en != undefined) {
+                formData.append("pdf_en", pdf_en);
+            }
+
             if (productList.length > 0) {
                 for (const id of productList) {
                     formData.append("ProductId", id);
@@ -410,6 +429,19 @@
             });
         }
 
+        $('#pdf_th').change(async function (e) {
+            if (e.target.files.length === 1) {
+                pdf_th = e.target.files[0];
+
+            }
+        });
+        $('#pdf_en').change(async function (e) {
+            if (e.target.files.length === 1) {
+                pdf_en = e.target.files[0];
+
+            }
+        });
+
         const blobToBase64DataURL = blob => new Promise(
             resolvePromise => {
                 const reader = new FileReader();
@@ -418,7 +450,7 @@
             }
         );
 
-        var file_img_title, files_sub_img, file_download;
+        var file_img_title, files_sub_img, file_download, pdf_th, pdf_en;
         $(document).ready(function () {
 
             $.ajax({

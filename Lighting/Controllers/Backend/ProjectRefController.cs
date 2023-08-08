@@ -37,6 +37,27 @@ namespace Lighting.Controllers.Backend
                         await input.Profile_Image.CopyToAsync(stream);
                     }
 
+                    var path_th = "";
+                    var path_en = "";
+
+                    if(input.pdf_th.Length > 0)
+                    {
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, path_th), FileMode.Create))
+                        {
+                            await input.pdf_th.CopyToAsync(stream);
+                        }
+                        path_th = Guid.NewGuid().ToString().Substring(0, 5) + ".pdf";
+                        
+                    }
+                    if (input.pdf_en.Length > 0)
+                    {
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, path_en), FileMode.Create))
+                        {
+                            await input.pdf_en.CopyToAsync(stream);
+                        }
+                        path_en = Guid.NewGuid().ToString().Substring(0, 5) + ".pdf";
+                    }
+
                     //using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, input.File_Download.FileName), FileMode.Create))
                     //{
                     //    await input.File_Download.CopyToAsync(stream);
@@ -67,6 +88,8 @@ namespace Lighting.Controllers.Backend
                         ProjectRef_Category = category,
                         //File_Download = input.File_Download.FileName,
                         Profile_Image = profile_img_name,
+                        Pdf_TH = path_th,
+                        Pdf_ENG = path_en
                     };
 
                     await _db.ProjectRefs.AddAsync(projectRef);
@@ -201,6 +224,39 @@ namespace Lighting.Controllers.Backend
                             await input.Profile_Image.CopyToAsync(stream);
                         }
                         project.Profile_Image = new_file_name;
+                    }
+
+                    var path_th = "";
+                    var path_en = "";
+
+                    if (input.pdf_th.Length > 0)
+                    {
+                        var new_file_name3 = Guid.NewGuid().ToString().Substring(0, 5) + ".pdf";
+                        var old_file = Path.Combine(_env.WebRootPath, path, project.Pdf_TH);
+                        if (System.IO.File.Exists(old_file))
+                        {
+                            System.IO.File.Delete(old_file);
+                        }
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, new_file_name3), FileMode.Create))
+                        {
+                            await input.pdf_th.CopyToAsync(stream);
+                        }
+                        project.Pdf_TH = new_file_name3;
+
+                    }
+                    if (input.pdf_en.Length > 0)
+                    {
+                        var new_file_name4 = Guid.NewGuid().ToString().Substring(0, 5) + ".pdf";
+                        var old_file = Path.Combine(_env.WebRootPath, path, project.Pdf_ENG);
+                        if (System.IO.File.Exists(old_file))
+                        {
+                            System.IO.File.Delete(old_file);
+                        }
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, new_file_name4), FileMode.Create))
+                        {
+                            await input.pdf_en.CopyToAsync(stream);
+                        }
+                        project.Pdf_ENG = new_file_name4;
                     }
 
                     //if (input.File_Download != null)
