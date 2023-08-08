@@ -149,6 +149,7 @@ namespace Lighting.Controllers.Backend
                     Image_Path = project.Image_Path,
                     Name_EN = project.Name_EN,
                     Name_TH = project.Name_TH,
+                     Image_Path_Nav = project.Image_Path_Nav,
                 })
                 .ToListAsync();
             return View(project);
