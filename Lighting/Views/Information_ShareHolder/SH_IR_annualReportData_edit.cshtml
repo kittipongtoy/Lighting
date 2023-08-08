@@ -22,7 +22,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="@Url.Action("InvestorRelations_index","Investor_Relations")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
+                        <a href="@Url.Action("Banner","IR_Index")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -112,7 +112,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="mb-10" style="text-align:center;">
-                                    <img src="~/upload_image/SH_annualReport/@Model.SH_annual_ReportData.upload_image" style="height: 250px;width: 250px;" alt="image">
+                                    <img src="~/upload_image/SH_annualReport/@Model.SH_annual_ReportData.upload_image" onclick="window.location.href='/upload_file/SH_annualReport/@Model.SH_annual_ReportData.file_name'" style="height: 250px;width: 250px; cursor:pointer;" alt="image">
                                 </div>
                                 <input type="file" class="form-control" name="upload_image" accept="image/*" required />
                             </div>
@@ -127,7 +127,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="mb-10" style="text-align:center;">
-                                    <img src="~/upload_image/SH_annualReport/@Model.SH_annual_ReportData.upload_image_ENG" style="height: 250px;width: 250px;" alt="image">
+                                    <img src="~/upload_image/SH_annualReport/@Model.SH_annual_ReportData.upload_image_ENG" onclick="window.location.href='/upload_file/SH_annualReport/@Model.SH_annual_ReportData.file_name_ENG'" style="height: 250px;width: 250px; cursor:pointer;" alt="image">
                                 </div>
                                 <input type="file" class="form-control" name="upload_image_ENG" accept="image/*" required />
                             </div>

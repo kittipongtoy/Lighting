@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Lighting.Models.model_input
+
+@{
     ViewData["Title"] = "IR_Contact_Edit";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
@@ -10,7 +12,7 @@
                 <span class="h-20px border-gray-200 border-start mx-4"></span>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
                     <li class="breadcrumb-item text-muted">
-                        <a href="@Url.Action("InvestorRelations_index","Corporate_Governance")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
+                        <a href="@Url.Action("Banner","IR_Index")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-200 w-5px h-2px"></span>
@@ -161,8 +163,18 @@
                                 <span>
                                     รูปพื้นหลังด้านซ้าย
                                 </span>
+                                <br />
+                                <span style="color:red;">
+                                    ขนาดรูปภาพ : 1020 * 680 px
+                                </span>
                             </div>
                             <div class="col-4">
+                                @if (Model.IR_Contact.Image != null)
+                                {
+                                    <div class="mb-10" style="text-align:center;">
+                                        <img src="~/upload_image/IR_Contact/@Model.IR_Contact.Image" style="height: 250px;width: 250px;" alt="image">
+                                    </div>
+                                }
                                 <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
                             </div>
                         </div>
@@ -174,7 +186,6 @@
                                 </span>
                             </div>
                             <div class="col-4" id="CheckStatus">
-                              
                             </div>
                         </div>
                         <input type="hidden" name="Id" id="Id" />
@@ -219,7 +230,7 @@
             console.log(check)
         }
 
-        $(()=>{
+        $(() => {
             $.ajax({
                 type: 'get',
                 url: '/IR_Contact/Get_IR_Contact',
@@ -227,7 +238,7 @@
                 success: function (data) {
                     console.log(data)
                     $("#Id").val(data.id);
-                    $("#Title_TH").val(data.title_TH);                 
+                    $("#Title_TH").val(data.title_TH);
                     $("#Title_EN").val(data.title_EN);
                     $("#SubTitle_TH").val(data.subTitle_TH);
                     $("#SubTitle_EN").val(data.subTitle_EN);
@@ -248,8 +259,7 @@
                         status += '<label class="form-check-label" for="use_status"> ใช้งาน </label>';
                         status += '</div>';
                     }
-                    else
-                    {
+                    else {
                         status += '<div class="form-check form-switch">';
                         status += '<input class="form-check-input" type="checkbox" name="Status" value="0" id="use_status" onclick="checkSwitch()">';
                         status += '<label class="form-check-label" for="use_status"> ใช้งาน </label>';

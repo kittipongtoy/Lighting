@@ -22,7 +22,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="@Url.Action("InvestorRelations_index","Investor_Relations")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
+                        <a href="@Url.Action("Banner","IR_Index")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -64,7 +64,7 @@
                             </h2>
                         </div>
                         <div class="col-6" style="text-align:right;">
-                            <a type="button" class="btn btn-secondary" href="@Url.Action("SH_IR_Presentation_Doc","Information_ShareHolder")">ย้อนกลับ</a>
+                            <a type="button" class="btn btn-secondary" href="@Url.Action("SH_IR_Presentation_Doc","PresentationInfor")">ย้อนกลับ</a>
                         </div>
                     </div>
                     <form id="form_create" enctype="multipart/form-data">
@@ -108,6 +108,14 @@
                                 </span>
                             </div>
                             <div class="col-4">
+                                @if (Model.SH_IR_presentation_doc_Data.file_name != null)
+                                {
+                                    <div>
+                                        <div style="text-align:center;">
+                                            <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/SH_IR_Presentation/@Model.SH_IR_presentation_doc_Data.file_name">ไฟล์เอกสาร TH</a>
+                                        </div><br />
+                                    </div>
+                                }
                                 <input type="file" class="form-control" name="uploaded_file" accept="application/pdf,application/vnd.ms-excel" />
                             </div>
                             <div class="col-2">
@@ -116,6 +124,15 @@
                                 </span>
                             </div>
                             <div class="col-4">
+                                @if (Model.SH_IR_presentation_doc_Data.file_name_ENG != null)
+                                {
+                                    <div>
+                                        <div style="text-align:center;">
+                                            <a type="button" class="btn btn-primary" target="_blank" href="~/upload_file/SH_IR_Presentation/@Model.SH_IR_presentation_doc_Data.file_name_ENG">ไฟล์เอกสาร ENG</a>
+                                        </div>
+                                        <br />
+                                    </div>
+                                }
                                 <input type="file" class="form-control" name="uploaded_file_ENG" accept="application/pdf,application/vnd.ms-excel" />
                             </div>
                         </div>
@@ -158,6 +175,7 @@
     <!--end::Post-->
 </div>
 <!--end::Content-->
+
 @section Scripts{
      
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">

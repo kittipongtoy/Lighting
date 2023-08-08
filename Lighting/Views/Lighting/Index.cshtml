@@ -1,9 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/Layout/Frontend_Index_Layout.cshtml";
+    var ggg = Model;
+    var lang = Context.Request.Cookies["lang"];
+
 }
-
-
 
 <div class="content-padding" id="index">
     <div class="container-fluid">
@@ -11,13 +12,42 @@
         <div class="wrap-pad">
             <div class="new-product-header">
                 <div class="row">
-                    <div class="col-lg-9 col-md-9 col-12">
-                        <h3>EXPLORE OUR</h3>
-                        <h1>NEW PRODUCTS</h1>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-12">
-                        <a class="buttonBD m-size" href="product.php">ALL PRODUCTS<i class="fa fa-long-arrow-right"></i></a>
-                    </div>
+                    @if(Model.DATA != null)
+                    {
+                        @if (lang == "EN")
+                        {
+                            <div class="col-lg-9 col-md-9 col-12">
+                                <h3>@Model.DATA.titleENG1</h3>
+                                <h1>@Model.DATA.titleENG3</h1>
+                            </div>
+                        }else{
+                            <div class="col-lg-9 col-md-9 col-12">
+                                <h3>@Model.DATA.titleTH1</h3>
+                                <h1>@Model.DATA.titleTH3</h1>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-lg-9 col-md-9 col-12">
+                            <h3>
+                                EXPLORE OUR
+                            </h3>
+                            <h1>NEW PRODUCTS</h1>
+                        </div>
+                    }
+                    @if (lang == "EN")
+                    {
+                        <div class="col-lg-3 col-md-3 col-12">
+                            <a class="buttonBD m-size" href="product.php">ALL PRODUCTS<i class="fa fa-long-arrow-right"></i></a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-lg-3 col-md-3 col-12">
+                            <a class="buttonBD m-size" href="product.php">สินค้าทั้งหมด<i class="fa fa-long-arrow-right"></i></a>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -128,108 +158,206 @@
                         </a>
                     </li>
                     *@
-                    <li>
-                        <a href="https://www.mydevdemosites.com/category/bollardborder">
-                            <img src="~/Frontend_assets/images/index/n-product01.jpg">
-                            <div class="contentBoxBG">
-                                <div class="row">
-                                    <div class="col-lg-8 col-md-12 col-12">
-                                        <div class="contentBox-topic">
-                                            <p>BOLLARD </p>
+                    @if(Model.Product != null && Model.Product.Count > 0)
+                    {
+                        @foreach (var tt in Model.Product)
+                        {
+                            <li>
+                                <a href="@Url.Action("Product_Category","Product",new {categoryId = tt.Id})">
+                                    <img src="@tt.Image">
+                                    <div class="contentBoxBG">
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-12 col-12">
+                                                <div class="contentBox-topic">
+                                                    @if(lang == "EN")
+                                                    {
+                                                        <p>@tt.Name_EN</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>@tt.Name_TH</p>                                                        
+                                                    }
+                                                </div>
+                                            </div>
+                                            @if(lang == "EN")
+                                            {
+                                                <div class="col-lg-4 d-none d-md-none d-lg-block">
+                                                    <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="col-lg-4 d-none d-md-none d-lg-block">
+                                                    <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                                </div>
+                                            }
+                                            
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                        <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.mydevdemosites.com/products/lighting-and-equipment">
-                            <img src="~/Frontend_assets/images/index/n-product02.jpg">
-                            <div class="contentBoxBG">
-                                <div class="row">
-                                    <div class="col-lg-8 col-md-12 col-12">
-                                        <div class="contentBox-topic">
-                                            <p>LED FRESNEL SPOT LIGHT</p>
+                                </a>
+                            </li>
+                        }
+                    }else
+                    {
+                        <li>
+                            <a href="https://www.mydevdemosites.com/category/bollardborder">
+                                <img src="~/Frontend_assets/images/index/n-product01.jpg">
+                                <div class="contentBoxBG">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-12 col-12">
+                                            <div class="contentBox-topic">
+                                                <p>BOLLARD </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                        <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                        @if (lang == "EN")
+                                        {
+                                            <div class="col-lg-4 d-none d-md-none d-lg-block">
+                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-4 d-none d-md-none d-lg-block">
+                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                            </div>
+                                        }
+
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.mydevdemosites.com/category/low-bay-high-bay">
-                            <img src="~/Frontend_assets/images/index/n-product03.jpg">
-                            <div class="contentBoxBG">
-                                <div class="row">
-                                    <div class="col-lg-8 col-md-12 col-12">
-                                        <div class="contentBox-topic">
-                                            <p>HIGH BAY HBL731</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.mydevdemosites.com/products/lighting-and-equipment">
+                                <img src="~/Frontend_assets/images/index/n-product02.jpg">
+                                <div class="contentBoxBG">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-12 col-12">
+                                            <div class="contentBox-topic">
+                                                <p>LED FRESNEL SPOT LIGHT</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                        <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                        @if (lang == "EN")
+                                        {
+                                            <div class="col-lg-4 d-none d-md-none d-lg-block">
+                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-4 d-none d-md-none d-lg-block">
+                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.mydevdemosites.com/category/spotlight-tracklight-led-retrofit">
-                            <img src="~/Frontend_assets/images/index/n-product04.jpg">
-                            <div class="contentBoxBG">
-                                <div class="row">
-                                    <div class="col-lg-8 col-md-12 col-12">
-                                        <div class="contentBox-topic">
-                                            <p>TRACK LIGHT LED MODULE TRL110</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.mydevdemosites.com/category/low-bay-high-bay">
+                                <img src="~/Frontend_assets/images/index/n-product03.jpg">
+                                <div class="contentBoxBG">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-12 col-12">
+                                            <div class="contentBox-topic">
+                                                <p>HIGH BAY HBL731</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                        <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                        @if (lang == "EN")
+                                        {
+                                            <div class="col-lg-4 d-none d-md-none d-lg-block">
+                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-4 d-none d-md-none d-lg-block">
+                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.mydevdemosites.com/category/recessed-downlight-led-module">
-                            <img src="~/Frontend_assets/images/index/n-product05.jpg">
-                            <div class="contentBoxBG">
-                                <div class="row">
-                                    <div class="col-lg-8 col-md-12 col-12">
-                                        <div class="contentBox-topic">
-                                            <p>RECESSED DOWNLIGHT RAL40D</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.mydevdemosites.com/category/spotlight-tracklight-led-retrofit">
+                                <img src="~/Frontend_assets/images/index/n-product04.jpg">
+                                <div class="contentBoxBG">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-12 col-12">
+                                            <div class="contentBox-topic">
+                                                <p>TRACK LIGHT LED MODULE TRL110</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                        <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                        @if (lang == "EN")
+                                        {
+                                            <div class="col-lg-4 d-none d-md-none d-lg-block">
+                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-4 d-none d-md-none d-lg-block">
+                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.mydevdemosites.com/category/wall-mount">
-                            <img src="~/Frontend_assets/images/index/n-product06.jpg">
-                            <div class="contentBoxBG">
-                                <div class="row">
-                                    <div class="col-lg-8 col-md-12 col-12">
-                                        <div class="contentBox-topic">
-                                            <p>WALL MOUNT WLL123</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.mydevdemosites.com/category/recessed-downlight-led-module">
+                                <img src="~/Frontend_assets/images/index/n-product05.jpg">
+                                <div class="contentBoxBG">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-12 col-12">
+                                            <div class="contentBox-topic">
+                                                <p>RECESSED DOWNLIGHT RAL40D</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                        <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                        @if (lang == "EN")
+                                        {
+                                            <div class="col-lg-4 d-none d-md-none d-lg-block">
+                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-4 d-none d-md-none d-lg-block">
+                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.mydevdemosites.com/category/wall-mount">
+                                <img src="~/Frontend_assets/images/index/n-product06.jpg">
+                                <div class="contentBoxBG">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-12 col-12">
+                                            <div class="contentBox-topic">
+                                                <p>WALL MOUNT WLL123</p>
+                                            </div>
+                                        </div>
+                                        @if (lang == "EN")
+                                        {
+                                            <div class="col-lg-4 d-none d-md-none d-lg-block">
+                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-4 d-none d-md-none d-lg-block">
+                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    }
+                    
 
                 </ul>
             </div>
@@ -237,26 +365,75 @@
 
         <!---------- INDEX :: PROJECT REF ---------->
         <div class="wrap-pad">
-            <div class="project-header">
-                <div class="row">
-                    <div class="col">
-                        <h1>WHAT WE DO?</h1>
-                        <h3>HI-LIGHT PROJECT</h3>
+            @if (Model.DATA != null)
+            {
+                @if (lang == "EN")
+                {
+                    <div class="project-header">
+                        <div class="row">
+                            <div class="col">
+                                <h1>@Model.DATA.titleENG2</h1>
+                                <h3>@Model.DATA.titlesubENG2</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-xl-8 col-lg-9 col-md-11 col-12">
+                            <div class="txt-content text-center f-17">
+                                <p>@Model.DATA.DescriptENG2</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="project-header">
+                        <div class="row">
+                            <div class="col">
+                                <h1>@Model.DATA.titleTH2</h1>
+                                <h3>@Model.DATA.titlesubTH2</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-xl-8 col-lg-9 col-md-11 col-12">
+                            <div class="txt-content text-center f-17">
+                                <p>@Model.DATA.DescriptTH2</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="project-header">
+                    <div class="row">
+                        <div class="col">
+                            <h1>WHAT WE DO?</h1>
+                            <h3>HI-LIGHT PROJECT</h3>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-xl-8 col-lg-9 col-md-11 col-12">
-                    <div class="txt-content text-center f-17">
-                        <p>Our lighting solution attempts to raise the general attractiveness of the design while energy efficient, durable and sustainable solutions are highly considered. Let us be part of your project by contact your nearest L&E representative.</p>
+                <div class="row justify-content-center">
+                    <div class="col-xl-8 col-lg-9 col-md-11 col-12">
+                        <div class="txt-content text-center f-17">
+                            <p>Our lighting solution attempts to raise the general attractiveness of the design while energy efficient, durable and sustainable solutions are highly considered. Let us be part of your project by contact your nearest L&E representative.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
             <div class="row">
                 <div class="col">
-                    <div class="content-center">
-                        <a class="buttonBD m-size" href="project.php">ALL PROJECTS<i class="fa fa-long-arrow-right"></i></a>
-                    </div>
+                    @if (lang == "EN")
+                    {
+                        <div class="content-center">
+                            <a class="buttonBD m-size" href="project.php">ALL PROJECTS<i class="fa fa-long-arrow-right"></i></a>
+                        </div>
+                    }else{
+                        <div class="content-center">
+                            <a class="buttonBD m-size" href="project.php">สินค้าทั้งหมด<i class="fa fa-long-arrow-right"></i></a>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -333,74 +510,115 @@
                         </a>
                     </li>
                     *@
-                    <li>
-                        <a href="https://www.mydevdemosites.com/projects/event-exhibition">
-                            <img src="~/Frontend_assets/images/index/project01.jpg">
-                            <div class="contentBoxBG">
-                                <div class="row">
-                                    <div class="col-lg-9 col-md-12 col-12">
-                                        <div class="contentBox-topic">
-                                            <p>QUEEN SIRKIT NATIONAL CONVENTION CENTER</p>
+                    @if (Model.Project != null && Model.Project.Count > 0)
+                    {
+                        @foreach (var tt in Model.Project)
+                        {
+                            <li>
+                                <a href="@Url.Action("Project_Category","Project",new {categoryId = tt.Id})">
+                                    <img src="~/Frontend_assets/images/index/project01.jpg">
+                                    <div class="contentBoxBG">
+                                        <div class="row">
+                                            <div class="col-lg-9 col-md-12 col-12">
+                                                <div class="contentBox-topic">
+                                                    @if (lang == "EN")
+                                                    {
+                                                        <p>@tt.Name_EN</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>@tt.Name_TH</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 d-none d-md-none d-lg-block">
+                                                @if(lang == "EN"){
+                                                    <div class="buttonBD">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="buttonBD">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                                }
+                                                
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 d-none d-md-none d-lg-block">
-                                        <div class="buttonBD">Read more<i class="fa fa-long-arrow-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.mydevdemosites.com/projects/event-exhibition-0">
-                            <img src="~/Frontend_assets/images/index/project02.jpg">
-                            <div class="contentBoxBG">
-                                <div class="row">
-                                    <div class="col-lg-9 col-md-12 col-12">
-                                        <div class="contentBox-topic">
-                                            <p>THE VOICE ALL STARS THAILAND</p>
+                                </a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="https://www.mydevdemosites.com/projects/event-exhibition">
+                                <img src="~/Frontend_assets/images/index/project01.jpg">
+                                <div class="contentBoxBG">
+                                    <div class="row">
+                                        <div class="col-lg-9 col-md-12 col-12">
+                                            <div class="contentBox-topic">
+                                                <p>QUEEN SIRKIT NATIONAL CONVENTION CENTER</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 d-none d-md-none d-lg-block">
+                                            <div class="buttonBD">Read more<i class="fa fa-long-arrow-right"></i></div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 d-none d-md-none d-lg-block">
-                                        <div class="buttonBD">Read more<i class="fa fa-long-arrow-right"></i></div>
-                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.mydevdemosites.com/projects/event-exhibition-0">
-                            <img src="~/Frontend_assets/images/index/project03.jpg">
-                            <div class="contentBoxBG">
-                                <div class="row">
-                                    <div class="col-lg-9 col-md-12 col-12">
-                                        <div class="contentBox-topic">
-                                            <p>REGENT PHUKET CAPE PANWA</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.mydevdemosites.com/projects/event-exhibition-0">
+                                <img src="~/Frontend_assets/images/index/project02.jpg">
+                                <div class="contentBoxBG">
+                                    <div class="row">
+                                        <div class="col-lg-9 col-md-12 col-12">
+                                            <div class="contentBox-topic">
+                                                <p>THE VOICE ALL STARS THAILAND</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 d-none d-md-none d-lg-block">
+                                            <div class="buttonBD">Read more<i class="fa fa-long-arrow-right"></i></div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 d-none d-md-none d-lg-block">
-                                        <div class="buttonBD">Read more<i class="fa fa-long-arrow-right"></i></div>
-                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.mydevdemosites.com/projects/shopping-mall/sooksiam-iconsiam">
-                            <img src="~/Frontend_assets/images/index/project04.jpg">
-                            <div class="contentBoxBG">
-                                <div class="row">
-                                    <div class="col-lg-9 col-md-12 col-12">
-                                        <div class="contentBox-topic">
-                                            <p>SOOKSIAM <br>@@ ICONSIAM</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.mydevdemosites.com/projects/event-exhibition-0">
+                                <img src="~/Frontend_assets/images/index/project03.jpg">
+                                <div class="contentBoxBG">
+                                    <div class="row">
+                                        <div class="col-lg-9 col-md-12 col-12">
+                                            <div class="contentBox-topic">
+                                                <p>REGENT PHUKET CAPE PANWA</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 d-none d-md-none d-lg-block">
+                                            <div class="buttonBD">Read more<i class="fa fa-long-arrow-right"></i></div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 d-none d-md-none d-lg-block">
-                                        <div class="buttonBD">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.mydevdemosites.com/projects/shopping-mall/sooksiam-iconsiam">
+                                <img src="~/Frontend_assets/images/index/project04.jpg">
+                                <div class="contentBoxBG">
+                                    <div class="row">
+                                        <div class="col-lg-9 col-md-12 col-12">
+                                            <div class="contentBox-topic">
+                                                <p>SOOKSIAM <br>@@ ICONSIAM</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 d-none d-md-none d-lg-block">
+                                            <div class="buttonBD">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
+                            </a>
+                        </li>
+                    }
+                    
 
                 </ul>
             </div>
@@ -411,18 +629,54 @@
 <div class="catalogueBG">
     <div class="container-fluid">
         <div class="wrap-pad">
-            <div class="row">
-                <div class="col">
-                    <h1>CATALOGUES</h1>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-xl-8 col-lg-9 col-md-11 col-12">
-                    <div class="txt-content text-center f-17">
-                        <p>Discover the latest collections of L&E LED luminaires. Be inspired by the new items for architectural, media façade and decorative lighting.</p>
+            @if (Model.DATA != null)
+            {
+                @if (lang == "EN")
+                {
+                    <div class="row">
+                        <div class="col">
+                            <h1>@Model.DATA.titleENG4</h1>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-xl-8 col-lg-9 col-md-11 col-12">
+                            <div class="txt-content text-center f-17">
+                                <p>@Model.DATA.titlesubENG4</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col">
+                            <h1>@Model.DATA.titleTH4</h1>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-xl-8 col-lg-9 col-md-11 col-12">
+                            <div class="txt-content text-center f-17">
+                                <p>@Model.DATA.titlesubTH4</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col">
+                        <h1>CATALOGUES</h1>
                     </div>
                 </div>
-            </div>
+                <div class="row justify-content-center">
+                    <div class="col-xl-8 col-lg-9 col-md-11 col-12">
+                        <div class="txt-content text-center f-17">
+                            <p>Discover the latest collections of L&E LED luminaires. Be inspired by the new items for architectural, media façade and decorative lighting.</p>
+                        </div>
+                    </div>
+                </div>
+            }
             <div class="row">
                 <div class="col">
                     <div class="slide-navButton">
@@ -513,90 +767,137 @@
                                 </a>
                             </div>
                             *@
-                            <div class="items">
-                                <a class="contentBox" href="https://drive.google.com/file/d/16ocjRBfzmKQmohAypXUwZtBrQYT_VcxW/view" target="_blank">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/catalogue/catalogue01.jpg"></div>
-                                        </div>
+                            @if (Model.Download != null && Model.Download.Count > 0)
+                            {
+                                @foreach (var tt in Model.Download)
+                                {
+                                    <div class="items">
+                                        <a class="contentBox" href="@Url.Action("Download","ManageDownload",new {path_and_name = tt.File_Path})" target="_blank">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="img-width"><img src="@tt.File_Path"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="contentBox-topic">
+                                                        @if (lang == "EN")
+                                                        {
+                                                            <p>@tt.Name_EN</p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p>@tt.Name_TH</p>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    @if(lang == "EN")
+                                                    {
+                                                    <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>ดาวน์โหลด</div>
+
+                                                    }
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>LED LE Catalogue 2023</p>
+                                }
+                            }
+                            else
+                            {
+                                <div class="items">
+                                    <a class="contentBox" href="https://drive.google.com/file/d/16ocjRBfzmKQmohAypXUwZtBrQYT_VcxW/view" target="_blank">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="img-width"><img src="~/Frontend_assets/images/catalogue/catalogue01.jpg"></div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="items">
-                                <a class="contentBox" href="https://drive.google.com/file/d/1SrOpB0si1Zeomn38lwSETHZTyfzU0lIx/view" target="_blank">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/catalogue/catalogue02.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>LMS Product Catalogue 2023-2025</p>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="contentBox-topic">
+                                                    <p>LED LE Catalogue 2023</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="items">
-                                <a class="contentBox" href="https://drive.google.com/file/d/18hCJa2074dy-4KnrTdHZaLQN_4jdB2L_/view" target="_blank">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/catalogue/catalogue03.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>LUMAX CATALOG</p>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="items">
-                                <a class="contentBox" href="images/testPDF.pdf" target="_blank">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="img-width"><img src="~/Frontend_assets/images/catalogue/catalogue04.jpg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="contentBox-topic">
-                                                <p>Decorative Light 2022</p>
+                                    </a>
+                                </div>
+                                <div class="items">
+                                    <a class="contentBox" href="https://drive.google.com/file/d/1SrOpB0si1Zeomn38lwSETHZTyfzU0lIx/view" target="_blank">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="img-width"><img src="~/Frontend_assets/images/catalogue/catalogue02.jpg"></div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="contentBox-topic">
+                                                    <p>LMS Product Catalogue 2023-2025</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="items">
+                                    <a class="contentBox" href="https://drive.google.com/file/d/18hCJa2074dy-4KnrTdHZaLQN_4jdB2L_/view" target="_blank">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="img-width"><img src="~/Frontend_assets/images/catalogue/catalogue03.jpg"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="contentBox-topic">
+                                                    <p>LUMAX CATALOG</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="items">
+                                    <a class="contentBox" href="images/testPDF.pdf" target="_blank">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="img-width"><img src="~/Frontend_assets/images/catalogue/catalogue04.jpg"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="contentBox-topic">
+                                                    <p>Decorative Light 2022</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                            
 
                         </div>
                     </div>

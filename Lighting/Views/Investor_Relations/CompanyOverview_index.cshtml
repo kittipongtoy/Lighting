@@ -13,7 +13,7 @@
                 <span class="h-20px border-gray-200 border-start mx-4"></span>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
                     <li class="breadcrumb-item text-muted">
-                        <a href="@Url.Action("InvestorRelations_index","Investor_Relations")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
+                        <a href="@Url.Action("Banner","IR_Index")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-200 w-5px h-2px"></span>
@@ -77,21 +77,36 @@
                                 <div class="modal-body">
                                     <form id="form_create" enctype="multipart/form-data">
                                         <div class="row mb-3">
-                                            <div class="col-2">
+                                            <div class="col-4">
                                                 <span>
                                                     สถานะการใช้งาน
                                                 </span>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-6">
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status_create">
                                                     <label class="form-check-label" for="use_status_create">ใช้งาน</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
+
+                                        <div class="row mb-3">
+                                            <div class="col-4">
+                                                <span>
+                                                    รูปภาพ
+                                                </span>
+                                                <br />
+                                                <span style="color:red;">
+                                                    ขนาดรูปภาพ : 905 * 640 px
+                                                </span>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
+                                                </div>
+                                            </div>
                                         </div>
+
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -116,21 +131,36 @@
                                             <img id="edit_image" src="" style="height: 250px;width: 250px;" alt="image">
                                         </div>
                                         <div class="row mb-3">
-                                            <div class="col-2">
+                                            <div class="col-4">
                                                 <span>
                                                     สถานะการใช้งาน
                                                 </span>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-6">
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status_edit">
                                                     <label class="form-check-label" for="use_status_edit">ใช้งาน</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
+
+                                        <div class="row mb-3">
+                                            <div class="col-4">
+                                                <span>
+                                                    รูปภาพ
+                                                </span>
+                                                <br />
+                                                <span style="color:red;">
+                                                    ขนาดรูปภาพ : 905 * 640 px
+                                                </span>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
+                                                </div>
+                                            </div>
                                         </div>
+
                                     </form>
                                 </div>
                                 <div class="modal-footer">

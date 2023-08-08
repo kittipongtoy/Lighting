@@ -19,7 +19,7 @@
         width: 80%;
         height: auto;
         display: grid;
-        grid-template-rows: 30vw auto auto auto auto auto auto auto auto auto auto auto auto;
+        grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto auto auto;
         gap: 2rem;
     }
 
@@ -130,17 +130,27 @@
 
     <div class="add-product">
 
-        <div>
-            <img src="" style="width:100%;height:100%;display:none;" id="img_preview" />
+        <div >
+            <img src="" style="width:100%;display:none;" id="img_preview" />
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">รูปโชว์/Preview Image</label>
+            <label class="h4">
+                รูปโชว์/Preview Image   <br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 500 * 500 px
+                </span>
+            </label>
             <input class="form-control" type="file" id="file_img_preview" accept="image/*" />
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">รูปสเปค/Spact Image</label>
+            <label class="h4">
+                รูปสเปค/Spact Image  <br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 260 * 40 px
+                </span>
+            </label>
             <input class="form-control" type="file" id="spact_img_file" accept="image/*" />
         </div>
 
@@ -212,12 +222,22 @@
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4"> Photometric Data Image</label>
+            <label class="h4">
+                Photometric Data Image<br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 500 * 500 px
+                </span>
+            </label>
             <input class="form-control" type="file" multiple id="light_distribute_file" accept="image/*" />
         </div>
 
         <div class="add-product-grid-item">
-            <label class="h4">Dimension Image</label>
+            <label class="h4">
+                Dimension Image<br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 500 * 500 px
+                </span>
+            </label>
             <input class="form-control" type="file" multiple id="technical_img_file" accept="image/*" />
         </div>
 

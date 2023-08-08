@@ -22,7 +22,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="@Url.Action("InvestorRelations_index","Corporate_Governance")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
+                        <a href="@Url.Action("Banner","IR_Index")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -58,177 +58,181 @@
             <div class="card">
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
-                </div>
-                <form id="form_create" enctype="multipart/form-data">
-                    @{
-                        if (Model.count_row_SH_IR_presentation_doc == 0)
-                        {
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="titleTH" autocomplete="off" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="titleENG" autocomplete="off" />
-                                </div>
-                            </div>
 
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ รายละเอียด TH
-                                    </span>
+                    <div class="mb-10">
+                    </div>
+                    <form id="form_create" enctype="multipart/form-data">
+                        @{
+                            if (Model.count_row_SH_IR_presentation_doc == 0)
+                            {
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="titleTH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="titleENG" autocomplete="off" />
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="detailsTitleTH" autocomplete="off" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ รายละเอียด ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="detailsTitleENG" autocomplete="off" />
-                                </div>
-                            </div>
 
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ เอกสารนำเสนอ TH
-                                    </span>
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="detailsTitleTH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="detailsTitleENG" autocomplete="off" />
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="present_documentTitleTH" autocomplete="off" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ เอกสารนำเสนอ ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="present_documentTitleENG" autocomplete="off" />
-                                </div>
-                            </div>
 
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ ดาวน์โหลด TH
-                                    </span>
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ เอกสารนำเสนอ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="present_documentTitleTH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ เอกสารนำเสนอ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="present_documentTitleENG" autocomplete="off" />
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="downloadTitleTH" autocomplete="off" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ ดาวน์โหลด ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="downloadTitleENG" autocomplete="off" />
-                                </div>
-                            </div>
 
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ดาวน์โหลด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="downloadTitleTH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ดาวน์โหลด ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="downloadTitleENG" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                            }
+                            else
+                            {
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="titleTH" value="@Model.fod_SH_IR_presentation_doc.titleTH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="titleENG" value="@Model.fod_SH_IR_presentation_doc.titleENG" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="detailsTitleTH" value="@Model.fod_SH_IR_presentation_doc.detailsTitleTH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ รายละเอียดENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="detailsTitleENG" value="@Model.fod_SH_IR_presentation_doc.detailsTitleENG" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ เอกสารนำเสนอ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="present_documentTitleTH" autocomplete="off" value="@Model.fod_SH_IR_presentation_doc.present_documentTitleTH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ เอกสารนำเสนอ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="present_documentTitleENG" autocomplete="off" value="@Model.fod_SH_IR_presentation_doc.present_documentTitleENG" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ดาวน์โหลด TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="downloadTitleTH" autocomplete="off" value="@Model.fod_SH_IR_presentation_doc.downloadTitleTH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ดาวน์โหลด ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="downloadTitleENG" autocomplete="off" value="@Model.fod_SH_IR_presentation_doc.downloadTitleENG" />
+                                    </div>
+                                </div>
+
+                            }
                         }
-                        else
-                        {
 
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="titleTH" value="@Model.fod_SH_IR_presentation_doc.titleTH" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="titleENG" value="@Model.fod_SH_IR_presentation_doc.titleENG" />
-                                </div>
-                            </div>
+                    </form>
 
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ รายละเอียด TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="detailsTitleTH" value="@Model.fod_SH_IR_presentation_doc.detailsTitleTH" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ รายละเอียดENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="detailsTitleENG" value="@Model.fod_SH_IR_presentation_doc.detailsTitleENG" />
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ เอกสารนำเสนอ TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="present_documentTitleTH" autocomplete="off" value="@Model.fod_SH_IR_presentation_doc.present_documentTitleTH" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ เอกสารนำเสนอ ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="present_documentTitleENG" autocomplete="off" value="@Model.fod_SH_IR_presentation_doc.present_documentTitleENG" />
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ ดาวน์โหลด TH
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="downloadTitleTH" autocomplete="off" value="@Model.fod_SH_IR_presentation_doc.downloadTitleTH" />
-                                </div>
-                                <div class="col-2">
-                                    <span>
-                                        หัวข้อ ดาวน์โหลด ENG
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="downloadTitleENG" autocomplete="off" value="@Model.fod_SH_IR_presentation_doc.downloadTitleENG" />
-                                </div>
-                            </div>
-
-                        }
-                    }
-
-                </form>
-
-                <div class="row mb-3" style="justify-content: right;">
-                    <div class="col-1">
-                        <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
                     </div>
                 </div>
+              
             </div>
             <!--end::Card body-->
             @*end*@

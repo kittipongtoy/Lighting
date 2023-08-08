@@ -22,7 +22,7 @@ namespace Lighting.Controllers.Backend
         [HttpPost]
         public async Task<IActionResult> Add([FromForm] Input_ProjectRefVM input)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
             {
                 var folder = Guid.NewGuid().ToString();
                 var path = Path.Combine("upload_image", "ProjectRef", folder);
@@ -93,7 +93,7 @@ namespace Lighting.Controllers.Backend
                 }
             }
 
-            return Json(new { status = "error", message = "กรุณากรอกทุกอย่างให้ครบถ้วน" });
+            //return Json(new { status = "error", message = "กรุณากรอกทุกอย่างให้ครบถ้วน" });
         }
 
         public async Task<IActionResult> Add_Page()
@@ -261,7 +261,6 @@ namespace Lighting.Controllers.Backend
                 }
 
             }
-
 
             return Json(new { status = "error", message = "กรุณากรอกทุกอย่างให้ครบถ้วน" });
         }

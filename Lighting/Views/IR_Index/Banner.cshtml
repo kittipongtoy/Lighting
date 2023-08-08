@@ -2,8 +2,7 @@
     ViewData["Title"] = "Banner";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
-
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+<div class="content d-flex flex-column flex-column-fluid">
     <div class="toolbar" id="kt_toolbar">
         <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
             <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center me-3 flex-wrap mb-5 mb-lg-0 lh-1">
@@ -11,7 +10,7 @@
                 <span class="h-20px border-gray-200 border-start mx-4"></span>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
                     <li class="breadcrumb-item text-muted">
-                        <a href="@Url.Action("InvestorRelations_index","Corporate_Governance")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
+                        <a href="@Url.Action("Banner","IR_Index")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-200 w-5px h-2px"></span>
@@ -26,28 +25,6 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <img src="@ViewBag.img_src" style="width:100%" id="preview_img">
-                <form  enctype="multipart/form-data" id="form">
-                    <div class="mb-3 mt-5">
-                        <label for="formFile" class="form-label">เลือกรูป</label>
-                        <input class="form-control" name="file" type="file" id="img_file">
-                    </div>
-                </form>
-            </div>
-        </div>
-        @{
-            var isSave = "save()";
-            if (ViewBag?.img_src != null)
-            {
-                isSave = "edit()";
-            }
-        }
-        <center> <button class="btn btn-success" onclick="@isSave">บันทึก/save</button> </center>
-    </div>
-    @*
     <div class="post d-flex flex-column-fluid">
         <div id="kt_content_container" class="container-xxl">
             <div class="card">
@@ -65,16 +42,16 @@
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                            <a type="button" class="btn btn-primary" href="@Url.Action("History_Add","Resource_Facility")">เพิ่ม</a>
+                            <a type="button" class="btn btn-primary" href="@Url.Action("Banner_Add","IR_Index")">เพิ่ม</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="History">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="TB_Banner">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th>#</th>
-                                <th class="min-w-125px">หัวข้อ TH</th>
+                                <th class="min-w-125px">แบนเนอร์</th>
                                 <th class="min-w-125px">สถานะการใช้งาน</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
@@ -84,64 +61,75 @@
             </div>
         </div>
     </div>
-    *@
-</div>
 
+</div>
 @section Scripts{
     <script>
-        var preview_img;
-        $(document).ready(function () {
-            $('#img_file').change(async function (e) {
-                if (e.target.files.length === 1) {
-                    preview_img = e.target.files[0];
-                    $('#preview_img').attr('src', await blobToBase64DataURL(preview_img));
-                }
+        $(() => {
+            var oTable = $("#TB_Banner").DataTable({
+                processing: true,
+                serverSide: true,
+                searching: false,
+                responsive: true,
+                oLanguage: {
+                    "sEmptyTable": "ไม่มีข้อมูล",
+                },
+                ajax: {
+                    type: "POST",
+                    url: '/IR_Index/TableBanner',
+                },
+                columns: [
+                    { 'data': 'index', name: 'index', className: 'text-center' },
+                    { 'data': 'imageBanner', name: 'imageBanner', className: 'text-center' },
+                    {
+                        "name": "status", "data": "status", "render": function (data, type, row) {
+                            if (row.status == 1) {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            } else {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            }
+                        }
+                    },
+                    {
+                        "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
+                            var text = '<button type="button" class="btn btn-warning" onclick="edit_item(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
+                            text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_item(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
+                            return text;
+                        }
+                    }
+                ]
             });
-        });
+        })
 
-        const blobToBase64DataURL = blob => new Promise(
-            resolvePromise => {
-                const reader = new FileReader();
-                reader.onload = () => resolvePromise(reader.result);
-                reader.readAsDataURL(blob);
-            }
-        );
+        function edit_item(id) {
+            location.href = '/IR_Index/Banner_Edit/?Id=' + id;
+        }
 
-        function save() {
-
-            let form = $('#form')[0]
-            console.log(form);
-            let formData = new FormData(form);
-
-
+        function changeStatus(id, checked_obj) {
             $.ajax({
-                type: 'POST',
-                url: '/IR_index/Banner_Add_Submit',
-                data: formData,
-                processData: false,
-                contentType: false,
+                type: "POST",
                 cache: false,
-                beforeSend: function () {
-                    Swal.fire('Please wait')
-                    Swal.showLoading()
+                url: "/IR_Index/Banner_Change",
+                data: {
+                    id: id
                 },
                 success: function (data) {
                     if (data.status == "success") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: data.message,
-                            showConfirmButton: false,
-                            timer: 2000
-                        }).then(() => {
-                            window.location.href = "/IR_index/Banner";
-                        });
+
                     }
                     else {
                         Swal.fire({
                             icon: 'warning',
                             text: data.message,
                         });
-
                     }
                 }, error: function (e) {
                     Swal.fire({
@@ -154,51 +142,53 @@
             });
         }
 
-        function edit() {
-
-            let form = $('#form')[0]
-            console.log(form);
-            let formData = new FormData(form);
-
-
-            $.ajax({
-                type: 'POST',
-                url: '/IR_index/Banner_Edit_Submit',
-                data: formData,
-                processData: false,
-                contentType: false,
-                cache: false,
-                beforeSend: function () {
-                    Swal.fire('Please wait')
-                    Swal.showLoading()
-                },
-                success: function (data) {
-                    if (data.status == "success") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: data.message,
-                            showConfirmButton: false,
-                            timer: 2000
-                        }).then(() => {
-                            window.location.href = "/IR_index/Banner";
-                        });
-                    }
-                    else {
-                        Swal.fire({
-                            icon: 'warning',
-                            text: data.message,
-                        });
-
-                    }
-                }, error: function (e) {
-                    Swal.fire({
-                        icon: 'error',
-                        text: e.message,
+        function delete_item(id) {
+            Swal.fire({
+                title: 'คุณต้องการจะลบหรือไม่?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'ใช่',
+                denyButtonText: `ไม่ใช่`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "delete",
+                        cache: false,
+                        url: "/IR_Index/Banner_Delete",
+                        data: {
+                            Id: id
+                        },
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then((result) => {
+                                    var oTable = $('#TB_Banner').DataTable();
+                                    oTable.ajax.reload(null, false);
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
                     });
-                    console.log(e.message);
-                    console.log(e.inner);
+                } else if (result.isDenied) {
+
                 }
-            });
+            })
         }
     </script>
 }

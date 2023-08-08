@@ -23,7 +23,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="@Url.Action("InvestorRelations_index","Corporate_Governance")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
+                        <a href="@Url.Action("Banner","IR_Index")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -233,8 +233,43 @@
                                 </div>
                                 <div class="modal-body">
                                     <form id="form_create_modal" enctype="multipart/form-data">
+
+                                        <div class="row">
+                                            @*<input type="file" class="form-control" name="uploaded_image" accept="image/*" />*@
+                                        </div>
+
                                         <div class="row mb-3">
-                                            <div class="col-2">
+                                            <div class="col-4">
+                                                <span>
+                                                    รูปภาพ TH
+                                                </span>
+                                                <br />
+                                                <span style="color:red;">
+                                                    ขนาดรูปภาพ : 1150 * 2200 px
+                                                </span>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-4">
+                                                <span>
+                                                    รูปภาพ ENG
+                                                </span>
+                                                <br />
+                                                <span style="color:red;">
+                                                    ขนาดรูปภาพ : 1150 * 2200 px
+                                                </span>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="file" class="form-control" name="uploaded_image_ENG" accept="image/*" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-4">
                                                 <span>
                                                     สถานะการใช้งาน
                                                 </span>
@@ -244,32 +279,7 @@
                                                     <input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status_create">
                                                     <label class="form-check-label" for="use_status_create">ใช้งาน</label>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            @*<input type="file" class="form-control" name="uploaded_image" accept="image/*" />*@
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <div class="col-2">
-                                                <span>
-                                                    รูปภาพ TH
-                                                </span>
-                                            </div>
-                                            <div class="col-4">
-                                                <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <div class="col-2">
-                                                <span>
-                                                    รูปภาพ ENG
-                                                </span>
-                                            </div>
-                                            <div class="col-4">
-                                                <input type="file" class="form-control" name="uploaded_image_ENG" accept="image/*" />
-                                            </div>
+                                            </div> 
                                         </div>
 
                                     </form>
@@ -307,6 +317,10 @@
                                                 <span>
                                                     รูปภาพ TH
                                                 </span>
+                                                <br />
+                                                <span style="color:red;">
+                                                    ขนาดรูปภาพ : 1150 * 2200 px
+                                                </span>
                                             </div>
                                             <div class="col-4">
                                                 <input type="file" class="form-control" name="uploaded_image" accept="image/*" />
@@ -320,6 +334,10 @@
                                             <div class="col-2">
                                                 <span>
                                                     รูปภาพ ENG
+                                                </span>
+                                                <br />
+                                                <span style="color:red;">
+                                                    ขนาดรูปภาพ : 1150 * 2200 px
                                                 </span>
                                             </div>
                                             <div class="col-4">

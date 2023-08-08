@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Button_Below_Banner";
+    ViewData["Title"] = "Button_Below_Banner_Edit";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
 
@@ -13,7 +13,7 @@
                 <span class="h-20px border-gray-200 border-start mx-4"></span>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
                     <li class="breadcrumb-item text-muted">
-                        <a href="@Url.Action("InvestorRelations_index","Corporate_Governance")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
+                        <a href="@Url.Action("Banner","IR_Index")" class="text-muted text-hover-primary">นักลงทุนสัมพันธ์</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-200 w-5px h-2px"></span>
@@ -27,110 +27,154 @@
             </div>
         </div>
     </div>
-
+    <div class="post d-flex flex-column-fluid">
+        <div id="kt_content_container" class="container-xxl">
+            <div class="card">
+                <div class="card-body pt-0">
+                    <div class="row mb-3" style="padding-top: 1.5rem!important;">
+                        <div class="col-6">
+                            <h2>
+                                แก้ไขรายการ
+                            </h2>
+                        </div>
+                        <div class="col-6" style="text-align:right;">
+                            <a type="button" class="btn btn-secondary" href="@Url.Action("Banner","IR_Index")">ย้อนกลับ</a>
+                        </div>
+                    </div>
+                    <form id="form_create" enctype="multipart/form-data">
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    ชื่อ TH
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Title_TH" id="Title_TH" />
+                            </div>
+                            <div class="col-2">
+                                <span>
+                                    ชื่อ EN
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Title_EN" id="Title_EN" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    รูป Iconn
+                                </span><br />
+                            </div>
+                            <div class="col-4">
+                                <input type="file" class="form-control" name="uploaded_Image" accept="image/*" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    สถานะการใช้งาน
+                                </span>
+                            </div>
+                            <div class="col-4" id="CheckStatus"></div>
+                        </div>
+                        <input type="hidden" name="Id" id="Id" />
+                    </form>
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<form class="container mb-5" enctype="multipart/form-data" id="form">
-    <div class="row">
-        <div class="col-12">
-            <img style="width:100%;height:60vh;" id="preview_img" src="@Model.Icon"/>
-        </div>
-    </div>
-
-    <div class="row mt-3">
-        <div class="col-12">
-            <div class="mb-3">
-                <label for="formFile" class="form-label">รูป</label>
-                <input class="form-control" type="file" id="file_img" name="Icon" accept="image/*" >
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="mb-3">
-                <label  class="form-label">Email address</label>
-                <input type="email" class="form-control" name="Title_TH" placeholder="ข้อความ (ภาษาไทย)" value="@Model.Title_TH.">
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="mb-3">
-                <label  class="form-label">Email address</label>
-                <input type="email" class="form-control" name="Title_EN" placeholder="string (English)" value="@Model.Title_EN">
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="mb-3">
-                <label class="form-label">Email address</label>
-                <input type="email" class="form-control" name="Link" placeholder="ลิ้ง/link http://example.com" value="@Model.Link">
-            </div>
-        </div>
-    </div>
-
-    <div style="display:flex;justify-content:space-between;">
-        <button class="btn btn-success" onclick="edit(@Model.Id)">บันทึก/save</button>
-        <a href="@Url.Action("Button_Below_Banner","IR_Index")" class="btn btn-primary">กลับ/back</a>
-        </div>
-</form>
 @section Scripts{
     <script>
-        $(document).ready(function () {
-            $('#file_img').change(async function (e) {
-                if (e.target.files.length === 1) {
-                    preview_img = e.target.files[0];
-                    $('#preview_img').attr('src', await blobToBase64DataURL(preview_img)).css("display", "block");
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                }
+            }
+        };
+        var Parmeter_id = getUrlParameter('Id');
+
+        var check = 0;
+        function checkSwitch() {
+            if (document.getElementById("use_status").checked == true) {
+                check = 1;
+            }
+            else {
+                check = 0;
+            }
+            $("#use_status").val(check);
+        }
+
+        $(() => {
+            $.ajax({
+                type: 'get',
+                url: '/IR_Index/GetButton_Below_Banner_Edit',
+                data: { Id: Parmeter_id },
+                success: function (data) {
+                    $("#Id").val(data.id);
+                    $("#Title_EN").val(data.title_EN);
+                    $("#Title_TH").val(data.title_TH);
+                    var status = '';
+                    if (data.status == 1) {
+                        status += '<div class="form-check form-switch">';
+                        status += '<input class="form-check-input" type="checkbox" name="Status" value="1" checked id="use_status" checked onclick="checkSwitch()">';
+                        status += '<label class="form-check-label" for="use_status"> ใช้งาน </label>';
+                        status += '</div>';
+                    }
+                    else {
+                        status += '<div class="form-check form-switch">';
+                        status += '<input class="form-check-input" type="checkbox" name="Status" value="0" id="use_status" onclick="checkSwitch()">';
+                        status += '<label class="form-check-label" for="use_status"> ใช้งาน </label>';
+                        status += '</div>';
+                    }
+                    $("#CheckStatus").html(status);
+                },
+                error: (e) => {
+                    displayError(e);
                 }
             });
-        });
+        })
 
-        function edit(id) {
-
-            let formData = $("#form")[0];
-            let form = new FormData(formData);
-
-
+        function submit_form() {
+            var forms = $('#form_create')[0];
+            var data = new FormData(forms);
             $.ajax({
-                type: 'POST',
-                url: '/IR_Index/Button_Below_Banner_Edit_Submit?id='+id,
-                data: form,
+                type: 'put',
+                url: '/IR_Index/Button_Below_Banner_Edit_Submit',
+                data: data,
                 processData: false,
                 contentType: false,
-                cache: false,
                 beforeSend: function () {
                     Swal.fire('Please wait')
                     Swal.showLoading()
                 },
                 success: function (data) {
-                    if (data.status == "success") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: data.message,
-                            showConfirmButton: false,
-                            timer: 2000
-                        }).then(() => {
-                            window.location.href = "/IR_Index/Button_Below_Banner";
-                        });
-                    }
-                    else {
-                        Swal.fire({
-                            icon: 'warning',
-                            text: data.message,
-                        });
-
-                    }
-                }, error: function (e) {
                     Swal.fire({
-                        icon: 'error',
-                        text: e.message,
+                        icon: 'success',
+                        title: 'บันทึกข้อมูลเรียบร้อยแล้ว',
+                        showConfirmButton: false,
+                        timer: 1500
                     });
-                    console.log(e.message);
-                    console.log(e.inner);
+                    window.location.href = "/IR_Index/Button_Below_Banner";
+                },
+                error: (e) => {
+                    displayError(e);
                 }
             });
         }
-
-        const blobToBase64DataURL = blob => new Promise(
-            resolvePromise => {
-                const reader = new FileReader();
-                reader.onload = () => resolvePromise(reader.result);
-                reader.readAsDataURL(blob);
-            }
-        );
     </script>
 }
