@@ -87,7 +87,7 @@
 
     .spect-grid-item {
         display: grid;
-        grid-template-columns: auto auto 5rem;
+        grid-template-columns: auto auto 5rem 5rem;
         border-bottom:1px solid black;
         & > div
         {
@@ -350,6 +350,20 @@
     </div>
 </div>
 
+<div class="add-spect-container" style="display:none;" id="edit_spect">
+    <div class="add-spect-box">
+        <h3>แก้ไข สเปค</h3>
+        <div></div>
+        <input type="text" placeholder="ชื่อสเปค" id="edit_txt_spect_name" />
+        <input type="text" placeholder="ค่าของสเปค" id="edit_txt_spect_value" />
+        <div></div>
+        <div style="display:flex;justify-content:space-between">
+            <button class="btn btn-success" onclick="saveEditSpect()">แก้ไข/edit</button>
+            <button class="btn btn-warning" onclick="EditSpac()">ยกเลิก/cancle</button>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="EditId" />
 @section Scripts{
     <script>
         var specification = [], spect_num = 0;
@@ -418,7 +432,8 @@
                     prev += `<div class="spect-grid-item" id="spect${curr.id}">
                                     <div> ${curr.name}</div>
                                     <div> ${curr.value}</div>
-                                            <button class= "btn btn-danger" onclick = "deleteSpect(${curr.id})" > ลบ </button>
+                                    <button class="btn btn-warning" onclick="EditSpac(${curr.id})">edit</button>
+                                    <button class= "btn btn-danger" onclick = "deleteSpect(${curr.id})" > ลบ </button>
                             </div>`, "");
                 $("#spect_container").html(html_spect);
                 spect_num++;
@@ -427,21 +442,80 @@
                 $("#txt_spect_value").val('');
             }
         }
+
+        function saveEditSpect(){
+            let name = $("#edit_txt_spect_name").val();
+            let value = $("#edit_txt_spect_value").val();
+            let id = $("#EditId").val();
+            var specification1 = specification.filter(x => x.id == id);
+            specification1[0].name = name;
+            specification1[0].value = value;
+            let html_spect = specification.reduce((prev, curr) =>
+                prev += `<div class="spect-grid-item" id="spect${id}">
+                                <div> ${curr.name}</div>
+                                <div> ${curr.value}</div>
+                                <button class="btn btn-warning" onclick="EditSpac(${curr.id})">edit</button>
+                                <button class= "btn btn-danger" onclick="deleteSpect(${curr.id})" > ลบ </button>
+                        </div>`, "");
+            $("#spect_container").html(html_spect);
+            EditSpac();
+
+            //specification.push({ id: spect_num, name: name, value: value });
+            //let html_spect = specification.reduce((prev, curr) =>
+            //    prev += `<div class="spect-grid-item" id="spect${curr.id}">
+            //                                <div> ${curr.name}</div>
+            //                                <div> ${curr.value}</div>
+            //                                <button class="btn btn-warning" onclick="EditSpac(${curr.id})">edit</button>
+            //                                <button class= "btn btn-danger" onclick = "deleteSpect(${curr.id})" > ลบ </button>
+            //                        </div>`, "");
+            //$("#spect_container").html(html_spect);
+
+
+            
+            //if (name !== "" && value !== "") {
+            //    specification.push({ id: spect_num, name: name, value: value });
+            //    let html_spect = specification.reduce((prev, curr) =>
+            //        prev += `<div class="spect-grid-item" id="spect${curr.id}">
+            //                                <div> ${curr.name}</div>
+            //                                <div> ${curr.value}</div>
+            //                                <button class="btn btn-warning" onclick="EditSpac(${curr.id})">edit</button>
+            //                                <button class= "btn btn-danger" onclick = "deleteSpect(${curr.id})" > ลบ </button>
+            //                        </div>`, "");
+            //    $("#spect_container").html(html_spect);
+            //    spect_num++;
+            //    showHideSpect();
+            //    $("#txt_spect_name").val('');
+            //    $("#txt_spect_value").val('');
+        }
+
         function deleteSpect(id) {
             specification = specification.filter(x => x.id != id);
             let html_spect = specification.reduce((prev, curr) =>
                 prev += `<div class="spect-grid-item" id="spect${curr.id}">
                            <div> ${curr.name}</div>
                            <div> ${curr.value}</div>
-                           <button class= "btn btn-danger" onclick = "deleteSpect(${curr.id})" > ลบ </button>
+                           <button class="btn btn-warning" onclick="EditSpac(${curr.id})">edit</button>
+                           <button class= "btn btn-danger" onclick="deleteSpect(${curr.id})" > ลบ </button>
                          </div>`, "");
-
             $("#spect_container").html(html_spect);
         }
+
+        function EditSpac(id)
+        {
+            if ($("#edit_spect").css("display") === "none") {
+                $("#edit_spect").css("display", "flex");
+                $("#EditId").val(id);
+                let spect = specification.find(x => x.id == id);
+                console.log(specification)
+                $("#edit_txt_spect_name").val(spect.name);
+                $("#edit_txt_spect_value").val(spect.value)
+            } else {
+                $("#edit_spect").css("display", "none");
+            }
+        }
+
         function addProduct() {
-
             let form = new FormData();
-
             form.append("Product_CategoryId", $("#product_category_id").val());
             form.append("Product_ModelId", $("#product_model_id").val());
             form.append("Model", $("#model_name").val());
@@ -494,8 +568,6 @@
                     form.append("Technical_Drawing_Img", file);
                 }
             }
-
-
 
             $.ajax({
                 type: 'POST',
