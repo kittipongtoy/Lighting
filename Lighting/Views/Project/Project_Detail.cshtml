@@ -420,7 +420,27 @@
                         slideBy: 1
                     }
                 }
-            })
+            });
+
+            let content = document.querySelectorAll("figure");
+            let indexHtml = 0;
+            document.querySelectorAll("oembed").forEach(x => {
+                //console.log(x.getAttribute("url"));
+                let url = x.getAttribute("url");
+                let w = window.innerWidth, h = 500;
+                if (w >= 1080) {
+                    h = 750;
+                }
+                if (w < 1080) {
+                    h = Math.floor(window.innerHeight * 0.55)
+                }
+                if (w < 500) {
+                    h = Math.floor(window.innerHeight * 0.4)
+                }
+                content[indexHtml].innerHTML = `<iframe width="100%" height="${h}px" src="${url}"></iframe>`;
+                indexHtml++;
+            });
+
         });
     </script>
 }
