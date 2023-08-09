@@ -28,7 +28,8 @@ namespace Lighting.Models.InputFilterModels.Contact
         public IFormFile? ImageEN { get; set; }
         public string? Email { get; set; }
         public string? GoogleMaps_Url { get; set; }
-        public string? YouTube_Url { get; set; }
+        public string? YouTube_Url_TH { get; set; }
+        public string? YouTube_Url_EN { get; set; }
     }
     public class Output_ContactVM
     {
@@ -52,6 +53,7 @@ namespace Lighting.Models.InputFilterModels.Contact
         public string? ImagePathEN { get; set; }
         public string? Email { get; set; }
         public string? GoogleMaps_Url { get; set; }
-        public string? YouTube_Url { get; set; }
+        public string? YouTube_Url_TH { get; set; }
+        public string? YouTube_Url_EN { get; set; }
     }
 }

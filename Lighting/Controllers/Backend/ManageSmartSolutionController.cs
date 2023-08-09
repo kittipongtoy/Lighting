@@ -176,6 +176,36 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = ex.Message, inner = ex.InnerException });
             }
         }
+        public async Task<IActionResult> EditSubImage([FromForm] IFormFile? file, [FromForm] string? link, [FromQuery]int id)
+        {
+            try
+            {
+                var subLink = await _db.Smart_Solution_Links.Where(x => x.Id == id).FirstOrDefaultAsync();
+                if (subLink != null)
+                {
+                    subLink.Link = link;
+                    if (file != null)
+                    {
+                        var path = Path.GetDirectoryName(file.FileName);
+                        var save_file = Path.Combine(path,file.FileName);
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath,save_file),FileMode.Create))
+                        {
+                           await file.CopyToAsync(stream);
+                        }
+                        subLink.Path = save_file;
+                    }
+                    await _db.SaveChangesAsync();
+                    return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย", link= subLink});
+                }
+                else
+                {
+                    return Json(new { status = "error", message = "ไม่พบข้อมูล" });
+                }
+            }catch (Exception ex)
+            {
+                return Json(new { status = "error", message = ex.Message, inner = ex.InnerException });
+            }
+        }
 
         public async Task<IActionResult> DeleteById([FromQuery] int id)
         {

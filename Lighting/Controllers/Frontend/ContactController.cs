@@ -64,7 +64,8 @@ namespace Lighting.Controllers.Frontend
                     PlaceName_EN = contact.PlaceName_EN,
                     PlaceName_TH = contact.PlaceName_TH,
                     TelePhone = contact.TelePhone,
-                    YouTube_Url = contact.YouTube_Url,
+                     YouTube_Url_EN = contact.YouTube_Url_EN,
+                      YouTube_Url_TH = contact.YouTube_Url_TH,
                     Sub_Factory_Name_EN = contact.Sub_Factory_Name_EN,
                     Sub_Factory_Name_TH = contact.Sub_Factory_Name_TH
                 }).ToListAsync();
