@@ -278,7 +278,8 @@ namespace Lighting.Controllers.Backend
                     OfficePhone = input_Contact.OfficePhone,
                     Email = input_Contact.Email,
                     GoogleMaps_Url = input_Contact.GoogleMaps_Url,
-                    YouTube_Url = input_Contact.YouTube_Url,
+                    YouTube_Url_TH = input_Contact.YouTube_Url_TH,
+                    YouTube_Url_EN = input_Contact.YouTube_Url_EN,
                     ImagePath = input_Contact.Image != null ? save_path.Replace("\\", "/") : null,
                     ImagePathEN = input_Contact.ImageEN != null ? save_path2.Replace("\\", "/") : null
                 });
@@ -293,47 +294,6 @@ namespace Lighting.Controllers.Backend
                 }
                 return Json(new { status = "error", message = ex.Message, inner = ex.InnerException });
             }
-
-
-            //if (ModelState.IsValid)
-            //{
-
-
-            //}
-                    _db.Contacts.Add(new Contact
-                    {
-                        ContactType = input_Contact.ContactType,
-                        Sub_Factory_Name_EN = input_Contact.Sub_Factory_Name_EN,
-                        Sub_Factory_Name_TH = input_Contact.Sub_Factory_Name_TH,
-                        PlaceName_EN = input_Contact.PlaceName_EN,
-                        PlaceName_TH = input_Contact.PlaceName_TH,
-                        Location_TH = input_Contact.Location_TH,
-                        Location_EN = input_Contact.Location_EN,
-                        CellPhone = input_Contact.CellPhone,
-                        TelePhone = input_Contact.TelePhone,
-                        OfficePhone = input_Contact.OfficePhone,
-                        Email = input_Contact.Email,
-                        GoogleMaps_Url = input_Contact.GoogleMaps_Url,
-                        YouTube_Url_EN = input_Contact.YouTube_Url_TH,
-                        YouTube_Url_TH = input_Contact.YouTube_Url_TH,
-                        ImagePath = input_Contact.Image != null ? save_path.Replace("\\", "/") : null,
-
-                    });
-                    await _db.SaveChangesAsync();
-                    return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
-                }
-                catch (Exception ex)
-                {
-                    if (System.IO.File.Exists(save_file))
-                    {
-                        System.IO.File.Delete(save_file);
-                    }
-                    return Json(new { status = "error", message = ex.Message, inner = ex.InnerException });
-                }
-            }
-
-            //return Json(new { status = "error", message = "กรุณากรอกทุกอย่างให้ครบถ้วน" });
         }
-
     }
 }
