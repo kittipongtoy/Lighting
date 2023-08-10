@@ -8,10 +8,15 @@
 }
 @model Lighting.Models.InputFilterModels.News.Output_NewsVm
 <style>
-/*    .media {
-        height: auto;
-        width: auto;
-    }*/
+    .text-tiny{
+        font-size:small;
+    }
+    .text-big{
+        font-size:clamp(1.5rem,3vw,3rem);
+    }
+    .text-huge{
+        font-size: clamp(2.2rem,4.5vw,4.5rem);
+    }
 </style>
 <div class="top-page">
     <div class="container">
@@ -149,7 +154,7 @@
                 });
 
             //video
-            /*
+            
             let content = document.querySelectorAll("figure");
             let indexHtml =0;
             document.querySelectorAll("oembed").forEach(x => {
@@ -168,7 +173,7 @@
                 content[indexHtml].innerHTML = `<iframe width="100%" height="${h}px" src="${url}"></iframe>`;
                 indexHtml++;
             });
-            */
+            
         });
 
     </script>

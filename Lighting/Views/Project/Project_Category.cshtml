@@ -68,7 +68,7 @@
                             <ul class="pagination mt-4">
 
                                 <li class="page-item">
-                                    <a class="page-link" href="/Project/Project_Category?categoryId=@ViewBag.categoryId&start=@(ViewBag.CurrentPage > 0 ? ViewBag.CurrentPage - max_page:0)" aria-label="Previous">
+                                    <a class="page-link" href="/Project/Project_Category?category=@ViewBag.categoryName&start=@(ViewBag.CurrentPage > 0 ? ViewBag.CurrentPage - max_page:0)" aria-label="Previous">
                                         <i class="fas fa-arrow-left"></i>
                                     </a>
                                 </li>
@@ -79,17 +79,17 @@
                                     {
                                         if (ViewBag.CurrentPage == pagination_num)
                                         {
-                                            <li class="page-item active"><a class="page-link" href="/Project/Project_Category?categoryId=@ViewBag.categoryId&start=@pagination_num">@page_count</a></li>
+                                            <li class="page-item active"><a class="page-link" href="/Project/Project_Category?category=@ViewBag.categoryName&start=@pagination_num">@page_count</a></li>
                                         }
                                         else
                                         {
-                                            <li class="page-item "><a class="page-link" href="/Project/Project_Category?categoryId=@ViewBag.categoryId&start=@pagination_num">@page_count</a></li>
+                                            <li class="page-item "><a class="page-link" href="/Project/Project_Category?category=@ViewBag.categoryName&start=@pagination_num">@page_count</a></li>
                                         }
                                         page_count++;
                                     }
                                 }
                                 <li class="page-item">
-                                    <a class="page-link" href="/Project/Project_Category?categoryId=@ViewBag.categoryId&start=@((ViewBag.CurrentPage + max_page) > ViewBag.MaximumPage ? ViewBag.MaximumPage :(ViewBag.CurrentPage + max_page)  )" aria-label="Next">
+                                    <a class="page-link" href="/Project/Project_Category?category=@ViewBag.categoryName&start=@((ViewBag.CurrentPage + max_page) > ViewBag.MaximumPage ? ViewBag.MaximumPage :(ViewBag.CurrentPage + max_page)  )" aria-label="Next">
                                         <i class="fas fa-arrow-right"></i>
                                     </a>
                                 </li>

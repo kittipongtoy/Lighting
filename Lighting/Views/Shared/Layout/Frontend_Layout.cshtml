@@ -60,15 +60,26 @@
                         //console.log(data);
                         const nav_link = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                             <li>
-                                                                                                 <a href="/${url}${curr.id}">
-                                                                                                    <p>${curr.name}</p>
-                                                                                                            <div class="menu-img"><img src="/${curr.image}"></div>
-                                                                                                 </a>
-                                                                                             </li>`, "");
+                                                                             <li>
+                                                                                 <a href="/${url}${curr?.name}">
+                                                                                    <p>${curr?.name}</p>
+                                                                                            <div class="menu-img"><img src="/${curr?.image}"></div>
+                                                                                 </a>
+                                                                             </li>`, "");
                         }
-                        $("#nav_projectref").html(nav_link(data, "project/Project_Category?categoryId="));
 
+                        $("#nav_projectref").html(nav_link(data, "project/Project_Category?category="));
+
+                        const nav_link_mobile = (res, url) => {
+                            return res.reduce((prev, curr) => prev += `
+                                                                        <li>
+                                                                            <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
+                                                                         </li>`, "");
+                        }
+
+                        $("#nav_mobile_projectRef").html(nav_link_mobile(data, "/project/Project_Category?category="));
+
+                        
                     }, error: function (e) {
                         console.log(e.message);
                         console.log(e.inner);
@@ -85,18 +96,26 @@
                         //console.log(data);
                         const nav_link = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                <li>
-                                                                                                    <a href="${url}${curr.id}">
-                                                                                                        <img src="/${curr.image}">
-                                                                                                        <div class="product-cate">
-                                                                                                            <p>${curr.name}</p>
-                                                                                                        </div>
-                                                                                                    </a>
-                                                                                                </li>`, "");
+                                                                                <li>
+                                                                                    <a href="${url}${curr?.name}">
+                                                                                        <img src="/${curr?.image}">
+                                                                                        <div class="product-cate">
+                                                                                            <p>${curr?.name}</p>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </li>`, "");
                         }
 
-                        $("#nav_product").html(nav_link(data, "/Product/Product_Category?categoryId="));
+                        $("#nav_product").html(nav_link(data, "/Product/Product_Category?category="));
 
+                        const nav_link_mobile = (res, url) => {
+                            return res.reduce((prev, curr) => prev += `
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
+                                                                                 </li>`, "");
+                        }
+
+                        $("#nav_mobile_product").html(nav_link_mobile(data, "/Product/Product_Category?category="));
                     }, error: function (e) {
                         console.log(e.message);
                         console.log(e.inner);
@@ -113,16 +132,23 @@
                         //console.log(data);
                         const nav_link = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                <li>
-                                                                                                <a href="${url}${curr.id}">
-                                                                                                 <p>${curr.name}</p>
-                                                                                                 <div class="menu-img"><img src="/${curr.image}"></div>
-                                                                                                </a>
-                                                                                                </li>`, "");
+                                                                                <li>
+                                                                                <a href="${url}${curr?.name}">
+                                                                                 <p>${curr?.name}</p>
+                                                                                 <div class="menu-img"><img src="/${curr?.image}"></div>
+                                                                                </a>
+                                                                                </li>`, "");
                         }
 
-                        $("#nav_smartsolution").append(nav_link(data, "/SmartSolution/SmartSolutionDetail?id="));
+                        $("#nav_smartsolution").append(nav_link(data, "/SmartSolution/SmartSolutionDetail?name="));
+                        const nav_link_mobile = (res, url) => {
+                            return res.reduce((prev, curr) => prev += `
+                                                                                        <li>
+                                                                                            <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
+                                                                                         </li>`, "");
+                        }
 
+                        $("#nav_mobile_smartSolution").html(nav_link_mobile(data, "/SmartSolution/SmartSolutionDetail?name="));
                     }, error: function (e) {
                         console.log(e.message);
                         console.log(e.inner);
@@ -438,7 +464,8 @@
                                                                                     <a href="#" class="menu-back">Back</a>
                                                                                 </div>
                                                                             </div>
-                                                                            <ul>
+                                                                            <ul id="nav_mobile_smartSolution">
+                                                                                @*
                                                                                 <li>
                                                                                     <div class="menu-item"><a href="@Url.Action("SmartSolution","SmartSolution")">All</a></div>
                                                                                 </li>
@@ -475,6 +502,7 @@
                                                                                 <li>
                                                                                     <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">SMART FARMING (BROWSER)</a></div>
                                                                                 </li>
+                                                                                *@
                                                                             </ul>
                                                                         </div>
 
@@ -485,7 +513,8 @@
                                                                                     <a href="#" class="menu-back">Back</a>
                                                                                 </div>
                                                                             </div>
-                                                                            <ul>
+                                                                            <ul id="nav_mobile_product">
+                                                                                @*
                                                                                 <li>
                                                                                     <div class="menu-item"><a href="@Url.Action("Product","Product")">All</a></div>
                                                                                 </li>
@@ -518,7 +547,7 @@
                                                                                 </li>
                                                                                 <li>
                                                                                     <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">POLE</a></div>
-                                                                                </li>
+                                                                                </li>*@
                                                                             </ul>
                                                                         </div>
 
@@ -529,7 +558,8 @@
                                                                                     <a href="#" class="menu-back">Back</a>
                                                                                 </div>
                                                                             </div>
-                                                                            <ul>
+                                                                            <ul id="nav_mobile_projectRef">
+                                                                                @*
                                                                                 <li>
                                                                                     <div class="menu-item"><a href="@Url.Action("Project","Project")">All</a></div>
                                                                                 </li>
@@ -572,6 +602,7 @@
                                                                                 <li>
                                                                                     <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">OUTDOOR / LANDSCAPE</a></div>
                                                                                 </li>
+                                                                                *@
                                                                             </ul>
                                                                         </div>
                                                                         <!-- DOWNLOAD -->

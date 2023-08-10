@@ -24,7 +24,6 @@ namespace Lighting.Controllers.Frontend
                 .AsNoTracking()
                 .Select(project => new 
                 {
-                    Id = project.Id,
                     Image = project.Image_Path_Nav,
                     Name = project.Name_EN,
                 })
@@ -38,7 +37,6 @@ namespace Lighting.Controllers.Frontend
                 .AsNoTracking()
                 .Select(project => new
                 {
-                    Id = project.Id,
                     Image = project.Image_Path_Nav,
                     Name = project.Name_TH,
                 })
@@ -94,15 +92,16 @@ namespace Lighting.Controllers.Frontend
             return View(project);
         }
 
-        public async Task<IActionResult> Project_Category(int categoryId, int start)
+        public async Task<IActionResult> Project_Category(string category, int start)
         {
-            ViewBag.categoryId = categoryId;
-            var category_name = await _db.Category_Projects.FirstOrDefaultAsync(cat => cat.Id == categoryId);
+            
+            var category_name = await _db.Category_Projects.FirstOrDefaultAsync(cat => cat.Name_EN.ToLower().StartsWith(category.ToLower()) || cat.Name_TH.StartsWith(category));
+            ViewBag.categoryName = category;
             ViewData["category"] = category_name;
 
             var project_cat = await _db.ProjectRefs
                  .AsNoTracking()
-                 .Where(cat => cat.ProjectRef_CategoryId == categoryId)
+                 .Where(cat => cat.ProjectRef_CategoryId == category_name.Id)
                  .Skip(start)
                  .Take(start + 6)
                  .OrderByDescending(cat => cat.Id)
@@ -119,7 +118,7 @@ namespace Lighting.Controllers.Frontend
             #region pagination
             var maximum_page = 6;
             var pagination_page = new List<int>();
-            var page_count = _db.ProjectRefs.Where(cat => cat.ProjectRef_CategoryId == categoryId).ToList().Count;
+            var page_count = _db.ProjectRefs.Where(cat => cat.ProjectRef_CategoryId == category_name.Id).ToList().Count;
             var is_only_one_page = false;
             if (page_count <= maximum_page)
             {
