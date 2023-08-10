@@ -170,17 +170,27 @@
                         </div>
                     </div>
                 </div>
-                @*
-                <div class="row">
-                    <div class="col">
+                @if (Model.pdf_th != null || Model.pdf_en != null)
+                {
+                    <div class="row">
+                        <div class="col">
                         <div class="content-center">
-                            <a class="downloadBD-button" href="@Url.Action("DownloadFile","project",new {path = Model.File_Download})" target="_blank">
-                                <div><i class="fas fa-arrow-alt-circle-down"></i>@Model?.File_Download?.Split("\\").Reverse().First()</div>
-                            </a>
-                        </div>
+                                @if (lang == "EN"){
+                                    <a class="downloadBD-button" href="@Model.pdf_en" target="_blank">
+                                        <div><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="downloadBD-button" href="@Model.pdf_th" target="_blank">
+                                        <div><i class="fas fa-arrow-alt-circle-down"></i>ดาวน์โหลด</div>
+                                    </a>
+                                }
+                            </div>
                     </div>
                 </div>
-                *@
+                }
+                
             }
             <!---------- END PROJECT - REF :: DETAIL ---------->
             <div class="row">

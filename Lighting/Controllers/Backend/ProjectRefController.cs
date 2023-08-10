@@ -22,7 +22,7 @@ namespace Lighting.Controllers.Backend
         [HttpPost]
         public async Task<IActionResult> Add([FromForm] Input_ProjectRefVM input)
         {
-            //if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var folder = Guid.NewGuid().ToString();
                 var path = Path.Combine("upload_image", "ProjectRef", folder);
@@ -37,25 +37,26 @@ namespace Lighting.Controllers.Backend
                         await input.Profile_Image.CopyToAsync(stream);
                     }
 
-                    var path_th = "";
-                    var path_en = "";
 
-                    if(input.pdf_th.Length > 0)
+                var pdf_folder = Path.Combine(path,Guid.NewGuid().ToString().Substring(0,5));
+                    Directory.CreateDirectory(Path.Combine(_env.WebRootPath,pdf_folder));
+
+                if (input.pdf_th != null)
                     {
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, path_th), FileMode.Create))
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, pdf_folder,input.pdf_th.FileName), FileMode.Create))
                         {
                             await input.pdf_th.CopyToAsync(stream);
                         }
-                        path_th = Guid.NewGuid().ToString().Substring(0, 5) + ".pdf";
-                        
-                    }
-                    if (input.pdf_en.Length > 0)
+                    //path_th =  Guid.NewGuid().ToString().Substring(0, 5) + ".pdf";
+
+                }
+                if (input.pdf_en != null)
                     {
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, path_en), FileMode.Create))
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, pdf_folder, input.pdf_en.FileName), FileMode.Create))
                         {
                             await input.pdf_en.CopyToAsync(stream);
                         }
-                        path_en = Guid.NewGuid().ToString().Substring(0, 5) + ".pdf";
+                        //path_en = Guid.NewGuid().ToString().Substring(0, 5) + ".pdf";
                     }
 
                     //using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, input.File_Download.FileName), FileMode.Create))
@@ -88,19 +89,22 @@ namespace Lighting.Controllers.Backend
                         ProjectRef_Category = category,
                         //File_Download = input.File_Download.FileName,
                         Profile_Image = profile_img_name,
-                        Pdf_TH = path_th,
-                        Pdf_ENG = path_en
+                        Pdf_TH = input.pdf_th != null ? Path.Combine(pdf_folder, input.pdf_th.FileName): null,
+                        Pdf_ENG = input.pdf_en != null ?  Path.Combine(pdf_folder, input.pdf_en.FileName) : null
                     };
 
                     await _db.ProjectRefs.AddAsync(projectRef);
                     await _db.SaveChangesAsync();
                     if (input.ProductId != null)
                     {
+                        var projectRef_project = new List<ProjectRef_Product>();
                         foreach (var productId in input.ProductId)
                         {
-                            await _db.ProjectRef_Products.AddAsync(new ProjectRef_Product { ProductId = productId, ProjectId = projectRef.Id });
-                            await _db.SaveChangesAsync();
+                            projectRef_project.Add(new ProjectRef_Product { ProductId = productId, ProjectId = projectRef.Id });
+
                         }
+                        await _db.ProjectRef_Products.AddRangeAsync(projectRef_project);
+                        await _db.SaveChangesAsync();
                     }
 
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
@@ -114,9 +118,9 @@ namespace Lighting.Controllers.Backend
                     }
                     return Json(new { status = "error", message = "เกิดข้อผิดพลาด หรือซื่อไฟล์ซ้ำกัน " + ex.Message });
                 }
-            }
+        }
 
-            //return Json(new { status = "error", message = "กรุณากรอกทุกอย่างให้ครบถ้วน" });
+            return Json(new { status = "error", message = "กรุณากรอกทุกอย่างให้ครบถ้วน" });
         }
 
         public async Task<IActionResult> Add_Page()
@@ -229,34 +233,34 @@ namespace Lighting.Controllers.Backend
                     var path_th = "";
                     var path_en = "";
 
-                    if (input.pdf_th.Length > 0)
+                    if (input.pdf_th != null)
                     {
-                        var new_file_name3 = Guid.NewGuid().ToString().Substring(0, 5) + ".pdf";
-                        var old_file = Path.Combine(_env.WebRootPath, path, project.Pdf_TH);
+                        //var new_file_name3 = Guid.NewGuid().ToString().Substring(0, 5) + ".pdf";
+                        var old_file = Path.Combine(_env.WebRootPath, project.Pdf_TH);
                         if (System.IO.File.Exists(old_file))
                         {
                             System.IO.File.Delete(old_file);
                         }
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, new_file_name3), FileMode.Create))
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, Path.GetDirectoryName(project.Pdf_TH),input.pdf_th.FileName), FileMode.Create))
                         {
                             await input.pdf_th.CopyToAsync(stream);
                         }
-                        project.Pdf_TH = new_file_name3;
+                        project.Pdf_TH = Path.Combine(Path.GetDirectoryName(project.Pdf_TH), input.pdf_th.FileName);
 
                     }
-                    if (input.pdf_en.Length > 0)
+                    if (input.pdf_en != null)
                     {
-                        var new_file_name4 = Guid.NewGuid().ToString().Substring(0, 5) + ".pdf";
-                        var old_file = Path.Combine(_env.WebRootPath, path, project.Pdf_ENG);
+                        //var new_file_name4 = Guid.NewGuid().ToString().Substring(0, 5) + ".pdf";
+                        var old_file = Path.Combine(_env.WebRootPath,project.Pdf_ENG);
                         if (System.IO.File.Exists(old_file))
                         {
                             System.IO.File.Delete(old_file);
                         }
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, new_file_name4), FileMode.Create))
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath,Path.GetDirectoryName(project.Pdf_ENG),input.pdf_en.FileName), FileMode.Create))
                         {
                             await input.pdf_en.CopyToAsync(stream);
                         }
-                        project.Pdf_ENG = new_file_name4;
+                        project.Pdf_ENG = Path.Combine(Path.GetDirectoryName(project.Pdf_ENG), input.pdf_en.FileName);
                     }
 
                     //if (input.File_Download != null)

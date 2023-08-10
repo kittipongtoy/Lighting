@@ -434,7 +434,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\upload_file\Author_board_director\" />
     <Folder Include="wwwroot\upload_file\CorporateGovernanceFile\" />
     <Folder Include="wwwroot\upload_file\BusinessEthics\" />
@@ -533,7 +532,6 @@
     <Folder Include="wwwroot\upload_image\RF_InnovationCenters\" />
     <Folder Include="wwwroot\upload_image\RF_Solution_Centers\" />
     <Folder Include="wwwroot\upload_image\RF_Solid_States\" />
-    <Folder Include="wwwroot\upload_image\RF_Oversea_Offices\" />
     <Folder Include="wwwroot\upload_image\RF_Warehouse_Logistics\" />
     <Folder Include="wwwroot\upload_image\RF_Manufacturing\" />
     <Folder Include="wwwroot\upload_image\RF_Assembly_Services\" />
@@ -542,7 +540,6 @@
     <Folder Include="wwwroot\upload_image\RF_Solution_Centers\" />
     <Folder Include="wwwroot\upload_image\RF_Assembly_Services\" />
     <Folder Include="wwwroot\upload_image\RF_Solid_States\" />
-    <Folder Include="wwwroot\upload_image\RF_Oversea_Offices\" />
     <Folder Include="wwwroot\upload_image\RF_Warehouse_Logistics\" />
     <Folder Include="wwwroot\upload_image\RF_Manufacturing\" />
     <Folder Include="wwwroot\upload_image\Product_Category\" />
