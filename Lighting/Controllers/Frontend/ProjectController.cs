@@ -244,7 +244,7 @@ namespace Lighting.Controllers.Frontend
             try
             {
                 var file_name = Directory.GetFiles(Path.Combine(_env.WebRootPath, path))
-                    .Where(filePath => !ignore_file_name.Contains(filePath.Split("\\").Reverse().First()))
+                    .Where(filePath => !ignore_file_name.Contains(filePath.Split("\\").Reverse().First()) && !filePath.EndsWith(".pdf"))
                     .Select(file_name =>
                     {
                         return Path.Combine(path, file_name.Split("\\").Reverse().First());

@@ -63,13 +63,15 @@ namespace Lighting.Controllers.Backend
                     //{
                     //    await input.File_Download.CopyToAsync(stream);
                     //}
-
-                    foreach (var file in input.Image_List)
+                    if (input.Image_List != null)
                     {
-                        var sub_img_name = Guid.NewGuid().ToString().Substring(0, 5) + ".jpg";
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, sub_img_name), FileMode.Create))
+                        foreach (var file in input.Image_List)
                         {
-                            await file.CopyToAsync(stream);
+                            var sub_img_name = Guid.NewGuid().ToString().Substring(0, 5) + ".jpg";
+                            using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, sub_img_name), FileMode.Create))
+                            {
+                                await file.CopyToAsync(stream);
+                            }
                         }
                     }
 
@@ -89,8 +91,8 @@ namespace Lighting.Controllers.Backend
                         ProjectRef_Category = category,
                         //File_Download = input.File_Download.FileName,
                         Profile_Image = profile_img_name,
-                        Pdf_TH = input.pdf_th != null ? Path.Combine(pdf_folder, input.pdf_th.FileName): null,
-                        Pdf_ENG = input.pdf_en != null ?  Path.Combine(pdf_folder, input.pdf_en.FileName) : null
+                        Pdf_TH = input.pdf_th != null ? Path.Combine(pdf_folder, input.pdf_th.FileName): pdf_folder,
+                        Pdf_ENG = input.pdf_en != null ?  Path.Combine(pdf_folder, input.pdf_en.FileName) : pdf_folder
                     };
 
                     await _db.ProjectRefs.AddAsync(projectRef);
@@ -236,10 +238,13 @@ namespace Lighting.Controllers.Backend
                     if (input.pdf_th != null)
                     {
                         //var new_file_name3 = Guid.NewGuid().ToString().Substring(0, 5) + ".pdf";
-                        var old_file = Path.Combine(_env.WebRootPath, project.Pdf_TH);
-                        if (System.IO.File.Exists(old_file))
+                        if (project.Pdf_TH != null)
                         {
-                            System.IO.File.Delete(old_file);
+                            var old_file = Path.Combine(_env.WebRootPath, project.Pdf_TH);
+                            if (System.IO.File.Exists(old_file))
+                            {
+                                System.IO.File.Delete(old_file);
+                            }
                         }
                         using (var stream = new FileStream(Path.Combine(_env.WebRootPath, Path.GetDirectoryName(project.Pdf_TH),input.pdf_th.FileName), FileMode.Create))
                         {
@@ -251,10 +256,13 @@ namespace Lighting.Controllers.Backend
                     if (input.pdf_en != null)
                     {
                         //var new_file_name4 = Guid.NewGuid().ToString().Substring(0, 5) + ".pdf";
-                        var old_file = Path.Combine(_env.WebRootPath,project.Pdf_ENG);
-                        if (System.IO.File.Exists(old_file))
+                        if (project.Pdf_ENG != null)
                         {
-                            System.IO.File.Delete(old_file);
+                            var old_file = Path.Combine(_env.WebRootPath, project.Pdf_ENG);
+                            if (System.IO.File.Exists(old_file))
+                            {
+                                System.IO.File.Delete(old_file);
+                            }
                         }
                         using (var stream = new FileStream(Path.Combine(_env.WebRootPath,Path.GetDirectoryName(project.Pdf_ENG),input.pdf_en.FileName), FileMode.Create))
                         {
@@ -417,7 +425,7 @@ namespace Lighting.Controllers.Backend
             try
             {
                 var file_name = Directory.GetFiles(Path.Combine(_env.WebRootPath, path))
-                    .Where(filePath => !ignore_file_name.Contains(filePath.Split("\\").Reverse().First()))
+                    .Where(filePath => !ignore_file_name.Contains(filePath.Split("\\").Reverse().First()) && !filePath.EndsWith(".pdf"))
                     .Select(file_name =>
                     {
                         return Path.Combine(path, file_name.Split("\\").Reverse().First());

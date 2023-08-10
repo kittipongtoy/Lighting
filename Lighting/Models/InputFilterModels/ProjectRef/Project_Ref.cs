@@ -27,7 +27,7 @@ namespace Lighting.Models.InputFilterModels.ProjectRef
         [Required]
         public int CategoryId { get; set; }
         public IFormFile Profile_Image { get; set; }
-        public List<IFormFile> Image_List { get; set; }
+        public List<IFormFile>? Image_List { get; set; }
         public string? Title_TH { get; set; }
         public string? Title_EN { get; set; }
         public string? Location_TH { get; set; }
