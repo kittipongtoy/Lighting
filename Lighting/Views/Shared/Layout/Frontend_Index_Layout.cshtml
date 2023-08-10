@@ -33,6 +33,39 @@
     @*<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>*@
 
     <script>
+        $(() => {
+            //GetBanner();
+        })
+
+        function GetBanner() {
+            $.ajax({
+                type: 'GET',
+                url: "/Lighting/GetBanner",
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (data) {
+                    var s = '';
+                    if (data.length > 0) {
+                        s += '<div class="index-main-banner owl-carousel owl-theme">';
+                        data.forEach(function (val) {
+                            s += ' <div class="items"><img src="~/Frontend_assets/images/web construc-01.jpg"></div>';
+                        });
+                        s += '</div>';
+                    }
+                    else {
+                        //s += '<div class="index-main-banner owl-carousel owl-theme">';
+                        s += '<div class="items"><img src="/Frontend_assets/images/web construc-01.jpg"></div>';
+                        s += '<div class="items"> <img src="/Frontend_assets/images/index/banner01.jpg"> </div>';
+                        //s += '</div>';
+                    }
+                    $("#BannerIndex").html(s);
+                }, error: function (e) {
+
+                }
+            })
+        }
+
         function SearchProduct(e) {
 
             let searchText = $("#search").val();
@@ -90,6 +123,7 @@
         var menu_width;
 
         $(() => {
+
             initMenu();
 
             menu_width = $("#menu .menu").width();
@@ -122,34 +156,34 @@
             });
 
             $('.index-main-banner').owlCarousel({
-                    loop: true,
-                    margin: 0,
+                loop: true,
+                margin: 0,
                 autoplay: true,
-                    animateOut: 'fadeOut',
-                    autoplayTimeout: 5500,
-                    smartSpeed: 4000,
-                    autoplayHoverPause: false,
-                    mouseDrag: false,
-                    dots: true,
-                    nav: false,
-                    navText: [
-                        '<i class="fas fa-chevron-left"></i>',
-                        '<i class="fas fa-chevron-right"></i>'
-                    ],
-                    responsive: {
-                        0: {
-                            items: 1,
-                            slideBy: 1
-                        },
-                        640: {
-                            items: 1,
-                            slideBy: 1
-                        },
-                        1024: {
-                            items: 1,
-                            slideBy: 1
-                        }
+                animateOut: 'fadeOut',
+                autoplayTimeout: 5500,
+                smartSpeed: 4000,
+                autoplayHoverPause: false,
+                mouseDrag: false,
+                dots: true,
+                nav: false,
+                navText: [
+                    '<i class="fas fa-chevron-left"></i>',
+                    '<i class="fas fa-chevron-right"></i>'
+                ],
+                responsive: {
+                    0: {
+                        items: 1,
+                        slideBy: 1
+                    },
+                    640: {
+                        items: 1,
+                        slideBy: 1
+                    },
+                    1024: {
+                        items: 1,
+                        slideBy: 1
                     }
+                }
             });
 
             $('.catalogue-slide').owlCarousel({
@@ -181,105 +215,9 @@
                     }
                 }
             });
+        });
 
-            //$('.main-banner').owlCarousel({});
-
-            //$('.index-main-banner').OwlCarousel({
-            //    loop: true,
-            //    margin: 0,
-            //    autoplay: true,
-            //    animateOut: 'fadeOut',
-            //    autoplayTimeout: 5500,
-            //    smartSpeed: 4000,
-            //    autoplayHoverPause: false,
-            //    mouseDrag: false,
-            //    dots: true,
-            //    nav: false,
-            //    navText: [
-            //        '<i class="fas fa-chevron-left"></i>',
-            //        '<i class="fas fa-chevron-right"></i>'
-            //    ],
-            //    responsive: {
-            //        0: {
-            //            items: 1,
-            //            slideBy: 1
-            //        },
-            //        640: {
-            //            items: 1,
-            //            slideBy: 1
-            //        },
-            //        1024: {
-            //            items: 1,
-            //            slideBy: 1
-            //        }
-            //    }
-            //})
-
-            //$('.catalogue-slide').OwlCarousel({
-            //    loop: true,
-            //    margin: 0,
-            //    autoplay: false,
-            //    autoplayTimeout: 1500,
-            //    smartSpeed: 1000,
-            //    autoplayHoverPause: true,
-            //    mouseDrag: false,
-            //    dots: false,
-            //    nav: true,
-            //    navText: [
-            //        '<i class="fas fa-chevron-left"></i>',
-            //        '<i class="fas fa-chevron-right"></i>'
-            //    ],
-            //    responsive: {
-            //        0: {
-            //            items: 1,
-            //            slideBy: 1
-            //        },
-            //        640: {
-            //            items: 1,
-            //            slideBy: 1
-            //        },
-            //        1024: {
-            //            items: 1,
-            //            slideBy: 1
-            //        }
-            //    }
-            //})
-
-            //$('.catalogue-slide').OwlCarousel({
-            //    loop: false,
-            //    margin: 0,
-            //    autoplay: false,
-            //    autoplayTimeout: 1500,
-            //    smartSpeed: 1000,
-            //    autoplayHoverPause: true,
-            //    mouseDrag: false,
-            //    dots: false,
-            //    nav: true,
-            //    navText: [
-            //        '<i class="fas fa-chevron-left"></i>',
-            //        '<i class="fas fa-chevron-right"></i>'
-            //    ],
-            //    responsive: {
-            //        0: {
-            //            items: 1,
-            //            slideBy: 1
-            //        },
-            //        640: {
-            //            items: 3,
-            //            slideBy: 1
-            //        },
-            //        1024: {
-            //            items: 3,
-            //            slideBy: 1
-            //        }
-            //     }
-            // })
-
-
-
-         });
-
-         function initMenu() {
+        function initMenu() {
             menu_width = $("#menu .menu").width();
             $("#menu .menu-back").click(function () {
                 var _pos = $("#menu .menu-slider").position().left + menu_width;
@@ -309,8 +247,6 @@
                 return false;
             });
         }
-
-
 
         // ACTIVE MENU //
         $(function () {
@@ -368,7 +304,7 @@
             });
         }
 
-        
+
 
     </script>
 </head>
@@ -933,8 +869,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col px-0">
-                    <div class="slide-navButton">
-                        <div class="index-main-banner owl-carousel owl-theme">
+                    <div class="slide-navButton" >
+                        <div class="index-main-banner owl-carousel owl-theme" id="BannerIndex">
                             <div class="items"><img src="~/Frontend_assets/images/web construc-01.jpg"></div>
                             <div class="items"><img src="~/Frontend_assets/images/index/banner01.jpg"></div>
                         </div>
@@ -1016,7 +952,7 @@
                     console.log(e.inner);
                 }
             });
-        }
+        }   
     </script>
 </body>
 </html>

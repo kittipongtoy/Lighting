@@ -1,4 +1,5 @@
 ﻿using Lighting.Areas.Identity.Data;
+using Lighting.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Dynamic;
 
@@ -9,12 +10,14 @@ namespace Lighting.Controllers.Frontend
         private readonly LightingContext _db;
         private readonly IWebHostEnvironment _env;
         private readonly string _rootPath;
+
         public LightingController(LightingContext db, IWebHostEnvironment env)
         {
             _db = db;
             _env = env;
             _rootPath = _env.WebRootPath;
         }
+
         public IActionResult Index()
         {
             dynamic mymodal = new ExpandoObject();
@@ -27,7 +30,17 @@ namespace Lighting.Controllers.Frontend
             mymodal.Product = Products;
             mymodal.Project = Projects;
             mymodal.Download = Downloads;
+
+            ViewData["BannerIndex"] = _db.Slide_Image_Index.Where(x => x.isActive == true).ToList();
+
             return View(mymodal);
+        }
+
+        [HttpGet]
+        public IActionResult GetBanner()
+        {
+            var DB = _db.Slide_Image_Index.Where(x => x.isActive == true).ToList();
+            return Ok(DB);
         }
     }
 }
