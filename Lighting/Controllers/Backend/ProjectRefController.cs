@@ -38,12 +38,12 @@ namespace Lighting.Controllers.Backend
                     }
 
 
-                var pdf_folder = Path.Combine(path,Guid.NewGuid().ToString().Substring(0,5));
-                    Directory.CreateDirectory(Path.Combine(_env.WebRootPath,pdf_folder));
+                //var pdf_folder = Path.Combine(path,Guid.NewGuid().ToString().Substring(0,5));
+                //    Directory.CreateDirectory(Path.Combine(_env.WebRootPath,pdf_folder));
 
                 if (input.pdf_th != null)
                     {
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, pdf_folder,input.pdf_th.FileName), FileMode.Create))
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path,input.pdf_th.FileName), FileMode.Create))
                         {
                             await input.pdf_th.CopyToAsync(stream);
                         }
@@ -52,7 +52,7 @@ namespace Lighting.Controllers.Backend
                 }
                 if (input.pdf_en != null)
                     {
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, pdf_folder, input.pdf_en.FileName), FileMode.Create))
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, input.pdf_en.FileName), FileMode.Create))
                         {
                             await input.pdf_en.CopyToAsync(stream);
                         }
@@ -91,8 +91,8 @@ namespace Lighting.Controllers.Backend
                         ProjectRef_Category = category,
                         //File_Download = input.File_Download.FileName,
                         Profile_Image = profile_img_name,
-                        Pdf_TH = input.pdf_th != null ? Path.Combine(pdf_folder, input.pdf_th.FileName): pdf_folder,
-                        Pdf_ENG = input.pdf_en != null ?  Path.Combine(pdf_folder, input.pdf_en.FileName) : pdf_folder
+                        Pdf_TH = input.pdf_th != null ? Path.Combine(path, input.pdf_th.FileName): path,
+                        Pdf_ENG = input.pdf_en != null ?  Path.Combine(path, input.pdf_en.FileName) : path
                     };
 
                     await _db.ProjectRefs.AddAsync(projectRef);
