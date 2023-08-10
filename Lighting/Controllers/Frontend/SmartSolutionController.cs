@@ -21,7 +21,6 @@ namespace Lighting.Controllers.Frontend
                     .AsNoTracking()
                     .Select(x => new
                     {
-                        id= x.Id,
                         Name = x.TitleName_EN,
                         Image = x.PreviewImg
 
@@ -35,7 +34,6 @@ namespace Lighting.Controllers.Frontend
                 .AsNoTracking()
                 .Select(x => new
                 {
-                    id = x.Id,
                     Name = x.TitleName_TH,
                     Image = x.PreviewImg
 
@@ -50,9 +48,9 @@ namespace Lighting.Controllers.Frontend
             return View(solutions);
         }
 
-        public async Task<IActionResult> SmartSolutionDetail(int id)
+        public async Task<IActionResult> SmartSolutionDetail(string name)
         {
-            var solution = await _db.Smart_Solutions.AsNoTracking().Include(x => x.Links).FirstOrDefaultAsync(s => s.Id == id);
+            var solution = await _db.Smart_Solutions.AsNoTracking().Include(x => x.Links).FirstOrDefaultAsync(s => s.TitleName_EN.ToLower().Contains(name.ToLower()) || s.TitleName_TH.StartsWith(name));
             if (solution == null) { return NotFound(); }
             return View(solution);
         }

@@ -20,7 +20,7 @@
                 <div class="row">
                     @foreach(var solution in Model){
                     <div class="col-lg-3 col-md-4 col-6">
-                        <a class="contentBox" href="@Url.Action("SmartSolutionDetail","SmartSolution",new {id = solution.Id})">
+                            <a class="contentBox" href="@Url.Action("SmartSolutionDetail","SmartSolution",new {name = solution.TitleName_EN})">
                             <div class="row">
                                 <div class="col">
                                     <div class="img-width"><img src="~/@solution.PreviewImg"></div>

@@ -149,10 +149,14 @@ namespace Lighting.Controllers.Frontend
                              Image = cat.Image
                          })
                          .ToListAsync();
-
+            var selected_category = await _db.Product_Categorys
+                         .AsNoTracking()
+                         .Where(product_cat => product_cat.Name_EN.ToLower().StartsWith(category.ToLower()) || product_cat.Name_TH.StartsWith(category)).FirstOrDefaultAsync();
+            if (selected_category == null) return RedirectToAction("Product");
             var sub_category = await _db.Product_Models
                          .AsNoTracking()
-                         .Where(sub_cat => sub_cat.Name_EN.ToLower().StartsWith(category.ToLower()) || sub_cat.Name_TH.StartsWith(category.ToLower()))
+                         //.Where(sub_cat => sub_cat.Name_EN.ToLower().StartsWith(category.ToLower()) || sub_cat.Name_TH.StartsWith(category))
+                         .Where(pro_model => pro_model.Product_CategoryId == selected_category.Id)
                          .OrderByDescending(x => x.Id)
                          .Select(cat =>
                          new Output_ProductModelVM

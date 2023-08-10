@@ -6,7 +6,17 @@
     var category_name = (Lighting.Areas.Identity.Data.Category_Project)ViewData["category"];
 }
 @model Lighting.Models.InputFilterModels.ProjectRef.Output_ProjectRefVM
-
+<style>
+    .text-tiny{
+        font-size:small;
+    }
+    .text-big{
+        font-size:clamp(1.5rem,3vw,3rem);
+    }
+    .text-huge{
+        font-size: clamp(2.2rem,4.5vw,4.5rem);
+    }
+</style>
 <!---------- PROJECT - REF :: DETAIL ---------->
 <div class="content-padding m-pad">
     <div class="container-fluid">
@@ -266,7 +276,7 @@
             <div class="row">
                 <div class="col">
                     <div class="content-center">
-                        <a class="buttonB" href="@Url.Action("Project_Category","Project",new {categoryId=category_name?.Id})"><i class="fas fa-long-arrow-alt-left"></i>Back</a>
+                        <a class="buttonB" href="@Url.Action("Project_Category","Project",new {category=category_name?.Name_EN})"><i class="fas fa-long-arrow-alt-left"></i>Back</a>
                     </div>
                 </div>
             </div>
