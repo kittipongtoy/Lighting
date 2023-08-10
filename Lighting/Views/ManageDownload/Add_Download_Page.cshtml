@@ -10,7 +10,7 @@
             <!--contact type-->
             <div class="form-group p-2">
                 <label class="h4">ประเภท</label>
-                <select class="form-control" id="download_type">
+                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="download_type">
                     <option value="L&E BIM OBJECTS" class="h5">L&E BIM OBJECTS</option>
                     <option value="CATALOGUE" class="h5">CATALOGUE</option>
                     <option value="COMPANY PROFILE" class="h5">COMPANY PROFILE</option>
@@ -31,10 +31,10 @@
 
             <!--fileimage-->
             <div class="custom-file mt-3 p-1" style="border:1px solid black">
-                <img style="width:100%;height:100%;display:none;" id="preview_show_img" />
+                <img style="width:500px;height:250px;display:none;" id="preview_show_img" />
                 <br />
                 <label for="formFile" class="form-label">
-                    เลือกไฟล์ รูป
+                    เลือกไฟล์ รูป TH
                     <br />
                     <span style="color:red;">
                         ขนาดรูปภาพ : 800 * 430 px
@@ -42,19 +42,35 @@
                 </label>
                 <input type="file" class="form-control" id="file_img" accept="image/png, image/gif, image/jpeg">
             </div>
+            <div class="custom-file mt-3 p-1" style="border:1px solid black">
+                <img style="width:500px;height:250px;display:none;" id="preview_show_img_EN" />
+                <br />
+                <label for="formFile" class="form-label">
+                    เลือกไฟล์ รูป EN
+                    <br />
+                    <span style="color:red;">
+                        ขนาดรูปภาพ : 800 * 430 px
+                    </span>
+                </label>
+                <input type="file" class="form-control" id="file_img_EN" accept="image/png, image/gif, image/jpeg">
+            </div>
             <!--end file-->
 
             <!--file download-->
             <div class="custom-file mt-3 p-1">
-                <label for="formFile" class="form-label">เลือกไฟล์สำหรับดาวน์โหลด</label>
+                <label for="formFile" class="form-label">เลือกไฟล์สำหรับดาวน์โหลด TH</label>
                 <input type="file" class="form-control" id="file_download">
+            </div>
+            <div class="custom-file mt-3 p-1">
+                <label for="formFile" class="form-label">เลือกไฟล์สำหรับดาวน์โหลด EN</label>
+                <input type="file" class="form-control" id="file_download_EN">
             </div>
             <!--end file download-->
             <!--link-->
             <div class="custom-file mt-3 p-1">
-                <label for="formFile" class="form-label">(เฉพาะ)ลิ้งดาวน์โหลด L&BIM OBJECT</label>
+                <label for="formFile" class="form-label"> ลิงค์ </label>
                 <input type="text" class="form-control" id="link_l_and_bim">
-            </div>
+            </div> 
             <!--end link-->
 
             <center style="display:flex;justify-content:space-between;margin:3rem;">
@@ -68,7 +84,9 @@
 @section Scripts{
     <script>
         var image_file;
+        var image_file_EN;
         var file_dowload;
+        var file_dowload_EN;
 
         $(document).ready(function () {
             $('#file_img').change(async function (e) {
@@ -77,9 +95,20 @@
                     $('#preview_show_img').attr('src', await blobToBase64DataURL(image_file)).css("display", "block");
                 }
             });
-            $('#file_download').change( function (e) {
+            $('#file_img_EN').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    image_file_EN = e.target.files[0];
+                    $('#preview_show_img_EN').attr('src', await blobToBase64DataURL(image_file_EN)).css("display", "block");
+                }
+            });
+            $('#file_download').change(function (e) {
                 if (e.target.files.length === 1) {
                     file_dowload = e.target.files[0];
+                }
+            });
+            $('#file_download_EN').change( function (e) {
+                if (e.target.files.length === 1) {
+                    file_dowload_EN = e.target.files[0];
                 }
             });
         });
@@ -117,9 +146,27 @@
                 return;
             }
 
+            if (image_file_EN != undefined) {
+                formData.append("Image_EN", image_file_EN);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    text: "กรุณาใส่รูป",
+                });
+                return;
+            }
             if (file_dowload != undefined){
                 formData.append("File", file_dowload);
             }else{
+                //Swal.fire({
+                //    icon: 'error',
+                //    text: "กรุณใส่ไฟล์ดาวโหลด",
+                //});
+                //return;
+            }
+            if (file_dowload_EN != undefined) {
+                formData.append("File_EN", file_dowload_EN);
+            } else {
                 //Swal.fire({
                 //    icon: 'error',
                 //    text: "กรุณใส่ไฟล์ดาวโหลด",

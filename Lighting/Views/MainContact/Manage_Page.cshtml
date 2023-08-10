@@ -49,62 +49,75 @@
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" >โทรศัพท์มือถือ</span>
+                    <span class="input-group-text">โทรศัพท์มือถือ</span>
                 </div>
                 <input name="PhoneNumber" value="@Model?.PhoneNumber" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" >โทรศัพท์สำนักงาน</span>
+                    <span class="input-group-text">Fax</span>
                 </div>
                 <input name="OfficePhone" value="@Model?.OfficePhone" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" >หัวข้ออีเมล1</span>
+                    <span class="input-group-text">หน่วยงาน 1</span>
                 </div>
                 <input name="TitleEMail1" value="@Model?.TitleEMail1" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" >อีเมล1</span>
+                    <span class="input-group-text">อีเมล 1</span>
                 </div>
                 <input name="EMail1" value="@Model?.EMail1" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" >หัวข้ออีเมล2</span>
+                    <span class="input-group-text">หน่วยงาน 2</span>
                 </div>
                 <input name="TitleEMail2" value="@Model?.TitleEMail2" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" >อีเมล2</span>
+                    <span class="input-group-text">อีเมล 2</span>
                 </div>
                 <input name="EMail2" value="@Model?.EMail2" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" >Google Map Link</span>
+                    <span class="input-group-text">Google Map Link</span>
                 </div>
                 <input name="GoogleMapLink" value="@Model?.GoogleMapLink" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" >ข้อมูลเพิ่มเติม</span>
+                    <span class="input-group-text">ลิ้งค์ Line</span>
                 </div>
                 <input name="MoreInfo" value="@Model?.MoreInfo" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
 
             <div class="mb-3">
-                <label for="formFile" class="form-label">รูปปก
+                <label for="formFile" class="form-label">
+                    แผนที่
                     <br />
                     <span style="color:red;">
                         ขนาดรูปภาพ : 1240 * 1755 px
-                    </span></label>
+                    </span>
+                </label>
                 <input name="Img_File" class="form-control" type="file" id="file_img_preview">
+            </div>
+
+            <div class="mb-3">
+                <label for="formFile" class="form-label">
+                    แผนที่ EN
+                    <br />
+                    <span style="color:red;">
+                        ขนาดรูปภาพ : 1240 * 1755 px
+                    </span>
+                </label>
+                <input name="Img_FileEN" class="form-control" type="file" id="file_img_previewEN">
             </div>
         </div>
         <div class="col-6">
@@ -117,9 +130,9 @@
     <button class="btn btn-success" onclick="save()">บันทึก/save</button>
 </center>
 @section Scripts{
-<script>
-
-    function save(){
+    <script>
+        //
+        function save() {
 
             let data = $("#form")[0];
             let form = new FormData(data);
@@ -162,14 +175,21 @@
                     console.log(e.inner);
                 }
             });
-    }
+        }
 
-    var preview_img;
+        var preview_img;
         $(document).ready(function () {
             $('#file_img_preview').change(async function (e) {
                 if (e.target.files.length === 1) {
                     preview_img = e.target.files[0];
                     $('#img_preview').attr('src', await blobToBase64DataURL(preview_img)).css("display", "block");
+                }
+            });
+
+            $('#file_img_previewEN').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    preview_img = e.target.files[0];
+                    $('#img_previewEN').attr('src', await blobToBase64DataURL(preview_img)).css("display", "block");
                 }
             });
         });
@@ -181,5 +201,5 @@
                 reader.readAsDataURL(blob);
             }
         );
-</script>
+    </script>
 }

@@ -1,9 +1,13 @@
-﻿@{
+﻿@using System.Globalization
+
+@{
     ViewData["Title"] = "News";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var lang = Context.Request.Cookies["lang"];
 }
+
 @model IEnumerable< Lighting.Models.InputFilterModels.News.Output_NewsVm>
+
 <div class="top-page">
     <div class="container">
         <div class="row">
@@ -20,6 +24,12 @@
                     {
                         @foreach (var news in Model)
                         {
+                            var getDate = "";
+                            if (news.CreateDate_EN!=null){ 
+                                var inputDate = Convert.ToDateTime(news.CreateDate_EN);
+                                getDate = inputDate.ToString("dd/MM/yyyy", new CultureInfo("en-US"));
+                            }
+
                             <div class="col-lg-4 col-md-4 col-6">
                                 <a class="news-publicBox" href="/New/NewDetail?id=@news.Id">
                                     <div class="row">
@@ -39,7 +49,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                <div class="news-date">@news?.CreateDate_EN</div>
+                                                <div class="news-date">@getDate</div>
                                             </div>
                                         </div>
                                     </div>
@@ -51,6 +61,13 @@
                     {
                         @foreach (var news in Model)
                         {
+                            var getDate = "";
+                            if (news.CreateDate_EN != null)
+                            {
+                                var inputDate = Convert.ToDateTime(news.CreateDate_EN);
+                                getDate = inputDate.ToString("dd/MM/yyyy", new CultureInfo("th-TH"));
+                            }
+
                             <div class="col-lg-4 col-md-4 col-6">
                                 <a class="news-publicBox" href="/New/NewDetail?id=@news.Id">
                                     <div class="row">
@@ -70,7 +87,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                <div class="news-date">@news?.CreateDate_TH</div>
+                                                <div class="news-date">@getDate</div>
                                             </div>
                                         </div>
                                     </div>

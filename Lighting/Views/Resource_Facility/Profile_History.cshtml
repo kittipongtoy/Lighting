@@ -352,28 +352,46 @@
                                             string youtubeUrlTH = item.FileVideoTH;
                                             string youtubeUrlEN = item.FileVideoEN;
 
-                                            // Split the URL using the "?" character as the separator
+                                            // Split the URL using the "?" character as the
                                             string[] delimiters = { "youtu.be/", "watch?v=", "embed/" };
-                                            string videoIdTH = delimiters.Select(delimiter => youtubeUrlTH.Split(delimiter).LastOrDefault())
-                                            .FirstOrDefault(id => !string.IsNullOrEmpty(id));
-                                            string embeddedUrlTH = "https://www.youtube.com/embed/" + videoIdTH;
-
-                                            string videoIdEN = delimiters.Select(delimiter => youtubeUrlEN.Split(delimiter).LastOrDefault())
-                                            .FirstOrDefault(id => !string.IsNullOrEmpty(id));
-                                            string embeddedUrlEN = "https://www.youtube.com/embed/" + videoIdEN;
-
-                                            if (Context.Request.Cookies["lang"] == "EN")
-                                            {
-                                                <div class="container-vdo">
-                                                    <iframe class="responsive-vdo" src="@embeddedUrlEN"></iframe>
-                                                </div>
+                                            if (youtubeUrlTH != null)
+                                            {                                              
+                                                string videoIdTH = delimiters.Select(delimiter => youtubeUrlTH.Split(delimiter).LastOrDefault())
+                                                .FirstOrDefault(id => !string.IsNullOrEmpty(id));
+                                                string embeddedUrlTH = "https://www.youtube.com/embed/" + videoIdTH;
+                                                if (Context.Request.Cookies["lang"] == "EN")
+                                                {
+                                                    @*<div class="container-vdo">
+                                                        <iframe class="responsive-vdo" src="@embeddedUrlEN"></iframe>
+                                                    </div>*@
+                                                }
+                                                else
+                                                {
+                                                    <div class="container-vdo">
+                                                        <iframe class="responsive-vdo" src="@embeddedUrlTH"></iframe>
+                                                    </div>
+                                                }
                                             }
-                                            else
-                                            {
-                                                <div class="container-vdo">
-                                                    <iframe class="responsive-vdo" src="@embeddedUrlTH"></iframe>
-                                                </div>
+
+                                            if (youtubeUrlEN != null)
+                                            { 
+                                                string videoIdEN = delimiters.Select(delimiter => youtubeUrlEN.Split(delimiter).LastOrDefault())
+                                                .FirstOrDefault(id => !string.IsNullOrEmpty(id));
+                                                string embeddedUrlEN = "https://www.youtube.com/embed/" + videoIdEN;
+                                                if (Context.Request.Cookies["lang"] == "EN")
+                                                {
+                                                    <div class="container-vdo">
+                                                        <iframe class="responsive-vdo" src="@embeddedUrlEN"></iframe>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    @*<div class="container-vdo">
+                                                        <iframe class="responsive-vdo" src="@embeddedUrlTH"></iframe>
+                                                    </div>*@
+                                                }
                                             }
+                                           
 
                                         }
                                     }

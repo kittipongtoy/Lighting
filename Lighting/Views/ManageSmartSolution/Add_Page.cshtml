@@ -51,10 +51,6 @@
         flex-direction:column;
         align-items:center;
     }
-    .input-box{
-        width:80%;
-        height:auto;
-        padding:3rem;
 
         display:grid;
         grid-template-rows: 3rem auto auto 3rem 3rem;
@@ -77,11 +73,13 @@
                 <img id="content_preiew_img" style="width:100%;height:40vh;display:none;" />
             </div>
             <div class="form-group mt-2 p-1">
-                <label class="h4">เลือกไฟล์ภาพพรีวิวคอนเทนต์
+                <label class="h4">
+                    เลือกไฟล์ภาพพรีวิวคอนเทนต์
                     <br />
                     <span style="color:red;">
                         ขนาดรูปภาพ : 1200 * 620 px
-                    </span></label>
+                    </span>
+                </label>
                 <input type="file" class="form-control" id="content_file_img">
             </div>
             @*title*@
@@ -95,14 +93,16 @@
             </div>
             @*file img*@
             <div class="img-container">
-                <img id="preiew_img" style="width:30vh;height:30vh;display:none;"/>
+                <img id="preiew_img" style="width:30vh;height:30vh;display:none;" />
             </div>
             <div class="form-group mt-2 p-1">
-                <label class="h4">เลือกไฟล์ภาพหน้าคอนเทนต์
+                <label class="h4">
+                    เลือกไฟล์ภาพหน้าคอนเทนต์
                     <br />
                     <span style="color:red;">
                         ขนาดรูปภาพ : 300 * 300 px
-                    </span></label>
+                    </span>
+                </label>
                 <input type="file" class="form-control" id="file_img">
             </div>
             @*explan*@
@@ -115,7 +115,7 @@
                 <textarea id="expanation_en"></textarea>
             </div>
             @*link*@
-            <div id="link_list" class="link-container"> 
+            <div id="link_list" class="link-container">
             </div>
             <center><button class="btn bg-success mt-3" onclick="openPopup()">เพิ่มลิ้ง/add link</button></center>
             @*content1*@
@@ -139,10 +139,14 @@
     <div class="input-box">
         <h1>เลือกรูปและไฟล์</h1>
         <div style="display:flex;justify-content:center;align-items:center;flex-direction:column;">
-            <img id="preview_subImg" style="height:40vh;width:100%;" />
+            <img id="preview_subImg" style="height:40vh;width:40vh;" />
+        </div> 
+        <div>
+            <span style="color:red;">
+                ขนาดรูปภาพ : 400 * 100 px
+            </span>
         </div>
-        <span style="color:red;">ภาพขนาด 400*100px</span>
-        <input type="file" class="form-control" id="file_img_preview" />
+        <input type="file" id="file_img_preview" />
         <input type="text" id="txt_link"/>
         <div style="display:flex;justify-content:space-between;">
             <button class="btn bg-success" onclick="addImageLink()">ตกลง</button>
@@ -315,9 +319,8 @@
                 link_img.push({ file: preview_subimg_file, link: link, id: add_link_number });
 
                 let html_link = "";
-                for (let i = 0; i < link_img.length;i++) 
-                {
-                   html_link += await addInputFile(link_img[i].file, link_img[i].link, link_img[i].id)
+                for (let i = 0; i < link_img.length; i++) {
+                    html_link += await addInputFile(link_img[i].file, link_img[i].link, link_img[i].id)
                 }
                 add_link_number++;
                 $("#link_list").html(html_link);
@@ -328,15 +331,15 @@
             }
         }
 
-        function addSolution(){
+        function addSolution() {
 
             let form = new FormData();
 
-            if (preview_image_file != undefined){
+            if (preview_image_file != undefined) {
                 form.append("PreviewImg", preview_image_file);
-            }else{
+            } else {
                 alert("กรุณาใส่รูป ภาพพรีวิวคอนเทนต์");
-                    return;
+                return;
             }
 
             if (content_preview_file != undefined) {
@@ -353,7 +356,7 @@
             form.append("Content_TH", content_th.getData());
             form.append("Content_EN", content_en.getData());
 
-            for(let i=0;i < link_img.length; i++){
+            for (let i = 0; i < link_img.length; i++) {
                 form.append("Links", link_img[i].link);
                 form.append("LinkFiles", link_img[i].file);
             }

@@ -69,34 +69,55 @@
             <div class="row justify-content-center">
                 @foreach (var download in Model)
                 {
-                    <div class="col-lg-6 col-md-6 col-11">
-                        <a class="contentBox" href="@download.File" target="_blank">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="img-width"><img src="~/@download.Image"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="contentBox-topic">
-                                        @if (lang == "EN")
-                                        {
-                                            <p>@download.Name_EN</p>
-                                        }
-                                        else
-                                        {
-                                            <p>@download.Name_TH</p>
-                                        }
+
+                    @if (lang == "EN")
+                    {
+                        <div class="col-lg-6 col-md-6 col-11">
+                            <a class="contentBox" href="@(download?.L_AND_BIM_Link != null ? download?.L_AND_BIM_Link:download?.File_EN)" target="_blank">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="img-width"><img src="~/@download?.Image_EN"></div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="contentBox-topic">
+                                            <p>@download?.Name_EN</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-lg-6 col-md-6 col-11">
+                            <a class="contentBox" href="@(download?.L_AND_BIM_Link != null ? download?.L_AND_BIM_Link:download?.File)" target="_blank">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="img-width"><img src="~/@download?.Image"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="contentBox-topic">
+                                            <p>@download?.Name_TH</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>ดาวน์โหลด</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
                 }
 
             </div>
