@@ -14,8 +14,10 @@ namespace Lighting.Models.InputFilterModels.News
         public string? Content_TH { get; set; }
         [Required]
         public string? Content_EN { get; set; }
-        public string? CreateDate_TH { get; set; }
-        public string? CreateDate_EN { get; set; }
+        public string? ImagePath { get; set; }
+        public DateTime? CreateDate_TH { get; set; }
+        public DateTime? CreateDate_EN { get; set; }
+        public string? date_str { get; set; }
         public List<IFormFile>? ImgList { get; set; } = new List<IFormFile>();
     }
     public class Output_NewsVm
@@ -24,10 +26,12 @@ namespace Lighting.Models.InputFilterModels.News
         public string? Title_EN { get; set; }
         public string? Title_TH { get; set; }
         public string? TitleImage { get; set; }
+        public string? ImagePath { get; set; }
         public string? Content_TH { get; set; }
         public string? Content_EN { get; set; }
-        public string? CreateDate_TH { get; set; }
-        public string? CreateDate_EN { get; set; }
+        public DateTime? CreateDate_TH { get; set; }
+        public DateTime? CreateDate_EN { get; set; }
+        public string? date_str { get; set; }
         public List<string>? ImgList { get; set; } = new List<string>();
     }
 }

@@ -24,15 +24,19 @@ namespace Lighting.Controllers.Backend
             var contact = _db.MainContacts.FirstOrDefault();
             return View(contact);
         }
+
         [HttpPost]
         public async Task<IActionResult> Save([FromForm] MainContact input)
         {
             try
             {
                 var path = Path.Combine("upload_image", "MainContact");
+                var path2 = Path.Combine("upload_image", "MainContact");
                 var mainContact = await _db.MainContacts.FirstOrDefaultAsync();
                 if (mainContact != null)
                 {
+                    string nameImage = Guid.NewGuid().ToString() + ".jpg";
+                    string nameImage2 = Guid.NewGuid().ToString() + ".jpg";
                     if (input.Img_File != null)
                     {
                         if (mainContact.Img_File != null)
@@ -43,12 +47,33 @@ namespace Lighting.Controllers.Backend
                                 System.IO.File.Delete(oldFile);
                             }
                         }
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, input.Img_File.FileName), FileMode.Create))
+
+
+                       
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, nameImage), FileMode.Create))
                         {
                             await input.Img_File.CopyToAsync(stream);
-                        }
+                        }                    
                     }
 
+                    if (input.Img_FileEN != null)
+                    {
+                        if (mainContact.Img_FileEN != null)
+                        {
+                            var oldFile = Path.Combine(_env.WebRootPath, mainContact.Img_FileEN);
+                            if (System.IO.File.Exists(oldFile))
+                            {
+                                System.IO.File.Delete(oldFile);
+                            }
+                        }
+
+                       
+                        using (var stream2 = new FileStream(Path.Combine(_env.WebRootPath, path2, nameImage2), FileMode.Create))
+                        {
+                            await input.Img_FileEN.CopyToAsync(stream2);
+                        }
+                    }
+                 
                     mainContact.EMail1 = input.EMail1;
                     mainContact.EMail2 = input.EMail2;
                     mainContact.GoogleMapLink = input.GoogleMapLink;
@@ -59,7 +84,8 @@ namespace Lighting.Controllers.Backend
                     mainContact.MoreInfo = input.MoreInfo;
                     mainContact.OfficePhone = input.OfficePhone;
                     mainContact.PhoneNumber = input.PhoneNumber;
-                    mainContact.Img_File = input.Img_File == null ? mainContact.Img_File : Path.Combine(path, input.Img_File.FileName);
+                    mainContact.Img_File = input.Img_File == null ? mainContact.Img_File : Path.Combine(path, nameImage);
+                    mainContact.Img_FileEN = input.Img_FileEN == null ? mainContact.Img_FileEN : Path.Combine(path, nameImage2);
                     mainContact.TitleEMail1 = input.TitleEMail1;
                     mainContact.TitleEMail2 = input.TitleEMail2;
                     mainContact.Title_EN = input.Title_EN;
@@ -70,11 +96,21 @@ namespace Lighting.Controllers.Backend
                 }
                 else
                 {
+                    string nameImage = Guid.NewGuid().ToString() + ".jpg";                   
                     if (input.Img_File != null)
                     {
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, input.Img_File.FileName), FileMode.Create))
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, nameImage), FileMode.Create))
                         {
                             await input.Img_File.CopyToAsync(stream);
+                        }
+                    }
+
+                    string nameImage2 = Guid.NewGuid().ToString() + ".jpg";
+                    if (input.Img_FileEN != null)
+                    {
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path, nameImage2), FileMode.Create))
+                        {
+                            await input.Img_FileEN.CopyToAsync(stream);
                         }
                     }
 
@@ -90,7 +126,8 @@ namespace Lighting.Controllers.Backend
                         MoreInfo = input.MoreInfo,
                         OfficePhone = input.OfficePhone,
                         PhoneNumber = input.PhoneNumber,
-                        Img_File = input.Img_File == null ? null : Path.Combine(path, input.Img_File.FileName),
+                        Img_File = input.Img_File == null ? null : Path.Combine(path, nameImage),
+                        Img_FileEN = input.Img_FileEN == null ? null : Path.Combine(path, nameImage2),
                         TitleEMail1 = input.TitleEMail1,
                         TitleEMail2 = input.TitleEMail2,
                         Title_EN = input.Title_EN,

@@ -28,7 +28,7 @@ namespace Lighting.Controllers.Backend
             var news_list = await _db.News.AsNoTracking().OrderByDescending(by => by.Id).ToListAsync();
             var output_news = new List<Output_NewsVm>();
             news_list.ForEach(news =>
-            {
+            {   
                 output_news.Add(new Output_NewsVm
                 {
                     Id = news.Id,
@@ -126,10 +126,11 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit([FromForm] Input_NewsVm input_News, [FromQuery, Required] int id)
+        public async Task<IActionResult> Edit([FromForm] Input_NewsVm input_News, [FromQuery, Required] int id,string? date_str)
         {
             try
             {
+
                 var edite = await _db.News.Where(news => news.Id.Equals(id)).FirstOrDefaultAsync();
                 if (edite != null)
                 {
@@ -164,8 +165,15 @@ namespace Lighting.Controllers.Backend
                     edite.Title_EN = input_News.Title_EN;
                     edite.Content_TH = input_News.Content_TH;
                     edite.Content_EN = input_News.Content_EN;
-                    edite.CreateDate_TH = input_News.CreateDate_TH;
-                    edite.CreateDate_EN = input_News.CreateDate_EN;
+                    if(date_str != null)
+                    { 
+                        DateTime InsertDate_news = DateTime.Now;
+                        if (date_str != null)
+                        {
+                            DateTime InsertDate = DateTime.ParseExact(date_str, "dd/MM/yyyy", new CultureInfo("en-US"));
+                            edite.CreateDate_EN = InsertDate;
+                        }
+                    }  
 
                     await _db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
@@ -175,91 +183,84 @@ namespace Lighting.Controllers.Backend
             }
             catch (Exception ex)
             {
-                return Json(new { status = "error", message = "ไม่พบข้อมูล "+ex.Message });
+                return Json(new { status = "error", message = "ไม่พบข้อมูล " + ex.Message });
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add_News([FromForm] Input_NewsVm newsVm)
+        public async Task<IActionResult> Add_News([FromForm] Input_NewsVm newsVm,News newdata, string? date_str)
         {
-            if (ModelState.IsValid)
+            var new_folder = Guid.NewGuid().ToString().Substring(0, 8);
+            var root_path = _env.WebRootPath;
+            var save_path = Path.Combine("upload_image", "news", new_folder);
+
+            try
             {
-                var new_folder = Guid.NewGuid().ToString().Substring(0, 8);
-                var root_path = _env.WebRootPath;
-                var save_path = Path.Combine("upload_image", "news", new_folder);
-                try
+                if (newsVm.TitleImage == null)
                 {
-                    #region check file type
-                    //should save only .jpg and .png
-                    //if (newsVm.TitleImage.Name.ToLower().EndsWith(".jpg") || newsVm.TitleImage.Name.ToLower().EndsWith(".png")) return Json(new { status = "error", message = "กรุณาใส่ รูปที่เป็น png jpg" });
-                    //bool isAllValid = true;
-                    //foreach (var file_img in newsVm.ImgList)
-                    //{
-                    //    if (file_img.Name.ToLower().EndsWith(".jpg") || file_img.Name.ToLower().EndsWith(".png"))
-                    //    {
+                    return Json(new { status = "error", message = "กรุณาใส่ รูปหัวข้อ" });
+                }
 
-                    //    }
-                    //    else
-                    //    {
-                    //        isAllValid = false;
-                    //        break;
-                    //    }
-                    //}
-                    #endregion
-
-                    if (newsVm.TitleImage == null)
+                if (!System.IO.File.Exists(save_path))
+                {
+                    System.IO.Directory.CreateDirectory(Path.Combine(root_path, save_path));
+                    //title image
+                    using (var stream = new FileStream(Path.Combine(root_path, save_path, "0.jpg"), FileMode.Create))
                     {
-                        return Json(new { status = "error", message = "กรุณาใส่ รูปหัวข้อ" });
+                        await newsVm.TitleImage.CopyToAsync(stream);
                     }
 
-
-                    if (!System.IO.File.Exists(save_path))
+                    if (newsVm.ImgList != null)
                     {
-                        System.IO.Directory.CreateDirectory(Path.Combine(root_path, save_path));
-                        //title image
-                        using (var stream = new FileStream(Path.Combine(root_path, save_path, "0.jpg"), FileMode.Create))
+                        if (newsVm.ImgList.Count > 0)
                         {
-                            await newsVm.TitleImage.CopyToAsync(stream);
-                        }
-
-                        if (newsVm.ImgList != null)
-                        {
-                            if (newsVm.ImgList.Count > 0)
+                            for (int index = 0; index < newsVm.ImgList.Count; index++)
                             {
-                                for (int index = 0; index < newsVm.ImgList.Count; index++)
+                                var new_file_name = Guid.NewGuid().ToString().Substring(0, 5);
+                                using (var file_stream = new FileStream(Path.Combine(root_path, save_path, new_file_name + ".jpg"), FileMode.Create))
                                 {
-                                    var new_file_name = Guid.NewGuid().ToString().Substring(0, 5);
-                                    using (var file_stream = new FileStream(Path.Combine(root_path, save_path, new_file_name + ".jpg"), FileMode.Create))
-                                    {
-                                        await newsVm.ImgList[index].CopyToAsync(file_stream);
-                                    }
+                                    await newsVm.ImgList[index].CopyToAsync(file_stream);
                                 }
                             }
                         }
+                    } 
 
-                        var news = new News
-                        {
-                            Title_EN = newsVm.Title_EN,
-                            Title_TH = newsVm.Title_TH,
-                            Content_TH = newsVm.Content_TH,
-                            Content_EN = newsVm.Content_EN,
-                            CreateDate_TH = newsVm.CreateDate_TH,
-                            CreateDate_EN = newsVm.CreateDate_EN,
-                            ImagePath = save_path
-                        };
-                        _db.News.Add(news);
-                        await _db.SaveChangesAsync();
-
-                        return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+                    DateTime InsertDate_news = DateTime.Now;
+                    if (date_str != null)
+                    { 
+                        DateTime InsertDate = DateTime.ParseExact(date_str, "dd/MM/yyyy", new CultureInfo("en-US"));
+                        newdata.CreateDate_EN = InsertDate; 
                     }
+
+                    newdata.Title_EN = newsVm.Title_EN;
+                    newdata.Title_TH = newsVm.Title_TH;
+                    newdata.Content_TH = newsVm.Content_TH;
+                    newdata.Content_EN = newsVm.Content_EN;
+                    newdata.ImagePath = save_path;
+
+                    //var news = new News
+                    //{
+                    //    Title_EN = newsVm.Title_EN,
+                    //    Title_TH = newsVm.Title_TH,
+                    //    Content_TH = newsVm.Content_TH,
+                    //    Content_EN = newsVm.Content_EN,
+                    //    CreateDate_EN = InsertDate_news,
+                    //    ImagePath = save_path
+                    //};
+                    _db.News.Add(newdata);
+                    await _db.SaveChangesAsync();
                 }
-                catch (Exception ex)
+                else
                 {
-                    System.IO.Directory.Delete(Path.Combine(root_path, save_path), true);
-                    return Json(new { status = "error", message = ex.Message, inner = ex.InnerException });
+                    return Json(new { status = "error", message = "data not found!" });
                 }
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
             }
-            return Json(new { status = "error", message = "กรุณากรอกทุกอย่างให้ครบถ้วน" });
+            catch (Exception ex)
+            {
+                System.IO.Directory.Delete(Path.Combine(root_path, save_path), true);
+                return Json(new { status = "error", message = ex.Message, inner = ex.InnerException });
+            } 
         }
 
         private List<string> Get_FileName(string path)
@@ -274,7 +275,8 @@ namespace Lighting.Controllers.Backend
                             return string.Join("/", new_path);
                         })
                         .ToList();
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return new List<string>();
             }

@@ -57,6 +57,7 @@ namespace Lighting.Controllers.Frontend
                     Email = contact.Email,
                     GoogleMaps_Url = contact.GoogleMaps_Url,
                     ImagePath = contact.ImagePath,
+                    ImagePathEN = contact.ImagePathEN,
                     Location_EN = contact.Location_EN,
                     Location_TH = contact.Location_TH,
                     OfficePhone = contact.OfficePhone,
