@@ -545,6 +545,7 @@
     <Folder Include="wwwroot\upload_image\MainContact\" />
     <Folder Include="wwwroot\upload_image\NewFolder\" />
     <Folder Include="wwwroot\upload_image\Philosophy\" />
+    <Folder Include="wwwroot\upload_image\Resource_Facility\" />
     <Folder Include="wwwroot\upload_image\SustainabilityReport\" />
     <Folder Include="wwwroot\upload_image\Product_Category\" />
     <Folder Include="wwwroot\upload_image\Product_Model\" />
