@@ -16,6 +16,7 @@ namespace Lighting.Controllers.Frontend
             _env = env;
             _rootPath = _env.WebRootPath;
         }
+
         public IActionResult Index()
         {
             dynamic mymodal = new ExpandoObject();
@@ -26,77 +27,17 @@ namespace Lighting.Controllers.Frontend
             {
                 x.Profile_Image = Path.Combine(x.Folder_Path, x.Profile_Image);
             });
-            var downloads = _db.Downloads.OrderByDescending(x => x.Id).Where(download => download.DownloadType == "CATALOGUE").Take(4).ToList();
-            var Downloads = downloads.Select(download => new Output_DownloadVM
-            {
-                Id = download.Id,
-                Name_EN = download.Name_EN,
-                Name_TH = download.Name_TH,
-                File = GetFileName(download.File_Path),
-                Image = download.File_Path + "/0.jpg",
-                File_EN = GetFileName_EN(download.File_Path_EN),
-                Image_EN = download.File_Path_EN + "/1.jpg",
 
-            });
             mymodal.DATA = DATA;
-
+            var latestDownloads = _db.Downloads
+            .Where(x => x.use_status == 1)
+            .GroupBy(x => x.DownloadType_id)
+            .Select(group => group.OrderByDescending(x => x.id).FirstOrDefault())
+            .ToList();
             mymodal.Product = Products;
             mymodal.Project = Projects;
             mymodal.Download = latestDownloads;
             return View(mymodal);
-        }
-        private string? GetFileName(string path)
-        {
-            try
-            {
-                var path_folder = Path.Combine(_env.WebRootPath, path);
-                if (Directory.Exists(path_folder))
-                {
-                    return Directory.GetFiles(path_folder)
-                                         .Where(file => Path.GetFileName(file).StartsWith("00"))
-                                         .FirstOrDefault()
-                                         .Split("\\")
-                                         .Reverse()
-                                         .Take(4)
-                                         .Reverse()
-                                         .Aggregate("", (prev, curr) => prev + "/" + curr);
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-            catch (Exception ex)
-            {
-                return string.Empty;
-            }
-
-        }
-        private string? GetFileName_EN(string path)
-        {
-            try
-            {
-                var path_folder = Path.Combine(_env.WebRootPath, path);
-                if (Directory.Exists(path_folder))
-                {
-                    return Directory.GetFiles(path_folder)
-                                         .Where(file => Path.GetFileName(file).StartsWith("11"))
-                                         .FirstOrDefault()
-                                         .Split("\\")
-                                         .Reverse()
-                                         .Take(4)
-                                         .Reverse()
-                                         .Aggregate("", (prev, curr) => prev + "/" + curr);
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-            catch (Exception ex)
-            {
-                return string.Empty;
-            }
         }
     }
 }

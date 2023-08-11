@@ -30,5 +30,9 @@ namespace Lighting.Models.InputFilterModels.Download
         public string? file_name_ENG { get; set; }
         public string? L_AND_BIM_Link { get; set; }
         public int? use_status { get; set; }
+        public string? File { get; set; }
+        public string? Image { get; set; }
+        public string? File_EN { get; set; }
+        public string? Image_EN { get; set; }
     }
 }
