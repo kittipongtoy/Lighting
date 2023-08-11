@@ -15,7 +15,7 @@
         public string? Qualification_TH { get; set; }
         public string? Qualification_EN { get; set; }
         public string? Email1 { get; set; }
-        public string? Email2 { get; set; }
+        //public string? Email2 { get; set; }
         public string? PhoneNumber { get; set; }
     }
 }

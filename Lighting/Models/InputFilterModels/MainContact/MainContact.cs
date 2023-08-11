@@ -17,5 +17,6 @@
         public string? GoogleMapLink { get; set; }
         public string? MoreInfo { get; set; }
         public IFormFile? Img_File { get; set; }
+        public IFormFile? Img_FileEN { get; set; }
     }
 }

@@ -37,7 +37,12 @@
                     </span>
             </label>
             <input class="form-control mt-3" type="file" id="file_img_preview">
-            <label class="form-label mt-3">เลือกรูปแนบบา/image category navbar</label>
+            <label class="form-label mt-3">เลือกรูปแนบบา/image category navbar
+                <br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 800 * 800 px
+                </span>
+            </label>
             <input class="form-control mt-3" type="file" id="file_img_preview_nav" />
         </div>
         <center><button class="btn btn-success" style="margin-top:3rem;" onclick="addCategory()">บันทึก/save</button></center>
@@ -86,7 +91,7 @@
 </div>
 
 <div style="position:fixed;inset:0;background-color:rgba(0,0,0,0.5);display:none;justify-content:center;flex-direction:column;align-items:center;z-index:10;overflow:auto;" id="edit_page">
-    <div style="width:50%;height:auto;background-color:white;padding:3rem;border-radius:10px;">
+    <div style="width:50%;min-width:428px;height:auto;background-color:white;padding:3rem;border-radius:10px;">
         <div style="display:grid;grid-template-rows:auto 4rem 4rem 4rem 3rem;gap:3rem;">
             <div style="display:grid;grid-template-columns:50% 50%;">
                 <img style="width:100%;height:50vh;" id="edit_img_preview" />
@@ -104,18 +109,27 @@
 
             </div>
 
-            <dvi>
+            <div>
 
-                <br />
-                <span style="color:red;">
-                    ขนาดรูปภาพ : 1280 * 960 px
-                </span>
-                <input class="form-control mt-3" type="file" id="edit_file_img_preview">
-            </dvi>
-            <dvi style="display:grid;grid-template-columns:auto auto;">
-                <label class="form-label mt-3">เลือกรูปแนบบา/image category navbar</label>
+                <div style="display:grid;grid-template-columns:auto auto;">
+                    <label class="form-label mt-3">
+                        เลือกรูปหมวดหมู่/image category                 
+                        <span style="color:red;">
+                            ขนาดรูปภาพ : 1280 * 960 px
+                        </span>
+                    </label>
+                    <input class="form-control mt-3" type="file" id="edit_file_img_preview">
+                </div>
+            </div>
+            <div style="display:grid;grid-template-columns:auto auto;">
+
+                <label class="form-label mt-3">เลือกรูปแนบบา/image category navbar
+                    <span style="color:red;">
+                        ขนาดรูปภาพ : 800 * 800 px
+                    </span>
+                </label>
                 <input class="form-control mt-3" type="file" id="edit_file_img_preview_nav">
-            </dvi>
+            </div>
             <center>
                 <button class="btn btn-success" onclick="saveEdit()">บันทึก/save</button>
                 <button class="btn btn-primary btn-danger"  onclick="closeEdit()">ปิด/close</button>

@@ -57,13 +57,15 @@ namespace Lighting.Controllers.Frontend
                     Email = contact.Email,
                     GoogleMaps_Url = contact.GoogleMaps_Url,
                     ImagePath = contact.ImagePath,
+                    ImagePathEN = contact.ImagePathEN,
                     Location_EN = contact.Location_EN,
                     Location_TH = contact.Location_TH,
                     OfficePhone = contact.OfficePhone,
                     PlaceName_EN = contact.PlaceName_EN,
                     PlaceName_TH = contact.PlaceName_TH,
                     TelePhone = contact.TelePhone,
-                    YouTube_Url = contact.YouTube_Url,
+                     YouTube_Url_EN = contact.YouTube_Url_EN,
+                      YouTube_Url_TH = contact.YouTube_Url_TH,
                     Sub_Factory_Name_EN = contact.Sub_Factory_Name_EN,
                     Sub_Factory_Name_TH = contact.Sub_Factory_Name_TH
                 }).ToListAsync();

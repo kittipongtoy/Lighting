@@ -69,22 +69,38 @@
 
                         // Split the URL using the "?" character as the separator
                         string[] delimiters = { "youtu.be/", "watch?v=", "embed/" };
-                        string videoId = delimiters.Select(delimiter => youtubeUrl.Split(delimiter).LastOrDefault())
-                        .FirstOrDefault(id => !string.IsNullOrEmpty(id));
-                        string embeddedUrl = "https://www.youtube.com/embed/" + videoId;
-
-                        string videoIdENG = delimiters.Select(delimiter => youtubeUrlENG.Split(delimiter).LastOrDefault())
-                        .FirstOrDefault(id => !string.IsNullOrEmpty(id));
-                        string embeddedUrlENG = "https://www.youtube.com/embed/" + videoIdENG;
-
-                        if (Context.Request.Cookies["lang"] == "EN")
-                        {
-                            <iframe class="responsive-vdo" src="@embeddedUrlENG"></iframe>
+                        if (youtubeUrl != null)
+                        { 
+                            string videoId = delimiters.Select(delimiter => youtubeUrl.Split(delimiter).LastOrDefault())
+                            .FirstOrDefault(id => !string.IsNullOrEmpty(id));
+                            string embeddedUrl = "https://www.youtube.com/embed/" + videoId;
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                //<iframe class="responsive-vdo" src="@embeddedUrlENG"></iframe>
+                            }
+                            else
+                            {
+                                <iframe class="responsive-vdo" src="@embeddedUrl"></iframe>
+                            }
                         }
-                        else
+
+                        if (youtubeUrlENG != null)
                         {
-                            <iframe class="responsive-vdo" src="@embeddedUrl"></iframe>
+                            string videoIdENG = delimiters.Select(delimiter => youtubeUrlENG.Split(delimiter).LastOrDefault())
+                            .FirstOrDefault(id => !string.IsNullOrEmpty(id));
+                            string embeddedUrlENG = "https://www.youtube.com/embed/" + videoIdENG;
+
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                <iframe class="responsive-vdo" src="@embeddedUrlENG"></iframe>
+                            }
+                            else
+                            {
+                                //<iframe class="responsive-vdo" src="@embeddedUrl"></iframe>
+                            }
+                            
                         }
+                        
                     }
                     else
                     {

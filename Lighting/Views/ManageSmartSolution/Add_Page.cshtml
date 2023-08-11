@@ -1,78 +1,68 @@
 ﻿@{
-    ViewData["Title"] = "Manage News";
+    ViewData["Title"] = "Manage_SmartSolution";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
 
 <style>
-    .img-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .link-container {
-        margin: 2rem 0;
-        background-color: rgba(0,0,0,0.2);
-        padding: 0.3rem;
-        min-height: 0px;
-    }
-
-    .input-link {
-        height: 5rem;
-        margin: 1rem;
-        padding: inherit.5rem;
-        display: grid;
-        grid-template-columns: 7rem auto 10rem;
-        gap: 1rem;
-        border-bottom: 1px solid black;
+    .img-container{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
         box-sizing: border-box;
-        & > span
+    }
+    .link-container{
+        background-color: rgba(0,0,0,0.2);
+        box-sizing: border-box;
+        height:auto;
+        overflow-y:auto;
 
-    {
+    }
+    .input-link{
+        height:auto;
+        padding:0.5rem;
+        display:grid;
+        grid-template-columns: 7rem auto 10rem 10rem;
+        gap: 1rem;
+        border-bottom:1px solid black;
+        box-sizing:border-box;
+        & > span{
         display: flex;
         justify-content: center;
         flex-direction: column;
-        text-align: center;
-        word-wrap: break-word;
-    }
-
+        text-align:center;
+        word-wrap:break-word;
+        }
     }
 
     .input-popup {
-        z-index: 10000;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        width: 100dvw;
-        height: 100vh;
-        height: 100dvh;
-        background: rgba(0,0,0,0.4);
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
+        z-index:10000;
+        position:fixed;
+        top:0;
+        left:0;
+        width:100vw;
+        width:100dvw;
+        height:100vh;
+        height:100dvh;
+        background:rgba(0,0,0,0.4);
+
+        display:flex;
+        justify-content:center;
+        flex-direction:column;
+        align-items:center;
     }
 
-    .input-box {
-        width: 80%;
-        height: auto;
-        padding: 3rem;
-        display: grid;
+        display:grid;
         grid-template-rows: 3rem auto auto 3rem 3rem;
-        gap: 3rem;
-        background-color: white;
-        border-radius: 10px;
-        & > h1
-
-    {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-    }
-
+        gap:3rem;
+        background-color:white;
+        border-radius:10px;
+        & > h1{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            text-align:center;
+        }
     }
 </style>
 <div class="container" style="margin-bottom:3rem;">
@@ -127,7 +117,7 @@
             @*link*@
             <div id="link_list" class="link-container">
             </div>
-            <center><button class="btn bg-success" onclick="openPopup()">เพิ่มลิ้ง/add link</button></center>
+            <center><button class="btn bg-success mt-3" onclick="openPopup()">เพิ่มลิ้ง/add link</button></center>
             @*content1*@
             <div class="form-group mt-3 p-1">
                 <label class="h4">คอนเทนต์ (ภาษาไทย)</label>
@@ -165,6 +155,22 @@
     </div>
 </div>
 
+<div class="input-popup" style="display:none;" id="edit_sub_img_popup">
+    <div class="input-box">
+        <h1>เลือกรูปและไฟล์</h1>
+        <div style="display:flex;justify-content:center;align-items:center;flex-direction:column;">
+            <img id="edit_preview_subImg" style="height:40vh;width:100%;" />
+        </div>
+        <span style="color:red;">ภาพขนาด 400*100px</span>
+        <input type="file" class="form-control" id="edit_file_img_preview" />
+        <input type="text" id="edit_txt_link" />
+        <div style="display:flex;justify-content:space-between;">
+            <button class="btn bg-success" onclick="saveEditLink()">ตกลง/save</button>
+            <button class="btn btn-danger" onclick="editClosePopup()">ยกเลิก/cancle</button>
+        </div>
+    </div>
+</div>
+
 @section Scripts{
     <script>
 
@@ -172,6 +178,8 @@
         var explan_th;
         var content_en;
         var content_th;
+
+        var edit_id = null;
 
         ClassicEditor
             .create(document.querySelector('#expanation_th'))
@@ -211,19 +219,20 @@
                 console.error(error);
             });
 
-        var preview_image_file, preview_subimg_file, content_preview_file;
+        var preview_image_file, preview_subimg_file,edit_preview_subimg_file, content_preview_file;
         var link_img = [], add_link_number = 0; //[{file,link,id}]
 
         async function addInputFile(img, link, id) {
             let img_b64 = await blobToBase64DataURL(img);
             return (`
-                    <div id='input_list' class='input-link'>
-                        <div class= 'img-container' >
-                            <img  src="${img_b64}"  style='width:100%;height:100%;' />
-                        </div>
-                        <span>${link}</span>
-                        <button class="btn btn-danger"  onClick="deleteLink(${id})">ลบ/delete</button>
-                    </div>`);
+            <div id='input_list' class='input-link'>
+                <div class='img-container' >
+                    <img  src="${img_b64}"  style='width:100%;height:100%;' />
+                </div>
+                <span>${link}</span>
+                <button class="btn btn-warning"  onClick="editLink('${img_b64}','${link}',${id})">แก้ไข/edit</button>
+                <button class="btn btn-danger"  onClick="deleteLink(${id})">ลบ/delete</button>
+            </div>`);
         }
 
         $(document).ready(function () {
@@ -242,6 +251,13 @@
                 }
             });
 
+            $("#edit_file_img_preview").change(async function (e) {
+                if (e.target.files.length === 1) {
+                    edit_preview_subimg_file = e.target.files[0];
+                    $('#edit_preview_subImg').attr('src', await blobToBase64DataURL(edit_preview_subimg_file)).css("display", "block");
+                }
+            });
+
             $('#file_img').change(async function (e) {
                 if (e.target.files.length === 1) {
                     preview_image_file = e.target.files[0];
@@ -250,10 +266,39 @@
             });
         });
 
+        async function saveEditLink() {
+            let link = $("#edit_txt_link").val();
+            if (link != "" && edit_id != null) {
+                link_img = link_img.map(x => x.id === edit_id ? { file: edit_preview_subimg_file != null ? edit_preview_subimg_file : x.file, link: link, id: x.id} : { ...x });
+                console.log(link_img);
+                let html_link = "";
+                for (let i = 0; i < link_img.length; i++) {
+                    html_link += await addInputFile(link_img[i].file, link_img[i].link, link_img[i].id);
+                }
+                $("#link_list").html(html_link);
+
+                $("#edit_txt_link").val('');
+                edit_preview_subimg_file = null;
+                editClosePopup();
+            }
+        }
+
+        function editLink(img, link, id) {
+            $("#edit_sub_img_popup").css("display", "flex");
+            $("#edit_preview_subImg").attr("src", img).css("display", "flex");
+            $("#edit_txt_link").val(link);
+            edit_id = id;
+        }
+
+        function editClosePopup(){
+            $("#edit_sub_img_popup").css("display", "none");
+            edit_id = null;
+        }
+
         function openPopup() {
             if ($("#sub_img_popup").css("display") == "flex"){
                 $("#sub_img_popup").css("display","none");
-                //$("#preview_subImg").attr("src", "").css("display", "none");
+                $("#preview_subImg").attr("src", "").css("display", "none");
             }else{
                 $("#sub_img_popup").css("display","flex");
             }
@@ -270,7 +315,7 @@
 
         async function addImageLink() {
             let link = $("#txt_link").val();
-            if (preview_subimg_file != undefined && link != "") {
+            if (preview_subimg_file != null && link != ""){
                 link_img.push({ file: preview_subimg_file, link: link, id: add_link_number });
 
                 let html_link = "";
@@ -281,7 +326,7 @@
                 $("#link_list").html(html_link);
 
                 $("#txt_link").val('');
-                preview_subimg_file = undefined;
+                preview_subimg_file = null;
                 openPopup();
             }
         }

@@ -21,5 +21,6 @@ namespace Lighting.Areas.Identity.Data
         public string? GoogleMapLink { get; set; }
         public string? MoreInfo { get; set; }
         public string? Img_File { get; set; }
+        public string? Img_FileEN { get; set; }
     }
 }

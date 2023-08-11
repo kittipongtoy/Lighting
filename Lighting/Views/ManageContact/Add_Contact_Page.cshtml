@@ -54,26 +54,39 @@
             <!--email and link-->
             <div class="form-group  p-2">
                 <label class="h4 mt-3">Email</label>
-                <textarea id="email" placeholder="Email@example1.com,Email@example2.com"></textarea>
+                <textarea id="email" placeholder="Email@example.com"></textarea>
                 <label class="h4 mt-3">Google Map URL</label>
                 <input type="text" class="form-control" id="googlemap" placeholder="https://example.com">
-                <label class="h4 mt-3">Youtube URL</label>
-                <input type="text" class="form-control" id="youtube" placeholder="https://youtube.com/example">
+                <label class="h4 mt-3">Youtube URL (ภาษาไทย)</label>
+                <input type="text" class="form-control" id="youtube_th" placeholder="https://youtube.com/example">
+                <label class="h4 mt-3">Youtube URL (English)</label>
+                <input type="text" class="form-control" id="youtube_en" placeholder="https://youtube.com/example">
             </div>
             <!--email and link--->
             <!--fileimage-->
             <div class="custom-file mt-3 p-1" style="border:1px solid black">
-
                 <img style="width:100%;height:100%;display:none;" id="preview_show_img" />
                 <br />
                 <label for="formFile" class="form-label">
-                    เลือกไฟล์ รูป
+                    เลือกไฟล์ รูป แผนที่ TH
                     <br />
                     <span style="color:red;">
                         ขนาดรูปภาพ : 1860 * 1300 px
                     </span>
                 </label>
                 <input type="file" class="form-control mt-3" id="file_img" accept="image/png, image/gif, image/jpeg" multiple>
+            </div>
+            <div class="custom-file mt-3 p-1" style="border:1px solid black">
+                <img style="width:100%;height:100%;display:none;" id="preview_show_imgEN" />
+                <br />
+                <label for="formFile" class="form-label">
+                    เลือกไฟล์ รูป แแผนที่ EN
+                    <br />
+                    <span style="color:red;">
+                        ขนาดรูปภาพ : 1860 * 1300 px
+                    </span>
+                </label>
+                <input type="file" class="form-control mt-3" id="file_imgEN" accept="image/png, image/gif, image/jpeg" multiple>
             </div>
             <!--file-->
             <center style="margin:3rem;display:flex;justify-content:space-between;">
@@ -120,11 +133,21 @@
             });
 
         var image_file;
+        var image_fileEN;
         $(document).ready(function () {
+            
+
             $('#file_img').change(async function (e) {
                 if (e.target.files.length === 1) {
                     image_file = e.target.files[0];
                     $('#preview_show_img').attr('src', await blobToBase64DataURL(image_file)).css("display", "block");
+                }
+            });
+
+            $('#file_imgEN').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    image_fileEN = e.target.files[0];
+                    $('#preview_show_imgEN').attr('src', await blobToBase64DataURL(image_fileEN)).css("display", "block");
                 }
             });
         });
@@ -157,7 +180,8 @@
 
             let email = email_txt.getData();
             let google_map = $("#googlemap").val();
-            let youtube = $("#youtube").val();
+            let youtube_th = $("#youtube_th").val();
+            let youtube_en = $("#youtube_en").val();
 
             let formData = new FormData();
             formData.append("ContactType", contact_type);
@@ -172,13 +196,19 @@
             formData.append("CellPhone", cell_phone);
             formData.append("TelePhone", tele_phone);
             formData.append("OfficePhone", office_phone);
+
             if (image_file != undefined) {
                 formData.append("Image", image_file);
             }
 
+            if (image_fileEN != undefined) {
+                formData.append("ImageEN", image_fileEN);
+            }
+
             formData.append("Email", email);
             formData.append("GoogleMaps_Url", google_map);
-            formData.append("YouTube_Url", youtube);
+            formData.append("YouTube_Url_TH", youtube_th);
+            formData.append("YouTube_Url_EN", youtube_en);
 
             $.ajax({
                 type: 'POST',

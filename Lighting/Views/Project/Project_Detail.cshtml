@@ -6,7 +6,17 @@
     var category_name = (Lighting.Areas.Identity.Data.Category_Project)ViewData["category"];
 }
 @model Lighting.Models.InputFilterModels.ProjectRef.Output_ProjectRefVM
-
+<style>
+    .text-tiny{
+        font-size:small;
+    }
+    .text-big{
+        font-size:clamp(1.5rem,3vw,3rem);
+    }
+    .text-huge{
+        font-size: clamp(2.2rem,4.5vw,4.5rem);
+    }
+</style>
 <!---------- PROJECT - REF :: DETAIL ---------->
 <div class="content-padding m-pad">
     <div class="container-fluid">
@@ -246,10 +256,10 @@
                                                     <div class="contentBox-topic">
                                                         @if (lang == "EN")
                                                         {
-                                                            <p>@cat.Location_EN</p>
+                                                            <p>@cat.Title_EN</p>
                                                         }else
                                                         {
-                                                            <p>@cat.Location_TH</p>
+                                                            <p>@cat.Title_TH</p>
                                                         }
                                                     </div>
                                                 </div>
@@ -266,7 +276,7 @@
             <div class="row">
                 <div class="col">
                     <div class="content-center">
-                        <a class="buttonB" href="@Url.Action("Project_Category","Project",new {categoryId=category_name?.Id})"><i class="fas fa-long-arrow-alt-left"></i>Back</a>
+                        <a class="buttonB" href="@Url.Action("Project_Category","Project",new {category=category_name?.Name_EN})"><i class="fas fa-long-arrow-alt-left"></i>Back</a>
                     </div>
                 </div>
             </div>
@@ -420,7 +430,27 @@
                         slideBy: 1
                     }
                 }
-            })
+            });
+
+            let content = document.querySelectorAll("figure");
+            let indexHtml = 0;
+            document.querySelectorAll("oembed").forEach(x => {
+                //console.log(x.getAttribute("url"));
+                let url = x.getAttribute("url");
+                let w = window.innerWidth, h = 500;
+                if (w >= 1080) {
+                    h = 750;
+                }
+                if (w < 1080) {
+                    h = Math.floor(window.innerHeight * 0.55)
+                }
+                if (w < 500) {
+                    h = Math.floor(window.innerHeight * 0.4)
+                }
+                content[indexHtml].innerHTML = `<iframe width="100%" height="${h}px" src="${url}"></iframe>`;
+                indexHtml++;
+            });
+
         });
     </script>
 }

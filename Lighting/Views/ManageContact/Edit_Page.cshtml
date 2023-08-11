@@ -76,11 +76,13 @@
             <!--email and link-->
             <div class="form-group  p-2">
                 <label class="h4 mt-3">Email</label>
-                <textarea id="email" placeholder="Email@example1.com,Email@example2.com">@Model.Email</textarea>
+                <textarea id="email" placeholder="Email@example.com">@Model.Email</textarea>
                 <label class="h4 mt-3">Google Map URL</label>
                 <input type="text" class="form-control" id="googlemap" placeholder="https://example.com" value="@Model.GoogleMaps_Url">
-                <label class="h4 mt-3">Youtube URL</label>
-                <input type="text" class="form-control" id="youtube" placeholder="https://youtube.com/example" value="@Model.YouTube_Url">
+                <label class="h4 mt-3">Youtube URL (ภาษาไทย)</label>
+                <input type="text" class="form-control" id="youtube_th" placeholder="https://youtube.com/example" value="@Model.YouTube_Url_TH">
+                <label class="h4 mt-3">Youtube URL (English)</label>
+                <input type="text" class="form-control" id="youtube_en" placeholder="https://youtube.com/example" value="@Model.YouTube_Url_EN">
             </div>
             <!--email and link--->
             <!--fileimage-->
@@ -95,13 +97,32 @@
                 }
                 <br />
                 <label for="formFile" class="form-label mt-3">
-                    เลือกไฟล์ เปลี่ยนรูป
+                    เลือกไฟล์ เปลี่ยนรูป แผ่นที่ TH
                     <br />
                     <span style="color:red;">
                         ขนาดรูปภาพ : 1860 * 1300 px
                     </span>
                 </label>
                 <input type="file" class="form-control " id="file_img" accept="image/png, image/gif, image/jpeg" multiple>
+            </div>
+            <div class="custom-file mt-3 p-1" style="border:1px solid black">
+                @if (Model.ImagePathEN != null)
+                {
+                    <img style="width:100%;height:100%;" id="preview_show_imgEN" src="@Model.ImagePathEN" />
+                }
+                else
+                {
+                    <img style="width:100%;height:100%;display:none;" id="preview_show_imgEN" />
+                }
+                <br />
+                <label for="formFile" class="form-label mt-3">
+                    เลือกไฟล์ เปลี่ยนรูป แผนที่ EN
+                    <br />
+                    <span style="color:red;">
+                        ขนาดรูปภาพ : 1860 * 1300 px
+                    </span>
+                </label>
+                <input type="file" class="form-control " id="file_imgEN" accept="image/png, image/gif, image/jpeg" multiple>
             </div>
             <!--file-->
             <center style="display:flex;justify-content:space-between;margin:3rem;">
@@ -147,12 +168,23 @@
             .catch(error => {
                 console.error(error);
             });
+
         var image_file;
         $(document).ready(function () {
             $('#file_img').change(async function (e) {
                 if (e.target.files.length === 1) {
                     image_file = e.target.files[0];
                     $('#preview_show_img').attr('src', await blobToBase64DataURL(image_file)).css("display", "block");
+                }
+            });
+        });
+
+        var image_fileEN;
+        $(document).ready(function () {
+            $('#file_imgEN').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    image_fileEN = e.target.files[0];
+                    $('#preview_show_imgEN').attr('src', await blobToBase64DataURL(image_fileEN)).css("display", "block");
                 }
             });
         });
@@ -185,7 +217,8 @@
 
             let email = email_txt.getData();
             let google_map = $("#googlemap").val();
-            let youtube = $("#youtube").val();
+            let youtube_th = $("#youtube_th").val();
+            let youtube_en = $("#youtube_en").val();
 
             let formData = new FormData();
             formData.append("ContactType", contact_type);
@@ -204,9 +237,14 @@
                 formData.append("Image", image_file);
             }
 
+            if (image_fileEN != undefined) {
+                formData.append("ImageEN", image_fileEN);
+            }
+
             formData.append("Email", email);
             formData.append("GoogleMaps_Url", google_map);
-            formData.append("YouTube_Url", youtube);
+            formData.append("YouTube_Url_TH", youtube_th);
+            formData.append("YouTube_Url_EN", youtube_en);
 
             $.ajax({
                 type: 'POST',
