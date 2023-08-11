@@ -1,9 +1,10 @@
-﻿@{
+﻿@model Lighting.Models.model_input;
+
+@{
     ViewData["Title"] = "Manage_Download_Page";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
     var lang = Context.Request.Cookies["lang"];
 }
-@model Lighting.Models.InputFilterModels.Download.Output_DownloadVM
 
 <div class="container">
 
@@ -12,8 +13,12 @@
             <!--contact type-->
             <div class="form-group p-2">
                 <label class="h4">ประเภท</label>
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="download_type">
-                    @if (Model.DownloadType == "L&E BIM OBJECTS")
+                <div class="col-sm-5">
+                    <select class="col-lg-8 form-controlform-select form-select-lg mb-3" aria-label=".form-select-lg example" id="Select2_DownloadType" name="DownloadType_id">
+                    </select>
+                </div>
+               @* <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="download_type">
+                    @if (Model.Output_DownloadVM.DownloadType_id == "L&E BIM OBJECTS")
                     {
                         <option value="L&E BIM OBJECTS" class="h5" selected="selected">L&E BIM OBJECTS</option>
                     }
@@ -21,7 +26,7 @@
                     {
                         <option value="L&E BIM OBJECTS" class="h5">L&E BIM OBJECTS</option>
                     }
-                    @if (Model.DownloadType == "CATALOGUE")
+                    @if (Model.Output_DownloadVM.DownloadType_id == "CATALOGUE")
                     {
                         <option value="CATALOGUE" class="h5" selected="selected">CATALOGUE</option>
                     }
@@ -29,7 +34,7 @@
                     {
                         <option value="CATALOGUE" class="h5">CATALOGUE</option>
                     }
-                    @if (Model.DownloadType == "COMPANY PROFILE")
+                    @if (Model.Output_DownloadVM.DownloadType == "COMPANY PROFILE")
                     {
                         <option value="COMPANY PROFILE" class="h5" selected>COMPANY PROFILE</option>
                     }
@@ -37,7 +42,7 @@
                     {
                         <option value="COMPANY PROFILE" class="h5">COMPANY PROFILE</option>
                     }
-                    @if (Model.DownloadType == "IES FILE")
+                    @if (Model.Output_DownloadVM.DownloadType == "IES FILE")
                     {
                         <option value="IES FILE" class="h5" selected="selected">IES FILE</option>
                     }
@@ -45,7 +50,7 @@
                     {
                         <option value="IES FILE" class="h5">IES FILE</option>
                     }
-                    @if (Model.DownloadType == "LEAFLET")
+                    @if (Model.Output_DownloadVM.DownloadType == "LEAFLET")
                     {
                         <option value="LEAFLET" class="h5" selected="selected">LEAFLET</option>
                     }
@@ -54,20 +59,20 @@
                         <option value="LEAFLET" class="h5">LEAFLET</option>
                     }
 
-                </select>
+                </select>*@
             </div>
             <!--end contact type-->
             <!-- dowload name-->
             <div class="form-group mt-3 p-2" style="border:1px solid black" id="place">
                 <label class="h4 mt-3">ชื่อการดาวน์โหลด (ภาษาไทย)</label>
-                <input type="text" class="form-control" id="download_name_th" placeholder="ชื่อการดาวน์โหลด" value="@Model.Name_TH">
+                <input type="text" class="form-control" id="download_name_th" placeholder="ชื่อการดาวน์โหลด" value="@Model.Output_DownloadVM.Name_TH">
                 <label class="h4 mt-3">Download Name (English)</label>
-                <input type="text" class="form-control" id="download_name_en" placeholder="Download Name" value="@Model.Name_EN">
+                <input type="text" class="form-control" id="download_name_en" placeholder="Download Name" value="@Model.Output_DownloadVM.Name_EN">
             </div>
             <!--dowload name-->
             <!--fileimage-->
             <div class="custom-file mt-3 p-1" style="border:1px solid black">
-                <img style="width:100%;height:100%;" id="preview_show_img" src="@Model.Image" />
+                <img style="width:500px;height:250px;" id="preview_show_img" src="~/upload_file/Download/@Model.Output_DownloadVM.upload_image" />
                 <br />
                 <label for="formFile" class="form-label mt-3">
                     เปลี่ยน รูป TH
@@ -80,7 +85,7 @@
             </div>
 
             <div class="custom-file mt-3 p-1" style="border:1px solid black">
-                <img style="width:100%;height:100%;" id="preview_show_img_EN" src="@Model.Image_EN" />
+                <img style="width:500px;height:250px;" id="preview_show_img_EN" src="~/upload_file/Download/@Model.Output_DownloadVM.upload_image_ENG" />
                 <br />
                 <label for="formFile" class="form-label mt-3">
                     เปลี่ยน รูป EN
@@ -98,29 +103,52 @@
                 <label for="formFile" class="form-label mt-3">เปลี่ยนไฟล์/chnage file</label>
                 <input type="file" class="form-control" id="file_download">
             </div>
-            @if (Model.File != null)
+            @if (Model.Output_DownloadVM.file_name != null)
             {
-                <a href="ManageDownload/Download?path_and_name=@Model.File" target="_blank" class="btn btn-primary h4 mt-3">ไฟล์เอกสาร TH</a>
+                <a href="~/upload_file/Download/@Model.Output_DownloadVM.file_name" target="_blank" class="btn btn-primary h4 mt-3">ไฟล์เอกสาร TH</a>
                 <br />
             }
             <div class="custom-file mt-3 p-1">
                 <label for="formFile" class="form-label mt-3">เปลี่ยนไฟล์/chnage file</label>
                 <input type="file" class="form-control" id="file_download_EN">
             </div>
-            @if (Model.File_EN != null)
+            @if (Model.Output_DownloadVM.file_name_ENG != null)
             {
-                <a href="ManageDownload/Download?path_and_name=@Model.File_EN" target="_blank" class="btn btn-primary h4 mt-3">ไฟล์เอกสาร EN</a>
+                <a href="~/upload_file/Download/@Model.Output_DownloadVM.file_name_ENG" target="_blank" class="btn btn-primary h4 mt-3">ไฟล์เอกสาร EN</a>
             }
             <br />
             <!--end file-->
             <!--link-->
             <div class="custom-file mt-3 p-1">
                 <label for="formFile" class="form-label"> ลิงค์ </label>
-                <input type="text" class="form-control" id="link_l_and_bim" value="@Model.L_AND_BIM_Link">
+                <input type="text" class="form-control" id="link_l_and_bim" value="@Model.Output_DownloadVM.L_AND_BIM_Link">
             </div>
             <!--end link-->
+
+            <br />
+            <div class="row mb-3">
+                <div class="col-2">
+                    <span>
+                        สถานะการใช้งาน
+                    </span>
+                </div>
+                <div class="col-4">
+                    <div class="form-check form-switch">
+                        @if (Model.Output_DownloadVM.use_status == 1)
+                        {
+                            <input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onclick="checkSwitch()">
+                        }
+                        else
+                        {
+                            <input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onclick="checkSwitch()">
+                        }
+                        <label class="form-check-label" for="active_status">ใช้งาน</label>
+                    </div>
+                </div>
+            </div>
+
             <center style="display:flex;justify-content:space-between;margin:3rem;">
-                <button type="button" class="btn btn-success" onclick="submit(@Model.Id)">บันทึก/save</button>
+                <button type="button" class="btn btn-success" onclick="submit(@Model.Output_DownloadVM.id)">บันทึก/save</button>
                 <a href="@Url.Action("manage_Download_page","ManageDownload")" class="btn btn-primary">กลับ/back</a>
             </center>
 
@@ -130,12 +158,50 @@
 
 @section Scripts{
     <script>
+
+        function Select2_DownloadType() {
+            $.ajax({
+                type: 'POST',
+                url: '/ManageDownload/Get_DownloadType',
+                success: function (data) {
+                    if (data.Length != 0) {
+                        var s = '<option  value = "0" disabled> --กรุณาเลือก ประเภท-- </option > ';
+                        $.each(data.db, function (index, item) {
+                            if (item.id == @Model.Output_DownloadVM.DownloadType_id){ 
+                            s += '<option selected value="' + item.id + '">' + item.downloadType_name_ENG + '</option>';
+                            }else{ 
+                            s += '<option value="' + item.id + '">' + item.downloadType_name_ENG + '</option>';
+                            }
+                        });
+                        $("#Select2_DownloadType").html(s);
+                    }
+                },
+                error: function (error) {
+                    console.log("AJAX Error:", error);
+                }
+            });
+        }
+
+        var check = 1;
+        function checkSwitch() {
+            if (document.getElementById("use_status").checked == true) {
+                check = 1;
+            }
+            else {
+                check = 0;
+            }
+            $("#use_status").val(check);
+            console.log(check)
+        }
+
         var image_file;
         var image_file_EN;
         var file_dowload;
         var file_dowload_EN;
 
         $(document).ready(function () {
+            Select2_DownloadType();
+
             $('#file_img').change(async function (e) {
                 if (e.target.files.length === 1) {
                     image_file = e.target.files[0];
@@ -176,12 +242,18 @@
             let download_name_th = $("#download_name_th").val();
             let download_name_en = $("#download_name_en").val();
             let link_l_and_bim = $("#link_l_and_bim").val();
+            let downloadType_id = $("#Select2_DownloadType").val()
+            debugger
+            let use_status = check;
 
             let formData = new FormData();
             formData.append("DownloadType", download_type);
             formData.append("Name_EN", download_name_en);
             formData.append("Name_TH", download_name_th);
             formData.append("L_AND_BIM_Link", link_l_and_bim);
+            formData.append("use_status", use_status);
+            formData.append("DownloadType_id", downloadType_id);
+
             if (image_file != undefined) {
                 formData.append("Image", image_file);
             }

@@ -3,13 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Lighting.Areas.Identity.Data
 {
-    public class RF_Solution_Centers_Images : IProperty
+    public class DownloadTypes : IProperty
     {
-        [Key]
         public int id { get; set; }
-        public string? upload_image { get; set; }
-        public string? upload_image_ENG { get; set; }
-        public int? active_status { get; set; }
+        public string? DownloadType_name_TH { get; set; }
+        public string? DownloadType_name_ENG { get; set; }
         public DateTime? created_at { get; set; }
         public DateTime? updated_at { get; set; }
     }

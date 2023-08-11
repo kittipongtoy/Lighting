@@ -25,7 +25,7 @@ namespace Lighting.Controllers.Frontend
             #region pagination
             var maximum_page = 10;
             var pagination_page = new List<int>();
-            var page_count = _db.Downloads.AsNoTracking().Where(download => download.DownloadType == "CATALOGUE").ToList().Count;
+            var page_count = _db.Downloads.AsNoTracking().Where(download => download.DownloadType_id == 2).ToList().Count;
             var is_only_one_page = false;
             if (page_count <= maximum_page)
             {
@@ -52,33 +52,36 @@ namespace Lighting.Controllers.Frontend
 
             var download_list = await _db.Downloads
                 .AsNoTracking()
-                .Where(download => download.DownloadType == "CATALOGUE")
-                .OrderByDescending(by => by.Id)
+                .Where(download => download.DownloadType_id == 2)
+                .OrderByDescending(by => by.id)
                 .Skip(start)
                 .Take(start > 0 ? maximum_page : start + maximum_page)
                 .ToListAsync();
 
-            var output = download_list.Select(download => new Output_DownloadVM
-            {
-                Id = download.Id,
-                Name_EN = download.Name_EN,
-                Name_TH = download.Name_TH,
-                File = GetFileName(download.File_Path),
-                Image = download.File_Path + "/0.jpg",
-                File_EN = GetFileName_EN(download.File_Path_EN),
-                Image_EN = download.File_Path_EN + "/1.jpg",
+            //var output = download_list.Select(download => new Output_DownloadVM
+            //{
+            //    id = download.id,
+            //    Name_EN = download.Name_EN,
+            //    Name_TH = download.Name_TH,
+            //    upload_image = download.upload_image,
+            //    upload_image_ENG = download.upload_image_ENG,
+            //    file_name = download.file_name,
+            //    file_name_ENG = download.file_name_ENG,
+            //    L_AND_BIM_Link = download.L_AND_BIM_Link
+            //});
 
-            });
+            ViewBag.Head = await _db.DownloadHeads.ToListAsync();
+            ViewBag.TitleMenu = await _db.DownloadTypes.ToListAsync(); 
+            ViewBag.Content = download_list;
 
-
-            return View(output);
+            return View();
         }
         public async Task<IActionResult> COMPANY_PROFILE_Page(int start)
         {
             #region pagination
             var maximum_page = 10;
             var pagination_page = new List<int>();
-            var page_count = _db.Downloads.AsNoTracking().Where(download => download.DownloadType == "COMPANY PROFILE").ToList().Count;
+            var page_count = _db.Downloads.AsNoTracking().Where(download => download.DownloadType_id == 3).ToList().Count;
             var is_only_one_page = false;
             if (page_count <= maximum_page)
             {
@@ -105,32 +108,36 @@ namespace Lighting.Controllers.Frontend
 
             var download_list = await _db.Downloads
                 .AsNoTracking()
-                .Where(download => download.DownloadType == "COMPANY PROFILE")
-                .OrderByDescending(by => by.Id)
+                .Where(download => download.DownloadType_id == 3)
+                .OrderByDescending(by => by.id)
                 .Skip(start)
                 .Take(start > 0 ? maximum_page : start + maximum_page)
                 .ToListAsync();
 
-            var output = download_list.Select(download => new Output_DownloadVM
-            {
-                Id = download.Id,
-                Name_EN = download.Name_EN,
-                Name_TH = download.Name_TH,
-                File = GetFileName(download.File_Path),
-                Image = download.File_Path + "/0.jpg",
-                File_EN = GetFileName_EN(download.File_Path_EN),
-                Image_EN = download.File_Path_EN + "/1.jpg",
-            });
+            //var output = download_list.Select(download => new Output_DownloadVM
+            //{
+            //    id = download.id,
+            //    Name_EN = download.Name_EN,
+            //    Name_TH = download.Name_TH,
+            //    upload_image = download.upload_image,
+            //    upload_image_ENG = download.upload_image_ENG,
+            //    file_name = download.file_name,
+            //    file_name_ENG = download.file_name_ENG,
+            //    L_AND_BIM_Link = download.L_AND_BIM_Link
+            //});
 
+            ViewBag.Head = await _db.DownloadHeads.ToListAsync();
+            ViewBag.TitleMenu = await _db.DownloadTypes.ToListAsync();
+            ViewBag.Content = download_list;
 
-            return View(output);
+            return View();
         }
         public async Task<IActionResult> IES_FILE_Page(int start)
         {
             #region pagination
             var maximum_page = 10;
             var pagination_page = new List<int>();
-            var page_count = _db.Downloads.AsNoTracking().Where(download => download.DownloadType == "IES FILE").ToList().Count;
+            var page_count = _db.Downloads.AsNoTracking().Where(download => download.DownloadType_id == 4).ToList().Count;
             var is_only_one_page = false;
             if (page_count <= maximum_page)
             {
@@ -157,32 +164,36 @@ namespace Lighting.Controllers.Frontend
 
             var download_list = await _db.Downloads
                 .AsNoTracking()
-                .Where(download => download.DownloadType == "IES FILE")
-                .OrderByDescending(by => by.Id)
+                .Where(download => download.DownloadType_id == 4)
+                .OrderByDescending(by => by.id)
                 .Skip(start)
                 .Take(start > 0 ? maximum_page : start + maximum_page)
                 .ToListAsync();
 
-            var output = download_list.Select(download => new Output_DownloadVM
-            {
-                Id = download.Id,
-                Name_EN = download.Name_EN,
-                Name_TH = download.Name_TH,
-                File = GetFileName(download.File_Path),
-                Image = download.File_Path + "/0.jpg",
-                File_EN = GetFileName_EN(download.File_Path_EN),
-                Image_EN = download.File_Path_EN + "/1.jpg",
-            });
+            //var output = download_list.Select(download => new Output_DownloadVM
+            //{
+            //    id = download.id,
+            //    Name_EN = download.Name_EN,
+            //    Name_TH = download.Name_TH,
+            //    upload_image = download.upload_image,
+            //    upload_image_ENG = download.upload_image_ENG,
+            //    file_name = download.file_name,
+            //    file_name_ENG = download.file_name_ENG,
+            //    L_AND_BIM_Link = download.L_AND_BIM_Link
+            //});
 
+            ViewBag.Head = await _db.DownloadHeads.ToListAsync();
+            ViewBag.TitleMenu = await _db.DownloadTypes.ToListAsync();
+            ViewBag.Content = download_list;
 
-            return View(output);
+            return View();
         }
         public async Task<IActionResult> L_AND_BIM_OBJECT_Page(int start)
         {
             #region pagination
             var maximum_page = 10;
             var pagination_page = new List<int>();
-            var page_count = _db.Downloads.AsNoTracking().Where(download => download.DownloadType == "L&E BIM OBJECTS").ToList().Count;
+            var page_count = _db.Downloads.AsNoTracking().Where(download => download.DownloadType_id == 1).ToList().Count;
             var is_only_one_page = false;
             if (page_count <= maximum_page)
             {
@@ -209,32 +220,36 @@ namespace Lighting.Controllers.Frontend
 
             var download_list = await _db.Downloads
                 .AsNoTracking()
-                .Where(download => download.DownloadType == "L&E BIM OBJECTS")
-                .OrderByDescending(by => by.Id)
+                .Where(download => download.DownloadType_id == 1)
+                .OrderByDescending(by => by.id)
                 .Skip(start)
                 .Take(start > 0 ? maximum_page : start + maximum_page)
                 .ToListAsync();
 
-            var output = download_list.Select(download => new Output_DownloadVM
-            {
-                Id = download.Id,
-                Name_EN = download.Name_EN,
-                Name_TH = download.Name_TH,
-                File = GetFileName(download.File_Path),
-                Image = download.File_Path + "/0.jpg", 
-                File_EN = GetFileName_EN(download.File_Path_EN),
-                Image_EN = download.File_Path_EN + "/1.jpg",
-                L_AND_BIM_Link = download.L_AND_BIM_Link
-            });
+            //var output = download_list.Select(download => new Output_DownloadVM
+            //{
+            //    id = download.id,
+            //    Name_EN = download.Name_EN,
+            //    Name_TH = download.Name_TH,
+            //    upload_image = download.upload_image,
+            //    upload_image_ENG = download.upload_image_ENG,
+            //    file_name = download.file_name,
+            //    file_name_ENG = download.file_name_ENG,
+            //    L_AND_BIM_Link = download.L_AND_BIM_Link
+            //});
 
-            return View(output);
+            ViewBag.Head = await _db.DownloadHeads.ToListAsync();
+            ViewBag.TitleMenu = await _db.DownloadTypes.ToListAsync();
+            ViewBag.Content = download_list;
+
+            return View();
         }
         public async Task<IActionResult> LEAFLET_Page(int start)
         {
             #region pagination
             var maximum_page = 10;
             var pagination_page = new List<int>();
-            var page_count = _db.Downloads.AsNoTracking().Where(download => download.DownloadType == "LEAFLET").ToList().Count;
+            var page_count = _db.Downloads.AsNoTracking().Where(download => download.DownloadType_id == 5).ToList().Count;
             var is_only_one_page = false;
             if (page_count <= maximum_page)
             {
@@ -261,82 +276,30 @@ namespace Lighting.Controllers.Frontend
 
             var download_list = await _db.Downloads
                 .AsNoTracking()
-                .Where(download => download.DownloadType == "LEAFLET")
-                .OrderByDescending(by => by.Id)
+                .Where(download => download.DownloadType_id == 5)
+                .OrderByDescending(by => by.id)
                 .Skip(start)
                 .Take(start > 0 ? maximum_page : start + maximum_page)
                 .ToListAsync();
 
-            var output = download_list.Select(download => new Output_DownloadVM
-            {
-                Id = download.Id,
-                Name_EN = download.Name_EN,
-                Name_TH = download.Name_TH,
-                File = GetFileName(download.File_Path),
-                Image = download.File_Path + "/0.jpg",
-                File_EN = GetFileName_EN(download.File_Path_EN),
-                Image_EN = download.File_Path_EN + "/1.jpg",
-            });
+            //var output = download_list.Select(download => new Output_DownloadVM
+            //{
+            //    id = download.id,
+            //    Name_EN = download.Name_EN,
+            //    Name_TH = download.Name_TH,
+            //    upload_image = download.upload_image,
+            //    upload_image_ENG = download.upload_image_ENG,
+            //    file_name = download.file_name,
+            //    file_name_ENG = download.file_name_ENG,
+            //    L_AND_BIM_Link = download.L_AND_BIM_Link
+            //}); 
 
+            ViewBag.Head = await _db.DownloadHeads.ToListAsync();
+            ViewBag.TitleMenu = await _db.DownloadTypes.ToListAsync();
+            ViewBag.Content = download_list;
 
-            return View(output);
+            return View();
         }
-
-        private string? GetFileName(string path)
-        {
-            try
-            {
-                var path_folder = Path.Combine(_env.WebRootPath, path);
-                if (Directory.Exists(path_folder))
-                {
-                    return Directory.GetFiles(path_folder)
-                                         .Where(file => Path.GetFileName(file).StartsWith("00"))
-                                         .FirstOrDefault()
-                                         .Split("\\")
-                                         .Reverse()
-                                         .Take(4)
-                                         .Reverse()
-                                         .Aggregate("", (prev, curr) => prev + "/" + curr);
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-            catch (Exception ex)
-            {
-                return string.Empty;
-            }
-
-        } 
-        private string? GetFileName_EN(string path)
-        {
-            try
-            {
-                var path_folder = Path.Combine(_env.WebRootPath, path);
-                if (Directory.Exists(path_folder))
-                {
-                    return Directory.GetFiles(path_folder)
-                                         .Where(file => Path.GetFileName(file).StartsWith("11"))
-                                         .FirstOrDefault()
-                                         .Split("\\")
-                                         .Reverse()
-                                         .Take(4)
-                                         .Reverse()
-                                         .Aggregate("", (prev, curr) => prev + "/" + curr);
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-            catch (Exception ex)
-            {
-                return string.Empty;
-            }
-
-        }
-
-
+         
     }
 }

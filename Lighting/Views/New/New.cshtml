@@ -27,7 +27,7 @@
                             var getDate = "";
                             if (news.CreateDate_EN!=null){ 
                                 var inputDate = Convert.ToDateTime(news.CreateDate_EN);
-                                getDate = inputDate.ToString("dd/MM/yyyy", new CultureInfo("en-US"));
+                                getDate = inputDate.ToString("dd/MMM/yyyy", new CultureInfo("en-US"));
                             }
 
                             <div class="col-lg-4 col-md-4 col-6">
@@ -65,7 +65,7 @@
                             if (news.CreateDate_EN != null)
                             {
                                 var inputDate = Convert.ToDateTime(news.CreateDate_EN);
-                                getDate = inputDate.ToString("dd/MM/yyyy", new CultureInfo("th-TH"));
+                                getDate = inputDate.ToString("dd/MMM/yyyy", new CultureInfo("th-TH"));
                             }
 
                             <div class="col-lg-4 col-md-4 col-6">

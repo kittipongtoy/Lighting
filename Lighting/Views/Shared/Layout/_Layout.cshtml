@@ -374,7 +374,8 @@
 
     var show_download = "";
     var here_download = "";
-    if (ViewData["Title"] == "Manage_Download_Page")
+    if (ViewData["Title"] == "Manage_Download_Page"
+    ||ViewData["Title"] == "Download_Type_edit")
     {
         show_download = "show";
         here_download = "here";
@@ -893,7 +894,8 @@
                                 </span>
                                 <div class="menu-sub menu-sub-accordion @show_download @here_download">
                                     <div class="menu-item">
-                                        @if (ViewData["Title"] == "Manage_Download_Page")
+                                        @if (ViewData["Title"] == "Manage_Download_Page"
+                                            ||ViewData["Title"] == "Download_Type_edit")
                                         {
                                             <a class="menu-link active" href="@Url.Action("Manage_Download_Page","ManageDownload")">
                                                 <span class="menu-bullet">

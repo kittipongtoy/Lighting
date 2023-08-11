@@ -3,8 +3,11 @@
 namespace Lighting.Models
 {
     public class model_input
-    {
-        
+    { 
+        public DownloadTypes? DownloadTypes { get; set; }
+        public int? count_row_DownloadHeads { get; set; }
+        public DownloadHeads? fod_DownloadHeads { get; set; }
+        public Download? Output_DownloadVM { get; set; }
         public IR_Contact? IR_Contact { get; set; }
         public IR_InvestorCalendarDetail? IR_InvestorCalendarDetail { get; set; }
         public IR_MassMediaDetail? IR_MassMediaDetail { get; set; }
@@ -18,7 +21,7 @@ namespace Lighting.Models
             public int id { get; set; }
             public string? upload_image { get; set; }
             public string? upload_image_ENG { get; set; }
-            public int active_status { get; set; }
+            public int? active_status { get; set; }
             public DateTime? created_at { get; set; }
             public DateTime? updated_at { get; set; }
         }

@@ -1,99 +1,252 @@
-﻿@{
+﻿@model Lighting.Models.model_input
+
+@{
     ViewData["Title"] = "Manage_Download_Page";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
-@model IEnumerable<Lighting.Models.InputFilterModels.Download.Output_DownloadVM>
 
-<div class="container" style="width:100%;">
-    <div class="row d-flex justify-content-between mb-3">
-        <div>
-            @*<a href="@Url.Action("CATALOGUE_Page","ManageDownload")" class="btn btn-primary rounded-2">
-                ดูงานทั้งหมด / View All Job
-            </a>
-            *@
-            @*
-            style="display:grid;grid-template-columns:auto 20%;"
-            <input type="text" placeholder="ชื่อหัวข้อดาวน์โหลด/Download Title" style="padding:5px;"/>
-            <button  style="word-wrap:break-word;">ค้นหา/search</button>
-            *@
-        </div>
-        <div style="display:flex;justify-content:flex-end">
-            <a href="@Url.Action("Add_Download_Page","ManageDownload")" class="btn btn-primary rounded-2">
-                เพิ่มดาวโหลด/ Add Download
-            </a>
-        </div>
-    </div>
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
-    <div class="row">
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
 
-        <table class="table mt-3">
-            <thead>
-                <tr style="border-top:1px solid black;border-bottom:1px solid black;">
-                    <th scope="col">#</th>
-                    <th scope="col">ประเภทการดาวน์โหลด/Dowload Type</th>
-                    <th scope="col">ชื่อหัวข้อดาวน์โหลด/Download Title</th>
-                    @*<th scope="col">ดาวโหลดไฟล์/Dowload File</th>*@
-                    <th scope="col" class="text-center">จัดการ/Manage</th>
-                </tr>
-            </thead>
-            @{
-                int i = 1;
-            }
-            <tbody>
-                @foreach (var download in Model)
-                {
-                    <tr id="@download.Id">
-                        <th scope="row">@i</th>
-                        <td>@download.DownloadType</td>
-                        <td style="word-wrap:break-word;max-width:500px;">@download.Name_TH/@download.Name_EN</td>
-                        @*<td style="word-wrap:break-word;max-width:500px;"><a href="/ManageDownload/Download?path_and_name=@download.File" target="_blank" class="btn btn-primary">โหลด/download</a></td>*@
-                        <td class="text-center">
-                            <button type="button" class="btn btn-warning" onclick="editById(@download.Id)">
-                                <i class="bi bi-pencil-square"></i>แก้ไข/edit
-                            </button>
-                            <button type="button" class="btn btn-danger"  onclick="deleteRowById(@download.Id)">
-                                <i class="bi bi-trash-fill"></i>ลบ/delete
-                            </button>
-                        </td>
+            <div class="card">
+
+                  <br />
+                <div style="text-align:center;">
+                    <h3>ประเภท ดาวน์โหลด </h3>
+                </div>
+                <div class="card-header border-0 pt-6">
+                    <div class="card-title">
+                        <div class="d-flex align-items-center position-relative my-1">
+                            <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                    <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <input type="text" data-kt-customer-table-filter="search" id="search_table_1" class="form-control form-control-solid w-250px ps-15" placeholder="ค้นหา" />
+                        </div>
+                    </div> 
+                </div>
+                <div class="card-body pt-0">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+                        <thead>
+                            <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                                <th>#</th>
+                                <th class="min-w-125px">หัวข้อ TH</th>
+                                <th class="min-w-125px">หัวข้อ ENG</th> 
+                                <th class="text-end min-w-70px">รายละเอียด</th>
+                            </tr>
+                        </thead>
+                        <tbody class="fw-semibold text-gray-600">
+                        </tbody>
+                    </table>
+                    <div class="mb-10">
+                    </div>
+                </div>
+
+                <div class="card-body pt-0">
+                    <div class="mb-10">
+                    </div>
+                    <form id="form_create" enctype="multipart/form-data">
                         @{
-                            i++;
+                            if (Model.count_row_DownloadHeads == 0)
+                            {
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="title_TH" autocomplete="off" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="Title_ENG" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                            }
+                            else
+                            {
+
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ TH
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="title_TH" value="@Model.fod_DownloadHeads.title_TH" />
+                                    </div>
+                                    <div class="col-2">
+                                        <span>
+                                            หัวข้อ ENG
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" name="Title_ENG" value="@Model.fod_DownloadHeads.Title_ENG" />
+                                    </div>
+                                </div>
+
+                            }
                         }
-                    </tr>
-                }
-            </tbody>
-        </table>
+
+                    </form>
+
+                    <div class="row mb-3" style="justify-content: right;">
+                        <div class="col-1">
+                            <a class="btn btn-success" onclick="submit_form()">บันทึก</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!--begin::Card header-->
+                <div class="card-header border-0 pt-6">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+                        <!--begin::Search-->
+                        <div class="d-flex align-items-center position-relative my-1">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                            <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                    <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                            <input type="text" data-kt-customer-table-filter="search" id="search_table_2" class="form-control form-control-solid w-250px ps-15" placeholder="ค้นหา" />
+                        </div>
+                        <!--end::Search-->
+                    </div>
+                    <!--begin::Card title-->
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar">
+                        <!--begin::Toolbar-->
+                        <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+                            <!--begin::Add customer-->
+                            <a type="button" class="btn btn-primary" href="@Url.Action("Add_Download_Page","ManageDownload")">เพิ่ม</a>
+                            <!--end::Add customer-->
+                        </div>
+                        <!--end::Toolbar-->
+                    </div>
+                    <!--end::Card toolbar-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <h3>รายละเอียด</h3>
+                    <!--begin::Table-->
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table_2">
+                        <!--begin::Table head-->
+                        <thead>
+                            <!--begin::Table row-->
+                            <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                                <th>#</th>
+                                <th class="min-w-125px">ประเภทการดาวน์โหลด</th>
+                                <th class="min-w-125px">ชื่อหัวข้อ TH</th>
+                                <th class="min-w-125px">ชื่อหัวข้อ EN</th>
+                                <th class="min-w-125px">สถานะการใช้งาน</th>
+                                <th class="text-end min-w-70px">รายละเอียด</th>
+                            </tr>
+                            <!--end::Table row-->
+                        </thead>
+                        <!--end::Table head-->
+                        <!--begin::Table body-->
+                        <tbody class="fw-semibold text-gray-600">
+                        </tbody>
+                        <!--end::Table body-->
+                    </table>
+                    <!--end::Table-->
+                    <div class="mb-10">
+                    </div>
+
+                </div>
+                <!--end::Card body-->
+            </div>
+        </div>
+        <!--end::Card-->
+
     </div>
+    <!--end::Container-->
 </div>
 
 @section Scripts{
+
     <script>
 
+        function submit_form() {
+            var raw_form = document.getElementById('form_create');
+            var formData = new FormData(raw_form);
 
+            $.ajax({
+                type: 'POST',
+                url: '/ManageDownload/DownloadHead_Data',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = "@Url.Action("Manage_Download_Page","ManageDownload")";
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
 
         function editById(id) {
             window.location.href = "/ManageDownload/Edit_Page?id=" + id;
         }
 
-        function deleteRowById(id) {
-
+        function delete_details(id) {
             Swal.fire({
-                icon: 'warning',
-                title: "คุณแน่ใจว่าต้องการลบ?",
-                text: "",
-                showConfirmButton: true,
-            }).then((confirm) => {
-                if (confirm.isConfirmed) {
-
+                title: 'คุณต้องการจะลบหรือไม่?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'ใช่',
+                denyButtonText: `ไม่ใช่`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
                     $.ajax({
-                        type: 'POST',
-                        url: '/ManageDownload/DeleteById?id=' + id,
-                        processData: false,
-                        contentType: false,
+                        type: "POST",
                         cache: false,
-                        beforeSend: function () {
-                            Swal.fire('Please wait')
-                            Swal.showLoading()
-                        },
+                        url: "/ManageDownload/DeleteById",
+                        data: {
+                            Id: id
+                        },    // multiple data sent using ajax
                         success: function (data) {
                             if (data.status == "success") {
                                 Swal.fire({
@@ -101,9 +254,9 @@
                                     title: data.message,
                                     showConfirmButton: false,
                                     timer: 2000
-                                }).then(() => {
-
-                                    $("#" + id).remove();
+                                }).then((result) => {
+                                    var oTable = $('#kt_customers_table_2').DataTable();
+                                    oTable.ajax.reload(null, false);
                                 });
                             }
                             else {
@@ -121,11 +274,135 @@
                             console.log(e.inner);
                         }
                     });
-                } else {
+                } else if (result.isDenied) {
 
+                }
+            })
+        }
+
+        function changeStatus(id, checked_obj) {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/ManageDownload/Download_changesStatus",
+                data: {
+                    id: id,
+                    status: checked_obj.checked
+                },    // multiple data sent using ajax
+                success: function (data) {
+                    if (data.status == "success") {
+                        window.location.href = "@Url.Action("Manage_Download_Page","ManageDownload")";
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
                 }
             });
         }
+
+
+        function edit_item_image(id) {
+            location.href = '/ManageDownload/Download_Type_edit/?Id=' + id;
+        }
+
+        //load data details to table
+        $(document).ready(function () {
+            var table_1 = $("#kt_customers_table").DataTable({
+                responsive: true,
+                order: [[0, "asc"]],
+                "ajax": {
+                    "url": "/ManageDownload/Download_Type_getTable",
+                    "type": "POST",
+                    "datatype": "json",
+
+                },
+                "columns": [
+                    {
+                        "name": "count_row", "data": "count_row"
+                    },
+                    {
+                        "name": "downloadType_name_TH", "data": "downloadType_name_TH"
+                    },
+                    {
+                        "name": "downloadType_name_ENG", "data": "downloadType_name_ENG"
+                    }, 
+                    {
+                        "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
+                            var text = '<button type="button" class="btn btn-warning" onclick="edit_item_image(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
+                             return text;
+
+                        }
+                    }
+                ],
+            }); 
+
+            $('#search_table_1').keyup(function () {
+                table_1.search($(this).val()).draw();
+            })
+
+            var table_2 = $("#kt_customers_table_2").DataTable({
+                responsive: true,
+                order: [[0, "asc"]],
+                "ajax": {
+                    "url": "/ManageDownload/Manage_Download_Page_getTable",
+                    "type": "POST",
+                    "datatype": "json",
+                },
+                "columns": [
+                    {
+                        "name": "count_row", "data": "count_row"
+                    },
+                    {
+                        "name": "downloadType", "data": "downloadType"
+                    },
+                    {
+                        "name": "name_TH", "data": "name_TH"
+                    },
+                    {
+                        "name": "name_EN", "data": "name_EN"
+                    },
+                    {
+                        "name": "use_status", "data": "use_status", "render": function (data, type, row) {
+                            if (row.use_status == 1) {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            } else {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id + ',this)"> ' +
+                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            }
+                        }
+                    },
+                    {
+                        "name": "id", "data": "id", "class": "text-center", "render": function (data, type, row) {
+                            var text = '<button type="button" class="btn btn-warning" onclick="editById(' + row.id + ')"><i class="bi bi-pencil-square"></i>แก้ไข</button>';
+                            text += '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_details(' + row.id + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
+                            return text;
+
+                        }
+                    }
+                ],
+            });
+
+            $('#search_table_2').keyup(function () {
+                table_2.search($(this).val()).draw();
+            })
+        });
 
     </script>
 }

@@ -35,7 +35,7 @@
                                     if (Model.CreateDate_EN != null)
                                     {
                                         var inputDate = Convert.ToDateTime(Model.CreateDate_EN);
-                                        getDate = inputDate.ToString("dd/MM/yyyy", new CultureInfo("en-US"));
+                                        getDate = inputDate.ToString("dd/MMM/yyyy", new CultureInfo("en-US"));
                                     }
 
                                     <h4>@Model.Title_EN</h4>
@@ -47,7 +47,7 @@
                                     if (Model.CreateDate_EN != null)
                                     {
                                         var inputDate = Convert.ToDateTime(Model.CreateDate_EN);
-                                        getDate = inputDate.ToString("dd/MM/yyyy", new CultureInfo("th-TH"));
+                                        getDate = inputDate.ToString("dd/MMM/yyyy", new CultureInfo("th-TH"));
                                     }
 
                                     <h4>@Model.Title_TH</h4>

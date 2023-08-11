@@ -14,6 +14,7 @@ namespace Lighting.Controllers.Backend
 
         private readonly LightingContext db;
         private IWebHostEnvironment _hostingEnvironment;
+        public CultureInfo provider = CultureInfo.InvariantCulture;
 
         public ResourceFacilityController(LightingContext context, IWebHostEnvironment environment)
         {
@@ -2274,7 +2275,7 @@ namespace Lighting.Controllers.Backend
         }
         public IActionResult RF_ManufactufingImages_changesStatus(int? id, string? status)
         {
-            var get_data = db.RF_Manufacturing_Images.Where(x => x.id == id).FirstOrDefault();
+            var get_data = db.RF_Manufacturing_Images.FirstOrDefault(x => x.id == id);
             if (status == "true")
             {
                 get_data.active_status = 1;
@@ -2555,7 +2556,7 @@ namespace Lighting.Controllers.Backend
         }
         public IActionResult RF_WarehouseLogisticsImages_changesStatus(int? id, string? status)
         {
-            var get_data = db.RF_Warehouse_Logistics_Images.Where(x => x.id == id).FirstOrDefault();
+            var get_data = db.RF_Warehouse_Logistics_Images.FirstOrDefault(x => x.id == id);
             if (status == "true")
             {
                 get_data.active_status = 1;
@@ -2836,7 +2837,7 @@ namespace Lighting.Controllers.Backend
         }
         public IActionResult RF_OverseaOfficesImages_changesStatus(int? id, string? status)
         {
-            var get_data = db.RF_Oversea_Offices_Images.Where(x => x.id == id).FirstOrDefault();
+            var get_data = db.RF_Oversea_Offices_Images.FirstOrDefault(x => x.id == id);
             if (status == "true")
             {
                 get_data.active_status = 1;
@@ -3117,7 +3118,7 @@ namespace Lighting.Controllers.Backend
         }
         public IActionResult RF_SolidStateImages_changesStatus(int? id, string? status)
         {
-            var get_data = db.RF_Solid_States_Images.Where(x => x.id == id).FirstOrDefault();
+            var get_data = db.RF_Solid_States_Images.FirstOrDefault(x => x.id == id);
             if (status == "true")
             {
                 get_data.active_status = 1;
@@ -3398,7 +3399,7 @@ namespace Lighting.Controllers.Backend
         }
         public IActionResult RF_AssemblyServiceImages_changesStatus(int? id, string? status)
         {
-            var get_data = db.RF_Assembly_Services_Images.Where(x => x.id == id).FirstOrDefault();
+            var get_data = db.RF_Assembly_Services_Images.FirstOrDefault(x => x.id == id);
             if (status == "true")
             {
                 get_data.active_status = 1;
@@ -3676,20 +3677,37 @@ namespace Lighting.Controllers.Backend
             var model = new Resource_FacilityModels { RF_Solution_Centers_Images = get_detail };
             return View(model);
         }
-        public IActionResult RF_SolutionCentersImages_changesStatus(int? id, string? status)
+        public async Task<IActionResult> RF_SolutionCentersImages_changesStatus(int? id, string? status)
         {
-            var get_data = db.RF_Solution_Centers_Images.Where(x => x.id == id).FirstOrDefault();
-            if (status == "true")
+            try
             {
-                get_data.active_status = 1;
-            }
-            else
-            {
-                get_data.active_status = 0;
-            }
-            db.SaveChanges();
+                var get_data = db.RF_Solution_Centers_Images.FirstOrDefault(x => x.id == id);
+                if (get_data != null) // Check if the retrieved data is not null
+                {
+                    if (status == "true")
+                    {
+                        get_data.active_status = 1;
+                    }
+                    else
+                    {
+                        get_data.active_status = 0;
+                    }
+                    db.SaveChanges();
 
-            return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
+                    return new JsonResult(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
+                }
+                else
+                {
+                    return new JsonResult(new { status = "error", message = "ไม่พบข้อมูลที่ต้องการ" });
+                } 
+
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+
+
         }
         public IActionResult RF_SolutionCentersImages_delete(int? id)
         {
@@ -3959,18 +3977,25 @@ namespace Lighting.Controllers.Backend
         }
         public IActionResult RF_InnovationCentersImages_changesStatus(int? id, string? status)
         {
-            var get_data = db.RF_Solution_Centers_Images.Where(x => x.id == id).FirstOrDefault();
-            if (status == "true")
-            {
-                get_data.active_status = 1;
-            }
-            else
-            {
-                get_data.active_status = 0;
-            }
-            db.SaveChanges();
+            try
+            { 
+                var get_data = db.RF_Innovation_Center_Images.FirstOrDefault(x => x.id == id);
+                if (status == "true")
+                {
+                    get_data.active_status = 1;
+                }
+                else
+                {
+                    get_data.active_status = 0;
+                }
+                db.SaveChanges();
 
-            return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
+                return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
         }
         public IActionResult RF_InnovationCentersImages_delete(int? id)
         {

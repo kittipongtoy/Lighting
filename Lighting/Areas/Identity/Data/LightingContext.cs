@@ -33,6 +33,9 @@ namespace Lighting.Areas.Identity.Data
         public DbSet<Category_Project> Category_Projects { get; set; }
         public DbSet<ProjectRef> ProjectRefs { get; set; }
         #endregion
+        
+        public DbSet<DownloadTypes> DownloadTypes { get; set; }
+        public DbSet<DownloadHeads> DownloadHeads { get; set; }
         public DbSet<RF_Philosophy_Vision_Mission> RF_Philosophy_Vision_Mission { get; set; }
         public DbSet<RF_Philosophy_Vision_Mission_Details> RF_Philosophy_Vision_Mission_Details { get; set; }
         public DbSet<RF_Innovation_Center_Images> RF_Innovation_Center_Images { get; set; }
