@@ -4,8 +4,12 @@
 }
 @model Lighting.Models.InputFilterModels.News.Output_NewsVm
 @{
-    var date = Model.CreateDate_EN;
-    string getDate = date.Value.Day + "/" + date.Value.Month + "/" + date.Value.Year;
+    var date = Model?.CreateDate_EN;
+    string getDate = "";
+    if (date != null)
+    {
+        getDate =  date.Value.Day + "/" + date.Value.Month + "/" + date.Value.Year;
+    }
 }
 <div class="container">
     <div class="row p-1">
@@ -14,11 +18,11 @@
             <!--title-->
             <div class="form-group mt-2 p-1">
                 <label class="h4">หัวข้อ (ภาษาไทย)</label>
-                <input type="text" class="form-control" id="title_th" value="@Model.Title_TH" placeholder="กรอกหัวข้อ">
+                <input type="text" class="form-control" id="title_th" value="@Model?.Title_TH" placeholder="กรอกหัวข้อ">
             </div>
             <div class="form-group mt-3 p-1">
                 <label class="h4">Title (English)</label>
-                <input type="text" class="form-control" id="title_en" value="@Model.Title_EN" placeholder="Enter Title Englist">
+                <input type="text" class="form-control" id="title_en" value="@Model?.Title_EN" placeholder="Enter Title Englist">
             </div>
             <!--end title-->
             <!--create date-->
@@ -34,17 +38,17 @@
             <!--content-->
             <div class="form-group mt-3 p-1">
                 <label class="h4">คอนเทนต์ (ภาษาไทย)</label>
-                <textarea id="Content_TH">@Model.Content_TH</textarea>
+                <textarea id="Content_TH">@Model?.Content_TH</textarea>
             </div>
             <div class="form-group mt-3 p-1">
                 <label class="h4">Content (English)</label>
-                <textarea id="Content_EN">@Model.Content_EN</textarea>
+                <textarea id="Content_EN">@Model?.Content_EN</textarea>
             </div>
             <!--end content-->
             <!--file-->
 
             <div class="custom-file mt-3 p-1" style="border:1px solid black;">
-                <img id="preview_show_img" class="mt-3" style="width:100%;height:50vh;" src="@Model.TitleImage" /> <!--img preview-->
+                <img id="preview_show_img" class="mt-3" style="width:100%;height:50vh;" src="@Model?.TitleImage" /> <!--img preview-->
                 <br />
                 <br />
                 <br />

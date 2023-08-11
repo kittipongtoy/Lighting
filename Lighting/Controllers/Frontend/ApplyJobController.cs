@@ -36,7 +36,7 @@ namespace Lighting.Controllers.Frontend
                     WorkPlace_TH = job.WorkPlace_TH,
                 })
                 .ToListAsync();
-            var img_content = await _db.ApplyJobImgContents.FirstOrDefaultAsync();
+            var img_content = await _db.ApplyJobImgContents.FirstOrDefaultAsync(x => x.Id == 1);
             ViewData["JobImage"] = img_content;
             return View(jobs);
         }

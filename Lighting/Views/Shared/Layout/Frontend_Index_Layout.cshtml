@@ -552,7 +552,8 @@
                                                                                         <a href="#" class="menu-back">Back</a>
                                                                                     </div>
                                                                                 </div>
-                                                                                <ul>
+                                                                                <ul id="nav_mobile_smartSolution">
+                                                                                    @*
                                                                                     <li>
                                                                                         <div class="menu-item"><a href="@Url.Action("SmartSolution","SmartSolution")">All</a></div>
                                                                                     </li>
@@ -589,6 +590,7 @@
                                                                                     <li>
                                                                                         <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">SMART FARMING (BROWSER)</a></div>
                                                                                     </li>
+                                                                                    *@
                                                                                 </ul>
                                                                             </div>
 
@@ -599,7 +601,8 @@
                                                                                         <a href="#" class="menu-back">Back</a>
                                                                                     </div>
                                                                                 </div>
-                                                                                <ul>
+                                                                                <ul id="nav_mobile_product">
+                                                                                    @*
                                                                                     <li>
                                                                                         <div class="menu-item"><a href="@Url.Action("Product","Product")">All</a></div>
                                                                                     </li>
@@ -633,6 +636,7 @@
                                                                                     <li>
                                                                                         <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">POLE</a></div>
                                                                                     </li>
+                                                                                    *@
                                                                                 </ul>
                                                                             </div>
 
@@ -643,7 +647,8 @@
                                                                                         <a href="#" class="menu-back">Back</a>
                                                                                     </div>
                                                                                 </div>
-                                                                                <ul>
+                                                                                <ul id="nav_mobile_projectRef">
+                                                                                    @*
                                                                                     <li>
                                                                                         <div class="menu-item"><a href="@Url.Action("Project","Project")">All</a></div>
                                                                                     </li>
@@ -686,6 +691,7 @@
                                                                                     <li>
                                                                                         <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">OUTDOOR / LANDSCAPE</a></div>
                                                                                     </li>
+                                                                                    *@
                                                                                 </ul>
                                                                             </div>
 
@@ -698,19 +704,19 @@
                                                                                 </div>
                                                                                 <ul>
                                                                                     <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Download","Download")">L&E BIM OBJECTS</a></div>
+                                                                                        <div class="menu-item"><a href="@Url.Action("L_AND_BIM_OBJECT_Page","Download")">L&E BIM OBJECTS</a></div>
                                                                                     </li>
                                                                                     <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Download","Download")">CATALOGUE</a></div>
+                                                                                        <div class="menu-item"><a href="@Url.Action("CATALOGUE_PAGE","Download")">CATALOGUE</a></div>
                                                                                     </li>
                                                                                     <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Download","Download")">COMPANY PROFILE</a></div>
+                                                                                        <div class="menu-item"><a href="@Url.Action("COMPANY_PROFILE_PAGE","Download")">COMPANY PROFILE</a></div>
                                                                                     </li>
                                                                                     <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Download","Download")">IES FILE</a></div>
+                                                                                        <div class="menu-item"><a href="@Url.Action("IES_FILE_PAGE","Download")">IES FILE</a></div>
                                                                                     </li>
                                                                                     <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Download","Download")">LEAFLET</a></div>
+                                                                                        <div class="menu-item"><a href="@Url.Action("LEAFLET_PAGE","Download")">LEAFLET</a></div>
                                                                                     </li>
                                                                                 </ul>
                                                                             </div>
@@ -915,7 +921,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li data-page="download"><a href="@Url.Action("Download","Download")">DOWNLOAD</a></li>
+                                            <li data-page="download"><a href="@Url.Action("CATALOGUE_PAGE","Download")">DOWNLOAD</a></li>
                                             <li data-page="news"><a href="@Url.Action("New","New")">NEWS</a></li>
                                             <li data-page="ir"><a href="@Url.Action("IR_index","Frontend_IR")">INVESTOR</a></li>
                                             <li data-page="job"><a href="@Url.Action("ApplyJob","ApplyJob")">APPLY JOB</a></li>
@@ -980,7 +986,114 @@
     @Html.Partial("~/Views/Shared/Inc/IR_inc_footer.cshtml")
     @await RenderSectionAsync("Scripts", required: false)
     <script>
+        jQuery(document).ready(
+            function () {
 
+                $.ajax({
+                    type: 'GET',
+                    url: "/Project/JsonNavBar",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (data) {
+                        //console.log(data);
+                        const nav_link = (res, url) => {
+                            return res.reduce((prev, curr) => prev += `
+                                                                                     <li>
+                                                                                         <a href="/${url}${curr?.name}">
+                                                                                            <p>${curr?.name}</p>
+                                                                                                    <div class="menu-img"><img src="/${curr?.image}"></div>
+                                                                                         </a>
+                                                                                     </li>`, "");
+                        }
+
+                        $("#nav_projectref").html(nav_link(data, "project/Project_Category?category="));
+
+                        const nav_link_mobile = (res, url) => {
+                            return res.reduce((prev, curr) => prev += `
+                                                                                <li>
+                                                                                    <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
+                                                                                 </li>`, "");
+                        }
+
+                        $("#nav_mobile_projectRef").html(nav_link_mobile(data, "/project/Project_Category?category="));
+
+
+                    }, error: function (e) {
+                        console.log(e.message);
+                        console.log(e.inner);
+                    }
+                });
+
+                $.ajax({
+                    type: 'GET',
+                    url: "/Product/JsonNavBar",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (data) {
+                        //console.log(data);
+                        const nav_link = (res, url) => {
+                            return res.reduce((prev, curr) => prev += `
+                                                                                        <li>
+                                                                                            <a href="${url}${curr?.name}">
+                                                                                                <img src="/${curr?.image}">
+                                                                                                <div class="product-cate">
+                                                                                                    <p>${curr?.name}</p>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </li>`, "");
+                        }
+
+                        $("#nav_product").html(nav_link(data, "/Product/Product_Category?category="));
+
+                        const nav_link_mobile = (res, url) => {
+                            return res.reduce((prev, curr) => prev += `
+                                                                                        <li>
+                                                                                            <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
+                                                                                         </li>`, "");
+                        }
+
+                        $("#nav_mobile_product").html(nav_link_mobile(data, "/Product/Product_Category?category="));
+                    }, error: function (e) {
+                        console.log(e.message);
+                        console.log(e.inner);
+                    }
+                });
+
+                $.ajax({
+                    type: 'GET',
+                    url: "/SmartSolution/JsonNavBar",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (data) {
+                        //console.log(data);
+                        const nav_link = (res, url) => {
+                            return res.reduce((prev, curr) => prev += `
+                                                                                        <li>
+                                                                                        <a href="${url}${curr?.name}">
+                                                                                         <p>${curr?.name}</p>
+                                                                                         <div class="menu-img"><img src="/${curr?.image}"></div>
+                                                                                        </a>
+                                                                                        </li>`, "");
+                        }
+
+                        $("#nav_smartsolution").append(nav_link(data, "/SmartSolution/SmartSolutionDetail?name="));
+                        const nav_link_mobile = (res, url) => {
+                            return res.reduce((prev, curr) => prev += `
+                                                                                                <li>
+                                                                                                    <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
+                                                                                                 </li>`, "");
+                        }
+
+                        $("#nav_mobile_smartSolution").html(nav_link_mobile(data, "/SmartSolution/SmartSolutionDetail?name="));
+                    }, error: function (e) {
+                        console.log(e.message);
+                        console.log(e.inner);
+                    }
+                });
+            });
         function setLang(lang) {
             if (lang == 'TH') {
                 $("#butt_th").addClass("active");

@@ -246,11 +246,11 @@ namespace Lighting.Controllers.Backend
                                 System.IO.File.Delete(old_file);
                             }
                         }
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, Path.GetDirectoryName(project.Pdf_TH),input.pdf_th.FileName), FileMode.Create))
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, project.Folder_Path,input.pdf_th.FileName), FileMode.Create))
                         {
                             await input.pdf_th.CopyToAsync(stream);
                         }
-                        project.Pdf_TH = Path.Combine(Path.GetDirectoryName(project.Pdf_TH), input.pdf_th.FileName);
+                        project.Pdf_TH = Path.Combine(project.Folder_Path, input.pdf_th.FileName);
 
                     }
                     if (input.pdf_en != null)
@@ -264,11 +264,11 @@ namespace Lighting.Controllers.Backend
                                 System.IO.File.Delete(old_file);
                             }
                         }
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath,Path.GetDirectoryName(project.Pdf_ENG),input.pdf_en.FileName), FileMode.Create))
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath,project.Folder_Path,input.pdf_en.FileName), FileMode.Create))
                         {
                             await input.pdf_en.CopyToAsync(stream);
                         }
-                        project.Pdf_ENG = Path.Combine(Path.GetDirectoryName(project.Pdf_ENG), input.pdf_en.FileName);
+                        project.Pdf_ENG = Path.Combine(project.Folder_Path, input.pdf_en.FileName);
                     }
 
                     //if (input.File_Download != null)

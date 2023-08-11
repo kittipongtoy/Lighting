@@ -31,6 +31,7 @@ namespace Lighting.Controllers.Backend
 
         public async Task<ActionResult> Edit_Product_Page(int id)
         {
+            var path = Path.Combine("upload_image", "Product");
             var product = await _db.Products
                 .Include(pro=> pro.ProductSpect)
                 .Where(pro => pro.Id == id)
@@ -68,19 +69,19 @@ namespace Lighting.Controllers.Backend
                     //Luminaire_Output = pro.Luminaire_Output,
 
                     Folder_Path = pro.Folder_Path,
-                    CUTSHEET = pro.CUTSHEET == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CUTSHEET),
-                    CATALOGUE = pro.CATALOGUE == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CATALOGUE),
-                    IESFILE = pro.IESFILE == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.IESFILE),
-                    RFA = pro.RFA == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.RFA),
-                    Preview_Imamge = pro.Preview_Image == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.Preview_Image),
-                    SUB_IMG = pro.SUB_IMG == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.SUB_IMG),
+                    CUTSHEET = pro.CUTSHEET == null ? null : Path.Combine(path, pro.Folder_Path, pro.CUTSHEET),
+                    CATALOGUE = pro.CATALOGUE == null ? null : Path.Combine(path, pro.Folder_Path, pro.CATALOGUE),
+                    IESFILE = pro.IESFILE == null ? null : Path.Combine(path, pro.Folder_Path, pro.IESFILE),
+                    RFA = pro.RFA == null ? null : Path.Combine(path, pro.Folder_Path, pro.RFA),
+                    Preview_Imamge = pro.Preview_Image == null ? null : Path.Combine(path, pro.Folder_Path, pro.Preview_Image),
+                    SUB_IMG = pro.SUB_IMG == null ? null : Path.Combine(path, pro.Folder_Path, pro.SUB_IMG),
 
                 }).FirstOrDefaultAsync();
 
             if (product != null)
             {
-                product.Technical_Drawing_Img = GET_FILE(Path.Combine("upload_image", "Product", product.Folder_Path, "technical_img"));
-                product.LIGHT_DISTRIBUTION = GET_FILE(Path.Combine("upload_image", "Product", product.Folder_Path, "light_ditribute_img"));
+                product.Technical_Drawing_Img = GET_FILE(Path.Combine(path, product.Folder_Path, "technical_img"));
+                product.LIGHT_DISTRIBUTION = GET_FILE(Path.Combine(path, product.Folder_Path, "light_ditribute_img"));
 
                 ViewData["category"] = await _db.Product_Categorys.ToListAsync();
                 ViewData["model"] = await _db.Product_Models.ToListAsync();
@@ -691,7 +692,7 @@ namespace Lighting.Controllers.Backend
                     product.CUTSHEET = input.CUTSHEET != null ? input.CUTSHEET.FileName : product.CUTSHEET;
                     product.CATALOGUE = input.CATALOGUE != null ? input.CATALOGUE.FileName : product.CATALOGUE;
                     product.RFA = input.RFA != null ? input.RFA.FileName : product.RFA;
-                    product.IESFILE = input.IESFILE != null ? input.IESFILE.FileName : product.Preview_Image;
+                    product.IESFILE = input.IESFILE != null ? input.IESFILE.FileName : product.IESFILE;
 
                     product.MORE_INFORMATION = input.MORE_INFORMATION;
 

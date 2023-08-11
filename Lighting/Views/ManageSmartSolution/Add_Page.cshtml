@@ -35,6 +35,26 @@
         }
     }
 
+    .input-box {
+        width: 80%;
+        min-width:200px;
+        height: auto;
+        padding: 3rem;
+        display: grid;
+        grid-template-rows: 3rem auto auto 3rem 3rem;
+        gap: 3rem;
+        background-color: white;
+        border-radius: 10px;
+        & > h1
+
+    {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    }
     .input-popup {
         z-index:10000;
         position:fixed;
@@ -147,7 +167,7 @@
             </span>
         </div>
         <input type="file" id="file_img_preview" />
-        <input type="text" id="txt_link"/>
+        <input type="text" id="txt_link" placeholder="link" />
         <div style="display:flex;justify-content:space-between;">
             <button class="btn bg-success" onclick="addImageLink()">ตกลง</button>
             <button class="btn btn-danger" onclick="openPopup()">ยกเลิก</button>
@@ -163,7 +183,7 @@
         </div>
         <span style="color:red;">ภาพขนาด 400*100px</span>
         <input type="file" class="form-control" id="edit_file_img_preview" />
-        <input type="text" id="edit_txt_link" />
+        <input type="text" id="edit_txt_link" placeholder="link" />
         <div style="display:flex;justify-content:space-between;">
             <button class="btn bg-success" onclick="saveEditLink()">ตกลง/save</button>
             <button class="btn btn-danger" onclick="editClosePopup()">ยกเลิก/cancle</button>
