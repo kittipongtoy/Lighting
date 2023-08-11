@@ -19,7 +19,7 @@ namespace Lighting.Controllers.Backend
             var path = Path.Combine("upload_image", "Apply_Img_Content");
             try
             {
-                var news_img_content = await _db.ApplyJobImgContents.FirstOrDefaultAsync();
+                var news_img_content = await _db.ApplyJobImgContents.FirstOrDefaultAsync( x => x.Id == 1);
                 if (news_img_content != null)
                 {
                     if (input.Benefit_img != null)

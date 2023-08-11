@@ -119,7 +119,12 @@
             </div>
         </div>
         <div class="col-6">
-            <img src="@Model?.Img_File" style="width:100%;height:100%;" id="img_preview" />
+            <div class="row">
+                <img src="@Model?.Img_File" style="width:100%;height:100%;" id="img_preview" />
+            </div>
+            <div class="row">
+                <img src="@Model?.Img_FileEN" style="width:100%;height:100%;" id="img_preview_en" />
+            </div>
         </div>
     </div>
 
@@ -175,7 +180,7 @@
             });
         }
 
-        var preview_img;
+        var preview_img, preview_img_en;
         $(document).ready(function () {
             $('#file_img_preview').change(async function (e) {
                 if (e.target.files.length === 1) {
@@ -188,6 +193,13 @@
                 if (e.target.files.length === 1) {
                     preview_img = e.target.files[0];
                     $('#img_previewEN').attr('src', await blobToBase64DataURL(preview_img)).css("display", "block");
+                }
+            });
+
+            $('#file_img_previewEN').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    preview_img_en = e.target.files[0];
+                    $('#img_preview_en').attr('src', await blobToBase64DataURL(preview_img_en)).css("display", "block");
                 }
             });
         });

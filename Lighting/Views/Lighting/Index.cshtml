@@ -165,7 +165,7 @@
                         @foreach (var tt in Model.Product)
                         {
                             <li>
-                                <a href="@Url.Action("Product_Category","Product",new {categoryId = tt.Id})">
+                                <a href="@Url.Action("Product_Category","Product",new {category = tt.Name_EN})">
                                     <img src="@tt.Image">
                                     <div class="contentBoxBG">
                                         <div class="row">
@@ -520,8 +520,9 @@
                         @foreach (var tt in Model.Project)
                         {
                             <li>
-                                <a href="@Url.Action("Project_Category","Project",new {categoryId = tt.Id})">
-                                    <img src="~/Frontend_assets/images/index/project01.jpg">
+                                <a href="@Url.Action("Project_Detail","Project",new {id = tt.Id})">
+                                    @*<img src="~/Frontend_assets/images/index/project01.jpg">*@
+                                    <img src="~/@tt.Profile_Image">
                                     <div class="contentBoxBG">
                                         <div class="row">
                                             <div class="col-lg-9 col-md-12 col-12">

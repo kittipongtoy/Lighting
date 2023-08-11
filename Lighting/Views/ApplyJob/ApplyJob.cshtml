@@ -22,28 +22,31 @@
                 }
                 @if (imgContent != null)
                 {
+                    @*
                     if (imgContent.Position_pdf != null && imgContent.Benefit_pdf != null)
                     {
                         <div class="col-lg-6 col-md-6 col-12">
-                            <a class="img-width imgBD hover-img mb-3" href="~/@imgContent.Position_pdf" target="_blank"><img src="~/@imgContent.Position_img"></a>
+                            <a class="img-width imgBD hover-img mb-3" href="~/@imgContent?.Position_pdf" target="_blank"><img src="~/@imgContent?.Position_img"></a>
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
-                            <a class="img-width imgBD hover-img" href="~/@imgContent.Benefit_pdf" target="_blank"><img src="~/@imgContent.Benefit_img"></a>
+                            <a class="img-width imgBD hover-img" href="~/@imgContent?.Benefit_pdf" target="_blank"><img src="~/@imgContent?.Benefit_img"></a>
                         </div>
                     }
-                    else if (imgContent.Position_pdf != null)
+                    *@
+                   
+                    if (imgContent?.Position_pdf != null)
                     {
                         <div class="col-lg-6 col-md-6 col-12">
-                            <a class="img-width imgBD hover-img mb-3" href="~/@imgContent.Position_pdf" target="_blank"><img src="~/@imgContent.Position_img"></a>
+                            <a class="img-width imgBD hover-img mb-3" href="~/@imgContent?.Position_pdf" target="_blank"><img src="~/@imgContent?.Position_img"></a>
                         </div>
                     }
-                    else if (imgContent.Benefit_pdf != null)
+                    if (imgContent?.Benefit_pdf != null)
                     {
                         <div class="col-lg-6 col-md-6 col-12">
-                            <a class="img-width imgBD hover-img" href="~/@imgContent.Benefit_pdf" target="_blank"><img src="~/@imgContent.Benefit_img"></a>
+                            <a class="img-width imgBD hover-img" href="~/@imgContent?.Benefit_pdf" target="_blank"><img src="~/@imgContent?.Benefit_img"></a>
                         </div>
                     }
-
+                    
                 }
             </div>
             <div class="row">

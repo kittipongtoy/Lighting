@@ -18,11 +18,12 @@ namespace Lighting.Controllers.Frontend
 
         public async Task<IActionResult> JsonNavBar()
         {
-           var lang = Request.Cookies["lang"];
-            if (lang == "EN") {
+            var lang = Request.Cookies["lang"];
+            if (lang == "EN")
+            {
                 var project = await _db.Category_Projects
                 .AsNoTracking()
-                .Select(project => new 
+                .Select(project => new
                 {
                     Image = project.Image_Path_Nav,
                     Name = project.Name_EN,
@@ -94,7 +95,7 @@ namespace Lighting.Controllers.Frontend
 
         public async Task<IActionResult> Project_Category(string category, int start)
         {
-            
+
             var category_name = await _db.Category_Projects.FirstOrDefaultAsync(cat => cat.Name_EN.ToLower().StartsWith(category.ToLower()) || cat.Name_TH.StartsWith(category));
             ViewBag.categoryName = category;
             ViewData["category"] = category_name;
@@ -170,27 +171,31 @@ namespace Lighting.Controllers.Frontend
                                     Title_EN = proj.Title_EN,
                                     Title_TH = proj.Title_TH,
                                     Profile_Image = Path.Combine(proj.Folder_Path, proj.Profile_Image),
-                                     CategoryId = proj.ProjectRef_CategoryId
+                                    CategoryId = proj.ProjectRef_CategoryId,
+                                    pdf_en = proj.Pdf_ENG,
+                                    pdf_th = proj.Pdf_TH,
                                 }).FirstOrDefault();
 
-                 var project_product = await _db.ProjectRef_Products.AsNoTracking().Where(project => project.ProjectId == id).ToListAsync();
-                if(project_product != null)
+                var project_product = await _db.ProjectRef_Products.AsNoTracking().Where(project => project.ProjectId == id).ToListAsync();
+                if (project_product != null)
                 {
                     var products = new List<Product>();
-                    foreach( var product in project_product)
+                    foreach (var product in project_product)
                     {
                         products.Add(await _db.Products.AsNoTracking()
                             .Where(pro => pro.Id == product.ProductId)
-                            .Select(product => 
-                            new Product { 
-                                 Id = product.Id,
-                             Preview_Image = Path.Combine("upload_image", "Product", product.Folder_Path,product.Preview_Image),
-                              Product_CategoryId = product.Product_CategoryId,
-                               Product_ModelId = product.Product_ModelId,
-                             })
+                            .Select(product =>
+                            new Product
+                            {
+                                Id = product.Id,
+                                Preview_Image = Path.Combine("upload_image", "Product", product.Folder_Path, product.Preview_Image),
+                                Product_CategoryId = product.Product_CategoryId,
+                                Product_ModelId = product.Product_ModelId,
+                            })
                             .FirstOrDefaultAsync());
                     }
-                    if(products.Count > 0) {
+                    if (products.Count > 0)
+                    {
                         ViewBag.CategoryId = products.First().Product_CategoryId;
                         ViewBag.SubCategoryId = products.First().Product_ModelId;
 
@@ -216,7 +221,7 @@ namespace Lighting.Controllers.Frontend
                     .ToListAsync();
 
                 }
-               
+
 
                 return View(proj_output);
             }
@@ -239,7 +244,7 @@ namespace Lighting.Controllers.Frontend
             try
             {
                 var file_name = Directory.GetFiles(Path.Combine(_env.WebRootPath, path))
-                    .Where(filePath => !ignore_file_name.Contains(filePath.Split("\\").Reverse().First()))
+                    .Where(filePath => !ignore_file_name.Contains(filePath.Split("\\").Reverse().First()) && !filePath.EndsWith(".pdf"))
                     .Select(file_name =>
                     {
                         return Path.Combine(path, file_name.Split("\\").Reverse().First());

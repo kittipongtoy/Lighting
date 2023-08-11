@@ -2,18 +2,20 @@
 @{
     ViewData["Title"] = "Project_Detail";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
-    var lang = Context.Request.Cookies["lang"];
+    string lang = Context.Request.Cookies["lang"];
     var category_name = (Lighting.Areas.Identity.Data.Category_Project)ViewData["category"];
 }
 @model Lighting.Models.InputFilterModels.ProjectRef.Output_ProjectRefVM
 <style>
-    .text-tiny{
-        font-size:small;
+    .text-tiny {
+        font-size: small;
     }
-    .text-big{
-        font-size:clamp(1.5rem,3vw,3rem);
+
+    .text-big {
+        font-size: clamp(1.5rem,3vw,3rem);
     }
-    .text-huge{
+
+    .text-huge {
         font-size: clamp(2.2rem,4.5vw,4.5rem);
     }
 </style>
@@ -23,7 +25,7 @@
         <div class="wrap-pad project-page">
             <div class="row">
                 <div class="col">
-                    @if(lang == "EN")
+                    @if (lang == "EN")
                     {
                         <h2>@category_name?.Name_EN</h2>
                     }
@@ -47,13 +49,15 @@
                             <div class="col col-xl-9 col-lg-10 col-md-12 col-12">
                                 <div class="projectGal-slide detail_slide">
                                     <div id="big" class="owl-carousel owl-theme big-img slider">
-                                        @foreach(var img in Model.Image_List){
-                                        <a class="item" data-fancybox="gallery" href="~/@img"><img src="~/@img"></a>
+                                        @foreach (var img in Model.Image_List)
+                                        {
+                                            <a class="item" data-fancybox="gallery" href="~/@img"><img src="~/@img"></a>
                                         }
                                     </div>
                                     <div id="thumbs" class="owl-carousel owl-theme thumbs-img navigation-thumbs">
-                                        @foreach(var img in Model.Image_List){
-                                        <div class="item"><img src="~/@img"></div>
+                                        @foreach (var img in Model.Image_List)
+                                        {
+                                            <div class="item"><img src="~/@img"></div>
                                         }
                                     </div>
                                 </div>
@@ -91,17 +95,22 @@
                         </div>
                     </div>
                 </div>
-                @*
-                <div class="row">
-                    <div class="col">
-                        <div class="content-center">
-                            <a class="downloadBD-button" href="@Url.Action("DownloadFile","project",new {path = Model.File_Download})" target="_blank">
-                                <div><i class="fas fa-arrow-alt-circle-down"></i>@Model?.File_Download?.Split("\\").Reverse().First()</div>
-                            </a>
+
+
+                @if (Model.pdf_en?.ToLower().EndsWith(".pdf") == true)
+                {
+                    <div class="row">
+                        <div class="col">
+                            <div class="content-center">
+                                <a class="downloadBD-button" href="~/@Model.pdf_en" target="_blank">
+                                    <div><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            *@
+                }
+
+
             }
             else
             {
@@ -170,17 +179,23 @@
                         </div>
                     </div>
                 </div>
-                @*
-                <div class="row">
-                    <div class="col">
-                        <div class="content-center">
-                            <a class="downloadBD-button" href="@Url.Action("DownloadFile","project",new {path = Model.File_Download})" target="_blank">
-                                <div><i class="fas fa-arrow-alt-circle-down"></i>@Model?.File_Download?.Split("\\").Reverse().First()</div>
-                            </a>
+
+                @if (Model?.pdf_th?.EndsWith(".pdf") == true)
+                {
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="content-center">
+                                <a class="downloadBD-button" href="~/@Model?.pdf_th" target="_blank">
+                                    <div><i class="fas fa-arrow-alt-circle-down"></i>ดาวน์โหลด</div>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                *@
+                }
+
+
+
             }
             <!---------- END PROJECT - REF :: DETAIL ---------->
             <div class="row">
@@ -257,7 +272,8 @@
                                                         @if (lang == "EN")
                                                         {
                                                             <p>@cat.Title_EN</p>
-                                                        }else
+                                                        }
+                                                        else
                                                         {
                                                             <p>@cat.Title_TH</p>
                                                         }

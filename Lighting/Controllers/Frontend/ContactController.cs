@@ -67,7 +67,8 @@ namespace Lighting.Controllers.Frontend
                      YouTube_Url_EN = contact.YouTube_Url_EN,
                       YouTube_Url_TH = contact.YouTube_Url_TH,
                     Sub_Factory_Name_EN = contact.Sub_Factory_Name_EN,
-                    Sub_Factory_Name_TH = contact.Sub_Factory_Name_TH
+                    Sub_Factory_Name_TH = contact.Sub_Factory_Name_TH,
+                     
                 }).ToListAsync();
 
             var main_contact = await _db.MainContacts.FirstOrDefaultAsync();
