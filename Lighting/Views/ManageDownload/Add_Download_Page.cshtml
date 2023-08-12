@@ -1,103 +1,107 @@
 ﻿@{
     ViewData["Title"] = "Manage_Download_Page";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
-    var lang = Context.Request.Cookies["lang"];
 }
 
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <!--contact type-->
-            <div class="form-group p-2">
-                <label class="h4">ประเภท</label>
-                <div class="col-sm-5">
-                    <select class="col-lg-8 form-controlform-select form-select-lg mb-3" aria-label=".form-select-lg example" id="Select2_DownloadType" name="DownloadType_id">
-                    </select>
-                </div>
-                @* <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="download_type">
-                <option value="L&E BIM OBJECTS" class="h5">L&E BIM OBJECTS</option>
-                <option value="CATALOGUE" class="h5">CATALOGUE</option>
-                <option value="COMPANY PROFILE" class="h5">COMPANY PROFILE</option>
-                <option value="IES FILE" class="h5">IES FILE</option>
-                <option value="LEAFLET" class="h5">LEAFLET</option>
-                </select>*@
-            </div>
-            <!--end contact type-->
-            <!-- dowload name-->
-            <div class="form-group mt-3 p-2" style="border:1px solid black" id="place">
-                <label class="h4 mt-3">ชื่อการดาวน์โหลด</label>
-                <input type="text" class="form-control" id="download_name_th" placeholder="ชื่อการดาวน์โหลด">
-                <label class="h4 mt-3">Download Name (English)</label>
-                <input type="text" class="form-control" id="download_name_en" placeholder="Download Name">
-            </div>
-            <!--dowload name-->
-            <!--fileimage-->
-            <div class="custom-file mt-3 p-1" style="border:1px solid black">
-                <img style="width:500px;height:250px;display:none;" id="preview_show_img" />
-                <br />
-                <label for="formFile" class="form-label">
-                    เลือกไฟล์ รูป TH
-                    <br />
-                    <span style="color:red;">
-                        ขนาดรูปภาพ : 800 * 430 px
-                    </span>
-                </label>
-                <input type="file" class="form-control" id="file_img" accept="image/png, image/gif, image/jpeg">
-            </div>
-            <div class="custom-file mt-3 p-1" style="border:1px solid black">
-                <img style="width:500px;height:250px;display:none;" id="preview_show_img_EN" />
-                <br />
-                <label for="formFile" class="form-label">
-                    เลือกไฟล์ รูป EN
-                    <br />
-                    <span style="color:red;">
-                        ขนาดรูปภาพ : 800 * 430 px
-                    </span>
-                </label>
-                <input type="file" class="form-control" id="file_img_EN" accept="image/png, image/gif, image/jpeg">
-            </div>
-            <!--end file-->
-            <!--file download-->
-            <div class="custom-file mt-3 p-1">
-                <label for="formFile" class="form-label">เลือกไฟล์สำหรับดาวน์โหลด TH</label>
-                <input type="file" class="form-control" id="file_download">
-            </div>
-            <div class="custom-file mt-3 p-1">
-                <label for="formFile" class="form-label">เลือกไฟล์สำหรับดาวน์โหลด EN</label>
-                <input type="file" class="form-control" id="file_download_EN">
-            </div>
-            <!--end file download-->
-            <!--link-->
-            <div class="custom-file mt-3 p-1">
-                <label for="formFile" class="form-label"> ลิงค์ </label>
-                <input type="text" class="form-control" id="link_l_and_bim">
-            </div>
-            <!--end link-->
-
-            <div class="custom-file mt-3 p-1">
-                <div class="col-2">
-                    <span>
-                        สถานะการใช้งาน
-                    </span>
-                </div>
-                <div class="col-4">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onclick="checkSwitch()">
-                        <label class="form-check-label" for="use_status">ใช้งาน</label>
+            <form id="form_create" enctype="multipart/form-data">
+                <div class="form-group p-2">
+                    <label class="h4">ประเภท</label>
+                    <div class="col-sm-5">
+                        <select class="col-lg-8 form-controlform-select form-select-lg mb-3" aria-label=".form-select-lg example" id="Select2_DownloadType" name="DownloadType_id"></select>
                     </div>
                 </div>
-            </div>
-
-            <center style="display:flex;justify-content:space-between;margin:3rem;">
-                <button type="button" class="btn btn-success" onclick="submit()">บันทึก/save</button>
-                <a href="@Url.Action("manage_Download_page","ManageDownload")" class="btn btn-primary">กลับ/back</a>
-            </center>
+                <div class="form-group mt-3 p-2" style="border:1px solid black" id="place">
+                    <label class="h4 mt-3">ชื่อการดาวน์โหลด</label>
+                    <input type="text" class="form-control" id="download_name_th" name="Name_TH" placeholder="ชื่อการดาวน์โหลด">
+                    <label class="h4 mt-3">Download Name (English)</label>
+                    <input type="text" class="form-control" id="download_name_en" name="Name_EN" placeholder="Download Name">
+                </div>
+                <div class="custom-file mt-3 p-1" style="border:1px solid black">
+                    <img style="width:500px;height:250px;display:none;" id="preview_show_img" />
+                    <br />
+                    <label for="formFile" class="form-label">
+                        เลือกไฟล์ รูป TH
+                        <br />
+                        <span style="color:red;">
+                            ขนาดรูปภาพ : 800 * 430 px
+                        </span>
+                    </label>
+                    <input type="file" class="form-control" name="Image" id="file_img" accept="image/png, image/gif, image/jpeg">
+                </div>
+                <div class="custom-file mt-3 p-1" style="border:1px solid black">
+                    <img style="width:500px;height:250px;display:none;" id="preview_show_img_EN" />
+                    <br />
+                    <label for="formFile" class="form-label">
+                        เลือกไฟล์ รูป EN
+                        <br />
+                        <span style="color:red;">
+                            ขนาดรูปภาพ : 800 * 430 px
+                        </span>
+                    </label>
+                    <input type="file" class="form-control" name="Image_EN" id="file_img_EN" accept="image/png, image/gif, image/jpeg">
+                </div>
+                <div class="custom-file mt-3 p-1">
+                    <label for="formFile" class="form-label">เลือกไฟล์สำหรับดาวน์โหลด TH</label>
+                    <input type="file" class="form-control" id="file_download" name="File">
+                </div>
+                <div class="custom-file mt-3 p-1">
+                    <label for="formFile" class="form-label">เลือกไฟล์สำหรับดาวน์โหลด EN</label>
+                    <input type="file" class="form-control" id="file_download_EN" name="File_EN">
+                </div>
+                <div class="custom-file mt-3 p-1">
+                    <label for="formFile" class="form-label"> ลิงค์ </label>
+                    <input type="text" class="form-control" id="link_l_and_bim" name="L_AND_BIM_Link">
+                </div>
+                <div class="custom-file mt-3 p-1">
+                    <div class="col-2">
+                        <span>
+                            สถานะการใช้งาน
+                        </span>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onclick="checkSwitch()">
+                            <label class="form-check-label" for="use_status">ใช้งาน</label>
+                        </div>
+                    </div>
+                </div>
+                <center style="display:flex;justify-content:space-between;margin:3rem;">
+                    <a class="btn btn-success" onclick="submit()">บันทึก/save</a>
+                    <a href="@Url.Action("manage_Download_page","ManageDownload")" class="btn btn-primary">กลับ/back</a>
+                </center>
+            </form>
         </div>
     </div>
 </div>
-
 @section Scripts{
     <script>
+        $(() => {
+            Select2_DownloadType();
+
+            $('#file_img').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    image_file = e.target.files[0];
+                    $('#preview_show_img').attr('src', await blobToBase64DataURL(image_file)).css("display", "block");
+                }
+            });
+            $('#file_img_EN').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    image_file_EN = e.target.files[0];
+                    $('#preview_show_img_EN').attr('src', await blobToBase64DataURL(image_file_EN)).css("display", "block");
+                }
+            });
+        })
+
+        const blobToBase64DataURL = blob => new Promise(
+            resolvePromise => {
+                const reader = new FileReader();
+                reader.onload = () => resolvePromise(reader.result);
+                reader.readAsDataURL(blob);
+            }
+        );
 
         function Select2_DownloadType() {
             $.ajax({
@@ -127,72 +131,48 @@
                 check = 0;
             }
             $("#use_status").val(check);
-            console.log(check)
         }
 
-        var image_file;
-        var image_file_EN;
-        var file_dowload;
-        var file_dowload_EN;
-
-        $(document).ready(function () {
-
-            Select2_DownloadType();
-
-            $('#file_img').change(async function (e) {
-                if (e.target.files.length === 1) {
-                    image_file = e.target.files[0];
-                    $('#preview_show_img').attr('src', await blobToBase64DataURL(image_file)).css("display", "block");
-                }
-            });
-            $('#file_img_EN').change(async function (e) {
-                if (e.target.files.length === 1) {
-                    image_file_EN = e.target.files[0];
-                    $('#preview_show_img_EN').attr('src', await blobToBase64DataURL(image_file_EN)).css("display", "block");
-                }
-            });
-            $('#file_download').change(function (e) {
-                if (e.target.files.length === 1) {
-                    file_dowload = e.target.files[0];
-                }
-            });
-            $('#file_download_EN').change(function (e) {
-                if (e.target.files.length === 1) {
-                    file_dowload_EN = e.target.files[0];
-                }
-            });
-        });
-
-
-        const blobToBase64DataURL = blob => new Promise(
-            resolvePromise => {
-                const reader = new FileReader();
-                reader.onload = () => resolvePromise(reader.result);
-                reader.readAsDataURL(blob);
-            }
-        );
-
         function submit() {
-
-            let download_type = $("#download_type").val();
-
-            let download_name_th = $("#download_name_th").val();
-            let download_name_en = $("#download_name_en").val();
-            let link_l_and_bim = $("#link_l_and_bim").val();
             let downloadType_id = $("#Select2_DownloadType").val()
-            //debugger
-            let use_status = check;
-
-            let formData = new FormData();
-            formData.append("DownloadType", download_type);
-            formData.append("Name_EN", download_name_en);
-            formData.append("Name_TH", download_name_th);
-            formData.append("L_AND_BIM_Link", link_l_and_bim);
-            formData.append("use_status", use_status);
-            formData.append("DownloadType_id", downloadType_id);
-
             if (downloadType_id != null) {
-                formData.append("DownloadType_id", downloadType_id);
+                var forms = $('#form_create')[0];
+                var data = new FormData(forms);
+                $.ajax({
+                    type: 'POST',
+                    url: '/ManageDownload/Add_Download',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    beforeSend: function () {
+                        Swal.fire('Please wait')
+                        Swal.showLoading()
+                    },
+                    success: function (data) {
+                        if (data.status == "success") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: data.message,
+                                showConfirmButton: false,
+                                timer: 2000
+                            }).then(() => {
+                                window.location.href = "/ManageDownload/Manage_Download_Page";
+                            });
+                        }
+                        else {
+                            Swal.fire({
+                                icon: 'warning',
+                                text: data.message,
+                            });
+                        }
+                    }, error: function (e) {
+                        Swal.fire({
+                            icon: 'error',
+                            text: e.message,
+                        });
+                    }
+                });
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -200,83 +180,6 @@
                 });
                 return;
             }
-
-            if (image_file != undefined) {
-                formData.append("Image", image_file);
-            } else {
-                //Swal.fire({
-                //    icon: 'error',
-                //    text: "กรุณาใส่รูป",
-                //});
-                //return;
-            }
-
-            if (image_file_EN != undefined) {
-                formData.append("Image_EN", image_file_EN);
-            } else {
-                //Swal.fire({
-                //    icon: 'error',
-                //    text: "กรุณาใส่รูป",
-                //});
-                //return;
-            }
-            if (file_dowload != undefined) {
-                formData.append("File", file_dowload);
-            } else {
-                //Swal.fire({
-                //    icon: 'error',
-                //    text: "กรุณใส่ไฟล์ดาวโหลด",
-                //});
-                //return;
-            }
-            if (file_dowload_EN != undefined) {
-                formData.append("File_EN", file_dowload_EN);
-            } else {
-                //Swal.fire({
-                //    icon: 'error',
-                //    text: "กรุณใส่ไฟล์ดาวโหลด",
-                //});
-                //return;
-            }
-
-            $.ajax({
-                type: 'POST',
-                url: '/ManageDownload/Add_Download',
-                data: formData,
-                processData: false,
-                contentType: false,
-                cache: false,
-                beforeSend: function () {
-                    Swal.fire('Please wait')
-                    Swal.showLoading()
-                },
-                success: function (data) {
-                    if (data.status == "success") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: data.message,
-                            showConfirmButton: false,
-                            timer: 2000
-                        }).then(() => {
-                            window.location.href = "/ManageDownload/Manage_Download_Page";
-                        });
-                    }
-                    else {
-                        Swal.fire({
-                            icon: 'warning',
-                            text: data.message,
-                        });
-
-                    }
-                }, error: function (e) {
-                    Swal.fire({
-                        icon: 'error',
-                        text: e.message,
-                    });
-                    console.log(e.message);
-                    console.log(e.inner);
-                }
-            });
         }
     </script>
-            }
+}

@@ -17,6 +17,7 @@ namespace Lighting.Models.InputFilterModels.Download
         public IFormFile File { get; set; }
         public IFormFile File_EN { get; set; }
         public string? L_AND_BIM_Link { get; set; }
+        public int id { get; set; }
     }
     public class Output_DownloadVM
     {

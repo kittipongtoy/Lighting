@@ -44,17 +44,17 @@ namespace Lighting.Controllers.Backend
                 return View(output);
             }
             return RedirectToAction("Manage_Download_Page");
-        } 
+        }
         public async Task<IActionResult> DownloadType_Submit(DownloadTypes downloadTypes)
         {
             var download = await db.DownloadTypes.FirstOrDefaultAsync(download => download.id == downloadTypes.id);
             if (download != null)
             {
                 try
-                { 
+                {
 
                     download.DownloadType_name_TH = downloadTypes.DownloadType_name_TH;
-                    download.DownloadType_name_ENG = downloadTypes.DownloadType_name_ENG; 
+                    download.DownloadType_name_ENG = downloadTypes.DownloadType_name_ENG;
                     await db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
                 }
@@ -66,8 +66,6 @@ namespace Lighting.Controllers.Backend
             }
             return Json(new { status = "error", message = "ไม่พบข้อมูล" });
         }
-
-
         public IActionResult Manage_Download_Page()
         {
             var checkrow = db.DownloadHeads.FirstOrDefault();
@@ -119,13 +117,13 @@ namespace Lighting.Controllers.Backend
                 var add_count = new List<DownloadModel.DownloadType_table>();
                 var count = 1;
                 foreach (var items in Raw_list)
-                { 
+                {
                     add_count.Add(new DownloadModel.DownloadType_table
                     {
                         count_row = count,
-                        id = items.id, 
+                        id = items.id,
                         downloadType_name_TH = items.DownloadType_name_TH,
-                        downloadType_name_ENG = items.DownloadType_name_ENG, 
+                        downloadType_name_ENG = items.DownloadType_name_ENG,
                         created_at = items.created_at,
                         updated_at = items.updated_at,
                     });
@@ -138,7 +136,7 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
 
-        } 
+        }
         public IActionResult Manage_Download_Page_getTable()
         {
             try
@@ -200,18 +198,22 @@ namespace Lighting.Controllers.Backend
             }
             return RedirectToAction("Manage_Download_Page");
         }
-        public async Task<IActionResult> Edit([FromForm] Input_DownloadVM input, [FromQuery] int id, Download updateData)
+
+        [HttpPut]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public async Task<IActionResult> Edit(Input_DownloadVM input)
         {
-            var download = await db.Downloads.FirstOrDefaultAsync(download => download.id == id);
-            if (download != null)
+            try
             {
-                try
+                var download = await db.Downloads.FirstOrDefaultAsync(download => download.id == input.id);
+                if (download != null)
                 {
-                    var old_data = db.Downloads.Where(x => x.id == id).FirstOrDefault();
+
+                    var old_data = db.Downloads.Where(x => x.id == input.id).FirstOrDefault();
 
                     if (input.Image != null)
                     {
-                        var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Download/" + old_data.upload_image);
+                        var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Download/" + old_data.upload_image);
                         if (System.IO.File.Exists(old_filePath) == true)
                         {
                             System.IO.File.Delete(old_filePath);
@@ -221,7 +223,7 @@ namespace Lighting.Controllers.Backend
                         var extension = Path.GetExtension(input.Image.FileName);
 
                         download.upload_image = datestr + extension;
-                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Download/" + datestr + extension);
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Download/" + datestr + extension);
 
                         using (var stream = System.IO.File.Create(filePath))
                         {
@@ -230,7 +232,7 @@ namespace Lighting.Controllers.Backend
                     }
                     if (input.Image_EN != null)
                     {
-                        var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Download/" + old_data.upload_image_ENG);
+                        var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Download/" + old_data.upload_image_ENG);
                         if (System.IO.File.Exists(old_filePath) == true)
                         {
                             System.IO.File.Delete(old_filePath);
@@ -240,7 +242,7 @@ namespace Lighting.Controllers.Backend
                         var extension = Path.GetExtension(input.Image_EN.FileName);
 
                         download.upload_image_ENG = datestr + extension;
-                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Download/" + datestr + extension);
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Download/" + datestr + extension);
 
                         using (var stream = System.IO.File.Create(filePath))
                         {
@@ -296,23 +298,29 @@ namespace Lighting.Controllers.Backend
                     await db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
                 }
-                catch (Exception ex)
+                else
                 {
-                    return Json(new { status = "error", message = "เกิดข้อผิดพลาด" });
-                }
-
+                    return Json(new { status = "error", message = "ไม่พบข้อมูล" });
+                }                
             }
-            return Json(new { status = "error", message = "ไม่พบข้อมูล" });
+            catch (Exception ex)
+            {
+                return Json(new { status = "error", message = "เกิดข้อผิดพลาด" });
+            }
         }
+
         public IActionResult Add_Download_Page()
         {
             return View();
         }
+
         [HttpPost]
-        public IActionResult Add_Download([FromForm] Input_DownloadVM input, Download inputData)
+        [RequestSizeLimit(1024 * 1024 * 1024)]
+        public async Task<IActionResult> Add_Download(Input_DownloadVM input)
         {
             try
             {
+                Download inputData = new Download();
                 if (input.Image != null)
                 {
                     var datestr = DateTime.Now.Ticks.ToString();
@@ -320,7 +328,7 @@ namespace Lighting.Controllers.Backend
                     extension = extension.Replace(" ", "");
 
                     inputData.upload_image = datestr + extension;
-                    var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Download/" + datestr + extension);
+                    var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Download/" + datestr + extension);
 
                     using (var stream = System.IO.File.Create(filePath))
                     {
@@ -335,7 +343,7 @@ namespace Lighting.Controllers.Backend
                     extension = extension.Replace(" ", "");
 
                     inputData.upload_image_ENG = datestr + extension;
-                    var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/Download/" + datestr + extension);
+                    var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_image/Download/" + datestr + extension);
 
                     using (var stream = System.IO.File.Create(filePath))
                     {
@@ -384,7 +392,7 @@ namespace Lighting.Controllers.Backend
                 inputData.created_at = Date;
 
                 db.Downloads.Add(inputData);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
 
                 return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
             }

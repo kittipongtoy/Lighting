@@ -544,6 +544,7 @@
     <Folder Include="wwwroot\upload_image\Apply_Img_Content\" />
     <Folder Include="wwwroot\upload_image\MainContact\" />
     <Folder Include="wwwroot\upload_image\Image_Category\" />
+    <Folder Include="wwwroot\upload_image\Download\" />
     <Folder Include="wwwroot\upload_image\NewFolder\" />
     <Folder Include="wwwroot\upload_image\Philosophy\" />
     <Folder Include="wwwroot\upload_image\Resource_Facility\" />
