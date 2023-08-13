@@ -2,13 +2,9 @@
 using Lighting.Models;
 using Lighting.Models.InputFilterModels.Download;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
-using System.IO;
-using System.Text;
 
 namespace Lighting.Controllers.Backend
 {

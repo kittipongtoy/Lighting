@@ -96,6 +96,24 @@
                         <div class="row mb-3">
                             <div class="col-2">
                                 <span>
+                                    Link TH
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Link_TH" id="Link_TH" />
+                            </div>
+                            <div class="col-2">
+                                <span>
+                                    Link EN
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Link_EN" id="Link_EN" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
                                     รูปด้านซ้าย
                                 </span><br />
                             </div>
@@ -165,6 +183,8 @@
                     $("#SubTitle_EN").val(data.subTitle_EN);
                     $("#RegisterTH").val(data.registerTH);
                     $("#RegisterEN").val(data.registerEN);
+                    $("#Link_TH").val(data.link_TH);
+                    $("#Link_EN").val(data.link_EN);
                     var status = '';
                     if (data.status == 1) {
                         status += '<div class="form-check form-switch">';

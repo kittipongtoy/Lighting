@@ -598,6 +598,8 @@ namespace Lighting.Controllers.Backend
                 iR_LIGHTING_EQUIPMENT.SubTitle_TH = model.SubTitle_TH;
                 iR_LIGHTING_EQUIPMENT.RegisterTH = model.RegisterTH;
                 iR_LIGHTING_EQUIPMENT.RegisterEN = model.RegisterEN;
+                iR_LIGHTING_EQUIPMENT.Link_TH = model.Link_TH;
+                iR_LIGHTING_EQUIPMENT.Link_EN = model.Link_EN;
                 iR_LIGHTING_EQUIPMENT.Status = model.Status;
                 iR_LIGHTING_EQUIPMENT.updated_at = DateTime.Now;
                 iR_LIGHTING_EQUIPMENT.created_at = DateTime.Now;
@@ -675,6 +677,8 @@ namespace Lighting.Controllers.Backend
                     iR_LIGHTING_EQUIPMENT.SubTitle_TH = model.SubTitle_TH;
                     iR_LIGHTING_EQUIPMENT.RegisterTH = model.RegisterTH;
                     iR_LIGHTING_EQUIPMENT.RegisterEN = model.RegisterEN;
+                    iR_LIGHTING_EQUIPMENT.Link_TH = model.Link_TH;
+                    iR_LIGHTING_EQUIPMENT.Link_EN = model.Link_EN;
                     iR_LIGHTING_EQUIPMENT.Status = model.Status;
                     iR_LIGHTING_EQUIPMENT.updated_at = DateTime.Now;
                     iR_LIGHTING_EQUIPMENT.created_at = DateTime.Now;
@@ -816,11 +820,31 @@ namespace Lighting.Controllers.Backend
         }
 
         [HttpPost]
+        [RequestSizeLimit(1024 * 1024 * 1024)]
         public async Task<IActionResult> Summary_Financial_Highlights_Add_Submit(RequestDTO.IR_Summary_Financial_HighlightsRequest model)
         {
             try
             {
                 IR_Summary_Financial_Highlights iR_Summary_Financial_Highlights = new IR_Summary_Financial_Highlights();
+
+                if (model.uploaded_Image != null)
+                {
+                    foreach (var formFile in model.uploaded_Image)
+                    {
+                        if (formFile.Length > 0)
+                        {
+                            var datestr = DateTime.Now.Ticks.ToString();
+                            var extension = Path.GetExtension(formFile.FileName);
+                            iR_Summary_Financial_Highlights.Background = datestr + extension;
+                            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_Index/" + datestr + extension);
+                            using (var stream = System.IO.File.Create(filePath))
+                            {
+                                formFile.CopyTo(stream);
+                            }
+                        }
+                    }
+                }
+
                 iR_Summary_Financial_Highlights.Title_EN = model.Title_EN;
                 iR_Summary_Financial_Highlights.Title_TH = model.Title_TH;
                 iR_Summary_Financial_Highlights.Detail_TH = model.Detail_TH;
@@ -872,6 +896,30 @@ namespace Lighting.Controllers.Backend
                 var iR_Summary_Financial_Highlight = _context.IR_Summary_Financial_Highlight.FirstOrDefault(x => x.Id == model.Id);
                 if (iR_Summary_Financial_Highlight is not null)
                 {
+                    if (model.uploaded_Image != null)
+                    {
+                        foreach (var formFile in model.uploaded_Image)
+                        {
+                            if (formFile.Length > 0)
+                            {
+                                var old_filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_Index/" + iR_Summary_Financial_Highlight.Background);
+                                if (System.IO.File.Exists(old_filePath) == true)
+                                {
+                                    System.IO.File.Delete(old_filePath);
+                                }
+
+                                var datestr = DateTime.Now.Ticks.ToString();
+                                var extension = Path.GetExtension(formFile.FileName);
+                                iR_Summary_Financial_Highlight.Background = datestr + extension;
+                                var filePath = Path.Combine(_hostEnvironment.WebRootPath, "upload_image/IR_Index/" + datestr + extension);
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    formFile.CopyTo(stream);
+                                }
+                            }
+                        }
+                    }
+
                     iR_Summary_Financial_Highlight.Title_EN = model.Title_EN;
                     iR_Summary_Financial_Highlight.Title_TH = model.Title_TH;
                     iR_Summary_Financial_Highlight.Detail_EN = model.Detail_EN;

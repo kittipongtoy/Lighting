@@ -86,7 +86,8 @@
                                 </span>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" name="SubTitle_TH" id="SubTitle_TH" />
+                                <textarea id="SubTitle_TH"></textarea>
+                                @*<input type="text" class="form-control" name="SubTitle_TH" id="SubTitle_TH" />*@
                             </div>
                             <div class="col-2">
                                 <span>
@@ -94,7 +95,8 @@
                                 </span>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" name="SubTitle_EN" id="SubTitle_EN" />
+                                <textarea id="SubTitle_EN"></textarea>
+                                @*<input type="text" class="form-control" name="SubTitle_EN" id="SubTitle_EN" />*@
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -151,6 +153,9 @@
             $("#use_status").val(check);
         }
 
+        var editorTH;
+        var editorEN;
+
         $(() => {
             $.ajax({
                 type: 'get',
@@ -161,8 +166,8 @@
                     $("#Id").val(data.id);
                     $("#Title_TH").val(data.title_TH);
                     $("#Title_EN").val(data.title_EN);
-                    $("#Detail_TH").val(data.detail_TH);
-                    $("#Detail_EN").val(data.detail_EN);
+                    $("#SubTitle_TH").val(data.subTitle_TH);
+                    $("#SubTitle_EN").val(data.subTitle_EN);
                     var status = '';
                     if (data.status == 1) {
                         status += '<div class="form-check form-switch">';
@@ -176,6 +181,26 @@
                         status += '<label class="form-check-label" for="use_status"> ใช้งาน </label>';
                         status += '</div>';
                     }
+
+                    ClassicEditor
+                        .create(document.querySelector('#SubTitle_TH'))
+                        .then(editor => {
+                            console.log('Editor was initialized', editor);
+                            editorTH = editor;
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                    ClassicEditor
+                        .create(document.querySelector('#SubTitle_EN'))
+                        .then(editor => {
+                            console.log('Editor was initialized', editor);
+                            editorEN = editor;
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+
                     $("#CheckStatus").html(status);
                 },
                 error: (e) => {
@@ -187,6 +212,10 @@
         function submit_form() {
             var forms = $('#form_create')[0];
             var data = new FormData(forms);
+            var get_th = editorTH.getData();
+            var get_en = editorEN.getData();
+            data.append("SubTitle_TH", get_th);
+            data.append("SubTitle_EN", get_en);
             $.ajax({
                 type: 'put',
                 url: '/IR_Index/Report_Edit_Submit',

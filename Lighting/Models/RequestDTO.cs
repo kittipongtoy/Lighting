@@ -62,6 +62,7 @@
             public string? Detail_TH { get; set; }
             public string? Detail_EN { get; set; }
             public int? Status { get; set; }
+            public List<IFormFile> uploaded_Image { get; set; }
         }
 
         public class IR_Summary_Financial_HighlightsDetailRequest
@@ -87,6 +88,8 @@
             public string? SubTitle_EN { get; set; }
             public string? RegisterTH { get; set; }
             public string? RegisterEN { get; set; }
+            public string? Link_TH { get; set; }
+            public string? Link_EN { get; set; }
             public int? Status { get; set; }
             public List<IFormFile> uploaded_Image { get; set; }
         }

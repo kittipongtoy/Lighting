@@ -11,6 +11,7 @@ namespace Lighting.Areas.Identity.Data
         public string? Title_EN { get; set; }
         public string? Detail_TH { get; set; }
         public string? Detail_EN { get; set; }
+        public string? Background { get; set; }
         public int? Status { get; set; }
         public DateTime? created_at { get; set; }
         public DateTime? updated_at { get; set; }

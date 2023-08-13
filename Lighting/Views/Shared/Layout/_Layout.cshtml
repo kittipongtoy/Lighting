@@ -269,6 +269,8 @@
     || ViewData["Title"] == "Summary_Financial_Highlights"
     || ViewData["Title"] == "Summary_Financial_Highlights_Add"
     || ViewData["Title"] == "Summary_Financial_Highlights_Edit"
+    || ViewData["Title"] == "Summary_Financial_HighlightsDetail_Add"
+    || ViewData["Title"] == "Summary_Financial_HighlightsDetail_Edit"
     || ViewData["Title"] == "Report"
     || ViewData["Title"] == "Report_Add"
     || ViewData["Title"] == "Report_Edit")
@@ -1030,7 +1032,7 @@
 												}
 											</div>
 											<div class="menu-item">
-												@if (ViewData["Title"] == "Summary_Financial_Highlights" || ViewData["Title"] == "Summary_Financial_Highlights_Add" || ViewData["Title"] == "Summary_Financial_Highlights_Edit")
+                                                @if (ViewData["Title"] == "Summary_Financial_Highlights" || ViewData["Title"] == "Summary_Financial_Highlights_Add" || ViewData["Title"] == "Summary_Financial_Highlights_Edit" || ViewData["Title"] == "Summary_Financial_HighlightsDetail_Add" || ViewData["Title"] == "Summary_Financial_HighlightsDetail_Edit")
 												{
 													<a class="menu-link active" href="@Url.Action("Summary_Financial_Highlights","IR_Index")">
 														<span class="menu-bullet">
