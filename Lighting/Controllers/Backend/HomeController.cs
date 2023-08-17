@@ -143,7 +143,7 @@ namespace Lighting.Controllers.Backend
                 });
             }
             _db.SaveChanges();
-            return Redirect("/Home/Index");
+            return Redirect("/Home/settingslide");
         }
 
         public IActionResult up(int ids, int sortc)

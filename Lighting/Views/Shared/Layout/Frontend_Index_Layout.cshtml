@@ -1,5 +1,6 @@
 ﻿@{
     var get_cookies = Context.Request.Cookies["lang"];
+    var Slide_Image_Index = (List<Lighting.Areas.Identity.Data.SlideImageIndex>)ViewData["Slide_Image_Index"];
 }
 
 <!DOCTYPE html>
@@ -33,44 +34,8 @@
     @*<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>*@
 
     <script>
-        $(() => {
-            //GetBanner();
-        })
-
-        function GetBanner() {
-            $.ajax({
-                type: 'GET',
-                url: "/Lighting/GetBanner",
-                processData: false,
-                contentType: false,
-                cache: false,
-                success: function (data) {
-                    var s = '';
-                    if (data.length > 0) {
-                        s += '<div class="index-main-banner owl-carousel owl-theme">';
-                        data.forEach(function (val) {
-                            s += ' <div class="items"><img src="~/Frontend_assets/images/web construc-01.jpg"></div>';
-                        });
-                        s += '</div>';
-                    }
-                    else {
-                        //s += '<div class="index-main-banner owl-carousel owl-theme">';
-                        s += '<div class="items"><img src="/Frontend_assets/images/web construc-01.jpg"></div>';
-                        s += '<div class="items"> <img src="/Frontend_assets/images/index/banner01.jpg"> </div>';
-                        //s += '</div>';
-                    }
-                    $("#BannerIndex").html(s);
-                }, error: function (e) {
-
-                }
-            })
-        }
-
         function SearchProduct(e) {
-
             let searchText = $("#search").val();
-            console.log(searchText);
-
             $.ajax({
                 type: 'GET',
                 url: "/Product/SearchJson?search=" + searchText,
@@ -123,9 +88,7 @@
         var menu_width;
 
         $(() => {
-
             initMenu();
-
             menu_width = $("#menu .menu").width();
             $("#menu .menu-back").click(function () {
                 var _pos = $("#menu .menu-slider").position().left + menu_width;
@@ -303,9 +266,6 @@
                 }
             });
         }
-
-
-
     </script>
 </head>
 <body>
@@ -488,46 +448,7 @@
                                                                                         <a href="#" class="menu-back">Back</a>
                                                                                     </div>
                                                                                 </div>
-                                                                                <ul id="nav_mobile_smartSolution">
-                                                                                    @*
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("SmartSolution","SmartSolution")">All</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">ICON LINK (APP)</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">WISE PLUS (APP)</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">WISE PLAY (APP)</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">WISE PRO (BROWSER)</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">WISE NB (BROWSER)</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">LIGHTING MANAGEMENT SYSTEM (APP/BROWSER)</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">SMART BUILDING</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">SMART STREET POLE (BROWSER)</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">SMART URBAN POLE (BROWSER)</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">SMART SOLAR STREET POLE (BROWSER)</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("SmartSolutionDetail","SmartSolution")">SMART FARMING (BROWSER)</a></div>
-                                                                                    </li>
-                                                                                    *@
-                                                                                </ul>
+                                                                                <ul id="nav_mobile_smartSolution"></ul>
                                                                             </div>
 
                                                                             <!-- PRODUCT -->
@@ -537,43 +458,7 @@
                                                                                         <a href="#" class="menu-back">Back</a>
                                                                                     </div>
                                                                                 </div>
-                                                                                <ul id="nav_mobile_product">
-                                                                                    @*
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Product","Product")">All</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">INDOOR</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">OUTDOOR</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">DECORATIVE</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">ENTERTAINMENT</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">SPECIAL</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">SWITCH / RECEPTACLE / SIGNAGE</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">LAMP</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">COMPONENT / CONTROL EQUIPMENT</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">HORTICULTURE / BIOLOGICAL LIGHTING</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Product_Category","Product")">POLE</a></div>
-                                                                                    </li>
-                                                                                    *@
-                                                                                </ul>
+                                                                                <ul id="nav_mobile_product"></ul>
                                                                             </div>
 
                                                                             <!-- PROJECT REF -->
@@ -583,52 +468,7 @@
                                                                                         <a href="#" class="menu-back">Back</a>
                                                                                     </div>
                                                                                 </div>
-                                                                                <ul id="nav_mobile_projectRef">
-                                                                                    @*
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Project","Project")">All</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">RESIDENTIAL</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">HOTEL / RESORT</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">SHOP / SHOWROOM</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">BANK / OFFICE / COMMERCIAL BUILDING</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">FACADE / HISTORICAL STRUCTURE</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">SPORT</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">EVENT / EXHIBITION</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">AIRPORT</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">FACTORY</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">SHOPPING MALL</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">SPA</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">STREETLIGHT / TUNNEL</a></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <div class="menu-item"><a href="@Url.Action("Project_Category","Project")">OUTDOOR / LANDSCAPE</a></div>
-                                                                                    </li>
-                                                                                    *@
-                                                                                </ul>
+                                                                                <ul id="nav_mobile_projectRef"></ul>
                                                                             </div>
 
                                                                             <!-- DOWNLOAD -->
@@ -875,10 +715,20 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col px-0">
-                    <div class="slide-navButton" >
-                        <div class="index-main-banner owl-carousel owl-theme" id="BannerIndex">
-                            <div class="items"><img src="~/Frontend_assets/images/web construc-01.jpg"></div>
-                            <div class="items"><img src="~/Frontend_assets/images/index/banner01.jpg"></div>
+                    <div class="slide-navButton">
+                        <div class="index-main-banner owl-carousel owl-theme">
+                            @if (Slide_Image_Index != null)
+                            {
+                                foreach (var item in Slide_Image_Index)
+                                {
+                                    <div class="items"><img src="~/upload_image/Index/@item.PathImg"></div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="items"><img src="~/Frontend_assets/images/web construc-01.jpg"></div>
+                                <div class="items"><img src="~/Frontend_assets/images/index/banner01.jpg"></div>
+                            }
                         </div>
                     </div>
                 </div>

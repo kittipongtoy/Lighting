@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="card-body pt-0 row">
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="TB_Cancel_Email">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="TB_Slide_Image_Index">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 @*<th class="min-w-125px">เรียงลำดับ</th>*@
@@ -42,8 +42,6 @@
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
                         </thead>
-                        <tbody class="fw-semibold text-gray-600">
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -85,7 +83,7 @@
 
         }
         $(() => {
-            var oTable = $("#TB_Cancel_Email").DataTable({
+            var oTable = $("#TB_Slide_Image_Index").DataTable({
                 processing: true,
                 serverSide: true,
                 searching: false,
@@ -109,7 +107,7 @@
                         }
                     },
                     {
-                        "name": "isactive", "data": "isactive", "className": "text-center", "render": function (data, type, row) {
+                        "name": "isActive", "data": "isActive", "className": "text-center", "render": function (data, type, row) {
                             return '<div class="form-check form-switch"><input class="form-check-input" type = "checkbox" role="switch" id="flexSwitchCheckDefault" checked></div>';
                     }
                     },

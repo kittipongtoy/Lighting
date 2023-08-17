@@ -3,6 +3,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
+
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <div class="toolbar" id="kt_toolbar">
         <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
@@ -12,7 +13,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
                     <li class="breadcrumb-item text-muted">
                         <a href="@Url.Action("Index","Home")" class="text-muted text-hover-primary">หน้าแรก</a>
-                    </li>                    
+                    </li>
                 </ul>
             </div>
         </div>
@@ -23,32 +24,48 @@
                 <div class="card-header border-0 pt-6">
                     <div class="card-title">
                         คั้งค่า Text หน้า Main
-                    </div>                  
+                    </div>
                 </div>
-                <div class="card-body pt-0 row">                   
-                    <form asp-action="update" asp-controller="Home" method="post" enctype="multipart/form-data">
+                <form asp-action="update" asp-controller="Home" method="post" enctype="multipart/form-data">
+                    <div class="card-body pt-0 row">
                         <div class="col-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาไทย</span>
+                                    <span class="input-group-text" id="basic-addon3">ข้อความ EXPLORE OUR TH</span>
                                 </div>
                                 @if (Model != null)
-                                { 
+                                {
                                     <input type="text" class="form-control" name="titleTH1" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleTH1">
                                 }
                                 else
                                 {
-                                    <input type="text" class="form-control" name="titleTH1" id="basic-url" aria-describedby="basic-addon3" value="">                                   
+                                    <input type="text" class="form-control" name="titleTH1" id="basic-url" aria-describedby="basic-addon3" value="">
                                 }
                             </div>
-                       </div>
+                        </div>
                         <div class="col-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาไทย</span>
+                                    <span class="input-group-text" id="basic-addon3">ข้อความ EXPLORE OUR EN</span>
                                 </div>
                                 @if (Model != null)
-                                { 
+                                {
+                                    <input type="text" class="form-control" name="titleENG1" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleENG1">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="titleENG1" id="basic-url" aria-describedby="basic-addon3" value="">
+                                }
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">ข้อความ NEW PRODUCTS TH</span>
+                                </div>
+                                @if (Model != null)
+                                {
                                     <input type="text" class="form-control" name="titleTH3" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleTH3">
                                 }
                                 else
@@ -60,37 +77,23 @@
                         <div class="col-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">ภาษาอังกฤษ</span>
+                                    <span class="input-group-text" id="basic-addon3">ข้อความ NEW PRODUCTS EN</span>
                                 </div>
                                 @if (Model != null)
-                                { 
-                                    <input type="text" class="form-control" name="titleENG1" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleENG1">
-                                }
-                                else
                                 {
-                                    <input type="text" class="form-control" name="titleENG1" id="basic-url" aria-describedby="basic-addon3" value="">
-                                }
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">ภาษาอังกฤษ</span>
-                                </div>
-                                @if (Model != null)
-                                { 
                                     <input type="text" class="form-control" name="titleENG3" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleENG3">
                                 }
                                 else
                                 {
-                                    <input type="text" class="form-control" name="titleENG3" id="basic-url" aria-describedby="basic-addon3" value="">                                 
+                                    <input type="text" class="form-control" name="titleENG3" id="basic-url" aria-describedby="basic-addon3" value="">
                                 }
                             </div>
                         </div>
-                        <div class="col-4">
+
+                        <div class="col-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาไทย</span>
+                                    <span class="input-group-text" id="basic-addon3">ข้อความ WHAT WE DO TH</span>
                                 </div>
                                 @if (Model != null)
                                 {
@@ -100,16 +103,33 @@
                                 {
                                     <input type="text" class="form-control" name="titleTH2" id="basic-url" aria-describedby="basic-addon3" value="">
                                 }
-                                
+
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาไทย</span>
+                                    <span class="input-group-text" id="basic-addon3">ข้อความ WHAT WE DO EN</span>
                                 </div>
                                 @if (Model != null)
-                                { 
+                                {
+                                    <input type="text" class="form-control" name="titleENG2" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleENG2">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="titleENG2" id="basic-url" aria-describedby="basic-addon3" value="">
+
+                                }
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">ข้อความ HI-LIGHT PROJECT TH</span>
+                                </div>
+                                @if (Model != null)
+                                {
                                     <input type="text" class="form-control" name="titlesubTH2" id="basic-url" aria-describedby="basic-addon3" value="@Model.titlesubTH2">
                                 }
                                 else
@@ -118,44 +138,13 @@
                                 }
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาไทย</span>
+                                    <span class="input-group-text" id="basic-addon3">ข้อความ HI-LIGHT PROJECT EN</span>
                                 </div>
                                 @if (Model != null)
-                                { 
-                                    <input type="text" class="form-control" name="DescriptTH2" id="basic-url" aria-describedby="basic-addon3" value="@Model.DescriptTH2">
-                                }
-                                else
                                 {
-                                    <input type="text" class="form-control" name="DescriptTH2" id="basic-url" aria-describedby="basic-addon3" value="">                             
-                                }
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาอังกฤษ</span>
-                                </div>
-                                @if (Model != null)
-                                { 
-                                    <input type="text" class="form-control" name="titleENG2" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleENG2">
-                                }
-                                else
-                                {
-                                    <input type="text" class="form-control" name="titleENG2" id="basic-url" aria-describedby="basic-addon3" value="">
-                                    
-                                }
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาอังกฤษ</span>
-                                </div>
-                                @if (Model != null)
-                                { 
                                     <input type="text" class="form-control" name="titlesubENG2" id="basic-url" aria-describedby="basic-addon3" value="@Model.titlesubENG2">
                                 }
                                 else
@@ -164,10 +153,26 @@
                                 }
                             </div>
                         </div>
-                        <div class="col-4">
+
+                        <div class="col-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาอังกฤษ</span>
+                                    <span class="input-group-text" id="basic-addon3">ข้อความ รายละเอียด WHAT WE DO TH</span>
+                                </div>
+                                @if (Model != null)
+                                {
+                                    <input type="text" class="form-control" name="DescriptTH2" id="basic-url" aria-describedby="basic-addon3" value="@Model.DescriptTH2">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="DescriptTH2" id="basic-url" aria-describedby="basic-addon3" value="">
+                                }
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">ข้อความ รายละเอียด WHAT WE DO EN</span>
                                 </div>
                                 @if (Model != null)
                                 {
@@ -175,14 +180,15 @@
                                 }
                                 else
                                 {
-                                    <input type="text" class="form-control" name="DescriptENG2" id="basic-url" aria-describedby="basic-addon3" value="">                                   
+                                    <input type="text" class="form-control" name="DescriptENG2" id="basic-url" aria-describedby="basic-addon3" value="">
                                 }
                             </div>
                         </div>
+
                         <div class="col-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาไทย</span>
+                                    <span class="input-group-text" id="basic-addon3">ข้อความ CATALOGUES TH</span>
                                 </div>
                                 @if (Model != null)
                                 {
@@ -190,32 +196,17 @@
                                 }
                                 else
                                 {
-                                    <input type="text" class="form-control" name="titleTH4" id="basic-url" aria-describedby="basic-addon3" value="">                                  
+                                    <input type="text" class="form-control" name="titleTH4" id="basic-url" aria-describedby="basic-addon3" value="">
                                 }
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">ข้อความ ภาษาไทย</span>
+                                    <span class="input-group-text" id="basic-addon3">ข้อความ CATALOGUES EN</span>
                                 </div>
                                 @if (Model != null)
-                                { 
-                                     <input type="text" class="form-control" name="titlesubTH4" id="basic-url" aria-describedby="basic-addon3" value="@Model.titlesubTH4">
-                                }
-                                else
                                 {
-                                    <input type="text" class="form-control" name="titlesubTH4" id="basic-url" aria-describedby="basic-addon3" value="">
-                                }
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">ภาษาอังกฤษ</span>
-                                </div>
-                                @if (Model != null)
-                                { 
                                     <input type="text" class="form-control" name="titleENG4" id="basic-url" aria-describedby="basic-addon3" value="@Model.titleENG4">
                                 }
                                 else
@@ -224,37 +215,47 @@
                                 }
                             </div>
                         </div>
+
                         <div class="col-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">ภาษาอังกฤษ</span>
+                                    <span class="input-group-text" id="basic-addon3">รายละเอียด CATALOGUES TH</span>
                                 </div>
-                                @if(Model != null)
+                                @if (Model != null)
+                                {
+                                    <input type="text" class="form-control" name="titlesubTH4" id="basic-url" aria-describedby="basic-addon3" value="@Model.titlesubTH4">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="titlesubTH4" id="basic-url" aria-describedby="basic-addon3" value="">
+                                }
+                            </div>
+                        </div>               
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">รายละเอียด CATALOGUES EN</span>
+                                </div>
+                                @if (Model != null)
                                 {
                                     <input type="text" class="form-control" name="titlesubENG4" id="basic-url" aria-describedby="basic-addon3" value="@Model.titlesubENG4">
                                 }
                                 else
-                                {                               
+                                {
                                     <input type="text" class="form-control" name="titlesubENG4" id="basic-url" aria-describedby="basic-addon3" value="">
                                 }
                             </div>
                         </div>
+
                         <div class="input-group mb-3">
-                            <input type="file" class="form-control" name="PathImg" id="inputGroupFile02">
+                            <input type="file" class="form-control col-3" name="PathImg" id="inputGroupFile02">
                             <label class="input-group-text" for="inputGroupFile02">Upload</label>
                         </div>
-                        <div class="col-3">
-                            
-                        </div>
-                        <div class="col-3">
-                        </div>
-                        <div class="col-3">
-                        </div>
-                        <div class="col-3">
+                        <div class="col-12" style="text-align:right">
                             <button class="btn btn-success">บันทึก</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

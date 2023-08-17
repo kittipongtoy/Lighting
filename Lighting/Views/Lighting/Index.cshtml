@@ -1,9 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/Layout/Frontend_Index_Layout.cshtml";
-    var ggg = Model;
     var lang = Context.Request.Cookies["lang"];
-
+    var Count_Setting_Index = (List<Lighting.Areas.Identity.Data.SettingIndex>)ViewBag.Setting_Index;
+    var Count_Products = (List<Lighting.Areas.Identity.Data.Product_Category>)ViewBag.Products;
+    var Count_Project = (List<Lighting.Areas.Identity.Data.ProjectRef>)ViewBag.Project;
+    var Count_Download = (List<Lighting.Areas.Identity.Data.Download>)ViewBag.latestDownloads;
+    ViewData["Slide_Image_Index"] = (List<Lighting.Areas.Identity.Data.SlideImageIndex>)ViewBag.Slide_Image_Index;
 }
 
 <div class="content-padding" id="index">
@@ -12,21 +15,24 @@
         <div class="wrap-pad">
             <div class="new-product-header">
                 <div class="row">
-                    @if (Model.DATA != null)
+                    @if (Count_Setting_Index.Count() != 0)
                     {
-                        @if (lang == "EN")
-                        {
-                            <div class="col-lg-9 col-md-9 col-12">
-                                <h3>@Model.DATA.titleENG1</h3>
-                                <h1>@Model.DATA.titleENG3</h1>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="col-lg-9 col-md-9 col-12">
-                                <h3>@Model.DATA.titleTH1</h3>
-                                <h1>@Model.DATA.titleTH3</h1>
-                            </div>
+                        foreach (var item in Count_Setting_Index)
+                        { 
+                            @if (lang == "EN")
+                            {
+                                <div class="col-lg-9 col-md-9 col-12">
+                                    <h3>@item.titleENG1</h3>
+                                    <h1>@item.titleENG3</h1>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-lg-9 col-md-9 col-12">
+                                    <h3>@item.titleTH1</h3>
+                                    <h1>@item.titleTH3</h1>
+                                </div>
+                            }
                         }
                     }
                     else
@@ -53,116 +59,13 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col">
                 <ul class="contentBox-list">
-                    @*
-                    <li>
-                    <a href="product_detail.php">
-                    <img src="~/Frontend_assets/images/index/n-product01.jpg">
-                    <div class="contentBoxBG">
-                    <div class="row">
-                    <div class="col-lg-8 col-md-12 col-12">
-                    <div class="contentBox-topic">
-                    <p>BOLLARD </p>
-                    </div>
-                    </div>
-                    <div class="col-lg-4 d-none d-md-none d-lg-block">
-                    <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
-                    </div>
-                    </div>
-                    </div>
-                    </a>
-                    </li>
-                    <li>
-                    <a href="product_detail.php">
-                    <img src="~/Frontend_assets/images/index/n-product02.jpg">
-                    <div class="contentBoxBG">
-                    <div class="row">
-                    <div class="col-lg-8 col-md-12 col-12">
-                    <div class="contentBox-topic">
-                    <p>LED FRESNEL SPOT LIGHT</p>
-                    </div>
-                    </div>
-                    <div class="col-lg-4 d-none d-md-none d-lg-block">
-                    <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
-                    </div>
-                    </div>
-                    </div>
-                    </a>
-                    </li>
-                    <li>
-                    <a href="product_detail.php">
-                    <img src="~/Frontend_assets/images/index/n-product03.jpg">
-                    <div class="contentBoxBG">
-                    <div class="row">
-                    <div class="col-lg-8 col-md-12 col-12">
-                    <div class="contentBox-topic">
-                    <p>HIGH BAY HBL731</p>
-                    </div>
-                    </div>
-                    <div class="col-lg-4 d-none d-md-none d-lg-block">
-                    <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
-                    </div>
-                    </div>
-                    </div>
-                    </a>
-                    </li>
-                    <li>
-                    <a href="product_detail.php">
-                    <img src="~/Frontend_assets/images/index/n-product04.jpg">
-                    <div class="contentBoxBG">
-                    <div class="row">
-                    <div class="col-lg-8 col-md-12 col-12">
-                    <div class="contentBox-topic">
-                    <p>TRACK LIGHT LED MODULE TRL110</p>
-                    </div>
-                    </div>
-                    <div class="col-lg-4 d-none d-md-none d-lg-block">
-                    <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
-                    </div>
-                    </div>
-                    </div>
-                    </a>
-                    </li>
-                    <li>
-                    <a href="product_detail.php">
-                    <img src="~/Frontend_assets/images/index/n-product05.jpg">
-                    <div class="contentBoxBG">
-                    <div class="row">
-                    <div class="col-lg-8 col-md-12 col-12">
-                    <div class="contentBox-topic">
-                    <p>RECESSED DOWNLIGHT RAL40D</p>
-                    </div>
-                    </div>
-                    <div class="col-lg-4 d-none d-md-none d-lg-block">
-                    <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
-                    </div>
-                    </div>
-                    </div>
-                    </a>
-                    </li>
-                    <li>
-                    <a href="product_detail.php">
-                    <img src="~/Frontend_assets/images/index/n-product06.jpg">
-                    <div class="contentBoxBG">
-                    <div class="row">
-                    <div class="col-lg-8 col-md-12 col-12">
-                    <div class="contentBox-topic">
-                    <p>WALL MOUNT WLL123</p>
-                    </div>
-                    </div>
-                    <div class="col-lg-4 d-none d-md-none d-lg-block">
-                    <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
-                    </div>
-                    </div>
-                    </div>
-                    </a>
-                    </li>
-                    *@
-                    @if (Model.Product != null && Model.Product.Count > 0)
+                    @if (Count_Products.Count() != 0)
                     {
-                        @foreach (var tt in Model.Product)
+                        @foreach (var tt in Count_Products)
                         {
                             <li>
                                 <a href="@Url.Action("Product_Category","Product",new {category = tt.Name_EN})">
@@ -193,7 +96,6 @@
                                                     <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
                                                 </div>
                                             }
-
                                         </div>
                                     </div>
                                 </a>
@@ -360,51 +262,52 @@
                             </a>
                         </li>
                     }
-
-
                 </ul>
             </div>
         </div>
 
         <!---------- INDEX :: PROJECT REF ---------->
         <div class="wrap-pad">
-            @if (Model.DATA != null)
+            @if (Count_Setting_Index.Count() != 0)
             {
-                @if (lang == "EN")
-                {
-                    <div class="project-header">
-                        <div class="row">
-                            <div class="col">
-                                <h1>@Model.DATA.titleENG2</h1>
-                                <h3>@Model.DATA.titlesubENG2</h3>
+                foreach (var item in Count_Setting_Index)
+                { 
+                    @if (lang == "EN")
+                    {
+                        <div class="project-header">
+                            <div class="row">
+                                <div class="col">
+                                    <h1>@item.titleENG2</h1>
+                                    <h3>@item.titlesubENG2</h3>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-xl-8 col-lg-9 col-md-11 col-12">
-                            <div class="txt-content text-center f-17">
-                                <p>@Model.DATA.DescriptENG2</p>
+                        <div class="row justify-content-center">
+                            <div class="col-xl-8 col-lg-9 col-md-11 col-12">
+                                <div class="txt-content text-center f-17">
+                                    <p>@item.DescriptENG2</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }
-                else
-                {
-                    <div class="project-header">
-                        <div class="row">
-                            <div class="col">
-                                <h1>@Model.DATA.titleTH2</h1>
-                                <h3>@Model.DATA.titlesubTH2</h3>
+                    }
+                    else
+                    {
+                        <div class="project-header">
+                            <div class="row">
+                                <div class="col">
+                                    <h1>@item.titleTH2</h1>
+                                    <h3>@item.titlesubTH2</h3>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-xl-8 col-lg-9 col-md-11 col-12">
-                            <div class="txt-content text-center f-17">
-                                <p>@Model.DATA.DescriptTH2</p>
+                        <div class="row justify-content-center">
+                            <div class="col-xl-8 col-lg-9 col-md-11 col-12">
+                                <div class="txt-content text-center f-17">
+                                    <p>@item.DescriptTH2</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 }
             }
             else
@@ -442,86 +345,16 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col">
                 <ul class="contentBox-list project">
-                    @*
-                    <li>
-                    <a href="project_detail.php">
-                    <img src="~/Frontend_assets/images/index/project01.jpg">
-                    <div class="contentBoxBG">
-                    <div class="row">
-                    <div class="col-lg-9 col-md-12 col-12">
-                    <div class="contentBox-topic">
-                    <p>QUEEN SIRKIT NATIONAL CONVENTION CENTER</p>
-                    </div>
-                    </div>
-                    <div class="col-lg-3 d-none d-md-none d-lg-block">
-                    <div class="buttonBD">Read more<i class="fa fa-long-arrow-right"></i></div>
-                    </div>
-                    </div>
-                    </div>
-                    </a>
-                    </li>
-                    <li>
-                    <a href="project_detail.php">
-                    <img src="~/Frontend_assets/images/index/project02.jpg">
-                    <div class="contentBoxBG">
-                    <div class="row">
-                    <div class="col-lg-9 col-md-12 col-12">
-                    <div class="contentBox-topic">
-                    <p>THE VOICE ALL STARS THAILAND</p>
-                    </div>
-                    </div>
-                    <div class="col-lg-3 d-none d-md-none d-lg-block">
-                    <div class="buttonBD">Read more<i class="fa fa-long-arrow-right"></i></div>
-                    </div>
-                    </div>
-                    </div>
-                    </a>
-                    </li>
-                    <li>
-                    <a href="project_detail.php">
-                    <img src="~/Frontend_assets/images/index/project03.jpg">
-                    <div class="contentBoxBG">
-                    <div class="row">
-                    <div class="col-lg-9 col-md-12 col-12">
-                    <div class="contentBox-topic">
-                    <p>REGENT PHUKET CAPE PANWA</p>
-                    </div>
-                    </div>
-                    <div class="col-lg-3 d-none d-md-none d-lg-block">
-                    <div class="buttonBD">Read more<i class="fa fa-long-arrow-right"></i></div>
-                    </div>
-                    </div>
-                    </div>
-                    </a>
-                    </li>
-                    <li>
-                    <a href="project_detail.php">
-                    <img src="~/Frontend_assets/images/index/project04.jpg">
-                    <div class="contentBoxBG">
-                    <div class="row">
-                    <div class="col-lg-9 col-md-12 col-12">
-                    <div class="contentBox-topic">
-                    <p>SOOKSIAM <br>@@ ICONSIAM</p>
-                    </div>
-                    </div>
-                    <div class="col-lg-3 d-none d-md-none d-lg-block">
-                    <div class="buttonBD">Read more<i class="fa fa-long-arrow-right"></i></div>
-                    </div>
-                    </div>
-                    </div>
-                    </a>
-                    </li>
-                    *@
-                    @if (Model.Project != null && Model.Project.Count > 0)
+                    @if (Count_Project.Count() > 0)
                     {
-                        @foreach (var tt in Model.Project)
+                        @foreach (var tt in Count_Project)
                         {
                             <li>
                                 <a href="@Url.Action("Project_Detail","Project",new {id = tt.Id})">
-                                    @*<img src="~/Frontend_assets/images/index/project01.jpg">*@
                                     <img src="~/@tt.Profile_Image">
                                     <div class="contentBoxBG">
                                         <div class="row">
@@ -546,7 +379,6 @@
                                                 {
                                                     <div class="buttonBD">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
                                                 }
-
                                             </div>
                                         </div>
                                     </div>
@@ -625,8 +457,6 @@
                             </a>
                         </li>
                     }
-
-
                 </ul>
             </div>
         </div>
@@ -636,37 +466,40 @@
 <div class="catalogueBG">
     <div class="container-fluid">
         <div class="wrap-pad">
-            @if (Model.DATA != null)
+            @if (Count_Setting_Index.Count() != 0)
             {
-                @if (lang == "EN")
-                {
-                    <div class="row">
-                        <div class="col">
-                            <h1>@Model.DATA.titleENG4</h1>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-xl-8 col-lg-9 col-md-11 col-12">
-                            <div class="txt-content text-center f-17">
-                                <p>@Model.DATA.titlesubENG4</p>
+                foreach (var item in Count_Setting_Index)
+                { 
+                    @if (lang == "EN")
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <h1>@item.titleENG4</h1>
                             </div>
                         </div>
-                    </div>
-                }
-                else
-                {
-                    <div class="row">
-                        <div class="col">
-                            <h1>@Model.DATA.titleTH4</h1>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-xl-8 col-lg-9 col-md-11 col-12">
-                            <div class="txt-content text-center f-17">
-                                <p>@Model.DATA.titlesubTH4</p>
+                        <div class="row justify-content-center">
+                            <div class="col-xl-8 col-lg-9 col-md-11 col-12">
+                                <div class="txt-content text-center f-17">
+                                    <p>@item.titlesubENG4</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <h1>@item.titleTH4</h1>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-xl-8 col-lg-9 col-md-11 col-12">
+                                <div class="txt-content text-center f-17">
+                                    <p>@item.titlesubTH4</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 }
             }
             else
@@ -684,102 +517,15 @@
                     </div>
                 </div>
             }
+
             <div class="row">
                 <div class="col">
                     <div class="slide-navButton">
                         <div class="catalogue-slide owl-carousel owl-theme">
-                            @*
-                            <div class="items">
-                            <a class="contentBox" href="images/testPDF.pdf" target="_blank">
-                            <div class="row">
-                            <div class="col">
-                            <div class="img-width"><img src="~/Frontend_assets/images/catalogue/catalogue01.jpg"></div>
-                            </div>
-                            </div>
-                            <div class="row">
-                            <div class="col">
-                            <div class="contentBox-topic">
-                            <p>LED LE Catalogue 2023</p>
-                            </div>
-                            </div>
-                            </div>
-                            <div class="row">
-                            <div class="col">
-                            <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
-                            </div>
-                            </div>
-                            </a>
-                            </div>
-                            <div class="items">
-                            <a class="contentBox" href="images/testPDF.pdf" target="_blank">
-                            <div class="row">
-                            <div class="col">
-                            <div class="img-width"><img src="~/Frontend_assets/images/catalogue/catalogue02.jpg"></div>
-                            </div>
-                            </div>
-                            <div class="row">
-                            <div class="col">
-                            <div class="contentBox-topic">
-                            <p>LMS Product Catalogue 2023-2025</p>
-                            </div>
-                            </div>
-                            </div>
-                            <div class="row">
-                            <div class="col">
-                            <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
-                            </div>
-                            </div>
-                            </a>
-                            </div>
-                            <div class="items">
-                            <a class="contentBox" href="images/testPDF.pdf" target="_blank">
-                            <div class="row">
-                            <div class="col">
-                            <div class="img-width"><img src="~/Frontend_assets/images/catalogue/catalogue03.jpg"></div>
-                            </div>
-                            </div>
-                            <div class="row">
-                            <div class="col">
-                            <div class="contentBox-topic">
-                            <p>LUMAX CATALOG</p>
-                            </div>
-                            </div>
-                            </div>
-                            <div class="row">
-                            <div class="col">
-                            <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
-                            </div>
-                            </div>
-                            </a>
-                            </div>
-                            <div class="items">
-                            <a class="contentBox" href="images/testPDF.pdf" target="_blank">
-                            <div class="row">
-                            <div class="col">
-                            <div class="img-width"><img src="~/Frontend_assets/images/catalogue/catalogue04.jpg"></div>
-                            </div>
-                            </div>
-                            <div class="row">
-                            <div class="col">
-                            <div class="contentBox-topic">
-                            <p>Decorative Light 2022</p>
-                            </div>
-                            </div>
-                            </div>
-                            <div class="row">
-                            <div class="col">
-                            <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
-                            </div>
-                            </div>
-                            </a>
-                            </div>
-                            *@
-
-                            @if (Model.Download != null && Model.Download.Count > 0)
+                            @if (Count_Download.Count() != 0)
                             {
-                                @foreach (var download in Model.Download)
+                                @foreach (var download in Count_Download)
                                 {
-
                                     if (lang == "EN")
                                     {
                                         if (download.file_name_ENG == null)
@@ -788,7 +534,7 @@
                                                 <a class="contentBox" href="@(download?.L_AND_BIM_Link)" target="_blank">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <div class="img-width"><img src="~/upload_file/Download/@download?.upload_image_ENG"></div>
+                                                            <div class="img-width"><img src="~/upload_image/Download/@download?.upload_image_ENG"></div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -812,7 +558,7 @@
                                                 <a class="contentBox" href="~/upload_file/Download/@(download?.file_name_ENG)"  target="_blank">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <div class="img-width"><img src="~/upload_file/Download/@download?.upload_image_ENG"></div>
+                                                            <div class="img-width"><img src="~/upload_image/Download/@download?.upload_image_ENG"></div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -839,7 +585,7 @@
                                                 <a class="contentBox" href="@(download?.L_AND_BIM_Link)" target="_blank">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <div class="img-width"><img src="~/upload_file/Download/@download?.upload_image"></div>
+                                                            <div class="img-width"><img src="~/upload_image/Download/@download?.upload_image"></div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -864,7 +610,7 @@
                                                 <a class="contentBox" href="~/upload_file/Download/@(download?.file_name)" target="_blank">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <div class="img-width"><img src="~/upload_file/Download/@download?.upload_image"></div>
+                                                            <div class="img-width"><img src="~/upload_image/Download/@download?.upload_image"></div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -884,7 +630,6 @@
                                         }
                                     } 
                                 } 
-
                             }
                             else
                             {
@@ -972,7 +717,6 @@
                                         </div>
                                     </a>
                                 </div>
-
                                 <div class="items">
                                     <a class="contentBox" href="images/testPDF.pdf" target="_blank">
                                         <div class="row">
@@ -995,8 +739,6 @@
                                     </a>
                                 </div>
                             }
-
-
                         </div>
                     </div>
                 </div>
@@ -1004,6 +746,7 @@
         </div>
     </div>
 </div>
+
 @section Scripts{
     <script>
         $(window).scroll(function () {
