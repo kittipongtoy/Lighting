@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "settingslide";
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -96,11 +96,6 @@
                     url: '/Home/datatable',
                 },
                 columns: [
-                    //{ 'data': 'sort', name: 'sort', className: 'text-center',"render":function(data,type,row){
-                        
-                    //        return "";
-                    //    }
-                    //},
                     {
                         "name": "pathImg", "data": "pathImg", "render": function (data, type, row) {
                             return "<img src=\"upload_image/Index/" + data + "\" width=\"25%\"/>";
@@ -108,18 +103,108 @@
                     },
                     {
                         "name": "isActive", "data": "isActive", "className": "text-center", "render": function (data, type, row) {
-                            return '<div class="form-check form-switch"><input class="form-check-input" type = "checkbox" role="switch" id="flexSwitchCheckDefault" checked></div>';
+                            if (row.isActive == true) {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" checked type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id_slideimg_index + ',this)"> ' +
+                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            } else {
+                                var text = '<div class="form-check form-switch">' +
+                                    '<input class="form-check-input" type="checkbox" name="use_status" value="1" id="use_status" onchange="changeStatus(' + row.id_slideimg_index + ',this)"> ' +
+                                    '<label class="form-check-label" for="use_status">ใช้งาน</label>' +
+                                    '</div>';
+                                return text;
+                            }
+                            //return '<div class="form-check form-switch"><input class="form-check-input" type = "checkbox" role="switch" id="flexSwitchCheckDefault" checked></div>';
                     }
                     },
                     {
                         "name": "id_slideimg_index", "data": "id_slideimg_index", "class": "text-center", "render": function (data, type, row) {
-                            
-                            return "<button class='btn btn-danger' >ลบ</button>";
+                            var text = '<button type="button" class="btn btn-danger"style="margin-left: 15px;" onclick="delete_item(' + row.id_slideimg_index + ')"><i class="bi bi-trash-fill"></i>ลบ</button>';
+                            return text;
                         }
                     }
                 ]
             });
         })
 
+        function changeStatus(id, checked_obj) {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Home/BannerChange",
+                data: {
+                    Id: id
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
+        function delete_item(id) {
+            Swal.fire({
+                title: 'คุณต้องการจะลบหรือไม่?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'ใช่',
+                denyButtonText: `ไม่ใช่`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "delete",
+                        cache: false,
+                        url: "/Home/BannerDelete",
+                        data: {
+                            Id: id
+                        },
+                        success: function (data) {
+                            if (data.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then((result) => {
+                                    var oTable = $('#TB_Slide_Image_Index').DataTable();
+                                    oTable.ajax.reload(null, false);
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    text: data.message,
+                                });
+                            }
+                        }, error: function (e) {
+                            Swal.fire({
+                                icon: 'error',
+                                text: e.message,
+                            });
+                            console.log(e.message);
+                            console.log(e.inner);
+                        }
+                    });
+                } else if (result.isDenied) {
+
+                }
+            })
+        }
     </script>
 }

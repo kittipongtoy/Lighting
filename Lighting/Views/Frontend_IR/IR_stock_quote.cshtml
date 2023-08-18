@@ -1,6 +1,8 @@
 ﻿@{
     ViewData["Title"] = "IR_stock_quote";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
+    var IR_Stock_Quote = (List<Lighting.Areas.Identity.Data.IR_Stock_Quote>)ViewBag.IR_Stock_Quote;
+    var IR_Stock_QuoteDetail = (List<Lighting.Areas.Identity.Data.IR_Stock_QuoteDetail>)ViewBag.IR_Stock_QuoteDetail;
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
@@ -13,8 +15,30 @@
             <div class="row">
                 <div class="col">
                     <div class="header-twoline">
-                        <h5>ข้อมูลราคาหลักทรัพย์</h5>
-                        <h1>ราคาหุ้นล่าสุด</h1>
+                        @if (IR_Stock_Quote.Count() != 0)
+                        {
+                            if (Context.Request.Cookies["lang"] == "EN")
+                            {
+                                foreach (var item in ViewBag.IR_faq)
+                                {
+                                    <h5>@item.Title_EN</h5>
+                                    <h1>@item.SubTitle_EN</h1>
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in ViewBag.IR_faq)
+                                {
+                                    <h5>@item.Title_TH</h5>
+                                    <h1>@item.SubTitle_TH</h1>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <h5>ข้อมูลราคาหลักทรัพย์</h5>
+                            <h1>ราคาหุ้นล่าสุด</h1>
+                        }
                     </div>
                 </div>
             </div>
@@ -22,26 +46,104 @@
                 <div class="col-xl-9 col-lg-10 col-md-11 col-12">
                     <div class="WH-Box">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="topicBD-Box">
-                                            <div>STOCK PRICE</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-9 col-md-9 col-11">
-                                        <div class="img-width mb-4">
-                                            <iframe frameborder=0 scrolling=no width="200" height="260" src="https://weblink.settrade.com/banner/banner3.jsp"></iframe>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                @if (Context.Request.Cookies["lang"] == "EN")
+                            @if (IR_Stock_QuoteDetail.Count() != 0)
+                            {
+                                IR_Stock_QuoteDetail = IR_Stock_QuoteDetail.OrderByDescending(x => x.Id).Take(1).ToList();
+                                @foreach (var item in IR_Stock_QuoteDetail)
                                 {
-                                   @* foreach (var item in ViewBag.IR_Latest_News)
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="topicBD-Box">
+                                                    @if (Context.Request.Cookies["lang"] == "EN")
+                                                    {
+                                                        <div>@item.STOCK_PRICE_EN</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div>@item.STOCK_PRICE_TH</div>
+                                                    }                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-9 col-md-9 col-11">
+                                                <div class="img-width mb-4">
+                                                    @* <iframe frameborder=0 scrolling=no width="200" height="260" src="https://weblink.settrade.com/banner/banner3.jsp"></iframe> *@
+                                                    @Html.Raw(item.Link_STOCK_PRICE)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="topicBD-Box">
+                                                <div>STOCK PRICE</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-9 col-md-9 col-11">
+                                            <div class="img-width mb-4">
+                                                <iframe frameborder=0 scrolling=no width="200" height="260" src="https://weblink.settrade.com/banner/banner3.jsp"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="col-lg-6 col-md-6 col-12">
+                                @if (IR_Stock_QuoteDetail.Count() != 0)
+                                {
+                                    IR_Stock_QuoteDetail = IR_Stock_QuoteDetail.OrderByDescending(x => x.Id).Take(1).ToList();
+                                    @foreach (var item in IR_Stock_QuoteDetail)
+                                    {
+                                        @if (Context.Request.Cookies["lang"] == "EN")
+                                        {
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="topicBD-Box">
+                                                        <div>@item.SET_INDEX_EN</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-9 col-md-9 col-11">
+                                                    <div class="img-width">
+                                                        @Html.Raw(item.Link_SET_INDEX_EN)
+                                                        @* <iframe frameborder=0 scrolling=no width="200" height="200" src="https://weblink.settrade.com/IRPage/irpage.jsp?txtSymbol=L%2526E&language=en&key=27742"></iframe> *@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="topicBD-Box">
+                                                        <div>@item.SET_INDEX_TH</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-9 col-md-9 col-11">
+                                                    <div class="img-width">
+                                                        @Html.Raw(item.Link_SET_INDEX_TH)
+                                                        @* <iframe frameborder=0 scrolling=no width="200" height="200" src="https://weblink.settrade.com/IRPage/irpage.jsp?txtSymbol=L%2526E&language=th&key=27742"></iframe> *@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    @if (Context.Request.Cookies["lang"] == "EN")
                                     {
                                         <div class="row">
                                             <div class="col">
@@ -57,11 +159,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    }*@
-                                }
-                                else
-                                {
-                                   @* foreach (var item in ViewBag.IR_Latest_News)
+                                    }
+                                    else
                                     {
                                         <div class="row">
                                             <div class="col">
@@ -77,7 +176,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    }*@
+                                    }
                                 }
                             </div>
                         </div>

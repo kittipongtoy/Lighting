@@ -15,6 +15,7 @@ namespace Lighting.Areas.Identity.Data
         public string? file_name_ENG { get; set; } 
         public string? L_AND_BIM_Link { get; set; }
         public int? use_status { get; set; }
+        public int? ShowItem { get; set; }
         public DateTime? created_at { get; set; }
         public DateTime? updated_at { get; set; }
     }

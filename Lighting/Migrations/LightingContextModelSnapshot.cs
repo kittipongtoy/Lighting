@@ -616,19 +616,20 @@ namespace Lighting.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
-                    b.Property<int>("DownloadType_id")
+                    b.Property<int?>("DownloadType_id")
                         .HasColumnType("int");
 
                     b.Property<string>("L_AND_BIM_Link")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name_EN")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name_TH")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ShowItem")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("created_at")
                         .HasColumnType("datetime2");
@@ -2409,9 +2410,9 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "50f816c5-31cc-4bb2-8c88-a0b478af71cc",
+                            Id = "b1262c8a-8e4e-4e2b-a2a5-bb86594abe94",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e76a62e8-7c58-497e-b858-20c976a04e8b",
+                            ConcurrencyStamp = "cbf4b10a-df76-47cf-a8ce-700b827d14b6",
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -2421,9 +2422,9 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAELRaWHJPzOaEq+devPMeFFepXAeBEfOl5nbydZfcqeIFk87dOkO/WeX16g+JMj+K2A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBzzgoT1mGBqTCE7wsqVwYkiXi86Avkt2suvkPnSooY3/K1xvQViQJK1Pw9bXqAMRg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a1970116-3b33-4785-b7fb-facc14d00fe5",
+                            SecurityStamp = "76d6f8ee-8bcd-4bfe-beaf-89e50e9975f8",
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -3961,6 +3962,9 @@ namespace Lighting.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ShowItem")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Product_Categorys");
@@ -4061,6 +4065,9 @@ namespace Lighting.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProjectRef_CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ShowItem")
                         .HasColumnType("int");
 
                     b.Property<string>("Title_EN")
@@ -4709,13 +4716,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e6562ba4-d131-4377-840a-bf6ea68e8b93",
-                            ConcurrencyStamp = "ee5635a7-5a3f-4ccc-849e-af4087b85fe9",
+                            Id = "45e22b91-d81d-4757-b3ba-f4fd70437afb",
+                            ConcurrencyStamp = "ffa21e2a-195d-4978-ae9c-ebc3cd8f3993",
                             Name = "Admin",
                             NameThai = "Admin",
                             NormalizedName = "Admin",
-                            created_at = new DateTime(2023, 8, 12, 9, 51, 24, 833, DateTimeKind.Utc).AddTicks(9199),
-                            updated_at = new DateTime(2023, 8, 12, 9, 51, 24, 833, DateTimeKind.Utc).AddTicks(9202)
+                            created_at = new DateTime(2023, 8, 18, 7, 35, 36, 821, DateTimeKind.Utc).AddTicks(7956),
+                            updated_at = new DateTime(2023, 8, 18, 7, 35, 36, 821, DateTimeKind.Utc).AddTicks(7960)
                         });
                 });
 
@@ -6579,8 +6586,8 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "50f816c5-31cc-4bb2-8c88-a0b478af71cc",
-                            RoleId = "e6562ba4-d131-4377-840a-bf6ea68e8b93"
+                            UserId = "b1262c8a-8e4e-4e2b-a2a5-bb86594abe94",
+                            RoleId = "45e22b91-d81d-4757-b3ba-f4fd70437afb"
                         });
                 });
 

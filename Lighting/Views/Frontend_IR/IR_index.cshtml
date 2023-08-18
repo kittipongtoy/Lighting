@@ -11,12 +11,13 @@
     var Count_IR_HighlightDetail = (List<Lighting.Areas.Identity.Data.IR_HightlightDetail>)ViewBag.IR_HighlightDetail;
     var Count_IR_Latest_NewDetail = (List<Lighting.Areas.Identity.Data.IR_Latest_NewDetail>)ViewBag.IR_Latest_NewDetail;
     var Count_IR_NewDetail = (List<Lighting.Areas.Identity.Data.IR_NewDetail>)ViewBag.IR_NewDetail;
+    var IR_Stock_QuoteDetail = (List<Lighting.Areas.Identity.Data.IR_Stock_QuoteDetail>)ViewBag.IR_Stock_QuoteDetail;
 
     var IR_Summary_Background = "";
-    if(Count_IR_Summary_Financial_Highlights.Count() != 0)
+    if (Count_IR_Summary_Financial_Highlights.Count() != 0)
     {
         var Image = Count_IR_Summary_Financial_Highlights.FirstOrDefault().Background;
-        if(Image != null)
+        if (Image != null)
         {
             IR_Summary_Background = "/upload_image/IR_Index/" + Image;
         }
@@ -128,7 +129,6 @@
             </div>
         </div>
     </div>
-
     <!---------- IR INDEX :: IR COMPANY PROFILE ---------->
     <div class="IR-index-info">
         <div class="row justify-content-center">
@@ -224,28 +224,30 @@
             }
         </div>
     </div>
-
     <!---------- IR INDEX :: STOCK PRICE SECTION ---------->
     <div class="wrap-pad">
         <div class="stock-section">
             <div class="row">
-                <div class="col-lg-8 col-md-12 col-12">
+                <div class="col-lg-6 col-md-12 col-12">
                     <div class="WH-Box">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12">
+                        @if (IR_Stock_QuoteDetail.Count() != 0)
+                        {
+                            foreach (var item in IR_Stock_QuoteDetail)
+                            {
                                 @if (Context.Request.Cookies["lang"] == "EN")
                                 {
                                     <div class="row">
                                         <div class="col">
                                             <div class="topicBD-Box">
-                                                <div>SET INDEX</div>
+                                                <div>@item.SET_INDEX_EN</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="col-lg-9 col-md-9 col-11">
                                             <div class="img-width">
-                                                <iframe frameborder=0 scrolling=no width="200" height="200" src="https://weblink.settrade.com/IRPage/irpage.jsp?txtSymbol=L%2526E&language=en&key=27742"></iframe>
+                                                @Html.Raw(item.Link_SET_INDEX_EN)
+                                                @* <iframe frameborder=0 scrolling=no width="200" height="200" src="https://weblink.settrade.com/IRPage/irpage.jsp?txtSymbol=L%2526E&language=en&key=27742"></iframe> *@
                                             </div>
                                         </div>
                                     </div>
@@ -255,55 +257,108 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="topicBD-Box">
-                                                <div>SET INDEX</div>
+                                                <div>@item.SET_INDEX_TH</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="col-lg-9 col-md-9 col-11">
                                             <div class="img-width">
-                                                <iframe frameborder=0 scrolling=no width="200" height="200" src="https://weblink.settrade.com/IRPage/irpage.jsp?txtSymbol=L%2526E&language=th&key=27742"></iframe>
+                                                @Html.Raw(item.Link_SET_INDEX_TH)
+                                                @* <iframe frameborder=0 scrolling=no width="200" height="200" src="https://weblink.settrade.com/IRPage/irpage.jsp?txtSymbol=L%2526E&language=th&key=27742"></iframe> *@
                                             </div>
                                         </div>
                                     </div>
                                 }
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12">
+                            }
+                        }
+                        else
+                        {
+                            @if (Context.Request.Cookies["lang"] == "EN")
+                            {
                                 <div class="row">
                                     <div class="col">
                                         <div class="topicBD-Box">
-                                            <div>STOCK PRICE</div>
+                                            <div>SET INDEX</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col-lg-9 col-md-9 col-11">
                                         <div class="img-width">
-                                            <iframe frameborder=0 scrolling=no width="200" height="200" src="https://weblink.settrade.com/banner/banner3.jsp"></iframe>
+                                            <iframe frameborder=0 scrolling=no width="200" height="200" src="https://weblink.settrade.com/IRPage/irpage.jsp?txtSymbol=L%2526E&language=en&key=27742"></iframe>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            }
+                            else
+                            {
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="topicBD-Box">
+                                            <div>SET INDEX</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-9 col-md-9 col-11">
+                                        <div class="img-width">
+                                            <iframe frameborder=0 scrolling=no width="200" height="200" src="https://weblink.settrade.com/IRPage/irpage.jsp?txtSymbol=L%2526E&language=th&key=27742"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12 col-12">
+                <div class="col-lg-6 col-md-12 col-12">
                     <div class="WH-Box">
-                        <div class="row">
-                            <div class="col">
-                                <div class="topicBD-Box">
-                                    <div>TOTAL REVENUE</div>
+                        @if (IR_Stock_QuoteDetail.Count() != 0)
+                        {
+                            foreach (var item in IR_Stock_QuoteDetail)
+                            {
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="topicBD-Box">
+                                            @if (Context.Request.Cookies["lang"] == "EN")
+                                            {
+                                                <div>@item.STOCK_PRICE_EN</div>
+                                            }
+                                            else
+                                            {
+                                                <div>@item.STOCK_PRICE_TH</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-9 col-md-9 col-11">
+                                        <div class="img-width">
+                                            @Html.Raw(item.Link_STOCK_PRICE)
+                                            @* <iframe frameborder=0 scrolling=no width="200" height="200" src="https://weblink.settrade.com/banner/banner3.jsp"></iframe> *@
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col">
+                                    <div class="topicBD-Box">
+                                        <div>STOCK PRICE</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-lg-12 col-md-6 col-12">
-                                <div class="img-width">
-                                    <iframe frameborder=0 scrolling=no width="200" height="200" src="https://weblink.settrade.com/IRPage/irpage.jsp?txtSymbol=L%2526E&language=en&key=27742"></iframe>
-                                    @*<img src="~/Frontend_assets/images/ir/total-revenue.jpg">*@
+                            <div class="row justify-content-center">
+                                <div class="col-lg-9 col-md-9 col-11">
+                                    <div class="img-width">
+                                        <iframe frameborder=0 scrolling=no width="200" height="200" src="https://weblink.settrade.com/banner/banner3.jsp"></iframe>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+                        }
                     </div>
                 </div>
             </div>
@@ -517,7 +572,6 @@
         </div>
     </div>
 </div>
-
 <div class="IR-index-news">
     <div class="container-fluid">
         <div class="wrap-pad">
@@ -636,7 +690,6 @@
         </div>
     </div>
 </div>
-
 <div class="content-padding foot-pad ir-high-section">
     <div class="container-fluid">
         <div class="wrap-pad more-w">
@@ -662,7 +715,7 @@
                                                 <div class="col">
                                                     <div class="txt-content f-17 WH-txt text-center" style="text-overflow:ellipsis">
                                                         @Html.Raw(item.SubTitle_EN)
-                                                       
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -691,7 +744,7 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="txt-content f-17 WH-txt text-center" style="text-overflow:ellipsis">
-                                                         @Html.Raw(item.SubTitle_EN)
+                                                        @Html.Raw(item.SubTitle_EN)
                                                     </div>
                                                 </div>
                                             </div>

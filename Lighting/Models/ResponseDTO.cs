@@ -2,6 +2,54 @@
 {
     public class ResponseDTO
     {
+        public class DownloadResponse
+        {
+            public int? Index { get; set; }
+            public int id { get; set; }
+            public int? DownloadType_id { get; set; }
+            public string? Name_EN { get; set; }
+            public string? Name_TH { get; set; }
+            public string? upload_image { get; set; }
+            public string? upload_image_ENG { get; set; }
+            public string? file_name { get; set; }
+            public string? file_name_ENG { get; set; }
+            public string? L_AND_BIM_Link { get; set; }
+            public int? use_status { get; set; }
+            public int? ShowItem { get; set; }
+        }
+
+        public class ProjectRefResponse
+        {
+            public int? Index { get; set; }
+            public int Id { get; set; }
+            //public int CategoryId { get; set; }
+            public string? Title_TH { get; set; }
+            public string? Title_EN { get; set; }
+            public string? Profile_Image { get; set; }
+            public string? Folder_Path { get; set; }
+            public string? Location_TH { get; set; }
+            public string? Location_EN { get; set; }
+            public string? Client { get; set; }
+            public string? Design_Solution { get; set; }
+            public string? Photo_Credit { get; set; }
+            public string? Content_TH { get; set; }
+            public string? Content_EN { get; set; }
+            public string? Pdf_TH { get; set; }
+            public string? Pdf_ENG { get; set; }
+            public int? ShowItem { get; set; }
+            public int ProjectRef_CategoryId { get; set; }
+        }
+
+        public class Product_CategoryResponse
+        {
+            public int? Index { get; set; }
+            public int? Id { get; set; }
+            public string? Name_EN { get; set; }
+            public string? Name_TH { get; set; }
+            public string? Image { get; set; }
+            public int? ShowItem { get; set; }
+        }
+
         public class IR_HIGHLIGHTDetailResponse
         {
             public int? Index { get; set; }

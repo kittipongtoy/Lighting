@@ -192,5 +192,328 @@ namespace Lighting.Controllers.Backend
             var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data = IR_Contact };
             return Ok(jsonData);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> BannerChange(int? Id)
+        {
+            try
+            {
+                var DB = _db.Slide_Image_Index.FirstOrDefault(x => x.id_slideimg_index == Id);
+                if (DB is not null)
+                {
+                    if (DB.isActive)
+                    {
+                        DB.isActive = false;
+                    }
+                    else
+                    {
+                        DB.isActive = true;
+                    }
+                    _db.Entry(DB).State = EntityState.Modified;
+                    await _db.SaveChangesAsync();
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> BannerDelete(int? Id)
+        {
+            try
+            {
+                var DB = _db.Slide_Image_Index.FirstOrDefault(x => x.id_slideimg_index == Id);
+                if (DB is not null)
+                {
+                    var old_filePath = Path.Combine(_env.WebRootPath, "upload_image/Index/" + DB.PathImg);
+                    if (System.IO.File.Exists(old_filePath) == true)
+                    {
+                        System.IO.File.Delete(old_filePath);
+                    }
+
+                    _db.Slide_Image_Index.Remove(DB);
+                    await _db.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        public IActionResult ShowProduct()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DataTableShowProduct()
+        {
+            try
+            {
+                string? draw = Request.Form["draw"];
+                string? start = Request.Form["start"];
+                string? length = Request.Form["length"];
+                string? sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+                string? sortColumnDirection = Request.Form["order[0][dir]"];
+                string? searchValue = Request.Form["search[value]"];
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int? recordsTotal = 0;
+                var list = new List<ResponseDTO.Product_CategoryResponse>();
+                var History = await _db.Product_Categorys.ToListAsync();
+                int? runitem = 1;
+                foreach (var item in History)
+                {
+                    list.Add(new ResponseDTO.Product_CategoryResponse
+                    {
+                        Index = runitem,
+                        Id = item.Id,
+                        Name_EN = item.Name_EN,
+                        Name_TH = item.Name_TH,
+                        Image = item.Image,
+                        ShowItem = item.ShowItem
+                    });
+                    runitem++;
+                }
+
+                if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+                {
+                    var dd = list.AsQueryable();
+                }
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    list = list.Where(x => x.Name_EN.Contains(searchValue)
+                    || x.Name_TH.Contains(searchValue)).ToList();
+                }
+
+                recordsTotal = list.Count;
+                list = list.Skip(skip).Take(pageSize).ToList();
+
+                var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data = list };
+                return Ok(jsonData);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeShowProduct(int? Id)
+        {
+            try
+            {
+                var DB = _db.Product_Categorys.FirstOrDefault(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    if (DB.ShowItem == 1)
+                    {
+                        DB.ShowItem = 0;
+                    }
+                    else
+                    {
+                        DB.ShowItem = 1;
+                    }
+                    _db.Entry(DB).State = EntityState.Modified;
+                    await _db.SaveChangesAsync();
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        public IActionResult ShowProject()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DataTableShowProject()
+        {
+            try
+            {
+                string? draw = Request.Form["draw"];
+                string? start = Request.Form["start"];
+                string? length = Request.Form["length"];
+                string? sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+                string? sortColumnDirection = Request.Form["order[0][dir]"];
+                string? searchValue = Request.Form["search[value]"];
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int? recordsTotal = 0;
+                var list = new List<ResponseDTO.ProjectRefResponse>();
+                var History = await _db.ProjectRefs.ToListAsync();
+                int? runitem = 1;
+                foreach (var item in History)
+                {
+                    list.Add(new ResponseDTO.ProjectRefResponse
+                    {
+                        Index = runitem,
+                        Id = item.Id,
+                        ShowItem = item.ShowItem,
+                        Title_TH = item.Title_TH,
+                        Title_EN = item.Title_EN,
+                        Profile_Image = item.Profile_Image,
+                        Folder_Path = item.Folder_Path,
+                        Location_TH = item.Location_TH,
+                        Location_EN = item.Location_EN,
+                        Client = item.Client,
+                        Design_Solution = item.Design_Solution,
+                        Photo_Credit = item.Photo_Credit,
+                        Content_TH = item.Content_TH,
+                        Content_EN = item.Content_EN,
+                        Pdf_TH = item.Pdf_TH,
+                        Pdf_ENG = item.Pdf_ENG,
+                    });
+                    runitem++;
+                }
+
+                if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+                {
+                    var dd = list.AsQueryable();
+                }
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    list = list.Where(x => x.Title_TH.Contains(searchValue)
+                    || x.Title_EN.Contains(searchValue)
+                    || x.Location_TH.Contains(searchValue)
+                    || x.Location_EN.Contains(searchValue)).ToList();
+                }
+
+                recordsTotal = list.Count;
+                list = list.Skip(skip).Take(pageSize).ToList();
+
+                var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data = list };
+                return Ok(jsonData);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeShowProject(int? Id)
+        {
+            try
+            {
+                var DB = _db.ProjectRefs.FirstOrDefault(x => x.Id == Id);
+                if (DB is not null)
+                {
+                    if (DB.ShowItem == 1)
+                    {
+                        DB.ShowItem = 0;
+                    }
+                    else
+                    {
+                        DB.ShowItem = 1;
+                    }
+                    _db.Entry(DB).State = EntityState.Modified;
+                    await _db.SaveChangesAsync();
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        public IActionResult ShowDownload()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DatatableShowDownload()
+        {
+            try
+            {
+                string? draw = Request.Form["draw"];
+                string? start = Request.Form["start"];
+                string? length = Request.Form["length"];
+                string? sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+                string? sortColumnDirection = Request.Form["order[0][dir]"];
+                string? searchValue = Request.Form["search[value]"];
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int? recordsTotal = 0;
+                var list = new List<ResponseDTO.DownloadResponse>();
+                var History = await _db.Downloads.ToListAsync();
+                int? runitem = 1;
+                foreach (var item in History)
+                {
+                    list.Add(new ResponseDTO.DownloadResponse
+                    {
+                        Index = runitem,
+                        id = item.id,
+                        Name_TH = item.Name_TH,
+                        Name_EN = item.Name_EN,
+                        ShowItem = item.ShowItem,
+                        use_status = item.use_status
+                    });
+                    runitem++;
+                }
+
+                if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+                {
+                    var dd = list.AsQueryable();
+                }
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    list = list.Where(x => x.Name_TH.Contains(searchValue)
+                    || x.Name_EN.Contains(searchValue)).ToList();
+                }
+
+                recordsTotal = list.Count;
+                list = list.Skip(skip).Take(pageSize).ToList();
+
+                var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data = list };
+                return Ok(jsonData);
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeShowDownload(int? Id)
+        {
+            try
+            {
+                var DB = _db.Downloads.FirstOrDefault(x => x.id == Id);
+                if (DB is not null)
+                {
+                    if (DB.ShowItem == 1)
+                    {
+                        DB.ShowItem = 0;
+                    }
+                    else
+                    {
+                        DB.ShowItem = 1;
+                    }
+                    _db.Entry(DB).State = EntityState.Modified;
+                    await _db.SaveChangesAsync();
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
     }
 }

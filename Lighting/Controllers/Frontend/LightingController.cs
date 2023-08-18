@@ -21,13 +21,13 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> Index()
         {
             var Setting_Index = await _db.Setting_Index.ToListAsync();
-            var Products = await _db.Product_Categorys.OrderByDescending(x => x.Id).Take(6).ToListAsync();
-            var Projects = await _db.ProjectRefs.OrderByDescending(x => x.Id).Take(4).ToListAsync();
+            var Products = await _db.Product_Categorys.Where(x=>x.ShowItem == 1).OrderByDescending(x => x.Id).Take(6).ToListAsync();
+            var Projects = await _db.ProjectRefs.Where(x=>x.ShowItem == 1).OrderByDescending(x => x.Id).Take(4).ToListAsync();
             Projects.ForEach(x =>
             {
                 x.Profile_Image = Path.Combine(x.Folder_Path, x.Profile_Image);
             });
-            var latestDownloads = await _db.Downloads.Where(x => x.use_status == 1).GroupBy(x => x.DownloadType_id).Select(group => group.OrderByDescending(x => x.id).FirstOrDefault()).ToListAsync();
+            var latestDownloads = await _db.Downloads.Where(x => x.use_status == 1 && x.ShowItem == 1).GroupBy(x => x.DownloadType_id).Select(group => group.OrderByDescending(x => x.id).FirstOrDefault()).ToListAsync();
 
             var Slide_Image_Index = await _db.Slide_Image_Index.Where(x => x.isActive == true).ToListAsync();
             ViewBag.Slide_Image_Index = Slide_Image_Index;

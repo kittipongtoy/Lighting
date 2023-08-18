@@ -4,6 +4,7 @@ using MailKit.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
+using Org.BouncyCastle.Asn1.Ess;
 using System.Globalization;
 
 namespace Lighting.Controllers.Frontend
@@ -53,6 +54,7 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_HighlightDetail = await db.IR_HightlightDetail.Where(x => x.Status == 1).OrderByDescending(o => o.created_at).ToListAsync();                
             ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).Take(5).ToListAsync();
             ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).Take(5).ToListAsync();
+            ViewBag.IR_Stock_QuoteDetail = await db.IR_Stock_QuoteDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
 
@@ -1444,8 +1446,10 @@ namespace Lighting.Controllers.Frontend
             }
             return View();
         }
-        public IActionResult IR_stock_quote()
+        public async Task<IActionResult> IR_stock_quote()
         {
+            ViewBag.IR_Stock_Quote = await db.IR_Stock_Quote.Where(x=>x.Status == 1).ToListAsync();
+            ViewBag.IR_Stock_QuoteDetail = await db.IR_Stock_QuoteDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
         public IActionResult IR_summary()
