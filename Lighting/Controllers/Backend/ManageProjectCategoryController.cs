@@ -32,8 +32,8 @@ namespace Lighting.Controllers.Backend
                     {
                         await input.Image_File.CopyToAsync(stream);
                     }
-                    var file_nav = Path.Combine( "upload_image", "Image_Category", Guid.NewGuid().ToString()+".jpg");
-                    using (var stream = new FileStream(Path.Combine(_env.WebRootPath,file_nav), FileMode.CreateNew))
+                    var file_nav = Path.Combine("upload_image", "Image_Category", Guid.NewGuid().ToString() + ".jpg");
+                    using (var stream = new FileStream(Path.Combine(_env.WebRootPath, file_nav), FileMode.CreateNew))
                     {
                         await input.Image_File_Nav.CopyToAsync(stream);
                     }
@@ -42,8 +42,8 @@ namespace Lighting.Controllers.Backend
                         Image_Path = path_file,
                         Name_EN = input.Name_EN,
                         Name_TH = input.Name_TH,
-                         Image_Path_Nav = file_nav
-                         
+                        Image_Path_Nav = file_nav
+
                     });
                     await _db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
@@ -102,7 +102,7 @@ namespace Lighting.Controllers.Backend
                     //update
                     category.Name_EN = input.Name_EN;
                     category.Name_TH = input.Name_TH;
-                    category.Image_Path = input.Image_File != null ?  path_file: category.Image_Path;
+                    category.Image_Path = input.Image_File != null ? path_file : category.Image_Path;
                     category.Image_Path_Nav = input.Image_File_Nav != null ? img_nav_path : category.Image_Path_Nav;
                     await _db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
@@ -149,7 +149,7 @@ namespace Lighting.Controllers.Backend
                     Image_Path = project.Image_Path,
                     Name_EN = project.Name_EN,
                     Name_TH = project.Name_TH,
-                     Image_Path_Nav = project.Image_Path_Nav,
+                    Image_Path_Nav = project.Image_Path_Nav,
                 })
                 .ToListAsync();
             return View(project);

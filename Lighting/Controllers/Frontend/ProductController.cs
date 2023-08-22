@@ -303,9 +303,11 @@ namespace Lighting.Controllers.Frontend
                      Image = cat.Image
                  })
                  .ToListAsync();
-
+                var current_category = all_category.Where(x => x.Name_EN.ToLower().StartsWith(category.ToLower()) || x.Name_TH.StartsWith(category)).FirstOrDefault();
+                if (current_category == null) return NotFound();
                 var all_sub_category = await _db.Product_Models
                              .AsNoTracking()
+                             .Where(x => x.Product_CategoryId == current_category.Id)
                              .OrderByDescending(x => x.Id)
                              .Select(cat =>
                              new Output_ProductModelVM
@@ -379,7 +381,7 @@ namespace Lighting.Controllers.Frontend
             }
             catch (Exception ex)
             {
-                return NotFound();
+                return NotFound(ex.Message);
             }
         }
 

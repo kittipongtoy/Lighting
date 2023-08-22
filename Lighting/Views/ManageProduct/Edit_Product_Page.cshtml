@@ -175,10 +175,10 @@
                     {
                         <option class="h5" value="@model_data.Id" selected>@model_data.Name_TH/@model_data.Name_EN</option>
                     }
-                    else
+                    @*else
                     {
                         <option class="h5" value="@model_data.Id">@model_data.Name_TH/@model_data.Name_EN</option>
-                    }
+                    }*@
 
                 }
             </select>
@@ -392,10 +392,24 @@
 
 @section Scripts{
     <script>
+        var Application;
+        ClassicEditor
+            .create(document.querySelector('#application'))
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+                Application = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
         var specification = [], spect_num = 0;
         var preview_img, sub_img_file, CutSheet_file, IesFile_file, Catalogue_file, rfa_file, technical_file, light_distribute_file;
 
         $(document).ready(function () {
+            
+            appendSelectOptionOnLoad();
+            categorySelectChange();
+
             $('#file_img_preview').change(async function (e) {
                 if (e.target.files.length === 1) {
                     preview_img = e.target.files[0];
@@ -438,6 +452,26 @@
                 }
             });
         });
+
+        function appendSelectOptionOnLoad(){
+                fetch("/ManageProduct/SubcategoryJson?categoryId=@Model.Product_CategoryId").then(res => res.json()).then(json => {
+                    //console.log(json);
+                    var selectedId = @Model.Product_ModelId;
+                var html_option = json.filter(x => x.id !== selectedId).reduce((prev, curr) => prev += `<option class="h5" value="${curr.id}">${curr.name_TH}/${curr.name_EN}</option>`, "");
+                    $("#product_model_id").append(html_option);
+                });
+        }
+
+        function categorySelectChange() {
+            $('#product_category_id').on('change', function () {
+                fetch("/ManageProduct/SubcategoryJson?categoryId=" + this.value).then(res => res.json()).then(json => {
+                    //console.log(json);
+                    var html_option = "<option class='h5' >กรุณาเลือก</option>";
+                    html_option += json.reduce((prev, curr) => prev += `<option class="h5" value="${curr.id}">${curr.name_TH}/${curr.name_EN}</option>`, "");
+                    $("#product_model_id").html(html_option);
+                });
+            });
+        }
 
         function showHideSpect() {
             if ($("#add_spect").css("display") === "none") {
@@ -547,7 +581,7 @@
             form.append("CATALOGUE", Catalogue_file);
             form.append("RFA", rfa_file);
             form.append("MORE_INFORMATION", $("#more_info").val());
-            form.append("Application", $("#application").val());
+            form.append("Application", Application.getData()/*$("#application").val()*/);
             //form.append("Technical_Drawing", $("#").val());
             form.append("Power", $("#Power").val());
             form.append("Dimension", $("#Dimension").val());
