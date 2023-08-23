@@ -22,10 +22,15 @@ namespace Lighting.Controllers.Backend
             _env = env;
         }
 
+        public async Task<IActionResult> SubcategoryJson(int categoryId)
+        {
+            var subcategory = await _db.Product_Models.AsNoTracking().Where(x => x.Product_CategoryId == categoryId).ToListAsync();
+            return Json(subcategory);
+        }
         public async Task<ActionResult> Add_Product_Page()
         {
             ViewData["category"] = await _db.Product_Categorys.ToListAsync();
-            ViewData["model"] = await _db.Product_Models.ToListAsync();
+            //ViewData["model"] = await _db.Product_Models.ToListAsync();
             return View();
         }
 
@@ -33,7 +38,7 @@ namespace Lighting.Controllers.Backend
         {
             var path = Path.Combine("upload_image", "Product");
             var product = await _db.Products
-                .Include(pro=> pro.ProductSpect)
+                .Include(pro => pro.ProductSpect)
                 .Where(pro => pro.Id == id)
                 .Select(pro =>
                 new Output_ProductVM
@@ -42,12 +47,12 @@ namespace Lighting.Controllers.Backend
                     Product_CategoryId = pro.Product_CategoryId,
                     Product_ModelId = pro.Product_ModelId,
                     Application = pro.Application,
-                    
+
                     Type_EN = pro.Type_EN,
                     Type_TH = pro.Type_TH,
                     Model = pro.Model,
                     MORE_INFORMATION = pro.MORE_INFORMATION,
-                   
+
                     Product_Spects = pro.ProductSpect.ToList(),
                     //spect
                     IP_Rating = pro.IP_Rating,
@@ -451,14 +456,14 @@ namespace Lighting.Controllers.Backend
                     product.Dimension = input.Dimension;
 
                     var product_spect = new List<Product_Spect>();
-                    if(input.Spect_Name != null && input.Spect_Value != null)
+                    if (input.Spect_Name != null && input.Spect_Value != null)
                     {
-                        for (int i =0; i< input.Spect_Name.Count;i++)
+                        for (int i = 0; i < input.Spect_Name.Count; i++)
                         {
-                            product_spect.Add(new Product_Spect 
-                            { 
-                                 Name = input.Spect_Name[i],
-                                 Value = input.Spect_Value[i]
+                            product_spect.Add(new Product_Spect
+                            {
+                                Name = input.Spect_Name[i],
+                                Value = input.Spect_Value[i]
                             });
                         }
                     }
@@ -549,7 +554,7 @@ namespace Lighting.Controllers.Backend
                         var preview_img = Path.Combine(directory, input.Preview_Image.FileName);
                         if (product.Preview_Image != null)
                         {
-                            var delete_file = Path.Combine(_env.WebRootPath,path, product.Preview_Image);
+                            var delete_file = Path.Combine(_env.WebRootPath, path, product.Preview_Image);
                             if (System.IO.File.Exists(delete_file))
                             {
                                 System.IO.File.Delete(delete_file);
@@ -722,7 +727,7 @@ namespace Lighting.Controllers.Backend
                             });
                         }
                     }
-                    product.ProductSpect.AddRange( product_spect);
+                    product.ProductSpect.AddRange(product_spect);
                     //product.Housing = input.Housing;
                     //product.Finishing = input.Finishing;
                     //product.Lens = input.Lens;
@@ -743,7 +748,7 @@ namespace Lighting.Controllers.Backend
                 catch (Exception ex)
                 {
                     //Directory.Delete(directory, true);
-                    return Json(new { status = "fail", message = "เกิดข้อผิดพลาด อาจมีชื่อไฟล์ซ้ำกัน:"+ex.Message });
+                    return Json(new { status = "fail", message = "เกิดข้อผิดพลาด อาจมีชื่อไฟล์ซ้ำกัน:" + ex.Message });
                 }
             }
             return Json(new { status = "fail", message = "ไท่พบข้อมูล" });
@@ -785,7 +790,7 @@ namespace Lighting.Controllers.Backend
                     CUTSHEET = pro.CUTSHEET == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CUTSHEET),
                     CATALOGUE = pro.CATALOGUE == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.CATALOGUE),
                     RFA = pro.RFA == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.RFA),
-                     SUB_IMG = pro.SUB_IMG == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.SUB_IMG),
+                    SUB_IMG = pro.SUB_IMG == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.SUB_IMG),
                     IESFILE = pro.IESFILE == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.IESFILE),
                     Preview_Imamge = pro.Preview_Image == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.Preview_Image),
 

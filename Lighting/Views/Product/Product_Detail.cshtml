@@ -5,7 +5,19 @@
 }
 @model Lighting.Models.InputFilterModels.Product.Output_ProductVM
 @using Lighting.Models.InputFilterModels.Product
+<style>
+    .text-tiny {
+        font-size: small;
+    }
 
+    .text-big {
+        font-size: clamp(1.5rem,3vw,3rem);
+    }
+
+    .text-huge {
+        font-size: clamp(2.2rem,4.5vw,4.5rem);
+    }
+</style>
 <div class="top-page">
     <div class="container">
         <div class="row">
@@ -62,7 +74,7 @@
                     <div class="row">
                         <div class="col">
                             <ul class="bread-crumb">
-                                <li><a href="@Url.Action("Product","Product")">PRODUCTS11</a></li>
+                                <li><a href="@Url.Action("Product","Product")">PRODUCTS</a></li>
                                 @foreach (var cate_name in (IEnumerable<Output_ProductCategoryVM>)ViewData["All_Category"])
                                 {
                                     if (cate_name.Name_EN.ToLower().StartsWith(ViewBag.Category.ToLower()) || cate_name.Name_TH.StartsWith(ViewBag.Category))
@@ -177,7 +189,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="txt-content mb-0">
-                                            <p>@Model.Application</p>
+                                            <p>@Html.Raw(Model?.Application)</p>
                                         </div>
                                     </div>
                                 </div>
@@ -338,3 +350,33 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        // collapse //
+        $(document).ready(function () {
+            //video
+
+            let content = document.querySelectorAll("figure");
+            let indexHtml = 0;
+            document.querySelectorAll("oembed").forEach(x => {
+                //console.log(x.getAttribute("url"));
+                let url = x.getAttribute("url");
+                let w = window.innerWidth, h = 500;
+                if (w >= 1080) {
+                    h = 750;
+                }
+                if (w < 1080) {
+                    h = Math.floor(window.innerHeight * 0.55)
+                }
+                if (w < 500) {
+                    h = Math.floor(window.innerHeight * 0.4)
+                }
+                content[indexHtml].innerHTML = `<iframe width="100%" height="${h}px" src="${url}"></iframe>`;
+                indexHtml++;
+            });
+
+        });
+
+    </script>
+}
