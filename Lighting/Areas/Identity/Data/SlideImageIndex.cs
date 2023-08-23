@@ -8,6 +8,7 @@ namespace Lighting.Areas.Identity.Data
         [Key]
         public int id_slideimg_index { get; set; }
         public string? PathImg { get; set; }
+        public string? Link { get; set; }
         public bool isActive { get; set; } = true;
         public int? sort { get; set; }
         public DateTime? created_at { get; set; }

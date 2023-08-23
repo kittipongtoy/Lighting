@@ -118,8 +118,24 @@ namespace Lighting.Controllers.Backend
                             await input.Image.CopyToAsync(stream);
                         }
                         category.Image = path;
-
                     }
+
+                    if (input.ImageShow != null)
+                    {
+                        var path_old_path = Path.Combine(_env.WebRootPath, category.ShowImage);
+                        if (System.IO.File.Exists(path_old_path))
+                        {
+                            System.IO.File.Delete(path_old_path);
+                        }
+                        var image_name = Guid.NewGuid().ToString().Substring(0, 6) + ".jpg";
+                        var path = Path.Combine("upload_image", "Product_Category", image_name);
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path), FileMode.Create))
+                        {
+                            await input.ImageShow.CopyToAsync(stream);
+                        }
+                        category.ShowImage = path;
+                    }
+
                     category.Name_TH = input.Name_TH;
                     category.Name_EN = input.Name_EN;
 
@@ -176,6 +192,16 @@ namespace Lighting.Controllers.Backend
                             await input.Image.CopyToAsync(stream);
                         }
                     }
+
+                    var image_name2 = Guid.NewGuid().ToString().Substring(0, 6) + ".jpg";
+                    var path2 = Path.Combine("upload_image", "Product_Category", image_name2);
+                    if (input.ImageShow != null)
+                    {
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path2), FileMode.Create))
+                        {
+                            await input.ImageShow.CopyToAsync(stream);
+                        }
+                    }
                     await _db
                         .Product_Categorys
                         .AddAsync(
@@ -183,7 +209,8 @@ namespace Lighting.Controllers.Backend
                         {
                             Name_EN = input.Name_EN,
                             Name_TH = input.Name_TH,
-                            Image = input.Image == null ? "" : path
+                            Image = input.Image == null ? "" : path,
+                            ShowImage = input.Image == null ? "" : path2
                         });
                     await _db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
@@ -206,7 +233,8 @@ namespace Lighting.Controllers.Backend
                     Id = cat.Id,
                     Name_EN = cat.Name_EN,
                     Name_TH = cat.Name_TH,
-                    Image = cat.Image
+                    Image = cat.Image,
+                    ImageShow = cat.ShowImage
                 }).ToListAsync();
             return View(category);
         }

@@ -26,6 +26,7 @@
             getdate_3 = Convert.ToDateTime(item.date3Title);
         }
     }
+    ViewData["IR_Stock_LinkDetail"] = (List<Lighting.Areas.Identity.Data.IR_Stock_LinkDetail>)ViewBag.IR_Stock_LinkDetail;
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")

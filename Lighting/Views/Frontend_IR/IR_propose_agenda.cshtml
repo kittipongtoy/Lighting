@@ -2,7 +2,7 @@
     ViewData["Title"] = "IR_propose_agenda";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var Count_mailTitles = (List<Lighting.Areas.Identity.Data.SH_IR_propose_agenda_mailTitles>)ViewBag.mailTitles;
-
+    ViewData["IR_Stock_LinkDetail"] = (List<Lighting.Areas.Identity.Data.IR_Stock_LinkDetail>)ViewBag.IR_Stock_LinkDetail;
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")

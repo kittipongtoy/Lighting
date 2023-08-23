@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
 
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+<div class="content d-flex flex-column flex-column-fluid">
     <div class="toolbar" id="kt_toolbar">
         <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
             <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center me-3 flex-wrap mb-5 mb-lg-0 lh-1">
@@ -63,11 +63,21 @@
                         <div class="row mb-3">
                             <div class="col-2">
                                 <span>
-                                    Link STOCK PRICE
+                                    Link STOCK PRICE TH
                                 </span>
                             </div>
                             <div class="col-4">
                                 <input type="text" class="form-control" name="Link_STOCK_PRICE" id="Link_STOCK_PRICE" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <span>
+                                    Link STOCK PRICE EN
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="Link_STOCK_PRICE_EN" id="Link_STOCK_PRICE_EN" />
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -168,8 +178,9 @@
                     console.log(data)
                     $("#Id").val(data.id);
                     $("#STOCK_PRICE_TH").val(data.stocK_PRICE_TH);
-                    $("#STOCK_PRICE_EN").val(data.stocK_PRICE_EN);
+                    $("#STOCK_PRICE_EN").val(data.stocK_PRICE_EN); 
                     $("#Link_STOCK_PRICE").val(data.link_STOCK_PRICE);
+                    $("#Link_STOCK_PRICE_EN").val(data.link_STOCK_PRICE_EN);
                     $("#SET_INDEX_TH").val(data.seT_INDEX_TH);
                     $("#SET_INDEX_EN").val(data.seT_INDEX_EN);
                     $("#Link_SET_INDEX_TH").val(data.link_SET_INDEX_TH);

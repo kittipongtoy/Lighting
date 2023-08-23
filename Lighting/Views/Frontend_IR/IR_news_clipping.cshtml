@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var Count_IR_Print_Media = (List<Lighting.Areas.Identity.Data.IR_Print_Media>)ViewBag.IR_Print_Media;
     var Count_IR_Print_MediaDetail = (List<Lighting.Areas.Identity.Data.IR_Print_MediaDetail>)ViewBag.IR_Print_MediaDetail;
-
+    ViewData["IR_Stock_LinkDetail"] = (List<Lighting.Areas.Identity.Data.IR_Stock_LinkDetail>)ViewBag.IR_Stock_LinkDetail;
     var language = "";
     if (Context.Request.Cookies["lang"] == "EN")
     {

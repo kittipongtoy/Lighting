@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var IR_Stock_Quote = (List<Lighting.Areas.Identity.Data.IR_Stock_Quote>)ViewBag.IR_Stock_Quote;
     var IR_Stock_QuoteDetail = (List<Lighting.Areas.Identity.Data.IR_Stock_QuoteDetail>)ViewBag.IR_Stock_QuoteDetail;
+    ViewData["IR_Stock_LinkDetail"] = (List<Lighting.Areas.Identity.Data.IR_Stock_LinkDetail>)ViewBag.IR_Stock_LinkDetail;
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
@@ -70,7 +71,15 @@
                                             <div class="col-lg-9 col-md-9 col-11">
                                                 <div class="img-width mb-4">
                                                     @* <iframe frameborder=0 scrolling=no width="200" height="260" src="https://weblink.settrade.com/banner/banner3.jsp"></iframe> *@
-                                                    @Html.Raw(item.Link_STOCK_PRICE)
+                                                    @if (Context.Request.Cookies["lang"] == "EN")
+                                                    {
+                                                        @Html.Raw(item.Link_STOCK_PRICE_EN)
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.Raw(item.Link_STOCK_PRICE)
+                                                    }
+                                                   
                                                 </div>
                                             </div>
                                         </div>

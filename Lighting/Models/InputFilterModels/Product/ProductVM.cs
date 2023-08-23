@@ -96,6 +96,7 @@ namespace Lighting.Models.InputFilterModels.Product
     public class Input_ProductCategoryVM
     {
         public IFormFile? Image { get; set; }
+        public IFormFile? ImageShow { get; set; }
         [Required]
         public string Name_EN { get; set; }
         [Required]
@@ -108,6 +109,7 @@ namespace Lighting.Models.InputFilterModels.Product
         public string Name_EN { get; set; }
         public string Name_TH { get; set; }
         public string Image { get; set; }
+        public string ImageShow { get; set; }
     }
 
     public class Input_ProductModelVM

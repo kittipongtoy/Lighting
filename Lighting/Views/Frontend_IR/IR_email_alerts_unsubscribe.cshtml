@@ -2,6 +2,7 @@
     ViewData["Title"] = "IR_email_alerts_unsubscribe";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var Count_IR_Cancel_Email = (List<Lighting.Areas.Identity.Data.IR_Cancel_Email>)ViewBag.IR_Cancel_Email;
+    ViewData["IR_Stock_LinkDetail"] = (List<Lighting.Areas.Identity.Data.IR_Stock_LinkDetail>)ViewBag.IR_Stock_LinkDetail;
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")

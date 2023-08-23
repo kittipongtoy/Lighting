@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "IR_board_directors";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
-
+    ViewData["IR_Stock_LinkDetail"] = (List<Lighting.Areas.Identity.Data.IR_Stock_LinkDetail>)ViewBag.IR_Stock_LinkDetail;
     var cookies = Context.Request.Cookies["lang"];
 }
 

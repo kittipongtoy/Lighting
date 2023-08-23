@@ -12,7 +12,7 @@
     var Count_IR_Latest_NewDetail = (List<Lighting.Areas.Identity.Data.IR_Latest_NewDetail>)ViewBag.IR_Latest_NewDetail;
     var Count_IR_NewDetail = (List<Lighting.Areas.Identity.Data.IR_NewDetail>)ViewBag.IR_NewDetail;
     var IR_Stock_QuoteDetail = (List<Lighting.Areas.Identity.Data.IR_Stock_QuoteDetail>)ViewBag.IR_Stock_QuoteDetail;
-
+    ViewData["IR_Stock_LinkDetail"] = (List<Lighting.Areas.Identity.Data.IR_Stock_LinkDetail>)ViewBag.IR_Stock_LinkDetail;
     var IR_Summary_Background = "";
     if (Count_IR_Summary_Financial_Highlights.Count() != 0)
     {
@@ -68,25 +68,53 @@
                         {
                             if (Context.Request.Cookies["lang"] == "EN")
                             {
-                                <li>
-                                    <a href="@Url.Action("IR_financial_highlight","Frontend_IR")">
-                                        <div class="img-width"><img src="/upload_image/IR_Index/@item.Icon"></div>
-                                        <div class="download-topic">
-                                            <p>@item.Title_EN</p>
-                                        </div>
-                                    </a>
-                                </li>
+                                if (item.Link_EN != null && item.Link_EN != "")
+                                {
+                                    <li>
+                                        <a href="@item.Link_EN">
+                                            <div class="img-width"><img src="/upload_image/IR_Index/@item.Icon"></div>
+                                            <div class="download-topic">
+                                                <p>@item.Title_EN</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@Url.Action("IR_financial_highlight","Frontend_IR")">
+                                            <div class="img-width"><img src="/upload_image/IR_Index/@item.Icon"></div>
+                                            <div class="download-topic">
+                                                <p>@item.Title_EN</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
                             }
                             else
                             {
-                                <li>
-                                    <a href="@Url.Action("IR_financial_highlight","Frontend_IR")">
-                                        <div class="img-width"><img src="/upload_image/IR_Index/@item.Icon"></div>
-                                        <div class="download-topic">
-                                            <p>@item.Title_TH</p>
-                                        </div>
-                                    </a>
-                                </li>
+                                @if (item.Link_TH != null && item.Link_TH != "")
+                                { 
+                                    <li>
+                                        <a href="@item.Link_TH">
+                                            <div class="img-width"><img src="/upload_image/IR_Index/@item.Icon"></div>
+                                            <div class="download-topic">
+                                                <p>@item.Title_TH</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@Url.Action("IR_financial_highlight","Frontend_IR")">
+                                            <div class="img-width"><img src="/upload_image/IR_Index/@item.Icon"></div>
+                                            <div class="download-topic">
+                                                <p>@item.Title_TH</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
                             }
                         }
                     }
@@ -334,7 +362,15 @@
                                 <div class="row justify-content-center">
                                     <div class="col-lg-9 col-md-9 col-11">
                                         <div class="img-width">
-                                            @Html.Raw(item.Link_STOCK_PRICE)
+                                            @if (Context.Request.Cookies["lang"] == "EN")
+                                            {
+                                               @Html.Raw(item.Link_STOCK_PRICE_EN)
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw(item.Link_STOCK_PRICE)
+                                            }
+                                            
                                             @* <iframe frameborder=0 scrolling=no width="200" height="200" src="https://weblink.settrade.com/banner/banner3.jsp"></iframe> *@
                                         </div>
                                     </div>

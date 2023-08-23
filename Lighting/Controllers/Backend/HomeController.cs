@@ -117,7 +117,7 @@ namespace Lighting.Controllers.Backend
             return Redirect("/Home/Index");
         }
 
-        public IActionResult update1(IFormFile image1)
+        public IActionResult update1(IFormFile image1,string? Link)
         {
 
             if (image1.Length > 0)
@@ -136,6 +136,7 @@ namespace Lighting.Controllers.Backend
                 _db.Slide_Image_Index.Add(new SlideImageIndex
                 {
                     PathImg = image,
+                    Link = Link,
                     created_at = DateTime.Now,
                     updated_at = DateTime.Now,
                     isActive = true,

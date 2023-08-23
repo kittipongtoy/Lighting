@@ -10,5 +10,6 @@ namespace Lighting.Areas.Identity.Data
         public string Name_TH { get; set; }
         public string Image { get; set; }
         public int? ShowItem { get; set; }
+        public string? ShowImage { get; set; }
     }
 }

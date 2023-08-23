@@ -55,10 +55,11 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).Take(5).ToListAsync();
             ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).Take(5).ToListAsync();
             ViewBag.IR_Stock_QuoteDetail = await db.IR_Stock_QuoteDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
 
-        public IActionResult IR_annual_report()
+        public async Task<IActionResult> IR_annual_report()
         {
             var data = db.SH_annual_Report.ToList();
             if (data.Count != 0)
@@ -71,6 +72,7 @@ namespace Lighting.Controllers.Frontend
             {
                 ViewBag.Body = details;
             }
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
         public IActionResult Get_IR_annual_report()
@@ -92,7 +94,7 @@ namespace Lighting.Controllers.Frontend
             //return View();
         }
 
-        public IActionResult IR_anti_corruption_policy()
+        public async Task<IActionResult> IR_anti_corruption_policy()
         {
             var main_content = new model_input.page_corporate_governance_content();
             var main_file = new List<model_input.page_corporate_governance_file>();
@@ -137,7 +139,7 @@ namespace Lighting.Controllers.Frontend
                 main_content.detail_th = getdata.detail_th;
             }
 
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -151,7 +153,7 @@ namespace Lighting.Controllers.Frontend
             };
             return View(model);
         }
-        public IActionResult IR_author_audit_committee()
+        public async Task<IActionResult> IR_author_audit_committee()
         {
             var main_content = new model_input.page_corporate_governance_content();
             var main_file = new List<model_input.page_corporate_governance_file>();
@@ -196,7 +198,7 @@ namespace Lighting.Controllers.Frontend
                 main_content.detail_th = getdata.detail_th;
             }
 
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -210,7 +212,7 @@ namespace Lighting.Controllers.Frontend
             };
             return View(model);
         }
-        public IActionResult IR_author_board_director()
+        public async Task<IActionResult> IR_author_board_director()
         {
             var main_content = new model_input.page_corporate_governance_content();
             var main_file = new List<model_input.page_corporate_governance_file>();
@@ -255,7 +257,7 @@ namespace Lighting.Controllers.Frontend
                 main_content.detail_th = getdata.detail_th;
             }
 
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -269,7 +271,7 @@ namespace Lighting.Controllers.Frontend
             };
             return View(model);
         }
-        public IActionResult IR_author_cg()
+        public async Task<IActionResult> IR_author_cg()
         {
             var main_content = new model_input.page_corporate_governance_content();
             var main_file = new List<model_input.page_corporate_governance_file>();
@@ -314,7 +316,7 @@ namespace Lighting.Controllers.Frontend
                 main_content.detail_th = getdata.detail_th;
             }
 
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -328,7 +330,7 @@ namespace Lighting.Controllers.Frontend
             };
             return View(model);
         }
-        public IActionResult IR_author_chairman_board()
+        public async Task<IActionResult> IR_author_chairman_board()
         {
             var main_content = new model_input.page_corporate_governance_content();
             var main_file = new List<model_input.page_corporate_governance_file>();
@@ -372,7 +374,7 @@ namespace Lighting.Controllers.Frontend
                 main_content.detail_en = getdata.detail_en;
                 main_content.detail_th = getdata.detail_th;
             }
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -386,7 +388,7 @@ namespace Lighting.Controllers.Frontend
             };
             return View(model);
         }
-        public IActionResult IR_author_chairman_executive()
+        public async Task<IActionResult> IR_author_chairman_executive()
         {
             var main_content = new model_input.page_corporate_governance_content();
             var main_file = new List<model_input.page_corporate_governance_file>();
@@ -431,7 +433,7 @@ namespace Lighting.Controllers.Frontend
                 main_content.detail_th = getdata.detail_th;
             }
 
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -445,7 +447,7 @@ namespace Lighting.Controllers.Frontend
             };
             return View(model);
         }
-        public IActionResult IR_author_executive_board()
+        public async Task<IActionResult> IR_author_executive_board()
         {
             var main_content = new model_input.page_corporate_governance_content();
             var main_file = new List<model_input.page_corporate_governance_file>();
@@ -490,7 +492,7 @@ namespace Lighting.Controllers.Frontend
                 main_content.detail_th = getdata.detail_th;
             }
 
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -504,7 +506,7 @@ namespace Lighting.Controllers.Frontend
             };
             return View(model);
         }
-        public IActionResult IR_author_secretary()
+        public async Task<IActionResult> IR_author_secretary()
         {
             var main_content = new model_input.page_corporate_governance_content();
             var main_file = new List<model_input.page_corporate_governance_file>();
@@ -549,7 +551,7 @@ namespace Lighting.Controllers.Frontend
                 main_content.detail_th = getdata.detail_th;
             }
 
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -563,7 +565,7 @@ namespace Lighting.Controllers.Frontend
             };
             return View(model);
         }
-        public IActionResult IR_board_directors()
+        public async Task<IActionResult> IR_board_directors()
         {
             var get_data1 = db.Board_of_Directors.Where(x => x.use_status == 1 && x.type_board == 1).ToList();
             var count1 = 0;
@@ -578,6 +580,7 @@ namespace Lighting.Controllers.Frontend
             {
                 count2 = 1;
             }
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input
             {
                 list_Board = get_data1,
@@ -595,6 +598,7 @@ namespace Lighting.Controllers.Frontend
         }
         public async Task<IActionResult> IR_calendar()
         {
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_InvestorCalendar = await db.IR_InvestorCalendar.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_InvestorCalendarDetail = await db.IR_InvestorCalendarDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
             return View();
@@ -623,8 +627,9 @@ namespace Lighting.Controllers.Frontend
             return Ok(DB);
         }
 
-        public IActionResult IR_chairman()
+        public async Task<IActionResult> IR_chairman()
         {
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var get_message = db.M_message_chairman.FirstOrDefault();
             var get_chairman = db.M_chairman.Where(x => x.use_status == 1).ToList();
             var count = 0;
@@ -648,7 +653,7 @@ namespace Lighting.Controllers.Frontend
             };
             return View(model);
         }
-        public IActionResult IR_channel_clue()
+        public async Task<IActionResult> IR_channel_clue()
         {
             var main_content = new model_input.page_corporate_governance_content();
             var main_file = new List<model_input.page_corporate_governance_file>();
@@ -693,7 +698,7 @@ namespace Lighting.Controllers.Frontend
                 main_content.detail_th = getdata.detail_th;
             }
 
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -707,7 +712,7 @@ namespace Lighting.Controllers.Frontend
             };
             return View(model);
         }
-        public IActionResult IR_code_conduct()
+        public async Task<IActionResult> IR_code_conduct()
         {
             var main_content = new model_input.page_corporate_governance_content();
             var main_file = new List<model_input.page_corporate_governance_file>();
@@ -746,7 +751,7 @@ namespace Lighting.Controllers.Frontend
                 main_content.detail_th = getdata.detail_th;
             }
 
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -760,7 +765,7 @@ namespace Lighting.Controllers.Frontend
             };
             return View(model);
         }
-        public IActionResult IR_companyprofile()
+        public async Task<IActionResult> IR_companyprofile()
         {
             var getData = db.Companyprofile.Where(x => x.use_status == 1).ToList();
             var count = 0;
@@ -768,6 +773,7 @@ namespace Lighting.Controllers.Frontend
             {
                 count = 1;
             }
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input { count_list_Companyprofile = count, list_Companyprofile = getData };
             return View(model);
         }
@@ -788,14 +794,16 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> IR_complaints()
         {
             ViewBag.IR_complaints = await db.IR_Complaints.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_contact()
         {
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.Get_IR_Contact = await db.IR_Contact.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
-        public IActionResult IR_corporate_governance()
+        public async Task<IActionResult> IR_corporate_governance()
         {
             var get_data_main = db.CorporateGovernance.FirstOrDefault();
             var get_data_file = db.CorporateGovernance_File.Where(x => x.use_status == 1).ToList();
@@ -816,6 +824,7 @@ namespace Lighting.Controllers.Frontend
             {
                 count_cate = 1;
             }
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input
             {
                 count_row_CorporateGovernance = count_main,
@@ -827,7 +836,7 @@ namespace Lighting.Controllers.Frontend
             };
             return View(model);
         }
-        public IActionResult IR_csr_policy()
+        public async Task<IActionResult> IR_csr_policy()
         {
             var main_content = new model_input.page_corporate_governance_content();
             var main_file = new List<model_input.page_corporate_governance_file>();
@@ -871,7 +880,7 @@ namespace Lighting.Controllers.Frontend
                 main_content.detail_en = getdata.detail_en;
                 main_content.detail_th = getdata.detail_th;
             }
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -898,19 +907,22 @@ namespace Lighting.Controllers.Frontend
             {
                 ViewBag.Body = details;
             }
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_email_alerts()
         {
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_Email_Alerts = await db.IR_Email_Alerts.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_email_alerts_unsubscribe()
         {
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_Cancel_Email = await db.IR_Cancel_Email.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
-        public IActionResult IR_fact_sheet()
+        public async Task<IActionResult> IR_fact_sheet()
         {
             var data = db.Import_Info_ShareHolder.ToList();
             if (data.Count != 0)
@@ -923,12 +935,14 @@ namespace Lighting.Controllers.Frontend
             {
                 ViewBag.Body = details;
             }
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_faq()
         {
             ViewBag.IR_faq = await db.IR_faq.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_faq_Detail = await db.IR_faq_Detail.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_finance_statement()
@@ -974,7 +988,7 @@ namespace Lighting.Controllers.Frontend
             {
                 ViewBag.ContentDownload = detailsDownload;
             }
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
         public IActionResult Get_IR_Finance_Statement()
@@ -1028,7 +1042,7 @@ namespace Lighting.Controllers.Frontend
             {
                 ViewBag.BodyDetails = data_details_Item;
             }
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_form56()
@@ -1044,6 +1058,7 @@ namespace Lighting.Controllers.Frontend
             {
                 ViewBag.Body = details;
             }
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_general_meeting()
@@ -1059,9 +1074,10 @@ namespace Lighting.Controllers.Frontend
             {
                 ViewBag.Body = details;
             }
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
-        public IActionResult IR_gift_and_entertainment_policy()
+        public async Task<IActionResult> IR_gift_and_entertainment_policy()
         {
             var main_content = new model_input.page_corporate_governance_content();
             var main_file = new List<model_input.page_corporate_governance_file>();
@@ -1106,7 +1122,7 @@ namespace Lighting.Controllers.Frontend
                 main_content.detail_th = getdata.detail_th;
             }
 
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -1143,11 +1159,12 @@ namespace Lighting.Controllers.Frontend
             {
                 ViewBag.BodyFile = file_details;
             }
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_news()
         {
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_Latest_News = await db.IR_Latest_News.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
             return View();
@@ -1162,6 +1179,7 @@ namespace Lighting.Controllers.Frontend
 
         public async Task<IActionResult> IR_news_clipping()
         {
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_Print_Media = await db.IR_Print_Media.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_Print_MediaDetail = await db.IR_Print_MediaDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
             return View();
@@ -1187,11 +1205,12 @@ namespace Lighting.Controllers.Frontend
 
         public async Task<IActionResult> IR_news_detail(int? Id)
         {
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_Latest_News = await db.IR_Latest_News.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1 && x.Id == Id).OrderByDescending(o => o.NewDate).ToListAsync();
             return View();
         }
-        public IActionResult IR_organization()
+        public async Task<IActionResult> IR_organization()
         {
             var get_data = db.OrganizationalStructure.Where(x => x.use_status == 1).ToList();
             var count = 0;
@@ -1199,10 +1218,11 @@ namespace Lighting.Controllers.Frontend
             {
                 count = 1;
             }
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input { count_list_OrganizationalStructure = count, list_OrganizationalStructure = get_data };
             return View(model);
         }
-        public IActionResult IR_philosophy()
+        public async Task<IActionResult> IR_philosophy()
         {
             var getData = db.P_philosophy.Where(x => x.use_status == 1).ToList();
             var count = 0;
@@ -1210,6 +1230,7 @@ namespace Lighting.Controllers.Frontend
             {
                 count = 1;
             }
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input { list_philosophy = getData, count_list_philosophy = count };
             return View(model);
         }
@@ -1220,7 +1241,7 @@ namespace Lighting.Controllers.Frontend
             {
                 ViewBag.Header = data;
             }
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var details = db.SH_IR_presentation_doc_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.id).ToList();
             if (details.Count != 0)
             {
@@ -1255,6 +1276,7 @@ namespace Lighting.Controllers.Frontend
             {
                 ViewBag.Body = details;
             }
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
         public async Task<IActionResult> Get_IR_presentation_webcast()
@@ -1280,7 +1302,7 @@ namespace Lighting.Controllers.Frontend
             ViewBag.Body = await db.SH_IR_propose_agenda_DataDetails.Where(x => x.active_status == 1).ToListAsync();
 
             ViewBag.mailTitles = await db.SH_IR_propose_agenda_mailTitles.Where(x => x.active_status == 1).ToListAsync();
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
         public IActionResult Get_TypeOfPropose()
@@ -1363,6 +1385,7 @@ namespace Lighting.Controllers.Frontend
 
         public async Task<IActionResult> IR_public_relation()
         {
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_MassMedia = await db.IR_MassMedia.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_MassMediaDetail = await db.IR_MassMediaDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
             return View();
@@ -1377,12 +1400,13 @@ namespace Lighting.Controllers.Frontend
 
         public async Task<IActionResult> IR_public_relation_detail(int? Id)
         {
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_MassMedia = await db.IR_MassMedia.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_MassMediaDetail = await db.IR_MassMediaDetail.Where(x => x.Status == 1 && x.Id == Id).OrderByDescending(o=>o.NewDate).ToListAsync();
             return View();
         }
 
-        public IActionResult IR_report_general_meeting()
+        public async Task<IActionResult> IR_report_general_meeting()
         {
             var data = db.SH_IR_Report_Meeting.ToList();
             if (data.Count != 0)
@@ -1401,18 +1425,20 @@ namespace Lighting.Controllers.Frontend
             {
                 ViewBag.Content = datadetails;
             }
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
 
         public async Task<IActionResult> IR_request_inquiry()
         {
             ViewBag.IR_Request_Inquiry = await db.IR_Request_Inquiry.Where(x => x.Status == 1).ToListAsync();
-
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
 
         public async Task<IActionResult> IR_set_announcement()
         {
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.GetIR_Stock_Market = await db.IR_Stock_Market.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
             return View();
@@ -1427,11 +1453,12 @@ namespace Lighting.Controllers.Frontend
 
         public async Task<IActionResult> IR_set_announcement_detail(int? Id)
         {
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.GetIR_Stock_Market = await db.IR_Stock_Market.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1 && x.Id == Id).OrderByDescending(o => o.NewDate).ToListAsync();
             return View();
         }
-        public IActionResult IR_shareholding()
+        public async Task<IActionResult> IR_shareholding()
         {
             var data = db.ShareHolder.ToList();
             if (data.Count != 0)
@@ -1444,15 +1471,17 @@ namespace Lighting.Controllers.Frontend
             {
                 ViewBag.Body = details;
             }
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_stock_quote()
         {
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_Stock_Quote = await db.IR_Stock_Quote.Where(x=>x.Status == 1).ToListAsync();
             ViewBag.IR_Stock_QuoteDetail = await db.IR_Stock_QuoteDetail.Where(x => x.Status == 1).ToListAsync();
             return View();
         }
-        public IActionResult IR_summary()
+        public async Task<IActionResult> IR_summary()
         {
             var getData = db.Company_Overview.Where(x => x.use_status == 1).ToList();
             var count = 0;
@@ -1460,6 +1489,7 @@ namespace Lighting.Controllers.Frontend
             {
                 count = 1;
             }
+            ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             var model = new model_input { list_companyOverview = getData, count_list_companyOverview = count };
             return View(model);
         }

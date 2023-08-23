@@ -1,4 +1,5 @@
 ﻿@{
+    var IR_Stock_LinkDetail = (List<Lighting.Areas.Identity.Data.IR_Stock_LinkDetail>)ViewData["IR_Stock_LinkDetail"];
     var language = "";
     if (Context.Request.Cookies["lang"] == "EN")
     {
@@ -12,7 +13,6 @@
 <!--------------- IR - HEADER --------------->
 <link rel="stylesheet" type="text/css" href="~/Frontend_assets/css/csDropdown.css">
 <script src="~/Frontend_assets/js/csDropdown.js"></script>
-
 
 <div class="IR-menuBG">
     <div class="container-fluid">
@@ -179,9 +179,16 @@
                                             @*<li>
                                                 <a class="cd-dropdown-item item-1" href="#">กราฟราคาย้อนหลัง</a>
                                             </li>*@
-                                            <li>
-                                                <a class="cd-dropdown-item item-1" href="https://www.set.or.th/th/market/product/stock/quote/l&e/price" target="_blank">ราคาย้อนหลัง</a>
-                                            </li>
+                                            @if (IR_Stock_LinkDetail.Count() != 0)
+                                            {
+                                                IR_Stock_LinkDetail = IR_Stock_LinkDetail.OrderByDescending(x => x.Id).Take(1).ToList();
+                                                @foreach(var item in IR_Stock_LinkDetail)
+                                                {
+                                                    <li>
+                                                        <a class="cd-dropdown-item item-1" href="@item.Link_IR_Stock_Link" target="_blank">ราคาย้อนหลัง</a>
+                                                    </li>
+                                                }
+                                            }
                                         </ul>
                                     </li>
                                     <li class="has-children">

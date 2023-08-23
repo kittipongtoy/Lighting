@@ -284,6 +284,7 @@ namespace Lighting.Controllers.Backend
                 iR_Stock_QuoteDetail.STOCK_PRICE_TH = model.STOCK_PRICE_TH;
                 iR_Stock_QuoteDetail.STOCK_PRICE_EN = model.STOCK_PRICE_EN;
                 iR_Stock_QuoteDetail.Link_STOCK_PRICE = model.Link_STOCK_PRICE;
+                iR_Stock_QuoteDetail.Link_STOCK_PRICE_EN = model.Link_STOCK_PRICE_EN;
                 iR_Stock_QuoteDetail.SET_INDEX_TH = model.SET_INDEX_TH;
                 iR_Stock_QuoteDetail.SET_INDEX_EN = model.SET_INDEX_EN;
                 iR_Stock_QuoteDetail.Link_SET_INDEX_TH = model.Link_SET_INDEX_TH;
@@ -332,6 +333,7 @@ namespace Lighting.Controllers.Backend
                     iR_Stock_QuoteDetail.STOCK_PRICE_TH = model.STOCK_PRICE_TH;
                     iR_Stock_QuoteDetail.STOCK_PRICE_EN = model.STOCK_PRICE_EN;
                     iR_Stock_QuoteDetail.Link_STOCK_PRICE = model.Link_STOCK_PRICE;
+                    iR_Stock_QuoteDetail.Link_STOCK_PRICE_EN = model.Link_STOCK_PRICE_EN;
                     iR_Stock_QuoteDetail.SET_INDEX_TH = model.SET_INDEX_TH;
                     iR_Stock_QuoteDetail.SET_INDEX_EN = model.SET_INDEX_EN;
                     iR_Stock_QuoteDetail.Link_SET_INDEX_TH = model.Link_SET_INDEX_TH;

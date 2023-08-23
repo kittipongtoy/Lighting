@@ -350,6 +350,8 @@ namespace Lighting.Controllers.Backend
                 }
                 iR_Button_Below_Banner.Title_TH = model.Title_TH;
                 iR_Button_Below_Banner.Title_EN = model.Title_EN;
+                iR_Button_Below_Banner.Link_TH = model.Link_TH;
+                iR_Button_Below_Banner.Link_EN = model.Link_EN;
                 iR_Button_Below_Banner.Status = model.Status;
                 iR_Button_Below_Banner.updated_at = DateTime.Now;
                 iR_Button_Below_Banner.created_at = DateTime.Now;
@@ -423,6 +425,8 @@ namespace Lighting.Controllers.Backend
                     }
                     IR_Button_Below_Banner.Title_TH = model.Title_TH;
                     IR_Button_Below_Banner.Title_EN = model.Title_EN;
+                    IR_Button_Below_Banner.Link_TH = model.Link_TH;
+                    IR_Button_Below_Banner.Link_EN = model.Link_EN;
                     IR_Button_Below_Banner.Status = model.Status;
                     IR_Button_Below_Banner.Status = model.Status;
                     IR_Button_Below_Banner.updated_at = DateTime.Now;

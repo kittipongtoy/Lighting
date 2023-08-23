@@ -54,22 +54,30 @@
         <div class="modal-content">
             <form asp-action="update1" asp-controller="Home" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">เพิ่มรูปภาพสไลด์</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">เพิ่มรูปภาพสไลด์ <span style="color:red">ขนาดรูปภาพ : 1920 * 867 px </span> </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-               
+                <div class="modal-body">               
                     <div class="input-group mb-3">
                         <input type="file" class="form-control" id="inputGroupFile02" name="image1" required>
                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                     </div>
-                </div>
+                    <div class="row mb-3">
+                        <div class="col-2">
+                            <span>
+                                ลิงก์
+                            </span>
+                        </div>
+                        <div class="col-12">
+                            <input type="text" class="form-control" name="Link" />
+                        </div>
+                    </div>
+                </div>             
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">เพิ่ม</button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>

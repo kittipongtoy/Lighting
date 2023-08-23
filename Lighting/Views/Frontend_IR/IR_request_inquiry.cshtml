@@ -2,6 +2,7 @@
     ViewData["Title"] = "IR_request_inquiry";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var Count_IR_Request_Inquiry = (List<Lighting.Areas.Identity.Data.IR_Request_Inquiry>)ViewBag.IR_Request_Inquiry;
+    ViewData["IR_Stock_LinkDetail"] = (List<Lighting.Areas.Identity.Data.IR_Stock_LinkDetail>)ViewBag.IR_Stock_LinkDetail;
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")

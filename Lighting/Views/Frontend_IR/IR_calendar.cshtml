@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var Count_IR_InvestorCalendar = (List<Lighting.Areas.Identity.Data.IR_InvestorCalendar>)ViewBag.IR_InvestorCalendar;
     var Count_IR_InvestorCalendarDetail = (List<Lighting.Areas.Identity.Data.IR_InvestorCalendarDetail>)ViewBag.IR_InvestorCalendarDetail;
-
+    ViewData["IR_Stock_LinkDetail"] = (List<Lighting.Areas.Identity.Data.IR_Stock_LinkDetail>)ViewBag.IR_Stock_LinkDetail;
     var language = "";
     if (Context.Request.Cookies["lang"] == "EN")
     {

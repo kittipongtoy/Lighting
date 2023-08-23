@@ -3,6 +3,7 @@
     ViewData["Title"] = "IR_email_alerts";
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var Count_IR_Email_Alerts = (List<Lighting.Areas.Identity.Data.IR_Email_Alerts>)ViewBag.IR_Email_Alerts;
+    ViewData["IR_Stock_LinkDetail"] = (List<Lighting.Areas.Identity.Data.IR_Stock_LinkDetail>)ViewBag.IR_Stock_LinkDetail;
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")

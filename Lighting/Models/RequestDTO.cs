@@ -99,6 +99,8 @@
             public int Id { get; set; }
             public string? Title_TH { get; set; }
             public string? Title_EN { get; set; }
+            public string? Link_TH { get; set; }
+            public string? Link_EN { get; set; }
             public int? Status { get; set; }
             public List<IFormFile> uploaded_Image { get; set; }
         }
@@ -199,6 +201,7 @@
             public string? STOCK_PRICE_TH { get; set; }
             public string? STOCK_PRICE_EN { get; set; }
             public string? Link_STOCK_PRICE { get; set; }
+            public string? Link_STOCK_PRICE_EN { get; set; }         
             public string? SET_INDEX_TH { get; set; }
             public string? SET_INDEX_EN { get; set; }
             public string? Link_SET_INDEX_TH { get; set; }

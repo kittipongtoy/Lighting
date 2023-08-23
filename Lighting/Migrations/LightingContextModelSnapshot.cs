@@ -981,7 +981,10 @@ namespace Lighting.Migrations
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Link")
+                    b.Property<string>("Link_EN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Link_TH")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Status")
@@ -2203,6 +2206,9 @@ namespace Lighting.Migrations
                     b.Property<string>("Link_STOCK_PRICE")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Link_STOCK_PRICE_EN")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SET_INDEX_EN")
                         .HasColumnType("nvarchar(max)");
 
@@ -2410,9 +2416,9 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b1262c8a-8e4e-4e2b-a2a5-bb86594abe94",
+                            Id = "6b20c185-cc9c-4941-92c6-56272af5bd0f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cbf4b10a-df76-47cf-a8ce-700b827d14b6",
+                            ConcurrencyStamp = "b03d6df4-11f9-405b-b0ac-99ed4f512ab2",
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -2422,9 +2428,9 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBzzgoT1mGBqTCE7wsqVwYkiXi86Avkt2suvkPnSooY3/K1xvQViQJK1Pw9bXqAMRg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEItTspMX7wVA6r8XFdpKjy670t5q15i2H/7M5PIbKAk2mha8Fl9nqj1wJJt1xoUv7g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "76d6f8ee-8bcd-4bfe-beaf-89e50e9975f8",
+                            SecurityStamp = "730bb627-1f44-4d49-ada0-a8110a5fd04c",
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -3962,6 +3968,9 @@ namespace Lighting.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ShowImage")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("ShowItem")
                         .HasColumnType("int");
 
@@ -4716,13 +4725,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "45e22b91-d81d-4757-b3ba-f4fd70437afb",
-                            ConcurrencyStamp = "ffa21e2a-195d-4978-ae9c-ebc3cd8f3993",
+                            Id = "694c7e68-d892-44ed-9db7-819063de273f",
+                            ConcurrencyStamp = "a9dc48c0-72e7-481a-949b-27e1389346d9",
                             Name = "Admin",
                             NameThai = "Admin",
                             NormalizedName = "Admin",
-                            created_at = new DateTime(2023, 8, 18, 7, 35, 36, 821, DateTimeKind.Utc).AddTicks(7956),
-                            updated_at = new DateTime(2023, 8, 18, 7, 35, 36, 821, DateTimeKind.Utc).AddTicks(7960)
+                            created_at = new DateTime(2023, 8, 23, 10, 10, 28, 592, DateTimeKind.Utc).AddTicks(4760),
+                            updated_at = new DateTime(2023, 8, 23, 10, 10, 28, 592, DateTimeKind.Utc).AddTicks(4764)
                         });
                 });
 
@@ -6363,6 +6372,9 @@ namespace Lighting.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id_slideimg_index"), 1L, 1);
 
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PathImg")
                         .HasColumnType("nvarchar(max)");
 
@@ -6586,8 +6598,8 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "b1262c8a-8e4e-4e2b-a2a5-bb86594abe94",
-                            RoleId = "45e22b91-d81d-4757-b3ba-f4fd70437afb"
+                            UserId = "6b20c185-cc9c-4941-92c6-56272af5bd0f",
+                            RoleId = "694c7e68-d892-44ed-9db7-819063de273f"
                         });
                 });
 

@@ -10,6 +10,7 @@ namespace Lighting.Areas.Identity.Data
         public string? STOCK_PRICE_TH { get; set; }
         public string? STOCK_PRICE_EN { get; set; }
         public string? Link_STOCK_PRICE { get; set; }
+        public string? Link_STOCK_PRICE_EN { get; set; }
         public string? SET_INDEX_TH { get; set; }
         public string? SET_INDEX_EN { get; set; }
         public string? Link_SET_INDEX_TH { get; set; }
