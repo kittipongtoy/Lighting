@@ -9,6 +9,12 @@
     {
         language = "TH";
     }
+
+    ViewData["Finance_Statement"] = (List<Lighting.Areas.Identity.Data.SH_IR_Finance_Statement>)ViewBag.Finance_Statement;
+    var Finance_Statement = (List<Lighting.Areas.Identity.Data.SH_IR_Finance_Statement>)ViewBag.Finance_Statement;
+
+    ViewData["SH_IR_prospectus"] = (List<Lighting.Areas.Identity.Data.SH_IR_prospectus>)ViewBag.SH_IR_prospectus;
+    var SH_IR_prospectus = (List<Lighting.Areas.Identity.Data.SH_IR_prospectus>)ViewBag.SH_IR_prospectus;
 }
 <!--------------- IR - HEADER --------------->
 <link rel="stylesheet" type="text/css" href="~/Frontend_assets/css/csDropdown.css">
@@ -104,19 +110,53 @@
                                     <li class="has-children">
                                         <a href="https://codyhouse.co/?p=748">ข้อมูลสำคัญทางการเงิน</a>
                                         <ul class="cd-dropdown-icons is-hidden">
-                                            <li>
-                                                @*<a class="cd-dropdown-item item-1" href="@Url.Action("IR_finance_statement","Frontend_IR")">งบการเงิน</a>*@
-                                                <a class="cd-dropdown-item item-1" href="https://www.set.or.th/th/market/product/stock/quote/l&e/financial-statement/company-highlights">งบการเงิน</a>
-                                            </li>
+                                            @if (Finance_Statement.Count > 0)
+                                            {
+                                                foreach (var items in Finance_Statement)
+                                                {
+                                                    if (language == "EN")
+                                                    {
+                                                        <li>
+                                                            <a class="cd-dropdown-item item-1" href="@items.linkENG">งบการเงิน</a>
+                                                        </li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li>
+                                                            <a class="cd-dropdown-item item-1" href="@items.linkTH">งบการเงิน</a>
+                                                        </li>
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    @*<a class="cd-dropdown-item item-1" href="@Url.Action("IR_finance_statement","Frontend_IR")">งบการเงิน</a>*@
+                                                    <a class="cd-dropdown-item item-1" href="https://www.set.or.th/th/market/product/stock/quote/l&e/financial-statement/company-highlights">งบการเงิน</a>
+                                                </li>
+                                            }
+
                                             <li>
                                                 <a class="cd-dropdown-item item-1" href="@Url.Action("IR_financial_highlight","Frontend_IR")">ข้อมูลสำคัญทางการเงิน</a>
                                             </li>
                                             <li>
                                                 <a class="cd-dropdown-item item-1" href="@Url.Action("IR_mda","Frontend_IR")">คำอธิบาย และการวิเคราะห์</a>
                                             </li>
-                                            <li>
-                                                <a class="cd-dropdown-item item-1" href="http://capital.sec.or.th/webapp/corp_fin2/cgi-bin/result69c.php?comp_id=0764" target="_blank">หนังสือชี้ชวน</a>
-                                            </li>
+                                            @if (SH_IR_prospectus.Count > 0)
+                                            {
+                                                foreach (var items in SH_IR_prospectus)
+                                                {
+                                                    <li>
+                                                        <a class="cd-dropdown-item item-1" href="@items.Link">หนังสือชี้ชวน</a>
+                                                    </li>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="http://capital.sec.or.th/webapp/corp_fin2/cgi-bin/result69c.php?comp_id=0764" target="_blank">หนังสือชี้ชวน</a>
+                                                </li>
+                                            }
                                         </ul>
                                     </li>
                                     <li class="has-children">
@@ -177,7 +217,7 @@
                                                 <a class="cd-dropdown-item item-1" href="@Url.Action("IR_stock_quote","Frontend_IR")">ราคาหุ้นล่าสุด</a>
                                             </li>
                                             @*<li>
-                                                <a class="cd-dropdown-item item-1" href="#">กราฟราคาย้อนหลัง</a>
+                                            <a class="cd-dropdown-item item-1" href="#">กราฟราคาย้อนหลัง</a>
                                             </li>*@
                                             @if (IR_Stock_LinkDetail.Count() != 0)
                                             {
@@ -442,18 +482,51 @@
                                                                     </div>
                                                                 </div>
                                                                 <ul>
-                                                                    <li>
-                                                                        <div class="menu-item"><a href="@Url.Action("IR_finance_statement","Frontend_IR")">งบการเงิน</a></div>
-                                                                    </li>
+                                                                    @if (Finance_Statement.Count > 0)
+                                                                    {
+                                                                        foreach (var items in Finance_Statement)
+                                                                        {
+                                                                            if (language == "EN")
+                                                                            {
+                                                                                <li>
+                                                                                    <a class="cd-dropdown-item item-1" href="@items.linkENG">งบการเงิน</a>
+                                                                                </li>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <li>
+                                                                                    <a class="cd-dropdown-item item-1" href="@items.linkTH">งบการเงิน</a>
+                                                                                </li>
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <li>
+                                                                            <a class="cd-dropdown-item item-1" href="https://www.set.or.th/th/market/product/stock/quote/l&e/financial-statement/company-highlights">งบการเงิน</a>
+                                                                        </li>
+                                                                    }
                                                                     <li>
                                                                         <div class="menu-item"><a href="@Url.Action("IR_financial_highlight","Frontend_IR")">ข้อมูลสำคัญทางการเงิน</a></div>
                                                                     </li>
                                                                     <li>
                                                                         <div class="menu-item"><a href="@Url.Action("IR_mda","Frontend_IR")">คำอธิบาย และการวิเคราะห์</a></div>
                                                                     </li>
-                                                                    <li>
-                                                                        <div class="menu-item"><a href="http://capital.sec.or.th/webapp/corp_fin2/cgi-bin/result69c.php?comp_id=0764" target="_blank">หนังสือชี้ชวน</a></div>
-                                                                    </li>
+                                                                    @if (SH_IR_prospectus.Count > 0)
+                                                                    {
+                                                                        foreach (var items in SH_IR_prospectus)
+                                                                        {
+                                                                            <li>
+                                                                                <a class="cd-dropdown-item item-1" href="@items.Link">หนังสือชี้ชวน</a>
+                                                                            </li>
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <li>
+                                                                            <div class="menu-item"><a href="http://capital.sec.or.th/webapp/corp_fin2/cgi-bin/result69c.php?comp_id=0764" target="_blank">หนังสือชี้ชวน</a></div>
+                                                                        </li>
+                                                                    }
                                                                 </ul>
                                                             </div>
 
@@ -549,8 +622,8 @@
                                                                     <li>
                                                                         <div class="menu-item"><a href="@Url.Action("IR_stock_quote","Frontend_IR")">ราคาหุ้นล่าสุด</a></div>
                                                                     </li>
-                                                                   @* <li>
-                                                                        <div class="menu-item"><a href="#">กราฟราคาย้อนหลัง</a></div>
+                                                                    @* <li>
+                                                                    <div class="menu-item"><a href="#">กราฟราคาย้อนหลัง</a></div>
                                                                     </li>*@
                                                                     <li>
                                                                         <div class="menu-item"><a href="https://www.set.or.th/th/market/product/stock/quote/l&e/price" target="_blank">ราคาย้อนหลัง</a></div>
