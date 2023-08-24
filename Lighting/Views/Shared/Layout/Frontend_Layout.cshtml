@@ -68,21 +68,21 @@
                         //console.log(data);
                         const nav_link = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                     <li>
-                                                                                                         <a href="/${url}${curr?.name}">
-                                                                                                            <p>${curr?.name}</p>
-                                                                                                                    <div class="menu-img"><img src="/${curr?.image}"></div>
-                                                                                                         </a>
-                                                                                                     </li>`, "");
+                                                                                                             <li>
+                                                                                                                 <a href="/${url}${curr?.name}">
+                                                                                                                    <p>${curr?.name}</p>
+                                                                                                                            <div class="menu-img"><img src="/${curr?.image}"></div>
+                                                                                                                 </a>
+                                                                                                             </li>`, "");
                         }
 
                         $("#nav_projectref").html(nav_link(data, "project/Project_Category?category="));
 
                         const nav_link_mobile = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                <li>
-                                                                                                    <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
-                                                                                                 </li>`, "");
+                                                                                                        <li>
+                                                                                                            <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
+                                                                                                         </li>`, "");
                         }
 
                         $("#nav_mobile_projectRef").html(nav_link_mobile(data, "/project/Project_Category?category="));
@@ -104,23 +104,23 @@
                         //console.log(data);
                         const nav_link = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                        <li>
-                                                                                                            <a href="${url}${curr?.name}">
-                                                                                                                <img src="/${curr?.image}">
-                                                                                                                <div class="product-cate">
-                                                                                                                    <p>${curr?.name}</p>
-                                                                                                                </div>
-                                                                                                            </a>
-                                                                                                        </li>`, "");
+                                                                                                                <li>
+                                                                                                                    <a href="${url}${curr?.name}">
+                                                                                                                        <img src="/${curr?.image}">
+                                                                                                                        <div class="product-cate">
+                                                                                                                            <p>${curr?.name}</p>
+                                                                                                                        </div>
+                                                                                                                    </a>
+                                                                                                                </li>`, "");
                         }
 
                         $("#nav_product").html(nav_link(data, "/Product/Product_Category?category="));
 
                         const nav_link_mobile = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                        <li>
-                                                                                                            <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
-                                                                                                         </li>`, "");
+                                                                                                                <li>
+                                                                                                                    <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
+                                                                                                                 </li>`, "");
                         }
 
                         $("#nav_mobile_product").html(nav_link_mobile(data, "/Product/Product_Category?category="));
@@ -140,20 +140,20 @@
                         //console.log(data);
                         const nav_link = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                        <li>
-                                                                                                        <a href="${url}${curr?.name}">
-                                                                                                         <p>${curr?.name}</p>
-                                                                                                         <div class="menu-img"><img src="/${curr?.image}"></div>
-                                                                                                        </a>
-                                                                                                        </li>`, "");
+                                                                                                                <li>
+                                                                                                                <a href="${url}${curr?.name}">
+                                                                                                                 <p>${curr?.name}</p>
+                                                                                                                 <div class="menu-img"><img src="/${curr?.image}"></div>
+                                                                                                                </a>
+                                                                                                                </li>`, "");
                         }
 
                         $("#nav_smartsolution").append(nav_link(data, "/SmartSolution/SmartSolutionDetail?name="));
                         const nav_link_mobile = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                                <li>
-                                                                                                                    <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
-                                                                                                                 </li>`, "");
+                                                                                                                        <li>
+                                                                                                                            <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
+                                                                                                                         </li>`, "");
                         }
 
                         $("#nav_mobile_smartSolution").html(nav_link_mobile(data, "/SmartSolution/SmartSolutionDetail?name="));
@@ -333,11 +333,11 @@
                                                                                     <div class="menu-item">
                                                                                         @if (get_cookies == "EN")
                                                                                         {
-                                                                                           <a href="@Url.Action("Index","Lighting")">Home</a>
+                                                                                            <a href="@Url.Action("Index","Lighting")">Home</a>
                                                                                         }
                                                                                         else
                                                                                         {
-                                                                                           <a href="@Url.Action("Index","Lighting")">หน้าหลัก</a>
+                                                                                            <a href="@Url.Action("Index","Lighting")">หน้าหลัก</a>
                                                                                         }
                                                                                     </div>
                                                                                 </li>
@@ -485,7 +485,14 @@
                                                                         <div class="submenu menu" data-menu="1">
                                                                             <div class="submenu-back">
                                                                                 <div class="menu-item">
-                                                                                    <a href="#" class="menu-back">Back</a>
+                                                                                    @if (get_cookies == "EN")
+                                                                                    {
+                                                                                        <a href="#" class="menu-back">Back</a>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <a href="#" class="menu-back">กลับ</a>
+                                                                                    }
                                                                                 </div>
                                                                             </div>
                                                                             <ul class="lang-menu">
@@ -519,40 +526,187 @@
                                                                                 </div>
                                                                             </div>
                                                                             <ul>
-                                                                                <li class="m-sub-topic">PROFILE</li>
-                                                                                <li>
-                                                                                    <div class="menu-item"><a href="@Url.Action("Profile_History","Resource_Facility")">History</a></div>
+                                                                                <li class="m-sub-topic">
+                                                                                    @if (get_cookies == "EN")
+                                                                                    {
+                                                                                        <h6>PROFILE</h6>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <h6>ข้อมูลองค์กร</h6>
+                                                                                    }
                                                                                 </li>
                                                                                 <li>
-                                                                                    <div class="menu-item"><a href="@Url.Action("Profile_Our_Philosophy_Vision_Misson","Resource_Facility")">Our Philosophy Vision & Mission</a></div>
+                                                                                    <div class="menu-item">
+                                                                                        @if (get_cookies == "EN")
+                                                                                        {
+                                                                                            <a href="@Url.Action("Profile_History","Resource_Facility")">History</a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a href="@Url.Action("Profile_History","Resource_Facility")">ประวัติ</a>
+                                                                                        }
+                                                                                    </div>
                                                                                 </li>
                                                                                 <li>
-                                                                                    <div class="menu-item"><a href="@Url.Action("Profile_Organization_Chart","Resource_Facility")">Organization Chart</a></div>
+                                                                                    <div class="menu-item">
+                                                                                        @if (get_cookies == "EN")
+                                                                                        {
+                                                                                            <a href="@Url.Action("Profile_Our_Philosophy_Vision_Misson","Resource_Facility")">
+                                                                                                <p>Our Philosophy Vision & Mission</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a href="@Url.Action("Profile_Our_Philosophy_Vision_Misson","Resource_Facility")">
+                                                                                                <p>ปรัชญา วิสัยทัศน์และพันธกิจ</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                    </div>
                                                                                 </li>
                                                                                 <li>
-                                                                                    <div class="menu-item"><a href="@Url.Action("Profile_Awards","Resource_Facility")">Awards</a></div>
-                                                                                </li>
-                                                                                <li class="m-sub-topic">SUBSIDIARIES PROFILE</li>
-                                                                                <li>
-                                                                                    <div class="menu-item"><a href="@Url.Action("Subsidiaries_Lighting_Innovation_Center","Resource_Facility")">L&E Lighting Innovation Center</a></div>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <div class="menu-item"><a href="@Url.Action("Subsidiaries_SolidState","Resource_Facility")">L&E Solid State Co.,Ltd</a></div>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <div class="menu-item"><a href="@Url.Action("Subsidiaries_Manufacturing","Resource_Facility")">L&E Manufacturing Co.,Ltd</a></div>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <div class="menu-item"><a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">L&E Assembly / Service</a></div>
+                                                                                    <div class="menu-item">
+                                                                                        @if (get_cookies == "EN")
+                                                                                        {
+                                                                                            <a href="@Url.Action("Profile_Organization_Chart","Resource_Facility")">Organization Chart</a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a href="@Url.Action("Profile_Organization_Chart","Resource_Facility")">โครงสร้างองค์กร</a>
+                                                                                        }
+                                                                                    </div>
                                                                                 </li>
                                                                                 <li>
-                                                                                    <div class="menu-item"><a href="@Url.Action("Subsidiaries_Warehouse_Logistics","Resource_Facility")">L&E Warehouse & Logistics</a></div>
+                                                                                    <div class="menu-item">
+                                                                                        @if (get_cookies == "EN")
+                                                                                        {
+                                                                                            <a href="@Url.Action("Profile_Awards","Resource_Facility")">Awards</a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a href="@Url.Action("Profile_Awards","Resource_Facility")">รางวัล</a>
+                                                                                        }
+                                                                                    </div>
+                                                                                </li>
+                                                                                @if (get_cookies == "EN")
+                                                                                {
+                                                                                    <li class="m-sub-topic">SUBSIDIARIES PROFILE</li>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <li class="m-sub-topic">ข้อมูลบริษัทย่อย</li>
+                                                                                }
+                                                                                <li>
+                                                                                    <div class="menu-item">
+                                                                                        @if (get_cookies == "EN")
+                                                                                        {
+                                                                                            <a href="@Url.Action("Subsidiaries_Lighting_Innovation_Center","Resource_Facility")">
+                                                                                                <p>L&E Lighting Innovation Center</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a href="@Url.Action("Subsidiaries_Lighting_Innovation_Center","Resource_Facility")">
+                                                                                                <p>แอล แอนด์ อี ไลท์ติ้ง อินโนเวชั่น เซ็นเตอร์</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                    </div>
                                                                                 </li>
                                                                                 <li>
-                                                                                    <div class="menu-item"><a href="@Url.Action("Subsidiaries_Lighting_Solution_Center","Resource_Facility")">L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</a></div>
+                                                                                    <div class="menu-item">
+                                                                                        @if (get_cookies == "EN")
+                                                                                        {
+                                                                                            <a href="@Url.Action("Subsidiaries_SolidState","Resource_Facility")">
+                                                                                                <p>L&E Solid State Co.,Ltd</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a href="@Url.Action("Subsidiaries_SolidState","Resource_Facility")">
+                                                                                                <p>บริษัท แอล แอนด์ อี โซลิดสเตท จำกัด</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                    </div>
                                                                                 </li>
                                                                                 <li>
-                                                                                    <div class="menu-item"><a href="@Url.Action("Subsidiaries_Overseas_Offices","Resource_Facility")">L&E Overseas Offices</a></div>
+                                                                                    <div class="menu-item">
+                                                                                        @if (get_cookies == "EN")
+                                                                                        {
+                                                                                            <a href="@Url.Action("Subsidiaries_Manufacturing","Resource_Facility")">
+                                                                                                <p>L&E Manufacturing Co.,Ltd</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a href="@Url.Action("Subsidiaries_Manufacturing","Resource_Facility")">
+                                                                                                <p>บริษัท แอล แอนด์ อี แมนูแฟคเจอริ่ง จำกัด</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item">
+                                                                                        @if (get_cookies == "EN")
+                                                                                        {
+                                                                                            <a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">
+                                                                                                <p>L&E Assembly / Service</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">
+                                                                                                <p>แอล แอนด์ อี โรงงานประกอบ</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item">
+                                                                                        @if (get_cookies == "EN")
+                                                                                        {
+                                                                                            <a href="@Url.Action("Subsidiaries_Warehouse_Logistics","Resource_Facility")">
+                                                                                                <p>L&E Warehouse & Logistics</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">
+                                                                                                <p>แอล แอนด์ อี คลังสินค้าและศูนย์กระจายสินค้า</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item">
+                                                                                        @if (get_cookies == "EN")
+                                                                                        {
+                                                                                            <a href="@Url.Action("Subsidiaries_Lighting_Solution_Center","Resource_Facility")">
+                                                                                                <p>L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a href="@Url.Action("Subsidiaries_Lighting_Solution_Center","Resource_Facility")">
+                                                                                                <p>แอล แอนด์ อี ไลท์ติ้ง โซลูชัน เซนเตอร์ (สาขารัชดา/สาขาราชพฤกษ์)</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="menu-item">
+                                                                                        @if (get_cookies == "EN")
+                                                                                        {
+                                                                                            <a href="@Url.Action("Subsidiaries_Overseas_Offices","Resource_Facility")">
+                                                                                                <p>L&E Overseas Offices</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a href="@Url.Action("Subsidiaries_Overseas_Offices","Resource_Facility")">
+                                                                                                <p>แอล แอนด์ อี สำนักงานต่างประเทศ</p>
+                                                                                            </a>
+                                                                                        }
+                                                                                    </div>
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
@@ -561,7 +715,14 @@
                                                                         <div class="submenu menu" data-menu="3">
                                                                             <div class="submenu-back">
                                                                                 <div class="menu-item">
-                                                                                    <a href="#" class="menu-back">Back</a>
+                                                                                   @if (get_cookies == "EN")
+                                                                                        {
+                                                                                            <a href="#" class="menu-back">Back</a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a href="#" class="menu-back">กลับ</a>
+                                                                                        }
                                                                                 </div>
                                                                             </div>
                                                                             <ul id="nav_mobile_smartSolution"></ul>
@@ -571,7 +732,14 @@
                                                                         <div class="submenu menu" data-menu="4">
                                                                             <div class="submenu-back">
                                                                                 <div class="menu-item">
-                                                                                    <a href="#" class="menu-back">Back</a>
+                                                                                    @if (get_cookies == "EN")
+                                                                                        {
+                                                                                            <a href="#" class="menu-back">Back</a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a href="#" class="menu-back">กลับ</a>
+                                                                                        }
                                                                                 </div>
                                                                             </div>
                                                                             <ul id="nav_mobile_product"></ul>
@@ -581,7 +749,14 @@
                                                                         <div class="submenu menu" data-menu="5">
                                                                             <div class="submenu-back">
                                                                                 <div class="menu-item">
-                                                                                    <a href="#" class="menu-back">Back</a>
+                                                                                   @if (get_cookies == "EN")
+                                                                                        {
+                                                                                            <a href="#" class="menu-back">Back</a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a href="#" class="menu-back">กลับ</a>
+                                                                                        }
                                                                                 </div>
                                                                             </div>
                                                                             <ul id="nav_mobile_projectRef"></ul>
@@ -590,7 +765,14 @@
                                                                         <div class="submenu menu" data-menu="6">
                                                                             <div class="submenu-back">
                                                                                 <div class="menu-item">
-                                                                                    <a href="#" class="menu-back">Back</a>
+                                                                                    @if (get_cookies == "EN")
+                                                                                    {
+                                                                                        <a href="#" class="menu-back">Back</a>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <a href="#" class="menu-back">กลับ</a>
+                                                                                    }
                                                                                 </div>
                                                                             </div>
                                                                             <ul>
@@ -684,31 +866,74 @@
                                                         <div class="col-lg-4">
                                                             <div class="row">
                                                                 <div class="col">
-                                                                    <h6>PROFILE</h6>
+                                                                    @if (get_cookies == "EN")
+                                                                    {
+                                                                        <h6>PROFILE</h6>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <h6>ข้อมูลองค์กร</h6>
+                                                                    }
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <ul class="dropdown-submenu">
                                                                         <li>
-                                                                            <a href="@Url.Action("Profile_History","Resource_Facility")">
-                                                                                <p>History</p>
-                                                                            </a>
+                                                                            @if (get_cookies == "EN")
+                                                                            {
+                                                                                <a href="@Url.Action("Profile_History","Resource_Facility")">
+                                                                                    <p>History</p>
+                                                                                </a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="@Url.Action("Profile_History","Resource_Facility")">
+                                                                                    <p>ประวัติ</p>
+                                                                                </a>
+                                                                            }
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Profile_Our_Philosophy_Vision_Misson","Resource_Facility")">
-                                                                                <p>Our Philosophy Vision & Mission</p>
-                                                                            </a>
+                                                                            @if (get_cookies == "EN")
+                                                                            {
+                                                                                <a href="@Url.Action("Profile_Our_Philosophy_Vision_Misson","Resource_Facility")">
+                                                                                    <p>Our Philosophy Vision & Mission</p>
+                                                                                </a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="@Url.Action("Profile_Our_Philosophy_Vision_Misson","Resource_Facility")">
+                                                                                    <p>ปรัชญา วิสัยทัศน์และพันธกิจ</p>
+                                                                                </a>
+                                                                            }
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Profile_Organization_Chart","Resource_Facility")">
-                                                                                <p>Organization Chart</p>
-                                                                            </a>
+                                                                            @if (get_cookies == "EN")
+                                                                            {
+                                                                                <a href="@Url.Action("Profile_Organization_Chart","Resource_Facility")">
+                                                                                    <p>Organization Chart</p>
+                                                                                </a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="@Url.Action("Profile_Organization_Chart","Resource_Facility")">
+                                                                                    <p>โครงสร้างองค์กร</p>
+                                                                                </a>
+                                                                            }
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Profile_Awards","Resource_Facility")">
-                                                                                <p>Awards</p>
-                                                                            </a>
+                                                                            @if (get_cookies == "EN")
+                                                                            {
+                                                                                <a href="@Url.Action("Profile_Awards","Resource_Facility")">
+                                                                                    <p>Awards</p>
+                                                                                </a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="@Url.Action("Profile_Awards","Resource_Facility")">
+                                                                                    <p>รางวัล</p>
+                                                                                </a>
+                                                                            }
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -717,46 +942,116 @@
                                                         <div class="col-lg-8">
                                                             <div class="row">
                                                                 <div class="col">
-                                                                    <h6>SUBSIDIARIES PROFILE</h6>
+                                                                    @if (get_cookies == "EN")
+                                                                    {
+                                                                        <h6>SUBSIDIARIES PROFILE</h6>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <h6>ข้อมูลบริษัทย่อย</h6>
+                                                                    }
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <ul class="dropdown-submenu w-half">
                                                                         <li>
-                                                                            <a href="@Url.Action("Subsidiaries_Lighting_Innovation_Center","Resource_Facility")">
-                                                                                <p>L&E Lighting Innovation Center</p>
-                                                                            </a>
+                                                                            @if (get_cookies == "EN")
+                                                                            {
+                                                                                <a href="@Url.Action("Subsidiaries_Lighting_Innovation_Center","Resource_Facility")">
+                                                                                    <p>L&E Lighting Innovation Center</p>
+                                                                                </a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="@Url.Action("Subsidiaries_Lighting_Innovation_Center","Resource_Facility")">
+                                                                                    <p>แอล แอนด์ อี ไลท์ติ้ง อินโนเวชั่น เซ็นเตอร์</p>
+                                                                                </a>
+                                                                            }
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Subsidiaries_SolidState","Resource_Facility")">
-                                                                                <p>L&E Solid State Co.,Ltd</p>
-                                                                            </a>
+                                                                            @if (get_cookies == "EN")
+                                                                            {
+                                                                                <a href="@Url.Action("Subsidiaries_SolidState","Resource_Facility")">
+                                                                                    <p>L&E Solid State Co.,Ltd</p>
+                                                                                </a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="@Url.Action("Subsidiaries_SolidState","Resource_Facility")">
+                                                                                    <p>บริษัท แอล แอนด์ อี โซลิดสเตท จำกัด</p>
+                                                                                </a>
+                                                                            }
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Subsidiaries_Manufacturing","Resource_Facility")">
-                                                                                <p>L&E Manufacturing Co.,Ltd</p>
-                                                                            </a>
+                                                                            @if (get_cookies == "EN")
+                                                                            {
+                                                                                <a href="@Url.Action("Subsidiaries_Manufacturing","Resource_Facility")">
+                                                                                    <p>L&E Manufacturing Co.,Ltd</p>
+                                                                                </a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="@Url.Action("Subsidiaries_Manufacturing","Resource_Facility")">
+                                                                                    <p>บริษัท แอล แอนด์ อี แมนูแฟคเจอริ่ง จำกัด</p>
+                                                                                </a>
+                                                                            }
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">
-                                                                                <p>L&E Assembly / Service</p>
-                                                                            </a>
+                                                                            @if (get_cookies == "EN")
+                                                                            {
+                                                                                <a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">
+                                                                                    <p>L&E Assembly / Service</p>
+                                                                                </a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">
+                                                                                    <p>แอล แอนด์ อี โรงงานประกอบ</p>
+                                                                                </a>
+                                                                            }
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Subsidiaries_Warehouse_Logistics","Resource_Facility")">
-                                                                                <p>L&E Warehouse & Logistics</p>
-                                                                            </a>
+                                                                            @if (get_cookies == "EN")
+                                                                            {
+                                                                                <a href="@Url.Action("Subsidiaries_Warehouse_Logistics","Resource_Facility")">
+                                                                                    <p>L&E Warehouse & Logistics</p>
+                                                                                </a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="@Url.Action("Subsidiaries_AssemblyService","Resource_Facility")">
+                                                                                    <p>แอล แอนด์ อี คลังสินค้าและศูนย์กระจายสินค้า</p>
+                                                                                </a>
+                                                                            }
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Subsidiaries_Lighting_Solution_Center","Resource_Facility")">
-                                                                                <p>L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</p>
-                                                                            </a>
+                                                                            @if (get_cookies == "EN")
+                                                                            {
+                                                                                <a href="@Url.Action("Subsidiaries_Lighting_Solution_Center","Resource_Facility")">
+                                                                                    <p>L&E Lighting Solution Center (Ratchadapisek / Rachapruek)</p>
+                                                                                </a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="@Url.Action("Subsidiaries_Lighting_Solution_Center","Resource_Facility")">
+                                                                                    <p>แอล แอนด์ อี ไลท์ติ้ง โซลูชัน เซนเตอร์ (สาขารัชดา/สาขาราชพฤกษ์)</p>
+                                                                                </a>
+                                                                            }
                                                                         </li>
                                                                         <li>
-                                                                            <a href="@Url.Action("Subsidiaries_Overseas_Offices","Resource_Facility")">
-                                                                                <p>L&E Overseas Offices</p>
-                                                                            </a>
+                                                                            @if (get_cookies == "EN")
+                                                                            {
+                                                                                <a href="@Url.Action("Subsidiaries_Overseas_Offices","Resource_Facility")">
+                                                                                    <p>L&E Overseas Offices</p>
+                                                                                </a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="@Url.Action("Subsidiaries_Overseas_Offices","Resource_Facility")">
+                                                                                    <p>แอล แอนด์ อี สำนักงานต่างประเทศ</p>
+                                                                                </a>
+                                                                            }
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -782,7 +1077,14 @@
                                                 <div class="menu-container w-img">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <h6>SMART SOLUTION</h6>
+                                                            @if (get_cookies == "EN")
+                                                            {
+                                                                <h6>SMART SOLUTION</h6>
+                                                            }
+                                                            else
+                                                            {
+                                                                <h6>สมาร์ท โซลูชั่น</h6>
+                                                            }
                                                         </div>
                                                     </div>
                                                     <div class="row">
