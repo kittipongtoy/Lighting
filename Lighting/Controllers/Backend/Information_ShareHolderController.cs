@@ -2447,7 +2447,7 @@ namespace Lighting.Controllers.Backend
                 }
                 else
                 {
-                    checkrow.account = mailContact.account; ;
+                    checkrow.account = mailContact.account;
                     checkrow.updated_at = DateTime.Now;
                     db.SaveChanges();
                 }

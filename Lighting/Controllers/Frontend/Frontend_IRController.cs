@@ -78,6 +78,8 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Body = details;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public IActionResult Get_IR_annual_report()
@@ -145,6 +147,8 @@ namespace Lighting.Controllers.Frontend
             }
 
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -204,6 +208,8 @@ namespace Lighting.Controllers.Frontend
             }
 
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -263,6 +269,8 @@ namespace Lighting.Controllers.Frontend
             }
 
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -322,6 +330,8 @@ namespace Lighting.Controllers.Frontend
             }
 
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -380,6 +390,8 @@ namespace Lighting.Controllers.Frontend
                 main_content.detail_th = getdata.detail_th;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -439,6 +451,8 @@ namespace Lighting.Controllers.Frontend
             }
 
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -498,6 +512,8 @@ namespace Lighting.Controllers.Frontend
             }
 
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -557,6 +573,8 @@ namespace Lighting.Controllers.Frontend
             }
 
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -586,6 +604,8 @@ namespace Lighting.Controllers.Frontend
                 count2 = 1;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input
             {
                 list_Board = get_data1,
@@ -606,6 +626,8 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_InvestorCalendar = await db.IR_InvestorCalendar.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_InvestorCalendarDetail = await db.IR_InvestorCalendarDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
 
@@ -635,6 +657,8 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> IR_chairman()
         {
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var get_message = db.M_message_chairman.FirstOrDefault();
             var get_chairman = db.M_chairman.Where(x => x.use_status == 1).ToList();
             var count = 0;
@@ -704,6 +728,8 @@ namespace Lighting.Controllers.Frontend
             }
 
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -757,6 +783,8 @@ namespace Lighting.Controllers.Frontend
             }
 
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -779,6 +807,8 @@ namespace Lighting.Controllers.Frontend
                 count = 1;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input { count_list_Companyprofile = count, list_Companyprofile = getData };
             return View(model);
         }
@@ -800,12 +830,16 @@ namespace Lighting.Controllers.Frontend
         {
             ViewBag.IR_complaints = await db.IR_Complaints.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_contact()
         {
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.Get_IR_Contact = await db.IR_Contact.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_corporate_governance()
@@ -830,6 +864,8 @@ namespace Lighting.Controllers.Frontend
                 count_cate = 1;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input
             {
                 count_row_CorporateGovernance = count_main,
@@ -886,6 +922,8 @@ namespace Lighting.Controllers.Frontend
                 main_content.detail_th = getdata.detail_th;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -913,18 +951,24 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Body = details;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_email_alerts()
         {
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_Email_Alerts = await db.IR_Email_Alerts.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_email_alerts_unsubscribe()
         {
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_Cancel_Email = await db.IR_Cancel_Email.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_fact_sheet()
@@ -941,6 +985,8 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Body = details;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_faq()
@@ -948,6 +994,8 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_faq = await db.IR_faq.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_faq_Detail = await db.IR_faq_Detail.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_finance_statement()
@@ -994,6 +1042,8 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.ContentDownload = detailsDownload;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public IActionResult Get_IR_Finance_Statement()
@@ -1048,6 +1098,8 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.BodyDetails = data_details_Item;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_form56()
@@ -1064,6 +1116,8 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Body = details;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_general_meeting()
@@ -1080,6 +1134,8 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Body = details;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_gift_and_entertainment_policy()
@@ -1128,6 +1184,8 @@ namespace Lighting.Controllers.Frontend
             }
 
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input
             {
                 count_fod_page_corporate_governance_content = count_data,
@@ -1164,6 +1222,8 @@ namespace Lighting.Controllers.Frontend
             {
                 ViewBag.BodyFile = file_details;
             }
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             return View();
         }
@@ -1172,6 +1232,8 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_Latest_News = await db.IR_Latest_News.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
 
@@ -1187,6 +1249,8 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_Print_Media = await db.IR_Print_Media.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_Print_MediaDetail = await db.IR_Print_MediaDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
 
@@ -1213,6 +1277,8 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_Latest_News = await db.IR_Latest_News.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1 && x.Id == Id).OrderByDescending(o => o.NewDate).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_organization()
@@ -1224,6 +1290,8 @@ namespace Lighting.Controllers.Frontend
                 count = 1;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input { count_list_OrganizationalStructure = count, list_OrganizationalStructure = get_data };
             return View(model);
         }
@@ -1236,6 +1304,8 @@ namespace Lighting.Controllers.Frontend
                 count = 1;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input { list_philosophy = getData, count_list_philosophy = count };
             return View(model);
         }
@@ -1247,6 +1317,8 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Header = data;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var details = db.SH_IR_presentation_doc_Data.Where(x => x.active_status == 1).OrderByDescending(x => x.id).ToList();
             if (details.Count != 0)
             {
@@ -1282,6 +1354,8 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Body = details;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public async Task<IActionResult> Get_IR_presentation_webcast()
@@ -1308,6 +1382,8 @@ namespace Lighting.Controllers.Frontend
 
             ViewBag.mailTitles = await db.SH_IR_propose_agenda_mailTitles.Where(x => x.active_status == 1).ToListAsync();
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public IActionResult Get_TypeOfPropose()
@@ -1393,6 +1469,8 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_MassMedia = await db.IR_MassMedia.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_MassMediaDetail = await db.IR_MassMediaDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
 
@@ -1408,6 +1486,8 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_MassMedia = await db.IR_MassMedia.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_MassMediaDetail = await db.IR_MassMediaDetail.Where(x => x.Status == 1 && x.Id == Id).OrderByDescending(o=>o.NewDate).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
 
@@ -1431,6 +1511,8 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Content = datadetails;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
 
@@ -1438,6 +1520,8 @@ namespace Lighting.Controllers.Frontend
         {
             ViewBag.IR_Request_Inquiry = await db.IR_Request_Inquiry.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
 
@@ -1446,6 +1530,8 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.GetIR_Stock_Market = await db.IR_Stock_Market.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
 
@@ -1461,6 +1547,8 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.GetIR_Stock_Market = await db.IR_Stock_Market.Where(x => x.Status == 1).ToListAsync();
             ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1 && x.Id == Id).OrderByDescending(o => o.NewDate).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_shareholding()
@@ -1477,6 +1565,8 @@ namespace Lighting.Controllers.Frontend
                 ViewBag.Body = details;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_stock_quote()
@@ -1484,6 +1574,8 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
             ViewBag.IR_Stock_Quote = await db.IR_Stock_Quote.Where(x=>x.Status == 1).ToListAsync();
             ViewBag.IR_Stock_QuoteDetail = await db.IR_Stock_QuoteDetail.Where(x => x.Status == 1).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             return View();
         }
         public async Task<IActionResult> IR_summary()
@@ -1495,6 +1587,8 @@ namespace Lighting.Controllers.Frontend
                 count = 1;
             }
             ViewBag.IR_Stock_LinkDetail = await db.IR_Stock_LinkDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
             var model = new model_input { list_companyOverview = getData, count_list_companyOverview = count };
             return View(model);
         }

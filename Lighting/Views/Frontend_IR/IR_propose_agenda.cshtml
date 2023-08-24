@@ -3,6 +3,15 @@
     Layout = "~/Views/Shared/Layout/Frontend_Layout.cshtml";
     var Count_mailTitles = (List<Lighting.Areas.Identity.Data.SH_IR_propose_agenda_mailTitles>)ViewBag.mailTitles;
     ViewData["IR_Stock_LinkDetail"] = (List<Lighting.Areas.Identity.Data.IR_Stock_LinkDetail>)ViewBag.IR_Stock_LinkDetail;
+
+    ViewData["Finance_Statement"] = (List<Lighting.Areas.Identity.Data.SH_IR_Finance_Statement>)ViewBag.Finance_Statement;
+    ViewData["SH_IR_prospectus"] = (List<Lighting.Areas.Identity.Data.SH_IR_prospectus>)ViewBag.SH_IR_prospectus;
+
+    var Finance_Statement = (List<Lighting.Areas.Identity.Data.SH_IR_Finance_Statement>)ViewBag.Finance_Statement;
+    var SH_IR_prospectus = (List<Lighting.Areas.Identity.Data.SH_IR_prospectus>)ViewBag.SH_IR_prospectus;
+
+    var Header = (List<Lighting.Areas.Identity.Data.SH_IR_propose_agenda>)ViewBag.Header;
+    var Body = (List<Lighting.Areas.Identity.Data.SH_IR_propose_agenda_DataDetails>)ViewBag.Body;
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
@@ -17,7 +26,7 @@
                     <div class="header-twoline">
                         @if (Context.Request.Cookies["lang"] == "EN")
                         {
-                            if (ViewBag.Header != null)
+                            if (Header.Count > 0)
                             {
                                 foreach (var item in ViewBag.Header)
                                 {
@@ -27,13 +36,13 @@
                             }
                             else
                             {
-                                <h5>ข้อมูลสำหรับผู้ถือหุ้น</h5>
-                                <h1>เสนอวาระ/กรรมการ/คำถามล่วงหน้า</h1>
+                                <h5>ข้อมูลสำหรับผู้ถือหุ้น ddd</h5>
+                                <h1>เสนอวาระ/กรรมการ/คำถามล่วงหน้า dddd</h1>
                             }
                         }
                         else
                         {
-                            if (ViewBag.Header != null)
+                            if (Header.Count > 0)
                             {
                                 foreach (var item in ViewBag.Header)
                                 {
@@ -62,7 +71,7 @@
 
                                 @if (Context.Request.Cookies["lang"] == "EN")
                                 {
-                                    if (ViewBag.Body != null)
+                                    if (Body.Count > 0)
                                     {
                                         foreach (var item in ViewBag.Body)
                                         {
@@ -74,10 +83,19 @@
                                             </tr>
                                         }
                                     }
+                                    else
+                                    {
+                                        <tr>
+                                            <td>การให้สิทธิแก่ผู้ถือหุ้นในการเสนอวาระการประชุมผู้ถือหุ้นประจำปี 2566 ส่งคำถาม และการเสนอชื่อบุคคลเพื่อพิจารณาเข้าดำรงตำแหน่งกรรมการล่วงหน้า</td>
+                                            <td>
+                                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                            </td>
+                                        </tr>
+                                    }
                                 }
                                 else
                                 {
-                                    if (ViewBag.Body != null)
+                                    if (Body.Count > 0)
                                     {
                                         foreach (var item in ViewBag.Body)
                                         {
@@ -88,6 +106,15 @@
                                                 </td>
                                             </tr>
                                         }
+                                    }
+                                     else
+                                    {
+                                        <tr>
+                                            <td>การให้สิทธิแก่ผู้ถือหุ้นในการเสนอวาระการประชุมผู้ถือหุ้นประจำปี 2566 ส่งคำถาม และการเสนอชื่อบุคคลเพื่อพิจารณาเข้าดำรงตำแหน่งกรรมการล่วงหน้า</td>
+                                            <td>
+                                                <a class="download-button" href="~/Frontend_assets/images/testPDF.pdf" target="_blank"><span>ดาวน์โหลด</span></a>
+                                            </td>
+                                        </tr>
                                     }
                                 }
 

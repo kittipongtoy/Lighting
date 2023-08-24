@@ -4,6 +4,12 @@
     var Count_IR_MassMedia = (List<Lighting.Areas.Identity.Data.IR_MassMedia>)ViewBag.IR_MassMedia;
     var Count_IR_MassMediaDetail = (List<Lighting.Areas.Identity.Data.IR_MassMediaDetail>)ViewBag.IR_MassMediaDetail;
     ViewData["IR_Stock_LinkDetail"] = (List<Lighting.Areas.Identity.Data.IR_Stock_LinkDetail>)ViewBag.IR_Stock_LinkDetail;
+
+    ViewData["Finance_Statement"] = (List<Lighting.Areas.Identity.Data.SH_IR_Finance_Statement>)ViewBag.Finance_Statement;
+    ViewData["SH_IR_prospectus"] = (List<Lighting.Areas.Identity.Data.SH_IR_prospectus>)ViewBag.SH_IR_prospectus;
+
+    var Finance_Statement = (List<Lighting.Areas.Identity.Data.SH_IR_Finance_Statement>)ViewBag.Finance_Statement;
+    var SH_IR_prospectus = (List<Lighting.Areas.Identity.Data.SH_IR_prospectus>)ViewBag.SH_IR_prospectus;
 }
 
 @Html.Partial("~/Views/Shared/Inc/IR_inc_topmenu.cshtml")
