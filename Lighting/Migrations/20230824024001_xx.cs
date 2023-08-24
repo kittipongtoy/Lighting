@@ -2620,6 +2620,23 @@ namespace Lighting.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SH_IR_Finance_Statement",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    linkTH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    linkENG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    active_status = table.Column<int>(type: "int", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SH_IR_Finance_Statement", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SH_IR_financial_highlight",
                 columns: table => new
                 {
@@ -3503,17 +3520,29 @@ namespace Lighting.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NameThai", "NormalizedName", "created_at", "updated_at" },
-                values: new object[] { "694c7e68-d892-44ed-9db7-819063de273f", "a9dc48c0-72e7-481a-949b-27e1389346d9", "Admin", "Admin", "Admin", new DateTime(2023, 8, 23, 10, 10, 28, 592, DateTimeKind.Utc).AddTicks(4760), new DateTime(2023, 8, 23, 10, 10, 28, 592, DateTimeKind.Utc).AddTicks(4764) });
+                values: new object[] { "26cb0684-d902-4e14-b799-028b33b880ec", "93d8eb9f-795a-46b2-baad-432aed34c459", "Admin", "Admin", "Admin", new DateTime(2023, 8, 24, 2, 40, 0, 800, DateTimeKind.Utc).AddTicks(2787), new DateTime(2023, 8, 24, 2, 40, 0, 800, DateTimeKind.Utc).AddTicks(2791) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ApplicationFile", "ConcurrencyStamp", "Email", "EmailConfirmed", "EmployeeCode", "EmployeeCodeInt", "Firstname", "GuarantorIdentificationCardFile", "Isactive", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePath", "ReceptionistFile", "SecurityStamp", "TwoFactorEnabled", "UserName", "created_at", "updated_at" },
-                values: new object[] { "6b20c185-cc9c-4941-92c6-56272af5bd0f", 0, null, null, "b03d6df4-11f9-405b-b0ac-99ed4f512ab2", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEItTspMX7wVA6r8XFdpKjy670t5q15i2H/7M5PIbKAk2mha8Fl9nqj1wJJt1xoUv7g==", null, false, null, null, "730bb627-1f44-4d49-ada0-a8110a5fd04c", false, "Admin@Lighting.com", null, null });
+                values: new object[] { "6f8eb594-b87f-44dd-9bdf-198bf6330d98", 0, null, null, "4a3d7706-ff8f-425c-8483-90db948bfde6", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEGNdTYpS74zWDeVLrPsoxzi4V8h8SPR1euz8m5dZVm2SfvjiF+U1GmUADA6GjGvGGw==", null, false, null, null, "699b15b7-7df0-45fa-9d07-00a5fb92857f", false, "Admin@Lighting.com", null, null });
+
+            migrationBuilder.InsertData(
+                table: "DownloadTypes",
+                columns: new[] { "id", "DownloadType_name_ENG", "DownloadType_name_TH", "created_at", "updated_at" },
+                values: new object[,]
+                {
+                    { 1, "L&E BIM OBJECTS", "L&E BIM OBJECTS", new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1386), new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1389) },
+                    { 2, "CATALOGUE", "CATALOGUE", new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1390), new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1391) },
+                    { 3, "COMPANY PROFILE", "COMPANY PROFILE", new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1392), new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1392) },
+                    { 4, "IES FILE", "IES FILE", new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1456), new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1457) },
+                    { 5, "LEAFLET", "LEAFLET", new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1458), new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1459) }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "694c7e68-d892-44ed-9db7-819063de273f", "6b20c185-cc9c-4941-92c6-56272af5bd0f" });
+                values: new object[] { "26cb0684-d902-4e14-b799-028b33b880ec", "6f8eb594-b87f-44dd-9bdf-198bf6330d98" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -3952,6 +3981,9 @@ namespace Lighting.Migrations
 
             migrationBuilder.DropTable(
                 name: "SH_IR_download_financial_statements");
+
+            migrationBuilder.DropTable(
+                name: "SH_IR_Finance_Statement");
 
             migrationBuilder.DropTable(
                 name: "SH_IR_financial_highlight");

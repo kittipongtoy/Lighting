@@ -707,6 +707,48 @@ namespace Lighting.Migrations
                     b.HasKey("id");
 
                     b.ToTable("DownloadTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            DownloadType_name_ENG = "L&E BIM OBJECTS",
+                            DownloadType_name_TH = "L&E BIM OBJECTS",
+                            created_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1386),
+                            updated_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1389)
+                        },
+                        new
+                        {
+                            id = 2,
+                            DownloadType_name_ENG = "CATALOGUE",
+                            DownloadType_name_TH = "CATALOGUE",
+                            created_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1390),
+                            updated_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1391)
+                        },
+                        new
+                        {
+                            id = 3,
+                            DownloadType_name_ENG = "COMPANY PROFILE",
+                            DownloadType_name_TH = "COMPANY PROFILE",
+                            created_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1392),
+                            updated_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1392)
+                        },
+                        new
+                        {
+                            id = 4,
+                            DownloadType_name_ENG = "IES FILE",
+                            DownloadType_name_TH = "IES FILE",
+                            created_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1456),
+                            updated_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1457)
+                        },
+                        new
+                        {
+                            id = 5,
+                            DownloadType_name_ENG = "LEAFLET",
+                            DownloadType_name_TH = "LEAFLET",
+                            created_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1458),
+                            updated_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1459)
+                        });
                 });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.History", b =>
@@ -2416,9 +2458,9 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6b20c185-cc9c-4941-92c6-56272af5bd0f",
+                            Id = "6f8eb594-b87f-44dd-9bdf-198bf6330d98",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b03d6df4-11f9-405b-b0ac-99ed4f512ab2",
+                            ConcurrencyStamp = "4a3d7706-ff8f-425c-8483-90db948bfde6",
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -2428,9 +2470,9 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEItTspMX7wVA6r8XFdpKjy670t5q15i2H/7M5PIbKAk2mha8Fl9nqj1wJJt1xoUv7g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGNdTYpS74zWDeVLrPsoxzi4V8h8SPR1euz8m5dZVm2SfvjiF+U1GmUADA6GjGvGGw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "730bb627-1f44-4d49-ada0-a8110a5fd04c",
+                            SecurityStamp = "699b15b7-7df0-45fa-9d07-00a5fb92857f",
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -4725,13 +4767,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "694c7e68-d892-44ed-9db7-819063de273f",
-                            ConcurrencyStamp = "a9dc48c0-72e7-481a-949b-27e1389346d9",
+                            Id = "26cb0684-d902-4e14-b799-028b33b880ec",
+                            ConcurrencyStamp = "93d8eb9f-795a-46b2-baad-432aed34c459",
                             Name = "Admin",
                             NameThai = "Admin",
                             NormalizedName = "Admin",
-                            created_at = new DateTime(2023, 8, 23, 10, 10, 28, 592, DateTimeKind.Utc).AddTicks(4760),
-                            updated_at = new DateTime(2023, 8, 23, 10, 10, 28, 592, DateTimeKind.Utc).AddTicks(4764)
+                            created_at = new DateTime(2023, 8, 24, 2, 40, 0, 800, DateTimeKind.Utc).AddTicks(2787),
+                            updated_at = new DateTime(2023, 8, 24, 2, 40, 0, 800, DateTimeKind.Utc).AddTicks(2791)
                         });
                 });
 
@@ -5162,6 +5204,34 @@ namespace Lighting.Migrations
                     b.HasKey("id");
 
                     b.ToTable("SH_IR_download_financial_statements");
+                });
+
+            modelBuilder.Entity("Lighting.Areas.Identity.Data.SH_IR_Finance_Statement", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<int?>("active_status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("linkENG")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("linkTH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("updated_at")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("id");
+
+                    b.ToTable("SH_IR_Finance_Statement");
                 });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.SH_IR_financial_highlight", b =>
@@ -6598,8 +6668,8 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "6b20c185-cc9c-4941-92c6-56272af5bd0f",
-                            RoleId = "694c7e68-d892-44ed-9db7-819063de273f"
+                            UserId = "6f8eb594-b87f-44dd-9bdf-198bf6330d98",
+                            RoleId = "26cb0684-d902-4e14-b799-028b33b880ec"
                         });
                 });
 

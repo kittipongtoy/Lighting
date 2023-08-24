@@ -15,12 +15,14 @@ namespace Lighting.Controllers.Frontend
         private readonly LightingContext db;
         private IWebHostEnvironment _hostingEnvironment;
         public CultureInfo provider = CultureInfo.InvariantCulture;
+        private IConfiguration _config;
 
-        public Frontend_IRController(LightingContext context, IWebHostEnvironment environment)
+        public Frontend_IRController(LightingContext context, IWebHostEnvironment environment, IConfiguration config)
         {
             //_config = config;
             db = context;
             _hostingEnvironment = environment;
+            _config = config;
         }
         public IActionResult change_lang(string? lang)
         {
@@ -1343,15 +1345,15 @@ namespace Lighting.Controllers.Frontend
         public async Task SendEmailAsyncCareer(receive_mail_propose_agendas mailRequest)
         {
 
-            //string Email = System.Configuration.ConfigurationManager.AppSettings["EmailSender"];
-            //string Password = System.Configuration.ConfigurationManager.AppSettings["EmailPassswordSender"];
-            //string Smtp = System.Configuration.ConfigurationManager.AppSettings["EmailSmtpSender"];
-            //string SmtpPort = System.Configuration.ConfigurationManager.AppSettings["EmailSmtpPort"];
+            string Email = _config["SettingMail:Email"];
+            string Password = _config["SettingMail:Password"];
+            string Smtp = _config["SettingMail:Smtp"];
+            string SmtpPort = _config["SettingMail:SmtpPort"];
 
-            string Email = "saimonnlaing1500@gmail.com";
-            string Password = "ffrpojpekljhdqnb";
-            string Smtp = "smtp.gmail.com";
-            string SmtpPort = "587";
+            //string Email = "saimonnlaing1500@gmail.com";
+            //string Password = "ffrpojpekljhdqnb";
+            //string Smtp = "smtp.gmail.com";
+            //string SmtpPort = "587";
 
             var to_mail = db.receive_agenda_mail_accounts.FirstOrDefault().account;
             var tomails = to_mail.Split(',', ' ');
@@ -1380,7 +1382,7 @@ namespace Lighting.Controllers.Frontend
             using (var smtp = new MailKit.Net.Smtp.SmtpClient())
             {
                 await smtp.ConnectAsync(Smtp, int.Parse(SmtpPort), SecureSocketOptions.Auto);
-                await smtp.AuthenticateAsync(Email, Password);
+                //await smtp.AuthenticateAsync(Email, Password);
                 await smtp.SendAsync(email);
                 await smtp.DisconnectAsync(true);
             }
