@@ -28,79 +28,277 @@
                     <!-- IR MENU :: PC & IPAD PRO -->
                     <div class="d-none d-lg-block">
                         <div class="cd-dropdown-wrapper">
-
-                            <a class="cd-dropdown-trigger navbar-toggler collapsed" href="#0">
-                                <span></span>
-                                เมนูนักลงทุนสัมพันธ์
-                            </a>
-
+                            @if (language == "EN")
+                            {
+                                <a class="cd-dropdown-trigger navbar-toggler collapsed" href="#0">
+                                    <span></span>
+                                    IR HOME
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="cd-dropdown-trigger navbar-toggler collapsed" href="#0">
+                                    <span></span>
+                                    เมนูนักลงทุนสัมพันธ์
+                                </a>
+                            }
                             <nav class="cd-dropdown">
                                 <ul class="cd-dropdown-content">
-                                    <li><a href="@Url.Action("IR_index","Frontend_IR")">หน้าหลักนักลงทุนสัมพันธ์</a></li>
+                                    @if (language == "EN")
+                                    {
+                                        <li><a href="@Url.Action("IR_index","Frontend_IR")">CORPORATE INFORMATION</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@Url.Action("IR_index","Frontend_IR")">หน้าหลักนักลงทุนสัมพันธ์</a></li>
+                                    }
                                     <li class="has-children">
-                                        <a href="https://codyhouse.co/?p=748">ข้อมูลบริษัท</a>
+                                        @if (language == "EN")
+                                        {
+                                            <a href="https://codyhouse.co/?p=748">CORPORATE INFORMATION</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="https://codyhouse.co/?p=748">ข้อมูลบริษัท</a>
+                                        }
                                         <ul class="cd-dropdown-icons is-hidden">
-                                            <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_chairman","Frontend_IR")">สารจากประธานกรรมการ</a>
-                                            </li>
-                                            <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_philosophy","Frontend_IR")">ปรัชญาองค์กร</a>
-                                            </li>
-                                            <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_companyprofile","Frontend_IR")">ข้อมูลทั่วไปบริษัท</a>
-                                            </li>
-                                            <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_summary","Frontend_IR")">สรุปภาพรวมบริษัท</a>
-                                            </li>
-                                            <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_board_directors","Frontend_IR")">คณะกรรมการบริษัท</a>
-                                            </li>
-                                            <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_organization","Frontend_IR")">โครงสร้างองค์กร</a>
-                                            </li>
+                                            @if (language == "EN")
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_chairman","Frontend_IR")">
+                                                        Message From Chairman
+                                                    </a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_chairman","Frontend_IR")">
+                                                        สารจากประธานบริษัท
+                                                    </a>
+                                                </li>
+                                            }
+                                            @if (language == "EN")
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_philosophy","Frontend_IR")">
+                                                        Philosophy
+                                                    </a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_philosophy","Frontend_IR")">
+                                                        ปรัชญาองค์กร
+                                                    </a>
+                                                </li>
+                                            }
+                                            @if (language == "EN")
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_companyprofile","Frontend_IR")">
+                                                        Company Profile
+                                                    </a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_companyprofile","Frontend_IR")">
+                                                        ข้อมูลทั่วไปบริษัท
+                                                    </a>
+                                                </li>
+                                            }
+                                            @if (language == "EN")
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_summary","Frontend_IR")">Summary Company</a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_summary","Frontend_IR")">สรุปภาพรวมบริษัท</a>
+                                                </li>
+                                            }
+                                            @if (language == "EN")
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_board_directors","Frontend_IR")">Board of Directors</a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_board_directors","Frontend_IR")">คณะกรรมการบริษัท</a>
+                                                </li>
+                                            }
+                                            @if (language == "EN")
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_organization","Frontend_IR")">Organization Chart</a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_organization","Frontend_IR")">โครงสร้างองค์กร</a>
+                                                </li>
+                                            }
                                         </ul>
                                     </li>
                                     <li class="has-children">
-                                        <a href="https://codyhouse.co/?p=748">นโยบายการกำกับดูแลกิจการ</a>
+                                        @if (language == "EN")
+                                        {
+                                            <a href="https://codyhouse.co/?p=748">CORPORATE GOVERNANCE</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="https://codyhouse.co/?p=748">นโยบายการกำกับดูแลกิจการ</a>
+                                        }
                                         <ul class="cd-dropdown-icons is-hidden">
                                             <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_corporate_governance","Frontend_IR")">นโยบายการกำกับดูแลกิจการ</a>
+                                                @if (language == "EN")
+                                                {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_corporate_governance","Frontend_IR")">
+                                                        Corporate Governance Policy
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_corporate_governance","Frontend_IR")">นโยบายการกำกับดูแลกิจการ</a>
+                                                }
                                             </li>
                                             <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_code_conduct","Frontend_IR")">จรรยาบรรณธุรกิจ</a>
+                                                @if (language == "EN")
+                                                {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_code_conduct","Frontend_IR")">Codes of Conduct</a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_code_conduct","Frontend_IR")">จรรยาบรรณธุรกิจ</a>
+                                                }
                                             </li>
                                             <li>
-                                                <a class="cd-dropdown-item item-1 link_report" target="_blank">รายงานความยั่งยืน</a>
+                                                @if (language == "EN")
+                                                {
+                                                    <a class="cd-dropdown-item item-1 link_report" target="_blank">Sustainability Report</a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="cd-dropdown-item item-1 link_report" target="_blank">รายงานความยั่งยืน</a>
+                                                }
                                             </li>
                                             <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_csr_policy","Frontend_IR")">นโยบายและความรับผิดชอบต่อสังคมและสิ่งแวดล้อม</a>
+                                                @if (language == "EN")
+                                                {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_csr_policy","Frontend_IR")">
+                                                        Policy and social responsibility and the environment
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_csr_policy","Frontend_IR")">นโยบายและความรับผิดชอบต่อสังคมและสิ่งแวดล้อม</a>
+                                                }
                                             </li>
                                             <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_anti_corruption_policy","Frontend_IR")">นโยบายการต่อต้านการทุจริตและคอร์รัปชั่น</a>
+                                                @if (language == "EN")
+                                                {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_anti_corruption_policy","Frontend_IR")">
+                                                        The Anti-Corruption Policy
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_anti_corruption_policy","Frontend_IR")">นโยบายการต่อต้านการทุจริตและคอร์รัปชั่น</a>
+                                                }
                                             </li>
                                             <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_gift_and_entertainment_policy","Frontend_IR")">นโยบายการให้หรือรับของขวัญ และการเลี้ยงรับรอง</a>
+                                                @if (language == "EN")
+                                                {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_gift_and_entertainment_policy","Frontend_IR")">
+                                                        Gift and Entertainment Policy
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_gift_and_entertainment_policy","Frontend_IR")">นโยบายการให้หรือรับของขวัญ และการเลี้ยงรับรอง</a>
+                                                }
                                             </li>
                                             <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_channel_clue","Frontend_IR")">ช่องทางแจ้งเบาะแส</a>
+                                                @if (language == "EN")
+                                                {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_channel_clue","Frontend_IR")">Channel Clue</a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_channel_clue","Frontend_IR")">ช่องทางแจ้งเบาะแส</a>
+                                                }
                                             </li>
                                             <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_chairman_board","Frontend_IR")">ขอบเขตอำนาจหน้าที่ของประธานกรรมการ</a>
+                                                @if (language == "EN")
+                                                {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_chairman_board","Frontend_IR")">Authorities and Duties of Chairman of the Board</a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_chairman_board","Frontend_IR")">ขอบเขตอำนาจหน้าที่ของประธานกรรมการ</a>
+                                                }
+                                            <li>
+                                                    @if (language == "EN")
+                                                    {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_chairman_executive","Frontend_IR")">
+                                                        Authorities and Duties of Chairman of Executive
+                                                        Committee
+                                                    </a>
+                                                    }
+                                                    else
+                                                    {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_chairman_executive","Frontend_IR")">ขอบเขตอำนาจหน้าที่ของประธานกรรมการบริหาร</a>
+                                                    }
                                             </li>
                                             <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_chairman_executive","Frontend_IR")">ขอบเขตอำนาจหน้าที่ของประธานกรรมการบริหาร</a>
+                                                    @if (language == "EN")
+                                                    {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_board_director","Frontend_IR")">Authorities and Duties of Board of Directors</a>
+                                                    }
+                                                    else
+                                                    {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_board_director","Frontend_IR")">ขอบเขตอำนาจหน้าที่ของคณะกรรมการบริษัท</a>
+                                                    }
                                             </li>
                                             <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_board_director","Frontend_IR")">ขอบเขตอำนาจหน้าที่ของคณะกรรมการบริษัท</a>
+                                                    @if (language == "EN")
+                                                    {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_audit_committee","Frontend_IR")">
+                                                        Authorities and Duties of Audit Committee
+                                                    </a>
+                                                    }
+                                                    else
+                                                    {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_audit_committee","Frontend_IR")">ขอบเขตอำนาจหน้าที่ของคณะกรรมการตรวจสอบ</a>
+                                                    }
                                             </li>
                                             <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_audit_committee","Frontend_IR")">ขอบเขตอำนาจหน้าที่ของคณะกรรมการตรวจสอบ</a>
+                                                    @if (language == "EN")
+                                                    {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_cg","Frontend_IR")">Authorities and Duties of CG</a>
+                                                    }
+                                                    else
+                                                    {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_cg","Frontend_IR")">ขอบเขตอำนาจหน้าที่ของคณะกรรมการกำกับดูแลกิจการ สรรหาและค่าตอบแทน</a>
+                                                    }
                                             </li>
                                             <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_cg","Frontend_IR")">ขอบเขตอำนาจหน้าที่ของคณะกรรมการกำกับดูแลกิจการ สรรหาและค่าตอบแทน</a>
-                                            </li>
-                                            <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_executive_board","Frontend_IR")">ขอบเขตอำนาจหน้าที่ของคณะกรรมการบริหาร</a>
+                                                    @if (language == "EN")
+                                                    {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_executive_board","Frontend_IR")">Authorities and Duties of Executive Board</a>
+                                                    }
+                                                    else
+                                                    {
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_executive_board","Frontend_IR")">ขอบเขตอำนาจหน้าที่ของคณะกรรมการบริหาร</a>
+                                                    }
                                             </li>
                                             <li>
                                                 <a class="cd-dropdown-item item-1" href="@Url.Action("IR_author_secretary","Frontend_IR")">ขอบเขตอำนาจหน้าที่เลขานุการบริษัท</a>
@@ -108,7 +306,14 @@
                                         </ul>
                                     </li>
                                     <li class="has-children">
-                                        <a href="https://codyhouse.co/?p=748">ข้อมูลสำคัญทางการเงิน</a>
+                                        @if (language == "EN")
+                                        {
+                                            <a href="https://codyhouse.co/?p=748">FINANCIAL INFORMATION</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="https://codyhouse.co/?p=748">ข้อมูลสำคัญทางการเงิน</a>
+                                        }
                                         <ul class="cd-dropdown-icons is-hidden">
                                             @if (Finance_Statement.Count > 0)
                                             {
@@ -117,7 +322,7 @@
                                                     if (language == "EN")
                                                     {
                                                         <li>
-                                                            <a class="cd-dropdown-item item-1" href="@items.linkENG">งบการเงิน</a>
+                                                            <a class="cd-dropdown-item item-1" href="@items.linkENG">Financial Statement</a>
                                                         </li>
                                                     }
                                                     else
@@ -131,24 +336,51 @@
                                             else
                                             {
                                                 <li>
-                                                    @*<a class="cd-dropdown-item item-1" href="@Url.Action("IR_finance_statement","Frontend_IR")">งบการเงิน</a>*@
                                                     <a class="cd-dropdown-item item-1" href="https://www.set.or.th/th/market/product/stock/quote/l&e/financial-statement/company-highlights">งบการเงิน</a>
                                                 </li>
                                             }
-
-                                            <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_financial_highlight","Frontend_IR")">ข้อมูลสำคัญทางการเงิน</a>
-                                            </li>
-                                            <li>
-                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_mda","Frontend_IR")">คำอธิบาย และการวิเคราะห์</a>
-                                            </li>
+                                            @if (language == "EN")
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_financial_highlight","Frontend_IR")">Financial Highlight</a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_financial_highlight","Frontend_IR")">ข้อมูลสำคัญทางการเงิน</a>
+                                                </li>
+                                            }
+                                            @if (language == "EN")
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_mda","Frontend_IR")">MD&A</a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_mda","Frontend_IR")">คำอธิบาย และการวิเคราะห์</a>
+                                                </li>
+                                            }
                                             @if (SH_IR_prospectus.Count > 0)
                                             {
                                                 foreach (var items in SH_IR_prospectus)
                                                 {
-                                                    <li>
-                                                        <a class="cd-dropdown-item item-1" href="@items.Link">หนังสือชี้ชวน</a>
-                                                    </li>
+                                                    @if (language == "EN")
+                                                    {
+                                                        <li>
+                                                            <a class="cd-dropdown-item item-1" href="@items.Link">
+                                                                Filing
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li>
+                                                            <a class="cd-dropdown-item item-1" href="@items.Link">หนังสือชี้ชวน</a>
+                                                        </li>
+                                                    }
                                                 }
                                             }
                                             else
@@ -160,17 +392,55 @@
                                         </ul>
                                     </li>
                                     <li class="has-children">
-                                        <a href="https://codyhouse.co/?p=748">ข้อมูลสำหรับผู้ถือหุ้น</a>
+                                        @if (language == "EN")
+                                        {
+                                            <a href="https://codyhouse.co/?p=748">SHAREHOLDER INFORMATION</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="https://codyhouse.co/?p=748">ข้อมูลสำหรับผู้ถือหุ้น</a>
+                                        }
                                         <ul class="cd-dropdown-icons is-hidden">
+                                        @if (language == "EN")
+                                        {
+                                            <li>
+                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_shareholding","Frontend_IR")">
+                                                    Shareholding
+                                                </a>
+                                            </li>
+                                        }
+                                        else
+                                        {
                                             <li>
                                                 <a class="cd-dropdown-item item-1" href="@Url.Action("IR_shareholding","Frontend_IR")">ผู้ถือหุ้นรายใหญ่</a>
                                             </li>
+                                        }
+                                        @if (language == "EN")
+                                        {
+                                            <li>
+                                                    <a class="cd-dropdown-item item-1" href="@Url.Action("IR_fact_sheet","Frontend_IR")">Fact Sheet</a>
+                                            </li>
+                                        }
+                                        else
+                                        {
                                             <li>
                                                 <a class="cd-dropdown-item item-1" href="@Url.Action("IR_fact_sheet","Frontend_IR")">ข้อมูลที่สำคัญ</a>
                                             </li>
+                                        }
+                                        @if (language == "EN")
+                                        {
+                                            <li>
+                                                <a class="cd-dropdown-item item-1" href="@Url.Action("IR_general_meeting","Frontend_IR")">
+                                                    Notice
+                                                </a>
+                                            </li>
+                                        }
+                                        else
+                                        {
                                             <li>
                                                 <a class="cd-dropdown-item item-1" href="@Url.Action("IR_general_meeting","Frontend_IR")">หนังสือเชิญประชุมผู้ถือหุ้น</a>
                                             </li>
+                                        }
                                             <li>
                                                 <a class="cd-dropdown-item item-1" href="@Url.Action("IR_report_general_meeting","Frontend_IR")">รายงานการประชุมผู้ถือหุ้น</a>
                                             </li>
@@ -222,7 +492,7 @@
                                             @if (IR_Stock_LinkDetail.Count() != 0)
                                             {
                                                 IR_Stock_LinkDetail = IR_Stock_LinkDetail.OrderByDescending(x => x.Id).Take(1).ToList();
-                                                @foreach(var item in IR_Stock_LinkDetail)
+                                                @foreach (var item in IR_Stock_LinkDetail)
                                                 {
                                                     <li>
                                                         <a class="cd-dropdown-item item-1" href="@item.Link_IR_Stock_Link" target="_blank">ราคาย้อนหลัง</a>

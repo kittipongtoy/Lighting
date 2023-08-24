@@ -456,7 +456,14 @@
                                                                             <div class="submenu menu" data-menu="1">
                                                                                 <div class="submenu-back">
                                                                                     <div class="menu-item">
-                                                                                        <a href="#" class="menu-back">Back</a>
+                                                                                        @if (get_cookies == "EN")
+                                                                                        {
+                                                                                            <a href="#" class="menu-back">Back</a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a href="#" class="menu-back">กลับ</a>
+                                                                                        }
                                                                                     </div>
                                                                                 </div>
                                                                                 <ul class="lang-menu">
@@ -558,7 +565,7 @@
                                                                                     </li>
                                                                                     @if (get_cookies == "EN")
                                                                                     {
-                                                                                        <li class="m-sub-topic">SUBSIDIARIES PROFILE</li>                                                                                          
+                                                                                        <li class="m-sub-topic">SUBSIDIARIES PROFILE</li>
                                                                                     }
                                                                                     else
                                                                                     {
@@ -626,7 +633,7 @@
                                                                                                     <p>แอล แอนด์ อี โรงงานประกอบ</p>
                                                                                                 </a>
                                                                                             }
-                                                                                    </div>
+                                                                                        </div>
                                                                                     </li>
                                                                                     <li>
                                                                                         <div class="menu-item">
@@ -717,7 +724,7 @@
                                                                             <div class="submenu menu" data-menu="5">
                                                                                 <div class="submenu-back">
                                                                                     <div class="menu-item">
-                                                                                         @if (get_cookies == "EN")
+                                                                                        @if (get_cookies == "EN")
                                                                                         {
                                                                                             <a href="#" class="menu-back">Back</a>
                                                                                         }
@@ -1107,7 +1114,6 @@
                                                                 {
                                                                     <h6>ผลงาน</h6>
                                                                 }
-
                                                             </div>
                                                         </div>
                                                         <div class="row">
@@ -1250,21 +1256,21 @@
                         //console.log(data);
                         const nav_link = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                     <li>
-                                                                                                         <a href="/${url}${curr?.name}">
-                                                                                                            <p>${curr?.name}</p>
-                                                                                                                    <div class="menu-img"><img src="/${curr?.image}"></div>
-                                                                                                         </a>
-                                                                                                     </li>`, "");
+                                                                                                             <li>
+                                                                                                                 <a href="/${url}${curr?.name}">
+                                                                                                                    <p>${curr?.name}</p>
+                                                                                                                            <div class="menu-img"><img src="/${curr?.image}"></div>
+                                                                                                                 </a>
+                                                                                                             </li>`, "");
                         }
 
                         $("#nav_projectref").html(nav_link(data, "project/Project_Category?category="));
 
                         const nav_link_mobile = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                <li>
-                                                                                                    <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
-                                                                                                 </li>`, "");
+                                                                                                        <li>
+                                                                                                            <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
+                                                                                                         </li>`, "");
                         }
 
                         $("#nav_mobile_projectRef").html(nav_link_mobile(data, "/project/Project_Category?category="));
@@ -1286,23 +1292,23 @@
                         //console.log(data);
                         const nav_link = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                        <li>
-                                                                                                            <a href="${url}${curr?.name}">
-                                                                                                                <img src="/${curr?.image}">
-                                                                                                                <div class="product-cate">
-                                                                                                                    <p>${curr?.name}</p>
-                                                                                                                </div>
-                                                                                                            </a>
-                                                                                                        </li>`, "");
+                                                                                                                <li>
+                                                                                                                    <a href="${url}${curr?.name}">
+                                                                                                                        <img src="/${curr?.image}">
+                                                                                                                        <div class="product-cate">
+                                                                                                                            <p>${curr?.name}</p>
+                                                                                                                        </div>
+                                                                                                                    </a>
+                                                                                                                </li>`, "");
                         }
 
                         $("#nav_product").html(nav_link(data, "/Product/Product_Category?category="));
 
                         const nav_link_mobile = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                        <li>
-                                                                                                            <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
-                                                                                                         </li>`, "");
+                                                                                                                <li>
+                                                                                                                    <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
+                                                                                                                 </li>`, "");
                         }
 
                         $("#nav_mobile_product").html(nav_link_mobile(data, "/Product/Product_Category?category="));
@@ -1322,20 +1328,20 @@
                         //console.log(data);
                         const nav_link = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                        <li>
-                                                                                                        <a href="${url}${curr?.name}">
-                                                                                                         <p>${curr?.name}</p>
-                                                                                                         <div class="menu-img"><img src="/${curr?.image}"></div>
-                                                                                                        </a>
-                                                                                                        </li>`, "");
+                                                                                                                <li>
+                                                                                                                <a href="${url}${curr?.name}">
+                                                                                                                 <p>${curr?.name}</p>
+                                                                                                                 <div class="menu-img"><img src="/${curr?.image}"></div>
+                                                                                                                </a>
+                                                                                                                </li>`, "");
                         }
 
                         $("#nav_smartsolution").append(nav_link(data, "/SmartSolution/SmartSolutionDetail?name="));
                         const nav_link_mobile = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                                <li>
-                                                                                                                    <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
-                                                                                                                 </li>`, "");
+                                                                                                                        <li>
+                                                                                                                            <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
+                                                                                                                         </li>`, "");
                         }
 
                         $("#nav_mobile_smartSolution").html(nav_link_mobile(data, "/SmartSolution/SmartSolutionDetail?name="));

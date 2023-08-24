@@ -234,7 +234,7 @@ namespace Lighting.Controllers.Backend
                     Name_EN = cat.Name_EN,
                     Name_TH = cat.Name_TH,
                     Image = cat.Image,
-                    ImageShow = cat.ShowImage
+                    ImageShow = cat.ShowImage == null || cat.ShowImage == "" ? "" : cat.ShowImage
                 }).ToListAsync();
             return View(category);
         }
