@@ -13,6 +13,14 @@
     var Count_IR_NewDetail = (List<Lighting.Areas.Identity.Data.IR_NewDetail>)ViewBag.IR_NewDetail;
     var IR_Stock_QuoteDetail = (List<Lighting.Areas.Identity.Data.IR_Stock_QuoteDetail>)ViewBag.IR_Stock_QuoteDetail;
     ViewData["IR_Stock_LinkDetail"] = (List<Lighting.Areas.Identity.Data.IR_Stock_LinkDetail>)ViewBag.IR_Stock_LinkDetail;
+      ViewData["Finance_Statement"] = (List<Lighting.Areas.Identity.Data.SH_IR_Finance_Statement>)ViewBag.Finance_Statement;
+    ViewData["SH_IR_prospectus"] = (List<Lighting.Areas.Identity.Data.SH_IR_prospectus>)ViewBag.SH_IR_prospectus;
+
+    var Finance_Statementss = (List<Lighting.Areas.Identity.Data.SH_IR_Finance_Statement>)ViewData["Finance_Statement"];
+    var Finance_Statement = (List<Lighting.Areas.Identity.Data.SH_IR_Finance_Statement>)ViewBag.Finance_Statement;
+
+    var SH_IR_prospectusa = (List<Lighting.Areas.Identity.Data.SH_IR_prospectus>)ViewData["SH_IR_prospectus"];
+    var SH_IR_prospectus = (List<Lighting.Areas.Identity.Data.SH_IR_prospectus>)ViewBag.SH_IR_prospectus;
     var IR_Summary_Background = "";
     if (Count_IR_Summary_Financial_Highlights.Count() != 0)
     {
