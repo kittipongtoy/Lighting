@@ -4,7 +4,7 @@ using System.Globalization;
 using Lighting.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol.Core.Types; 
+using NuGet.Protocol.Core.Types;
 
 namespace Lighting.Controllers.Backend
 {
@@ -141,7 +141,7 @@ namespace Lighting.Controllers.Backend
             try
             {
 
-                if (upload_image.Count == 0 || upload_image_ENG.Count == 0 )
+                if (upload_image.Count == 0 || upload_image_ENG.Count == 0)
                 {
                     return Json(new { status = "warning", message = "กรุณากรอกข้อมูลให้ครบ!" });
                 }
@@ -605,41 +605,35 @@ namespace Lighting.Controllers.Backend
 
         public IActionResult SH_IR_finance_statement()
         {
-            var checkrow = db.SH_IR_important_financial.FirstOrDefault();
-            var count_row = 0;
-            if (checkrow != null)
-            {
-                count_row = 1;
-            }
-            var model = new model_input { count_row_SH_IR_important_financial = count_row, fod_SH_IR_important_financial = checkrow };
-            return View(model);
+            return View();
         }
         public IActionResult SH_IR_finance_statement_create()
         {
             return View();
         }
-        public IActionResult SH_IR_finance_statement_edit()
+        public IActionResult SH_IR_finance_statement_edit(int? id)
         {
             return View();
         }
-        public IActionResult SH_IR_finance_position_getTable()
+        public IActionResult SH_IR_finance_statement_getTable()
         {
             try
             {
-                var Raw_list = db.SH_IR_financial_position.ToList();
-                var add_count = new List<IR_Important_Financial_model.SH_IR_financial_position_table>();
+                var Raw_list = db.SH_IR_Finance_Statement.ToList();
+
+                var add_count = new List<IR_Important_Financial_model.SH_IR_Finance_Statement_table>();
                 var count = 1;
                 foreach (var items in Raw_list)
                 {
-                    add_count.Add(new IR_Important_Financial_model.SH_IR_financial_position_table
+                    add_count.Add(new IR_Important_Financial_model.SH_IR_Finance_Statement_table
                     {
                         count_row = count,
                         id = items.id,
                         created_at = items.created_at,
                         updated_at = items.updated_at,
-                        active_status = items.active_status,
-                        titleTH = items.titleTH,
-                        titleENG = items.titleENG
+                        linkTH = items.linkTH,
+                        linkENG = items.linkENG,
+                        active_status = items.active_status
                     });
                     count++;
                 }
@@ -650,6 +644,179 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
+        [HttpPost]
+        public IActionResult SH_IR_finance_statement_create_submit(SH_IR_Finance_Statement SH_IR_Finance_Statement)
+        {
+            try
+            { 
+                if (SH_IR_Finance_Statement.active_status == 1)
+                {
+                    var check_other = from up2 in db.SH_IR_Finance_Statement
+                                      where up2.active_status == 1
+                                      select up2;
+                    foreach (SH_IR_Finance_Statement up2 in check_other)
+                    {
+                        up2.active_status = 0;
+                    }
+                    db.SaveChanges();
+                }
+
+                if (SH_IR_Finance_Statement.active_status != 1)
+                {
+                    SH_IR_Finance_Statement.active_status = 0;
+                }
+                else
+                {
+                    SH_IR_Finance_Statement.active_status = 1;
+                }
+
+                SH_IR_Finance_Statement.created_at = DateTime.Now;
+                SH_IR_Finance_Statement.updated_at = DateTime.Now;
+                db.SH_IR_Finance_Statement.Add(SH_IR_Finance_Statement);
+                db.SaveChanges();
+                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
+            }
+        }
+        [HttpPut]
+        public async Task<IActionResult> SH_IR_finance_statement_Edit_Submit(SH_IR_Finance_Statement SH_IR_Finance_Statement)
+        {
+            try
+            {
+                var Finance_Statement = db.SH_IR_Finance_Statement.FirstOrDefault(x => x.id == SH_IR_Finance_Statement.id);
+                if (Finance_Statement is not null)
+                { 
+                    if (SH_IR_Finance_Statement.active_status == 1)
+                    {
+                        var check_other = from up2 in db.SH_IR_Finance_Statement
+                                          where up2.id != SH_IR_Finance_Statement.id && up2.active_status == 1
+                                          select up2;
+                        foreach (SH_IR_Finance_Statement up2 in check_other)
+                        {
+                            up2.active_status = 0;
+                        }
+                        db.SaveChanges();
+                    } 
+
+                    Finance_Statement.linkTH = SH_IR_Finance_Statement.linkTH;
+                    Finance_Statement.linkENG = SH_IR_Finance_Statement.linkENG;
+                    if (SH_IR_Finance_Statement.active_status != 1)
+                    {
+                        Finance_Statement.active_status = 0;
+                    }
+                    else
+                    {
+                        Finance_Statement.active_status = 1;
+                    }
+
+                    Finance_Statement.updated_at = DateTime.Now;
+                    db.Entry(Finance_Statement).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get_SH_IR_finance_statement_Edit(int? id)
+        {
+            try
+            {
+                var DB = await db.SH_IR_Finance_Statement.FirstOrDefaultAsync(x => x.id == id);
+                if (DB is not null)
+                {
+                    return Ok(DB);
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+        [HttpDelete]
+        public async Task<IActionResult> SH_IR_finance_statement_Delete(int? id)
+        {
+            try
+            {
+                var DB = db.SH_IR_Finance_Statement.FirstOrDefault(x => x.id == id);
+                if (DB is not null)
+                {
+                    db.SH_IR_Finance_Statement.Remove(DB);
+                    await db.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูล");
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+        [HttpPost]
+
+        public async Task<IActionResult> SH_IR_finance_statement_ChangeStatus(int? id)
+        {
+            try
+            {
+                var DB = db.SH_IR_Finance_Statement.FirstOrDefault(x => x.id == id);
+                if (DB is not null)
+                {
+                    if (DB.active_status != 1)
+                    {
+                        var Change = db.SH_IR_Finance_Statement.ToList();
+                        foreach (var item in Change)
+                        {
+                            item.active_status = 0;
+                            db.Entry(item).State = EntityState.Modified;
+                            await db.SaveChangesAsync();
+                        }
+                        if (DB.active_status == 1)
+                        {
+                            DB.active_status = 0;
+                            db.Entry(DB).State = EntityState.Modified;
+                            await db.SaveChangesAsync();
+                        }
+                        else
+                        {
+                            DB.active_status = 1;
+                            db.Entry(DB).State = EntityState.Modified;
+                            await db.SaveChangesAsync();
+                        }
+                    }
+                }
+                else
+                {
+                    return new JsonResult(new { status = "error", messageArray = "error" });
+                }
+                return new JsonResult(new { status = "success", messageArray = "success" });
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error?.InnerException?.ToString() ?? "error " + error?.Message);
+            }
+        }
+
+
+
+        //
         public IActionResult SH_IR_finance_position_DataDetails_getTable(int? id)
         {
             try
@@ -674,109 +841,6 @@ namespace Lighting.Controllers.Backend
                     count++;
                 }
                 return Json(new { data = add_count });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_finance_position_Submit(SH_IR_financial_position SH_IR_financial_position)
-        {
-            try
-            {
-                if (SH_IR_financial_position.active_status != 1)
-                {
-                    SH_IR_financial_position.active_status = 0;
-                }
-                else
-                {
-                    SH_IR_financial_position.active_status = 1;
-                }
-                SH_IR_financial_position.created_at = DateTime.Now;
-                SH_IR_financial_position.updated_at = DateTime.Now;
-
-                db.SH_IR_financial_position.Add(SH_IR_financial_position);
-                db.SaveChanges();
-                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_finance_position_getEditData(int? id)
-        {
-            var get_data = db.SH_IR_financial_position.Where(x => x.id == id).FirstOrDefault();
-
-            return Json(new { status = "success", message = "", data = get_data });
-        }
-        public IActionResult SH_IR_finance_statement_addData(SH_IR_important_financial fod_SH_IR_important_financial)
-        {
-            try
-            {
-                var checkrow = db.SH_IR_important_financial.FirstOrDefault();
-                if (checkrow == null)
-                {
-                    fod_SH_IR_important_financial.created_at = DateTime.Now;
-                    fod_SH_IR_important_financial.updated_at = DateTime.Now;
-                    db.SH_IR_important_financial.Add(fod_SH_IR_important_financial);
-                    db.SaveChanges();
-                }
-                else
-                {
-                    checkrow.titleTH = fod_SH_IR_important_financial.titleTH;
-                    checkrow.titleENG = fod_SH_IR_important_financial.titleENG;
-                    checkrow.detailsTitleTH = fod_SH_IR_important_financial.detailsTitleTH;
-                    checkrow.detailsTitleENG = fod_SH_IR_important_financial.detailsTitleENG;
-                    checkrow.download_financialTitleTH = fod_SH_IR_important_financial.download_financialTitleTH;
-                    checkrow.financial_positionTitleENG = fod_SH_IR_important_financial.financial_positionTitleENG;
-                    checkrow.profitLoseTitleTH = fod_SH_IR_important_financial.profitLoseTitleTH;
-                    checkrow.profitLoseTitleENG = fod_SH_IR_important_financial.profitLoseTitleENG;
-                    checkrow.Comprehensive_IncomeTitleTH = fod_SH_IR_important_financial.Comprehensive_IncomeTitleTH;
-                    checkrow.Comprehensive_IncomeTitleENG = fod_SH_IR_important_financial.Comprehensive_IncomeTitleENG;
-                    checkrow.cash_flowTitleTH = fod_SH_IR_important_financial.cash_flowTitleTH;
-                    checkrow.cash_flowTitleENG = fod_SH_IR_important_financial.cash_flowTitleENG;
-                    checkrow.download_financialTitleTH = fod_SH_IR_important_financial.download_financialTitleTH;
-                    checkrow.download_financialTitleENG = fod_SH_IR_important_financial.download_financialTitleENG;
-                    checkrow.listTitleTH = fod_SH_IR_important_financial.listTitleTH;
-                    checkrow.listTitleENG = fod_SH_IR_important_financial.listTitleENG;
-                    checkrow.amountTitleTH = fod_SH_IR_important_financial.amountTitleTH;
-                    checkrow.amountTitleENG = fod_SH_IR_important_financial.amountTitleENG;
-                    checkrow.percentTitleTH = fod_SH_IR_important_financial.percentTitleTH;
-                    checkrow.percentTitleENG = fod_SH_IR_important_financial.percentTitleENG;
-                    checkrow.dayTitleTH = fod_SH_IR_important_financial.dayTitleTH;
-                    checkrow.dayTitleENG = fod_SH_IR_important_financial.dayTitleENG;
-                    checkrow.updated_at = DateTime.Now;
-                    db.SaveChanges();
-                }
-
-                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_finance_position_edit_Submit(SH_IR_financial_position SH_IR_financial_position)
-        {
-            try
-            {
-                var get_oldData = db.SH_IR_financial_position.Where(x => x.id == SH_IR_financial_position.id).FirstOrDefault();
-
-                if (SH_IR_financial_position.active_status != 1)
-                {
-                    get_oldData.active_status = 0;
-                }
-                else
-                {
-                    get_oldData.active_status = 1;
-                }
-                get_oldData.titleTH = SH_IR_financial_position.titleTH;
-                get_oldData.titleENG = SH_IR_financial_position.titleENG;
-
-                get_oldData.updated_at = DateTime.Now;
-                db.SaveChanges();
-                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
             }
             catch (Exception e)
             {
@@ -885,670 +949,8 @@ namespace Lighting.Controllers.Backend
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
         }
-        public IActionResult SH_IR_finance_position_delete(int? id)
-        {
-            try
-            {
-                var checkrow = db.SH_IR_financial_position.Where(x => x.id == id).FirstOrDefault();
 
-                if (checkrow != null)
-                {
-                    var dataDetails = db.SH_IR_financial_position_DataDetails.Where(x => x.financialPosition_id == checkrow.id).ToList();
-                    foreach (var item in dataDetails)
-                    {
-                        var deleteDetails = db.SH_IR_financial_position_DataDetails.FirstOrDefault(x => x.id == item.id);
-                        if (deleteDetails != null)
-                        {
-                            db.SH_IR_financial_position_DataDetails.Remove(deleteDetails);
-                            db.SaveChanges();
-                        }
-                    }
-                    db.SH_IR_financial_position.Remove(checkrow);
-                    db.SaveChanges();
 
-                }
-
-                return Json(new { status = "success", message = "ลบข้อมูลเรียบร้อย" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_finance_profit_Lose()
-        {
-            return View();
-        }
-        public IActionResult SH_IR_finance_profit_Lose_getTable()
-        {
-            try
-            {
-                var Raw_list = db.SH_IR_Profit_Lose.ToList();
-
-                var add_count = new List<IR_Important_Financial_model.SH_IR_Profit_Lose_dataTable>();
-                var count = 1;
-                foreach (var items in Raw_list)
-                {
-                    add_count.Add(new IR_Important_Financial_model.SH_IR_Profit_Lose_dataTable
-                    {
-                        count_row = count,
-                        id = items.id,
-                        created_at = items.created_at,
-                        updated_at = items.updated_at,
-                        amount = items.amount,
-                        percentProfit = items.percentProfit,
-                        titleTH = items.titleTH,
-                        titleENG = items.titleENG
-                    });
-                    count++;
-                }
-                return Json(new { data = add_count });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_finance_profit_Lose_submit(SH_IR_Profit_Lose SH_IR_Profit_Lose)
-        {
-            try
-            {
-                SH_IR_Profit_Lose.titleTH = SH_IR_Profit_Lose.titleTH;
-                SH_IR_Profit_Lose.titleENG = SH_IR_Profit_Lose.titleENG;
-                SH_IR_Profit_Lose.amount = SH_IR_Profit_Lose.amount;
-                SH_IR_Profit_Lose.percentProfit = SH_IR_Profit_Lose.percentProfit;
-                SH_IR_Profit_Lose.created_at = DateTime.Now;
-                SH_IR_Profit_Lose.updated_at = DateTime.Now;
-                db.SH_IR_Profit_Lose.Add(SH_IR_Profit_Lose);
-                db.SaveChanges();
-                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_finance_profit_Lose_edit(int? id)
-        {
-            if (id == null)
-            {
-                return RedirectToAction("SH_IR_finance_statement", "importantFinancialInformation");
-            }
-            var get_detail = db.SH_IR_Profit_Lose.Where(x => x.id == id).FirstOrDefault();
-            if (get_detail == null)
-            {
-                return RedirectToAction("SH_IR_finance_statement", "importantFinancialInformation");
-            }
-            var model = new model_input { SH_IR_Profit_Lose = get_detail };
-            return View(model);
-        }
-        public IActionResult SH_IR_finance_profit_Lose_edit_Submit(SH_IR_Profit_Lose SH_IR_Profit_Lose)
-        {
-            try
-            {
-                if (SH_IR_Profit_Lose.titleTH == null || SH_IR_Profit_Lose.titleENG == "")
-                {
-                    return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ TH / ENG" });
-                }
-
-                var old_data = db.SH_IR_Profit_Lose.Where(x => x.id == SH_IR_Profit_Lose.id).FirstOrDefault();
-
-                old_data.titleTH = SH_IR_Profit_Lose.titleTH;
-                old_data.titleENG = SH_IR_Profit_Lose.titleENG;
-                old_data.amount = SH_IR_Profit_Lose.amount;
-                old_data.percentProfit = SH_IR_Profit_Lose.percentProfit;
-
-                old_data.updated_at = DateTime.Now;
-                db.SaveChanges();
-                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_finance_profit_Lose_delete(int? id)
-        {
-            try
-            {
-                var checkrow = db.SH_IR_Profit_Lose.Where(x => x.id == id).FirstOrDefault();
-
-                if (checkrow != null)
-                {
-                    db.SH_IR_Profit_Lose.Remove(checkrow);
-                    db.SaveChanges();
-
-                }
-
-                return Json(new { status = "success", message = "ลบข้อมูลเรียบร้อย" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_comprehensive_profit_Lose()
-        {
-            return View();
-        }
-        public IActionResult SH_IR_comprehensive_profit_Lose_getTable()
-        {
-            try
-            {
-                var Raw_list = db.SH_IR_Profit_Lose_others.ToList();
-
-                var add_count = new List<IR_Important_Financial_model.SH_IR_Profit_Lose_others_dataTable>();
-                var count = 1;
-                foreach (var items in Raw_list)
-                {
-                    add_count.Add(new IR_Important_Financial_model.SH_IR_Profit_Lose_others_dataTable
-                    {
-                        count_row = count,
-                        id = items.id,
-                        created_at = items.created_at,
-                        updated_at = items.updated_at,
-                        amount = items.amount,
-                        percentProfit = items.percentProfit,
-                        titleTH = items.titleTH,
-                        titleENG = items.titleENG
-                    });
-                    count++;
-                }
-                return Json(new { data = add_count });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_comprehensive_profit_Lose_submit(SH_IR_Profit_Lose_others SH_IR_Profit_Lose_others)
-        {
-            try
-            {
-                SH_IR_Profit_Lose_others.titleTH = SH_IR_Profit_Lose_others.titleTH;
-                SH_IR_Profit_Lose_others.titleENG = SH_IR_Profit_Lose_others.titleENG;
-                SH_IR_Profit_Lose_others.amount = SH_IR_Profit_Lose_others.amount;
-                SH_IR_Profit_Lose_others.percentProfit = SH_IR_Profit_Lose_others.percentProfit;
-                SH_IR_Profit_Lose_others.created_at = DateTime.Now;
-                SH_IR_Profit_Lose_others.updated_at = DateTime.Now;
-                db.SH_IR_Profit_Lose_others.Add(SH_IR_Profit_Lose_others);
-                db.SaveChanges();
-                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_comprehensive_profit_Lose_edit(int? id)
-        {
-            if (id == null)
-            {
-                return RedirectToAction("SH_IR_finance_statement", "importantFinancialInformation");
-            }
-            var get_detail = db.SH_IR_Profit_Lose_others.Where(x => x.id == id).FirstOrDefault();
-            if (get_detail == null)
-            {
-                return RedirectToAction("SH_IR_finance_statement", "importantFinancialInformation");
-            }
-            var model = new model_input { SH_IR_Profit_Lose_others = get_detail };
-            return View(model);
-        }
-        public IActionResult SH_IR_comprehensive_profit_Lose_edit_Submit(SH_IR_Profit_Lose_others SH_IR_Profit_Lose_others)
-        {
-            try
-            {
-                if (SH_IR_Profit_Lose_others.titleTH == null || SH_IR_Profit_Lose_others.titleENG == "")
-                {
-                    return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ TH / ENG" });
-                }
-
-                var old_data = db.SH_IR_Profit_Lose_others.Where(x => x.id == SH_IR_Profit_Lose_others.id).FirstOrDefault();
-
-                old_data.titleTH = SH_IR_Profit_Lose_others.titleTH;
-                old_data.titleENG = SH_IR_Profit_Lose_others.titleENG;
-                old_data.amount = SH_IR_Profit_Lose_others.amount;
-                old_data.percentProfit = SH_IR_Profit_Lose_others.percentProfit;
-
-                old_data.updated_at = DateTime.Now;
-                db.SaveChanges();
-                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_comprehensive_profit_Lose_delete(int? id)
-        {
-            try
-            {
-                var checkrow = db.SH_IR_Profit_Lose_others.Where(x => x.id == id).FirstOrDefault();
-
-                if (checkrow != null)
-                {
-                    db.SH_IR_Profit_Lose_others.Remove(checkrow);
-                    db.SaveChanges();
-
-                }
-
-                return Json(new { status = "success", message = "ลบข้อมูลเรียบร้อย" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_cashFlow_statements()
-        {
-            return View();
-        }
-        public IActionResult SH_IR_cashFlow_statements_getTable()
-        {
-            try
-            {
-                var Raw_list = db.SH_IR_cashFlow_statements.ToList();
-
-                var add_count = new List<IR_Important_Financial_model.SH_IR_cashFlow_statements_dataTable>();
-                var count = 1;
-                foreach (var items in Raw_list)
-                {
-                    add_count.Add(new IR_Important_Financial_model.SH_IR_cashFlow_statements_dataTable
-                    {
-                        count_row = count,
-                        id = items.id,
-                        created_at = items.created_at,
-                        updated_at = items.updated_at,
-                        amount = items.amount,
-                        percentProfit = items.percentProfit,
-                        titleTH = items.titleTH,
-                        titleENG = items.titleENG
-                    });
-                    count++;
-                }
-                return Json(new { data = add_count });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_cashFlow_statements_edit(int? id)
-        {
-            if (id == null)
-            {
-                return RedirectToAction("SH_IR_finance_statement", "importantFinancialInformation");
-            }
-            var get_detail = db.SH_IR_cashFlow_statements.Where(x => x.id == id).FirstOrDefault();
-            if (get_detail == null)
-            {
-                return RedirectToAction("SH_IR_finance_statement", "importantFinancialInformation");
-            }
-            var model = new model_input { SH_IR_cashFlow_statements = get_detail };
-            return View(model);
-        }
-        public IActionResult SH_IR_cashFlow_statements_submit(SH_IR_cashFlow_statements SH_IR_cashFlow_statements)
-        {
-            try
-            {
-                SH_IR_cashFlow_statements.titleTH = SH_IR_cashFlow_statements.titleTH;
-                SH_IR_cashFlow_statements.titleENG = SH_IR_cashFlow_statements.titleENG;
-                SH_IR_cashFlow_statements.amount = SH_IR_cashFlow_statements.amount;
-                SH_IR_cashFlow_statements.percentProfit = SH_IR_cashFlow_statements.percentProfit;
-                SH_IR_cashFlow_statements.created_at = DateTime.Now;
-                SH_IR_cashFlow_statements.updated_at = DateTime.Now;
-                db.SH_IR_cashFlow_statements.Add(SH_IR_cashFlow_statements);
-                db.SaveChanges();
-                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_cashFlow_statements_edit_Submit(SH_IR_cashFlow_statements SH_IR_cashFlow_statements)
-        {
-            try
-            {
-                if (SH_IR_cashFlow_statements.titleTH == null || SH_IR_cashFlow_statements.titleENG == "")
-                {
-                    return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ TH / ENG" });
-                }
-
-                var old_data = db.SH_IR_cashFlow_statements.Where(x => x.id == SH_IR_cashFlow_statements.id).FirstOrDefault();
-
-                old_data.titleTH = SH_IR_cashFlow_statements.titleTH;
-                old_data.titleENG = SH_IR_cashFlow_statements.titleENG;
-                old_data.amount = SH_IR_cashFlow_statements.amount;
-                old_data.percentProfit = SH_IR_cashFlow_statements.percentProfit;
-
-                old_data.updated_at = DateTime.Now;
-                db.SaveChanges();
-                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_cashFlow_statements_delete(int? id)
-        {
-            try
-            {
-                var checkrow = db.SH_IR_cashFlow_statements.Where(x => x.id == id).FirstOrDefault();
-
-                if (checkrow != null)
-                {
-                    db.SH_IR_cashFlow_statements.Remove(checkrow);
-                    db.SaveChanges();
-
-                }
-
-                return Json(new { status = "success", message = "ลบข้อมูลเรียบร้อย" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_download_financialStatements()
-        {
-            return View();
-        }
-        public IActionResult SH_IR_download_financialStatements_getTable()
-        {
-            try
-            {
-                var Raw_list = db.SH_IR_download_financial_statements.ToList();
-
-                var add_count = new List<IR_Important_Financial_model.SH_IR_download_finanicalStatement_dataTable>();
-                var count = 1;
-                foreach (var items in Raw_list)
-                {
-                    var dateDatas = Convert.ToDateTime(items.inputDate);
-                    var InsertDates = dateDatas.ToString("dd/MM/yyyy", new CultureInfo("en-US"));
-
-                    add_count.Add(new IR_Important_Financial_model.SH_IR_download_finanicalStatement_dataTable
-                    {
-                        count_row = count,
-                        id = items.id,
-                        created_at = items.created_at,
-                        updated_at = items.updated_at,
-                        active_status = items.active_status,
-                        inputDate = InsertDates,
-                        titleTH = items.titleTH,
-                        titleENG = items.titleENG
-                    });
-                    count++;
-                }
-                return Json(new { data = add_count });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_download_financialStatements_edit(int? id)
-        {
-            if (id == null)
-            {
-                return RedirectToAction("SH_IR_finance_statement", "importantFinancialInformation");
-            }
-            var get_detail = db.SH_IR_download_financial_statements.Where(x => x.id == id).FirstOrDefault();
-            if (get_detail == null)
-            {
-                return RedirectToAction("SH_IR_finance_statement", "importantFinancialInformation");
-            }
-            var model = new model_input { SH_IR_Download_Financial_Statements = get_detail };
-            return View(model);
-        }
-
-        [RequestSizeLimit(1024 * 1024 * 1024)]
-        public IActionResult SH_IR_download_financialStatements_submit(SH_IR_download_financial_statements SH_IR_download_financial_statements, string? InputDate_Str,
-           List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
-        {
-            try
-            {
-                if (InputDate_Str == null)
-                {
-                    return Json(new { status = "error", message = "กรุณาระบุ ปี!" });
-                }
-                DateTime InsertDate = DateTime.ParseExact(InputDate_Str, "dd/MM/yyyy", new CultureInfo("en-US"));
-
-                if (uploaded_file.Count == 0 || uploaded_file_ENG.Count == 0)
-                {
-                    return Json(new { status = "warning", message = "กรุณากรอกข้อมูลให้ครบ!" });
-                }
-                foreach (var formFile in uploaded_file)
-                {
-                    if (formFile.Length > 0)
-                    {
-                        var datestr = DateTime.Now.Ticks.ToString();
-                        var extension = Path.GetExtension(formFile.FileName);
-                        extension = extension.Replace(" ", "");
-
-                        SH_IR_download_financial_statements.file_name = datestr + extension;
-                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/SH_IR_download_financialStatements/" + datestr + extension);
-
-                        using (var stream = System.IO.File.Create(filePath))
-                        {
-                            formFile.CopyTo(stream);
-                        }
-                    }
-                }
-
-                foreach (var formFileENG in uploaded_file_ENG)
-                {
-                    if (formFileENG.Length > 0)
-                    {
-                        var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
-                        var extension = Path.GetExtension(formFileENG.FileName);
-                        extension = extension.Replace(" ", "");
-
-                        SH_IR_download_financial_statements.file_name_ENG = datestr + extension;
-                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/SH_IR_download_financialStatements/" + datestr + extension);
-
-                        using (var stream = System.IO.File.Create(filePath))
-                        {
-                            formFileENG.CopyTo(stream);
-                        }
-                    }
-                }
-
-                if (SH_IR_download_financial_statements.active_status != 1)
-                {
-                    SH_IR_download_financial_statements.active_status = 0;
-                }
-                else
-                {
-                    SH_IR_download_financial_statements.active_status = 1;
-                }
-
-                SH_IR_download_financial_statements.inputDate = InsertDate;
-                SH_IR_download_financial_statements.created_at = DateTime.Now;
-                SH_IR_download_financial_statements.updated_at = DateTime.Now;
-                db.SH_IR_download_financial_statements.Add(SH_IR_download_financial_statements);
-                db.SaveChanges();
-                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-
-        [RequestSizeLimit(1024 * 1024 * 1024)]
-        public IActionResult SH_IR_download_financialStatements_edit_Submit(SH_IR_download_financial_statements SH_IR_download_financial_statements, string? InputDate_Str,
-           List<IFormFile> uploaded_file, List<IFormFile> uploaded_file_ENG)
-        {
-            try
-            {
-
-                if (SH_IR_download_financial_statements.titleTH == null || SH_IR_download_financial_statements.titleENG == null)
-                {
-                    return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ TH / ENG " });
-                }
-
-                if (InputDate_Str == null)
-                {
-                    return Json(new { status = "error", message = "กรุณาระบุ ปี!" });
-                }
-                DateTime InsertDate = DateTime.ParseExact(InputDate_Str, "dd/MM/yyyy", new CultureInfo("en-US"));
-
-                var old_data = db.SH_IR_download_financial_statements.Where(x => x.id == SH_IR_download_financial_statements.id).FirstOrDefault();
-
-                if (uploaded_file.Count > 0)
-                {
-                    foreach (var formFile in uploaded_file)
-                    {
-                        if (formFile.Length > 0)
-                        {
-                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/SH_IR_download_financialStatements/" + old_data.file_name);
-                            if (System.IO.File.Exists(old_filePath) == true)
-                            {
-                                System.IO.File.Delete(old_filePath);
-                            }
-
-                            var datestr = DateTime.Now.Ticks.ToString();
-                            var extension = Path.GetExtension(formFile.FileName);
-
-                            old_data.file_name = datestr + extension;
-                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/SH_IR_download_financialStatements/" + datestr + extension);
-
-                            using (var stream = System.IO.File.Create(filePath))
-                            {
-                                formFile.CopyTo(stream);
-                            }
-                        }
-                    }
-                }
-
-                if (uploaded_file_ENG.Count > 0)
-                {
-                    foreach (var formFileENG in uploaded_file_ENG)
-                    {
-                        if (formFileENG.Length > 0)
-                        {
-                            var old_filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/SH_IR_download_financialStatements/" + old_data.file_name_ENG);
-                            if (System.IO.File.Exists(old_filePath) == true)
-                            {
-                                System.IO.File.Delete(old_filePath);
-                            }
-
-                            var datestr = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss_");
-                            var extension = Path.GetExtension(formFileENG.FileName);
-
-                            old_data.file_name_ENG = datestr + extension;
-                            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/SH_IR_download_financialStatements/" + datestr + extension);
-
-                            using (var stream = System.IO.File.Create(filePath))
-                            {
-                                formFileENG.CopyTo(stream);
-                            }
-                        }
-                    }
-                }
-
-                if (SH_IR_download_financial_statements.active_status != 1)
-                {
-                    old_data.active_status = 0;
-                }
-                else
-                {
-                    old_data.active_status = 1;
-                }
-                old_data.titleTH = SH_IR_download_financial_statements.titleTH;
-                old_data.titleENG = SH_IR_download_financial_statements.titleENG;
-
-                old_data.inputDate = InsertDate;
-
-                old_data.updated_at = DateTime.Now;
-                db.SaveChanges();
-                return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_download_financialStatements_getEditData(int? id)
-        {
-            var get_data = db.SH_IR_download_financial_statements.Where(x => x.id == id).FirstOrDefault();
-
-            return Json(new { status = "success", message = "", data = get_data });
-        }
-        public IActionResult SH_IR_download_financialStatements_delete(int? id)
-        {
-            try
-            {
-                var checkrow = db.SH_IR_download_financial_statements.Where(x => x.id == id).FirstOrDefault();
-
-                if (checkrow != null)
-                {
-
-                    var old_filePathTH = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/SH_IR_download_financialStatements/" + checkrow.file_name);
-                    if (System.IO.File.Exists(old_filePathTH) == true)
-                    {
-                        System.IO.File.Delete(old_filePathTH);
-                    }
-
-                    var old_filePathENG = Path.Combine(_hostingEnvironment.WebRootPath, "upload_file/SH_IR_download_financialStatements/" + checkrow.file_name_ENG);
-                    if (System.IO.File.Exists(old_filePathENG) == true)
-                    {
-                        System.IO.File.Delete(old_filePathENG);
-                    }
-
-                    db.SH_IR_download_financial_statements.Remove(checkrow);
-                    db.SaveChanges();
-
-                }
-
-                return Json(new { status = "success", message = "ลบข้อมูลเรียบร้อย" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "error", message = e.Message, inner = e.InnerException });
-            }
-        }
-        public IActionResult SH_IR_finance_position_changeStatus(int? id, string? status)
-        {
-            var get_data = db.SH_IR_financial_position.Where(x => x.id == id).FirstOrDefault();
-            if (status == "true")
-            {
-                get_data.active_status = 1;
-            }
-            else
-            {
-                get_data.active_status = 0;
-            }
-            db.SaveChanges();
-
-            return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
-        }
-        public IActionResult SH_IR_download_financialStatements_changeStatus(int? id, string? status)
-        {
-            var get_data = db.SH_IR_download_financial_statements.Where(x => x.id == id).FirstOrDefault();
-            if (status == "true")
-            {
-                get_data.active_status = 1;
-            }
-            else
-            {
-                get_data.active_status = 0;
-            }
-            db.SaveChanges();
-
-            return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
-        }
-        public IActionResult Get_Edit_SH_IR_download_financialStatements(int? id)
-        {
-            var InfoDataedit = db.SH_IR_download_financial_statements.Where(x => x.id == id).FirstOrDefault();
-            if (InfoDataedit != null)
-            {
-                return Json(InfoDataedit);
-            }
-            return Json(new { alert = 0 });
-        }
         ///
         public IActionResult SH_IR_prospectus()
         {
@@ -1616,7 +1018,7 @@ namespace Lighting.Controllers.Backend
                     {
                         count_row = count,
                         id = items.id,
-                        active_status=items.active_status,
+                        active_status = items.active_status,
                         created_at = items.created_at,
                         updated_at = items.updated_at,
                         profitTitleTH = items.profitTitleTH,
@@ -1633,7 +1035,7 @@ namespace Lighting.Controllers.Backend
         }
         public IActionResult SH_IR_financial_highlight_Data(int? id)
         {
-            var checkrow = db.SH_IR_financial_highlight_Data.FirstOrDefault(x=>x.id==id);
+            var checkrow = db.SH_IR_financial_highlight_Data.FirstOrDefault(x => x.id == id);
             var count_row = 0;
             if (checkrow != null)
             {
@@ -1826,7 +1228,7 @@ namespace Lighting.Controllers.Backend
         public IActionResult SH_IR_financial_highlight_Submit(SH_IR_financial_highlight_Data SH_IR_financial_highlight_Data)
         {
             try
-            { 
+            {
                 SH_IR_financial_highlight_Data.created_at = DateTime.Now;
                 SH_IR_financial_highlight_Data.updated_at = DateTime.Now;
                 db.SH_IR_financial_highlight_Data.Add(SH_IR_financial_highlight_Data);
@@ -1846,8 +1248,8 @@ namespace Lighting.Controllers.Backend
 
                 if (checkrow != null)
                 {
-                    var dataDeatils=db.SH_IR_financial_highlight_DataDetails.Where(x => x.fH_Data_id == checkrow.id).ToList();
-                    foreach(var item in dataDeatils)
+                    var dataDeatils = db.SH_IR_financial_highlight_DataDetails.Where(x => x.fH_Data_id == checkrow.id).ToList();
+                    foreach (var item in dataDeatils)
                     {
                         var getData = db.SH_IR_financial_highlight_DataDetails.Where(x => x.id == item.id).FirstOrDefault();
                         if (getData != null)
@@ -1879,11 +1281,11 @@ namespace Lighting.Controllers.Backend
                     return Json(new { status = "error", message = "กรุณาระบุ หัวข้อ TH / ENG " });
                 }
 
-                var old_data = db.SH_IR_financial_highlight_Data.Where(x => x.id == SH_IR_financial_highlight_Data.id).FirstOrDefault(); 
+                var old_data = db.SH_IR_financial_highlight_Data.Where(x => x.id == SH_IR_financial_highlight_Data.id).FirstOrDefault();
 
                 old_data.profitTitleTH = SH_IR_financial_highlight_Data.profitTitleTH;
                 old_data.profitTitleENG = SH_IR_financial_highlight_Data.profitTitleENG;
-                old_data.active_status = SH_IR_financial_highlight_Data.active_status; 
+                old_data.active_status = SH_IR_financial_highlight_Data.active_status;
 
                 old_data.updated_at = DateTime.Now;
                 db.SaveChanges();
@@ -1904,7 +1306,7 @@ namespace Lighting.Controllers.Backend
         {
             try
             {
-                var Raw_list = db.SH_IR_financial_highlight_DataDetails.Where(x => x.fH_Data_id == id).OrderByDescending(x=>x.year).ToList();
+                var Raw_list = db.SH_IR_financial_highlight_DataDetails.Where(x => x.fH_Data_id == id).OrderByDescending(x => x.year).ToList();
                 var add_count = new List<IR_Important_Financial_model.SH_IR_financial_highlight_DataDetailstable>();
                 var count = 1;
                 foreach (var items in Raw_list)
@@ -1920,7 +1322,7 @@ namespace Lighting.Controllers.Backend
                         updated_at = items.updated_at,
                         fH_Data_id = items.fH_Data_id,
                         year = InsertDates,
-                        amount=items.amount
+                        amount = items.amount
                     });
                     count++;
                 }
@@ -1941,8 +1343,8 @@ namespace Lighting.Controllers.Backend
                 }
                 DateTime InsertDate_year = DateTime.ParseExact(Year_Str, "yyyy", new CultureInfo("en-US"));
 
-                var checkData = db.SH_IR_financial_highlight_DataDetails.Where(x=>x.fH_Data_id==fH_DataDetails.fH_Data_id).ToList();
-                foreach(var item in checkData)
+                var checkData = db.SH_IR_financial_highlight_DataDetails.Where(x => x.fH_Data_id == fH_DataDetails.fH_Data_id).ToList();
+                foreach (var item in checkData)
                 {
                     var getData = db.SH_IR_financial_highlight_DataDetails.FirstOrDefault(x => x.id == item.id);
                     if (InsertDate_year.Year == getData.year.Value.Year)
@@ -1969,8 +1371,8 @@ namespace Lighting.Controllers.Backend
 
             return Json(new { status = "success", message = "", data = get_data });
         }
-        public IActionResult SH_IR_financial_highlight_DataDetails_edit_Submit(SH_IR_financial_highlight_DataDetails fH_dataDetails,string? Year_Str)
-        { 
+        public IActionResult SH_IR_financial_highlight_DataDetails_edit_Submit(SH_IR_financial_highlight_DataDetails fH_dataDetails, string? Year_Str)
+        {
             try
             {
                 if (Year_Str == null)
@@ -1980,8 +1382,8 @@ namespace Lighting.Controllers.Backend
                 DateTime InsertDate_year = DateTime.ParseExact(Year_Str, "yyyy", new CultureInfo("en-US"));
 
                 var get_oldData = db.SH_IR_financial_highlight_DataDetails.Where(x => x.id == fH_dataDetails.id).FirstOrDefault();
-                 
-                var checkData = db.SH_IR_financial_highlight_DataDetails.Where(x => x.fH_Data_id == get_oldData.fH_Data_id&&x.id!=get_oldData.id).ToList();
+
+                var checkData = db.SH_IR_financial_highlight_DataDetails.Where(x => x.fH_Data_id == get_oldData.fH_Data_id && x.id != get_oldData.id).ToList();
                 foreach (var item in checkData)
                 {
                     var getData = db.SH_IR_financial_highlight_DataDetails.FirstOrDefault(x => x.id == item.id);
@@ -2022,7 +1424,7 @@ namespace Lighting.Controllers.Backend
             {
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
-        } 
+        }
 
         public IActionResult SH_IR_financial_highlight_Details_getTable()
         {
@@ -2078,7 +1480,7 @@ namespace Lighting.Controllers.Backend
                         id = items.id,
                         created_at = items.created_at,
                         updated_at = items.updated_at,
-                        active_status=items.active_status,
+                        active_status = items.active_status,
                         profitTitleTH = items.profitTitleTH,
                         profitTitleENG = items.profitTitleENG
                     });
@@ -2191,12 +1593,12 @@ namespace Lighting.Controllers.Backend
                 var checkrow = db.SH_IR_financial_highlight_DetailsData.Where(x => x.id == id).FirstOrDefault();
 
                 if (checkrow != null)
-                { 
-                    var checkData=db.SH_IR_financial_highlight_DetailsData_Items.Where(x => x.fH_DetailsData_id == checkrow.id).ToList();
-                    foreach(var item in checkData)
+                {
+                    var checkData = db.SH_IR_financial_highlight_DetailsData_Items.Where(x => x.fH_DetailsData_id == checkrow.id).ToList();
+                    foreach (var item in checkData)
                     {
                         var getData = db.SH_IR_financial_highlight_DetailsData_Items.Where(x => x.id == item.id).FirstOrDefault();
-                        if(getData!= null)
+                        if (getData != null)
                         {
                             db.SH_IR_financial_highlight_DetailsData_Items.Remove(getData);
                             db.SaveChanges();
@@ -2218,7 +1620,7 @@ namespace Lighting.Controllers.Backend
         public IActionResult SH_IR_financial_highlight_DetailsData_submit(SH_IR_financial_highlight_DetailsData SH_IR_financial_highlight_DetailsData)
         {
             try
-            { 
+            {
                 SH_IR_financial_highlight_DetailsData.financial_hilight_id = SH_IR_financial_highlight_DetailsData.financial_hilight_id;
                 SH_IR_financial_highlight_DetailsData.profitTitleTH = SH_IR_financial_highlight_DetailsData.profitTitleTH;
                 SH_IR_financial_highlight_DetailsData.profitTitleENG = SH_IR_financial_highlight_DetailsData.profitTitleENG;
@@ -2304,7 +1706,7 @@ namespace Lighting.Controllers.Backend
             {
                 return Json(new { status = "error", message = e.Message, inner = e.InnerException });
             }
-        } 
+        }
         public IActionResult SH_IR_financial_highlight_Details_changeStatus(int? id, string? status)
         {
             var get_data = db.SH_IR_financial_highlight_Details.Where(x => x.id == id).FirstOrDefault();
@@ -2319,7 +1721,7 @@ namespace Lighting.Controllers.Backend
             db.SaveChanges();
 
             return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
-        } 
+        }
         public IActionResult SH_IR_financial_highlight_Data_changeStatus(int? id, string? status)
         {
             var get_data = db.SH_IR_financial_highlight_Data.Where(x => x.id == id).FirstOrDefault();
@@ -2351,8 +1753,8 @@ namespace Lighting.Controllers.Backend
             return Json(new { status = "success", message = "เปลี่ยนสถานะเรียบร้อย" });
         }
         public IActionResult SH_IR_financial_highlight_DetailsDataItem(int? id)
-        { 
-            var checkrow = db.SH_IR_financial_highlight_DetailsData.FirstOrDefault(x => x.id == id); 
+        {
+            var checkrow = db.SH_IR_financial_highlight_DetailsData.FirstOrDefault(x => x.id == id);
             if (checkrow == null)
             {
                 return RedirectToAction("SH_IR_financial_highlight", "importantFinancialInformation");
@@ -2368,7 +1770,7 @@ namespace Lighting.Controllers.Backend
         public IActionResult SH_IR_financial_highlight_DetailsDataItem_getTable(int? id)
         {
             try
-            {   
+            {
                 var Raw_list = db.SH_IR_financial_highlight_DetailsData_Items.Where(x => x.fH_DetailsData_id == id).OrderByDescending(x => x.year).ToList();
                 var add_count = new List<IR_Important_Financial_model.SH_IR_financial_highlight_DetailsData_Items_table>();
                 var count = 1;

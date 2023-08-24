@@ -55,6 +55,9 @@ namespace Lighting.Controllers.Frontend
             ViewBag.IR_Latest_NewDetail = await db.IR_Latest_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).Take(5).ToListAsync();
             ViewBag.IR_NewDetail = await db.IR_NewDetail.Where(x => x.Status == 1).OrderByDescending(o => o.NewDate).Take(5).ToListAsync();
             ViewBag.IR_Stock_QuoteDetail = await db.IR_Stock_QuoteDetail.Where(x => x.Status == 1).OrderByDescending(x => x.Id).ToListAsync();
+            ViewBag.Finance_Statement = await db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
+            ViewBag.SH_IR_prospectus = await db.SH_IR_prospectus.ToListAsync();
+
             return View();
         }
 

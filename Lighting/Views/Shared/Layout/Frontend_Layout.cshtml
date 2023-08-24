@@ -1,5 +1,13 @@
 ﻿@{
     var get_cookies = Context.Request.Cookies["lang"];
+    ViewData["Finance_Statement"] = (List<Lighting.Areas.Identity.Data.SH_IR_Finance_Statement>)ViewBag.Finance_Statement;
+    ViewData["SH_IR_prospectus"] = (List<Lighting.Areas.Identity.Data.SH_IR_prospectus>)ViewBag.SH_IR_prospectus;
+    
+    var Finance_Statementss = (List<Lighting.Areas.Identity.Data.SH_IR_Finance_Statement>)ViewData["Finance_Statement"]; 
+    var Finance_Statement = (List<Lighting.Areas.Identity.Data.SH_IR_Finance_Statement>)ViewBag.Finance_Statement; 
+    
+    var SH_IR_prospectusa = (List<Lighting.Areas.Identity.Data.SH_IR_prospectus>)ViewData["SH_IR_prospectus"]; 
+    var SH_IR_prospectus = (List<Lighting.Areas.Identity.Data.SH_IR_prospectus>)ViewBag.SH_IR_prospectus; 
 }
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">

@@ -28,6 +28,8 @@ namespace Lighting.Controllers.Frontend
                 x.Profile_Image = Path.Combine(x.Folder_Path, x.Profile_Image);
             });
             var latestDownloads = await _db.Downloads.Where(x => x.use_status == 1 && x.ShowItem == 1).GroupBy(x => x.DownloadType_id).Select(group => group.OrderByDescending(x => x.id).FirstOrDefault()).ToListAsync();
+            
+            var Finance_Statement = await _db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
 
             var Slide_Image_Index = await _db.Slide_Image_Index.Where(x => x.isActive == true).ToListAsync();
             ViewBag.Slide_Image_Index = Slide_Image_Index;
@@ -35,6 +37,7 @@ namespace Lighting.Controllers.Frontend
             ViewBag.Products = Products;
             ViewBag.Project = Projects;
             ViewBag.latestDownloads = latestDownloads;
+            ViewBag.Finance_Statement = Finance_Statement;
             return View();
         }
 

@@ -2,6 +2,17 @@
 {
     public class IR_Important_Financial_model
     {
+        public class SH_IR_Finance_Statement_table
+        {
+            public int count_row { get; set; }
+            public int id { get; set; }
+            public string? linkTH { get; set; }
+            public string? linkENG { get; set; }
+            public int? active_status { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
+
+        }
         public class SH_IR_financial_highlight_DataDetailstable
         { 
             public int count_row { get; set; }
