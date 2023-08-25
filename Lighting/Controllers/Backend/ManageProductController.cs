@@ -106,10 +106,13 @@ namespace Lighting.Controllers.Backend
                 {
                     if (input.Image != null)
                     {
-                        var path_old_path = Path.Combine(_env.WebRootPath, category.Image);
-                        if (System.IO.File.Exists(path_old_path))
-                        {
-                            System.IO.File.Delete(path_old_path);
+                        if (category.Image != null)
+                        { 
+                            var path_old_path = Path.Combine(_env.WebRootPath, category.Image);
+                            if (System.IO.File.Exists(path_old_path))
+                            {
+                                System.IO.File.Delete(path_old_path);
+                            }
                         }
                         var image_name = Guid.NewGuid().ToString().Substring(0, 6) + ".jpg";
                         var path = Path.Combine("upload_image", "Product_Category", image_name);
@@ -122,10 +125,13 @@ namespace Lighting.Controllers.Backend
 
                     if (input.ImageShow != null)
                     {
-                        var path_old_path = Path.Combine(_env.WebRootPath, category.ShowImage);
-                        if (System.IO.File.Exists(path_old_path))
-                        {
-                            System.IO.File.Delete(path_old_path);
+                        if (category.ShowImage != null)
+                        { 
+                            var path_old_path = Path.Combine(_env.WebRootPath, category.ShowImage);
+                            if (System.IO.File.Exists(path_old_path))
+                            {
+                                System.IO.File.Delete(path_old_path);
+                            }
                         }
                         var image_name = Guid.NewGuid().ToString().Substring(0, 6) + ".jpg";
                         var path = Path.Combine("upload_image", "Product_Category", image_name);
