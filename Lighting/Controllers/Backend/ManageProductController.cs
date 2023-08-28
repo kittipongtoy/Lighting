@@ -131,7 +131,7 @@ namespace Lighting.Controllers.Backend
                 }
                 catch (Exception ex)
                 {
-                    return Json(new { status = "faile", message = ex.InnerException });
+                    return Json(new { status = "faile", message = "เกิดข้อผอดพลาด:"+ex.Message });
                 }
 
             }
@@ -506,6 +506,22 @@ namespace Lighting.Controllers.Backend
                 }
             }
             return Json(new { status = "fail", message = "กรุณากรอกข้อมูลให้ครบ" });
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditSpect([FromQuery]int? id=null,string name="",string  value="")
+        {
+            if (id != null)
+            {
+                var product = await _db.Product_Spects.FirstOrDefaultAsync(x => x.Id == id);
+                if (product != null)
+                {
+                    product.Name = name;
+                    product.Value = value;
+                    await _db.SaveChangesAsync();
+                    return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
+                }
+            }
+            return Json(new { status = "fail", message = "ไม่พบข้อมูล" });
         }
 
         [HttpPost]

@@ -55,16 +55,13 @@
 
     .spect-grid-item {
         display: grid;
-        grid-template-columns: auto auto 5rem;
+        grid-template-columns: auto auto 5rem 5rem;
         border-bottom: 1px solid black;
-        & > div
-
-    {
-        max-width: 100%;
-        word-wrap: break-word;
-        font-size: 1.7rem;
-    }
-
+        & > div{
+            max-width: 100%;
+            word-wrap: break-word;
+            font-size: 1.7rem;
+        }
     }
 
     .add-spect-box {
@@ -306,11 +303,13 @@
                         <div class="spect-grid-item" id="@spect.Id">
                             <div>@spect.Name/</div>
                             <div>@spect.Value</div>
+                            <button class="btn btn-warning" onclick="EditSpacServer(@spect.Id,'@spect.Name','@spect.Value')"> แก้ไข </button>
                             <button class="btn btn-danger" onclick="deleteSpectById(@spect.Id)"> ลบ </button>
                         </div>
                     }
                 }
             </div>
+            <hr/>
             <div id="spect_container" class="spect-grid-container">
             </div>
             <center><button onclick="showHideSpect()" class="btn btn-success">เพิ่มสเปค/add space</button> </center>
@@ -336,6 +335,36 @@
         </div>
     </div>
 </div>
+
+<div class="add-spect-container" style="display:none;" id="edit_spect">
+    <div class="add-spect-box">
+        <h3>แก้ไข สเปค</h3>
+        <div></div>
+        <input type="text" placeholder="ชื่อสเปค" id="edit_txt_spect_name" />
+        <input type="text" placeholder="ค่าของสเปค" id="edit_txt_spect_value" />
+        <div></div>
+        <div style="display:flex;justify-content:space-between">
+            <button class="btn btn-success" onclick="saveEditSpect()">บันทึก/save</button>
+            <button class="btn btn-warning" onclick="EditSpac()">ยกเลิก/cancle</button>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="EditId" />
+
+<div class="add-spect-container" style="display:none;" id="edit_spect_server">
+    <div class="add-spect-box">
+        <h3>แก้ไข สเปค</h3>
+        <div></div>
+        <input type="text" placeholder="ชื่อสเปค" id="edit_txt_spect_name_server" />
+        <input type="text" placeholder="ค่าของสเปค" id="edit_txt_spect_value_server" />
+        <div></div>
+        <div style="display:flex;justify-content:space-between">
+            <button class="btn btn-success" onclick="serverSaveEditSpect()">บันทึก/save</button>
+            <button class="btn btn-warning" onclick="serverCancleEditSpac()">ยกเลิก/cancle</button>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="serverEditId" />
 
 @section Scripts{
     <script>
@@ -436,6 +465,70 @@
             }
         }
 
+        function serverShowHideEditSpect(){
+            if( $("#edit_spect_server").css("display") === "none"){
+                $("#edit_spect_server").css("display", "flex");
+            }else{
+                $("#edit_spect_server").css("display", "none");
+            }
+        }
+
+        function serverCancleEditSpac(){
+            serverShowHideEditSpect();
+        }
+
+        function EditSpacServer(id,name,value){
+            $("#serverEditId").val(id);
+            $("#edit_txt_spect_name_server").val(name);
+            $("#edit_txt_spect_value_server").val(value);
+
+            serverShowHideEditSpect();
+        }
+
+        function serverSaveEditSpect(){
+
+            let id= $("#serverEditId").val();
+            let name= $("#edit_txt_spect_name_server").val();
+            let value =$("#edit_txt_spect_value_server").val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/ManageProduct/EditSpect?id=' + id + "&name=" + name + "&value=" + value,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    Swal.fire('Please wait')
+                    Swal.showLoading()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                           window.location.reload();
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data.message,
+                        });
+                    }
+                }, error: function (e) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: e.message,
+                    });
+                    console.log(e.message);
+                    console.log(e.inner);
+                }
+            });
+        }
+
         function addSpect() {
             let name = $("#txt_spect_name").val();
             let value = $("#txt_spect_value").val();
@@ -445,6 +538,7 @@
                     prev += `<div class="spect-grid-item" id="spect${curr.id}">
                                                             <div> ${curr.name}</div>
                                                             <div> ${curr.value}</div>
+                                                                    <button class="btn btn-warning" onclick="EditSpac(${curr.id})">edit</button>
                                                                     <button class= "btn btn-danger" onclick = "deleteSpect(${curr.id})" > ลบ </button>
                                                     </div>`, "");
                 $("#spect_container").html(html_spect);
@@ -452,6 +546,39 @@
                 showHideSpect();
                 $("#txt_spect_name").val('');
                 $("#txt_spect_value").val('');
+            }
+        }
+
+
+        function saveEditSpect() {
+            let name = $("#edit_txt_spect_name").val();
+            let value = $("#edit_txt_spect_value").val();
+            let id = $("#EditId").val();
+            var specification1 = specification.filter(x => x.id == id);
+            console.log(specification1,name,value);
+            specification1[0].name = name;
+            specification1[0].value = value;
+            let html_spect = specification.reduce((prev, curr) =>
+                prev += `<div class="spect-grid-item" id="spect${id}">
+                                        <div> ${curr.name}</div>
+                                        <div> ${curr.value}</div>
+                                        <button class="btn btn-warning" onclick="EditSpac(${curr.id})">edit</button>
+                                        <button class= "btn btn-danger" onclick="deleteSpect(${curr.id})" > ลบ </button>
+                                </div>`, "");
+            $("#spect_container").html(html_spect);
+            EditSpac();
+        }
+
+        function EditSpac(id) {
+            if ($("#edit_spect").css("display") === "none") {
+                $("#edit_spect").css("display", "flex");
+                $("#EditId").val(id);
+                let spect = specification.find(x => x.id == id);
+                console.log(specification)
+                $("#edit_txt_spect_name").val(spect.name);
+                $("#edit_txt_spect_value").val(spect.value)
+            } else {
+                $("#edit_spect").css("display", "none");
             }
         }
 
