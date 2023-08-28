@@ -2039,11 +2039,12 @@ namespace Lighting.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Product_CategoryId = table.Column<int>(type: "int", nullable: false),
                     Product_ModelId = table.Column<int>(type: "int", nullable: false),
-                    Folder_Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Folder_Path = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type_TH = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type_EN = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Preview_Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Preview_Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Preview_Image_Index = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SUB_IMG = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CUTSHEET = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IESFILE = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -2056,7 +2057,8 @@ namespace Lighting.Migrations
                     IP_Rating = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Dimension = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Power = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LIGHT_DISTRIBUTION = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    LIGHT_DISTRIBUTION = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShowItem = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -3520,29 +3522,49 @@ namespace Lighting.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NameThai", "NormalizedName", "created_at", "updated_at" },
-                values: new object[] { "26cb0684-d902-4e14-b799-028b33b880ec", "93d8eb9f-795a-46b2-baad-432aed34c459", "Admin", "Admin", "Admin", new DateTime(2023, 8, 24, 2, 40, 0, 800, DateTimeKind.Utc).AddTicks(2787), new DateTime(2023, 8, 24, 2, 40, 0, 800, DateTimeKind.Utc).AddTicks(2791) });
+                values: new object[] { "0d8d8eb2-1ab8-477b-999d-456e75e09c53", "768b2271-d5d6-48f7-8478-0ce4d8277738", "Admin", "Admin", "Admin", new DateTime(2023, 8, 25, 9, 15, 8, 313, DateTimeKind.Utc).AddTicks(331), new DateTime(2023, 8, 25, 9, 15, 8, 313, DateTimeKind.Utc).AddTicks(335) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ApplicationFile", "ConcurrencyStamp", "Email", "EmailConfirmed", "EmployeeCode", "EmployeeCodeInt", "Firstname", "GuarantorIdentificationCardFile", "Isactive", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePath", "ReceptionistFile", "SecurityStamp", "TwoFactorEnabled", "UserName", "created_at", "updated_at" },
-                values: new object[] { "6f8eb594-b87f-44dd-9bdf-198bf6330d98", 0, null, null, "4a3d7706-ff8f-425c-8483-90db948bfde6", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEGNdTYpS74zWDeVLrPsoxzi4V8h8SPR1euz8m5dZVm2SfvjiF+U1GmUADA6GjGvGGw==", null, false, null, null, "699b15b7-7df0-45fa-9d07-00a5fb92857f", false, "Admin@Lighting.com", null, null });
+                values: new object[] { "f229e326-0cf2-41f9-adf8-5275e131d374", 0, null, null, "cb2fc90c-a84f-4133-b214-ce1f7b8e1e56", "Admin@Lighting.com", false, "Admin", 1, "Admin", null, null, "Admin", false, null, "", "admin@lighting.com", "AQAAAAEAACcQAAAAEPG46zJ71M875oaDOWBfXLXDePhWVeQTyZRnP/txQMNtVZ+2Fvyv/MyM0havv0C3Nw==", null, false, null, null, "15a02727-a99f-46d6-934d-f08e0ba2e9ca", false, "Admin@Lighting.com", null, null });
 
             migrationBuilder.InsertData(
                 table: "DownloadTypes",
                 columns: new[] { "id", "DownloadType_name_ENG", "DownloadType_name_TH", "created_at", "updated_at" },
                 values: new object[,]
                 {
-                    { 1, "L&E BIM OBJECTS", "L&E BIM OBJECTS", new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1386), new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1389) },
-                    { 2, "CATALOGUE", "CATALOGUE", new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1390), new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1391) },
-                    { 3, "COMPANY PROFILE", "COMPANY PROFILE", new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1392), new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1392) },
-                    { 4, "IES FILE", "IES FILE", new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1456), new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1457) },
-                    { 5, "LEAFLET", "LEAFLET", new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1458), new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1459) }
+                    { 1, "L&E BIM OBJECTS", "L&E BIM OBJECTS", new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5391), new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5400) },
+                    { 2, "CATALOGUE", "CATALOGUE", new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5401), new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5403) },
+                    { 3, "COMPANY PROFILE", "COMPANY PROFILE", new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5404), new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5404) },
+                    { 4, "IES FILE", "IES FILE", new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5405), new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5406) },
+                    { 5, "LEAFLET", "LEAFLET", new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5407), new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5408) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SH_IR_propose_agenda_mailTitles",
+                columns: new[] { "id", "active_status", "created_at", "detailsENG", "detailsPlaceholderTitleENG", "detailsPlaceholderTitleTH", "detailsTH", "detailsTitleENG", "detailsTitleTH", "emailTitleENG", "emailTitlePlaceholderENG", "emailTitlePlaceholderTH", "emailTitleTH", "nameTitleENG", "nameTitlePlaceholderENG", "nameTitlePlaceholderTH", "nameTitleTH", "phoneENG", "phoneTH", "phoneTitlePlaceholder", "proposeTitleENG", "proposeTitleTH", "remarkENG", "remarkTH", "titleENG", "titleTH", "updated_at", "wantProposePlaceholderTitleENG", "wantProposePlaceholderTitleTH", "wantProposeTitleENG", "wantProposeTitleTH" },
+                values: new object[] { 1, 1, new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5619), "ฉันได้อ่านและยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href=\"\">นโยบายความเป็นส่วนตัว</a> และยินยอมให้รวบรวมประมวลผลและ / หรือเปิดเผยข้อมูลส่วนบุคคลที่ฉันให้ไว้เพื่อบรรลุวัตถุประสงค์ดังกล่าวข้างต้น", "โปรดกรอกรายละเอียดที่ต้องการเสนอ", "โปรดกรอกรายละเอียดที่ต้องการเสนอ", "ฉันได้อ่านและยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href=\"\">นโยบายความเป็นส่วนตัว</a> และยินยอมให้รวบรวมประมวลผลและ / หรือเปิดเผยข้อมูลส่วนบุคคลที่ฉันให้ไว้เพื่อบรรลุวัตถุประสงค์ดังกล่าวข้างต้น", "รายละเอียด", "รายละเอียด", "e-mail", "example@mail.com", "example@mail.com", "e-mail", "ชื่อ-นามสกุล*", "โปรดระบุทั้งชื่อและนามสกุลให้ชัดเจน", "โปรดระบุทั้งชื่อและนามสกุลให้ชัดเจน", "ชื่อ-นามสกุล*", "โทรศัพท์*", "โทรศัพท์*", "xxx-xxx-xxxx", "หัวข้อที่ต้องการเสนอ*", "หัวข้อที่ต้องการเสนอ*", "หมายเหตุ : * จำเป็นต้องกรอกข้อมูล", "หมายเหตุ : * จำเป็นต้องกรอกข้อมูล", "เชิญผู้ถือหุ้นเสนอวาระ กรรมการ และส่งคำถามล่วงหน้าสำหรับการประชุมสามัญผู้ถือหุ้นประจำปี โดยกรอกแบบฟอร์มด้านล่างให้ครบถ้วน", "เชิญผู้ถือหุ้นเสนอวาระ กรรมการ และส่งคำถามล่วงหน้าสำหรับการประชุมสามัญผู้ถือหุ้นประจำปี โดยกรอกแบบฟอร์มด้านล่างให้ครบถ้วน", new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5620), "โปรดระบุหัวข้อที่ต้องการเสนอ", "โปรดระบุหัวข้อที่ต้องการเสนอ", "ชื่อหัวข้อที่ต้องการเสนอ", "ชื่อหัวข้อที่ต้องการเสนอ" });
+
+            migrationBuilder.InsertData(
+                table: "receive_agenda_mail_accounts",
+                columns: new[] { "id", "account", "created_at", "updated_at" },
+                values: new object[] { 1, "mizaogz03@gmail.com", new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5450), new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5451) });
+
+            migrationBuilder.InsertData(
+                table: "type_of_agenda_Propose",
+                columns: new[] { "id", "active_status", "created_at", "titleENG", "titleTH", "updated_at" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5573), "เสนอวาระการประชุม​", "เสนอวาระการประชุม​", new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5574) },
+                    { 2, 1, new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5577), "เสนอกรรมการเพื่อเข้าดำรงตำแหน่ง​", "เสนอกรรมการเพื่อเข้าดำรงตำแหน่ง​", new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5578) },
+                    { 3, 1, new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5579), "ฝากคำถาม / ข้อเสนอแนะ / อื่นๆ​", "ฝากคำถาม / ข้อเสนอแนะ / อื่นๆ​", new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5580) }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "26cb0684-d902-4e14-b799-028b33b880ec", "6f8eb594-b87f-44dd-9bdf-198bf6330d98" });
+                values: new object[] { "0d8d8eb2-1ab8-477b-999d-456e75e09c53", "f229e326-0cf2-41f9-adf8-5275e131d374" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -270,17 +270,16 @@ namespace Lighting.Controllers.Backend
                 int skip = start != null ? Convert.ToInt32(start) : 0;
                 int? recordsTotal = 0;
                 var list = new List<ResponseDTO.Product_CategoryResponse>();
-                var History = await _db.Product_Categorys.ToListAsync();
+                var Products = await _db.Products.ToListAsync();
                 int? runitem = 1;
-                foreach (var item in History)
+                foreach (var item in Products)
                 {
                     list.Add(new ResponseDTO.Product_CategoryResponse
                     {
                         Index = runitem,
                         Id = item.Id,
-                        Name_EN = item.Name_EN,
-                        Name_TH = item.Name_TH,
-                        Image = item.Image,
+                        Type_TH = item.Type_TH,
+                        Type_EN = item.Type_EN,
                         ShowItem = item.ShowItem
                     });
                     runitem++;
@@ -292,8 +291,8 @@ namespace Lighting.Controllers.Backend
                 }
                 if (!string.IsNullOrEmpty(searchValue))
                 {
-                    list = list.Where(x => x.Name_EN.Contains(searchValue)
-                    || x.Name_TH.Contains(searchValue)).ToList();
+                    list = list.Where(x => x.Type_TH.Contains(searchValue)
+                    || x.Type_EN.Contains(searchValue)).ToList();
                 }
 
                 recordsTotal = list.Count;
@@ -313,7 +312,7 @@ namespace Lighting.Controllers.Backend
         {
             try
             {
-                var DB = _db.Product_Categorys.FirstOrDefault(x => x.Id == Id);
+                var DB = _db.Products.FirstOrDefault(x => x.Id == Id);
                 if (DB is not null)
                 {
                     if (DB.ShowItem == 1)

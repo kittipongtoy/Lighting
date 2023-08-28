@@ -137,6 +137,21 @@
             <input class="form-control" type="file" id="file_img_preview" />
         </div>
 
+        <div>
+            <img src="@Model.Preview_Imamge_Show" style="width:100%;height:100%;" id="img_preview_Index" />
+        </div>
+
+        <div class="add-product-grid-item">
+            <label class="h4">
+                รูปสินค้าแสดงหน้า Home Index
+                <br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 500 * 500 px
+                </span>
+            </label>
+            <input class="form-control" type="file" id="file_img_preview_Index" />
+        </div>
+
         <div class="add-product-grid-item">
             <label class="h4">
                 รูปสเปค/Spec Image
@@ -282,75 +297,7 @@
             <div class="add-product-grid-item">
                 <label class="h4">Power</label>
                 <input type="text" placeholder="Power" id="Power" value="@Model?.Power" />
-            </div>
-            @*
-            <div class="add-product-grid-item">
-            <label class="h4">Housing</label>
-            <input type="text" placeholder="Housing" id="Housing" value="@Model?.Housing"/>
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Finishing</label>
-            <input type="text" placeholder="Finishing" id="Finishing" value="@Model?.Finishing" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Lens</label>
-            <input type="text" placeholder="Lens" id="Lens" value="@Model?.Lens" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Gasket</label>
-            <input type="text" placeholder="Gasket" id="Gasket" value="@Model?.Gasket" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Mounting</label>
-            <input type="text" placeholder="Mounting" id="Mounting" value="@Model?.Mounting" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Source</label>
-            <input type="text" placeholder="Source" id="Source" value="@Model?.Source" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Lamp Colour</label>
-            <input type="text" placeholder="Lamp Colour" id="Lamp_Colour" value="@Model?.Lamp_Colour" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Luminaire Output</label>
-            <input type="text" placeholder="Luminaire Output" id="Luminaire_Output" value="@Model?.Luminaire_Output" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Beam Angle</label>
-            <input type="text" placeholder="Beam Angle" id="Beam_Angle" value="@Model?.Beam_Angle" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Control Gear</label>
-            <input type="text" placeholder="Control Gear" id="Control_Gear" value="@Model?.Control_Gear" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Power Supply</label>
-            <input type="text" placeholder="Power Supply" id="Power_Supply" value="@Model?.Power_Supply" />
-            </div>
-
-
-
-            <div class="add-product-grid-item">
-            <label class="h4">Luminaire Lifetime</label>
-            <input type="text" placeholder="Luminaire Lifetime" id="Luminaire_Lifetime" value="@Model?.Luminaire_Lifetime" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Equivalent</label>
-            <input type="text" placeholder="Equivalent" id="Equivalent" value="@Model?.Equivalent" />
-            </div>
-            *@
+            </div>         
             <div class="spect-grid-container">
                 @if (Model?.Product_Spects != null)
                 {
@@ -404,7 +351,7 @@
             });
         var specification = [], spect_num = 0;
         var preview_img, sub_img_file, CutSheet_file, IesFile_file, Catalogue_file, rfa_file, technical_file, light_distribute_file;
-
+        var preview_img_Index;
         $(document).ready(function () {
             
             appendSelectOptionOnLoad();
@@ -416,6 +363,14 @@
                     $('#img_preview').attr('src', await blobToBase64DataURL(preview_img)).css("display", "block");
                 }
             });
+
+            $('#file_img_preview_Index').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    preview_img_Index = e.target.files[0];
+                    $('#img_preview_Index').attr('src', await blobToBase64DataURL(preview_img_Index)).css("display", "block");
+                }
+            });
+
             $('#sub_img_file').change(function (e) {
                 if (e.target.files.length === 1) {
                     sub_img_file = e.target.files[0];
@@ -575,6 +530,7 @@
             form.append("Type_TH", $("#category_name_th").val());
             form.append("Type_EN", $("#category_name_en").val());
             form.append("Preview_Image", preview_img);
+            form.append("Preview_Image2", preview_img_Index);
             form.append("SUB_IMG", sub_img_file);
             form.append("CUTSHEET", CutSheet_file);
             form.append("IESFILE", IesFile_file);

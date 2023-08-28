@@ -135,44 +135,85 @@ namespace Lighting.Controllers.Frontend
             return View(category);
         }
 
-        public async Task<IActionResult> Product_Category(string category)
+        public async Task<IActionResult> Product_Category(string category,int? ProductId)
         {
-            var allCategory = await _db.Product_Categorys
-                         .AsNoTracking()
-                         .OrderByDescending(x => x.Id)
-                         .Select(cat =>
-                         new Output_ProductCategoryVM
-                         {
-                             Id = cat.Id,
-                             Name_EN = cat.Name_EN,
-                             Name_TH = cat.Name_TH,
-                             Image = cat.Image
-                         })
-                         .ToListAsync();
-            var selected_category = await _db.Product_Categorys
-                         .AsNoTracking()
-                         .Where(product_cat => product_cat.Name_EN.ToLower().StartsWith(category.ToLower()) || product_cat.Name_TH.StartsWith(category)).FirstOrDefaultAsync();
-            if (selected_category == null) return RedirectToAction("Product");
-            var sub_category = await _db.Product_Models
-                         .AsNoTracking()
-                         //.Where(sub_cat => sub_cat.Name_EN.ToLower().StartsWith(category.ToLower()) || sub_cat.Name_TH.StartsWith(category))
-                         .Where(pro_model => pro_model.Product_CategoryId == selected_category.Id)
-                         .OrderByDescending(x => x.Id)
-                         .Select(cat =>
-                         new Output_ProductModelVM
-                         {
-                             Id = cat.Id,
-                             Name_EN = cat.Name_EN,
-                             Name_TH = cat.Name_TH,
-                             Image = Path.Combine("upload_image", "Product_Model", cat.Image)
-                         })
-                         .ToListAsync();
+            if (category != null && category != "")
+            {
+                var allCategory = await _db.Product_Categorys
+                             .AsNoTracking()
+                             .OrderByDescending(x => x.Id)
+                             .Select(cat =>
+                             new Output_ProductCategoryVM
+                             {
+                                 Id = cat.Id,
+                                 Name_EN = cat.Name_EN,
+                                 Name_TH = cat.Name_TH,
+                                 Image = cat.Image
+                             })
+                             .ToListAsync();
+                var selected_category = await _db.Product_Categorys
+                             .AsNoTracking()
+                             .Where(product_cat => product_cat.Name_EN.ToLower().StartsWith(category.ToLower()) || product_cat.Name_TH.StartsWith(category)).FirstOrDefaultAsync();
+                if (selected_category == null) return RedirectToAction("Product");
+                var sub_category = await _db.Product_Models
+                             .AsNoTracking()
+                             //.Where(sub_cat => sub_cat.Name_EN.ToLower().StartsWith(category.ToLower()) || sub_cat.Name_TH.StartsWith(category))
+                             .Where(pro_model => pro_model.Product_CategoryId == selected_category.Id)
+                             .OrderByDescending(x => x.Id)
+                             .Select(cat =>
+                             new Output_ProductModelVM
+                             {
+                                 Id = cat.Id,
+                                 Name_EN = cat.Name_EN,
+                                 Name_TH = cat.Name_TH,
+                                 Image = Path.Combine("upload_image", "Product_Model", cat.Image)
+                             })
+                             .ToListAsync();
 
-            ViewData["All_Category"] = allCategory;
-            ViewData["Sub_Category"] = sub_category;
+                ViewData["All_Category"] = allCategory;
+                ViewData["Sub_Category"] = sub_category;
 
-            ViewBag.Category = category;
+                ViewBag.Category = category;
+            }
+            else 
+            {
+                var allCategory = await _db.Product_Categorys
+                                .AsNoTracking()
+                                .OrderByDescending(x => x.Id)
+                                .Select(cat =>
+                                new Output_ProductCategoryVM
+                                {
+                                    Id = cat.Id,
+                                    Name_EN = cat.Name_EN,
+                                    Name_TH = cat.Name_TH,
+                                    Image = cat.Image
+                                })
+                                .ToListAsync();
+                ViewData["All_Category"] = allCategory;
 
+                var selected_category = await _db.Product_Categorys.FirstOrDefaultAsync(x=>x.Id == ProductId);
+
+                if (selected_category == null) return RedirectToAction("Product");
+                var sub_category = await _db.Product_Models
+                             .AsNoTracking()
+                             //.Where(sub_cat => sub_cat.Name_EN.ToLower().StartsWith(category.ToLower()) || sub_cat.Name_TH.StartsWith(category))
+                             .Where(pro_model => pro_model.Product_CategoryId == selected_category.Id)
+                             .OrderByDescending(x => x.Id)
+                             .Select(cat =>
+                             new Output_ProductModelVM
+                             {
+                                 Id = cat.Id,
+                                 Name_EN = cat.Name_EN,
+                                 Name_TH = cat.Name_TH,
+                                 Image = Path.Combine("upload_image", "Product_Model", cat.Image)
+                             })
+                             .ToListAsync();
+
+                
+                ViewData["Sub_Category"] = sub_category;
+
+                ViewBag.Category = selected_category.Name_EN;
+            }
             return View();
         }
 

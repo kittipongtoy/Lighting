@@ -145,6 +145,21 @@
             <input class="form-control" type="file" id="file_img_preview" accept="image/*" />
         </div>
 
+        <div>
+            <img src="" style="width:100%;display:none;" id="img_preview_Index" />
+        </div>
+
+        <div class="add-product-grid-item">
+            <label class="h4">
+                รูปสินค้าแสดงหน้า Home Index
+                <br />
+                <span style="color:red;">
+                    ขนาดรูปภาพ : 500 * 500 px
+                </span>
+            </label>
+            <input class="form-control" type="file" id="file_img_preview_Index" accept="image/*" />
+        </div>
+
         <div class="add-product-grid-item">
             <label class="h4">
                 รูปสเปค/Spec Image
@@ -261,79 +276,11 @@
             <div class="add-product-grid-item">
                 <label class="h4">IP Rating</label>
                 <input type="text" placeholder="IP Rating" id="IP_Rating" />
-            </div>
-            @*
-            <div class="add-product-grid-item">
-            <label class="h4">Housing</label>
-            <input type="text" placeholder="Housing" id="Housing" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Finishing</label>
-            <input type="text" placeholder="Finishing" id="Finishing" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Lens</label>
-            <input type="text" placeholder="Lens" id="Lens" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Gasket</label>
-            <input type="text" placeholder="Gasket" id="Gasket" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Mounting</label>
-            <input type="text" placeholder="Mounting" id="Mounting" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Source</label>
-            <input type="text" placeholder="Source" id="Source" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Lamp Colour</label>
-            <input type="text" placeholder="Lamp Colour" id="Lamp_Colour" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Luminaire Output</label>
-            <input type="text" placeholder="Luminaire Output" id="Luminaire_Output" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Beam Angle</label>
-            <input type="text" placeholder="Beam Angle" id="Beam_Angle" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Control Gear</label>
-            <input type="text" placeholder="Control Gear" id="Control_Gear" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Power Supply</label>
-            <input type="text" placeholder="Power Supply" id="Power_Supply" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Luminaire Lifetime</label>
-            <input type="text" placeholder="Luminaire Lifetime" id="Luminaire_Lifetime" />
-            </div>
-
-            <div class="add-product-grid-item">
-            <label class="h4">Equivalent</label>
-            <input type="text" placeholder="Equivalent" id="Equivalent" />
-            </div>
-            *@
+            </div>        
             <div id="spect_container" class="spect-grid-container">
             </div>
             <center><button onclick="showHideSpect()" class="btn btn-success">เพิ่มสเปค/add space</button> </center>
         </div>
-       
-
     </div>
     <br />
     <br />
@@ -383,6 +330,7 @@
 
         var specification = [], spect_num = 0;
         var preview_img, spact_img_file, CutSheet_file, IesFile_file, Catalogue_file, rfa_file, technical_file, light_distribute_file;
+        var preview_img_Index;
 
         $(document).ready(function () {
             categorySelectChange();
@@ -392,6 +340,14 @@
                     $('#img_preview').attr('src', await blobToBase64DataURL(preview_img)).css("display", "block");
                 }
             });
+
+            $('#file_img_preview_Index').change(async function (e) {
+                if (e.target.files.length === 1) {
+                    preview_img_Index = e.target.files[0];
+                    $('#img_preview_Index').attr('src', await blobToBase64DataURL(preview_img_Index)).css("display", "block");
+                }
+            });
+
             $('#spact_img_file').change(function (e) {
                 if (e.target.files.length === 1) {
                     spact_img_file = e.target.files[0];
@@ -549,7 +505,7 @@
             form.append("Type_TH", $("#category_name_th").val());
             form.append("Type_EN", $("#category_name_en").val());
             form.append("Preview_Image", preview_img);
-
+            form.append("Preview_Image2", preview_img_Index);
             form.append("CUTSHEET", CutSheet_file);
             form.append("IESFILE", IesFile_file);
             form.append("CATALOGUE", Catalogue_file);

@@ -5,6 +5,7 @@
 @model IEnumerable<Lighting.Models.InputFilterModels.Product.Output_ProductCategoryVM>
 
 <div class="container" style="width:100%;">
+
     <div class="row d-flex justify-content-between mb-3">
         <div class="col d-flex justify-content-between">
             <div>
@@ -15,6 +16,8 @@
             </a>
         </div>
     </div>
+
+
     <div class="row mt-3" style="display:none;" id="add_category">
         <div class="col-12 text-center">
             <img style="width:100%;height:50vh;display:none;" id="img_preview" />
@@ -29,23 +32,6 @@
                 </span>
             </label>
             <input class="form-control" type="file" accept="image/*" id="img_file" />
-
-
-            <!--                        -->
-            <div class="col-12 text-center">
-                <img style="width:100%;height:50vh;display:none;" id="img_preview_Show" />
-            </div>
-            <label for="formFile" class="form-label">
-                เลือกไฟล์รูปหมวดหมู่ แสดงหน้า Main Index
-                <br />
-                <span style="color:red;">
-                    ขนาดรูปภาพ : 500 * 500 px
-                </span>
-            </label>
-            <input class="form-control" type="file" accept="image/*" id="img_file_Show" />
-            <!--                        -->
-
-
             <div class="input-group" style="margin-top:2rem;">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="">ชื่อหมวดหมู่/Category Name</span>
@@ -56,6 +42,7 @@
         </div>
         <center><button class="btn btn-success" style="margin-top:3rem;" onclick="addCategory()">บันทึก/save</button></center>
     </div>
+
     <div class="row mt-5">
         <div class="col-12">
             <table class="table mt-3">
@@ -78,7 +65,7 @@
                             <td><img src="@cat.Image" style="width:100px;height:100px;" /></td>
                             <td style="word-wrap:break-word;max-width:500px;">@cat.Name_TH / @cat.Name_EN</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-warning" onclick="edit(@cat.Id,'@cat.Name_TH','@cat.Name_EN','@cat.Image.Replace("\\","//")','@cat.ImageShow.Replace("\\","//")')">
+                                <button type="button" class="btn btn-warning" onclick="edit(@cat.Id,'@cat.Name_TH','@cat.Name_EN','@cat.Image.Replace("\\","//")')">
                                     <i class="bi bi-pencil-square"></i>แก้ไข/edit
                                 </button>
                                 <button type="button" class="btn btn-danger" onclick="deleteRowById(@cat.Id)">
@@ -97,8 +84,7 @@
 </div>
 
 <div style="position:fixed;inset:0;background-color:rgba(0,0,0,0.5);display:none;justify-content:center;flex-direction:column;align-items:center;overflow-y: auto;z-index:10" id="edit_page">
-    <div style="width:50%;height:auto;background-color:white;display:grid;grid-template-rows:auto 3rem auto 3rem auto;gap:3rem;border-radius:10px;padding:3rem;">
-        
+    <div style="width:50%;height:auto;background-color:white;display:grid;grid-template-rows:auto 3rem 3rem 3rem auto;gap:3rem;border-radius:10px;padding:3rem;">
         <div>
             <img style="width:100%;height:40vh;" id="edit_img" />
         </div>
@@ -109,21 +95,6 @@
             </span>
             <input class="form-control" type="file" accept="image/*" id="change_img" />
         </div>
-
-        <!--    -->
-        <div>
-            <img style="width:100%;height:40vh;" id="edit_img_Show" />
-        </div>
-        <div>
-            <br />
-            Shome Image Main Index
-            <span style="color:red;">
-                ขนาดรูปภาพ : 500 * 500 px
-            </span>
-            <input class="form-control" type="file" accept="image/*" id="change_img_Show" />
-        </div>
-        <!--    -->
-
         <div>
             <div class="input-group">
                 <div class="input-group-prepend">
@@ -143,11 +114,10 @@
 
 @section Scripts{
     <script>
+
         var edit_id = null;
         var img_preview;
-        var img_preview_Show;
         var edit_img;
-        var edit_img_Show;
         $(document).ready(function () {
 
             $("#btn_add_category").on("click", function () {
@@ -166,24 +136,10 @@
                 }
             });
 
-            $('#img_file_Show').change(async function (e) {
-                if (e.target.files.length === 1) {
-                    img_preview_Show = e.target.files[0];
-                    $('#img_preview_Show').attr('src', await blobToBase64DataURL(img_preview_Show)).css("display", "block");
-                }
-            });
-
             $('#change_img').change(async function (e) {
                 if (e.target.files.length === 1) {
                     edit_img = e.target.files[0];
                     $('#edit_img').attr('src', await blobToBase64DataURL(edit_img)).css("display", "block");
-                }
-            });
-
-            $('#change_img_Show').change(async function (e) {
-                if (e.target.files.length === 1) {
-                    edit_img_Show = e.target.files[0];
-                    $('#edit_img_Show').attr('src', await blobToBase64DataURL(edit_img_Show)).css("display", "block");
                 }
             });
 
@@ -198,10 +154,6 @@
             form.append("Name_EN", category_name_en);
             if (img_preview != undefined) {
                 form.append("Image", img_preview);
-            }
-
-            if (img_preview_Show != undefined) {
-                form.append("ImageShow", img_preview_Show);
             }
 
             //ajax
@@ -244,13 +196,12 @@
             });
         }
 
-        function edit(id, name_th, name_en, img, imgshow) {
+        function edit(id, name_th, name_en, img) {
             edit_id = id;
             $("#edit_page").css("display", "flex");
             $("#edit_category_name_th").val(name_th);
             $("#edit_category_name_en").val(name_en);
             $("#edit_img").attr("src", img);
-            $("#edit_img_Show").attr("src", imgshow);           
         }
 
         function closeEdit() {
@@ -278,9 +229,6 @@
                 form.append("Image", edit_img);
             }
 
-            if (edit_img_Show != undefined) {
-                form.append("ImageShow", edit_img_Show);
-            }
             //ajax
             $.ajax({
                 type: 'POST',
@@ -322,6 +270,7 @@
                 }
             });
         }
+
 
         function deleteRowById(id) {
 

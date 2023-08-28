@@ -80,7 +80,7 @@ namespace Lighting.Controllers.Backend
                     RFA = pro.RFA == null ? null : Path.Combine(path, pro.Folder_Path, pro.RFA),
                     Preview_Imamge = pro.Preview_Image == null ? null : Path.Combine(path, pro.Folder_Path, pro.Preview_Image),
                     SUB_IMG = pro.SUB_IMG == null ? null : Path.Combine(path, pro.Folder_Path, pro.SUB_IMG),
-
+                    Preview_Imamge_Show = pro.Preview_Image_Index == null ? null : Path.Combine(path, pro.Folder_Path, pro.Preview_Image_Index),
                 }).FirstOrDefaultAsync();
 
             if (product != null)
@@ -123,25 +123,6 @@ namespace Lighting.Controllers.Backend
                         category.Image = path;
                     }
 
-                    if (input.ImageShow != null)
-                    {
-                        if (category.ShowImage != null)
-                        { 
-                            var path_old_path = Path.Combine(_env.WebRootPath, category.ShowImage);
-                            if (System.IO.File.Exists(path_old_path))
-                            {
-                                System.IO.File.Delete(path_old_path);
-                            }
-                        }
-                        var image_name = Guid.NewGuid().ToString().Substring(0, 6) + ".jpg";
-                        var path = Path.Combine("upload_image", "Product_Category", image_name);
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path), FileMode.Create))
-                        {
-                            await input.ImageShow.CopyToAsync(stream);
-                        }
-                        category.ShowImage = path;
-                    }
-
                     category.Name_TH = input.Name_TH;
                     category.Name_EN = input.Name_EN;
 
@@ -150,7 +131,7 @@ namespace Lighting.Controllers.Backend
                 }
                 catch (Exception ex)
                 {
-
+                    return Json(new { status = "faile", message = ex.InnerException });
                 }
 
             }
@@ -199,15 +180,6 @@ namespace Lighting.Controllers.Backend
                         }
                     }
 
-                    var image_name2 = Guid.NewGuid().ToString().Substring(0, 6) + ".jpg";
-                    var path2 = Path.Combine("upload_image", "Product_Category", image_name2);
-                    if (input.ImageShow != null)
-                    {
-                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path2), FileMode.Create))
-                        {
-                            await input.ImageShow.CopyToAsync(stream);
-                        }
-                    }
                     await _db
                         .Product_Categorys
                         .AddAsync(
@@ -215,8 +187,7 @@ namespace Lighting.Controllers.Backend
                         {
                             Name_EN = input.Name_EN,
                             Name_TH = input.Name_TH,
-                            Image = input.Image == null ? "" : path,
-                            ShowImage = input.Image == null ? "" : path2
+                            Image = input.Image == null ? "" : path
                         });
                     await _db.SaveChangesAsync();
                     return Json(new { status = "success", message = "บันทึกข้อมูลเรียบร้อย" });
@@ -380,7 +351,8 @@ namespace Lighting.Controllers.Backend
                 var path = Path.Combine("upload_image", "Product", folder_name);
                 var directory = Path.Combine(_env.WebRootPath, path);
                 Directory.CreateDirectory(directory);
-
+                var directory2 = Path.Combine(_env.WebRootPath, path);
+                Directory.CreateDirectory(directory2);
                 var product = new Product();
 
 
@@ -390,6 +362,12 @@ namespace Lighting.Controllers.Backend
                     using (var stream = new FileStream(preview_img, FileMode.Create))
                     {
                         await input.Preview_Image.CopyToAsync(stream);
+                    }
+
+                    var preview_img2 = Path.Combine(directory2, input.Preview_Image2.FileName);
+                    using (var stream2 = new FileStream(preview_img2, FileMode.Create))
+                    {
+                        await input.Preview_Image2.CopyToAsync(stream2);
                     }
 
                     if (input.SUB_IMG != null)
@@ -468,6 +446,7 @@ namespace Lighting.Controllers.Backend
                     product.Folder_Path = folder_name;
                     //file
                     product.Preview_Image = input.Preview_Image.FileName;
+                    product.Preview_Image_Index = input.Preview_Image2.FileName;
                     product.SUB_IMG = input.SUB_IMG?.FileName;
                     product.CUTSHEET = input.CUTSHEET?.FileName;
                     product.CATALOGUE = input.CATALOGUE?.FileName;
@@ -601,6 +580,24 @@ namespace Lighting.Controllers.Backend
                         }
                     }
 
+                    if (input.Preview_Image2 != null)
+                    {
+                        var preview_img = Path.Combine(directory, input.Preview_Image2.FileName);
+                        if (product.Preview_Image_Index != null)
+                        {
+                            var delete_file = Path.Combine(_env.WebRootPath, path, product.Preview_Image_Index);
+                            if (System.IO.File.Exists(delete_file))
+                            {
+                                System.IO.File.Delete(delete_file);
+                            }
+                        }
+
+                        using (var stream = new FileStream(preview_img, FileMode.Create))
+                        {
+                            await input.Preview_Image2.CopyToAsync(stream);
+                        }
+                    }
+
                     if (input.SUB_IMG != null)
                     {
                         var sub_img = Path.Combine(directory, input.SUB_IMG.FileName);
@@ -727,6 +724,7 @@ namespace Lighting.Controllers.Backend
                     //product.Folder_Path = folder_name;
                     //file
                     product.Preview_Image = input.Preview_Image != null ? input.Preview_Image.FileName : product.Preview_Image;
+                    product.Preview_Image_Index = input.Preview_Image2.FileName;
                     product.SUB_IMG = input.SUB_IMG != null ? input.SUB_IMG.FileName : product.SUB_IMG;
                     product.CUTSHEET = input.CUTSHEET != null ? input.CUTSHEET.FileName : product.CUTSHEET;
                     product.CATALOGUE = input.CATALOGUE != null ? input.CATALOGUE.FileName : product.CATALOGUE;
@@ -827,6 +825,7 @@ namespace Lighting.Controllers.Backend
                     SUB_IMG = pro.SUB_IMG == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.SUB_IMG),
                     IESFILE = pro.IESFILE == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.IESFILE),
                     Preview_Imamge = pro.Preview_Image == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.Preview_Image),
+                    Preview_Imamge_Show = pro.Preview_Image_Index == null ? null : Path.Combine("upload_image", "Product", pro.Folder_Path, pro.Preview_Image_Index),
 
                 })
                 .ToListAsync();

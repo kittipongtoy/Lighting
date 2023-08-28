@@ -1,5 +1,12 @@
 ﻿@{
     var get_cookies = Context.Request.Cookies["lang"];
+
+    var SetLang = ViewData["Title"];
+    if(SetLang != null)
+    {
+    
+    }
+
     var Slide_Image_Index = (List<Lighting.Areas.Identity.Data.SlideImageIndex>)ViewData["Slide_Image_Index"];
 }
 

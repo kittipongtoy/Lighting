@@ -714,40 +714,40 @@ namespace Lighting.Migrations
                             id = 1,
                             DownloadType_name_ENG = "L&E BIM OBJECTS",
                             DownloadType_name_TH = "L&E BIM OBJECTS",
-                            created_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1386),
-                            updated_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1389)
+                            created_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5391),
+                            updated_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5400)
                         },
                         new
                         {
                             id = 2,
                             DownloadType_name_ENG = "CATALOGUE",
                             DownloadType_name_TH = "CATALOGUE",
-                            created_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1390),
-                            updated_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1391)
+                            created_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5401),
+                            updated_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5403)
                         },
                         new
                         {
                             id = 3,
                             DownloadType_name_ENG = "COMPANY PROFILE",
                             DownloadType_name_TH = "COMPANY PROFILE",
-                            created_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1392),
-                            updated_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1392)
+                            created_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5404),
+                            updated_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5404)
                         },
                         new
                         {
                             id = 4,
                             DownloadType_name_ENG = "IES FILE",
                             DownloadType_name_TH = "IES FILE",
-                            created_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1456),
-                            updated_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1457)
+                            created_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5405),
+                            updated_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5406)
                         },
                         new
                         {
                             id = 5,
                             DownloadType_name_ENG = "LEAFLET",
                             DownloadType_name_TH = "LEAFLET",
-                            created_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1458),
-                            updated_at = new DateTime(2023, 8, 24, 2, 40, 0, 808, DateTimeKind.Utc).AddTicks(1459)
+                            created_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5407),
+                            updated_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5408)
                         });
                 });
 
@@ -2458,9 +2458,9 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6f8eb594-b87f-44dd-9bdf-198bf6330d98",
+                            Id = "f229e326-0cf2-41f9-adf8-5275e131d374",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4a3d7706-ff8f-425c-8483-90db948bfde6",
+                            ConcurrencyStamp = "cb2fc90c-a84f-4133-b214-ce1f7b8e1e56",
                             Email = "Admin@Lighting.com",
                             EmailConfirmed = false,
                             EmployeeCode = "Admin",
@@ -2470,9 +2470,9 @@ namespace Lighting.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "admin@lighting.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGNdTYpS74zWDeVLrPsoxzi4V8h8SPR1euz8m5dZVm2SfvjiF+U1GmUADA6GjGvGGw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPG46zJ71M875oaDOWBfXLXDePhWVeQTyZRnP/txQMNtVZ+2Fvyv/MyM0havv0C3Nw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "699b15b7-7df0-45fa-9d07-00a5fb92857f",
+                            SecurityStamp = "15a02727-a99f-46d6-934d-f08e0ba2e9ca",
                             TwoFactorEnabled = false,
                             UserName = "Admin@Lighting.com"
                         });
@@ -3936,7 +3936,6 @@ namespace Lighting.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Folder_Path")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IESFILE")
@@ -3958,7 +3957,9 @@ namespace Lighting.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Preview_Image")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Preview_Image_Index")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Product_CategoryId")
@@ -3972,6 +3973,9 @@ namespace Lighting.Migrations
 
                     b.Property<string>("SUB_IMG")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ShowItem")
+                        .HasColumnType("int");
 
                     b.Property<string>("Technical_Drawing")
                         .HasColumnType("nvarchar(max)");
@@ -4173,6 +4177,15 @@ namespace Lighting.Migrations
                     b.HasKey("id");
 
                     b.ToTable("receive_agenda_mail_accounts");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            account = "mizaogz03@gmail.com",
+                            created_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5450),
+                            updated_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5451)
+                        });
                 });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.receive_mail_propose_agendas", b =>
@@ -4767,13 +4780,13 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "26cb0684-d902-4e14-b799-028b33b880ec",
-                            ConcurrencyStamp = "93d8eb9f-795a-46b2-baad-432aed34c459",
+                            Id = "0d8d8eb2-1ab8-477b-999d-456e75e09c53",
+                            ConcurrencyStamp = "768b2271-d5d6-48f7-8478-0ce4d8277738",
                             Name = "Admin",
                             NameThai = "Admin",
                             NormalizedName = "Admin",
-                            created_at = new DateTime(2023, 8, 24, 2, 40, 0, 800, DateTimeKind.Utc).AddTicks(2787),
-                            updated_at = new DateTime(2023, 8, 24, 2, 40, 0, 800, DateTimeKind.Utc).AddTicks(2791)
+                            created_at = new DateTime(2023, 8, 25, 9, 15, 8, 313, DateTimeKind.Utc).AddTicks(331),
+                            updated_at = new DateTime(2023, 8, 25, 9, 15, 8, 313, DateTimeKind.Utc).AddTicks(335)
                         });
                 });
 
@@ -6200,6 +6213,42 @@ namespace Lighting.Migrations
                     b.HasKey("id");
 
                     b.ToTable("SH_IR_propose_agenda_mailTitles");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            active_status = 1,
+                            created_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5619),
+                            detailsENG = "ฉันได้อ่านและยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href=\"\">นโยบายความเป็นส่วนตัว</a> และยินยอมให้รวบรวมประมวลผลและ / หรือเปิดเผยข้อมูลส่วนบุคคลที่ฉันให้ไว้เพื่อบรรลุวัตถุประสงค์ดังกล่าวข้างต้น",
+                            detailsPlaceholderTitleENG = "โปรดกรอกรายละเอียดที่ต้องการเสนอ",
+                            detailsPlaceholderTitleTH = "โปรดกรอกรายละเอียดที่ต้องการเสนอ",
+                            detailsTH = "ฉันได้อ่านและยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href=\"\">นโยบายความเป็นส่วนตัว</a> และยินยอมให้รวบรวมประมวลผลและ / หรือเปิดเผยข้อมูลส่วนบุคคลที่ฉันให้ไว้เพื่อบรรลุวัตถุประสงค์ดังกล่าวข้างต้น",
+                            detailsTitleENG = "รายละเอียด",
+                            detailsTitleTH = "รายละเอียด",
+                            emailTitleENG = "e-mail",
+                            emailTitlePlaceholderENG = "example@mail.com",
+                            emailTitlePlaceholderTH = "example@mail.com",
+                            emailTitleTH = "e-mail",
+                            nameTitleENG = "ชื่อ-นามสกุล*",
+                            nameTitlePlaceholderENG = "โปรดระบุทั้งชื่อและนามสกุลให้ชัดเจน",
+                            nameTitlePlaceholderTH = "โปรดระบุทั้งชื่อและนามสกุลให้ชัดเจน",
+                            nameTitleTH = "ชื่อ-นามสกุล*",
+                            phoneENG = "โทรศัพท์*",
+                            phoneTH = "โทรศัพท์*",
+                            phoneTitlePlaceholder = "xxx-xxx-xxxx",
+                            proposeTitleENG = "หัวข้อที่ต้องการเสนอ*",
+                            proposeTitleTH = "หัวข้อที่ต้องการเสนอ*",
+                            remarkENG = "หมายเหตุ : * จำเป็นต้องกรอกข้อมูล",
+                            remarkTH = "หมายเหตุ : * จำเป็นต้องกรอกข้อมูล",
+                            titleENG = "เชิญผู้ถือหุ้นเสนอวาระ กรรมการ และส่งคำถามล่วงหน้าสำหรับการประชุมสามัญผู้ถือหุ้นประจำปี โดยกรอกแบบฟอร์มด้านล่างให้ครบถ้วน",
+                            titleTH = "เชิญผู้ถือหุ้นเสนอวาระ กรรมการ และส่งคำถามล่วงหน้าสำหรับการประชุมสามัญผู้ถือหุ้นประจำปี โดยกรอกแบบฟอร์มด้านล่างให้ครบถ้วน",
+                            updated_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5620),
+                            wantProposePlaceholderTitleENG = "โปรดระบุหัวข้อที่ต้องการเสนอ",
+                            wantProposePlaceholderTitleTH = "โปรดระบุหัวข้อที่ต้องการเสนอ",
+                            wantProposeTitleENG = "ชื่อหัวข้อที่ต้องการเสนอ",
+                            wantProposeTitleTH = "ชื่อหัวข้อที่ต้องการเสนอ"
+                        });
                 });
 
             modelBuilder.Entity("Lighting.Areas.Identity.Data.SH_IR_propose_agenda_receive_mails", b =>
@@ -6577,6 +6626,35 @@ namespace Lighting.Migrations
                     b.HasKey("id");
 
                     b.ToTable("type_of_agenda_Propose");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            active_status = 1,
+                            created_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5573),
+                            titleENG = "เสนอวาระการประชุม​",
+                            titleTH = "เสนอวาระการประชุม​",
+                            updated_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5574)
+                        },
+                        new
+                        {
+                            id = 2,
+                            active_status = 1,
+                            created_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5577),
+                            titleENG = "เสนอกรรมการเพื่อเข้าดำรงตำแหน่ง​",
+                            titleTH = "เสนอกรรมการเพื่อเข้าดำรงตำแหน่ง​",
+                            updated_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5578)
+                        },
+                        new
+                        {
+                            id = 3,
+                            active_status = 1,
+                            created_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5579),
+                            titleENG = "ฝากคำถาม / ข้อเสนอแนะ / อื่นๆ​",
+                            titleTH = "ฝากคำถาม / ข้อเสนอแนะ / อื่นๆ​",
+                            updated_at = new DateTime(2023, 8, 25, 9, 15, 8, 321, DateTimeKind.Utc).AddTicks(5580)
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -6668,8 +6746,8 @@ namespace Lighting.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "6f8eb594-b87f-44dd-9bdf-198bf6330d98",
-                            RoleId = "26cb0684-d902-4e14-b799-028b33b880ec"
+                            UserId = "f229e326-0cf2-41f9-adf8-5275e131d374",
+                            RoleId = "0d8d8eb2-1ab8-477b-999d-456e75e09c53"
                         });
                 });
 

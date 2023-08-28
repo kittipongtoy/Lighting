@@ -12,11 +12,12 @@ namespace Lighting.Areas.Identity.Data
         //sub category
         public int Product_ModelId { get; set; }
 
-        public string Folder_Path { get; set; }
+        public string? Folder_Path { get; set; }
         public string? Model { get; set; }
         public string? Type_TH { get; set; }
         public string? Type_EN { get; set; }
-        public string Preview_Image { get; set; }
+        public string? Preview_Image { get; set; }
+        public string? Preview_Image_Index { get; set; }
         public string? SUB_IMG { get; set; }
         public string? CUTSHEET { get; set; }
         public string? IESFILE { get; set; }
@@ -47,5 +48,6 @@ namespace Lighting.Areas.Identity.Data
         //public string? Luminaire_Lifetime { get; set; }
         //public string? Equivalent { get; set; }
         public string? LIGHT_DISTRIBUTION { get; set; }
+        public int? ShowItem { get; set; }
     }
 }

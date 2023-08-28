@@ -21,14 +21,20 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> Index()
         {
             var Setting_Index = await _db.Setting_Index.ToListAsync();
-            var Products = await _db.Product_Categorys.Where(x=>x.ShowItem == 1).OrderByDescending(x => x.Id).Take(6).ToListAsync();
+            //var Products = await _db.Product_Categorys.Where(x=>x.ShowItem == 1).OrderByDescending(x => x.Id).Take(6).ToListAsync();
+            var Products = await _db.Products.Where(x => x.ShowItem == 1).OrderByDescending(x => x.Id).Take(6).ToListAsync();
             var Projects = await _db.ProjectRefs.Where(x=>x.ShowItem == 1).OrderByDescending(x => x.Id).Take(4).ToListAsync();
+
+            Products.ForEach(x =>
+            {
+                x.Preview_Image_Index = Path.Combine(x.Folder_Path, x.Preview_Image_Index);
+            });
             Projects.ForEach(x =>
             {
                 x.Profile_Image = Path.Combine(x.Folder_Path, x.Profile_Image);
             });
-            var latestDownloads = await _db.Downloads.Where(x => x.use_status == 1 && x.ShowItem == 1).GroupBy(x => x.DownloadType_id).Select(group => group.OrderByDescending(x => x.id).FirstOrDefault()).ToListAsync();
-            
+            //var latestDownloads = await _db.Downloads.Where(x => x.use_status == 1 && x.ShowItem == 1).GroupBy(x => x.DownloadType_id).Select(group => group.OrderByDescending(x => x.id).FirstOrDefault()).ToListAsync();
+            var latestDownloads = await _db.Downloads.Where(x => x.use_status == 1 && x.ShowItem == 1).ToListAsync();
             var Finance_Statement = await _db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
 
             var Slide_Image_Index = await _db.Slide_Image_Index.Where(x => x.isActive == true).ToListAsync();

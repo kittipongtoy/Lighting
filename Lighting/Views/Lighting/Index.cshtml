@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/Layout/Frontend_Index_Layout.cshtml";
     var lang = Context.Request.Cookies["lang"];
     var Count_Setting_Index = (List<Lighting.Areas.Identity.Data.SettingIndex>)ViewBag.Setting_Index;
-    var Count_Products = (List<Lighting.Areas.Identity.Data.Product_Category>)ViewBag.Products;
+    var Count_Products = (List<Lighting.Areas.Identity.Data.Product>)ViewBag.Products;
     var Count_Project = (List<Lighting.Areas.Identity.Data.ProjectRef>)ViewBag.Project;
     var Count_Download = (List<Lighting.Areas.Identity.Data.Download>)ViewBag.latestDownloads;
     ViewData["Slide_Image_Index"] = (List<Lighting.Areas.Identity.Data.SlideImageIndex>)ViewBag.Slide_Image_Index;
@@ -69,19 +69,21 @@
                         @foreach (var tt in Count_Products)
                         {
                             <li>
-                                <a href="@Url.Action("Product_Category","Product",new {category = tt.Name_EN})">
-                                    <img src="@tt.ShowImage">
+                                @* <a href="@Url.Action("Product_Category","Product",new {category = tt.Name_EN})"> *@
+                                <a href="@Url.Action("Product_Category","Product", new { ProductId = tt.Product_CategoryId })">
+                                    @* <img src="@tt.Preview_Image_Index"> *@
+                                    <img src="/upload_image/Product/@tt.Preview_Image_Index">
                                     <div class="contentBoxBG">
                                         <div class="row">
                                             <div class="col-lg-8 col-md-12 col-12">
                                                 <div class="contentBox-topic">
                                                     @if (lang == "EN")
                                                     {
-                                                        <p>@tt.Name_EN</p>
+                                                        <p>@tt.Type_EN</p>
                                                     }
                                                     else
                                                     {
-                                                        <p>@tt.Name_TH</p>
+                                                        <p>@tt.Type_TH</p>
                                                     }
                                                 </div>
                                             </div>
