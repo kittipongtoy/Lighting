@@ -796,7 +796,7 @@ namespace Lighting.Controllers.Backend
                 catch (Exception ex)
                 {
                     //Directory.Delete(directory, true);
-                    return Json(new { status = "fail", message = "เกิดข้อผิดพลาด อาจมีชื่อไฟล์ซ้ำกัน:" + ex.Message });
+                    return Json(new { status = "fail", message = "เกิดข้อผิดพลาด:" + ex.Message });
                 }
             }
             return Json(new { status = "fail", message = "ไท่พบข้อมูล" });
