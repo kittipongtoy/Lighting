@@ -740,7 +740,7 @@ namespace Lighting.Controllers.Backend
                     //product.Folder_Path = folder_name;
                     //file
                     product.Preview_Image = input.Preview_Image != null ? input.Preview_Image.FileName : product.Preview_Image;
-                    product.Preview_Image_Index = input.Preview_Image2.FileName;
+                    product.Preview_Image_Index = input.Preview_Image2 != null ? input.Preview_Image2.FileName : product.Preview_Image_Index;
                     product.SUB_IMG = input.SUB_IMG != null ? input.SUB_IMG.FileName : product.SUB_IMG;
                     product.CUTSHEET = input.CUTSHEET != null ? input.CUTSHEET.FileName : product.CUTSHEET;
                     product.CATALOGUE = input.CATALOGUE != null ? input.CATALOGUE.FileName : product.CATALOGUE;
