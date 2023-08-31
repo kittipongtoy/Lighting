@@ -358,16 +358,21 @@ namespace Lighting.Controllers.Backend
 
                 try
                 {
-                    var preview_img = Path.Combine(directory, input.Preview_Image.FileName);
-                    using (var stream = new FileStream(preview_img, FileMode.Create))
+                    if (input.Preview_Image != null)
                     {
-                        await input.Preview_Image.CopyToAsync(stream);
+                        var preview_img = Path.Combine(directory, input.Preview_Image.FileName);
+                        using (var stream = new FileStream(preview_img, FileMode.Create))
+                        {
+                            await input.Preview_Image.CopyToAsync(stream);
+                        }
                     }
-
-                    var preview_img2 = Path.Combine(directory2, input.Preview_Image2.FileName);
-                    using (var stream2 = new FileStream(preview_img2, FileMode.Create))
+                    if (input.Preview_Image2 != null)
                     {
-                        await input.Preview_Image2.CopyToAsync(stream2);
+                        var preview_img2 = Path.Combine(directory2, input.Preview_Image2.FileName);
+                        using (var stream2 = new FileStream(preview_img2, FileMode.Create))
+                        {
+                            await input.Preview_Image2.CopyToAsync(stream2);
+                        }
                     }
 
                     if (input.SUB_IMG != null)
@@ -445,8 +450,8 @@ namespace Lighting.Controllers.Backend
 
                     product.Folder_Path = folder_name;
                     //file
-                    product.Preview_Image = input.Preview_Image.FileName;
-                    product.Preview_Image_Index = input.Preview_Image2.FileName;
+                    product.Preview_Image = input.Preview_Image?.FileName;
+                    product.Preview_Image_Index = input.Preview_Image2?.FileName;
                     product.SUB_IMG = input.SUB_IMG?.FileName;
                     product.CUTSHEET = input.CUTSHEET?.FileName;
                     product.CATALOGUE = input.CATALOGUE?.FileName;
