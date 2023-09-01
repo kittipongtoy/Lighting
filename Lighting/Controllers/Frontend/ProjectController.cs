@@ -111,8 +111,8 @@ namespace Lighting.Controllers.Frontend
                  {
                      Id = project.Id,
                      Image_Path = Path.Combine(project.Folder_Path, project.Profile_Image),
-                     Name_EN = project.Title_TH,
-                     Name_TH = project.Title_EN,
+                     Name_EN = project.Title_EN,
+                     Name_TH = project.Title_TH,
                  })
                  .ToListAsync();
 

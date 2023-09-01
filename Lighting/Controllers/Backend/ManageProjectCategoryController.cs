@@ -27,22 +27,27 @@ namespace Lighting.Controllers.Backend
                 var save_path = Path.Combine(_env.WebRootPath, path_file);
                 try
                 {
-
-                    using (var stream = new FileStream(save_path, FileMode.CreateNew))
+                    if (input.Image_File != null)
                     {
-                        await input.Image_File.CopyToAsync(stream);
+                        using (var stream = new FileStream(save_path, FileMode.CreateNew))
+                        {
+                            await input.Image_File.CopyToAsync(stream);
+                        }
                     }
                     var file_nav = Path.Combine("upload_image", "Image_Category", Guid.NewGuid().ToString() + ".jpg");
-                    using (var stream = new FileStream(Path.Combine(_env.WebRootPath, file_nav), FileMode.CreateNew))
+                    if (input.Image_File_Nav != null)
                     {
-                        await input.Image_File_Nav.CopyToAsync(stream);
+                        using (var stream = new FileStream(Path.Combine(_env.WebRootPath, file_nav), FileMode.CreateNew))
+                        {
+                            await input.Image_File_Nav.CopyToAsync(stream);
+                        }
                     }
                     await _db.Category_Projects.AddAsync(new Category_Project
                     {
-                        Image_Path = path_file,
+                        Image_Path = input.Image_File != null ? path_file:null,
                         Name_EN = input.Name_EN,
                         Name_TH = input.Name_TH,
-                        Image_Path_Nav = file_nav
+                        Image_Path_Nav = input.Image_File_Nav != null ? file_nav:null
 
                     });
                     await _db.SaveChangesAsync();
@@ -74,11 +79,14 @@ namespace Lighting.Controllers.Backend
                     var img_nav_path = Path.Combine("upload_image", "Image_Category", Guid.NewGuid().ToString() + ".jpg");
                     if (input.Image_File != null)
                     {
-                        //delete old file
-                        var old_file = Path.Combine(_env.WebRootPath, category.Image_Path);
-                        if (System.IO.File.Exists(old_file))
+                        if (category.Image_Path != null)
                         {
-                            System.IO.File.Delete(old_file);
+                            //delete old file
+                            var old_file = Path.Combine(_env.WebRootPath, category.Image_Path);
+                            if (System.IO.File.Exists(old_file))
+                            {
+                                System.IO.File.Delete(old_file);
+                            }
                         }
                         using (var stream = new FileStream(Path.Combine(_env.WebRootPath, path_file), FileMode.CreateNew))
                         {
@@ -87,12 +95,14 @@ namespace Lighting.Controllers.Backend
                     }
                     if (input.Image_File_Nav != null)
                     {
-
-                        //delete old file
-                        var old_file = Path.Combine(_env.WebRootPath, category.Image_Path_Nav);
-                        if (System.IO.File.Exists(old_file))
+                        if (category.Image_Path_Nav != null)
                         {
-                            System.IO.File.Delete(old_file);
+                            //delete old file
+                            var old_file = Path.Combine(_env.WebRootPath, category.Image_Path_Nav);
+                            if (System.IO.File.Exists(old_file))
+                            {
+                                System.IO.File.Delete(old_file);
+                            }
                         }
                         using (var stream = new FileStream(Path.Combine(_env.WebRootPath, img_nav_path), FileMode.CreateNew))
                         {
@@ -109,7 +119,7 @@ namespace Lighting.Controllers.Backend
                 }
                 catch (Exception ex)
                 {
-                    return Json(new { status = "error", message = "เกิดข้อผิดพลาด" });
+                    return Json(new { status = "error", message = "เกิดข้อผิดพลาด:"+ex.Message });
                 }
 
             }

@@ -12,9 +12,8 @@ namespace Lighting.Models.InputFilterModels.Product
         public string? Model { get; set; }
         public string? Type_TH { get; set; }
         public string? Type_EN { get; set; }
-        [Required]
-        public IFormFile Preview_Image { get; set; }
-        public IFormFile Preview_Image2 { get; set; }
+        public IFormFile? Preview_Image { get; set; }
+        public IFormFile? Preview_Image2 { get; set; }
         public IFormFile? SUB_IMG { get; set; }
         public IFormFile? CUTSHEET { get; set; }
         public IFormFile? IESFILE { get; set; }
