@@ -1,0 +1,39 @@
+﻿    <!--search opup-->
+<div class="searchBar" id="search_nav">
+
+        <div class="search-category-item" onclick="closeNav()">close</div>
+
+    <div class="grid-search">
+        <select id="power" onchange="powerChange_ipRatingChange()">
+            <option selected>Power</option>
+        </select>
+    </div>
+    <div class="grid-search">
+        <select id="ip_rating" onchange="powerChange_ipRatingChange()">
+            <option selected>IP Rating</option>
+        </select>
+    </div>
+
+    @*<div class="search-category-item">
+    <div class="category-btn" id="show_subcategory" onclick="showSubcategory('show_subcategory')">category</div>
+    <div class="search-subcategory-container">
+    <div class="search-subcategory-item" onclick="selectSubCategory('name')">subcate</div>
+    </div>
+    </div>*@
+</div>
+
+<div class="search-box" id="show_search_container">
+
+    <button class="search-box-close-btn" onclick="closeSearchContainer()">&times;</button>
+    <div class="search-box-container" id="search_resault">
+
+        @*<a href="#" target="_blank">
+        <div class="search-card">
+        <img src="~/bt-product.jpg" class="search-card-img" />
+        <div class="searc-card-model">model</div>
+        <div class="search-card-power-rating-iprating">Power Rating<br />IP Rating<br />dimention</div>
+        </div>
+        </a>*@
+
+    </div>
+</div>

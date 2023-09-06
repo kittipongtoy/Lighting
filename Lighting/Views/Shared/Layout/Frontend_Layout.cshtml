@@ -59,7 +59,9 @@
     <!-- ✅ load moment.js ✅ -->
     <script src="~/assets/js/moment.min.js"></script>
     <script src="~/assets/js/moment-with-locales.min.js"></script>
-
+    <!--popup-->
+    <link rel="stylesheet" href="~/Frontend_assets/css/searchPopup.css" />
+    <script src="~/js/Search_Popup.js"></script>
     <!--end load moment.js-->
     <script src="~/Frontend_assets/OwlCarousel/owl.carousel.min.js"></script>
     <script type="text/javascript">
@@ -840,7 +842,7 @@
                                     <!-- SEARCH -->
                                     <li>
                                         <div class="search-container">
-                                            <div class="search-icon-btn">
+                                            <div class="search-icon-btn" onclick="showNav()">
                                                 <i class="fa fa-search"></i>
                                             </div>
                                             <div class="search-input">
@@ -1403,6 +1405,7 @@
         </nav>
     </div>
     @Html.Partial("~/Views/Shared/Inc/IR_inc_footer.cshtml")
+    @Html.Partial("~/Views/Shared/Inc/Search_Popup.cshtml")
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -19,7 +19,53 @@ namespace Lighting.Controllers.Frontend
             _env = env;
 
         }
+        [HttpPost]
+        public async Task<IActionResult> LoadProduct(int subcategoryId)
+        {
+            var lang = Request.Cookies["lang"];
+            var category = await _db.Product_Categorys.AsNoTracking().ToListAsync();
+            var subCategory = await _db.Product_Models.AsNoTracking().ToListAsync();
+            var product = await _db.Products.AsNoTracking().Where(x => x.Product_ModelId == subcategoryId).ToListAsync();
+           var p =  product.Select(x => new
+            {
+                Img = Path.Combine("upload_image", "Product", x.Folder_Path, x.Preview_Image),
+                IPRating = x.IP_Rating,
+                Power = x.Power,
+                Name = x.Model,
+                Dimention = x.Dimension,
+                Category = (lang == "EN" ? category.FirstOrDefault(cat => cat.Id == x.Product_CategoryId)!.Name_EN: category.FirstOrDefault(cat => cat.Id == x.Product_CategoryId)!.Name_TH),
+                SubCategory = (lang == "EN" ? subCategory.FirstOrDefault(sub => sub.Id == x.Product_ModelId)!.Name_EN : subCategory.FirstOrDefault(sub => sub.Id == x.Product_ModelId)!.Name_TH)
+            });
 
+            return Json(p);
+        }
+        [HttpPost]
+        public async Task<IActionResult> NavBarSearchListJson()
+        {
+            var listCategory = new List<SearchList>();
+            var lang = Request.Cookies["lang"];
+            var categorys = await _db.Product_Categorys.AsNoTracking().ToListAsync();
+            foreach (var category in categorys)
+            {
+                if(lang == "EN")
+                {
+                    listCategory.Add(new SearchList
+                    {
+                        CategoryName = category.Name_EN,
+                        SubCategory = await _db.Product_Models.AsNoTracking().Where(x => x.Product_CategoryId == category.Id).Select(x => new SubCategory { Id = x.Id, Name = x.Name_EN }).ToListAsync()
+                    });
+                }
+                else
+                {
+                    listCategory.Add(new SearchList
+                    {
+                        CategoryName = category.Name_TH,
+                        SubCategory = await _db.Product_Models.AsNoTracking().Where(x => x.Product_CategoryId == category.Id)!.Select(x => new SubCategory { Id = x.Id, Name = x.Name_TH }).ToListAsync()
+                    });
+                }
+            }
+            return Json(listCategory);
+        }
         public async Task<IActionResult> SearchJson(string search)
 
         {
@@ -450,5 +496,16 @@ namespace Lighting.Controllers.Frontend
         public string? Product { get; set; }
         public string? Subcategory { get; set; }
         public string? Category { get; set; }
+    }
+
+    class SubCategory
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+    }
+    class SearchList
+    {
+        public string CategoryName { get; set; }
+        public List<SubCategory?> SubCategory { get; set; }
     }
 }

@@ -34,6 +34,10 @@
     <link rel="stylesheet" href="~/Frontend_assets/OwlCarousel/owl.carousel.min.css">
     <link rel="stylesheet" href="~/Frontend_assets/OwlCarousel/owl.theme.default.min.css">
     <script src="~/Frontend_assets/OwlCarousel/owl.carousel.min.js"></script>
+    <!--popup-->
+    <link rel="stylesheet" href="~/Frontend_assets/css/searchPopup.css" />
+    <script src="~/js/Search_Popup.js"></script>
+
     <script>
         function SearchProduct(e) {
             let searchText = $("#search").val();
@@ -813,7 +817,7 @@
                                         <!-- SEARCH -->
                                         <li>
                                             <div class="search-container">
-                                                <div class="search-icon-btn">
+                                                <div class="search-icon-btn" onclick="showNav()">
                                                     <i class="fa fa-search"></i>
                                                 </div>
                                                 <div class="search-input">
@@ -1246,10 +1250,11 @@
             </ul>
         </nav>
     </div>
-
     @Html.Partial("~/Views/Shared/Inc/IR_inc_footer.cshtml")
+    @Html.Partial("~/Views/Shared/Inc/Search_Popup.cshtml")
     @await RenderSectionAsync("Scripts", required: false)
     <script>
+
         jQuery(document).ready(
             function () {
 
@@ -1263,21 +1268,21 @@
                         //console.log(data);
                         const nav_link = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                                     <li>
-                                                                                                                         <a href="/${url}${curr?.name}">
-                                                                                                                            <p>${curr?.name}</p>
-                                                                                                                                    <div class="menu-img"><img src="/${curr?.image}"></div>
-                                                                                                                         </a>
-                                                                                                                     </li>`, "");
+                                                                                                                                                                             <li>
+                                                                                                                                                                                 <a href="/${url}${curr?.name}">
+                                                                                                                                                                                    <p>${curr?.name}</p>
+                                                                                                                                                                                            <div class="menu-img"><img src="/${curr?.image}"></div>
+                                                                                                                                                                                 </a>
+                                                                                                                                                                             </li>`, "");
                         }
 
                         $("#nav_projectref").html(nav_link(data, "project/Project_Category?category="));
 
                         const nav_link_mobile = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                                <li>
-                                                                                                                    <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
-                                                                                                                 </li>`, "");
+                                                                                                                                                                        <li>
+                                                                                                                                                                            <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
+                                                                                                                                                                         </li>`, "");
                         }
 
                         $("#nav_mobile_projectRef").html(nav_link_mobile(data, "/project/Project_Category?category="));
@@ -1299,23 +1304,23 @@
                         //console.log(data);
                         const nav_link = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                                        <li>
-                                                                                                                            <a href="${url}${curr?.name}">
-                                                                                                                                <img src="/${curr?.image}">
-                                                                                                                                <div class="product-cate">
-                                                                                                                                    <p>${curr?.name}</p>
-                                                                                                                                </div>
-                                                                                                                            </a>
-                                                                                                                        </li>`, "");
+                                                                                                                                                                                <li>
+                                                                                                                                                                                    <a href="${url}${curr?.name}">
+                                                                                                                                                                                        <img src="/${curr?.image}">
+                                                                                                                                                                                        <div class="product-cate">
+                                                                                                                                                                                            <p>${curr?.name}</p>
+                                                                                                                                                                                        </div>
+                                                                                                                                                                                    </a>
+                                                                                                                                                                                </li>`, "");
                         }
 
                         $("#nav_product").html(nav_link(data, "/Product/Product_Category?category="));
 
                         const nav_link_mobile = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                                        <li>
-                                                                                                                            <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
-                                                                                                                         </li>`, "");
+                                                                                                                                                                                <li>
+                                                                                                                                                                                    <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
+                                                                                                                                                                                 </li>`, "");
                         }
 
                         $("#nav_mobile_product").html(nav_link_mobile(data, "/Product/Product_Category?category="));
@@ -1335,20 +1340,20 @@
                         //console.log(data);
                         const nav_link = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                                        <li>
-                                                                                                                        <a href="${url}${curr?.name}">
-                                                                                                                         <p>${curr?.name}</p>
-                                                                                                                         <div class="menu-img"><img src="/${curr?.image}"></div>
-                                                                                                                        </a>
-                                                                                                                        </li>`, "");
+                                                                                                                                                                                <li>
+                                                                                                                                                                                <a href="${url}${curr?.name}">
+                                                                                                                                                                                 <p>${curr?.name}</p>
+                                                                                                                                                                                 <div class="menu-img"><img src="/${curr?.image}"></div>
+                                                                                                                                                                                </a>
+                                                                                                                                                                                </li>`, "");
                         }
 
                         $("#nav_smartsolution").append(nav_link(data, "/SmartSolution/SmartSolutionDetail?name="));
                         const nav_link_mobile = (res, url) => {
                             return res.reduce((prev, curr) => prev += `
-                                                                                                                                <li>
-                                                                                                                                    <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
-                                                                                                                                 </li>`, "");
+                                                                                                                                                                                        <li>
+                                                                                                                                                                                            <div class="menu-item"><a href="${url}${curr?.name}">${curr?.name}</a></div>
+                                                                                                                                                                                         </li>`, "");
                         }
 
                         $("#nav_mobile_smartSolution").html(nav_link_mobile(data, "/SmartSolution/SmartSolutionDetail?name="));

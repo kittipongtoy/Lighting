@@ -1,0 +1,233 @@
+﻿@charset "utf-8";
+
+.searchBar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    padding-right: 10px;
+    z-index: 9000;
+    background-color: #fff;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: all 0.5s;
+    box-sizing: border-box;
+    display:none;
+}
+
+.search-category-item {
+    width: 100%;
+    min-height: 2.5rem;
+    height: auto;
+    background: white;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid black;
+    box-sizing: border-box;
+    transition: all 0.5s;
+    &:first-child
+
+{
+    background: red;
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+    position: sticky;
+    top: 0;
+}
+
+}
+
+.category-btn {
+    padding: 0 5px;
+    height: 2.5rem;
+    width: 100%;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.search-subcategory-container {
+    overflow: hidden;
+    height: 0;
+    transition: all 1s;
+}
+
+.search-subcategory-item {
+    margin-left: 2rem;
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid black;
+    transition: all 1s;
+    &:last-child
+
+{
+    border: none;
+}
+
+&:hover {
+    background-color: gray;
+    color: white;
+}
+
+}
+
+.grid-search {
+    
+    display: grid;
+    grid-template-columns: auto;
+    min-width: 0;
+    height: 2.5rem;
+    width: 100%;
+    & > *{
+    /*border: none;*/
+    border-bottom: 1px solid black;
+    }
+    &:nth-child(2) {
+        position: sticky;
+        top:40px;
+    }
+&:nth-child(3) {
+    position: sticky;
+    top: 80px;
+}
+}
+
+.search-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 300px;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 10000;
+    display:none;
+    @media only screen and (width < 820px) {
+        right:0;
+    }
+}
+
+.search-box-container {
+    /*position: relative;*/
+    padding: 5%;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    backdrop-filter: blur(10px);
+}
+
+.search-box-close-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    border: 2px solid red;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 40px;
+    font-weight: 900;
+    background-color: white;
+    padding: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    z-index: 10000;
+
+    @media only screen and (width < 820px) {
+        display: flex;
+    }
+
+    &:hover
+    {
+        transform: scale(1.5);
+    }
+
+}
+
+.search-card {
+    width: 350px;
+    height: 350px;
+    background-color: lime;
+    border-radius: 10px;
+    position: relative;
+    &:hover > .searc-card-model
+    {
+    opacity: 1;
+    }
+
+&:hover > .search-card-power-rating-iprating {
+    opacity: 1;
+}
+
+}
+
+.search-card-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.searc-card-model {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-size: 30px;
+    background-color: rgba(0,0,0,0.2);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: white;
+    user-select: none;
+    padding: 5px;
+    transition: all 1s;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    overflow: hidden;
+
+    @media only screen and (width < 820px) {
+        opacity: 1;
+    }
+}
+
+.search-card-power-rating-iprating {
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 20px;
+    padding: 5px;
+    background-color: rgba(0,0,0,0.2);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: all 1s;
+    color: white;
+    display: flex;
+    user-select: none;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    overflow: hidden;
+    @media only screen and (width < 820px) {
+        opacity: 1;
+    }
+}
