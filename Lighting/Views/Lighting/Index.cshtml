@@ -48,13 +48,13 @@
                     @if (lang == "EN")
                     {
                         <div class="col-lg-3 col-md-3 col-12">
-                            <a class="buttonBD m-size" href="product.php">ALL PRODUCTS<i class="fa fa-long-arrow-right"></i></a>
+                            <a class="buttonBD m-size" href="@Url.Action("product","product")">ALL PRODUCTS<i class="fa fa-long-arrow-right"></i></a>
                         </div>
                     }
                     else
                     {
                         <div class="col-lg-3 col-md-3 col-12">
-                            <a class="buttonBD m-size" href="product.php">สินค้าทั้งหมด<i class="fa fa-long-arrow-right"></i></a>
+                            <a class="buttonBD m-size" href="@Url.Action("product","product")">สินค้าทั้งหมด<i class="fa fa-long-arrow-right"></i></a>
                         </div>
                     }
                 </div>
@@ -336,13 +336,13 @@
                     @if (lang == "EN")
                     {
                         <div class="content-center">
-                            <a class="buttonBD m-size" href="project.php">ALL PROJECTS<i class="fa fa-long-arrow-right"></i></a>
+                            <a class="buttonBD m-size" href="@Url.Action("project","project")">ALL PROJECTS<i class="fa fa-long-arrow-right"></i></a>
                         </div>
                     }
                     else
                     {
                         <div class="content-center">
-                            <a class="buttonBD m-size" href="project.php">สินค้าทั้งหมด<i class="fa fa-long-arrow-right"></i></a>
+                            <a class="buttonBD m-size" href="@Url.Action("project","project")">สินค้าทั้งหมด<i class="fa fa-long-arrow-right"></i></a>
                         </div>
                     }
                 </div>
