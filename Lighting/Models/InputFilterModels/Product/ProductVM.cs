@@ -129,4 +129,15 @@ namespace Lighting.Models.InputFilterModels.Product
         public string Name_EN { get; set; }
         public string Name_TH { get; set; }
     }
+
+    public class Output_Product_IndexVM
+    {
+        public string? Preview_img { get; set; }
+        public string? Type_TH { get; set; }
+        public string? Type_EN { get; set; }
+
+        public string? CategoryName { get; set; }
+        public string? SubCategory { get; set; }
+        public string? ModelName { get; set; }
+    }
 }
