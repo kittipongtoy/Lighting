@@ -5,7 +5,7 @@
     top: 0;
     right: 0;
     bottom: 0;
-    width: 300px;
+    width: 350px;
     padding-right: 10px;
     z-index: 9000;
     background-color: #fff;
@@ -43,13 +43,15 @@
 
 .category-btn {
     padding: 0 5px;
-    height: 2.5rem;
+    min-height: 2.5rem;
+    height:auto;
     width: 100%;
     background-color: gray;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-size: 1.5rem;
+    word-wrap:break-word;
+    font-size: 1.2rem;
     color: white;
 }
 
@@ -61,7 +63,8 @@
 
 .search-subcategory-item {
     margin-left: 2rem;
-    font-size: 1.3rem;
+    font-size: 1rem;
+    min-height:1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -105,7 +108,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    right: 300px;
+    right: 350px;
     bottom: 0;
     background-color: rgba(0,0,0,0.6);
     z-index: 10000;

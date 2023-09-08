@@ -17,7 +17,6 @@ namespace Lighting.Controllers.Frontend
         {
             _db = db;
             _env = env;
-
         }
         [HttpPost]
         public async Task<IActionResult> LoadProduct(int subcategoryId)

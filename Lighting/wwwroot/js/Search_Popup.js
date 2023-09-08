@@ -50,7 +50,7 @@ const selectSubCategory = (subcategory_id) => {
         let ip_rating_ar = SEARCH_LIST_PRODUCT.map(x => x.ipRating);
         let power_set = new Set(power_ar);
         let ip_rating_set = new Set(ip_rating_ar);
-        let power_sHTML = "<option selected  value='-1'>IP Rating</option>";
+        let power_sHTML = "<option selected  value='-1'>Power</option>";
         let ip_rating_sHTML = "<option selected  value='-1' >IP Rating</option>";
         for (const p of power_set) {
             power_sHTML += `<option  value='${p}'>${p}</option>`;
@@ -103,17 +103,18 @@ const showNav = () => {
         $("#search_nav").css("display", "block");
         $("#show_search_container").css("display", "block");
     }
-
-    if (SEARCH_LIST_PRODUCT.length === 0) {
+    let count = $("#search_nav").children().length;
+    console.log(count);
+    if (count <= 3) {
         fetch("/product/NavBarSearchListJson", { method: "POST" }).then(x => x.json()).then(x => {
             let html = "";
             let i = 0;
             html = x.reduce((prev, curr) => prev += `
                                                     <div class="search-category-item">
-                                                        <div class="category-btn" id="show_subcategory${i}" onclick="showSubcategory('show_subcategory${i++}')">${curr?.categoryName}</div>
+                                                        <div class="category-btn" id="show_subcategory${i}" onclick="showSubcategory('show_subcategory${i++}')">${curr?.categoryName}ffffffffffffffffffffffffffkkkkkkkkkkkkkkkkkkkkkkfffffffffffffffffff</div>
                                                                 <div class="search-subcategory-container">`
                 +
-                (curr.subCategory.reduce((prevSub, currSub) => prevSub += `<div class= "search-subcategory-item" onclick = "selectSubCategory(${currSub?.id})" > ${currSub?.name} </div>`, ""))
+                (curr.subCategory.reduce((prevSub, currSub) => prevSub += `<div class= "search-subcategory-item" onclick = "selectSubCategory(${currSub?.id})" > ${currSub?.name} kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</div>`, ""))
                 +
                 `</div>
                                                     </div>`, "");
