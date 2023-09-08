@@ -111,10 +111,10 @@ const showNav = () => {
             let i = 0;
             html = x.reduce((prev, curr) => prev += `
                                                     <div class="search-category-item">
-                                                        <div class="category-btn" id="show_subcategory${i}" onclick="showSubcategory('show_subcategory${i++}')">${curr?.categoryName}ffffffffffffffffffffffffffkkkkkkkkkkkkkkkkkkkkkkfffffffffffffffffff</div>
+                                                        <div class="category-btn" id="show_subcategory${i}" onclick="showSubcategory('show_subcategory${i++}')">${curr?.categoryName}</div>
                                                                 <div class="search-subcategory-container">`
                 +
-                (curr.subCategory.reduce((prevSub, currSub) => prevSub += `<div class= "search-subcategory-item" onclick = "selectSubCategory(${currSub?.id})" > ${currSub?.name} kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</div>`, ""))
+                (curr.subCategory.reduce((prevSub, currSub) => prevSub += `<div class= "search-subcategory-item" onclick = "selectSubCategory(${currSub?.id})" > ${currSub?.name}</div>`, ""))
                 +
                 `</div>
                                                     </div>`, "");
