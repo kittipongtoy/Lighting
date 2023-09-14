@@ -20,21 +20,22 @@
         <div class="wrap-pad">
             <div class="three-colPad">
                 <div class="row">
-                    @if (lang == "EN")
+                    @if (lang == "TH")
                     {
                         @foreach (var news in Model)
                         {
                             var getDate = "";
-                            if (news.CreateDate_EN!=null){ 
+                            if (news.CreateDate_EN != null)
+                            {
                                 var inputDate = Convert.ToDateTime(news.CreateDate_EN);
-                                getDate = inputDate.ToString("dd/MMM/yyyy", new CultureInfo("en-US"));
+                                getDate = inputDate.ToString("dd/MMM/yyyy", new CultureInfo("th-TH"));
                             }
 
                             <div class="col-lg-4 col-md-4 col-6">
                                 <a class="news-publicBox" href="/New/NewDetail?id=@news.Id">
                                     <div class="row">
                                         <div class="col">
-                                            <div class="img-width" >
+                                            <div class="img-width">
                                                 <img src="~/@news?.TitleImage" />
                                             </div>
                                         </div>
@@ -43,7 +44,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="news-topic">
-                                                    <p>@news?.Title_EN</p>
+                                                    <p>@news?.Title_TH</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -65,7 +66,7 @@
                             if (news.CreateDate_EN != null)
                             {
                                 var inputDate = Convert.ToDateTime(news.CreateDate_EN);
-                                getDate = inputDate.ToString("dd/MMM/yyyy", new CultureInfo("th-TH"));
+                                getDate = inputDate.ToString("dd/MMM/yyyy", new CultureInfo("en-US"));
                             }
 
                             <div class="col-lg-4 col-md-4 col-6">
@@ -73,7 +74,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="img-width">
-                                                <img src="~/@news?.TitleImage"   />
+                                                <img src="~/@news?.TitleImage" />
                                             </div>
                                         </div>
                                     </div>
@@ -81,7 +82,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="news-topic">
-                                                    <p>@news?.Title_TH</p>
+                                                    <p>@news?.Title_EN</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -94,6 +95,7 @@
                                 </a>
                             </div>
                         }
+                       
                     }
                 </div>
             </div>

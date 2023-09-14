@@ -30,13 +30,14 @@
                                 {
                                     if (cate_name.Name_EN.ToLower().StartsWith(ViewBag.Category.ToLower()) || cate_name.Name_TH.StartsWith(ViewBag.Category.ToLower()))
                                     {
-                                        if (lang == "EN")
+                                        if (lang == "TH")
                                         {
-                                            <li><a href="@Url.Action("Product_Category","Product",new {category = ViewBag.Category})">@cate_name.Name_EN</a></li>
+                                            <li><a href="@Url.Action("Product_Category","Product",new {category = ViewBag.Category})">@cate_name.Name_TH</a></li>
+
                                         }
                                         else
                                         {
-                                            <li><a href="@Url.Action("Product_Category","Product",new {category = ViewBag.Category})">@cate_name.Name_TH</a></li>
+                                            <li><a href="@Url.Action("Product_Category","Product",new {category = ViewBag.Category})">@cate_name.Name_EN</a></li>
                                         }
                                     }
                                 }
@@ -45,13 +46,14 @@
                                 {
                                     if (sub_cat.Name_EN.ToLower().StartsWith(ViewBag.SubCategory.ToLower()) || sub_cat.Name_TH.ToLower().StartsWith(ViewBag.SubCategory))
                                     {
-                                        if (lang == "EN")
+                                        if (lang == "TH")
                                         {
-                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {sub_category=ViewBag.SubCategory,category = ViewBag.Category})">@sub_cat.Name_EN</a></li>
+                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {sub_category=ViewBag.SubCategory,category = ViewBag.Category})">@sub_cat.Name_TH</a></li>
+
                                         }
                                         else
                                         {
-                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {sub_category=ViewBag.SubCategory,category = ViewBag.Category})">@sub_cat.Name_TH</a></li>
+                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {sub_category=ViewBag.SubCategory,category = ViewBag.Category})">@sub_cat.Name_EN</a></li>
                                         }
                                     }
                                 }
@@ -65,13 +67,14 @@
                             {
                                 if (sub_cat.Name_EN.ToLower().StartsWith(ViewBag.SubCategory.ToLower()))
                                 {
-                                    if (lang == "EN")
+                                    if (lang == "TH")
                                     {
-                                        <h2>@sub_cat.Name_EN</h2>
+                                       
+                                        <h2>@sub_cat.Name_TH</h2>
                                     }
                                     else
                                     {
-                                        <h2>@sub_cat.Name_TH</h2>
+                                        <h2>@sub_cat.Name_EN</h2>
                                     }
                                 }
                             }

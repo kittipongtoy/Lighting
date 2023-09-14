@@ -44,24 +44,26 @@
                                 {
                                     if (sub_cat.Name_EN.ToLower().StartsWith(ViewBag.SubCategory.ToLower()) || sub_cat.Name_TH.StartsWith(ViewBag.SubCategory))
                                     {
-                                        if (lang == "EN")
+                                        if (lang == "TH")
                                         {
-                                            <li class="active"><a href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category,sub_category = sub_cat.Name_EN})">@sub_cat.Name_EN</a></li>
+                                            <li class="active"><a href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category,sub_category =sub_cat.Name_TH})">@sub_cat.Name_TH</a></li>
+
                                         }
                                         else
                                         {
-                                            <li class="active"><a href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category,sub_category =sub_cat.Name_TH})">@sub_cat.Name_TH</a></li>
+                                            <li class="active"><a href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category,sub_category = sub_cat.Name_EN})">@sub_cat.Name_EN</a></li>
                                         }
                                     }
                                     else
                                     {
-                                        if (lang == "EN")
+                                        if (lang == "TH")
                                         {
-                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category,sub_category = sub_cat.Name_EN})">@sub_cat.Name_EN</a></li>
+                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category,sub_category = sub_cat.Name_TH})">@sub_cat.Name_TH</a></li>
                                         }
                                         else
                                         {
-                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category,sub_category = sub_cat.Name_TH})">@sub_cat.Name_TH</a></li>
+                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category,sub_category = sub_cat.Name_EN})">@sub_cat.Name_EN</a></li>
+
                                         }
                                     }
                                 }
@@ -79,13 +81,14 @@
                                 {
                                     if (cate_name.Name_EN.ToLower().StartsWith(ViewBag.Category.ToLower()) || cate_name.Name_TH.StartsWith(ViewBag.Category))
                                     {
-                                        if (lang == "EN")
+                                        if (lang == "TH")
                                         {
-                                            <li><a href="@Url.Action("Product_Category","Product",new {category=ViewBag.Category})">@cate_name.Name_EN</a></li>
+                                            <li><a href="@Url.Action("Product_Category","Product",new {category=ViewBag.Category})">@cate_name.Name_TH</a></li>
+                                            
                                         }
                                         else
                                         {
-                                            <li><a href="@Url.Action("Product_Category","Product",new {category=ViewBag.Category})">@cate_name.Name_TH</a></li>
+                                            <li><a href="@Url.Action("Product_Category","Product",new {category=ViewBag.Category})">@cate_name.Name_EN</a></li>
                                         }
                                     }
                                 }
@@ -93,13 +96,14 @@
                                 {
                                     if (sub_cat.Name_EN.ToLower().StartsWith(ViewBag.SubCategory.ToLower()) || sub_cat.Name_TH.StartsWith(ViewBag.SubCategory))
                                     {
-                                        if (lang == "EN")
+                                        if (lang == "TH")
                                         {
-                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category,sub_category = ViewBag.SubCategory})">@sub_cat.Name_EN</a></li>
+                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category,sub_category = ViewBag.SubCategory})">@sub_cat.Name_TH</a></li>
                                         }
                                         else
                                         {
-                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category,sub_category = ViewBag.SubCategory})">@sub_cat.Name_TH</a></li>
+                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {category = ViewBag.Category,sub_category = ViewBag.SubCategory})">@sub_cat.Name_EN</a></li>
+
                                         }
                                     }
                                 }
@@ -114,13 +118,14 @@
                                     <div class="col">
                                         <div class="product-header">
                                             <h2>@Model.Model</h2>
-                                            @if (lang == "EN")
+                                            @if (lang == "TH")
                                             {
-                                                <p>@Model.Type_EN</p>
+                                                <p>@Model.Type_TH</p>
                                             }
                                             else
                                             {
-                                                <p>@Model.Type_TH</p>
+                                                
+                                                <p>@Model.Type_EN</p>
                                             }
                                            
                                         </div>

@@ -21,13 +21,14 @@
         <div class="wrap-pad project-page">
             <div class="row">
                 <div class="col">
-                    @if (lang == "EN")
+                    @if (lang == "TH")
                     {
-                        <h2>@category_name?.Name_EN</h2>
+                       
+                        <h2>@category_name?.Name_TH</h2>
                     }
                     else
                     {
-                        <h2>@category_name?.Name_TH</h2>
+                        <h2>@category_name?.Name_EN</h2>
                     }
                 </div>
             </div>
@@ -45,13 +46,14 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="contentBox-topic">
-                                            @if (lang == "EN")
+                                            @if (lang == "TH")
                                             {
-                                                <p>@Html.Raw(project.Name_EN)</p>
+                                                
+                                                <p>@Html.Raw(project.Name_TH)</p>
                                             }
                                             else
                                             {
-                                                <p>@Html.Raw(project.Name_TH)</p>
+                                                <p>@Html.Raw(project.Name_EN)</p>
                                             }
                                         </div>
                                     </div>

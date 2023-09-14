@@ -22,13 +22,14 @@
                     <div class="blueBox">
                         <div class="row">
                             <div class="col">
-                                @if (lang == "EN")
+                                @if (lang == "TH")
                                 {
-                                    <h3>@mainContact?.Title_EN</h3>
+                                   
+                                    <h3>@mainContact?.Title_TH</h3>
                                 }
                                 else
                                 {
-                                    <h3>@mainContact?.Title_TH</h3>
+                                    <h3>@mainContact?.Title_EN</h3>
                                 }
 
                             </div>
@@ -38,19 +39,20 @@
                                 <ul class="contact-info mb-0">
                                     <li class="address">
                                         <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                        @if (lang == "EN")
-                                        {
-                                            <p>
-                                                <strong> @mainContact?.TitleName_EN</strong>
-                                                @mainContact?.Location_EN
-                                            </p>
-                                        }
-                                        else
+                                        @if (lang == "TH")
                                         {
                                             <p>
                                                 <strong> @mainContact?.TitleName_TH</strong>
                                                 @mainContact?.Location_TH
                                             </p>
+                                        }
+                                        else
+                                        {
+                                            <p>
+                                                <strong> @mainContact?.TitleName_EN</strong>
+                                                @mainContact?.Location_EN
+                                            </p>
+
                                         }
 
                                     </li>
@@ -91,17 +93,18 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-5 col-12">
-                    @if (lang == "EN")
-                    {
-                        <a class="img-width hover-img" data-fancybox="" href="~/@mainContact?.Img_FileEN">
-                            <img src="~/@mainContact?.Img_FileEN">
-                        </a>
-                    }
-                    else
+                    @if (lang == "TH")
                     {
                         <a class="img-width hover-img" data-fancybox="" href="~/@mainContact?.Img_File">
                             <img src="~/@mainContact?.Img_File">
                         </a>
+                    }
+                    else
+                    {
+                        <a class="img-width hover-img" data-fancybox="" href="~/@mainContact?.Img_FileEN">
+                            <img src="~/@mainContact?.Img_FileEN">
+                        </a>
+
                     }
                 </div>
             </div>
@@ -140,110 +143,7 @@
                 <div class="display-group">
                     <!---------- 01 SHOWROOM ---------->
                     <div class="display-info" rel="1">
-                        @if (lang == "EN")
-                        {
-                            <div class="col-lg-12 row">
-                                @foreach (var item in Model.Where(contact => contact.ContactType == "SHOWROOM"))
-                                {
-                                    <div class="col-md-6 row">
-                                        <div class="col-lg-12 col-md-12 col-12">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <h5>@item?.PlaceName_EN</h5>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <ul class="contact-info">
-                                                        @if (item?.Sub_Factory_Name_EN != null)
-                                                        {
-                                                            <li class="address">
-                                                                <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                                @Html.Raw(item?.Sub_Factory_Name_EN)
-                                                            </li>
-                                                        }
-                                                        @if (item?.Location_EN != null)
-                                                        {
-                                                            <li class="address">
-                                                                <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                                <p style="word-wrap:break-word;">@item?.Location_EN </p>
-                                                            </li>
-                                                        }
-                                                        @if (item?.CellPhone != null)
-                                                        {
-                                                            <li>
-                                                                <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                                <p>@item?.CellPhone</p>
-                                                            </li>
-                                                        }
-                                                        @if (item?.TelePhone != null)
-                                                        {
-                                                            <li>
-                                                                <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
-                                                                <p>@item?.TelePhone</p>
-                                                            </li>
-                                                        }
-                                                        @if (item?.OfficePhone != null)
-                                                        {
-                                                            <li>
-                                                                <div class="icon-contact"><i class="fas fa-fax"></i></div>
-                                                                <p>@item?.OfficePhone</p>
-                                                            </li>
-                                                        }
-                                                        @if (item?.Email != null)
-                                                        {
-                                                            <li>
-                                                                <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                                <a style="word-wrap:break-word;" href="@item?.Email">@Html.Raw(item?.Email)</a>
-                                                            </li>
-                                                        }
-                                                        @if (item?.GoogleMaps_Url != null)
-                                                        {
-                                                            <li class="map">
-                                                                <a class="buttonB" href="@item?.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                                                @if (lang == "EN")
-                                                                {
-                                                                    @if (item?.YouTube_Url_EN != null)
-                                                                    {
-                                                                        <a class="buttonBD" href="@item?.YouTube_Url_EN" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
-                                                                    }
-                                                                }
-                                                                else
-                                                                {
-                                                                    @if (item?.YouTube_Url_TH != null)
-                                                                    {
-                                                                        <a class="buttonBD" href="@item?.YouTube_Url_TH" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
-                                                                    }
-                                                                }
-                                                            </li>
-                                                        }
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <!-- MAP :: FOR MOBILE -->
-                                            <div class="row d-block d-md-none">
-                                                <div class="col">
-                                                    <a class="img-width imgBD hover-img" data-fancybox href="~/@item?.ImagePathEN">
-                                                        <img src="~/@item?.ImagePathEN">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- MAP :: FOR PC -->
-                                        <div class="d-none d-md-block">
-                                            <div class="row">
-                                                <div class="col-lg-12 col-md-12">
-                                                    <a class="img-width imgBD hover-img" data-fancybox href="~/@item?.ImagePathEN">
-                                                        <img src="~/@item?.ImagePathEN">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        }
-                        else
+                        @if (lang == "TH")
                         {
                             <div class="col-lg-12 row">
                                 @foreach (var item in Model.Where(contact => contact.ContactType == "SHOWROOM"))
@@ -304,18 +204,19 @@
                                                         {
                                                             <li class="map">
                                                                 <a class="buttonB" href="@item?.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                                                @if (lang == "EN")
-                                                                {
-                                                                    @if (item?.YouTube_Url_EN != null)
-                                                                    {
-                                                                        <a class="buttonBD" href="@item?.YouTube_Url_EN" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
-                                                                    }
-                                                                }
-                                                                else
+                                                                @if (lang == "TH")
                                                                 {
                                                                     @if (item?.YouTube_Url_TH != null)
                                                                     {
                                                                         <a class="buttonBD" href="@item?.YouTube_Url_TH" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                                    }
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    @if (item?.YouTube_Url_EN != null)
+                                                                    {
+                                                                        <a class="buttonBD" href="@item?.YouTube_Url_EN" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
                                                                     }
                                                                 }
                                                             </li>
@@ -346,115 +247,117 @@
                                 }
                             </div>
                         }
+                        else
+                        {
+                            <div class="col-lg-12 row">
+                                @foreach (var item in Model.Where(contact => contact.ContactType == "SHOWROOM"))
+                                {
+                                    <div class="col-md-6 row">
+                                        <div class="col-lg-12 col-md-12 col-12">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h5>@item?.PlaceName_EN</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <ul class="contact-info">
+                                                        @if (item?.Sub_Factory_Name_EN != null)
+                                                        {
+                                                            <li class="address">
+                                                                <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                                @Html.Raw(item?.Sub_Factory_Name_EN)
+                                                            </li>
+                                                        }
+                                                        @if (item?.Location_EN != null)
+                                                        {
+                                                            <li class="address">
+                                                                <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                                <p style="word-wrap:break-word;">@item?.Location_EN </p>
+                                                            </li>
+                                                        }
+                                                        @if (item?.CellPhone != null)
+                                                        {
+                                                            <li>
+                                                                <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                                                <p>@item?.CellPhone</p>
+                                                            </li>
+                                                        }
+                                                        @if (item?.TelePhone != null)
+                                                        {
+                                                            <li>
+                                                                <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
+                                                                <p>@item?.TelePhone</p>
+                                                            </li>
+                                                        }
+                                                        @if (item?.OfficePhone != null)
+                                                        {
+                                                            <li>
+                                                                <div class="icon-contact"><i class="fas fa-fax"></i></div>
+                                                                <p>@item?.OfficePhone</p>
+                                                            </li>
+                                                        }
+                                                        @if (item?.Email != null)
+                                                        {
+                                                            <li>
+                                                                <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                                                <a style="word-wrap:break-word;" href="@item?.Email">@Html.Raw(item?.Email)</a>
+                                                            </li>
+                                                        }
+                                                        @if (item?.GoogleMaps_Url != null)
+                                                        {
+                                                            <li class="map">
+                                                                <a class="buttonB" href="@item?.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                                                @if (lang == "TH")
+                                                                {
+                                                                    @if (item?.YouTube_Url_TH != null)
+                                                                    {
+                                                                        <a class="buttonBD" href="@item?.YouTube_Url_TH" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    @if (item?.YouTube_Url_EN != null)
+                                                                    {
+                                                                        <a class="buttonBD" href="@item?.YouTube_Url_EN" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                                    }
+
+                                                                }
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!-- MAP :: FOR MOBILE -->
+                                            <div class="row d-block d-md-none">
+                                                <div class="col">
+                                                    <a class="img-width imgBD hover-img" data-fancybox href="~/@item?.ImagePathEN">
+                                                        <img src="~/@item?.ImagePathEN">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- MAP :: FOR PC -->
+                                        <div class="d-none d-md-block">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12">
+                                                    <a class="img-width imgBD hover-img" data-fancybox href="~/@item?.ImagePathEN">
+                                                        <img src="~/@item?.ImagePathEN">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            
+                        }
                     </div>
 
                     <!---------- 02 FACTORY & WAREHOUSE ---------->
                     <div class="display-info" rel="2">
                         <div class="row">
-                            @if (lang == "EN")
-                            {
-                                <div class="col-lg-12 row">
-                                    @foreach (var item in Model.Where(contact => contact.ContactType == "FACTORY_AND_WAREHOUSE"))
-                                    {
-                                        <div class="col-md-6 row">
-                                            <div class="col-lg-12 col-md-12 col-12">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <h5>@item?.PlaceName_EN</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <ul class="contact-info">
-                                                            @if (item?.Sub_Factory_Name_EN != null)
-                                                            {
-                                                                <li class="address">
-                                                                    <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                                    @Html.Raw(item?.Sub_Factory_Name_EN)
-                                                                </li>
-                                                            }
-                                                            @if (item?.Location_EN != null)
-                                                            {
-                                                                <li class="address">
-                                                                    <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                                    <p style="word-wrap:break-word;">@item?.Location_EN </p>
-                                                                </li>
-                                                            }
-                                                            @if (item?.CellPhone != null)
-                                                            {
-                                                                <li>
-                                                                    <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                                    <p>@item?.CellPhone</p>
-                                                                </li>
-                                                            }
-                                                            @if (item?.TelePhone != null)
-                                                            {
-                                                                <li>
-                                                                    <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
-                                                                    <p>@item?.TelePhone</p>
-                                                                </li>
-                                                            }
-                                                            @if (item?.OfficePhone != null)
-                                                            {
-                                                                <li>
-                                                                    <div class="icon-contact"><i class="fas fa-fax"></i></div>
-                                                                    <p>@item?.OfficePhone</p>
-                                                                </li>
-                                                            }
-                                                            @if (item?.Email != null)
-                                                            {
-                                                                <li>
-                                                                    <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                                    <a style="word-wrap:break-word;" href="@item?.Email">@Html.Raw(item?.Email)</a>
-                                                                </li>
-                                                            }
-                                                            @if (item?.GoogleMaps_Url != null)
-                                                            {
-                                                                <li class="map">
-                                                                    <a class="buttonB" href="@item?.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                                                      @if(lang == "EN")
-                                                            {
-                                                                @if (item?.YouTube_Url_EN != null)
-                                                                {
-                                                                    <a class="buttonBD" href="@item?.YouTube_Url_EN" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
-                                                                }
-                                                            }
-                                                            else
-                                                            {
-                                                                @if (item?.YouTube_Url_TH != null)
-                                                                {
-                                                                    <a class="buttonBD" href="@item?.YouTube_Url_TH" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
-                                                                }
-                                                            }
-                                                                </li>
-                                                            }
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <!-- MAP :: FOR MOBILE -->
-                                                <div class="row d-block d-md-none">
-                                                    <div class="col">
-                                                        <a class="img-width imgBD hover-img" data-fancybox href="~/@item?.ImagePathEN">
-                                                            <img src="~/@item?.ImagePathEN">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- MAP :: FOR PC -->
-                                            <div class="d-none d-md-block">
-                                                <div class="row">
-                                                    <div class="col-lg-12 col-md-12">
-                                                        <a class="img-width imgBD hover-img" data-fancybox href="~/@item?.ImagePathEN">
-                                                            <img src="~/@item?.ImagePathEN">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
-                            }
-                            else
+                            @if (lang == "TH")
                             {
                                 <div class="col-lg-12 row">
                                     @foreach (var item in Model.Where(contact => contact.ContactType == "FACTORY_AND_WAREHOUSE"))
@@ -515,20 +418,125 @@
                                                             {
                                                                 <li class="map">
                                                                     <a class="buttonB" href="@item?.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                                                      @if(lang == "EN")
-                                                            {
-                                                                @if (item?.YouTube_Url_EN != null)
-                                                                {
-                                                                    <a class="buttonBD" href="@item?.YouTube_Url_EN" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
-                                                                }
+                                                                    @if (lang == "TH")
+                                                                    {
+                                                                        @if (item?.YouTube_Url_TH != null)
+                                                                        {
+                                                                            <a class="buttonBD" href="@item?.YouTube_Url_TH" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                                        }
+  
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @if (item?.YouTube_Url_EN != null)
+                                                                        {
+                                                                            <a class="buttonBD" href="@item?.YouTube_Url_EN" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                                        }
+                                                                    }
+                                                                </li>
                                                             }
-                                                            else
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <!-- MAP :: FOR MOBILE -->
+                                                <div class="row d-block d-md-none">
+                                                    <div class="col">
+                                                        <a class="img-width imgBD hover-img" data-fancybox href="~/@item?.ImagePathEN">
+                                                            <img src="~/@item?.ImagePathEN">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- MAP :: FOR PC -->
+                                            <div class="d-none d-md-block">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <a class="img-width imgBD hover-img" data-fancybox href="~/@item?.ImagePathEN">
+                                                            <img src="~/@item?.ImagePathEN">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-lg-12 row">
+                                    @foreach (var item in Model.Where(contact => contact.ContactType == "FACTORY_AND_WAREHOUSE"))
+                                    {
+                                        <div class="col-md-6 row">
+                                            <div class="col-lg-12 col-md-12 col-12">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h5>@item?.PlaceName_EN</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <ul class="contact-info">
+                                                            @if (item?.Sub_Factory_Name_EN != null)
                                                             {
-                                                                @if (item?.YouTube_Url_TH != null)
-                                                                {
-                                                                    <a class="buttonBD" href="@item?.YouTube_Url_TH" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
-                                                                }
+                                                                <li class="address">
+                                                                    <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                                    @Html.Raw(item?.Sub_Factory_Name_EN)
+                                                                </li>
                                                             }
+                                                            @if (item?.Location_EN != null)
+                                                            {
+                                                                <li class="address">
+                                                                    <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                                    <p style="word-wrap:break-word;">@item?.Location_EN </p>
+                                                                </li>
+                                                            }
+                                                            @if (item?.CellPhone != null)
+                                                            {
+                                                                <li>
+                                                                    <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                                                    <p>@item?.CellPhone</p>
+                                                                </li>
+                                                            }
+                                                            @if (item?.TelePhone != null)
+                                                            {
+                                                                <li>
+                                                                    <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
+                                                                    <p>@item?.TelePhone</p>
+                                                                </li>
+                                                            }
+                                                            @if (item?.OfficePhone != null)
+                                                            {
+                                                                <li>
+                                                                    <div class="icon-contact"><i class="fas fa-fax"></i></div>
+                                                                    <p>@item?.OfficePhone</p>
+                                                                </li>
+                                                            }
+                                                            @if (item?.Email != null)
+                                                            {
+                                                                <li>
+                                                                    <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                                                    <a style="word-wrap:break-word;" href="@item?.Email">@Html.Raw(item?.Email)</a>
+                                                                </li>
+                                                            }
+                                                            @if (item?.GoogleMaps_Url != null)
+                                                            {
+                                                                <li class="map">
+                                                                    <a class="buttonB" href="@item?.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                                                    @if (lang == "TH")
+                                                                    {
+                                                                        @if (item?.YouTube_Url_TH != null)
+                                                                        {
+                                                                            <a class="buttonBD" href="@item?.YouTube_Url_TH" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @if (item?.YouTube_Url_EN != null)
+                                                                        {
+                                                                            <a class="buttonBD" href="@item?.YouTube_Url_EN" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                                        }
+
+                                                                    }
                                                                 </li>
                                                             }
                                                         </ul>
@@ -562,110 +570,7 @@
                     <!---------- 03 OVERSEA OFFICES ---------->
                     <div class="display-info" rel="3" id="oversea_btn">
                         <div class="row">
-                            @if (lang == "EN")
-                            {
-                                <div class="col-lg-12 row">
-                                    @foreach (var item in Model.Where(contact => contact.ContactType == "OVERSEA_OFFICES"))
-                                    {
-                                        <div class="col-md-6 row">
-                                            <div class="col-lg-12 col-md-12 col-12">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <h5>@item?.PlaceName_EN</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <ul class="contact-info">
-                                                            @if (item?.Sub_Factory_Name_EN != null)
-                                                            {
-                                                                <li class="address">
-                                                                    <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                                    @Html.Raw(item?.Sub_Factory_Name_EN)
-                                                                </li>
-                                                            }
-                                                            @if (item?.Location_EN != null)
-                                                            {
-                                                                <li class="address">
-                                                                    <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
-                                                                    <p style="word-wrap:break-word;">@item?.Location_EN </p>
-                                                                </li>
-                                                            }
-                                                            @if (item?.CellPhone != null)
-                                                            {
-                                                                <li>
-                                                                    <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
-                                                                    <p>@item?.CellPhone</p>
-                                                                </li>
-                                                            }
-                                                            @if (item?.TelePhone != null)
-                                                            {
-                                                                <li>
-                                                                    <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
-                                                                    <p>@item?.TelePhone</p>
-                                                                </li>
-                                                            }
-                                                            @if (item?.OfficePhone != null)
-                                                            {
-                                                                <li>
-                                                                    <div class="icon-contact"><i class="fas fa-fax"></i></div>
-                                                                    <p>@item?.OfficePhone</p>
-                                                                </li>
-                                                            }
-                                                            @if (item?.Email != null)
-                                                            {
-                                                                <li>
-                                                                    <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                                    <a style="word-wrap:break-word;" href="@item?.Email">@Html.Raw(item?.Email)</a>
-                                                                </li>
-                                                            }
-                                                            @if (item?.GoogleMaps_Url != null)
-                                                            {
-                                                                <li class="map">
-                                                                    <a class="buttonB" href="@item?.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                                                    @if (lang == "EN")
-                                                                    {
-                                                                        @if (item?.YouTube_Url_EN != null)
-                                                                        {
-                                                                            <a class="buttonBD" href="@item?.YouTube_Url_EN" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
-                                                                        }
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        @if (item?.YouTube_Url_TH != null)
-                                                                        {
-                                                                            <a class="buttonBD" href="@item?.YouTube_Url_TH" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
-                                                                        }
-                                                                    }
-                                                                </li>
-                                                            }
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <!-- MAP :: FOR MOBILE -->
-                                                <div class="row d-block d-md-none">
-                                                    <div class="col">
-                                                        <a class="img-width imgBD hover-img" data-fancybox href="~/@item?.ImagePathEN">
-                                                            <img src="~/@item?.ImagePathEN">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- MAP :: FOR PC -->
-                                            <div class="d-none d-md-block">
-                                                <div class="row">
-                                                    <div class="col-lg-12 col-md-12">
-                                                        <a class="img-width imgBD hover-img" data-fancybox href="~/@item?.ImagePathEN">
-                                                            <img src="~/@item?.ImagePathEN">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
-                            }
-                            else
+                            @if (lang == "TH")
                             {
                                 <div class="col-lg-12 row">
                                     @foreach (var item in Model.Where(contact => contact.ContactType == "OVERSEA_OFFICES"))
@@ -726,18 +631,123 @@
                                                             {
                                                                 <li class="map">
                                                                     <a class="buttonB" href="@item?.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
-                                                                    @if (lang == "EN")
+                                                                    @if (lang == "TH")
+                                                                    {
+                                                                        @if (item?.YouTube_Url_TH != null)
+                                                                        {
+                                                                            <a class="buttonBD" href="@item?.YouTube_Url_TH" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                                        }
+
+                                                                    }
+                                                                    else
                                                                     {
                                                                         @if (item?.YouTube_Url_EN != null)
                                                                         {
                                                                             <a class="buttonBD" href="@item?.YouTube_Url_EN" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
                                                                         }
                                                                     }
-                                                                    else
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <!-- MAP :: FOR MOBILE -->
+                                                <div class="row d-block d-md-none">
+                                                    <div class="col">
+                                                        <a class="img-width imgBD hover-img" data-fancybox href="~/@item?.ImagePathEN">
+                                                            <img src="~/@item?.ImagePathEN">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- MAP :: FOR PC -->
+                                            <div class="d-none d-md-block">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <a class="img-width imgBD hover-img" data-fancybox href="~/@item?.ImagePathEN">
+                                                            <img src="~/@item?.ImagePathEN">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-lg-12 row">
+                                    @foreach (var item in Model.Where(contact => contact.ContactType == "OVERSEA_OFFICES"))
+                                    {
+                                        <div class="col-md-6 row">
+                                            <div class="col-lg-12 col-md-12 col-12">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h5>@item?.PlaceName_EN</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <ul class="contact-info">
+                                                            @if (item?.Sub_Factory_Name_EN != null)
+                                                            {
+                                                                <li class="address">
+                                                                    <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                                    @Html.Raw(item?.Sub_Factory_Name_EN)
+                                                                </li>
+                                                            }
+                                                            @if (item?.Location_EN != null)
+                                                            {
+                                                                <li class="address">
+                                                                    <div class="icon-contact"><i class="fas fa-map-marker-alt"></i></div>
+                                                                    <p style="word-wrap:break-word;">@item?.Location_EN </p>
+                                                                </li>
+                                                            }
+                                                            @if (item?.CellPhone != null)
+                                                            {
+                                                                <li>
+                                                                    <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
+                                                                    <p>@item?.CellPhone</p>
+                                                                </li>
+                                                            }
+                                                            @if (item?.TelePhone != null)
+                                                            {
+                                                                <li>
+                                                                    <div class="icon-contact"><i class="fas fa-mobile-alt"></i></div>
+                                                                    <p>@item?.TelePhone</p>
+                                                                </li>
+                                                            }
+                                                            @if (item?.OfficePhone != null)
+                                                            {
+                                                                <li>
+                                                                    <div class="icon-contact"><i class="fas fa-fax"></i></div>
+                                                                    <p>@item?.OfficePhone</p>
+                                                                </li>
+                                                            }
+                                                            @if (item?.Email != null)
+                                                            {
+                                                                <li>
+                                                                    <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                                                    <a style="word-wrap:break-word;" href="@item?.Email">@Html.Raw(item?.Email)</a>
+                                                                </li>
+                                                            }
+                                                            @if (item?.GoogleMaps_Url != null)
+                                                            {
+                                                                <li class="map">
+                                                                    <a class="buttonB" href="@item?.GoogleMaps_Url" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
+                                                                    @if (lang == "TH")
                                                                     {
                                                                         @if (item?.YouTube_Url_TH != null)
                                                                         {
                                                                             <a class="buttonBD" href="@item?.YouTube_Url_TH" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
+                                                                        }
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @if (item?.YouTube_Url_EN != null)
+                                                                        {
+                                                                            <a class="buttonBD" href="@item?.YouTube_Url_EN" target="_blank"><i class="fab fa-youtube"></i>&nbsp;YouTube</a>
                                                                         }
                                                                     }
                                                                 </li>
