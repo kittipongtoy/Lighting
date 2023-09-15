@@ -34,7 +34,20 @@
                     <div class="news-page">
                         <div class="row">
                             <div class="col">
-                                @if (lang == "EN")
+                                @if (lang == "TH")
+                                {
+                                    var getDate = "";
+                                    if (Model.CreateDate_EN != null)
+                                    {
+                                        var inputDate = Convert.ToDateTime(Model.CreateDate_EN);
+                                        getDate = inputDate.ToString("dd/MMM/yyyy", new CultureInfo("th-TH"));
+                                    }
+
+                                    <h4>@Model.Title_TH</h4>
+                                    <div class="news-date">@getDate</div>
+
+                                }
+                                else
                                 {
                                     var getDate = "";
                                     if (Model.CreateDate_EN != null)
@@ -46,18 +59,6 @@
                                     <h4>@Model.Title_EN</h4>
                                     <div class="news-date">@getDate</div>
                                 }
-                                else
-                                {
-                                    var getDate = "";
-                                    if (Model.CreateDate_EN != null)
-                                    {
-                                        var inputDate = Convert.ToDateTime(Model.CreateDate_EN);
-                                        getDate = inputDate.ToString("dd/MMM/yyyy", new CultureInfo("th-TH"));
-                                    }
-
-                                    <h4>@Model.Title_TH</h4>
-                                    <div class="news-date">@getDate</div>
-                                }
                             </div>
                         </div>
                         <div class="row">
@@ -67,16 +68,17 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                @if (lang == "EN")
+                                @if (lang == "TH")
                                 {
                                     <div class="txt-content indent" id="content">
-                                        @Html.Raw(Model.Content_EN)
+                                        @Html.Raw(Model.Content_TH)
                                     </div>
                                 }
                                 else
                                 {
+
                                     <div class="txt-content indent" id="content">
-                                        @Html.Raw(Model.Content_TH)
+                                        @Html.Raw(Model.Content_EN)
                                     </div>
                                 }
                             </div>

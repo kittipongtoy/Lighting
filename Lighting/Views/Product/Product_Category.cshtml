@@ -27,17 +27,18 @@
                                     {
                                         if (cate_name.Name_EN.StartsWith(ViewBag.Category)  || cate_name.Name_TH.StartsWith(ViewBag.Category)) @*cate_name.Id == ViewBag.CategoryId*@
                                         {
-                                            if (lang == "EN")
+                                            if (lang == "TH")
                                             {
                                                 <a>
-                                                    @cate_name.Name_EN
+                                                    @cate_name.Name_TH
                                                 </a>
                                             }
                                             else
                                             {
                                                 <a>
-                                                    @cate_name.Name_TH
+                                                    @cate_name.Name_EN
                                                 </a>
+
                                             }
                                         }
                                     }
@@ -51,17 +52,18 @@
                             {
                                 if (cate_name.Name_EN.ToLower().StartsWith(ViewBag.Category)  || cate_name.Name_TH.StartsWith(ViewBag.Category)) @*cate_name.Id == ViewBag.CategoryId*@
                                 {
-                                    if (lang == "EN")
+                                    if (lang == "TH")
                                     {
                                         <h2>
-                                            @cate_name.Name_EN
+                                            @cate_name.Name_TH
                                         </h2>
                                     }
                                     else
                                     {
                                         <h2>
-                                            @cate_name.Name_TH
+                                            @cate_name.Name_EN
                                         </h2>
+
                                     }
                                 }
                             }
@@ -82,13 +84,13 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="contentBox-topic">
-                                                    @if (lang == "EN")
+                                                    @if (lang == "TH")
                                                     {
-                                                        <p>@sub_cat.Name_EN</p>
+                                                        <p>@sub_cat.Name_TH</p>
                                                     }
                                                     else
                                                     {
-                                                        <p>@sub_cat.Name_TH</p>
+                                                        <p>@sub_cat.Name_EN</p>
                                                     }
                                                     
                                                 </div>
