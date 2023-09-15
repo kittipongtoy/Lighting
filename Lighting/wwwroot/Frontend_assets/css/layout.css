@@ -492,13 +492,15 @@ header .row .col-lg-10 {
 
 .product-cate {
   width: 100%;
-  height: 42px;
+  height: 47px;
+  /*42*/
   display: table;
 }
 
 .product-cate p {
   font-weight: 400;
   font-size: 15px;
+  line-height: 1.46rem;
   color: #CED7DA;
   letter-spacing: 0.01rem;
   text-align: center;
@@ -5162,10 +5164,12 @@ footer .social li a i {
     margin-bottom: 12px;
   }
   .product-cate {
-    height: 36px;
+    height: 38px;
+    /*36*/
   }
   .product-cate p {
     font-size: 13px;
+    line-height: 1.18rem;
     letter-spacing: 0.01rem;
   }
   /*---------- FOOTER ----------*/

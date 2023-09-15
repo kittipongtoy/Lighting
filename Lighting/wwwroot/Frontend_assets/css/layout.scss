@@ -462,11 +462,12 @@ header{
 }
 .product-cate{
     width: 100%;
-    height: 46px; /*42*/
+    height: 47px; /*42*/
     display: table;
     p{
         font-weight: 400;
         font-size: 15px;
+        line-height: 1.46rem;
         color: #CED7DA;
         letter-spacing: 0.01rem;
         text-align: center;
@@ -4606,6 +4607,7 @@ footer{
         height: 38px; /*36*/
         p{
             font-size: 13px;
+            line-height: 1.18rem;
             letter-spacing: 0.01rem;
         }
     }
