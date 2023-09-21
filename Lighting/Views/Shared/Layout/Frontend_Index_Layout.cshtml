@@ -1,12 +1,17 @@
 ﻿@{
     var get_cookies = Context.Request.Cookies["lang"];
-
-    var SetLang = ViewData["Title"];
-    if (SetLang != null)
+    // if (get_cookies != null)
+    // { 
+    //     foreach (var cookie in Context.Request.Cookies.Keys)
+    //     {
+    //         Context.Response.Cookies.Delete(cookie);
+    //     }
+    // }
+    // get_cookies = Context.Request.Cookies["lang"];
+    if(get_cookies == null)
     {
-
+        get_cookies = "EN";
     }
-
     var Slide_Image_Index = (List<Lighting.Areas.Identity.Data.SlideImageIndex>)ViewData["Slide_Image_Index"];
 }
 

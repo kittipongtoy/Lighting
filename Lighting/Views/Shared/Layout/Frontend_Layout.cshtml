@@ -1,10 +1,24 @@
 ﻿@{
     var get_cookies = Context.Request.Cookies["lang"];
-
+    // if (get_cookies != null)
+    // {
+    //     foreach (var cookie in Context.Request.Cookies.Keys)
+    //     {
+    //         Context.Response.Cookies.Delete(cookie);
+    //     }
+    // }
     var SetLang = ViewData["Title"];
-    if (SetLang == "IR_index")
-    {
-        //get_cookies = "TH";
+    //get_cookies = Context.Request.Cookies["lang"];
+    if (get_cookies == null)
+    { 
+        if (SetLang == "IR_index")
+        {
+            get_cookies = "TH";
+        }
+        else
+        {
+            get_cookies = "EN";
+        }
     }
 
     ViewData["Finance_Statement"] = (List<Lighting.Areas.Identity.Data.SH_IR_Finance_Statement>)ViewBag.Finance_Statement;

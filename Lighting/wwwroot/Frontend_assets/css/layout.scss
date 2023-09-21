@@ -462,11 +462,12 @@ header{
 }
 .product-cate{
     width: 100%;
-    height: 42px;
+    height: 47px; /*42*/
     display: table;
     p{
         font-weight: 400;
         font-size: 15px;
+        line-height: 1.46rem;
         color: #CED7DA;
         letter-spacing: 0.01rem;
         text-align: center;
@@ -2749,10 +2750,12 @@ footer{
         margin-bottom: 22px;
     }
     .contact-info{
-        margin-bottom: 45px;
         li{
-            &.map .buttonBD{
-                margin-left: 10px;
+            &.map{
+                padding-left: 0 !important;
+                .buttonBD{
+                    margin-left: 10px;
+                }
             }
             p a{
                 display: inline-block;
@@ -2764,7 +2767,7 @@ footer{
     }
 }
 .topic-wSubtopic{
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     h5{
         margin-bottom: 8px;
     }
@@ -2784,6 +2787,28 @@ footer{
         }
     }
 }
+.contact-branch .row .col-lg-6{
+    &:first-child{
+        padding-right: 0;
+    }
+    &:nth-child(2){
+        padding-left: 0;
+    }
+}
+.contactBox{
+    background: white;
+    margin-bottom: 45px;
+    .contact-info{
+        margin-bottom: 0;
+    }
+    .img-width.imgBD{
+        margin-bottom: 0;
+    }
+}
+.contactBox-info{
+    padding: 40px 45px;
+}
+
 /*-- PRIVACY & COOKIES POLICY --*/
 .policy-page{
     .policy-header{
@@ -4579,9 +4604,10 @@ footer{
         }
     }
     .product-cate{
-        height: 36px;
+        height: 38px; /*36*/
         p{
             font-size: 13px;
+            line-height: 1.18rem;
             letter-spacing: 0.01rem;
         }
     }
@@ -5544,24 +5570,37 @@ footer{
     }
     .contact-page{
         h5{
-            font-size: 20px;
-            margin-bottom: 15px;
+            font-size: 18px;
+            margin-bottom: 12px;
         }
         .contact-info{
-            margin-bottom: 30px;
-        }
-        .img-width.imgBD{
-            margin-bottom: 35px;
+            li{
+                padding-left: 33px;
+                margin-bottom: 6px;
+                &.map{
+                    margin-top: 4px;
+                }
+            }
         }
     }
     .topic-wSubtopic{
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         h5{
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         ul li{
-            line-height: 1.6rem;
+            font-size: 14px;
+            line-height: 1.4rem;
+            &:before{
+                top: 3px;
+            }
         }
+    }
+    .contactBox{
+        margin-bottom: 40px;
+    }
+    .contactBox-info{
+        padding: 25px 30px 22px 25px;
     }
 
     /*-- PRIVACY & COOKIES POLICY --*/
@@ -7126,19 +7165,19 @@ footer{
         margin-bottom: 55px;
         .blueBox{
             min-height: 407px;
-            padding: 25px 27px 30px 27px;
+            padding: 25px 22px 28px 27px;
         }
         h3{
             font-size: 19px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .contact-info{
             li{
-                min-height: 26px;
-                padding-left: 36px;
-                margin-bottom: 7px;
+                min-height: 25px;
+                padding-left: 32px;
+                margin-bottom: 6px !important;
                 &.contactBT{
-                    margin-top: 5px;
+                    margin-top: 4px;
                 }
                 p{
                     font-size: 14px;
@@ -7147,13 +7186,13 @@ footer{
                     }
                 }
                 ul li{
-                    margin-bottom: 7px;
+                    margin-bottom: 4px;
                 }
             }
         }
         .icon-contact{
-            width: 26px;
-            height: 26px;
+            width: 25px;
+            height: 25px;
             i{
                 font-size: 11px;
             }
@@ -7161,23 +7200,19 @@ footer{
     }
     .contact-page{
         h5{
-            font-size: 16px;
-            margin-bottom: 10px;
+            font-size: 18px;
+            margin-bottom: 12px;
         }
         .contact-info{
-            margin-bottom: 25px;
             li{
-                margin-bottom: 6px;
+                margin-bottom: 7px;
                 &.map{
-                    margin-top: 7px;
+                    margin-top: 8px;
                 }
                 p{
-                    font-size: 14px;
+                    font-size: 15px;
                 }
             }
-        }
-        .img-width.imgBD{
-            margin-bottom: 30px;
         }
     }
     .topic-wSubtopic{
@@ -7187,7 +7222,25 @@ footer{
         }
         ul li{
             line-height: 1.6rem;
+            &:before{
+                top: 6px;
+            }
         }
+    }
+
+    .contact-branch .row .col-lg-6{
+        &:first-child{
+            padding-right: 12px;
+        }
+        &:nth-child(2){
+            padding-left: 12px;
+        }
+    }
+    .contactBox{
+        margin-bottom: 35px;
+    }
+    .contactBox-info{
+        padding: 32px 40px 45px 40px;
     }
 
     /*-- PRIVACY & COOKIES POLICY --*/
@@ -8778,17 +8831,19 @@ footer{
         }
         .contact-info{
             li{
+                padding-left: 32px;
                 margin-bottom: 6px;
+                p{
+                    font-size: 14px;
+                }
                 &.map{
                     margin-top: 8px;
+                    padding-left: 0;
                     .buttonBD{
                         margin-left: 8px;
                     }
                 }
             }
-        }
-        .img-width.imgBD{
-            margin-bottom: 35px;
         }
         .display-tab.s-txt li{
             width: 75%;
@@ -8803,6 +8858,12 @@ footer{
         ul li{
             line-height: 1.6rem;
         }
+    }
+    .contactBox{
+        margin-bottom: 25px;
+    }
+    .contactBox-info{
+        padding: 24px 22px 35px 22px;
     }
 
     /*-- PRIVACY & COOKIES POLICY --*/
