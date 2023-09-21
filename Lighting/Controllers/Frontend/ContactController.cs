@@ -20,18 +20,7 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> MainContactJson()
         {
             var lang = Request.Cookies["lang"];
-            if (lang == "EN")
-            {
-                return Json(await _db.MainContacts.Select(main => new
-                {
-                    companyName = main.TitleName_EN,
-                    EMail1 = main.EMail1,
-                    location = main.Location_EN,
-                    officePhone = main.OfficePhone,
-                    googleMapLink = main.GoogleMapLink,
-                }).FirstOrDefaultAsync());
-            }
-            else
+            if (lang == "TH")
             {
                 return Json(await _db.MainContacts.Select(main => new
                 {
@@ -41,6 +30,18 @@ namespace Lighting.Controllers.Frontend
                     officePhone = main.OfficePhone,
                     googleMapLink = main.GoogleMapLink,
                 }).FirstOrDefaultAsync());
+            }
+            else
+            {
+                return Json(await _db.MainContacts.Select(main => new
+                {
+                    companyName = main.TitleName_EN,
+                    EMail1 = main.EMail1,
+                    location = main.Location_EN,
+                    officePhone = main.OfficePhone,
+                    googleMapLink = main.GoogleMapLink,
+                }).FirstOrDefaultAsync());
+
             }
 
         }

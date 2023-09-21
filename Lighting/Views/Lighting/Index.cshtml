@@ -21,18 +21,19 @@
                     {
                         foreach (var item in Count_Setting_Index)
                         { 
-                            @if (lang == "EN")
-                            {
-                                <div class="col-lg-9 col-md-9 col-12">
-                                    <h3>@item.titleENG1</h3>
-                                    <h1>@item.titleENG3</h1>
-                                </div>
-                            }
-                            else
+                            @if (lang == "TH")
                             {
                                 <div class="col-lg-9 col-md-9 col-12">
                                     <h3>@item.titleTH1</h3>
                                     <h1>@item.titleTH3</h1>
+                                </div>
+                            }
+                            else
+                            {
+
+                                <div class="col-lg-9 col-md-9 col-12">
+                                    <h3>@item.titleENG1</h3>
+                                    <h1>@item.titleENG3</h1>
                                 </div>
                             }
                         }
@@ -46,16 +47,17 @@
                             <h1>NEW PRODUCTS</h1>
                         </div>
                     }
-                    @if (lang == "EN")
+                    @if (lang == "TH")
                     {
                         <div class="col-lg-3 col-md-3 col-12">
-                            <a class="buttonBD m-size" href="@Url.Action("product","product")">ALL PRODUCTS<i class="fa fa-long-arrow-right"></i></a>
+                            <a class="buttonBD m-size" href="@Url.Action("product","product")">สินค้าทั้งหมด<i class="fa fa-long-arrow-right"></i></a>
                         </div>
                     }
                     else
                     {
+
                         <div class="col-lg-3 col-md-3 col-12">
-                            <a class="buttonBD m-size" href="@Url.Action("product","product")">สินค้าทั้งหมด<i class="fa fa-long-arrow-right"></i></a>
+                            <a class="buttonBD m-size" href="@Url.Action("product","product")">ALL PRODUCTS<i class="fa fa-long-arrow-right"></i></a>
                         </div>
                     }
                 </div>
@@ -78,26 +80,28 @@
                                         <div class="row">
                                             <div class="col-lg-8 col-md-12 col-12">
                                                 <div class="contentBox-topic">
-                                                    @if (lang == "EN")
-                                                    {
-                                                        <p>@tt?.Type_EN</p>
-                                                    }
-                                                    else
+                                                    @if (lang == "TH")
                                                     {
                                                         <p>@tt?.Type_TH</p>
                                                     }
+                                                    else
+                                                    {
+                                                        
+                                                        <p>@tt?.Type_EN</p>
+                                                    }
                                                 </div>
                                             </div>
-                                            @if (lang == "EN")
+                                            @if (lang == "TH")
                                             {
                                                 <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                                    <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                                    <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
                                                 </div>
                                             }
                                             else
                                             {
+
                                                 <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                                    <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                                    <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
                                                 </div>
                                             }
                                         </div>
@@ -118,16 +122,17 @@
                                                 <p>BOLLARD </p>
                                             </div>
                                         </div>
-                                        @if (lang == "EN")
+                                        @if (lang == "TH")
                                         {
                                             <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
                                             </div>
                                         }
                                         else
                                         {
+
                                             <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
                                             </div>
                                         }
 
@@ -145,16 +150,17 @@
                                                 <p>LED FRESNEL SPOT LIGHT</p>
                                             </div>
                                         </div>
-                                        @if (lang == "EN")
+                                        @if (lang == "TH")
                                         {
                                             <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
                                             </div>
                                         }
                                         else
                                         {
+
                                             <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
                                             </div>
                                         }
                                     </div>
@@ -171,16 +177,17 @@
                                                 <p>HIGH BAY HBL731</p>
                                             </div>
                                         </div>
-                                        @if (lang == "EN")
+                                        @if (lang == "TH")
                                         {
                                             <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
                                             </div>
                                         }
                                         else
                                         {
+
                                             <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
                                             </div>
                                         }
                                     </div>
@@ -197,16 +204,17 @@
                                                 <p>TRACK LIGHT LED MODULE TRL110</p>
                                             </div>
                                         </div>
-                                        @if (lang == "EN")
+                                        @if (lang == "TH")
                                         {
                                             <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
                                             </div>
                                         }
                                         else
                                         {
+
                                             <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
                                             </div>
                                         }
                                     </div>
@@ -223,16 +231,17 @@
                                                 <p>RECESSED DOWNLIGHT RAL40D</p>
                                             </div>
                                         </div>
-                                        @if (lang == "EN")
+                                        @if (lang == "TH")
                                         {
                                             <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
                                             </div>
                                         }
                                         else
                                         {
+
                                             <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
                                             </div>
                                         }
                                     </div>
@@ -249,16 +258,17 @@
                                                 <p>WALL MOUNT WLL123</p>
                                             </div>
                                         </div>
-                                        @if (lang == "EN")
+                                        @if (lang == "TH")
                                         {
                                             <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
                                             </div>
                                         }
                                         else
                                         {
+
                                             <div class="col-lg-4 d-none d-md-none d-lg-block">
-                                                <div class="buttonB">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                                <div class="buttonB">Read more<i class="fa fa-long-arrow-right"></i></div>
                                             </div>
                                         }
                                     </div>
@@ -276,25 +286,7 @@
             {
                 foreach (var item in Count_Setting_Index)
                 { 
-                    @if (lang == "EN")
-                    {
-                        <div class="project-header">
-                            <div class="row">
-                                <div class="col">
-                                    <h1>@item.titleENG2</h1>
-                                    <h3>@item.titlesubENG2</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-xl-8 col-lg-9 col-md-11 col-12">
-                                <div class="txt-content text-center f-17">
-                                    <p>@item.DescriptENG2</p>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    else
+                    @if (lang == "TH")
                     {
                         <div class="project-header">
                             <div class="row">
@@ -308,6 +300,24 @@
                             <div class="col-xl-8 col-lg-9 col-md-11 col-12">
                                 <div class="txt-content text-center f-17">
                                     <p>@item.DescriptTH2</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="project-header">
+                            <div class="row">
+                                <div class="col">
+                                    <h1>@item.titleENG2</h1>
+                                    <h3>@item.titlesubENG2</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-xl-8 col-lg-9 col-md-11 col-12">
+                                <div class="txt-content text-center f-17">
+                                    <p>@item.DescriptENG2</p>
                                 </div>
                             </div>
                         </div>
@@ -334,16 +344,17 @@
             }
             <div class="row">
                 <div class="col">
-                    @if (lang == "EN")
+                    @if (lang == "TH")
                     {
                         <div class="content-center">
-                            <a class="buttonBD m-size" href="@Url.Action("project","project")">ALL PROJECTS<i class="fa fa-long-arrow-right"></i></a>
+                            <a class="buttonBD m-size" href="@Url.Action("project","project")">สินค้าทั้งหมด<i class="fa fa-long-arrow-right"></i></a>
                         </div>
                     }
                     else
                     {
+
                         <div class="content-center">
-                            <a class="buttonBD m-size" href="@Url.Action("project","project")">สินค้าทั้งหมด<i class="fa fa-long-arrow-right"></i></a>
+                            <a class="buttonBD m-size" href="@Url.Action("project","project")">ALL PROJECTS<i class="fa fa-long-arrow-right"></i></a>
                         </div>
                     }
                 </div>
@@ -364,24 +375,26 @@
                                         <div class="row">
                                             <div class="col-lg-9 col-md-12 col-12">
                                                 <div class="contentBox-topic">
-                                                    @if (lang == "EN")
+                                                    @if (lang == "TH")
                                                     {
-                                                        <p>@tt.Title_EN</p>
+                                                        <p>@tt.Title_TH</p>
                                                     }
                                                     else
                                                     {
-                                                        <p>@tt.Title_TH</p>
+                                                       
+                                                        <p>@tt.Title_EN</p>
                                                     }
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 d-none d-md-none d-lg-block">
-                                                @if (lang == "EN")
+                                                @if (lang == "TH")
                                                 {
-                                                    <div class="buttonBD">Read more<i class="fa fa-long-arrow-right"></i></div>
+                                                    <div class="buttonBD">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
                                                 }
                                                 else
                                                 {
-                                                    <div class="buttonBD">เพิ่มเติม<i class="fa fa-long-arrow-right"></i></div>
+                                                   
+                                                    <div class="buttonBD">Read more<i class="fa fa-long-arrow-right"></i></div>
                                                 }
                                             </div>
                                         </div>
@@ -474,22 +487,7 @@
             {
                 foreach (var item in Count_Setting_Index)
                 { 
-                    @if (lang == "EN")
-                    {
-                        <div class="row">
-                            <div class="col">
-                                <h1>@item.titleENG4</h1>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-xl-8 col-lg-9 col-md-11 col-12">
-                                <div class="txt-content text-center f-17">
-                                    <p>@item.titlesubENG4</p>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    else
+                    @if (lang == "TH")
                     {
                         <div class="row">
                             <div class="col">
@@ -500,6 +498,22 @@
                             <div class="col-xl-8 col-lg-9 col-md-11 col-12">
                                 <div class="txt-content text-center f-17">
                                     <p>@item.titlesubTH4</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+
+                        <div class="row">
+                            <div class="col">
+                                <h1>@item.titleENG4</h1>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-xl-8 col-lg-9 col-md-11 col-12">
+                                <div class="txt-content text-center f-17">
+                                    <p>@item.titlesubENG4</p>
                                 </div>
                             </div>
                         </div>
@@ -535,6 +549,31 @@
                                         if (download.file_name_ENG == null)
                                         {
                                             <div class="items">
+                                                <a class="contentBox" href="~/upload_file/Download/@(download?.file_name_ENG)" target="_blank">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="img-width"><img src="~/upload_image/Download/@download?.upload_image_ENG"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="contentBox-topic">
+                                                                <p>@download?.Name_EN</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            
+                                            <div class="items">
                                                 <a class="contentBox" href="@(download?.L_AND_BIM_Link)" target="_blank">
                                                     <div class="row">
                                                         <div class="col">
@@ -554,31 +593,7 @@
                                                         </div>
                                                     </div>
                                                 </a>
-                                            </div> 
-                                        }
-                                        else
-                                        {
-                                            <div class="items">
-                                                <a class="contentBox" href="~/upload_file/Download/@(download?.file_name_ENG)"  target="_blank">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <div class="img-width"><img src="~/upload_image/Download/@download?.upload_image_ENG"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <div class="contentBox-topic">
-                                                                <p>@download?.Name_EN</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>                                             
+                                            </div>
                                         }
                                     }
                                     else

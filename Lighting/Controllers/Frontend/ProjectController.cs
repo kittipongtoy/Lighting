@@ -19,14 +19,14 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> JsonNavBar()
         {
             var lang = Request.Cookies["lang"];
-            if (lang == "EN")
+            if (lang == "TH")
             {
                 var project = await _db.Category_Projects
                 .AsNoTracking()
                 .Select(project => new
                 {
                     Image = project.Image_Path_Nav,
-                    Name = project.Name_EN,
+                    Name = project.Name_TH,
                 })
                 .ToListAsync();
 
@@ -39,7 +39,7 @@ namespace Lighting.Controllers.Frontend
                 .Select(project => new
                 {
                     Image = project.Image_Path_Nav,
-                    Name = project.Name_TH,
+                    Name = project.Name_EN,
                 })
                 .ToListAsync();
 

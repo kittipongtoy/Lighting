@@ -18,13 +18,14 @@
             {
                 foreach (var headTitle in ViewBag.Head)
                 {
-                    if (Context.Request.Cookies["lang"] == "EN")
+                    if (Context.Request.Cookies["lang"] == "TH")
                     {
-                        <div class="col">@headTitle.Title_ENG</div>
+                        <div class="col">@headTitle.title_TH</div>
                     }
                     else
                     {
-                        <div class="col">@headTitle.title_TH</div>
+                       
+                        <div class="col">@headTitle.Title_ENG</div>
                     }
                 }
             }
@@ -47,14 +48,14 @@
                             {
                                 foreach (var title in ViewBag.TitleMenu)
                                 {
-                                    if (Context.Request.Cookies["lang"] == "EN")
+                                    if (Context.Request.Cookies["lang"] == "TH")
                                     {
                                         if (title.id == 1)
                                         {
                                             <li class="active">
                                                 <a href="@Url.Action("L_AND_BIM_OBJECT_Page","Download")">
                                                     <div class="cate-txtBox">
-                                                        <div>@title.DownloadType_name_ENG</div>
+                                                        <div>@title.DownloadType_name_TH</div>
                                                     </div>
                                                 </a>
                                             </li>
@@ -64,7 +65,7 @@
                                             <li>
                                                 <a href="@Url.Action("CATALOGUE_Page","Download")">
                                                     <div class="cate-txtBox">
-                                                        <div>@title.DownloadType_name_ENG</div>
+                                                        <div>@title.DownloadType_name_TH</div>
                                                     </div>
                                                 </a>
                                             </li>
@@ -74,7 +75,7 @@
                                             <li>
                                                 <a href="@Url.Action("COMPANY_PROFILE_Page","Download")">
                                                     <div class="cate-txtBox">
-                                                        <div>@title.DownloadType_name_ENG</div>
+                                                        <div>@title.DownloadType_name_TH</div>
                                                     </div>
                                                 </a>
                                             </li>
@@ -84,7 +85,7 @@
                                             <li>
                                                 <a href="@Url.Action("IES_FILE_Page","Download")">
                                                     <div class="cate-txtBox">
-                                                        <div>@title.DownloadType_name_ENG</div>
+                                                        <div>@title.DownloadType_name_TH</div>
                                                     </div>
                                                 </a>
                                             </li>
@@ -94,7 +95,7 @@
                                             <li>
                                                 <a href="@Url.Action("LEAFLET_Page","Download")">
                                                     <div class="cate-txtBox">
-                                                        <div>@title.DownloadType_name_ENG</div>
+                                                        <div>@title.DownloadType_name_TH</div>
                                                     </div>
                                                 </a>
                                             </li>
@@ -102,12 +103,13 @@
                                     }
                                     else
                                     {
+
                                         if (title.id == 1)
                                         {
                                             <li class="active">
                                                 <a href="@Url.Action("L_AND_BIM_OBJECT_Page","Download")">
                                                     <div class="cate-txtBox">
-                                                        <div>@title.DownloadType_name_TH</div>
+                                                        <div>@title.DownloadType_name_ENG</div>
                                                     </div>
                                                 </a>
                                             </li>
@@ -117,7 +119,7 @@
                                             <li>
                                                 <a href="@Url.Action("CATALOGUE_Page","Download")">
                                                     <div class="cate-txtBox">
-                                                        <div>@title.DownloadType_name_TH</div>
+                                                        <div>@title.DownloadType_name_ENG</div>
                                                     </div>
                                                 </a>
                                             </li>
@@ -127,7 +129,7 @@
                                             <li>
                                                 <a href="@Url.Action("COMPANY_PROFILE_Page","Download")">
                                                     <div class="cate-txtBox">
-                                                        <div>@title.DownloadType_name_TH</div>
+                                                        <div>@title.DownloadType_name_ENG</div>
                                                     </div>
                                                 </a>
                                             </li>
@@ -137,7 +139,7 @@
                                             <li>
                                                 <a href="@Url.Action("IES_FILE_Page","Download")">
                                                     <div class="cate-txtBox">
-                                                        <div>@title.DownloadType_name_TH</div>
+                                                        <div>@title.DownloadType_name_ENG</div>
                                                     </div>
                                                 </a>
                                             </li>
@@ -147,7 +149,7 @@
                                             <li>
                                                 <a href="@Url.Action("LEAFLET_Page","Download")">
                                                     <div class="cate-txtBox">
-                                                        <div>@title.DownloadType_name_TH</div>
+                                                        <div>@title.DownloadType_name_ENG</div>
                                                     </div>
                                                 </a>
                                             </li>
@@ -205,19 +207,20 @@
                         {
                             foreach (var title in ViewBag.TitleMenu)
                             {
-                                if (Context.Request.Cookies["lang"] == "EN")
+                                if (Context.Request.Cookies["lang"] == "TH")
                                 {
 
                                     if (title.id == 1)
                                     {
-                                        <h3>@title.DownloadType_name_ENG</h3>
+                                        <h3>@title.DownloadType_name_TH</h3>
                                     }
                                 }
                                 else
                                 {
                                     if (title.id == 1)
                                     {
-                                        <h3>@title.DownloadType_name_TH</h3>
+                                        
+                                        <h3>@title.DownloadType_name_ENG</h3>
                                     }
                                 }
                             }
@@ -236,58 +239,7 @@
                     {
                         var getLink = download.L_AND_BIM_Link;
 
-                        if (lang == "EN")
-                        {
-                            <div class="col-lg-6 col-md-6 col-11">
-                                @if (download.file_name_ENG == null)
-                                {
-                                    <a class="contentBox" href="@(download?.L_AND_BIM_Link)" target="_blank">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="img-width"><img src="~/upload_image/Download/@download?.upload_image_ENG"></div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="contentBox-topic">
-                                                    <p>@download?.Name_EN</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                }
-                                else
-                                {
-                                    <a class="contentBox" href="~/upload_file/Download/@(download?.file_name_ENG)" target="_blank">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="img-width"><img src="~/upload_image/Download/@download?.upload_image_ENG"></div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="contentBox-topic">
-                                                    <p>@download?.Name_EN</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                }
-                            </div>
-                        }
-                        else
+                        if (lang == "TH")
                         {
                             <div class="col-lg-6 col-md-6 col-11">
                                 @if (download.file_name == null)
@@ -334,6 +286,57 @@
                                         </div>
                                     </a>
 
+
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-lg-6 col-md-6 col-11">
+                                @if (download.file_name_ENG == null)
+                                {
+                                    <a class="contentBox" href="@(download?.L_AND_BIM_Link)" target="_blank">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="img-width"><img src="~/upload_image/Download/@download?.upload_image_ENG"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="contentBox-topic">
+                                                    <p>@download?.Name_EN</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                }
+                                else
+                                {
+                                    <a class="contentBox" href="~/upload_file/Download/@(download?.file_name_ENG)" target="_blank">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="img-width"><img src="~/upload_image/Download/@download?.upload_image_ENG"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="contentBox-topic">
+                                                    <p>@download?.Name_EN</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>Download</div>
+                                            </div>
+                                        </div>
+                                    </a>
 
                                 }
                             </div>

@@ -15,13 +15,13 @@ namespace Lighting.Controllers.Frontend
         public async Task<IActionResult> JsonNavBar()
         {
             var lang = Request.Cookies["lang"];
-            if (lang == "EN")
+            if (lang == "TH")
             {
                 var solutions = await _db.Smart_Solutions
                     .AsNoTracking()
                     .Select(x => new
                     {
-                        Name = x.TitleName_EN,
+                        Name = x.TitleName_TH,
                         Image = x.PreviewImg
 
                     })
@@ -34,7 +34,7 @@ namespace Lighting.Controllers.Frontend
                 .AsNoTracking()
                 .Select(x => new
                 {
-                    Name = x.TitleName_TH,
+                    Name = x.TitleName_EN,
                     Image = x.PreviewImg
 
                 })
