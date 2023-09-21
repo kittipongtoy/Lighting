@@ -402,13 +402,11 @@ namespace Lighting.Controllers.Backend
             return NotFound("file not found");
         }
 
-        public async Task<IActionResult> Manage_Page(int start)
+        public async Task<IActionResult> Manage_Page()
         {
             var project = await _db.ProjectRefs
                 .AsNoTracking()
                 .OrderByDescending(r => r.Id)
-                .Skip(start)
-                .Take(start + 20)
                 .Select(project => new Output_ProjectRef_PreviewVM
                 {
                     Id = project.Id,
