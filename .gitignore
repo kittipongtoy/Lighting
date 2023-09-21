@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+*.jpg
+/Lighting/Migrations/20230825091509_xx.cs
