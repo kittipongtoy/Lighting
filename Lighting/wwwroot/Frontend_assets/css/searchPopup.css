@@ -166,7 +166,7 @@
 .search-card {
     width: 350px;
     height: 350px;
-    background-color: lime;
+    background-color: gray;
     border-radius: 10px;
     position: relative;
     &:hover > .searc-card-model

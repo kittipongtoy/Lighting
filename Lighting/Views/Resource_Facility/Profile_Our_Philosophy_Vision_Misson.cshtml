@@ -24,15 +24,16 @@
                     {
                         foreach (var item in ViewBag.Header)
                         {
-                            if (Context.Request.Cookies["lang"] == "EN")
-                            {
-                                <h5>@item.Title_EN</h5>
-                                <h1>@item.SubTitle_EN</h1>
-                            }
-                            else
+                            if (Context.Request.Cookies["lang"] == "TH")
                             {
                                 <h5>@item.Title_TH</h5>
                                 <h1>@item.SubTitle_TH</h1>
+                            }
+                            else
+                            {
+
+                                <h5>@item.Title_EN</h5>
+                                <h1>@item.SubTitle_EN</h1>
                             }
                         }
                     }
@@ -49,19 +50,20 @@
             {
                 foreach (var item in ViewBag.Body)
                 {
-                    if (Context.Request.Cookies["lang"] == "EN")
+                    if (Context.Request.Cookies["lang"] == "TH")
                     {
                         <div class="col-lg-10 col-md-11 col-12">
-                            <a class="img-width hover-img" data-fancybox href="~/upload_image/RF_Philosophy_VM/@item.image_name_ENG">
-                                <img src="~/upload_image/RF_Philosophy_VM/@item.image_name_ENG">
+                            <a class="img-width hover-img" data-fancybox href="~/upload_image/RF_Philosophy_VM/@item.image_name">
+                                <img src="~/upload_image/RF_Philosophy_VM/@item.image_name">
                             </a>
                         </div>
                     }
                     else
                     {
-                        <div class="col-lg-10 col-md-11 col-12">
-                            <a class="img-width hover-img" data-fancybox href="~/upload_image/RF_Philosophy_VM/@item.image_name">
-                                <img src="~/upload_image/RF_Philosophy_VM/@item.image_name">
+
+                                                <div class="col-lg-10 col-md-11 col-12">
+                            <a class="img-width hover-img" data-fancybox href="~/upload_image/RF_Philosophy_VM/@item.image_name_ENG">
+                                <img src="~/upload_image/RF_Philosophy_VM/@item.image_name_ENG">
                             </a>
                         </div>
                     }

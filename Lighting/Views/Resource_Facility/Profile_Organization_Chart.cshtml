@@ -26,15 +26,16 @@
                     {
                         foreach (var item in ViewBag.Header)
                         {
-                            if (Context.Request.Cookies["lang"] == "EN")
-                            {
-                                <h5>@item.Title_EN</h5>
-                                <h1>@item.SubTitle_EN</h1>
-                            }
-                            else
+                            if (Context.Request.Cookies["lang"] == "TH")
                             {
                                 <h5>@item.Title_TH</h5>
                                 <h1>@item.SubTitle_TH</h1>
+                            }
+                            else
+                            {
+
+                                <h5>@item.Title_EN</h5>
+                                <h1>@item.SubTitle_EN</h1>
                             }
                         }
                     }

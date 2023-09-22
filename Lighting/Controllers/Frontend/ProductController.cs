@@ -24,7 +24,7 @@ namespace Lighting.Controllers.Frontend
             var lang = Request.Cookies["lang"];
             var category = await _db.Product_Categorys.AsNoTracking().ToListAsync();
             var subCategory = await _db.Product_Models.AsNoTracking().ToListAsync();
-            var product = await _db.Products.AsNoTracking().Where(x => x.Product_ModelId == subcategoryId).ToListAsync();
+            var product = await _db.Products.AsNoTracking().Where(x => x.Product_ModelId == subcategoryId).OrderByDescending(pro => pro.Id).ToListAsync();
            var p =  product.Select(x => new
             {
                 Img = Path.Combine("upload_image", "Product", x.Folder_Path, x.Preview_Image),
@@ -43,7 +43,7 @@ namespace Lighting.Controllers.Frontend
         {
             var listCategory = new List<SearchList>();
             var lang = Request.Cookies["lang"];
-            var categorys = await _db.Product_Categorys.AsNoTracking().ToListAsync();
+            var categorys = await _db.Product_Categorys.AsNoTracking().OrderByDescending(cat => cat.Id).ToListAsync();
             foreach (var category in categorys)
             {
                 if(lang == "TH")
@@ -51,7 +51,7 @@ namespace Lighting.Controllers.Frontend
                     listCategory.Add(new SearchList
                     {
                         CategoryName = category.Name_TH,
-                        SubCategory = await _db.Product_Models.AsNoTracking().Where(x => x.Product_CategoryId == category.Id).Select(x => new SubCategory { Id = x.Id, Name = x.Name_TH }).ToListAsync()
+                        SubCategory = await _db.Product_Models.AsNoTracking().Where(x => x.Product_CategoryId == category.Id).OrderByDescending(cat => cat.Id).Select(x => new SubCategory { Id = x.Id, Name = x.Name_TH }).ToListAsync()
                     });
                 }
                 else
@@ -59,7 +59,7 @@ namespace Lighting.Controllers.Frontend
                     listCategory.Add(new SearchList
                     {
                         CategoryName = category.Name_EN,
-                        SubCategory = await _db.Product_Models.AsNoTracking().Where(x => x.Product_CategoryId == category.Id)!.Select(x => new SubCategory { Id = x.Id, Name = x.Name_EN }).ToListAsync()
+                        SubCategory = await _db.Product_Models.AsNoTracking().Where(x => x.Product_CategoryId == category.Id)!.OrderByDescending(cat => cat.Id).Select(x => new SubCategory { Id = x.Id, Name = x.Name_EN }).ToListAsync()
                     });
                 }
             }

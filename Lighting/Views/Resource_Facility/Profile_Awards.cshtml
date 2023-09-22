@@ -24,15 +24,16 @@
                     {
                         foreach (var item in ViewBag.Header)
                         {
-                            if (Context.Request.Cookies["lang"] == "EN")
-                            {
-                                <h5>@item.Title_EN</h5>
-                                <h1>@item.SubTitle_EN</h1>
-                            }
-                            else
+                            if (Context.Request.Cookies["lang"] == "TH")
                             {
                                 <h5>@item.Title_TH</h5>
                                 <h1>@item.SubTitle_TH</h1>
+                            }
+                            else
+                            {
+
+                                <h5>@item.Title_EN</h5>
+                                <h1>@item.SubTitle_EN</h1>
                             }
                         }
                     }
@@ -51,29 +52,7 @@
                     {
                         foreach (var item in ViewBag.Body)
                         {
-                            if (Context.Request.Cookies["lang"] == "EN")
-                            {
-                                <div class="col-lg-6 col-md-6 col-12">
-                                    <div class="awardBox">
-                                        <div class="row">
-                                            <div class="col">
-                                                <a class="img-width hover-img" data-fancybox="gallery" data-caption="@item.Title_EN" href="~/upload_image/RF_Award/@item.ImageEN">
-                                                    <img src="~/upload_image/RF_Award/@item.ImageEN">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <ul class="name-info">
-                                                    <li>@item.Title_EN</li>
-                                                    <li>@item.SubTitle_EN</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                            else
+                            if (Context.Request.Cookies["lang"] == "TH")
                             {
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="awardBox">
@@ -89,6 +68,29 @@
                                                 <ul class="name-info">
                                                     <li>@item.Title_TH</li>
                                                     <li>@item.SubTitle_TH</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                               
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="awardBox">
+                                        <div class="row">
+                                            <div class="col">
+                                                <a class="img-width hover-img" data-fancybox="gallery" data-caption="@item.Title_EN" href="~/upload_image/RF_Award/@item.ImageEN">
+                                                    <img src="~/upload_image/RF_Award/@item.ImageEN">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <ul class="name-info">
+                                                    <li>@item.Title_EN</li>
+                                                    <li>@item.SubTitle_EN</li>
                                                 </ul>
                                             </div>
                                         </div>

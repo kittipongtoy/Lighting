@@ -9,24 +9,25 @@
         @{
             if (Model.count_list_page_resource_facility_content > 0)
             {
-                if (Context.Request.Cookies["lang"] == "EN")
-                {
-                    foreach (var items in Model.list_page_resource_facility_content)
-                    {
-                        <div class="col-lg-6 col-md-6 col-12 mb-3">
-                            <a class="img-width imgBD hover-img" data-fancybox="gallery" href="@Model.path_image@items.upload_image_ENG">
-                                <img src="@Model.path_image@items.upload_image_ENG">
-                            </a>
-                        </div>
-                    }
-                }
-                else
+                if (Context.Request.Cookies["lang"] == "TH")
                 {
                     foreach (var items in Model.list_page_resource_facility_content)
                     {
                         <div class="col-lg-6 col-md-6 col-12 mb-3">
                             <a class="img-width imgBD hover-img" data-fancybox="gallery" href="@Model.path_image@items.upload_image">
                                 <img src="@Model.path_image@items.upload_image">
+                            </a>
+                        </div>
+                    }
+                }
+                else
+                {
+
+                    foreach (var items in Model.list_page_resource_facility_content)
+                    {
+                        <div class="col-lg-6 col-md-6 col-12 mb-3">
+                            <a class="img-width imgBD hover-img" data-fancybox="gallery" href="@Model.path_image@items.upload_image_ENG">
+                                <img src="@Model.path_image@items.upload_image_ENG">
                             </a>
                         </div>
                     }
@@ -74,13 +75,14 @@
                             string videoId = delimiters.Select(delimiter => youtubeUrl.Split(delimiter).LastOrDefault())
                             .FirstOrDefault(id => !string.IsNullOrEmpty(id));
                             string embeddedUrl = "https://www.youtube.com/embed/" + videoId;
-                            if (Context.Request.Cookies["lang"] == "EN")
+                            if (Context.Request.Cookies["lang"] == "TH")
                             {
-                                //<iframe class="responsive-vdo" src="@embeddedUrlENG"></iframe>
+                                
+                                <iframe class="responsive-vdo" src="@embeddedUrl"></iframe>
                             }
                             else
                             {
-                                <iframe class="responsive-vdo" src="@embeddedUrl"></iframe>
+                                //<iframe class="responsive-vdo" src="@embeddedUrlENG"></iframe>
                             }
                         }
 
@@ -90,13 +92,14 @@
                             .FirstOrDefault(id => !string.IsNullOrEmpty(id));
                             string embeddedUrlENG = "https://www.youtube.com/embed/" + videoIdENG;
 
-                            if (Context.Request.Cookies["lang"] == "EN")
+                            if (Context.Request.Cookies["lang"] == "TH")
                             {
-                                <iframe class="responsive-vdo" src="@embeddedUrlENG"></iframe>
+                                //<iframe class="responsive-vdo" src="@embeddedUrl"></iframe>
                             }
                             else
                             {
-                                //<iframe class="responsive-vdo" src="@embeddedUrl"></iframe>
+                              
+                                <iframe class="responsive-vdo" src="@embeddedUrlENG"></iframe>
                             }
                             
                         }

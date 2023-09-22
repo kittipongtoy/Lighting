@@ -16,8 +16,14 @@
                     <div class="col-lg-4">
                         <div class="row">
                             <div class="col">
-                               @* <h6>สำนักงานใหญ่</h6>*@
-                                <h6>HEAD OFFICE</h6>
+                                @if(lang == "TH")
+                                {
+                                   <h6>สำนักงานใหญ่</h6>
+                                }
+                                else
+                                {
+                                    <h6>HEAD OFFICE</h6>
+                                }
                             </div>
                         </div>
                         <div class="row">
@@ -57,8 +63,14 @@
                                     <div class="col-6">
                                         <div class="row">
                                             <div class="col">
-                                                @*<h6>เกี่ยวกับเรา</h6>*@
-                                                <h6>ABOUT US</h6>
+                                                @if(lang == "TH")
+                                                {
+                                                   <h6>เกี่ยวกับเรา</h6>
+                                                }
+                                                else
+                                                {
+                                                    <h6>ABOUT US</h6>
+                                                }
                                             </div>
                                         </div>
                                         <div class="row">
@@ -114,8 +126,14 @@
                                     <div class="col-6">
                                         <div class="row">
                                             <div class="col">
-                                                <h6>OUR SERVICES</h6>
-                                              @*  <h6>บริการของเรา</h6>*@
+                                                @if(lang == "TH")
+                                                {
+                                                    <h6>บริการของเรา</h6>
+                                                }
+                                                else
+                                                {
+                                                    <h6>OUR SERVICES</h6>
+                                                }
                                             </div>
                                         </div>
                                         <div class="row">
@@ -130,7 +148,7 @@
                                                     else
                                                     {
                                                         <li><a href="@Url.Action("Product","Product")">Products</a></li>
-                                                        <li><a href="@Url.Action("Project","Project")">Project Ref</a></li>
+                                                        <li><a href="@Url.Action("Project","Project")">Projects</a></li>
                                                         <li><a href="@Url.Action("Company_profile_page","Download")">Download</a></li>
                                                     }
                                                     @*    <li><a href="@Url.Action("Product","Product")">สินค้า</a></li>
@@ -152,36 +170,49 @@
                             <div class="col-lg-5">
                                 <div class="row">
                                     <div class="col">
-                                        @*<h6>ติดตามเรา</h6>*@
-                                        <h6>FOLLOW US</h6>
+                                        @if(lang == "TH")
+                                        {
+                                            <h6>ติดตามเรา</h6>
+                                        }
+                                        else
+                                        {
+                                            <h6>FOLLOW US</h6>
+                                        }
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <ul class="social">
-                                            <li><a href="" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                                            <li><a href="" target="_blank"><i class="fab fa-youtube"></i></a></li>
-                                            <li><a href="" target="_blank"><img src="~/Frontend_assets/images/icon/icon-tiktokBK.svg"></a></li>
-                                            <li><a href="" target="_blank"><img src="~/Frontend_assets/images/icon/icon-lineBK.svg"></a></li>
-                                            <li><a href="" target="_blank"><i class="fas fa-shopping-cart"></i></a></li>
+                                            <li><a href="https://www.facebook.com/lightingthailand" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href="https://www.youtube.com/LightingChannel?reload=9" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                            <li><a href="https://www.tiktok.com/@("@lightingthailand")" target="_blank"><img src="~/Frontend_assets/images/icon/icon-tiktokBK.svg"></a></li>
+                                            <li><a href="https://lin.ee/P1l76vy" target="_blank"><img src="~/Frontend_assets/images/icon/icon-lineBK.svg"></a></li>
+                                            <li><a href="https://www.lightingshoponline.com/" target="_blank"><i class="fas fa-shopping-cart"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col">
-                                        @*<h6>ลงทะเบียนรับจดหมายข่าว</h6>*@
-                                        <h6>SUBSCRIBE TO NEWSLETTER</h6>
+                                        @if(lang == "TH")
+                                        {
+                                            <h6>ลงทะเบียนรับจดหมายข่าว</h6>
+                                        }
+                                        else
+                                        {
+                                            <h6>SUBSCRIBE TO NEWSLETTER</h6>
+                                        }
                                     </div>
                                 </div>
+                                @*
                                 <div class="row">
                                     <div class="col">
                                         <div class="input-group newsletter-container">
-                                            <input type="email" class="form-control" placeholder="อีเมล" aria-describedby="button-addon2">
+                                            <input type="email" class="form-control" placeholder="@(lang == "TH" ? "อีเมล":"email")" aria-describedby="button-addon2">
                                             <button class="buttonB" type="button" id="button-addon2"><i class="fas fa-paper-plane"></i></button>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
 
                                 <div class="row">
                                     <div class="col">
@@ -204,7 +235,15 @@
                                     <div class="panel-heading" role="tab">
                                         <div class="row">
                                             <div class="col">
-                                                <a data-toggle="collapse" data-parent="#foot-accordion" href="#footer01" aria-expanded="true">ติดต่อเรา</a>
+                                                @if(lang == "TH")
+                                                {
+                                                    <a data-toggle="collapse" data-parent="#foot-accordion" href="#footer01" aria-expanded="true">ติดต่อเรา</a>
+                                                }
+                                                else
+                                                {
+                                                    <a data-toggle="collapse" data-parent="#foot-accordion" href="#footer01" aria-expanded="true">Contact Us</a>
+                                                }
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -243,8 +282,14 @@
                                     <div class="panel-heading" role="tab">
                                         <div class="row">
                                             <div class="col">
-                                                @*<a data-toggle="collapse" data-parent="#foot-accordion" href="#footer02" aria-expanded="true">เกี่ยวกับเรา</a>*@
-                                                <a data-toggle="collapse" data-parent="#foot-accordion" href="#footer02" aria-expanded="true">ABOUT US</a>
+                                                @if(lang == "TH")
+                                                {
+                                                    <a data-toggle="collapse" data-parent="#foot-accordion" href="#footer02" aria-expanded="true">เกี่ยวกับเรา</a>
+                                                }
+                                                else
+                                                {
+                                                    <a data-toggle="collapse" data-parent="#foot-accordion" href="#footer02" aria-expanded="true">ABOUT US</a>
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -253,7 +298,31 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <ul class="footer-menu">
-                                                     @*   <li><a href="">ข้อมูลองค์กร</a></li>
+                                                        @if(lang == "TH")
+                                                        {
+
+                                                            <li><a href="@Url.Action("Profile_History","Resource_Facility")">ข้อมูลองค์กร</a></li>
+                                                            <li><a href="@Url.Action("SmartSolution","SmartSolution")">สมาร์ท โซลูชั่น</a></li>
+                                                            <li><a href="@Url.Action("New","New")">ข่าวสาร</a></li>
+                                                            <li><a href="@Url.Action("IR_index","Frontend_IR")">นักลงทุนสัมพันธ์</a></li>
+                                                            <li><a href="@Url.Action("ApplyJob","ApplyJob")">สมัครงาน</a></li>
+                                                            <li><a href="@Url.Action("Contact","Contact")">ติดต่อเรา</a></li>
+                                                            <li><a href="@Url.Action("PrivacyPolicy","PrivacyPolicy")">นโยบายความเป็นส่วนตัว</a></li>
+                                                            <li><a href="@Url.Action("CookiesPolicy","CookiesPolicy")">นโยบายคุกกี้</a></li>
+                                                        }
+                                                        else
+                                                        {
+
+                                                            <li><a href="@Url.Action("Profile_History","Resource_Facility")">Resource & Facility</a></li>
+                                                            <li><a href="@Url.Action("SmartSolution","SmartSolution")">Smart Solution</a></li>
+                                                            <li><a href="@Url.Action("New","New")">News</a></li>
+                                                            <li><a href="@Url.Action("IR_index","Frontend_IR")">Investor</a></li>
+                                                            <li><a href="@Url.Action("ApplyJob","ApplyJob")">Apply Job</a></li>
+                                                            <li><a href="@Url.Action("Contact","Contact")">Contact us</a></li>
+                                                            <li><a href="@Url.Action("PrivacyPolicy","PrivacyPolicy")">Privacy Policy</a></li>
+                                                            <li><a href="@Url.Action("CookiesPolicy","CookiesPolicy")">Cookies Policy</a></li>
+                                                        }
+                                                        @*   <li><a href="">ข้อมูลองค์กร</a></li>
                                                         <li><a href="">สมาร์ท โซลูชั่น</a></li>
                                                         <li><a href="">ข่าวสาร</a></li>
                                                         <li><a href="">นักลงทุนสัมพันธ์</a></li>
@@ -262,14 +331,6 @@
                                                         <li><a href="">นโยบายความเป็นส่วนตัว</a></li>
                                                         <li><a href="">นโยบายคุกกี้</a></li>*@
 
-                                                      <li><a href="@Url.Action("Profile_History","Resource_Facility")">Resource & Facility</a></li>
-                                                        <li><a href="@Url.Action("SmartSolution","SmartSolution")">Smart Solution</a></li>
-                                                        <li><a href="@Url.Action("New","New")">News</a></li>
-                                                        <li><a href="@Url.Action("IR_index","Frontend_IR")">Investor</a></li>
-                                                        <li><a href="@Url.Action("ApplyJob","ApplyJob")">Apply Job</a></li>
-                                                        <li><a href="@Url.Action("Contact","Contact")">Contact us</a></li>
-                                                        <li><a href="@Url.Action("PrivacyPolicy","PrivacyPolicy")">Privacy Policy</a></li>
-                                                        <li><a href="@Url.Action("CookiesPolicy","CookiesPolicy")">Cookies Policy</a></li>
                                                         @*
                                                         <li><a href="">Resource & Facility</a></li>
                                                         <li><a href="">Smart Solution</a></li>
@@ -290,8 +351,15 @@
                                     <div class="panel-heading" role="tab">
                                         <div class="row">
                                             <div class="col">
-                                                <a data-toggle="collapse" data-parent="#foot-accordion" href="#footer03" aria-expanded="true">OUR SERVICES</a>
-                                                @*<a data-toggle="collapse" data-parent="#foot-accordion" href="#footer03" aria-expanded="true">บริการของเรา</a>*@
+                                                @if(lang == "TH")
+                                                {
+                                                    <a data-toggle="collapse" data-parent="#foot-accordion" href="#footer03" aria-expanded="true">บริการของเรา</a>
+                                                }
+                                                else
+                                                {
+                                                    <a data-toggle="collapse" data-parent="#foot-accordion" href="#footer03" aria-expanded="true">OUR SERVICES</a>
+                                                }
+
                                             </div>
                                         </div>
                                     </div>
@@ -300,12 +368,18 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <ul class="footer-menu">
-                                                      @*  <li><a href="">สินค้า</a></li>
-                                                        <li><a href="">ผลงาน</a></li>
-                                                        <li><a href="">ดาวน์โหลด</a></li>*@
-                                                        <li><a href="@Url.Action("Product","Product")">Products</a></li>
-                                                        <li><a href="@Url.Action("Project","Project")">Project Ref</a></li>
-                                                        <li><a href="@Url.Action("Company_profile_page","Download")">Download</a></li>
+                                                        @if(lang == "TH")
+                                                        {
+                                                            <li><a href="@Url.Action("Product","Product")">สินค้า</a></li>
+                                                            <li><a href="@Url.Action("Project","Project")">ผลงาน</a></li>
+                                                            <li><a href="@Url.Action("Company_profile_page","Download")">ดาวน์โหลด</a></li>
+                                                        }
+                                                        else
+                                                        {
+                                                            <li><a href="@Url.Action("Product","Product")">Products</a></li>
+                                                            <li><a href="@Url.Action("Project","Project")">Projects</a></li>
+                                                            <li><a href="@Url.Action("Company_profile_page","Download")">Download</a></li>
+                                                        }
                                                     </ul>
                                                 </div>
                                             </div>
@@ -316,7 +390,15 @@
                                     <div class="panel-heading" role="tab">
                                         <div class="row">
                                             <div class="col">
-                                                <a data-toggle="collapse" data-parent="#foot-accordion" href="#footer04" aria-expanded="true">ติดตามเรา และลงทะเบียนรับจดหมายข่าว</a>
+                                                @if(lang == "TH")
+                                                {
+                                                    <a data-toggle="collapse" data-parent="#foot-accordion" href="#footer04" aria-expanded="true">ติดตามเรา และลงทะเบียนรับจดหมายข่าว</a>
+                                                }
+                                                else
+                                                {
+                                                    <a data-toggle="collapse" data-parent="#foot-accordion" href="#footer04" aria-expanded="true">SUBSCRIBE</a>
+                                                }
+
                                             </div>
                                         </div>
                                     </div>
@@ -336,17 +418,26 @@
 
                                             <div class="row">
                                                 <div class="col">
-                                                    <h6>ลงทะเบียนรับจดหมายข่าว</h6>
+                                                    @if(lang == "TH")
+                                                    {
+                                                        <h6>ลงทะเบียนรับจดหมายข่าว</h6>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h6>SUBSCRIBE TO NEWSLETTER</h6>
+                                                    }
+                                                   
                                                 </div>
                                             </div>
+                                            @*
                                             <div class="row">
                                                 <div class="col-md-6 col-12">
                                                     <div class="input-group newsletter-container">
-                                                        <input type="email" class="form-control" placeholder="อีเมล" aria-describedby="button-addon2">
+                                                        <input type="email" class="form-control" placeholder="@(lang == "TH" ? "อีเมล":"email")" aria-describedby="button-addon2">
                                                         <button class="buttonB" type="button" id="button-addon2"><i class="fas fa-paper-plane"></i></button>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>*@
 
                                         </div>
                                     </div>
@@ -438,10 +529,10 @@
                                                 <div class="icon-contact"><i class="fas fa-phone-alt"></i></div>
                                                     <p>${data?.officePhone}</p>
                                             </li>
-                                            <li>
-                                                <div class="icon-contact"><i class="fas fa-envelope"></i></div>
-                                                     <p><a href="${data?.eMail1}" > ${data?.eMail1}</a></p >
-                                            </li>
+                                                                                                                <li>
+                                                    <div class="icon-contact"><i class="fas fa-envelope"></i></div>
+                                                         <p><a href="#" > ${data?.eMail1}</a></p >
+                                                </li>
                                             <li class="map">
                                                     <a class="buttonBD" href="${data?.googleMapLink}" target="_blank"><i class="fas fa-map-marked-alt"></i>Google map</a>
                                             </li>

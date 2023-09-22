@@ -544,8 +544,61 @@
                             {
                                 @foreach (var download in Count_Download)
                                 {
-                                    if (lang == "EN")
+                                    if (lang == "TH")
                                     {
+                                        if (download.file_name == null)
+                                        {
+                                            <div class="items">
+                                                <a class="contentBox" href="@(download?.L_AND_BIM_Link)" target="_blank">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="img-width"><img src="~/upload_image/Download/@download?.upload_image"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="contentBox-topic">
+                                                                <p>@download?.Name_TH</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>ดาวน์โหลด</div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="items">
+                                                <a class="contentBox" href="~/upload_file/Download/@(download?.file_name)" target="_blank">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="img-width"><img src="~/upload_image/Download/@download?.upload_image"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="contentBox-topic">
+                                                                <p>@download?.Name_TH</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>ดาวน์โหลด</div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+
                                         if (download.file_name_ENG == null)
                                         {
                                             <div class="items">
@@ -572,7 +625,7 @@
                                         }
                                         else
                                         {
-                                            
+
                                             <div class="items">
                                                 <a class="contentBox" href="@(download?.L_AND_BIM_Link)" target="_blank">
                                                     <div class="row">
@@ -594,58 +647,6 @@
                                                     </div>
                                                 </a>
                                             </div>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (download.file_name == null)
-                                        {
-                                            <div class="items">
-                                                <a class="contentBox" href="@(download?.L_AND_BIM_Link)" target="_blank">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <div class="img-width"><img src="~/upload_image/Download/@download?.upload_image"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <div class="contentBox-topic">
-                                                                <p>@download?.Name_TH</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>ดาวน์โหลด</div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                             
-                                        }
-                                        else
-                                        {
-                                            <div class="items">
-                                                <a class="contentBox" href="~/upload_file/Download/@(download?.file_name)" target="_blank">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <div class="img-width"><img src="~/upload_image/Download/@download?.upload_image"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <div class="contentBox-topic">
-                                                                <p>@download?.Name_TH</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <div class="buttonB"><i class="fas fa-arrow-alt-circle-down"></i>ดาวน์โหลด</div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div> 
                                         }
                                     } 
                                 } 

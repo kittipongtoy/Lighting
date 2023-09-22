@@ -26,15 +26,16 @@
                     {
                         foreach (var item in ViewBag.Header)
                         {
-                            if (Context.Request.Cookies["lang"] == "EN")
-                            {
-                                <h5>@item.Title_EN</h5>
-                                <h1>@item.SubTitle_EN</h1>
-                            }
-                            else
+                            if (Context.Request.Cookies["lang"] == "TH")
                             {
                                 <h5>@item.Title_TH</h5>
                                 <h1>@item.SubTitle_TH</h1>
+                            }
+                            else
+                            {
+
+                                <h5>@item.Title_EN</h5>
+                                <h1>@item.SubTitle_EN</h1>
                             }
                         }
                     }
@@ -53,13 +54,14 @@
                     {
                         foreach (var item in ViewBag.Body)
                         {
-                            if (Context.Request.Cookies["lang"] == "EN")
+                            if (Context.Request.Cookies["lang"] == "TH")
                             {
-                                <h4>@item.Title_EN</h4>
+                                <h4>@item.Title_TH</h4>
                             }
                             else
                             {
-                                <h4>@item.Title_TH</h4>
+
+                                <h4>@item.Title_EN</h4>
                             }
                         }
                     }
@@ -75,13 +77,14 @@
                     {
                         foreach (var item in ViewBag.Body)
                         {
-                            if (Context.Request.Cookies["lang"] == "EN")
+                            if (Context.Request.Cookies["lang"] == "TH")
                             {
-                                <div class="img-width img-mb"><img src="~/upload_image/Resource_Facility/@item.ImageEN"></div>
+                                <div class="img-width img-mb"><img src="~/upload_image/Resource_Facility/@item.ImageTH"></div>
                             }
                             else
                             {
-                                <div class="img-width img-mb"><img src="~/upload_image/Resource_Facility/@item.ImageTH"></div>
+
+                                <div class="img-width img-mb"><img src="~/upload_image/Resource_Facility/@item.ImageEN"></div>
                             }
                         }
                     }
@@ -96,22 +99,23 @@
             {
                 foreach (var item in ViewBag.Body)
                 {
-                    if (Context.Request.Cookies["lang"] == "EN")
+                    if (Context.Request.Cookies["lang"] == "TH")
                     {
                         <div class="row">
                             <div class="col">
                                 <div class="txt-content indent f-17">
-                                    @Html.Raw(item.Detail_EN)
+                                    @Html.Raw(item.Detail_TH)
                                 </div>
                             </div>
                         </div>
                     }
                     else
                     {
+
                         <div class="row">
                             <div class="col">
                                 <div class="txt-content indent f-17">
-                                    @Html.Raw(item.Detail_TH)
+                                    @Html.Raw(item.Detail_EN)
                                 </div>
                             </div>
                         </div>
@@ -133,14 +137,14 @@
             {
                 foreach (var item in ViewBag.Body)
                 {
-                    if (Context.Request.Cookies["lang"] == "EN")
+                    if (Context.Request.Cookies["lang"] == "TH")
                     {
-                        if (item.FileCompany_EN != null)
+                        if (item.FileCompany_TH != null)
                         {
                             <div class="row">
                                 <div class="col">
                                     <div class="content-center">
-                                        <a class="downloadBD-button" href="~/upload_file/Resource_Facility/@item.FileCompany_EN" target="_blank">
+                                        <a class="downloadBD-button" href="~/upload_file/Resource_Facility/@item.FileCompany_TH" target="_blank">
                                             <div><i class="fas fa-arrow-alt-circle-down"></i>Company Profile</div>
                                         </a>
                                     </div>
@@ -150,12 +154,13 @@
                     }
                     else
                     {
-                        if (item.FileCompany_TH != null)
+
+                        if (item.FileCompany_EN != null)
                         {
                             <div class="row">
                                 <div class="col">
                                     <div class="content-center">
-                                        <a class="downloadBD-button" href="~/upload_file/Resource_Facility/@item.FileCompany_TH" target="_blank">
+                                        <a class="downloadBD-button" href="~/upload_file/Resource_Facility/@item.FileCompany_EN" target="_blank">
                                             <div><i class="fas fa-arrow-alt-circle-down"></i>Company Profile</div>
                                         </a>
                                     </div>
@@ -210,19 +215,20 @@
                                         {
                                             foreach (var item in ViewBag.BodyDetailsTimeline)
                                             {
-                                                if (Context.Request.Cookies["lang"] == "EN")
+                                                if (Context.Request.Cookies["lang"] == "TH")
                                                 {
                                                     <li>
-                                                        <a class="img-width" data-fancybox="gallery" href="~/upload_image/Resource_Facility/@item.ImageEN">
-                                                            <img src="~/upload_image/Resource_Facility/@item.ImageEN">
+                                                        <a class="img-width" data-fancybox="gallery" href="~/upload_image/Resource_Facility/@item.ImageTH">
+                                                            <img src="~/upload_image/Resource_Facility/@item.ImageTH">
                                                         </a>
                                                     </li>
                                                 }
                                                 else
                                                 {
+
                                                     <li>
-                                                        <a class="img-width" data-fancybox="gallery" href="~/upload_image/Resource_Facility/@item.ImageTH">
-                                                            <img src="~/upload_image/Resource_Facility/@item.ImageTH">
+                                                        <a class="img-width" data-fancybox="gallery" href="~/upload_image/Resource_Facility/@item.ImageEN">
+                                                            <img src="~/upload_image/Resource_Facility/@item.ImageEN">
                                                         </a>
                                                     </li>
                                                 }
@@ -355,43 +361,45 @@
                                             // Split the URL using the "?" character as the
                                             string[] delimiters = { "youtu.be/", "watch?v=", "embed/" };
                                             if (youtubeUrlTH != null)
-                                            {                                              
+                                            {
                                                 string videoIdTH = delimiters.Select(delimiter => youtubeUrlTH.Split(delimiter).LastOrDefault())
                                                 .FirstOrDefault(id => !string.IsNullOrEmpty(id));
                                                 string embeddedUrlTH = "https://www.youtube.com/embed/" + videoIdTH;
-                                                if (Context.Request.Cookies["lang"] == "EN")
-                                                {
-                                                    @*<div class="container-vdo">
-                                                        <iframe class="responsive-vdo" src="@embeddedUrlEN"></iframe>
-                                                    </div>*@
-                                                }
-                                                else
+                                                if (Context.Request.Cookies["lang"] == "TH")
                                                 {
                                                     <div class="container-vdo">
                                                         <iframe class="responsive-vdo" src="@embeddedUrlTH"></iframe>
                                                     </div>
+                                                }
+                                                else
+                                                {
+
+                                                    @*<div class="container-vdo">
+                                    <iframe class="responsive-vdo" src="@embeddedUrlEN"></iframe>
+                                    </div>*@
                                                 }
                                             }
 
                                             if (youtubeUrlEN != null)
-                                            { 
+                                            {
                                                 string videoIdEN = delimiters.Select(delimiter => youtubeUrlEN.Split(delimiter).LastOrDefault())
                                                 .FirstOrDefault(id => !string.IsNullOrEmpty(id));
                                                 string embeddedUrlEN = "https://www.youtube.com/embed/" + videoIdEN;
-                                                if (Context.Request.Cookies["lang"] == "EN")
+                                                if (Context.Request.Cookies["lang"] == "TH")
                                                 {
+                                                    @*<div class="container-vdo">
+                                    <iframe class="responsive-vdo" src="@embeddedUrlTH"></iframe>
+                                    </div>*@
+                                                }
+                                                else
+                                                {
+
                                                     <div class="container-vdo">
                                                         <iframe class="responsive-vdo" src="@embeddedUrlEN"></iframe>
                                                     </div>
                                                 }
-                                                else
-                                                {
-                                                    @*<div class="container-vdo">
-                                                        <iframe class="responsive-vdo" src="@embeddedUrlTH"></iframe>
-                                                    </div>*@
-                                                }
                                             }
-                                           
+
 
                                         }
                                     }
