@@ -496,6 +496,7 @@
     <Folder Include="wwwroot\upload_image\BusinessEthics\" />
     <Folder Include="wwwroot\upload_image\CRSpolicy\" />
     <Folder Include="wwwroot\upload_image\AntiFraud\" />
+    <Folder Include="wwwroot\upload_image\Download\NewFolder\" />
     <Folder Include="wwwroot\upload_image\Gift_entertainment\" />
     <Folder Include="wwwroot\upload_image\Channel_clue\" />
     <Folder Include="wwwroot\upload_image\Author_chairman\" />
@@ -538,7 +539,6 @@
     <Folder Include="wwwroot\upload_image\IR_Index\" />
     <Folder Include="wwwroot\upload_image\IR_NewRoom\" />
     <Folder Include="wwwroot\upload_image\Apply_Img_Content\" />
-    <Folder Include="wwwroot\upload_image\Download\" />
     <Folder Include="wwwroot\upload_image\Index\" />
     <Folder Include="wwwroot\upload_image\MainContact\" />
     <Folder Include="wwwroot\upload_image\NewFolder\" />

@@ -37,14 +37,14 @@
                                         }
                                         else
                                         {
-                                            <li><a href="@Url.Action("Product_Category","Product",new {category = ViewBag.Category})">@cate_name.Name_EN</a></li>
+                                            <li><a href="@Url.Action("Product_Category","Product",new {category = ((string)ViewBag.Category).ToLower()})">@cate_name.Name_EN</a></li>
                                         }
                                     }
                                 }
 
                                 @foreach (var sub_cat in (IEnumerable<Output_ProductModelVM>)ViewData["Sub_Category"])
                                 {
-                                    if (sub_cat.Name_EN.ToLower().StartsWith(ViewBag.SubCategory.ToLower()) || sub_cat.Name_TH.ToLower().StartsWith(ViewBag.SubCategory))
+                                    if (sub_cat.Name_EN.ToLower().StartsWith(ViewBag.SubCategory.ToLower()) || sub_cat.Name_TH.StartsWith(ViewBag.SubCategory))
                                     {
                                         if (lang == "TH")
                                         {
@@ -53,7 +53,7 @@
                                         }
                                         else
                                         {
-                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {sub_category=ViewBag.SubCategory,category = ViewBag.Category})">@sub_cat.Name_EN</a></li>
+                                            <li><a href="@Url.Action("Product_Subcategory","Product",new {sub_category=ViewBag.SubCategory.ToLower(),category = ViewBag.Category.ToLower()})">@sub_cat.Name_EN</a></li>
                                         }
                                     }
                                 }
@@ -86,7 +86,7 @@
                             @foreach (var product in Model)
                             {
                                 <div class="col-lg-4 col-md-4 col-6">
-                                    <a class="productBox" href="@Url.Action("Product_Detail","Product",new { category = ViewBag.Category, sub_category=ViewBag.SubCategory,model=product.Model})">
+                                    <a class="productBox" href="@Url.Action("Product_Detail","Product",new { category = ViewBag.Category.ToLower(), sub_category=ViewBag.SubCategory.ToLower(),model=product.Model.ToLower()})">
                                         <div class="row">
                                             <div class="col">
                                                 <div class="img-width">

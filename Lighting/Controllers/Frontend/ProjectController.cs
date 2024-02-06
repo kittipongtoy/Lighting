@@ -23,6 +23,7 @@ namespace Lighting.Controllers.Frontend
             {
                 var project = await _db.Category_Projects
                 .AsNoTracking()
+                //.OrderByDescending(x => x.Id)
                 .Select(project => new
                 {
                     Image = project.Image_Path_Nav,
@@ -36,7 +37,8 @@ namespace Lighting.Controllers.Frontend
             {
                 var project = await _db.Category_Projects
                 .AsNoTracking()
-                .Select(project => new
+				//.OrderByDescending(x => x.Id)
+				.Select(project => new
                 {
                     Image = project.Image_Path_Nav,
                     Name = project.Name_EN,

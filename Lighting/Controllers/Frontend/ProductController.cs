@@ -370,7 +370,7 @@ namespace Lighting.Controllers.Frontend
             ViewBag.CurrentPage = start;
             ViewBag.MaximumPage = pagination_page.Max();
             #endregion
-            return View(product);
+            return View(product.Skip(start).Take(maximum_page));
         }
 
         public async Task<IActionResult> Product_Detail(string category, string sub_category, string model)

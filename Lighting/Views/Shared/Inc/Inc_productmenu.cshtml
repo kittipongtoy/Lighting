@@ -27,7 +27,7 @@
                 {
                     if(lang == "TH")
                     {
-                        if (cat.Name_EN.StartsWith(ViewBag.Category) || cat.Name_TH.StartsWith(ViewBag.Category))
+                        if (cat.Name_EN.ToLower().StartsWith(ViewBag.Category) || cat.Name_TH.StartsWith(ViewBag.Category))
                         {
                             <li class="active"><a href="@Url.Action("Product_Category","Product",new {category= cat.Name_TH})">@cat.Name_TH</a></li>
                         }
@@ -39,13 +39,13 @@
                     else
                     {
 
-                        if (cat.Name_EN.StartsWith(ViewBag.Category) || cat.Name_TH.StartsWith(ViewBag.Category))
+                        if (cat.Name_EN.ToLower().StartsWith(ViewBag.Category) || cat.Name_TH.StartsWith(ViewBag.Category))
                         {
-                            <li class="active"><a href="@Url.Action("Product_Category","Product",new {category= cat.Name_EN})">@cat.Name_EN</a></li>
+                            <li class="active"><a href="@Url.Action("Product_Category","Product",new {category= cat.Name_EN.ToLower()})">@cat.Name_EN</a></li>
                         }
                         else
                         {
-                            <li><a href="@Url.Action("Product_Category","Product",new {category= cat.Name_EN})">@cat.Name_EN</a></li>
+                            <li><a href="@Url.Action("Product_Category","Product",new {category= cat.Name_EN.ToLower()})">@cat.Name_EN</a></li>
                         }
                     }
                 }

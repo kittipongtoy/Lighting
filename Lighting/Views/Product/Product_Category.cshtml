@@ -25,7 +25,7 @@
                                 <li>
                                     @foreach (var cate_name in (IEnumerable<Output_ProductCategoryVM>)ViewData["All_Category"])
                                     {
-                                        if (cate_name.Name_EN.StartsWith(ViewBag.Category)  || cate_name.Name_TH.StartsWith(ViewBag.Category)) @*cate_name.Id == ViewBag.CategoryId*@
+                                        if (cate_name.Name_EN.StartsWith(((string)ViewBag.Category).ToLower())  || cate_name.Name_TH.StartsWith(((string)ViewBag.Category).ToLower())) @*cate_name.Id == ViewBag.CategoryId*@
                                         {
                                             if (lang == "TH")
                                             {
@@ -50,7 +50,7 @@
                         <div class="col">
                             @foreach (var cate_name in (IEnumerable<Output_ProductCategoryVM>)ViewData["All_Category"])
                             {
-                                if (cate_name.Name_EN.ToLower().StartsWith(ViewBag.Category)  || cate_name.Name_TH.StartsWith(ViewBag.Category)) @*cate_name.Id == ViewBag.CategoryId*@
+                                if (cate_name.Name_EN.ToLower().StartsWith(((string)ViewBag.Category).ToLower())  || cate_name.Name_TH.StartsWith(ViewBag.Category)) @*cate_name.Id == ViewBag.CategoryId*@
                                 {
                                     if (lang == "TH")
                                     {
@@ -74,7 +74,7 @@
                             @foreach (var sub_cat in (IEnumerable<Output_ProductModelVM>)ViewData["Sub_Category"])
                             {
                                 <div class="col-lg-4 col-md-4 col-6">
-                                    <a class="contentBox" href="@Url.Action("Product_Subcategory","Product",new { category = ViewBag.Category, sub_category=sub_cat.Name_EN})">
+                                    <a class="contentBox" href="@Url.Action("Product_Subcategory","Product",new { category = ((string)ViewBag.Category).ToLower(), sub_category=sub_cat.Name_EN.ToLower()})">
                                         @*new { categoryId = ViewBag.CategoryId, sub_categoryId=sub_cat.Id}*@
                                         <div class="row">
                                             <div class="col">

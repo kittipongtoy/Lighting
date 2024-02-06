@@ -52,6 +52,7 @@ namespace Lighting.Controllers.Frontend
 
             //var latestDownloads = await _db.Downloads.Where(x => x.use_status == 1 && x.ShowItem == 1).GroupBy(x => x.DownloadType_id).Select(group => group.OrderByDescending(x => x.id).FirstOrDefault()).ToListAsync();
             var latestDownloads = await _db.Downloads.Where(x => x.use_status == 1 && x.ShowItem == 1).ToListAsync();
+
             var Finance_Statement = await _db.SH_IR_Finance_Statement.Where(x => x.active_status == 1).ToListAsync();
 
             var Slide_Image_Index = await _db.Slide_Image_Index.Where(x => x.isActive == true).ToListAsync();
