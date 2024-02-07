@@ -27,7 +27,7 @@ namespace Lighting.Controllers.Frontend
                     companyName = main.TitleName_TH,
                     EMail1 = main.EMail1,
                     location = main.Location_TH,
-                    officePhone = main.OfficePhone,
+                    officePhone = main.PhoneNumber,
                     googleMapLink = main.GoogleMapLink,
                 }).FirstOrDefaultAsync());
             }
@@ -38,7 +38,7 @@ namespace Lighting.Controllers.Frontend
                     companyName = main.TitleName_EN,
                     EMail1 = main.EMail1,
                     location = main.Location_EN,
-                    officePhone = main.OfficePhone,
+                    officePhone = main.PhoneNumber,
                     googleMapLink = main.GoogleMapLink,
                 }).FirstOrDefaultAsync());
 
